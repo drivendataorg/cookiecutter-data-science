@@ -1,4 +1,5 @@
 {
     "project_name": "project_name",
     "repo_name": "{{ cookiecutter.project_name|replace(' ', '_') }}",
+    "s3_bucket": "your-bucket-for-syncing-data"
 }
