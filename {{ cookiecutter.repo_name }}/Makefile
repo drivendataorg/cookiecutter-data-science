@@ -1,6 +1,9 @@
-.PHONY: clean data sync_data_to_s3 sync_data_from_s3
+.PHONY: clean data requirements sync_data_to_s3 sync_data_from_s3
 
-data:
+requirements:
+	pip install -r requirements.txt
+
+data: requirements
 	python src/make_dataset.py
 
 clean:
