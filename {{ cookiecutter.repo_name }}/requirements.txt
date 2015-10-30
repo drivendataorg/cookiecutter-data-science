@@ -1,1 +1,4 @@
 click
+Sphinx
+coverage
+s3cmd==1.6.0

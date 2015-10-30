@@ -18,11 +18,3 @@ Organization
     ├── references         <- Reports, data dictionaries, manuals, and all other explanatory materials.
     └── src                <- Source code. Possible subdirectories might be `scripts` or `API` for
                               projects with larger codebases.
-
-Basic Commands
---------------
-
-### Syncing data to S3
-
-* `make sync_data_to_s3` will use `s3cmd` to recursively sync files in `data/` up to `s3://{{ cookiecutter.s3_bucket }}/data/`.
-* `make sync_data_from_s3` will use `s3cmd` to recursively sync files from `s3://{{ cookiecutter.s3_bucket }}/data/` to `data/`.
