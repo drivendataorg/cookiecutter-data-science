@@ -23,10 +23,10 @@ lint:
 	flake8 .
 
 sync_data_to_s3:
-	s3cmd sync --recursive data/ s3://$( BUCKET )/data/
+	s3cmd sync --recursive data/ s3://$(BUCKET)/data/
 
 sync_data_from_s3:
-	s3cmd sync --recursive s3://$( BUCKET )/data/ data/
+	s3cmd sync --recursive s3://$(BUCKET)/data/ data/
 
 #################################################################################
 # PROJECT RULES                                                                 #
