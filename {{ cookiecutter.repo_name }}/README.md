@@ -17,8 +17,6 @@ Project Organization
     |
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     |
-    ├── figures            <- Graphic output from modeling to be used in reports
-    |
     ├── models             <- trained and serialized models, model predictions, or model summaries
     │
     ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
