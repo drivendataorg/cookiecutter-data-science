@@ -3,5 +3,7 @@
     "repo_name": "{{ cookiecutter.project_name|replace(' ', '_') }}",
     "author_name": "Your name (or your organization/company/team)",
     "description": "A short description of the project.",
-    "s3_bucket": "your-bucket-for-syncing-data (do not include 's3://')"
+    "s3_bucket": "your-bucket-for-syncing-data (do not include 's3://')",
+    "year": "{{ cookiecutter.now[:4] }}",
+    "open_source_license": ["MIT", "BSD", "Not open source"]
 }
