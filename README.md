@@ -13,7 +13,7 @@ Requirements to create project:
 To start a new project:
 ------------
 
-    cookiecutter git@github.com:drivendata/cookiecutter-data-science.git
+    cookiecutter https://github.com/drivendata/cookiecutter-data-science
 
 
 Data
