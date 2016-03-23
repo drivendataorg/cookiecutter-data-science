@@ -7,7 +7,7 @@ An opinionated, but not-afraid-to-be-wrong project template for data science pro
 Requirements to create project:
 -----------
  - Python 2.7 or 3.5
- - [cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html): `pip install cookiecutter`
+ - [cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html) >= 1.4.0: `pip install cookiecutter`
 
 
 To start a new project:
