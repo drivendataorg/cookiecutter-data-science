@@ -161,7 +161,7 @@ If you have more complex requirements for recreating your environment, consider 
 
 ### Keep secrets out of version control
 
-You _really_ don't want to leak your AWS secret key or Postgres username and password on Github. Enough said, mostly — see the [Twelve Factor App](http://12factor.net/) principles on this point. We generally use a `.env` file that, thanks to the `.gitignore`, never  that defines secrets as environment variables, and are read in automatically by a package like `dotenv` in Python.
+You _really_ don't want to leak your AWS secret key or Postgres username and password on Github. Enough said, mostly — see the [Twelve Factor App](http://12factor.net/) principles on this point. We generally use a `.env` file that, thanks to the `.gitignore`, never makes it into the repository (secrets should be shared via other means with contributors). The `.env` file defines secrets as environment variables, and is read in automatically by a package like `dotenv` in Python.
 
 ## Contributing
 
