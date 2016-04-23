@@ -1,0 +1,4 @@
+site_name: My Docs
+theme: cinder
+pages:
+  - Home: index.md
