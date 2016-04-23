@@ -4,10 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
-    <link rel="shortcut icon" href="./img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A project template and directory structure for Python data science projects.">   
+    <link rel="shortcut icon" href="./favicon.ico">
 
-    <title>My Docs</title>
+    <title>Cookiecutter Data Science</title>
 
     <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
@@ -34,6 +35,23 @@
     </script>
 
     
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54096005-4', 'drivendata.github.io/cookiecutter-data-science/');
+    ga('send', 'pageview');
+    </script>
+    
 </head>
 
 <body class="homepage" >
@@ -44,9 +62,17 @@
         <!-- Collapsed navigation -->
         <div class="navbar-header">
             
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
 
             <!-- Main title -->
-            <a class="navbar-brand" href=".">My Docs</a>
+            <a class="navbar-brand" href=".">Cookiecutter Data Science</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -61,6 +87,15 @@
                 </li>
                 
                 
+                    <li>
+                        <a href="https://github.com/drivendata/cookiecutter-data-science">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -71,12 +106,42 @@
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="first-level active"><a href="#welcome-to-peter">Welcome to Peter</a></li>
+        <li class="first-level active"><a href="#cookiecutter-data-science">Cookiecutter Data Science</a></li>
         
-            <li class="second-level"><a href="#commands">Commands</a></li>
+            <li class="second-level"><a href="#why">Why?</a></li>
+            
+                <li class="third-level"><a href="#other-people-will-thank-you">Other people will thank you</a></li>
+            
+                <li class="third-level"><a href="#you-will-thank-you">You will thank you</a></li>
             
         
-            <li class="second-level"><a href="#project-layout">Project layout</a></li>
+            <li class="second-level"><a href="#getting-started">Getting started</a></li>
+            
+                <li class="third-level"><a href="#requirements">Requirements</a></li>
+            
+                <li class="third-level"><a href="#starting-a-new-project">Starting a new project</a></li>
+            
+                <li class="third-level"><a href="#example">Example</a></li>
+            
+        
+            <li class="second-level"><a href="#directory-structure">Directory structure</a></li>
+            
+        
+            <li class="second-level"><a href="#opinions">Opinions</a></li>
+            
+                <li class="third-level"><a href="#data-is-immutable">Data is immutable</a></li>
+            
+                <li class="third-level"><a href="#notebooks-are-for-exploration">Notebooks are for exploration</a></li>
+            
+                <li class="third-level"><a href="#analysis-is-a-dag">Analysis is a DAG</a></li>
+            
+                <li class="third-level"><a href="#build-from-the-environment-up">Build from the environment up</a></li>
+            
+        
+            <li class="second-level"><a href="#contributing">Contributing</a></li>
+            
+        
+            <li class="second-level"><a href="#links-to-related-projects-and-references">Links to related projects and references</a></li>
             
         
     
@@ -84,27 +149,144 @@
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="welcome-to-peter">Welcome to Peter</h1>
-<p>For full documentation visit <a href="http://mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
+<h1 id="cookiecutter-data-science">Cookiecutter Data Science</h1>
+<h2 id="why">Why?</h2>
+<p>We often think data analysis is a report, some visualizations and or some insights. While these end products are generated by code, it's easy to focus on making to products look <em>real good</em> and ignore the quality of the code that generates them.</p>
+<p>On top of that, it's no secret that good analyses are often the result of exploration, experimentation, and digging into the data to see what works. This is not a process that lends itself to thinking carefully about the structure of your code or your project beforehand. So, let someone else do that thinking and the setup for you. Here's why:</p>
+<h3 id="other-people-will-thank-you">Other people will thank you</h3>
+<p>A well-defined project structure means that a newcomer can begin to understand an analysis without digging in to extensive documentation. Well organized code is self-documenting and provides a lot of context for your code without much overhead. People will thank you for this because they can:</p>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs help</code> - Print this help message.</li>
+<li>Collaborate easily with you on this analysis</li>
+<li>Easily learn from your analysis about the process and the domain</li>
+<li>Feel confident in the conclusions the analysis presents</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre></div>
+<p>A consistent project structure means that the</p>
+<h3 id="you-will-thank-you">You will thank you</h3>
+<p>Ever tried to reproduce an analysis that you did a few months ago or even a few years ago? You may have written the code, but it's now impossible to decipher whether you should use <code>make_figures.py.old</code>, <code>make_figures_working.py</code> or <code>new_make_figures01.py</code> to get things done. A good project structure encourages practices that make it easier to come back to old work, for example separation of concerns, abstracting analysis as a <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">DAG</a>, and engineering best practices like version control.</p>
+<h2 id="getting-started">Getting started</h2>
+<p>With this in mind, we've created a Cookiecutter Data Science template for projects in Python. Your analysis doesn't have to be in Python, but the template does provide some Python boilerplate that you'd want to remove (exclusively in the <code>src</code> folder).</p>
+<h3 id="requirements">Requirements</h3>
+<ul>
+<li>Python 2.7 or 3.5</li>
+<li><a href="http://cookiecutter.readthedocs.org/en/latest/installation.html">cookiecutter Python package</a> &gt;= 1.4.0: <code>pip install cookiecutter</code></li>
+</ul>
+<h3 id="starting-a-new-project">Starting a new project</h3>
+<p>Starting a new project is as easy as running this command at the command line. No need to create a directory first, the cookiecutter will do it for you.</p>
+<pre><code>cookiecutter https://github.com/drivendata/cookiecutter-data-science
+</code></pre>
+<h3 id="example">Example</h3>
+<script type="text/javascript" src="https://asciinema.org/a/9bgl5qh17wlop4xyxu9n9wr02.js" id="asciicast-9bgl5qh17wlop4xyxu9n9wr02" async></script>
+
+<h2 id="directory-structure">Directory structure</h2>
+<pre><code class="none">├── LICENSE
+├── Makefile           &lt;- Makefile with commands like `make data` or `make train`
+├── README.md          &lt;- The top-level README for developers using this project.
+├── data
+│   ├── external       &lt;- Data from third party sources.
+│   ├── interim        &lt;- Intermediate data that has been transformed.
+│   ├── processed      &lt;- The final, canonical data sets for modeling.
+│   └── raw            &lt;- The original, immutable data dump.
+│
+├── docs               &lt;- A default Sphinx project; see sphinx-doc.org for details
+│
+├── models             &lt;- trained and serialized models, model predictions, or model summaries
+│
+├── notebooks          &lt;- Jupyter notebooks. Naming convention is a number (for ordering),
+│                         the creator's initials, and a short `-` delimited description, e.g.
+│                         `1.0-jqp-initial-data-exploration`.
+│
+├── references         &lt;- Data dictionaries, manuals, and all other explanatory materials.
+│
+├── reports            &lt;- Generated analysis as HTML, PDF, LaTeX, etc.
+│   └── figures        &lt;- Generated graphics and figures to be used in reporting
+│
+├── requirements.txt   &lt;- The requirements file for reproducing the analysis environment, e.g.
+│                         generated with `pip freeze &gt; requirements.txt`
+│
+├── src                &lt;- Source code for use in this project.
+│   ├── __init__.py    &lt;- Makes src a Python module
+│   │
+│   ├── data           &lt;- Scripts to download or generate data
+│   │   └── make_dataset.py
+│   │
+│   ├── features       &lt;- Scripts to turn raw data into features for modeling
+│   │   └── build_features.py
+│   │
+│   └── models         &lt;- scripts to train models and then use trained models to make
+│       │                 predictions
+│       ├── predict_model.py
+│       └── train_model.py
+│
+└── tox.ini           &lt;- tox file with settings for running tox; see tox.testrun.org
+</code></pre>
+
+<h2 id="opinions">Opinions</h2>
+<p>There are some opinions implicit in the project structure that have grown out of learning what works and what doesn't when collaborating on data science projects. Some of the opinions are about workflows, and some of the opinions are about tools that make life easier. Here are some of the beliefs which this project is built on--if you've got thoughts, please <a href="#contributing">contribute or share them</a>.</p>
+<h3 id="data-is-immutable">Data is immutable</h3>
+<p>Don't edit your raw data in Excel. Don't overwrite your raw data. Don't save multiple versions of the raw data. Treat the data (and its format) as immutable. The code you write should move the raw data through a pipeline to your final analysis. You shouldn't have to run all of the steps every time you want to make a new figure (q.v. <a href="#analysis-is-a-dag">Analysis is a DAG</a>), but anyone should be able to reproduce the final products with only the code in <code>src</code> and the data in <code>data/raw</code>.</p>
+<p>Also, if data is immutable, it doesn't need source control in the same way that code does. Therefore, <strong><em>by default, the data folder is included in the .gitignore file.</em></strong> If you have a small amount of data that rarely changes, you may want to include the data in the repository. Github currently warns if files are over 50MB and rejects files over 100MB. Some other options for storing/syncing large data include <a href="https://aws.amazon.com/s3/">AWS S3</a> with a syncing tool (e.g., <a href="http://s3tools.org/s3cmd"><code>s3cmd</code></a>), <a href="https://git-lfs.github.com/">Git Large File Storage</a>, <a href="https://git-annex.branchable.com/">Git Annex</a>, and <a href="http://dat-data.com/">dat</a>. Currently by default, we ask for an S3 bucket and use <code>s3cmd</code> to sync data in the <code>data</code> folder with the server.</p>
+<h3 id="notebooks-are-for-exploration">Notebooks are for exploration</h3>
+<p>Notebooks such as the <a href="http://jupyter.org/">Jupyter notebook</a> and other literate programming tools are very effective for exploratory data analysis. However, these tools can be less effective for reproducing an analysis. When we use notebooks in our work, we often subdivide the <code>notebooks</code> folder. For example, <code>notebooks/exploratory</code> contains initial explorations, whereas <code>notebooks/reports</code> is more polished work that can be exported as html to the <code>reports</code> directory.</p>
+<p>Since notebooks are challenging objects for source control (e.g., diffs of the <code>json</code> are often not human-readable and merging is near impossible), we recommended not collaborating directly with others on Jupyter notebooks. There are two steps we recommend for using notebooks effectively:</p>
+<ol>
+<li>
+<p>Follow a naming convention that shows the owner and the order the analysis was done in. We use the format <code>&lt;step&gt;-&lt;ghuser&gt;-&lt;description&gt;.ipynb</code> (e.g., <code>0.3-bull-visualize-distributions.ipynb</code>).</p>
+</li>
+<li>
+<p>Refactor the good parts. Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at <code>src/data/make_dataset.py</code> and load data from <code>data/interim</code>. If it's useful utility code, refactor it to <code>src</code> and import it into notebooks with a cell like the following. If updating the system path is icky to you, we'd recommend making a Python package (there is a <a href="https://github.com/audreyr/cookiecutter-pypackage">cookiecutter for that</a> as well) and installing that as an editable package with <code>pip install -e</code>.</p>
+</li>
+</ol>
+<pre><code># Load the &quot;autoreload&quot; extension
+%load_ext autoreload
+
+# always reload modules marked with &quot;%aimport&quot;
+%autoreload 1
+
+import os
+import sys
+
+# add the 'src' directory as one where we can import modules
+src_dir = os.path.join(os.getcwd(), os.pardir, 'src')
+sys.path.append(src_dir)
+
+# import my method from the source code
+%aimport preprocess.build_features
+from preprocess.build_features import remove_invalid_data
+</code></pre>
+
+<h3 id="analysis-is-a-dag">Analysis is a DAG</h3>
+<p>Often in an analysis you have long-running steps that preprocesses data or trains models. If these steps have been run already (and you have stored the output somewhere like the <code>data/interim</code> directory), you don't want to wait to rerun them every time. We prefer <a href="https://www.gnu.org/software/make/"><code>make</code></a> for managing steps that depend on each other, especially the long-running ones. Make is a common tool on unix platforms (and <a href="">is available for Windows</a>). Following the <a href="https://www.gnu.org/software/make/"><code>make</code> documentation</a>, <a href="https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions">Makefile conventions</a>, and <a href="http://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Portable-Make.html#Portable-Make">portability guide</a> will help ensure your Makefiles work effectively across systems. Here are <a href="http://zmjones.com/make/">some</a> <a href="http://blog.kaggle.com/2012/10/15/make-for-data-scientists/">examples</a> to <a href="https://web.archive.org/web/20150206054212/http://www.bioinformaticszen.com/post/decomplected-workflows-makefiles/">get started</a>.</p>
+<p>There are other tools for managing DAGs that are written in Python instead of a DSL (e.g., <a href="http://paver.github.io/paver/#">Paver</a>, <a href="http://luigi.readthedocs.org/en/stable/index.html">Luigi</a>, <a href="http://pythonhosted.org/airflow/cli.html">Airflow</a>, <a href="https://bitbucket.org/snakemake/snakemake/wiki/Home">Snakemake</a>, <a href="http://www.ruffus.org.uk/">Ruffus</a>, or <a href="https://pythonhosted.org/joblib/memory.html">Joblib</a>). Feel free to use these if they are more appropriate for your analysis.</p>
+<h3 id="build-from-the-environment-up">Build from the environment up</h3>
+<p>The first step in reproducing an analysis is always reproducing the computational environment it was run in. You need the same tools, the same libraries, and the same versions to make everything play nicely together.</p>
+<p>One effective approach to this is use <a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a> (we recommend <a href="https://virtualenvwrapper.readthedocs.org/en/latest/">virtualenvwrapper</a> for managing virtualenvs). By listing all of your requirements in the repository (we include a <code>requirements.txt</code> file) you can easily track the packages needed to recreate the analysis. Here is a good workflow:</p>
+<ol>
+<li>Run <code>mkvirtualenv</code> when creating a new project</li>
+<li><code>pip install</code> the packages that your analysis needs</li>
+<li>Run <code>pip freeze &gt;&gt; requirements.txt</code> to pin the exact package versions used to recreate the analysis</li>
+<li>If you find you need to install another package, run <code>pip freeze &gt;&gt; requirements.txt</code> again and commit the changes to version control.</li>
+</ol>
+<p>If you have more complex requirements for recreating your environment, consider a virtual machine based approach such as <a href="https://www.docker.com/">Docker</a> or <a href="https://www.vagrantup.com/">Vagrant</a>. Both of these tools use text-based formats (Dockerfile and Vagrantfile respectively) you can easily add to source control to describe how to create a virtual machine with the requirements you need.</p>
+<h2 id="contributing">Contributing</h2>
+<p>The Cookiecutter Data Science project is opinionated, but not afraid to be wrong. Best practices change, tools evolve, and lessons are learned. <strong>The goal of this project is to make it easier to start, structure, and share an analysis.</strong> <a href="https://github.com/drivendata/cookiecutter-data-science/pulls">Pull requests</a> and <a href="https://github.com/drivendata/cookiecutter-data-science/issues">filing issues</a> is encouraged. We'd love to hear what works for you, and what doesn't.</p>
+<p>If you use the Cookiecutter Data Science project, link back to this page or <a href="https://twitter.com/drivendataorg">give us a holler</a> and <a href="mailto:info@drivendata.org">let us know</a>!</p>
+<h2 id="links-to-related-projects-and-references">Links to related projects and references</h2>
+<p>Project structure and reproducibility is talked about more in the R research community. Here are some projects and blog posts if you're working in R that may help you out.</p>
+<ul>
+<li><a href="http://projecttemplate.net/index.html">Project Template</a> - An R data analysis template</li>
+<li>"<a href="http://nicercode.github.io/blog/2013-04-05-projects/">Designing projects</a>" on Nice R Code</li>
+<li>"<a href="http://www.carlboettiger.info/2012/05/06/research-workflow.html">My research workflow</a>" on Carlboettifer.info</li>
+<li>"<a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424">A Quick Guide to Organizing Computational Biology Projects</a>" in PLOS Computational Biology</li>
+</ul>
+<p>Finally, a huge thanks to the <a href="https://cookiecutter.readthedocs.org/en/latest/">Cookiecutter</a> project (<a href="https://github.com/audreyr/cookiecutter">github</a>), which is helping us all spend less time thinking about and writing boilerplate and more time getting things done.</p></div>
         
     </div>
 
     <footer class="col-md-12 text-center">
         <hr>
         <p>
+        <small>Project maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>.<br></small>
+        
         <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p></small>
     </footer>
 
@@ -151,5 +333,5 @@ docs/
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-04-23 16:02:02.522648
+Build Date UTC : 2016-04-23 19:22:33.049193
 -->
