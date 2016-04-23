@@ -3,7 +3,7 @@ Cookiecutter Data Science
 
 An opinionated, but not-afraid-to-be-wrong project template for data science projects.
 
-### [Project homepage](https://github.com/drivendata/cookiecutter-data-science)
+#### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
 
 Requirements to create project:
 -----------
