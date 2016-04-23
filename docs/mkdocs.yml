@@ -1,4 +1,9 @@
-site_name: My Docs
+site_name: Cookiecutter Data Science
+site_description: A project template and directory structure for Python data science projects.
+site_favicon: favicon.ico
+repo_url: https://github.com/drivendata/cookiecutter-data-science
+copyright: Project maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>.
+google_analytics: ['UA-54096005-4', 'drivendata.github.io/cookiecutter-data-science/']
 theme: cinder
 pages:
   - Home: index.md
