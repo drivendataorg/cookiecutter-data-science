@@ -5,5 +5,7 @@ repo_url: https://github.com/drivendata/cookiecutter-data-science
 copyright: Project maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>.
 google_analytics: ['UA-54096005-4', 'drivendata.github.io/cookiecutter-data-science/']
 theme: cinder
+extra_css:
+  - css/extra.css
 pages:
   - Home: index.md
