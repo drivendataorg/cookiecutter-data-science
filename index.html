@@ -273,7 +273,7 @@ from preprocess.build_features import remove_invalid_data
 </code></pre>
 
 <h3 id="analysis-is-a-dag">Analysis is a DAG</h3>
-<p>Often in an analysis you have long-running steps that preprocesses data or trains models. If these steps have been run already (and you have stored the output somewhere like the <code>data/interim</code> directory), you don't want to wait to rerun them every time. We prefer <a href="https://www.gnu.org/software/make/"><code>make</code></a> for managing steps that depend on each other, especially the long-running ones. Make is a common tool on unix platforms (and <a href="">is available for Windows</a>). Following the <a href="https://www.gnu.org/software/make/"><code>make</code> documentation</a>, <a href="https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions">Makefile conventions</a>, and <a href="http://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Portable-Make.html#Portable-Make">portability guide</a> will help ensure your Makefiles work effectively across systems. Here are <a href="http://zmjones.com/make/">some</a> <a href="http://blog.kaggle.com/2012/10/15/make-for-data-scientists/">examples</a> to <a href="https://web.archive.org/web/20150206054212/http://www.bioinformaticszen.com/post/decomplected-workflows-makefiles/">get started</a>.</p>
+<p>Often in an analysis you have long-running steps that preprocesses data or trains models. If these steps have been run already (and you have stored the output somewhere like the <code>data/interim</code> directory), you don't want to wait to rerun them every time. We prefer <a href="https://www.gnu.org/software/make/"><code>make</code></a> for managing steps that depend on each other, especially the long-running ones. Make is a common tool on unix platforms (and <a href="">is available for Windows</a>). Following the <a href="https://www.gnu.org/software/make/"><code>make</code> documentation</a>, <a href="https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions">Makefile conventions</a>, and <a href="http://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Portable-Make.html#Portable-Make">portability guide</a> will help ensure your Makefiles work effectively across systems. Here are <a href="http://zmjones.com/make/">some</a> <a href="http://blog.kaggle.com/2012/10/15/make-for-data-scientists/">examples</a> to <a href="https://web.archive.org/web/20150206054212/http://www.bioinformaticszen.com/post/decomplected-workflows-makefiles/">get started</a>. A number of data folks use <code>make</code> as their tool of choice, including <a href="https://bost.ocks.org/mike/make/">Mike Bostock</a>.</p>
 <p>There are other tools for managing DAGs that are written in Python instead of a DSL (e.g., <a href="http://paver.github.io/paver/#">Paver</a>, <a href="http://luigi.readthedocs.org/en/stable/index.html">Luigi</a>, <a href="http://pythonhosted.org/airflow/cli.html">Airflow</a>, <a href="https://bitbucket.org/snakemake/snakemake/wiki/Home">Snakemake</a>, <a href="http://www.ruffus.org.uk/">Ruffus</a>, or <a href="https://pythonhosted.org/joblib/memory.html">Joblib</a>). Feel free to use these if they are more appropriate for your analysis.</p>
 <h3 id="build-from-the-environment-up">Build from the environment up</h3>
 <p>The first step in reproducing an analysis is always reproducing the computational environment it was run in. You need the same tools, the same libraries, and the same versions to make everything play nicely together.</p>
@@ -281,8 +281,8 @@ from preprocess.build_features import remove_invalid_data
 <ol>
 <li>Run <code>mkvirtualenv</code> when creating a new project</li>
 <li><code>pip install</code> the packages that your analysis needs</li>
-<li>Run <code>pip freeze &gt;&gt; requirements.txt</code> to pin the exact package versions used to recreate the analysis</li>
-<li>If you find you need to install another package, run <code>pip freeze &gt;&gt; requirements.txt</code> again and commit the changes to version control.</li>
+<li>Run <code>pip freeze &gt; requirements.txt</code> to pin the exact package versions used to recreate the analysis</li>
+<li>If you find you need to install another package, run <code>pip freeze &gt; requirements.txt</code> again and commit the changes to version control.</li>
 </ol>
 <p>If you have more complex requirements for recreating your environment, consider a virtual machine based approach such as <a href="https://www.docker.com/">Docker</a> or <a href="https://www.vagrantup.com/">Vagrant</a>. Both of these tools use text-based formats (Dockerfile and Vagrantfile respectively) you can easily add to source control to describe how to create a virtual machine with the requirements you need.</p>
 <h3 id="keep-secrets-out-of-version-control">Keep secrets out of version control</h3>
@@ -353,5 +353,5 @@ from preprocess.build_features import remove_invalid_data
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-04-25 21:26:04.542505
+Build Date UTC : 2016-04-25 21:29:37.194088
 -->
