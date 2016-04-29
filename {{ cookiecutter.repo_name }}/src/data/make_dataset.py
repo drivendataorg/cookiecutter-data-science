@@ -4,6 +4,8 @@ import click
 import dotenv
 import logging
 
+from utils import find_dotenv
+
 
 @click.command()
 @click.argument('input_filepath', type=click.Path(exists=True))
@@ -18,8 +20,7 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format=log_fmt)
 
     project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
-    dotenv_path = os.path.join(project_dir, '.env')
+    dotenv_path = find_dotenv()
     dotenv.load_dotenv(dotenv_path)
 
     main()
-
