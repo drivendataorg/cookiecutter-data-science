@@ -142,7 +142,9 @@
             
                 <li class="third-level"><a href="#build-from-the-environment-up">Build from the environment up</a></li>
             
-                <li class="third-level"><a href="#keep-secrets-out-of-version-control">Keep secrets out of version control</a></li>
+                <li class="third-level"><a href="#keep-secrets-and-configuration-out-of-version-control">Keep secrets and configuration out of version control</a></li>
+            
+                <li class="third-level"><a href="#be-conservative-in-changing-the-default-folder-structure">Be conservative in changing the default folder structure</a></li>
             
         
             <li class="second-level"><a href="#contributing">Contributing</a></li>
@@ -206,8 +208,9 @@
 </ul>
 <h3 id="starting-a-new-project">Starting a new project</h3>
 <p>Starting a new project is as easy as running this command at the command line. No need to create a directory first, the cookiecutter will do it for you.</p>
-<pre><code>cookiecutter https://github.com/drivendata/cookiecutter-data-science
+<pre><code class="nohighlight">cookiecutter https://github.com/drivendata/cookiecutter-data-science
 </code></pre>
+
 <h3 id="example">Example</h3>
 <script type="text/javascript" src="https://asciinema.org/a/9bgl5qh17wlop4xyxu9n9wr02.js" id="asciicast-9bgl5qh17wlop4xyxu9n9wr02" async></script>
 
@@ -304,8 +307,32 @@ from preprocess.build_features import remove_invalid_data
 <li>If you find you need to install another package, run <code>pip freeze &gt; requirements.txt</code> again and commit the changes to version control.</li>
 </ol>
 <p>If you have more complex requirements for recreating your environment, consider a virtual machine based approach such as <a href="https://www.docker.com/">Docker</a> or <a href="https://www.vagrantup.com/">Vagrant</a>. Both of these tools use text-based formats (Dockerfile and Vagrantfile respectively) you can easily add to source control to describe how to create a virtual machine with the requirements you need.</p>
-<h3 id="keep-secrets-out-of-version-control">Keep secrets out of version control</h3>
-<p>You <em>really</em> don't want to leak your AWS secret key or Postgres username and password on Github. Enough said, mostly — see the <a href="http://12factor.net/">Twelve Factor App</a> principles on this point. We generally use a <code>.env</code> file that, thanks to the <code>.gitignore</code>, never makes it into the repository (secrets should be shared via other means with contributors). The <code>.env</code> file defines secrets as environment variables, and is read in automatically by a package like <code>dotenv</code> in Python.</p>
+<h3 id="keep-secrets-and-configuration-out-of-version-control">Keep secrets and configuration out of version control</h3>
+<p>You <em>really</em> don't want to leak your AWS secret key or Postgres username and password on Github. Enough said — see the <a href="http://12factor.net/config">Twelve Factor App</a> principles on this point. Here's one way to do this:</p>
+<h4 id="store-your-secrets-and-config-variables-in-a-special-file">Store your secrets and config variables in a special file</h4>
+<p>Create a <code>.env</code> file in the project root folder. Thanks to the <code>.gitignore</code>, this file should never get committed into the version control repository. Here's an example:</p>
+<pre><code class="nohighlight"># example .env file
+DATABASE_URL=postgres://username:password@localhost:5432/dbname
+AWS_ACCESS_KEY=myaccesskey
+AWS_SECRET_ACCESS_KEY=mysecretkey
+OTHER_VARIABLE=something
+</code></pre>
+
+<h4 id="use-a-package-to-load-these-variables-automatically">Use a package to load these variables automatically.</h4>
+<p>If you look at the stub script in <code>src/data/make_dataset.py</code>, it uses a package called <a href="https://github.com/theskumar/python-dotenv">python-dotenv</a> to load up all the entries in this file as environment variables so they are accessible with <code>os.environ.get</code>. Here's an example snippet adapted from the <code>python-dotenv</code> documentation:</p>
+<pre><code class="python"># src/data/dotenv_example.py
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__), os.pardir, os.pardir, '.env')  # up two levels to root folder
+load_dotenv(dotenv_path)
+database_url = os.environ.get(&quot;DATABASE_URL&quot;)
+other_variable = os.environ.get(&quot;OTHER_VARIABLE&quot;)
+</code></pre>
+
+<h3 id="be-conservative-in-changing-the-default-folder-structure">Be conservative in changing the default folder structure</h3>
+<p>To keep this structure broadly applicable for many different kinds of projects, we think the best approach is to be liberal in changing the folders around for <em>your</em> project, but be conservative in changing the default structure for <em>all</em> projects.</p>
+<p>We've created a <span class="label label-info">folder-layout</span> label specifically for issues proposing to add, subtract, rename, or move folders around. More generally, we've also created a <span class="label label-warning">needs-discussion</span> label for issues that should have some careful discussion and broad support before being implemented.</p>
 <h2 id="contributing">Contributing</h2>
 <p>The Cookiecutter Data Science project is opinionated, but not afraid to be wrong. Best practices change, tools evolve, and lessons are learned. <strong>The goal of this project is to make it easier to start, structure, and share an analysis.</strong> <a href="https://github.com/drivendata/cookiecutter-data-science/pulls">Pull requests</a> and <a href="https://github.com/drivendata/cookiecutter-data-science/issues">filing issues</a> is encouraged. We'd love to hear what works for you, and what doesn't.</p>
 <p>If you use the Cookiecutter Data Science project, link back to this page or <a href="https://twitter.com/drivendataorg">give us a holler</a> and <a href="mailto:info@drivendata.org">let us know</a>!</p>
@@ -372,5 +399,5 @@ from preprocess.build_features import remove_invalid_data
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-04-28 23:14:27.721868
+Build Date UTC : 2016-04-29 19:49:45.990621
 -->
