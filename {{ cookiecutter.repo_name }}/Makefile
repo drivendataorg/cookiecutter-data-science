@@ -20,7 +20,7 @@ clean:
 	find . -name "*.pyc" -exec rm {} \;
 
 lint:
-	flake8 .
+	flake8 --exclude=lib/,bin/ .
 
 sync_data_to_s3:
 	s3cmd sync --recursive data/ s3://$(BUCKET)/data/
