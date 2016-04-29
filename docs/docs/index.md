@@ -66,7 +66,9 @@ With this in mind, we've created a data science cookiecutter template for projec
 
 Starting a new project is as easy as running this command at the command line. No need to create a directory first, the cookiecutter will do it for you.
 
-    cookiecutter https://github.com/drivendata/cookiecutter-data-science
+```nohighlight
+cookiecutter https://github.com/drivendata/cookiecutter-data-science
+```
 
 ### Example
 
@@ -178,9 +180,42 @@ One effective approach to this is use [virtualenv](https://virtualenv.pypa.io/en
 
 If you have more complex requirements for recreating your environment, consider a virtual machine based approach such as [Docker](https://www.docker.com/) or [Vagrant](https://www.vagrantup.com/). Both of these tools use text-based formats (Dockerfile and Vagrantfile respectively) you can easily add to source control to describe how to create a virtual machine with the requirements you need.
 
-### Keep secrets out of version control
+### Keep secrets and configuration out of version control
 
-You _really_ don't want to leak your AWS secret key or Postgres username and password on Github. Enough said, mostly — see the [Twelve Factor App](http://12factor.net/) principles on this point. We generally use a `.env` file that, thanks to the `.gitignore`, never makes it into the repository (secrets should be shared via other means with contributors). The `.env` file defines secrets as environment variables, and is read in automatically by a package like `dotenv` in Python.
+You _really_ don't want to leak your AWS secret key or Postgres username and password on Github. Enough said — see the [Twelve Factor App](http://12factor.net/config) principles on this point. Here's one way to do this:
+
+#### Store your secrets and config variables in a special file
+
+Create a `.env` file in the project root folder. Thanks to the `.gitignore`, this file should never get committed into the version control repository. Here's an example:
+
+```nohighlight
+# example .env file
+DATABASE_URL=postgres://username:password@localhost:5432/dbname
+AWS_ACCESS_KEY=myaccesskey
+AWS_SECRET_ACCESS_KEY=mysecretkey
+OTHER_VARIABLE=something
+```
+
+#### Use a package to load these variables automatically.
+
+If you look at the stub script in `src/data/make_dataset.py`, it uses a package called [python-dotenv](https://github.com/theskumar/python-dotenv) to load up all the entries in this file as environment variables so they are accessible with `os.environ.get`. Here's an example snippet adapted from the `python-dotenv` documentation:
+
+```python
+# src/data/dotenv_example.py
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__), os.pardir, os.pardir, '.env')  # up two levels to root folder
+load_dotenv(dotenv_path)
+database_url = os.environ.get("DATABASE_URL")
+other_variable = os.environ.get("OTHER_VARIABLE")
+```
+
+### Be conservative in changing the default folder structure
+
+To keep this structure broadly applicable for many different kinds of projects, we think the best approach is to be liberal in changing the folders around for _your_ project, but be conservative in changing the default structure for _all_ projects.
+
+We've created a <span class="label label-info">folder-layout</span> label specifically for issues proposing to add, subtract, rename, or move folders around. More generally, we've also created a <span class="label label-warning">needs-discussion</span> label for issues that should have some careful discussion and broad support before being implemented.
 
 ## Contributing
 
