@@ -203,10 +203,14 @@ If you look at the stub script in `src/data/make_dataset.py`, it uses a package 
 ```python
 # src/data/dotenv_example.py
 from os.path import join, dirname
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
-dotenv_path = join(dirname(__file__), os.pardir, os.pardir, '.env')  # up two levels to root folder
+# find .env automagically by walking up directories until it's found
+dotenv_path = find_dotenv()
+
+# load up the entries as environment variables
 load_dotenv(dotenv_path)
+
 database_url = os.environ.get("DATABASE_URL")
 other_variable = os.environ.get("OTHER_VARIABLE")
 ```
