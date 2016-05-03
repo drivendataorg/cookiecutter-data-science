@@ -14,7 +14,7 @@ requirements:
 	pip install -q -r requirements.txt
 
 data: requirements
-	python src/make_dataset.py
+	python src/data/make_dataset.py
 
 clean:
 	find . -name "*.pyc" -exec rm {} \;
