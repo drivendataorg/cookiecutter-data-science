@@ -322,10 +322,14 @@ OTHER_VARIABLE=something
 <p>If you look at the stub script in <code>src/data/make_dataset.py</code>, it uses a package called <a href="https://github.com/theskumar/python-dotenv">python-dotenv</a> to load up all the entries in this file as environment variables so they are accessible with <code>os.environ.get</code>. Here's an example snippet adapted from the <code>python-dotenv</code> documentation:</p>
 <pre><code class="python"># src/data/dotenv_example.py
 from os.path import join, dirname
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
-dotenv_path = join(dirname(__file__), os.pardir, os.pardir, '.env')  # up two levels to root folder
+# find .env automagically by walking up directories until it's found
+dotenv_path = find_dotenv()
+
+# load up the entries as environment variables
 load_dotenv(dotenv_path)
+
 database_url = os.environ.get(&quot;DATABASE_URL&quot;)
 other_variable = os.environ.get(&quot;OTHER_VARIABLE&quot;)
 </code></pre>
@@ -399,5 +403,5 @@ other_variable = os.environ.get(&quot;OTHER_VARIABLE&quot;)
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-04-29 19:49:45.990621
+Build Date UTC : 2016-05-05 18:29:16.454115
 -->
