@@ -23,10 +23,10 @@ lint:
 	flake8 --exclude=lib/,bin/ .
 
 sync_data_to_s3:
-	aws s3 sync --recursive data/ s3://$(BUCKET)/data/
+	aws s3 sync data/ s3://$(BUCKET)/data/
 
 sync_data_from_s3:
-	aws s3 sync --recursive s3://$(BUCKET)/data/ data/
+	aws s3 sync s3://$(BUCKET)/data/ data/
 
 #################################################################################
 # PROJECT RULES                                                                 #
