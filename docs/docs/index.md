@@ -202,7 +202,7 @@ If you look at the stub script in `src/data/make_dataset.py`, it uses a package 
 
 ```python
 # src/data/dotenv_example.py
-from os.path import join, dirname
+import os
 from dotenv import load_dotenv, find_dotenv
 
 # find .env automagically by walking up directories until it's found
