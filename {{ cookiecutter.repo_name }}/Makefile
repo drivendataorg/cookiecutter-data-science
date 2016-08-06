@@ -20,7 +20,7 @@ clean:
 	find . -name "*.pyc" -exec rm {} \;
 
 lint:
-	flake8 --exclude=lib/,bin/ .
+	flake8 --exclude=lib/,bin/,docs/conf.py .
 
 sync_data_to_s3:
 	aws s3 sync data/ s3://$(BUCKET)/data/
