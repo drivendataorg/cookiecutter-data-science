@@ -5,13 +5,15 @@
 #################################################################################
 
 BUCKET = {{ cookiecutter.s3_bucket }}
+PROJECT_NAME = {{ cookiecutter.repo_name }}
+PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
 
 #################################################################################
 # COMMANDS                                                                      #
 #################################################################################
 
 ## Install Python Dependencies
-requirements:
+requirements: test_environment
 	pip install -q -r requirements.txt
 
 ## Make Dataset
@@ -33,6 +35,15 @@ sync_data_to_s3:
 ## Download Data from S3
 sync_data_from_s3:
 	aws s3 sync s3://$(BUCKET)/data/ data/
+
+## Set up python interpreter environment
+setup_environment:
+	source /usr/local/bin/virtualenvwrapper.sh; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)
+	@echo ">>> Activate virtualenv with:\nworkon $(PROJECT_NAME)"
+
+## Test python environment is setup correctly
+test_environment:
+	python test_environment.py
 
 #################################################################################
 # PROJECT RULES                                                                 #
