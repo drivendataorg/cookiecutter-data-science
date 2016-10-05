@@ -37,9 +37,9 @@ sync_data_from_s3:
 	aws s3 sync s3://$(BUCKET)/data/ data/
 
 ## Set up python interpreter environment
-setup_environment:
+create_environment:
 	source /usr/local/bin/virtualenvwrapper.sh; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)
-	@echo ">>> Activate virtualenv with:\nworkon $(PROJECT_NAME)"
+	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
 
 ## Test python environment is setup correctly
 test_environment:
