@@ -14,11 +14,11 @@ PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
 
 ## Install Python Dependencies
 requirements: test_environment
-	pip install -q -r requirements.txt
+	pip install -r requirements.txt
 
 ## Make Dataset
 data: requirements
-	python src/data/make_dataset.py
+	$(PYTHON_INTERPRETER) src/data/make_dataset.py
 
 ## Delete all compiled Python files
 clean:
@@ -38,12 +38,16 @@ sync_data_from_s3:
 
 ## Set up python interpreter environment
 create_environment:
+	@pip install -q virtualenvwrapper
+	@echo ">>> Installing virtualenvwrapper if not already intalled.\nMake sure the following lines are in shell startup file\n\
+	export WORKON_HOME=$HOME/.virtualenvs\nexport PROJECT_HOME=$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
+
 	source /usr/local/bin/virtualenvwrapper.sh; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
 
 ## Test python environment is setup correctly
 test_environment:
-	python test_environment.py
+	$(PYTHON_INTERPRETER) test_environment.py
 
 #################################################################################
 # PROJECT RULES                                                                 #
