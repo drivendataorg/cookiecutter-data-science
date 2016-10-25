@@ -66,9 +66,8 @@ target/
 # Pycharm
 .idea
 
-# IPython NB Checkpoints
+# Jupyter NB Checkpoints
 .ipynb_checkpoints/
 
 # exclude data from source control by default
 /data/
-
