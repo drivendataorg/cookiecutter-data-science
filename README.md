@@ -16,7 +16,7 @@ $ pip install cookiecutter
 ```
 
 or
- 
+
 ``` bash
 $ conda config --add channels conda-forge
 $ conda install cookiecutter
@@ -30,3 +30,18 @@ $ conda install cookiecutter
 
 
 [![asciicast](https://asciinema.org/a/9bgl5qh17wlop4xyxu9n9wr02.png)](https://asciinema.org/a/9bgl5qh17wlop4xyxu9n9wr02)
+
+
+## Contributing
+
+We welcome contributions! [See the docs for guidelines](https://drivendata.github.io/cookiecutter-data-science/#contributing).
+
+### Installing development requirements
+------------
+
+    pip install -r requirements.txt
+
+### Running the tests
+------------
+
+    py.test tests
