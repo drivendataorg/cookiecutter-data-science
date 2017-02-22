@@ -7,7 +7,7 @@
 BUCKET = {{ cookiecutter.s3_bucket }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
-IS_ANACONDA=$(shell python -c "import sys;t=str('anaconda' in sys.version.lower() or 'continuum' in sys.version.lower());sys.stdout.write(t)")
+IS_ANACONDA=$(shell $(PYTHON_INTERPRETER) -c "import sys;t=str('anaconda' in sys.version.lower() or 'continuum' in sys.version.lower());sys.stdout.write(t)")
 
 #################################################################################
 # COMMANDS                                                                      #
