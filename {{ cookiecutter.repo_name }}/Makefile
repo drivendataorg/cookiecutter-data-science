@@ -7,7 +7,12 @@
 BUCKET = {{ cookiecutter.s3_bucket }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
-IS_ANACONDA=$(shell python -c "import sys;t=str('anaconda' in sys.version.lower() or 'continuum' in sys.version.lower());sys.stdout.write(t)")
+
+ifeq (,$(shell which conda))
+HAS_CONDA=False
+else
+HAS_CONDA=True
+endif
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -39,8 +44,8 @@ sync_data_from_s3:
 
 ## Set up python interpreter environment
 create_environment:
-ifeq (True,$(IS_ANACONDA))
-		@echo ">>> Detected Anaconda, creating conda environment."
+ifeq (True,$(HAS_CONDA))
+		@echo ">>> Detected conda, creating conda environment."
 ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
 	conda create --name $(PROJECT_NAME) python=3.5
 else
