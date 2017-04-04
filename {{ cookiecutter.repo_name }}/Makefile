@@ -23,6 +23,10 @@ endif
 requirements: test_environment
 	pip install -r requirements.txt
 
+## Create the data and subfolders
+create_data_folders:
+	for f in external interim processed raw; do mkdir -p data/$$f ; touch data/$$f/.gitkeep ; done
+
 ## Make Dataset
 data: requirements
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py
