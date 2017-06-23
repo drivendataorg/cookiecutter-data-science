@@ -80,8 +80,7 @@ def test_folders(default_baked_project):
     ]
 
     ignored_dirs = [
-        default_baked_project,
-        os.path.join(default_baked_project, '__pycache__')
+        default_baked_project
         ]
 
     abs_expected_dirs = [os.path.join(default_baked_project, d) for
