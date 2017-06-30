@@ -9,33 +9,60 @@ _A logical, reasonably standardized, but flexible project structure for doing an
 ### Requirements to use the cookiecutter template:
 -----------
  - Python 2.7 or 3.5
- - [Cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html) >= 1.4.0: This can be installed with pip by or conda depending on how you manage your Python packages:
+ - [Cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html) >= 1.4.0: This can be installed with pip:
 
 ``` bash
 $ pip install cookiecutter
 ```
 
-or
-
-``` bash
-$ conda config --add channels conda-forge
-$ conda install cookiecutter
-```
-
-
 ### To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/drivendata/cookiecutter-data-science
-
-
-[![asciicast](https://asciinema.org/a/9bgl5qh17wlop4xyxu9n9wr02.png)](https://asciinema.org/a/9bgl5qh17wlop4xyxu9n9wr02)
-
+    cookiecutter https://github.com/massmutual/cookiecutter-data-science
 
 ### The resulting directory structure
 ------------
 
-The directory structure of your new project looks like this: 
+The directory structure of your new project looks like this:
+
+```
+.
+├── Makefile
+├── README.md
+├── data
+│   ├── external
+│   ├── interim
+│   ├── predictions
+│   ├── processed
+│   └── raw
+├── models
+├── references
+├── reports
+│   ├── figures
+│   └── tables
+├── requirements.txt
+├── src
+│   ├── data
+│   │   ├── __init__.py
+│   │   └── make_dataset.py
+│   ├── exploratory
+│   │   └── __init__.py
+│   ├── features
+│   │   ├── __init__.py
+│   │   └── build_features.py
+│   ├── models
+│   │   ├── __init__.py
+│   │   ├── predict_model.py
+│   │   ├── test_model.py
+│   │   └── train_model.py
+│   └── vis
+│       ├── __init__.py
+│       └── visualize.py
+├── test_environment.py
+└── tox.ini
+```
+
+Here is some reference about those files:
 
 ```
 ├── LICENSE
