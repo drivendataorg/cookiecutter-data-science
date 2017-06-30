@@ -43,7 +43,10 @@ The directory structure of your new project looks like this:
 ├── requirements.txt
 ├── src
 │   ├── data
+│   │   ├── R
+│   │   │   └── utils.R
 │   │   ├── __init__.py
+│   │   ├── make_dataset.R
 │   │   └── make_dataset.py
 │   ├── exploratory
 │   │   └── __init__.py
