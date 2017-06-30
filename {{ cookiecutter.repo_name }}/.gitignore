@@ -66,6 +66,9 @@ target/
 # Pycharm
 .idea
 
+# Emacs
+*~
+
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
 

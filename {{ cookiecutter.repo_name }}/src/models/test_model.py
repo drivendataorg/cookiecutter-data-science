@@ -8,3 +8,4 @@ sys.path.append(src_dir)
 
 from data.make_dataset import *
 from vis.visualize import *
+from models.train_model import *
