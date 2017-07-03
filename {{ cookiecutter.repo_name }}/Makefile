@@ -8,7 +8,7 @@ PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = {{ cookiecutter.s3_bucket }}
 PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
-PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
+PYTHON_INTERPRETER = python3
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -53,6 +53,20 @@ create_environment:
 export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
 	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
+
+## Set up python interpreter environment
+create_environment_R:
+	mkdir $packratdir
+	@cd $packratdir; Rscript -e "packrat::init()"
+	@cd $packratdir; Rscript -e 'install.packages("dplyr", repos = "http://cran.us.r-project.org")'
+	@cd $packratdir; Rscript -e 'install.packages("devtools", repos = "http://cran.us.r-project.org")'
+	@cd $packratdir; Rscript -e 'install.packages("lubridate", repos = "http://cran.us.r-project.org")'
+	@cd $packratdir; Rscript -e 'install.packages("stringr", repos = "http://cran.us.r-project.org")'
+	@cd $packratdir; Rscript -e 'install.packages("RJDBC", repos = "http://cran.us.r-project.org")'
+	@cd $packratdir; Rscript -e 'install.packages("reshape2", repos = "http://cran.us.r-project.org")'
+	@cd $packratdir; Rscript -e 'install.packages("readxl", repos = "http://cran.us.r-project.org")'
+	@cd $packratdir; Rscript -e 'install.packages("ggplot2", repos = "http://cran.us.r-project.org")'
+	@cd $packratdir; Rscript -e 'install.packages("gbm", repos = "http://cran.us.r-project.org")'
 
 ## Test python environment is setup correctly
 test_environment:
