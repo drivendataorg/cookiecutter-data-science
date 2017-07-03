@@ -3,7 +3,8 @@ import os
 import click
 import logging
 from dotenv import find_dotenv, load_dotenv
-
+import ssl
+import vertica_python
 
 @click.command()
 @click.argument('input_filepath', type=click.Path(exists=True))
