@@ -4,10 +4,17 @@
 # GLOBALS                                                                       #
 #################################################################################
 
+PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = {{ cookiecutter.s3_bucket }}
+PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
-IS_ANACONDA=$(shell python -c "import sys;t=str('anaconda' in sys.version.lower() or 'continuum' in sys.version.lower());sys.stdout.write(t)")
+
+ifeq (,$(shell which conda))
+HAS_CONDA=False
+else
+HAS_CONDA=True
+endif
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -31,18 +38,26 @@ lint:
 
 ## Upload Data to S3
 sync_data_to_s3:
+ifeq (default,$(PROFILE))
 	aws s3 sync data/ s3://$(BUCKET)/data/
+else
+	aws s3 sync data/ s3://$(BUCKET)/data/ --profile $(PROFILE)
+endif
 
 ## Download Data from S3
 sync_data_from_s3:
+ifeq (default,$(PROFILE))
 	aws s3 sync s3://$(BUCKET)/data/ data/
+else
+	aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
+endif
 
 ## Set up python interpreter environment
 create_environment:
-ifeq (True,$(IS_ANACONDA))
-		@echo ">>> Detected Anaconda, creating conda environment."
+ifeq (True,$(HAS_CONDA))
+		@echo ">>> Detected conda, creating conda environment."
 ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
-	conda create --name $(PROJECT_NAME) python=3.5
+	conda create --name $(PROJECT_NAME) python=3
 else
 	conda create --name $(PROJECT_NAME) python=2.7
 endif
@@ -66,7 +81,7 @@ test_environment:
 
 
 #################################################################################
-# Self Documenting Commands                                                                #
+# Self Documenting Commands                                                     #
 #################################################################################
 
 .DEFAULT_GOAL := show-help
@@ -124,4 +139,4 @@ show-help:
 		} \
 		printf "\n"; \
 	}' \
-	| more $(shell test $(shell uname) == Darwin && echo '--no-init --raw-control-chars')
+	| more $(shell test $(shell uname) = Darwin && echo '--no-init --raw-control-chars')
