@@ -6,8 +6,7 @@ A video showing how to start a project using these docs is [on Vimeo here](https
 
 The slides from a presentation of this project (including the video) are in the `docs/` folder here.
 
-
-#### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
+#### Based on a project from Driven Data: [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
 
 
 ### Requirements to use the cookiecutter template:
@@ -72,7 +71,6 @@ The directory structure of your new project looks like this:
 Here is some reference about those files:
 
 ```
-├── LICENSE
 ├── Makefile           <- Makefile with commands like `make data` or `make train`
 ├── README.md          <- The top-level README for developers using this project.
 ├── data
@@ -84,10 +82,6 @@ Here is some reference about those files:
 ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
 │
 ├── models             <- Trained and serialized models, model predictions, or model summaries
-│
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
 │
@@ -117,16 +111,3 @@ Here is some reference about those files:
 └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
 ```
 
-## Contributing
-
-We welcome contributions! [See the docs for guidelines](https://drivendata.github.io/cookiecutter-data-science/#contributing).
-
-### Installing development requirements
-------------
-
-    pip install -r requirements.txt
-
-### Running the tests
-------------
-
-    py.test tests
