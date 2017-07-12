@@ -2,6 +2,10 @@
 
 _A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
 
+A video showing how to start a project using these docs is [on Vimeo here](https://vimeo.com/225258953).
+
+The slides from a presentation of this project (including the video) are in the `docs/` folder here.
+
 
 #### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
 
