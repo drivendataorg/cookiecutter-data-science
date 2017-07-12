@@ -1,3 +1,0 @@
-# Remove R stuff if not going to be used
-if '{{ cookiecutter.include_r_boilerplate}}'.lower() == 'falsen':
-    remove_grunt_files()
