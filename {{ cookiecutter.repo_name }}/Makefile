@@ -36,6 +36,13 @@ clean:
 lint:
 	flake8 --exclude=lib/,bin/,docs/conf.py .
 
+## Install Jupyter notebook with extensions
+jupyter: requirements
+	pip install jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator ipywidgets
+	jupyter contrib nbextension install --sys-prefix
+	jupyter nbextensions_configurator enable
+	jupyter nbextension enable --py --sys-prefix widgetsnbextension
+
 ## Upload Data to S3
 sync_data_to_s3:
 ifeq (default,$(PROFILE))
