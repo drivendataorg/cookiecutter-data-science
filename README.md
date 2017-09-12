@@ -1,4 +1,4 @@
-# Cookiecutter Data Science
+# MassMutual Data Science Project Structure Guidelines
 
 _A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
 
@@ -9,7 +9,7 @@ The slides from a presentation of this project (including the video) are in the 
 #### Based on a project from Driven Data: [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
 
 
-### Requirements to use the cookiecutter template:
+### Requirements to use this project structure template:
 -----------
  - Python 2.7 or 3.5
  - [Cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html) >= 1.4.0: This can be installed with pip:
@@ -29,85 +29,57 @@ $ pip install cookiecutter
 The directory structure of your new project looks like this:
 
 ```
-.
-├── Makefile
-├── README.md
+├── Makefile                   <- Makefile with commands like `make data` or `make train`
+├── README.md                  <- The top-level README for developers using this project.
+├── requirements.txt           <- The requirements file for reproducing the analysis environment, e.g.
+│                                 generated with `pip freeze > requirements.txt`
+|
 ├── data
-│   ├── external
-│   ├── interim
+│   ├── external               <- Data from third party sources.
+│   ├── interim                <- Intermediate data that has been transformed.
 │   ├── predictions
-│   ├── processed
-│   └── raw
-├── models
-├── references
-├── reports
-│   ├── figures
+│   ├── processed              <- The final, canonical data sets for modeling.
+│   └── raw                    <- The original, immutable data dump.
+|
+├── models                     <- Trained and serialized models, model predictions, or model summaries
+|
+├── references                 <- Data dictionaries, manuals, and all other explanatory materials.
+|
+├── reports                    <- Generated analysis as HTML, PDF, LaTeX, etc.
+│   ├── figures                <- Generated graphics and figures to be used in reporting
 │   └── tables
-├── requirements.txt
-├── src
+|
+|
+├── src                        <- Source code for use in this project.
 │   ├── data
 │   │   ├── R
 │   │   │   └── utils.R
 │   │   ├── __init__.py
 │   │   ├── make_dataset.R
 │   │   └── make_dataset.py
+│   ├── evaluation
 │   ├── exploratory
+│   │   ├── R
 │   │   └── __init__.py
-│   ├── features
+│   ├── features                <- Scripts to turn raw data into features for modeling
+│   │   ├── R
 │   │   ├── __init__.py
+│   │   ├── build_features.R
 │   │   └── build_features.py
-│   ├── models
+│   ├── models                   <- Scripts to train models and then use trained models to make predictions
+│   │   ├── R
 │   │   ├── __init__.py
 │   │   ├── predict_model.py
+│   │   ├── test_model.R
 │   │   ├── test_model.py
+│   │   ├── train_model.R
 │   │   └── train_model.py
 │   └── vis
+│       ├── R
 │       ├── __init__.py
+│       ├── visualize.R
 │       └── visualize.py
+|
 ├── test_environment.py
 └── tox.ini
 ```
-
-Here is some reference about those files:
-
-```
-├── Makefile           <- Makefile with commands like `make data` or `make train`
-├── README.md          <- The top-level README for developers using this project.
-├── data
-│   ├── external       <- Data from third party sources.
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
-│
-├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-│
-├── models             <- Trained and serialized models, model predictions, or model summaries
-│
-├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-│
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
-│
-├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-│                         generated with `pip freeze > requirements.txt`
-│
-├── src                <- Source code for use in this project.
-│   ├── __init__.py    <- Makes src a Python module
-│   │
-│   ├── data           <- Scripts to download or generate data
-│   │   └── make_dataset.py
-│   │
-│   ├── features       <- Scripts to turn raw data into features for modeling
-│   │   └── build_features.py
-│   │
-│   ├── models         <- Scripts to train models and then use trained models to make
-│   │   │                 predictions
-│   │   ├── predict_model.py
-│   │   └── train_model.py
-│   │
-│   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-│       └── visualize.py
-│
-└── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
-```
-
