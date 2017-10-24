@@ -83,3 +83,17 @@ The directory structure of your new project looks like this:
 ├── test_environment.py
 └── tox.ini
 ```
+
+<hr>
+
+## FAQ
+
+Q: Where should I put my Shiny App?
+
+A:
+
+1. Ideally each shiny app would live in it's own folder inside the vis folder.
+2. There should be a data folder in there as well as ui.R, server.R, and global.R.
+3. The data should live in the same folder as the app shiny treats it's enclosing folder as it's working directory.
+
+<hr>
