@@ -8,74 +8,92 @@ PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = {{ cookiecutter.s3_bucket }}
 PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
-PYTHON_INTERPRETER = python3
+PYTHON_VENV = pyenv
+PYTHON_INTERPRETER = $(PYTHON_VENV)/bin/python
 
 #################################################################################
-# COMMANDS                                                                      #
+# DATA                                                                          #
 #################################################################################
-
-## Install Python Dependencies
-requirements: test_environment
-	pip install -r requirements.txt
 
 ## Make Dataset
-data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py
+data/raw/my_dataset.csv: src/data/make_dataset.py
+	$(PYTHON_INTERPRETER) $< $@
+
+#################################################################################
+# MODELS                                                                        #
+#################################################################################
+
+
+
+#################################################################################
+# TESTS                                                                         #
+#################################################################################
+
+
+
+#################################################################################
+# SETUP COMMANDS                                                                #
+#################################################################################
+
+## Set up python interpreter environment
+create_environment: requirements.txt
+	pip3 install virtualenv -U
+	virtualenv ${PYTHON_VENV} --python=$(shell which python3)
+	${PYTHON_VENV}/bin/pip install -r requirements.txt
+
+## Set up R environment
+create_Renvironment:
+	mkdir $packratdir
+	cd $packratdir; Rscript -e "packrat::init()"
+	cd $packratdir; Rscript -e 'install.packages("dplyr", repos = "http://cran.us.r-project.org")'
+
+## Delete all compiled Python files
+clean:
+	find . -name "*.pyc" -exec rm {} \;
+	find . -name "*.~" -exec rm {} \;
+
+# Example target for creating symbolic links to shared data in Box
+# ## Link box folder into local repository
+# link_box:
+# 	ln -sf ~/Box-Sync/Sales-and-Marketing-Domain/channel-routing/data
+# 	ln -sf ~/Box-Sync/Sales-and-Marketing-Domain/channel-routing/models
+# 	ln -sf ~/Box-Sync/Sales-and-Marketing-Domain/channel-routing/references
+
+# Example target opens the relevant project webpages
+# open:
+# 	open --new -a "Google Chrome"
+# 	atom .
+# 	sleep 2
+# 	open -a "Google Chrome" "https://advana.atlassian.net/wiki/spaces/AAP/pages/126066680/Channel+Routing"
+# 	open -a "Google Chrome" 'https://advana.atlassian.net/projects/MCR/board'
+# 	open -a "Google Chrome" 'https://github.com/massmutual/channel-routing'
+
+## Lint using flake8 and lintr
+lint:
+	flake8 --exclude=$(PYTHON_VENV)/ --ignore=E501,E402 --count .
+	# for R:
+	# Rscript -e 'lintr::lint_package()'
 
 ## Delete all compiled Python files
 clean:
 	find . -name "*.pyc" -exec rm {} \;
 
-## Lint using flake8
-lint:
-	flake8 --exclude=lib/,bin/,docs/conf.py .
-
-## Upload Data to S3
-sync_data_to_s3:
-ifeq (default,$(PROFILE))
-	aws s3 sync data/ s3://$(BUCKET)/data/
-else
-	aws s3 sync data/ s3://$(BUCKET)/data/ --profile $(PROFILE)
-endif
-
-## Download Data from S3
-sync_data_from_s3:
-ifeq (default,$(PROFILE))
-	aws s3 sync s3://$(BUCKET)/data/ data/
-else
-	aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
-endif
-
-## Set up python interpreter environment
-create_environment:
-	@pip install -q virtualenv virtualenvwrapper
-	@echo ">>> Installing virtualenvwrapper if not already intalled.\nMake sure the following lines are in shell startup file\n\
-export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
-	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
-	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
-
-## Set up python interpreter environment
-create_environment_R:
-	mkdir $packratdir
-	@cd $packratdir; Rscript -e "packrat::init()"
-	@cd $packratdir; Rscript -e 'install.packages("dplyr", repos = "http://cran.us.r-project.org")'
-	@cd $packratdir; Rscript -e 'install.packages("devtools", repos = "http://cran.us.r-project.org")'
-	@cd $packratdir; Rscript -e 'install.packages("lubridate", repos = "http://cran.us.r-project.org")'
-	@cd $packratdir; Rscript -e 'install.packages("stringr", repos = "http://cran.us.r-project.org")'
-	@cd $packratdir; Rscript -e 'install.packages("RJDBC", repos = "http://cran.us.r-project.org")'
-	@cd $packratdir; Rscript -e 'install.packages("reshape2", repos = "http://cran.us.r-project.org")'
-	@cd $packratdir; Rscript -e 'install.packages("readxl", repos = "http://cran.us.r-project.org")'
-	@cd $packratdir; Rscript -e 'install.packages("ggplot2", repos = "http://cran.us.r-project.org")'
-	@cd $packratdir; Rscript -e 'install.packages("gbm", repos = "http://cran.us.r-project.org")'
-
-## Test python environment is setup correctly
-test_environment:
-	$(PYTHON_INTERPRETER) test_environment.py
-
-#################################################################################
-# PROJECT RULES                                                                 #
-#################################################################################
-
+# Example targets to move data to, from AWS
+# ## Upload Data to S3
+# sync_data_to_s3:
+# ifeq (default,$(PROFILE))
+# 	aws s3 sync data/ s3://$(BUCKET)/data/
+# else
+# 	aws s3 sync data/ s3://$(BUCKET)/data/ --profile $(PROFILE)
+# endif
+#
+# ## Download Data from S3
+# sync_data_from_s3:
+# ifeq (default,$(PROFILE))
+# 	aws s3 sync s3://$(BUCKET)/data/ data/
+# else
+# 	aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
+# endif
 
 #################################################################################
 # Self Documenting Commands                                                     #
