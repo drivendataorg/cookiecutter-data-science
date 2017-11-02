@@ -24,10 +24,6 @@ endif
 requirements: test_environment
 	pip install -r requirements.txt
 
-## Make Dataset
-data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py
-
 ## Delete all compiled Python files
 clean:
 	find . -name "*.pyc" -exec rm {} \;
@@ -35,6 +31,9 @@ clean:
 ## Lint using flake8
 lint:
 	flake8 --exclude=lib/,bin/,docs/conf.py .
+
+sync_s3: sync_data_to_s3 sync_data_from_s3 sync_models_to_s3 sync_models_from_s3 \
+	sync_references_to_s3 sync_references_from_s3
 
 ## Upload Data to S3
 sync_data_to_s3:
@@ -47,9 +46,41 @@ endif
 ## Download Data from S3
 sync_data_from_s3:
 ifeq (default,$(PROFILE))
-	aws s3 sync s3://$(BUCKET)/$(PROJECT_NAME)/data/ data/
+	aws s3 sync s3://$(BUCKET)/data/ data/
 else
-	aws s3 sync s3://$(BUCKET)/$(PROJECT_NAME)/data/ data/ --profile $(PROFILE)
+	aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
+endif
+
+## Upload models to S3
+sync_models_to_s3:
+ifeq (default,$(PROFILE))
+	aws s3 sync models/ s3://$(BUCKET)/models/
+else
+	aws s3 sync models/ s3://$(BUCKET)/models/ --profile $(PROFILE)
+endif
+
+## Download models from S3
+sync_models_from_s3:
+ifeq (default,$(PROFILE))
+	aws s3 sync s3://$(BUCKET)/models/ models/
+else
+	aws s3 sync s3://$(BUCKET)/models/ models/ --profile $(PROFILE)
+endif
+
+## Upload references to S3
+sync_references_to_s3:
+ifeq (default,$(PROFILE))
+	aws s3 sync references/ s3://$(BUCKET)/references/
+else
+	aws s3 sync references/ s3://$(BUCKET)/references/ --profile $(PROFILE)
+endif
+
+## Download references from S3
+sync_references_from_s3:
+ifeq (default,$(PROFILE))
+	aws s3 sync s3://$(BUCKET)/references/ references/
+else
+	aws s3 sync s3://$(BUCKET)/references/ references/ --profile $(PROFILE)
 endif
 
 ## Set up python interpreter environment
@@ -59,11 +90,14 @@ create_environment:
 	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
 	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
-endif
 
 ## Test python environment is setup correctly
 test_environment:
 	$(PYTHON_INTERPRETER) test_environment.py
+
+data:
+
+experiment:
 
 #################################################################################
 # PROJECT RULES                                                                 #
