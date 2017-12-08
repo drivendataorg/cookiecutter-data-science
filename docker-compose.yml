@@ -6,7 +6,7 @@ services:
          - "8888:8888"
       volumes:
          - ./:/mnt
-      entrypoint: /bin/bash 
+      entrypoint: bash -c "cd /mnt && jupyter notebook --NotebookApp.token='' --ip=0.0.0.0 --allow-root && /bin/bash" 
       stdin_open: true
       tty: true
 
