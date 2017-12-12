@@ -1,4 +1,8 @@
-.PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3
+.PHONY: clean data lint requirements sync_s3
+
+data:
+
+experiment:
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -10,12 +14,6 @@ PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
 
-ifeq (,$(shell which conda))
-HAS_CONDA=False
-else
-HAS_CONDA=True
-endif
-
 #################################################################################
 # COMMANDS                                                                      #
 #################################################################################
@@ -24,10 +22,6 @@ endif
 requirements: test_environment
 	pip install -r requirements.txt
 
-## Make Dataset
-data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py
-
 ## Delete all compiled Python files
 clean:
 	find . -name "*.pyc" -exec rm {} \;
@@ -35,6 +29,9 @@ clean:
 ## Lint using flake8
 lint:
 	flake8 --exclude=lib/,bin/,docs/conf.py .
+
+sync_s3: sync_data_to_s3 sync_data_from_s3 sync_models_to_s3 sync_models_from_s3 \
+	sync_references_to_s3 sync_references_from_s3
 
 ## Upload Data to S3
 sync_data_to_s3:
@@ -52,23 +49,62 @@ else
 	aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
 endif
 
+## Upload models to S3
+sync_models_to_s3:
+ifeq (default,$(PROFILE))
+	aws s3 sync models/ s3://$(BUCKET)/models/
+else
+	aws s3 sync models/ s3://$(BUCKET)/models/ --profile $(PROFILE)
+endif
+
+## Download models from S3
+sync_models_from_s3:
+ifeq (default,$(PROFILE))
+	aws s3 sync s3://$(BUCKET)/models/ models/
+else
+	aws s3 sync s3://$(BUCKET)/models/ models/ --profile $(PROFILE)
+endif
+
+## Upload references to S3
+sync_references_to_s3:
+ifeq (default,$(PROFILE))
+	aws s3 sync references/ s3://$(BUCKET)/references/
+else
+	aws s3 sync references/ s3://$(BUCKET)/references/ --profile $(PROFILE)
+endif
+
+## Download references from S3
+sync_references_from_s3:
+ifeq (default,$(PROFILE))
+	aws s3 sync s3://$(BUCKET)/references/ references/
+else
+	aws s3 sync s3://$(BUCKET)/references/ references/ --profile $(PROFILE)
+endif
+
+## Upload logs to S3
+sync_logs_to_s3:
+ifeq (default,$(PROFILE))
+	aws s3 sync logs/ s3://$(BUCKET)/logs/
+else
+	aws s3 sync logs/ s3://$(BUCKET)/logs/ --profile $(PROFILE)
+endif
+
+## Download references from S3
+sync_logs_from_s3:
+ifeq (default,$(PROFILE))
+	aws s3 sync s3://$(BUCKET)/logs/ logs/
+else
+	aws s3 sync s3://$(BUCKET)/logs/ logs/ --profile $(PROFILE)
+endif
+
 ## Set up python interpreter environment
 create_environment:
-ifeq (True,$(HAS_CONDA))
-		@echo ">>> Detected conda, creating conda environment."
-ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
-	conda create --name $(PROJECT_NAME) python=3
-else
-	conda create --name $(PROJECT_NAME) python=2.7
-endif
-		@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
-else
 	@pip install -q virtualenv virtualenvwrapper
 	@echo ">>> Installing virtualenvwrapper if not already intalled.\nMake sure the following lines are in shell startup file\n\
 	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
-	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
+	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); \
+	setvirtualenvproject $$HOME/.virtualenvs/$(PROJECT_NAME) $(PROJECT_DIR)"
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
-endif
 
 ## Test python environment is setup correctly
 test_environment:
