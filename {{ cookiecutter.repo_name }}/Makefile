@@ -81,6 +81,23 @@ else
 	aws s3 sync s3://$(BUCKET)/references/ references/ --profile $(PROFILE)
 endif
 
+
+## Upload logs to S3
+sync_logs_to_s3:
+ifeq (default,$(PROFILE))
+	aws s3 sync logs/ s3://$(BUCKET)/logs/
+else
+	aws s3 sync logs/ s3://$(BUCKET)/logs/ --profile $(PROFILE)
+endif
+
+## Download references from S3
+sync_logs_from_s3:
+ifeq (default,$(PROFILE))
+	aws s3 sync s3://$(BUCKET)/logs/ logs/
+else
+	aws s3 sync s3://$(BUCKET)/logs/ logs/ --profile $(PROFILE)
+endif
+
 ## Set up python interpreter environment
 create_environment:
 	@pip install -q virtualenv virtualenvwrapper
