@@ -1,1 +1,1 @@
-FROM 979328202387.dkr.ecr.us-east-1.amazonaws.com/centos
+FROM 952187651954.dkr.ecr.us-west-1.amazonaws.com/base-dev-centos:latest
