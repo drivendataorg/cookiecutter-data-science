@@ -3,7 +3,7 @@ services:
    dev:
       build: .
       ports:
-         - "8888:8888"
+         - "8889:8888"
       volumes:
          - ./:/mnt
       entrypoint: bash -c "cd /mnt && jupyter notebook --NotebookApp.token='' --ip=0.0.0.0 --allow-root && /bin/bash" 
