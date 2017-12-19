@@ -6,6 +6,7 @@ from dotenv import find_dotenv, load_dotenv
 import yaml
 import ssl
 import vertica_python
+import sys
 
 
 def run_from_ipython():
