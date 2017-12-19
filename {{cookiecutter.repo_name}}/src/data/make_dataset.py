@@ -7,6 +7,9 @@ import yaml
 import ssl
 import vertica_python
 import sys
+import subprocess
+import re
+from jinja2 import Template
 
 
 def run_from_ipython():
@@ -73,6 +76,61 @@ def vertica_python_conn(config, account='user', server='vertica'):
 def vertica_python_conn_wrapper(**kwargs):
     conn_info = yaml.safe_load(open(find_dotenv('.config.yml')))
     return vertica_python_conn(conn_info, **kwargs)
+
+
+def strip_comments(x: str):
+    """Remove SQL comments from a string."""
+    return re.sub("--.*?\n", "\n", x)
+
+
+def single_line(x: str):
+    """Convert a sql command into a single line (remove newlines)."""
+    return re.sub(r'\s*\n+\s*', ' ', x)
+
+
+def csv_command(query: str,
+                outfile: str,
+                header: bool=False):
+    """Generate command line command for passing `query` into vsql
+    and directing the output to `outfile`."""
+    # print(os.environ.get("pw"))
+    if header:
+        return """/usr/local/bin/vsql
+                  -h vertica.private.massmutual.com
+                  -d advana
+                  -U {0}
+                  -w '{1}'
+                  -F $'|'
+                  -A
+                  -c "{2}" |
+                  gzip -c > data/raw/{3}""".format(os.environ.get("user"),
+                                                   os.environ.get("pw"),
+                                                   query,
+                                                   outfile)
+    else:
+        return """/usr/local/bin/vsql
+                  -h vertica.private.massmutual.com
+                  -d advana
+                  -U {0}
+                  -w '{1}'
+                  -F $'|'
+                  -At
+                  -c "{2}" |
+                  gzip -c > data/raw/{3}""".format(os.environ.get("user"),
+                                                   os.environ.get("pw"),
+                                                   query,
+                                                   outfile)
+
+
+def vsql_to_csv(query: str,
+                outfile: str,
+                header: bool=False):
+    """Run query and direct output to outfile."""
+    command = csv_command(single_line(strip_comments(query)),
+                          outfile,
+                          header=header)
+    print(command)
+    subprocess.call(command, shell=True)
 
 
 @click.command()
