@@ -50,7 +50,7 @@ def get_vertica_python_conn(cfg=None):
     return conn
 
 
-def vertica_python_conn(config, account='user', server='vertica'):
+def vertica_python_conn_yaml(config, account='user', server='vertica'):
     """
     Generate vertica_python configuration object from configuration.
 
@@ -73,9 +73,41 @@ def vertica_python_conn(config, account='user', server='vertica'):
     return conn
 
 
+def vertica_python_conn_env(config, account='user', server='vertica'):
+    """
+    Generate vertica_python configuration object from configuration.
+
+    Args:
+    config -- database configuation.
+
+    Returns:
+    conn -- database connection.
+    """
+    params = {
+        'host': os.environ.get("_".join([server, "host"])),
+        'port': 5433,
+        'database': os.environ.get("_".join([server, "database"])),
+        'read_timeout': 10 * 60 * 60,
+        'unicode_error': 'strict',
+        'user': os.environ.get("_".join([server, account, "username"])),
+        'password': os.environ.get("_".join([server, account, "password"]))
+    }
+    conn = vertica_python.connect(**params)
+    return conn
+
+
 def vertica_python_conn_wrapper(**kwargs):
-    conn_info = yaml.safe_load(open(find_dotenv('.config.yml')))
-    return vertica_python_conn(conn_info, **kwargs)
+    # first, look for the YAML
+    if find_dotenv('.config.yml'):
+        conn_info = yaml.safe_load(open(find_dotenv('.config.yml')))
+        return vertica_python_conn_yaml(conn_info, **kwargs)
+    # else, look for the bash script
+    elif find_dotenv('.config.sh'):
+        load_dotenv(find_dotenv('.config.sh'))
+        return vertica_python_conn_env(**kwargs)
+    # else, assume they are in the environment already
+    else:
+        return vertica_python_conn_env(**kwargs)
 
 
 def strip_comments(x: str):
