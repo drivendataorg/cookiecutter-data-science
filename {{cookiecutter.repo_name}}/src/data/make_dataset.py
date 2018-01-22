@@ -39,7 +39,8 @@ def vertica_python_conn(config: dict,
     Generate vertica_python configuration object from configuration.
 
     Args:
-    (none)
+    config -- dictionary that optionally contains config[server] details
+              and config[server][account] details.
 
     Returns:
     conn -- database connection.
@@ -62,8 +63,7 @@ def vertica_python_conn(config: dict,
         ssl_context.verify_mode = ssl.CERT_NONE
         ssl_context.check_hostname = False
         params['ssl'] = ssl_context
-    conn = vertica_python.connect(**params)
-    return conn
+    return vertica_python.connect(**params)
 
 
 def vertica_python_conn_wrapper(**kwargs):
@@ -88,36 +88,37 @@ def single_line(x: str):
 
 def csv_command(query: str,
                 outfile: str,
-                header: bool = False):
+                config: dict,
+                header: bool = False,
+                account: str='user',
+                server: str='vertica'):
     """Generate command line command for passing `query` into vsql
     and directing the output to `outfile`."""
     # print(os.environ.get("pw"))
+    params = {}
+    if server in config:
+        config = config[server]
+    params['host'] = config.get("host", os.environ.get("_".join([server, "host"])))
+    params['database'] = config.get("database", os.environ.get("_".join([server, "database"])))
+    if account in config:
+        config = config[account]
+    params['user'] = config.get("username", os.environ.get("_".join([server, account, "username"])))
+    params['password'] = config.get("password", os.environ.get("_".join([server, account, "password"])))
+    params['query'] = query
+    params['outfile'] = outfile
     if header:
-        return """/usr/local/bin/vsql
-                  -h vertica.private.massmutual.com
-                  -d advana
-                  -U {0}
-                  -w '{1}'
-                  -F $'|'
-                  -A
-                  -c "{2}" |
-                  gzip -c > data/raw/{3}""".format(os.environ.get("user"),
-                                                   os.environ.get("pw"),
-                                                   query,
-                                                   outfile)
+        params['header'] = ''
     else:
-        return """/usr/local/bin/vsql
-                  -h vertica.private.massmutual.com
-                  -d advana
-                  -U {0}
-                  -w '{1}'
-                  -F $'|'
-                  -At
-                  -c "{2}" |
-                  gzip -c > data/raw/{3}""".format(os.environ.get("user"),
-                                                   os.environ.get("pw"),
-                                                   query,
-                                                   outfile)
+        params['header'] = 't'
+    return """/usr/local/bin/vsql
+              -h {host}
+              -d {database}
+              -U {user}
+              -w '{password}'
+              -F $'|'
+              -A{header}
+              -c "{query}" |
+              gzip -c > data/raw/{outfile}""".format(params)
 
 
 def vsql_to_csv(query: str,
