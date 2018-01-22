@@ -125,8 +125,12 @@ def vsql_to_csv(query: str,
                 outfile: str,
                 header: bool = False):
     """Run query and direct output to outfile."""
+    conn_info = {}
+    if find_dotenv('.config.yml'):
+        conn_info = yaml.safe_load(open(find_dotenv('.config.yml')))
     command = csv_command(single_line(strip_comments(query)),
                           outfile,
+                          conn_info,
                           header=header)
     print(command)
     subprocess.call(command, shell=True)
