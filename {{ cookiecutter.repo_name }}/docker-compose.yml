@@ -1,0 +1,12 @@
+version: '3'
+services:
+   dev:
+      build: .
+      ports:
+         - "127.0.0.1::8888"
+      volumes:
+         - ./:/mnt
+      entrypoint: bash -c "cd /mnt && jupyter notebook --NotebookApp.token='' --ip=0.0.0.0 --allow-root && /bin/bash" 
+      stdin_open: true
+      tty: true
+
