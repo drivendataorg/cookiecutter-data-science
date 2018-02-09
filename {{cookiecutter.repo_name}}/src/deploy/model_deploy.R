@@ -1,11 +1,11 @@
 ### What is the name of the model
 model_name = ""
 
-###  What is the domain - options are D (digital), I (investments), 
+###  What is the domain - options are D (digital), I (investments),
 ###  O (operations), SM (sales and marketing), RP (risk and product)
 domain = ""
 
-###  What is the current model version?  Model version should take the form of {major}.{minor} 
+###  What is the current model version?  Model version should take the form of {major}.{minor}
 ###  where both {major} and {minor} are integers.
 version = ""
 
@@ -16,7 +16,7 @@ owner = ""
 ###  contacted in case of failure
 secondary_owner = ""
 
-###  Where is the model object being stored? 
+###  Where is the model object being stored?
 ###  Typically this is a location in S3 or hdfs
 location = ""
 
@@ -25,7 +25,7 @@ location = ""
 deploy_date = ""
 
 ###  In order to monitor accuracy we need a baseline measurement
-###  First, how are you measuring your model? AUC? RMSE? Put the name 
+###  First, how are you measuring your model? AUC? RMSE? Put the name
 ###  of the metric below
 metric = ""
 
@@ -41,7 +41,7 @@ memo = ""
 
 ###  What is the name of the training dataframe in R?
 ###  Do not enter as a string
-training_data = 
+training_data =
 
 ###  What columns should we consider categorical?  For these columns model
 ###  monitoring will count the number in each bin.  Include model output
@@ -58,19 +58,22 @@ continuous_cols = c("", "")
 ###  What columns are model output?    DO NOT include the true label
 output_cols = c("", "")
 
+### Establish a connection to vertica. The vertica connection function is not offered
+### in this package. Users are encouraged to refer to other packages (e.g.,
+### mmlib::vertica_connect()) for ways of connecting to vertica. batch_id and batch_pass are
+### needed, though, and should be properly handled.
+db <- vertica_connect(Sys.getenv("MODEL_MONITORING_BATCH"),
+                      Sys.getenv("MODEL_MONITORING_PASS"))
+
+### This is the credential needed as an input. Users are encouraged to wrap creds as an env. variable.
+### NOTE: username = and password = cannot be ignored
+creds <- c(username = Sys.getenv("MODEL_MONITORING_BATCH"),
+           password = Sys.getenv("MODEL_MONITORING_PASS"))
 
 ### Run the following code after filling everything out above
-library(mmlib)
-db <- vertica_connect(user = "model_monitoring_batch",
-                       pass = [ask Adam])
-creds <- c(username = "model_monitoring_batch",
-            password = [ask Adam])
-
-
-
 # Execute the following command
 library(mmmm)
- 
+
 mmmm::new_model(
   name = model_name,
   version = version,

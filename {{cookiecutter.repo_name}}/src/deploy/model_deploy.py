@@ -1,8 +1,28 @@
 """This is a deployment file for mmmm package
 """
 from mmmm import new_model
-
+import os
+import sys
 import vertica_python
+
+
+def run_from_ipython():
+    try:
+        __IPYTHON__
+        return True
+    except NameError:
+        return False
+
+
+if run_from_ipython():
+    from IPython import get_ipython
+    ipython = get_ipython()
+    ipython.magic("matplotlib inline")
+    project_dir = os.getcwd()
+else:
+    project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
+src_dir = os.path.join(project_dir, "src")
+sys.path.append(src_dir)
 
 
 # What is the name of the model
@@ -48,7 +68,7 @@ memo = ''
 
 # What is the name of the training pd.Dataframe in Python?
 # Do not enter as a string
-training_data = 
+training_data =
 
 # What columns should we consider categorical?  For these columns model
 # monitoring will count the number in each bin.  Include model output
@@ -73,7 +93,7 @@ db_conn = vertica_python.connect(
     user='model_monitoring_batch',
     password='[ask Adam]',
     database='advana'
-    )
+)
 
 # Execute this function, given user does not offer self-defined bins
 new_model(
