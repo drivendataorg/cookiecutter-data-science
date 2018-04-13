@@ -1,8 +1,12 @@
+require.config({
+   baseUrl: base_url + "/search/"
+});
+
 require([
-    base_url + '/mkdocs/js/mustache.min.js',
-    base_url + '/mkdocs/js/lunr-0.5.7.min.js',
+    'mustache.min',
+    'lunr.min',
     'text!search-results-template.mustache',
-    'text!../search_index.json',
+    'text!search_index.json',
 ], function (Mustache, lunr, results_template, data) {
    "use strict";
 
@@ -70,7 +74,7 @@ require([
              */
             jQuery('#mkdocs_search_modal a').click(function(){
                 jQuery('#mkdocs_search_modal').modal('hide');
-            })
+            });
         }
 
     };
@@ -83,6 +87,6 @@ require([
         search();
     }
 
-    search_input.addEventListener("keyup", search);
+    if (search_input){search_input.addEventListener("keyup", search);}
 
 });

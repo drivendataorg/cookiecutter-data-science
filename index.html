@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A project template and directory structure for Python data science projects.">   
-    <link rel="shortcut icon" href="./favicon.ico">
+    <meta name="description" content="A project template and directory structure for Python data science projects.">  
+    <link rel="shortcut icon" href="./img/favicon.ico">
 
-    <title>Cookiecutter Data Science</title>
+    <title>Home - Cookiecutter Data Science</title>
 
     <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
     <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
@@ -38,23 +38,6 @@
     </script>
 
     
-    <script>
-    (function(i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function() {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-54096005-4', 'auto');
-    ga('send', 'pageview');
-    </script>
-    
 </head>
 
 <body class="homepage" >
@@ -64,7 +47,6 @@
 
         <!-- Collapsed navigation -->
         <div class="navbar-header">
-            
             <!-- Expander button -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -75,30 +57,22 @@
             
 
             <!-- Main title -->
+
             <a class="navbar-brand" href=".">Cookiecutter Data Science</a>
         </div>
 
         <!-- Expanded navigation -->
         <div class="navbar-collapse collapse">
-            
 
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                        <i class="fa fa-search"></i> Search
-                    </a>
-                </li>
-                
-                
                     <li>
-                        <a href="https://github.com/drivendata/cookiecutter-data-science">
-                            
-                                <i class="fa fa-github"></i>
-                            
-                            GitHub
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fa fa-search"></i> Search
                         </a>
                     </li>
-                
+                    <li>
+                        <a href="https://github.com/drivendata/cookiecutter-data-science/edit/master/docs/index.md"><i class="fa fa-github"></i> Edit on GitHub</a>
+                    </li>
             </ul>
         </div>
     </div>
@@ -108,52 +82,31 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-    
         <li class="first-level active"><a href="#cookiecutter-data-science">Cookiecutter Data Science</a></li>
-        
             <li class="second-level"><a href="#why-use-this-project-structure">Why use this project structure?</a></li>
-            
+                
                 <li class="third-level"><a href="#other-people-will-thank-you">Other people will thank you</a></li>
-            
                 <li class="third-level"><a href="#you-will-thank-you">You will thank you</a></li>
-            
                 <li class="third-level"><a href="#nothing-here-is-binding">Nothing here is binding</a></li>
-            
-        
             <li class="second-level"><a href="#getting-started">Getting started</a></li>
-            
+                
                 <li class="third-level"><a href="#requirements">Requirements</a></li>
-            
                 <li class="third-level"><a href="#starting-a-new-project">Starting a new project</a></li>
-            
                 <li class="third-level"><a href="#example">Example</a></li>
-            
-        
             <li class="second-level"><a href="#directory-structure">Directory structure</a></li>
-            
-        
+                
             <li class="second-level"><a href="#opinions">Opinions</a></li>
-            
+                
                 <li class="third-level"><a href="#data-is-immutable">Data is immutable</a></li>
-            
                 <li class="third-level"><a href="#notebooks-are-for-exploration-and-communication">Notebooks are for exploration and communication</a></li>
-            
                 <li class="third-level"><a href="#analysis-is-a-dag">Analysis is a DAG</a></li>
-            
                 <li class="third-level"><a href="#build-from-the-environment-up">Build from the environment up</a></li>
-            
                 <li class="third-level"><a href="#keep-secrets-and-configuration-out-of-version-control">Keep secrets and configuration out of version control</a></li>
-            
                 <li class="third-level"><a href="#be-conservative-in-changing-the-default-folder-structure">Be conservative in changing the default folder structure</a></li>
-            
-        
             <li class="second-level"><a href="#contributing">Contributing</a></li>
-            
-        
+                
             <li class="second-level"><a href="#links-to-related-projects-and-references">Links to related projects and references</a></li>
-            
-        
-    
+                
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -240,6 +193,7 @@
 ├── requirements.txt   &lt;- The requirements file for reproducing the analysis environment, e.g.
 │                         generated with `pip freeze &gt; requirements.txt`
 │
+├── setup.py           &lt;- Make this project pip installable with `pip install -e`
 ├── src                &lt;- Source code for use in this project.
 │   ├── __init__.py    &lt;- Makes src a Python module
 │   │
@@ -273,25 +227,17 @@
 <p>Follow a naming convention that shows the owner and the order the analysis was done in. We use the format <code>&lt;step&gt;-&lt;ghuser&gt;-&lt;description&gt;.ipynb</code> (e.g., <code>0.3-bull-visualize-distributions.ipynb</code>).</p>
 </li>
 <li>
-<p>Refactor the good parts. Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at <code>src/data/make_dataset.py</code> and load data from <code>data/interim</code>. If it's useful utility code, refactor it to <code>src</code> and import it into notebooks with a cell like the following. If updating the system path is icky to you, we'd recommend making a Python package (there is a <a href="https://github.com/audreyr/cookiecutter-pypackage">cookiecutter for that</a> as well) and installing that as an editable package with <code>pip install -e</code>.</p>
+<p>Refactor the good parts. Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at <code>src/data/make_dataset.py</code> and load data from <code>data/interim</code>. If it's useful utility code, refactor it to <code>src</code>.</p>
 </li>
 </ol>
-<pre><code># Load the &quot;autoreload&quot; extension
+<p>Now by default we turn the project into a Python package (see the <code>setup.py</code> file). You can import your code and use it in notebooks with a cell like the following:</p>
+<pre><code># OPTIONAL: Load the &quot;autoreload&quot; extension so that code can change
 %load_ext autoreload
 
-# always reload modules marked with &quot;%aimport&quot;
-%autoreload 1
+# OPTIONAL: always reload modules so that as you change code in src, it gets loaded
+%autoreload 2
 
-import os
-import sys
-
-# add the 'src' directory as one where we can import modules
-src_dir = os.path.join(os.getcwd(), os.pardir, 'src')
-sys.path.append(src_dir)
-
-# import my method from the source code
-%aimport preprocess.build_features
-from preprocess.build_features import remove_invalid_data
+from src.data import make_dataset
 </code></pre>
 
 <h3 id="analysis-is-a-dag">Analysis is a DAG</h3>
@@ -334,6 +280,18 @@ database_url = os.environ.get(&quot;DATABASE_URL&quot;)
 other_variable = os.environ.get(&quot;OTHER_VARIABLE&quot;)
 </code></pre>
 
+<h4 id="aws-cli-configuration">AWS CLI configuration</h4>
+<p>When using Amazon S3 to store data, a simple method of managing AWS access is to set your access keys to environment variables. However, managing mutiple sets of keys on a single machine (e.g. when working on multiple projects) it is best to use a <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html">credentials file</a>, typically located in <code>~/.aws/credentials</code>. A typical file might look like:</p>
+<pre><code>[default]
+aws_access_key_id=myaccesskey
+aws_secret_access_key=mysecretkey
+
+[another_project]
+aws_access_key_id=myprojectaccesskey
+aws_secret_access_key=myprojectsecretkey
+</code></pre>
+
+<p>You can add the profile name when initialising a project; assuming no applicable environment variables are set, the profile credentials will be used be default.</p>
 <h3 id="be-conservative-in-changing-the-default-folder-structure">Be conservative in changing the default folder structure</h3>
 <p>To keep this structure broadly applicable for many different kinds of projects, we think the best approach is to be liberal in changing the folders around for <em>your</em> project, but be conservative in changing the default structure for <em>all</em> projects.</p>
 <p>We've created a <span class="label label-info">folder-layout</span> label specifically for issues proposing to add, subtract, rename, or move folders around. More generally, we've also created a <span class="label label-warning">needs-discussion</span> label for issues that should have some careful discussion and broad support before being implemented.</p>
@@ -369,6 +327,8 @@ other_variable = os.environ.get(&quot;OTHER_VARIABLE&quot;)
     </script>
     <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
     <script src="./js/base.js"></script>
+    <script src="./search/require.js"></script>
+    <script src="./search/search.js"></script>
 
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
         <div class="modal-dialog">
@@ -402,6 +362,6 @@ other_variable = os.environ.get(&quot;OTHER_VARIABLE&quot;)
 </html>
 
 <!--
-MkDocs version : 0.15.3
-Build Date UTC : 2016-10-26 01:53:37.996301
+MkDocs version : 0.17.3
+Build Date UTC : 2018-04-13 23:26:04
 -->
