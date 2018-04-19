@@ -99,13 +99,9 @@ else
 endif
 
 ## Set up python interpreter environment
-create_environment:
-	@pip install -q virtualenv virtualenvwrapper
-	@echo ">>> Installing virtualenvwrapper if not already intalled.\nMake sure the following lines are in shell startup file\n\
-	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
-	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); \
-	setvirtualenvproject $$HOME/.virtualenvs/$(PROJECT_NAME) $(PROJECT_DIR)"
-	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
+create_docker:
+	SLASH = "/"
+	docker build -t $(PROJECT_NAME) --build-arg director=$(SLASH)$PROJECT_DIR
 
 ## Test python environment is setup correctly
 test_environment:
