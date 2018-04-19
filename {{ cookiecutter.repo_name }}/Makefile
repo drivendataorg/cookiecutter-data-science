@@ -13,6 +13,7 @@ BUCKET = {{ cookiecutter.s3_bucket }}
 PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
+SLASH = /
 
 #################################################################################
 # PROJECT RULES                                                                 #
@@ -106,8 +107,7 @@ endif
 
 ## Set up python interpreter environment
 create_docker:
-	SLASH = "/"
-	docker build -t $(PROJECT_NAME) --build-arg directory=$(SLASH)$PROJECT_DIR
+	docker build --build-arg directory=$(SLASH)$(PROJECT_DIR) -t $(PROJECT_NAME) .
 
 ## Test python environment is setup correctly
 test_environment:
