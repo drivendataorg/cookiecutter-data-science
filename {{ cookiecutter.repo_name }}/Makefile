@@ -15,6 +15,12 @@ PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
 
 #################################################################################
+# PROJECT RULES                                                                 #
+#################################################################################
+
+
+
+#################################################################################
 # COMMANDS                                                                      #
 #################################################################################
 
@@ -101,17 +107,11 @@ endif
 ## Set up python interpreter environment
 create_docker:
 	SLASH = "/"
-	docker build -t $(PROJECT_NAME) --build-arg director=$(SLASH)$PROJECT_DIR
+	docker build -t $(PROJECT_NAME) --build-arg directory=$(SLASH)$PROJECT_DIR
 
 ## Test python environment is setup correctly
 test_environment:
 	$(PYTHON_INTERPRETER) test_environment.py
-
-#################################################################################
-# PROJECT RULES                                                                 #
-#################################################################################
-
-
 
 #################################################################################
 # Self Documenting Commands                                                     #
