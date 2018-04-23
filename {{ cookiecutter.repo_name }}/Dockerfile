@@ -27,13 +27,18 @@ RUN apt-get update && apt-get -yq dist-upgrade \
     build-essential \
     git \
     inkscape \
+    libgmp3-dev \
     libsm6 \
+    libssl-dev \
+    libcurl4-openssl-dev \
+    libmpfr-dev \
+    libmpc-dev \
     libxext-dev \
     libxrender1 \
     lmodern \
     netcat \
     pandoc \
-    python-dev \
+    python3-dev \
     python3-pip \
     texlive-fonts-extra \
     texlive-fonts-recommended \
@@ -61,7 +66,7 @@ ENV SHELL=/bin/bash \
     LANGUAGE=en_US.UTF-8
 
 # Python Setup
-RUN pip3 install setuptools
+RUN pip3 install -U setuptools wheel
 RUN pip3 install -r requirements.txt
 
 # R Setup
