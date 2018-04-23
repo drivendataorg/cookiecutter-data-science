@@ -74,5 +74,3 @@ RUN apt-get update && \
     apt-get install -y r-base=3.2.3-4
     # && \
     # Rscript install_packages.R
-
-CMD jupyter-notebook --ip=0.0.0.0 --port=80 --no-browser --allow-root
