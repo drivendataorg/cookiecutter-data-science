@@ -5,6 +5,7 @@ FROM ubuntu:xenial-20180228@sha256:e348fbbea0e0a0e73ab0370de151e7800684445c509d4
 LABEL maintainer="Neighborhoods <neighborhoods.engineering@neighborhoods.com>"
 
 USER root
+EXPOSE 80
 
 ARG directory
 
@@ -60,6 +61,7 @@ ENV SHELL=/bin/bash \
     LANGUAGE=en_US.UTF-8
 
 # Python Setup
+RUN pip3 install setuptools
 RUN pip3 install -r requirements.txt
 
 # R Setup
@@ -67,3 +69,5 @@ RUN apt-get update && \
     apt-get install -y r-base=3.2.3-4
     # && \
     # Rscript install_packages.R
+
+CMD jupyter-notebook --ip=0.0.0.0 --port=80 --no-browser --allow-root
