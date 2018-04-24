@@ -105,9 +105,17 @@ else
 	aws s3 sync s3://$(BUCKET)/logs/ logs/ --profile $(PROFILE)
 endif
 
-## Set up python interpreter environment
+## Set up docker environment
 create_docker:
 	docker build --build-arg directory=$(SLASH)$(PROJECT_DIR) -t $(PROJECT_NAME) .
+
+## Run docker in container
+run_docker:
+	docker run -ti -p 7777:8888 --name=$(PROJECT_NAME) $(PROJECT_NAME):latest
+
+## Enter the running docker container
+enter_docker:
+	docker exec -it $(PROJECT_NAME) bash
 
 ## Test python environment is setup correctly
 test_environment:

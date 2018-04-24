@@ -5,7 +5,7 @@ FROM ubuntu:xenial-20180228@sha256:e348fbbea0e0a0e73ab0370de151e7800684445c509d4
 LABEL maintainer="Neighborhoods <neighborhoods.engineering@neighborhoods.com>"
 
 USER root
-EXPOSE 80
+EXPOSE 8888
 
 ARG directory
 
