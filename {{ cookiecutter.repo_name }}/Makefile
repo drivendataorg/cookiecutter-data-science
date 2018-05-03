@@ -15,6 +15,12 @@ PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
 SLASH = /
 
+BASE_IMAGE_NAME=analytics-base
+BASE_TAG=latest
+AWS_IMAGE_PREFIX=datascience
+AWS_ECR_SERVER=${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com
+BASE_AWS_TAG=${AWS_ECR_SERVER}/${AWS_IMAGE_PREFIX}/${BASE_IMAGE_NAME}:${BASE_TAG}
+
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
@@ -105,8 +111,16 @@ else
 	aws s3 sync s3://$(BUCKET)/logs/ logs/ --profile $(PROFILE)
 endif
 
+## Log in to our ECR registry with docker
+docker_login:
+	$$(aws ecr get-login --no-include-email)
+
+## pull the analytics-base image
+pull_base_image: docker_login
+	docker pull ${BASE_AWS_TAG}
+
 ## Set up docker environment
-create_docker:
+create_docker: pull_base_image
 	docker build --build-arg directory=$(SLASH)$(PROJECT_DIR) -t $(PROJECT_NAME) .
 
 ## Run docker in container
