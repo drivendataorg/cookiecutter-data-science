@@ -1,15 +1,16 @@
-.PHONY: clean data lint install-deps install-deps-all test test-cov test-all type-check sync_data_to_s3 sync_data_from_s3
+.PHONY: clean data lint install-deps install-deps-all test test-cov test-all type-check sync-data-to-s3 sync-data-from-s3 sync-data-to-gcs sync-data-from-gcs
 
 #################################################################################
 # GLOBALS                                                                       #
 #################################################################################
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-BUCKET = {{ cookiecutter.s3_bucket }}
-PROFILE = {{ cookiecutter.aws_profile }}
+S3_BUCKET = {{ cookiecutter.s3_bucket }}
+AWS_PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
-
+GCS_BUCKET = {{ cookiecuuter.gcs_bucket }}
+GCP_PROJECT = {{ cookiecuuter.gcp_project }}
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -54,20 +55,37 @@ clean:
 
 
 ## Upload Data to S3
-sync_data_to_s3:
-ifeq (default,$(PROFILE))
-	aws s3 sync data/ s3://$(BUCKET)/data/
+sync-data-to-s3:
+ifeq (default,$(AWS_PROFILE))
+	aws s3 sync data/ s3://$(S3_BUCKET)/data/
 else
-	aws s3 sync data/ s3://$(BUCKET)/data/ --profile $(PROFILE)
+	aws s3 sync data/ s3://$(S3_BUCKET)/data/ --profile $(AWS_PROFILE)
 endif
 
 ## Download Data from S3
-sync_data_from_s3:
-ifeq (default,$(PROFILE))
-	aws s3 sync s3://$(BUCKET)/data/ data/
+sync-data-from-s3:
+ifeq (default,$(AWS_PROFILE))
+	aws s3 sync s3://$(S3_BUCKET)/data/ data/
 else
-	aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
+	aws s3 sync s3://$(S3_BUCKET)/data/ data/ --profile $(AWS_PROFILE)
 endif
+
+## Upload Data to GCS
+sync-data-to-gcs:
+ifeq (default,$(GCP_PROJECT))
+	gsutil rsync data/ gs://$(GCS_BUCKET)/data
+else
+	gsutil rsync data/ gs://$(GCS_BUCKET)/data -p $(GCP_PROJECT)
+endif
+
+## Download Data to GCS
+sync-data-from-gcs:
+ifeq (default,$(GCP_PROJECT))
+	gsutil rsync gs://$(GCS_BUCKET)/data data/
+else
+	gsutil rsync gs://$(GCS_BUCKET)/data data/ -p $(GCP_PROJECT)
+endif
+
 
 
 #################################################################################
