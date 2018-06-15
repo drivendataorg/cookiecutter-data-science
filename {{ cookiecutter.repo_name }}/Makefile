@@ -9,12 +9,7 @@ BUCKET = {{ cookiecutter.s3_bucket }}
 PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
-
-ifeq (,$(shell which conda))
-HAS_CONDA=False
-else
-HAS_CONDA=True
-endif
+VIRTUALENV = {{ cookiecutter.virtualenv }}
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -22,8 +17,12 @@ endif
 
 ## Install Python Dependencies
 requirements: test_environment
+ifeq (conda, $(VIRTUALENV))
+	conda install --name $(PROJECT_NAME) -f environment.yml
+else
 	pip install -U pip setuptools wheel
 	pip install -r requirements.txt
+endif
 
 ## Make Dataset
 data: requirements
@@ -56,13 +55,9 @@ endif
 
 ## Set up python interpreter environment
 create_environment:
-ifeq (True,$(HAS_CONDA))
+ifeq (conda,$(VIRTUALENV))
 		@echo ">>> Detected conda, creating conda environment."
-ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
-	conda create --name $(PROJECT_NAME) python=3
-else
-	conda create --name $(PROJECT_NAME) python=2.7
-endif
+	conda env create --name $(PROJECT_NAME) -f environment.yml
 		@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
 else
 	@pip install -q virtualenv virtualenvwrapper
