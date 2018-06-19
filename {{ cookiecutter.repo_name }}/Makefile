@@ -18,7 +18,7 @@ VIRTUALENV = {{ cookiecutter.virtualenv }}
 ## Install Python Dependencies
 requirements: test_environment
 ifeq (conda, $(VIRTUALENV))
-	conda install --name $(PROJECT_NAME) -f environment.yml
+	conda env update --name $(PROJECT_NAME) -f environment.yml
 else
 	pip install -U pip setuptools wheel
 	pip install -r requirements.txt

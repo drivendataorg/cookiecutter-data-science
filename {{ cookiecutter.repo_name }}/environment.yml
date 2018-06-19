@@ -1,0 +1,22 @@
+{% macro py2dep() -%}
+  - python=2.7
+  - pathlib2
+{% endmacro -%}
+{% macro py3dep() -%}
+  - python=3
+{% endmacro -%}
+name: {{ cookiecutter.repo_name }}
+channels:
+  - conda-forge
+dependencies:
+  - flake8
+  - sphinx
+  - click
+  - coverage
+  - awscli
+  - python-dotenv>=0.5.1
+{% if cookiecutter.python_interpreter == 'python3' -%}
+{{ py3dep()|indent(2, true) }}
+{% else -%}
+{{ py2dep()|indent(2, true) }}
+{% endif -%}
