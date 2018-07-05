@@ -9,8 +9,9 @@ name: {{ cookiecutter.repo_name }}
 channels:
   - conda-forge
 dependencies:
-  - pip:
-    - -e .
+  - pip
+  - setuptools
+  - wheel
   - flake8
   - sphinx
   - click
