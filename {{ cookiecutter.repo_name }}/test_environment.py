@@ -19,6 +19,9 @@ def main():
                 required_major, sys.version))
     else:
         print(">>> Development environment passes all tests!")
+        # Tell `make` that it's done
+        with open('test_environment.done', 'w'):
+            pass
 
 
 if __name__ == '__main__':

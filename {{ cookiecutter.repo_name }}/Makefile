@@ -22,10 +22,10 @@ endif
 
 ## Test python environment is setup correctly
 test_environment:
-	$(PYTHON_INTERPRETER) test_environment.py
+	$(PYTHON_INTERPRETER) test_environment.py # will output a file test_environment.done
 
 ## Install Python Dependencies
-requirements: test_environment requirements.txt
+requirements: test_environment.done requirements.txt
 	pip install -U pip setuptools wheel
 	pip install -r requirements.txt
 	touch requirements.done
