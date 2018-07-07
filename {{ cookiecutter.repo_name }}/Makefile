@@ -25,7 +25,7 @@ test_environment:
 	$(PYTHON_INTERPRETER) test_environment.py
 
 ## Install Python Dependencies
-requirements: test_environment
+requirements: test_environment requirements.txt
 	pip install -U pip setuptools wheel
 	pip install -r requirements.txt
 
