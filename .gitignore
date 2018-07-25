@@ -6,3 +6,9 @@ docs/site/
 # test cache
 .cache/*
 tests/__pycache__/*
+
+# dataset 
+*.csv
+
+# environment 
+vent/
