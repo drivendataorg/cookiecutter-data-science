@@ -11,4 +11,6 @@ tests/__pycache__/*
 *.csv
 
 # environment 
-vent/
+venv/
+.idea
+.DS_Store
