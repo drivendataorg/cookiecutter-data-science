@@ -1,87 +1,6 @@
 import os
 import pytest
-import shutil
-from pathlib import Path
-
-from cookiecutter import main
-
-CCDS_ROOT = Path(__file__).parents[1].resolve()
-
-
-@pytest.fixture(scope='function')
-def default_baked_project(tmpdir):
-    temp = tmpdir.mkdir('data-project')
-    out_dir = Path(temp).resolve()
-
-    main.cookiecutter(
-        str(CCDS_ROOT),
-        no_input=True,
-        extra_context={},
-        output_dir=out_dir
-    )
-
-    # default project name is project_name
-    yield out_dir / 'project_name'
-
-    # cleanup after
-    shutil.rmtree(out_dir)
-
-
-def test_readme(default_baked_project):
-    readme_path = default_baked_project / 'README.md'
-
-    assert readme_path.exists()
-    assert no_curlies(readme_path)
-
-
-def test_license(default_baked_project):
-    license_path = default_baked_project / 'LICENSE'
-
-    assert license_path.exists()
-    assert no_curlies(license_path)
-
-
-def test_requirements(default_baked_project):
-    reqs_path = default_baked_project / 'requirements.txt'
-
-    assert reqs_path.exists()
-    assert no_curlies(reqs_path)
-
-
-def test_makefile(default_baked_project):
-    makefile_path = default_baked_project / 'Makefile'
-
-    assert makefile_path.exists()
-    assert no_curlies(makefile_path)
-
-
-def test_folders(default_baked_project):
-    expected_dirs = [
-        'data',
-        'data/external',
-        'data/interim',
-        'data/processed',
-        'data/raw',
-        'docs',
-        'models',
-        'notebooks',
-        'references',
-        'reports',
-        'reports/figures',
-        'src',
-        'src/data',
-        'src/features',
-        'src/models',
-        'src/visualization',
-    ]
-
-    ignored_dirs = [
-        str(default_baked_project)
-    ]
-
-    abs_expected_dirs = [str(default_baked_project / d) for d in expected_dirs]
-    abs_dirs, _, _ = list(zip(*os.walk(default_baked_project)))
-    assert len(set(abs_expected_dirs + ignored_dirs) - set(abs_dirs)) == 0
+from subprocess import check_output
 
 
 def no_curlies(filepath):
@@ -100,3 +19,93 @@ def no_curlies(filepath):
 
     template_strings_in_file = [s in data for s in template_strings]
     return not any(template_strings_in_file)
+
+
+@pytest.mark.usefixtures("default_baked_project")
+class TestCookieSetup(object):
+    def test_project_name(self):
+        project = self.path
+        if pytest.param.get('project_name'):
+            assert project.name == 'DataDriven'
+        else:
+            assert project.name == 'project_name'
+
+    def test_author(self):
+        setup_ = self.path / 'setup.py'
+        args = ['python', setup_, '--author']
+        p = check_output(args).decode('ascii').strip()
+        if pytest.param.get('author_name'):
+            assert p == 'DataDriven'
+        else:
+            assert p == 'Your name (or your organization/company/team)'
+
+    def test_readme(self):
+        readme_path = self.path / 'README.md'
+        assert readme_path.exists()
+        assert no_curlies(readme_path)
+        if pytest.param.get('project_name'):
+            with open(readme_path) as fin:
+                assert 'DataDriven' == next(fin).strip()
+
+    def test_setup(self):
+        setup_ = self.path / 'setup.py'
+        args = ['python', setup_, '--version']
+        p = check_output(args).decode('ascii').strip()
+        assert p == '0.1.0'
+
+    def test_license(self):
+        license_path = self.path / 'LICENSE'
+        assert license_path.exists()
+        assert no_curlies(license_path)
+
+    def test_license_type(self):
+        setup_ = self.path / 'setup.py'
+        args = ['python', setup_, '--license']
+        p = check_output(args).decode('ascii').strip()
+        if pytest.param.get('open_source_license'):
+            assert p == 'BSD-3'
+        else:
+            assert p == 'MIT'
+
+    def test_requirements(self):
+        reqs_path = self.path / 'requirements.txt'
+        assert reqs_path.exists()
+        assert no_curlies(reqs_path)
+        if pytest.param.get('python_interpreter'):
+            with open(reqs_path) as fin:
+                lines = list(map(lambda x: x.strip(), fin.readlines()))
+            assert 'pathlib2' in lines
+
+    def test_makefile(self):
+        makefile_path = self.path / 'Makefile'
+        assert makefile_path.exists()
+        assert no_curlies(makefile_path)
+
+    def test_folders(self):
+        expected_dirs = [
+            'data',
+            'data/external',
+            'data/interim',
+            'data/processed',
+            'data/raw',
+            'docs',
+            'models',
+            'notebooks',
+            'references',
+            'reports',
+            'reports/figures',
+            'src',
+            'src/data',
+            'src/features',
+            'src/models',
+            'src/visualization',
+        ]
+
+        ignored_dirs = [
+            str(self.path)
+        ]
+
+        abs_expected_dirs = [str(self.path / d) for d in expected_dirs]
+        abs_dirs, _, _ = list(zip(*os.walk(self.path)))
+        assert len(set(abs_expected_dirs + ignored_dirs) - set(abs_dirs)) == 0
+
