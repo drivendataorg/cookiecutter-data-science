@@ -2,6 +2,7 @@ docs/site/
 
 # OSX Junk
 .DS_Store
+.idea
 
 # test cache
 .cache/*
@@ -12,5 +13,4 @@ tests/__pycache__/*
 
 # environment 
 venv/
-.idea
-.DS_Store
+
