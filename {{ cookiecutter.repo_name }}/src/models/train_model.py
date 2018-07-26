@@ -16,24 +16,27 @@ else:
 def fetch_processed(data_path):
     data = pd.read_csv(os.path.join(ROOT, data_path))
     data_y = data.survived
-    data_x = data.drop(['survived', 'name', 'ticket', 'boat', 'body', 'home.dest'], axis=1)
-    return data_y, data_x
-
-
-def fit_and_pickle(ys, xs):
+    data_x = data.drop(['survived', 'name', 'ticket', 'boat', 
+        'body', 'home.dest'], axis=1)
     # Create training and test sets
-    X_train, X_test, y_train, y_test = train_test_split(xs, ys, test_size=0.2, random_state=0)
-    model = RandomForestClassifier(n_estimators=100)
+    X_train, X_test, y_train, y_test = train_test_split(data_x, data_y, 
+        test_size=0.2, random_state=0)
+    return X_train, X_test, y_train, y_test
 
+
+def fit_model(X_train, y_train):
+    model = RandomForestClassifier(n_estimators=100)
     # Fit to the training data
     model.fit(X_train, y_train)
-    model_out_dir = os.path.join(ROOT, 'models')
-    pickle.dump(model, os.path.join(model_out_dir, 'titanic'), PROTOCOL)
+    return model
 
 
 def main():
-    ys, xs = fetch_processed('data/processed/titanic.csv')
-    fit_and_pickle(ys, xs)
+    x_train, _, y_train, _ = fetch_processed('data/processed/titanic.csv')
+    model = fit_model(x_train, y_train)
+    model_out_dir = os.path.join(ROOT, 'models/titanic.model')
+    with open(model_out_dir, 'wb') as fout:
+        pickle.dump(model, fout, PROTOCOL)
 
 
 if __name__ == '__main__':
