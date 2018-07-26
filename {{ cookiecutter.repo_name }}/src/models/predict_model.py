@@ -1,10 +1,12 @@
 import os
 import pickle
-from train_model import ROOT, fetch_processed
+import pandas as pd
+from train_model import ROOT
 
 
 def main():
-    _, X_test, *_ = fetch_processed('data/processed/titanic.csv')
+    X_test = pd.read_csv(os.path.join(ROOT, 
+        'data/processed/titanic_test.csv'))
     pickled_model = os.path.join(ROOT, 'models/titanic.model')
     with open(pickled_model, 'rb') as fin:
         deserialized_model = pickle.load(fin)
