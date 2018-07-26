@@ -5,8 +5,8 @@ from pathlib import Path
 from sklearn.preprocessing import StandardScaler
 
 DATA_LINK = 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic3.csv'
-ROOT = Path(__file__).resolve().parents[2]
 TITLES = ['Mlle', 'Mrs', 'Mr', 'Miss', 'Master', 'Don', 'Rev', 'Dr', 'Mme', 'Ms', 'Major', 'Col', 'Capt', 'Countess']
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def extract_title(name):
@@ -36,9 +36,7 @@ def massage_data(raw_data):
     raw_data["fare"].fillna(raw_data.fare.median(), inplace=True)
 
     # Encode Categorical features ---
-
     raw_data["cabin"] = raw_data.apply(lambda obs: "No" if pd.isnull(obs['cabin']) else "Yes", axis=1)  # binarize “cabin” feature
-
     raw_data = pd.get_dummies(raw_data, columns=['sex', 'title', 'cabin', 'embarked'])
 
     # Scaling numerical features ---

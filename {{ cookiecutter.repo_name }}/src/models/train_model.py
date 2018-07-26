@@ -1,10 +1,16 @@
 import os
+import pickle
 import pandas as pd
 from pathlib import Path
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
 ROOT = Path(__file__).resolve().parents[2]
+
+if '{{ cookiecutter.python_interpreter }}' == 'python3':
+    PROTOCOL = pickle.DEFAULT_PROTOCOL
+else:
+    PROTOCOL = 2
 
 
 def fetch_processed(data_path):
@@ -21,8 +27,8 @@ def fit_and_pickle(ys, xs):
 
     # Fit to the training data
     model.fit(X_train, y_train)
-
-    # Please pickle the model
+    model_out_dir = os.path.join(ROOT, 'models')
+    pickle.dump(model, os.path.join(model_out_dir, 'titanic'), PROTOCOL)
 
 
 def main():
