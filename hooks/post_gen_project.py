@@ -9,5 +9,6 @@ if '{{ cookiecutter.include_starter_proj }}' == 'N':
     for directory in DIRS:
         files_path = os.path.join(CWD, directory)
         for file in os.listdir(files_path):
-            open(os.path.join(CWD, file), 
-                'w').close()
+            if file.endswith('.py'):
+                open(os.path.join(CWD, files_path, file), 
+                    'w').close()
