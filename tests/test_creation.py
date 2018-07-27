@@ -26,7 +26,7 @@ class TestCookieSetup(object):
     def test_project_name(self):
         project = self.path
         if pytest.param.get('project_name'):
-            assert project.name == 'DataDriven'
+            assert project.name == 'DrivenData'
         else:
             assert project.name == 'project_name'
 
@@ -35,7 +35,7 @@ class TestCookieSetup(object):
         args = ['python', setup_, '--author']
         p = check_output(args).decode('ascii').strip()
         if pytest.param.get('author_name'):
-            assert p == 'DataDriven'
+            assert p == 'DrivenData'
         else:
             assert p == 'Your name (or your organization/company/team)'
 
@@ -45,7 +45,7 @@ class TestCookieSetup(object):
         assert no_curlies(readme_path)
         if pytest.param.get('project_name'):
             with open(readme_path) as fin:
-                assert 'DataDriven' == next(fin).strip()
+                assert 'DrivenData' == next(fin).strip()
 
     def test_setup(self):
         setup_ = self.path / 'setup.py'
