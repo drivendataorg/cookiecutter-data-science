@@ -1,3 +1,4 @@
+import sys
 import pytest
 import shutil
 from pathlib import Path
@@ -11,6 +12,13 @@ args = {
         'open_source_license': 'BSD-3-Clause',
         'python_interpreter': 'python'
         }
+
+
+def system_check(basename):
+    platform = sys.platform
+    if 'linux' in platform:
+        basename = basename.lower()
+    return basename
 
 
 @pytest.fixture(scope='class', params=[{}, args])
@@ -27,6 +35,10 @@ def default_baked_project(tmpdir_factory, request):
     )
 
     pn = pytest.param.get('project_name') or 'project_name'
+    
+    # project name gets converted to lower case on Linux but not Mac
+    pn = system_check(pn)
+
     proj = out_dir / pn
     request.cls.path = proj
     yield 

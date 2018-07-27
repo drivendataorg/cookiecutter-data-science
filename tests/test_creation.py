@@ -1,6 +1,7 @@
 import os
 import pytest
 from subprocess import check_output
+from conftest import system_check
 
 
 def no_curlies(filepath):
@@ -26,7 +27,8 @@ class TestCookieSetup(object):
     def test_project_name(self):
         project = self.path
         if pytest.param.get('project_name'):
-            assert project.name == 'DrivenData'
+            name = system_check('DrivenData')
+            assert project.name == name
         else:
             assert project.name == 'project_name'
 
