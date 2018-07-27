@@ -32,13 +32,20 @@ def fit_model(X_train, y_train):
 
 
 def main():
-    x_train, x_test, y_train, _ = fetch_processed('data/processed/titanic.csv')
+    x_train, x_test, y_train, y_test = fetch_processed('data/processed/titanic.csv')
+    # Train the model 
     model = fit_model(x_train, y_train)
+
+    # Paths for storage
     model_out_dir = os.path.join(ROOT, 'models/titanic.model')
-    test_out_dir = os.path.join(ROOT, 'data/processed/titanic_test.csv')
+    x_test_path = os.path.join(ROOT, 'data/processed/titanic_x_test.csv')
+    y_test_path = os.path.join(ROOT, 'data/processed/titanic_y_test.csv')
+    
+    # Store model and test set for prediction
     with open(model_out_dir, 'wb') as fout:
         pickle.dump(model, fout, PROTOCOL)
-    x_test.to_csv(test_out_dir, index=False)
+    x_test.to_csv(x_test_path, index=False)
+    y_test.to_csv(y_test_path, index=False)
 
 
 if __name__ == '__main__':
