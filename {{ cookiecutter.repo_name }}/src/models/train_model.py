@@ -21,11 +21,13 @@ def fetch_processed(data_path):
     # Create training and test sets
     X_train, X_test, y_train, y_test = train_test_split(data_x, data_y, 
         test_size=0.2, random_state=0)
+
     return X_train, X_test, y_train, y_test
 
 
 def fit_model(X_train, y_train):
     model = RandomForestClassifier(n_estimators=100)
+    print(type(model))
     # Fit to the training data
     model.fit(X_train, y_train)
     return model
