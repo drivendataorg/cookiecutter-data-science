@@ -22,8 +22,6 @@ def main():
         'data/processed/titanic_y_test.csv'), header=None)
     print(f'The model returned these predictions:\n{y_pred}')
 
-    #clf = LogisticRegression(penalty='l1')
-    #logisticRegr.fit(x_train, y_train.astype(int))
     auc = roc_auc_score(y_test.astype(int), deserialized_model.predict_proba(X_test)[:,1])
     print('AUC (area under ROC curve): '+str(auc))
 
