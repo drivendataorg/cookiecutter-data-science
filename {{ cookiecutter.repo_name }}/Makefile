@@ -33,6 +33,10 @@ data: requirements
 train: data
 	$(PYTHON_INTERPRETER) src/models/train_model.py
 
+## Run the model pipeline
+model_pipeline: train
+	$(PYTHON_INTERPRETER) src/models/predict_model.py
+
 ## Delete all compiled Python files
 clean:
 	find . -type f -name "*.py[co]" -delete
