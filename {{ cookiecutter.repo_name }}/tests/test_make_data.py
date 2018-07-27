@@ -5,9 +5,9 @@ import pandas as pd
 from pathlib import Path
 from unittest.mock import patch
 from src.data.make_dataset import extract_title, dump_data
-from src.models.train_model import fetch_processed
 
 ROOT = Path(__file__).resolve().parents[2]
+
 
 @patch('src.data.make_dataset.TITLES')
 def test_extract_title(mock_titles):
@@ -33,10 +33,5 @@ def test_dump_data(tmp_dump_dir, monkeypatch):
     dumped = pd.read_csv(tmp_dump_dir)
     assert df.equals(dumped)
 
-def test_check_train_and_test():
-      x_train, x_test, y_train, y_test = fetch_processed('data/processed/titanic.csv')
-      assert all(y_train >= 0)
-      assert all(y_test >= 0)
-      assert x_train.shape[0] > 0
-      assert x_test.shape[0] > 0
+
   
