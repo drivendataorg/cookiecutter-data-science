@@ -13,6 +13,7 @@ def extract_title(name):
     for item in TITLES:
         if item in name:
             title = item
+            break
     if title == 'missing':
         title = 'Mr'
     return title

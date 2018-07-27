@@ -3,15 +3,12 @@ import pytest
 import random
 import pandas as pd
 from pathlib import Path
-from unittest.mock import patch
 from src.data.make_dataset import extract_title, dump_data
 
 ROOT = Path(__file__).resolve().parents[2]
 
 
-@patch('src.data.make_dataset.TITLES')
-def test_extract_title(mock_titles):
-    mock_titles = ['Mr', 'Mrs']
+def test_extract_title():
     names = ['Mr Bob', 'Mrs Daisy', 'Sam']
     expected_maps = {
         'Mr Bob': 'Mr',
