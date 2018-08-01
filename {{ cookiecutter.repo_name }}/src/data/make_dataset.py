@@ -1,53 +1,30 @@
 import os
+import io
+import requests
 import pandas as pd
 from pathlib import Path
 from sklearn.preprocessing import StandardScaler
 
-DATA_LINK = 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic3.csv'
-TITLES = ['Mlle', 'Mrs', 'Mr', 'Miss', 'Master', 'Don', 'Rev', 'Dr', 'Mme', 'Ms', 'Major', 'Col', 'Capt', 'Countess']
+DATA_LINK = 'https://archive.ics.uci.edu/ml/machine-learning-databases/blood-transfusion/transfusion.data'
 ROOT = Path(__file__).resolve().parents[2]
 
-
-def extract_title(name):
-    title = 'missing'
-    for item in TITLES:
-        if item in name:
-            title = item
-            break
-    if title == 'missing':
-        title = 'Mr'
-    return title
-
-
 def massage_data(raw_data):
+    """ Preprocess the data for predictions
     """
-    preprocess the data for predictions
-    """
-    # Feature engineering ---
-    raw_data["title"] = raw_data.apply(lambda row: extract_title(row["name"]), axis=1)  
-    
-    # Age: replace NaN with median
-    raw_data["age"].fillna(raw_data.age.median(), inplace=True)
+    raw_data.rename(index=str, columns={"whether he/she donated blood in March 2007": "label"}, inplace = True)
+  
+    # generate features for year for time columns
+    for x,y in zip(['time_years','recency_years'],['Time (months)', 'Recency (months)']):
+        raw_data[x] = (raw_data[y]/12).astype('int')
+ 
+    # generate features for quarter for time columns (3 month periods)
+    for x,y in zip(['time_quarters','recency_quarters'],['Time (months)', 'Recency (months)']):
+        raw_data[x] = (raw_data[y]/3).astype('int')
 
-    # Embarked: replace NaN with the mode value
-    raw_data["embarked"].fillna(raw_data.embarked.mode()[0], inplace=True)
-
-    # Fare: replace NaN with median
-    raw_data["fare"].fillna(raw_data.fare.median(), inplace=True)
-
-    # Encode Categorical features ---
-    raw_data["cabin"] = raw_data.apply(lambda obs: "No" if pd.isnull(obs['cabin']) else "Yes", axis=1)  # binarize “cabin” feature
-    raw_data = pd.get_dummies(raw_data, columns=['sex', 'title', 'cabin', 'embarked'])
-
-    # Scaling numerical features ---
-    scale = StandardScaler().fit(raw_data[['age', 'fare']])
-    raw_data[['age', 'fare']] = scale.transform(raw_data[['age', 'fare']])
     return raw_data
 
-
 def dump_data(data, out_loc):
-    """
-    given a path to a datafile, either a local file path
+    """ Given a path to a datafile, either a local file path
     or a url, fetch the data and dump it to a csv
     """
     out_dir = os.path.join(ROOT, out_loc)
@@ -55,13 +32,15 @@ def dump_data(data, out_loc):
 
 
 def main():
-    """ Runs data processing scripts to turn raw data from (../raw) into
+    """ Retrieves data and runs processing scripts to turn raw data from (../raw) into
         cleaned data ready to be analyzed (saved in ../processed).
     """
-    raw_data = pd.read_csv(DATA_LINK)
-    dump_data(raw_data, 'data/raw/titanic.csv')
+    s=requests.get(DATA_LINK).content
+    raw_data = pd.read_csv(io.StringIO(s.decode('utf-8')))
+
+    dump_data(raw_data, 'data/raw/transfusion_data_raw.csv')
     processed_data = massage_data(raw_data)
-    dump_data(processed_data, 'data/processed/titanic.csv')
+    dump_data(processed_data, 'data/processed/transfusion_data.csv')
 
 
 if __name__ == '__main__':
