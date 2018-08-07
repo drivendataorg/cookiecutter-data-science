@@ -5,12 +5,12 @@ from src.models.train_model import fetch_processed, fit_model
 
 
 mock_data = {
-   'survived': [1, 0, 0, 1],
-   'name': ['John', 'Bob', 'Sam', 'Kevin'],
-   'ticket': ['foo', 'bar', 'buzz', 'fizz'],
-   'boat': ['y', 'n', 'm', 'y'],
-   'body': ['a', 'b', 'c', 'd'],
-   'home.dest': ['nyc', 'la', 'boston', 'amherst'] 
+   'label': [1, 0, 0, 1],
+   'fizz': ['John', 'Bob', 'Sam', 'Kevin'],
+   'buzz': ['foo', 'bar', 'buzz', 'fizz'],
+   'foo': ['y', 'n', 'm', 'y'],
+   'bar': ['a', 'b', 'c', 'd'],
+   'fish': ['nyc', 'la', 'boston', 'amherst'] 
 }
 
 

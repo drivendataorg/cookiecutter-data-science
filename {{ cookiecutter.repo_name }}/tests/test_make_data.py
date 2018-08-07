@@ -1,34 +1,17 @@
-import os
-import pytest
-import random
 import pandas as pd
-from pathlib import Path
-from src.data.make_dataset import extract_title, dump_data
-
-ROOT = Path(__file__).resolve().parents[2]
+from src.data.make_dataset import massage_data
 
 
-def test_extract_title():
-    names = ['Mr Bob', 'Mrs Daisy', 'Sam']
-    expected_maps = {
-        'Mr Bob': 'Mr',
-        'Mrs Daisy': 'Mrs',
-        'Sam': 'Mr'
-    }
-    name = random.choice(names)
-    title = extract_title(name)
-    assert title == expected_maps.get(name)
+mock_data = {
+   'whether he/she donated blood in March 2007': [1, 0, 0, 1],
+   'Time (months)': [36, 10, 12, 16],
+   'Recency (months)': [10, 20, 15, 22] 
+}
 
 
-@pytest.mark.usefixtures('tmp_dump_dir')
-def test_dump_data(tmp_dump_dir, monkeypatch):
-    def mock_path_join(*paths):
-        return tmp_dump_dir
-    monkeypatch.setattr(os.path, 'join', mock_path_join)
-    df = pd.DataFrame({'A': [1, 2], 'B': [3, 4]})
-    dump_data(df, 'foo')
-    dumped = pd.read_csv(tmp_dump_dir)
-    assert df.equals(dumped)
-
-
-  
+def test_massage_data():
+    raw = pd.DataFrame(mock_data)
+    data = massage_data(raw)
+    assert data.iloc[0, 2] == 10
+    assert data.iloc[3, 6] == 7
+    

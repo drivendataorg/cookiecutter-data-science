@@ -1,7 +1,7 @@
 import os
 import shutil
 
-DIRS = ['src/data', 'src/models']
+DIRS = ['src/models']
 CWD = os.getcwd()
 
 if '{{ cookiecutter.include_starter_proj }}' == 'N':
