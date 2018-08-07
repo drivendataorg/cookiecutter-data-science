@@ -1,4 +1,3 @@
-import os
 import pandas as pd
 from unittest.mock import patch, Mock
 from src.models.train_model import fetch_processed, fit_model
@@ -15,13 +14,9 @@ mock_data = {
 
 
 def test_fetch_processed(monkeypatch):
-    def mock_path_join(*paths):
-        return 'foo'
-
     def mock_read_csv(fin):
         return pd.DataFrame(mock_data)
 
-    monkeypatch.setattr(os.path, 'join', mock_path_join)
     monkeypatch.setattr(pd, 'read_csv', mock_read_csv)
     x_train, x_test, y_train, y_test = fetch_processed('foo')
     
