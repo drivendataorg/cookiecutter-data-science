@@ -30,7 +30,7 @@ data: requirements
 	wget --progress=bar:force -O data/raw/transfusion_data_raw.csv https://archive.ics.uci.edu/ml/machine-learning-databases/blood-transfusion/transfusion.data
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py
 
-{% if cookiecutter.include_starter_proj == 'Y' %}
+{% if cookiecutter.include_starter_proj|lower == 'y' %}
 
 ## Train Model
 train: data
