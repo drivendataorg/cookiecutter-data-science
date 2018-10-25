@@ -27,7 +27,7 @@ requirements: test_environment
 
 ## Make Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py
+	$(PYTHON_INTERPRETER) -m {{ cookiecutter.module_name }}.data.make_dataset
 
 ## Delete all compiled Python files
 clean:
@@ -36,7 +36,7 @@ clean:
 
 ## Lint using flake8
 lint:
-	flake8 src
+	flake8 {{ cookiecutter.module_name }}
 
 ## Upload Data to S3
 sync_data_to_s3:
