@@ -21,8 +21,8 @@ ifeq (conda, $(VIRTUALENV))
 	conda env update --name $(PROJECT_NAME) -f environment.yml
 else
 	pip install -U pip setuptools wheel
-endif
 	pip install -r requirements.txt
+endif
 
 ## Make Dataset
 data: requirements
@@ -69,6 +69,11 @@ endif
 
 ## Test python environment is setup correctly
 test_environment:
+ifeq (conda,$(VIRTUALENV))
+ifneq (${CONDA_DEFAULT_ENV}, $(PROJECT_NAME))
+	$(error Must activate `$(PROJECT_NAME)` environment before proceeding)
+endif
+endif
 	$(PYTHON_INTERPRETER) test_environment.py
 
 #################################################################################
