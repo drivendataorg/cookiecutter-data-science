@@ -6,3 +6,4 @@ docs/site/
 # test cache
 .cache/*
 tests/__pycache__/*
+*.pytest_cache/

@@ -20,8 +20,8 @@ requirements: test_environment
 ifeq (conda, $(VIRTUALENV))
 	conda env update --name $(PROJECT_NAME) -f environment.yml
 else
-	pip install -U pip setuptools wheel
-	pip install -r requirements.txt
+	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
+	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 endif
 
 ## Make Dataset
@@ -60,7 +60,7 @@ ifeq (conda,$(VIRTUALENV))
 	conda env create --name $(PROJECT_NAME) -f environment.yml
 		@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
 else
-	@pip install -q virtualenv virtualenvwrapper
+	$(PYTHON_INTERPRETER) -m pip install -q virtualenv virtualenvwrapper
 	@echo ">>> Installing virtualenvwrapper if not already intalled.\nMake sure the following lines are in shell startup file\n\
 	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
 	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
@@ -81,7 +81,7 @@ test_environment:
 # Self Documenting Commands                                                     #
 #################################################################################
 
-.DEFAULT_GOAL := show-help
+.DEFAULT_GOAL := help
 
 # Inspired by <http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html>
 # sed script explained:
@@ -98,8 +98,8 @@ test_environment:
 # 	* print line
 # Separate expressions are necessary because labels cannot be delimited by
 # semicolon; see <http://stackoverflow.com/a/11799865/1968>
-.PHONY: show-help
-show-help:
+.PHONY: help
+help:
 	@echo "$$(tput bold)Available rules:$$(tput sgr0)"
 	@echo
 	@sed -n -e "/^## / { \
