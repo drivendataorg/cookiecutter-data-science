@@ -6,17 +6,18 @@
   - python=3
 {% endmacro -%}
 name: {{ cookiecutter.repo_name }}
-channels:
-  - conda-forge
 dependencies:
+  - pip
   - pip:
     - -e .
+    - python-dotenv>=0.5.1
+    - awscli
+  - setuptools
+  - wheel
   - flake8
   - sphinx
   - click
   - coverage
-  - awscli
-  - python-dotenv>=0.5.1
 {% if cookiecutter.python_interpreter == 'python3' -%}
 {{ py3dep()|indent(2, true) }}
 {% else -%}
