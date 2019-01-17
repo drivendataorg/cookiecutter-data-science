@@ -84,3 +84,6 @@ target/
 # vim
 *.swp
 *.swo
+
+# Mypy cache
+.mypy_cache/
