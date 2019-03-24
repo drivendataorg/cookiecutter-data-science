@@ -5,7 +5,7 @@
     "author_name": "Your name (or your organization/company/team)",
     "description": "A short description of the project.",
     "python_version_number": "3.7",
-    "dataset_storage": [
+    "data_storage": [
         {"none": {}},
         {"azure": {"container": "container-name"}},
         {"s3": {"bucket": "bucket-name", "aws_profile": "default"}},

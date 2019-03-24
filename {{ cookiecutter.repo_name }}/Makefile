@@ -31,29 +31,29 @@ clean:
 lint:
 	flake8 {{ cookiecutter.module_name }}
 
-{% if cookiecutter.dataset_storage.s3 %}
+{% if cookiecutter.data_storage.s3 %}
 ## Download Data from storage system
 sync_data_down:
-	{% if cookiecutter.dataset_storage.s3 %}
-	aws s3 sync s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/\
-		data/ {% if cookiecutter.dataset_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.dataset_storage.s3.aws_profile }}{% endif %}
-	{% elif cookiecutter.dataset_storage.azure %}
-	az storage blob download-batch -s {{ cookiecutter.dataset_storage.azure.container }}/data/ \
+	{% if cookiecutter.data_storage.s3 %}
+	aws s3 sync s3://{{ cookiecutter.data_storage.s3.bucket }}/data/\
+		data/ {% if cookiecutter.data_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.data_storage.s3.aws_profile }}{% endif %}
+	{% elif cookiecutter.data_storage.azure %}
+	az storage blob download-batch -s {{ cookiecutter.data_storage.azure.container }}/data/ \
 		-d data/
-	{% elif cookiecutter.dataset_storage.gcs %}
-	gsutil cp {{ cookiecutter.dataset_storage.gcs.bucket }}/data/ data/
+	{% elif cookiecutter.data_storage.gcs %}
+	gsutil cp {{ cookiecutter.data_storage.gcs.bucket }}/data/ data/
 	{% endif %}
 
 ## Upload Data to storage system
 sync_data_up:
-	{% if cookiecutter.dataset_storage.s3 %}
-	aws s3 sync s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/ data/\
-		{% if cookiecutter.dataset_storage.s3.aws_profile %} --profile $(PROFILE){% endif %}
-	{% elif cookiecutter.dataset_storage.azure %}
-	az storage blob upload-batch -d {{ cookiecutter.dataset_storage.azure.container }}/data/ \
+	{% if cookiecutter.data_storage.s3 %}
+	aws s3 sync s3://{{ cookiecutter.data_storage.s3.bucket }}/data/ data/\
+		{% if cookiecutter.data_storage.s3.aws_profile %} --profile $(PROFILE){% endif %}
+	{% elif cookiecutter.data_storage.azure %}
+	az storage blob upload-batch -d {{ cookiecutter.data_storage.azure.container }}/data/ \
 		-s data/
-	{% elif cookiecutter.dataset_storage.gcs %}
-	gsutil cp data/ {{ cookiecutter.dataset_storage.gcs.bucket }}/data/
+	{% elif cookiecutter.data_storage.gcs %}
+	gsutil cp data/ {{ cookiecutter.data_storage.gcs.bucket }}/data/
 	{% endif %}
 {% endif %}
 

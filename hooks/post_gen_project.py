@@ -13,7 +13,7 @@ pip_only_packages = [
     'python-dotenv',
 ]
 
-{% if cookiecutter.dataset_storage.s3 %}
+{% if cookiecutter.data_storage.s3 %}
 packages += ['awscli']
 {% endif %}
 

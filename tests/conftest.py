@@ -1,17 +1,26 @@
-import sys
-import pytest
-import shutil
+import json
 from pathlib import Path
-from cookiecutter import main
+import pytest
+import sys
+import shutil
+
+from click.testing import CliRunner
+
+from ccds.__main__ import main
+
+
+import yaml
 
 CCDS_ROOT = Path(__file__).parents[1].resolve()
 
-args = {
+args = {'default_context': {
         'project_name': 'DrivenData',
         'author_name': 'DrivenData',
         'open_source_license': 'BSD-3-Clause',
-        'python_interpreter': 'python'
+        'description' : 'Test project',
+        'data_storage': {'s3': {'bucket': 'test-bucket', 'aws_profile': 'default'}}
         }
+}
 
 
 def system_check(basename):
@@ -24,15 +33,42 @@ def system_check(basename):
 @pytest.fixture(scope='class', params=[{}, args])
 def default_baked_project(tmpdir_factory, request):
     temp = tmpdir_factory.mktemp('data-project')
+    config_dir = tmpdir_factory.mktemp('config')
+
     out_dir = Path(temp).resolve()
 
     pytest.param = request.param
-    main.cookiecutter(
-        str(CCDS_ROOT),
-        no_input=True,
-        extra_context=pytest.param,
-        output_dir=out_dir
+
+    config_path = Path(config_dir) / 'config.yml'
+    with open(config_path, 'w') as f:
+        yaml.dump(pytest.param, f)
+
+    runner = CliRunner()
+    result = runner.invoke(
+        main,
+        ['--no-input',
+         '-o', str(out_dir),
+         str(CCDS_ROOT)],
+        catch_exceptions=False,
     )
+
+    # import pdb; pdb.set_trace()
+
+    # assert result.output == ""
+    assert result.exit_code == 0
+
+    # main(
+    #     str(CCDS_ROOT),
+    #     pytest.param,
+    #     True,
+    #     None,
+    #     False,
+    #     False,
+    #     out_dir,
+    #     None,
+    #     True,
+    #     None
+    # )
 
     pn = pytest.param.get('project_name') or 'project_name'
     
@@ -44,4 +80,6 @@ def default_baked_project(tmpdir_factory, request):
     yield 
 
     # cleanup after
-    shutil.rmtree(out_dir)
+    print("=======> ", out_dir)
+    # shutil.rmtree(out_dir)
+    # shutil.rmtree(config_dir)
