@@ -26,7 +26,7 @@ $ conda install cookiecutter
 ### To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/drivendata/cookiecutter-data-science
+    cookiecutter https://github.com/tiphaine/cookiecutter-data-science
 
 
 [![asciicast](https://asciinema.org/a/9bgl5qh17wlop4xyxu9n9wr02.png)](https://asciinema.org/a/9bgl5qh17wlop4xyxu9n9wr02)
@@ -79,6 +79,8 @@ The directory structure of your new project looks like this:
 │   │
 │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
 │       └── visualize.py
+│
+├── tests              <- Source code for tests in this project.
 │
 └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
 ```
