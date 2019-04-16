@@ -77,10 +77,10 @@ The directory structure of your new project looks like this:
 │   │   ├── predict_model.py
 │   │   └── train_model.py
 │   │
+│   ├── tests         <- Source code for tests in this project
+│   │
 │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
 │       └── visualize.py
-│
-├── tests              <- Source code for tests in this project.
 │
 └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
 ```
