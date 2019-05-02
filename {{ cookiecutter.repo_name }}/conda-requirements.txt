@@ -1,0 +1,12 @@
+numpy
+scipy
+matplotlib
+altair
+s3fs
+papermill
+geoalchemy2
+openpyxl
+cartopy
+scikit-learn
+geopandas
+intake

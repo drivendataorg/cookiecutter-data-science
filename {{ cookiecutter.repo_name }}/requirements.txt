@@ -1,2 +1,4 @@
 awscli
 flake8
+intake-dcat
+intakge-geopandas
