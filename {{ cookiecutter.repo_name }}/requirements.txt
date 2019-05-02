@@ -1,4 +1,4 @@
-awscli
 flake8
 intake-dcat
-intakge-geopandas
+intake-geopandas
+jupyterlab>=1.0a3
