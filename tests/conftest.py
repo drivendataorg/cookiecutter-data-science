@@ -9,8 +9,6 @@ CCDS_ROOT = Path(__file__).parents[1].resolve()
 args = {
         'project_name': 'DrivenData',
         'author_name': 'DrivenData',
-        'open_source_license': 'BSD-3-Clause',
-        'python_interpreter': 'python'
         }
 
 
