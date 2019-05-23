@@ -1,0 +1,17 @@
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - conda
+  - click
+  - Sphinx
+  - coverage
+  - awscli
+  - flake8
+  - python-dotenv
+  - setuptools
+  - wheel
+  - pip
+  - pip:
+    - cython
+    - -e .
