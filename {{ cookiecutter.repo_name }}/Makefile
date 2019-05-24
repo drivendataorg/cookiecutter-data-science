@@ -20,7 +20,7 @@ requirements:
 
 ## Make Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/data/make_dataset.py
+	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/data/make_dataset.py data/raw data/processed
 
 ## Delete all compiled Python files
 clean:
