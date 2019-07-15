@@ -6,93 +6,67 @@ _A logical, reasonably standardized, but flexible project structure for doing an
 #### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
 
 
-### Requirements to use the cookiecutter template:
+### Requisitos para utilizar este template
 -----------
- - Python 2.7 or 3.5
- - [Cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html) >= 1.4.0: This can be installed with pip by or conda depending on how you manage your Python packages:
-
+ - Python 3.5
+ - Cookiecutter
 ``` bash
 $ pip install cookiecutter
 ```
 
-or
-
-``` bash
-$ conda config --add channels conda-forge
-$ conda install cookiecutter
-```
-
-
-### To start a new project, run:
+### Inicializando um novo projeto
 ------------
 
-    cookiecutter https://github.com/drivendata/cookiecutter-data-science
+    cookiecutter https://github.com/lucaslrolim/cookiecutter-data-science
 
 
 [![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
 
-
-### The resulting directory structure
+### Esturtura do diretório
 ------------
-
-The directory structure of your new project looks like this: 
 
 ```
 ├── LICENSE
-├── Makefile           <- Makefile with commands like `make data` or `make train`
-├── README.md          <- The top-level README for developers using this project.
+├── Makefile           <- Arquivo para armazenar comandos bash necessários para setup
+├── README.md          <- Descrição geral com objetivos e contexto do projeto
 ├── data
-│   ├── external       <- Data from third party sources.
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
+│   ├── processed       <- Datasets finais, utilizados pelos modelos.
+│   └── raw             <- Dump original extraído das bases de dado (imutável)
+|   └── queries         <- Consultas utilizadas para extração de informações das bases de
 │
-├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+├── models             <- Modelos treinados, predições geradas e sumário descritivo dos modelos e parâmetros utilizados
 │
-├── models             <- Trained and serialized models, model predictions, or model summaries
+├── notebooks          <- Jupyter notebooks. A conversão para nomes é a versão (para ordenar), as iniciais do criador e uma descrição. Tudo separado por "-", e.x.
+│                         `1.0-lr-initial-data-exploration`.
 │
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
+├── references         <- Artigos, links e outras referências para entendimento dos modelos.
 │
-├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+├── outputs            <- Análises geradas em HTML, PDF, LaTeX, etc.
+│   └── figures        <- Gráficos e figuras geradas e utilizadas nos relatórios.
 │
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
-│
-├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
+├── requirements.txt   <- Requerimentos de ambiente para execução do projeto. e.x:
 │                         generated with `pip freeze > requirements.txt`
 │
-├── src                <- Source code for use in this project.
+├── src                <- Classes funções do projeto
 │   ├── __init__.py    <- Makes src a Python module
 │   │
-│   ├── data           <- Scripts to download or generate data
+│   ├── data           <- Scripts para baixar e/ou gerar os datasets
 │   │   └── make_dataset.py
 │   │
-│   ├── features       <- Scripts to turn raw data into features for modeling
+│   ├── features       <- Scrpits para criar features ou datasets nos quais serão aplicados os modelos
 │   │   └── build_features.py
 │   │
-│   ├── models         <- Scripts to train models and then use trained models to make
-│   │   │                 predictions
+│   ├── models         <- Modelos
 │   │   ├── predict_model.py
 │   │   └── train_model.py
 │   │
-│   └── visualization  <- Scripts to create exploratory and results oriented visualizations
+│   └── visualization  <- Visualizações
 │       └── visualize.py
-│
-└── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
 ```
 
-## Contributing
 
-We welcome contributions! [See the docs for guidelines](https://drivendata.github.io/cookiecutter-data-science/#contributing).
-
-### Installing development requirements
+### Instalação das dependências
 ------------
 
     pip install -r requirements.txt
 
-### Running the tests
-------------
-
-    py.test tests
