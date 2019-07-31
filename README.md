@@ -5,13 +5,16 @@ _A logical, reasonably standardized, but flexible project structure for doing an
 
 #### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
 
-
 ### Requisitos para utilizar este template
 -----------
  - Python 3.5
  - Cookiecutter
 ``` bash
 $ pip install cookiecutter
+```
+
+```
+pip3 install --editable .
 ```
 
 ### Inicializando um novo projeto
