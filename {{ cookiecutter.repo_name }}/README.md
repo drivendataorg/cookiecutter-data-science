@@ -34,7 +34,9 @@ Project Organization
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project.
     │   ├── __init__.py    <- Makes src a Python module
-    │   │
+	│   │
+	│   ├── api 		   <- Source code for API model deployment (See FastAPI documentation website for more details https://fastapi.tiangolo.com/)
+	│   │
     │   ├── data           <- Scripts to download or generate data
     │   │   └── make_dataset.py
     │   │
@@ -46,7 +48,7 @@ Project Organization
     │   │   ├── predict_model.py
     │   │   └── train_model.py
     │   │
-    │   ├── tests       <- Source code for tests in this project
+    │   ├── tests          <- Source code for tests in this project
     │   │
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
     │       └── visualize.py
