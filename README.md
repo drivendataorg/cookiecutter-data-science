@@ -1,33 +1,55 @@
-# Cookiecutter Data Science
-
-_A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
-
-
-#### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
+## Projetos para Data Science
 
 ### Requisitos para utilizar este template
------------
- - Python 3.5
- - Cookiecutter
-``` bash
-$ pip install cookiecutter
-```
 
 ```
-pip3 install --editable .
+Python 3.6
+Pipenv
+Cookiecutter
+Git
 ```
 
-### Inicializando um novo projeto
-------------
+### Instalação dos requisitos:
 
-    cookiecutter https://github.com/lucaslrolim/cookiecutter-data-science
+#### Ubuntu:
 
+Pipenv:
+```
+pip3 install pipenv
+```
+
+Cookiecutter:
+```
+pip3 install cookiecutter
+```
+
+Git:
+```
+sudo apt-get install git-core
+```
+
+### Inicialização do projeto:
+
+```
+cookiecutter https://github.com/lucaslrolim/cookiecutter-data-science
+```
 
 [![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
 
-### Esturtura do diretório
-------------
+Após as configurações do projeto:
 
+```
+cd "nome-do-projeto"
+```
+
+Inicialização do Pipenv:
+
+```
+pipenv shell
+pipenv lock
+```
+
+## Estrutura do Projeto
 ```
 ├── LICENSE
 ├── Makefile           <- Arquivo para armazenar comandos bash necessários para setup
@@ -66,10 +88,22 @@ pip3 install --editable .
 │   └── visualization  <- Visualizações
 │       └── visualize.py
 ```
+## Para instalar as dependências:
 
+```
+pipenv install
+```
 
-### Instalação das dependências
-------------
+## Instalação de bibliotecas auxiliares:
 
-    pip install -r requirements.txt
+Certifique-se que o ambiente virtual do Pipenv esteja ativo.
+
+```
+pipenv install package
+```
+
+Exportanto o **src** para variável de ambiente:
+```
+pipenv install --editable .
+```
 
