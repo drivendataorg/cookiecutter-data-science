@@ -1,0 +1,12 @@
+black
+coverage
+flake8
+ipykernel
+ipython
+pytest>=5.0.0
+
+# For Doc
+mock
+sphinx
+sphinx_rtd_theme
+recommonmark
