@@ -6,4 +6,6 @@ docs/site/
 # test cache
 .cache/*
 tests/__pycache__/*
-*.pytest_cache/
+*.pytest_cache/anaconda3-2018.12/envs/test
+
+.python-version
