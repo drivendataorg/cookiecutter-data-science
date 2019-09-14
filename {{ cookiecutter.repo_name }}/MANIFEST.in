@@ -1,0 +1,10 @@
+# Extra files to include in the package
+# See syntax here : https://docs.python.org/3/distutils/commandref.html
+
+# Examples:
+# recursive-include *.json
+# include *.png
+# exclude *.log
+recursive-include *.pyc
+exclude docs/
+include requirements.txt
