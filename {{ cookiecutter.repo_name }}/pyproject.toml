@@ -1,16 +1,27 @@
 [tool.poetry]
-name = "cookiecutter-data-science"
-version = "0.1.0"
+name = "{{ cookiecutter.repo_name }}"
+version = 0.1.0
 description = "{{ cookiecutter.description }}"
-authors = ["Matthieu Mazzolini <m.mazzolini@kayrros.com>"]
-license = "MIT"
+authors = ["{{ cookiecutter.author_name }}"]
+license = "{{ cookiecutter.open_source_license }}"
 
 [tool.poetry.dependencies]
 python = "^3.6"
-pandas = "^0.25.1"
+python-dotenv = "^0.10.3"
+joblib = "^0.13"
 
 [tool.poetry.dev-dependencies]
-python-dotenv = "^0.10.3"
+black = "^19.3"
+coverage = "^4.5"
+flake8 = "^3.7"
+ipykernel = "^5.1"
+ipython = "^7.6"
+pytest = "^5.0"
+
+mock = "^3.0"
+sphinx = "^2.1"
+sphinx_rtd_theme = "^0.4"
+recommonmark = "^0.5"
 
 [build-system]
 requires = ["poetry>=0.12"]
@@ -35,4 +46,3 @@ exclude = '''
   | doc
 )/
 '''
-

@@ -1,6 +1,6 @@
 VERSION = (0, 1, 0)
 
-__title__ = "project"
+__title__ = "{{cookiecutter.repo_name }}"
 __description__ = "{{ cookiecutter.description }}"
 __url__ = ""
 __version__ = ".".join(map(str, VERSION))
