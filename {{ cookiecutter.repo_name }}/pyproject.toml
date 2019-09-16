@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "{{ cookiecutter.repo_name }}"
-version = 0.1.0
+version = "0.1.0"
 description = "{{ cookiecutter.description }}"
 authors = ["{{ cookiecutter.author_name }}"]
 license = "{{ cookiecutter.open_source_license }}"
@@ -11,7 +11,7 @@ python-dotenv = "^0.10.3"
 joblib = "^0.13"
 
 [tool.poetry.dev-dependencies]
-black = "^19.3"
+black = "^19.3b0"
 coverage = "^4.5"
 flake8 = "^3.7"
 ipykernel = "^5.1"

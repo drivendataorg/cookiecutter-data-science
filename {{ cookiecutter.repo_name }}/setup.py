@@ -5,7 +5,7 @@ import re
 from setuptools import setup, find_packages
 
 HERE = os.path.abspath(os.path.dirname(__file__))
-PACKAGE_NAME = "module"
+PACKAGE_NAME = "{{ cookiecutter.repo_name }}"
 about = {}
 with open(os.path.join(HERE, PACKAGE_NAME, "__about__.py"), "r", "utf-8") as f:
     exec(f.read(), about)
