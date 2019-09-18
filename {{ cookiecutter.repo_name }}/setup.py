@@ -16,38 +16,21 @@ def readme():
         return f.read()
 
 
-def parse_requirements():
-    """
-    Reads requirements.txt and preprocess it
-    to be feed into setuptools.
-
-    References:
-        https://github.com/pypa/pip/issues/3610#issuecomment-356687173
-
-    Warnings:
-        to make pip respect the links, you have to use
-        `--process-dependency-links` switch. So e.g.:
-        `pip install --process-dependency-links {git-url}`
-
-    Returns:
-         tuple of list: first list is regular package name on pypi. SEcond list are package with git urls
-    """
-    default = open("requirements.txt", "r").readlines()
-    packages_name = []
-    private_packages = []
-
-    for resource in default:
-        if "git+ssh" in resource:
-            private_packages.append(resource.strip().replace("-e ", ""))
-            packages_name.append(resource.split("egg=")[-1].rsplit("-", 1)[0])
-        else:
-            packages_name.append(resource.strip())
-
-    return packages_name, private_packages
-
-
-public_packages, private_packages = parse_requirements()
-
+install_requires = [
+    "click",
+    "Sphinx",
+    "coverage",
+    "awscli",
+    "flake8",
+    "python-dotenv>=0.5.1",
+]
+extra_requires = {
+    "dev": ["black", "coverage", "flake8", "ipykernel", "ipython", "pytest>=5.0.0"],
+    "docs": ["mock", "sphinx", "sphinx_rtd_theme", "recommonmark"],
+}
+extra_requires["all"] = list(
+    set((item for value in extra_requires.values() for item in value))
+)
 
 setup(
     name=about["__title__"],
@@ -60,8 +43,8 @@ setup(
     long_description=readme(),
     long_description_content_type="text/markdown",
     packages=find_packages(),
-    install_requires=public_packages,
-    dependency_links=private_packages,
+    install_requires=install_requires,
+    extra_requires=extra_requires,
     include_package_data=False,  # True to include files listed in ./MANIFEST.in,
     entry_points="""
         [console_scripts]

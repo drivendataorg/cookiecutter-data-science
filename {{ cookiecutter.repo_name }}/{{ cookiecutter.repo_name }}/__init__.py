@@ -3,12 +3,9 @@ import logging
 
 from dotenv import load_dotenv
 
-from module.module import ModuleObject
-from module.__about__ import __author__, __author_email__, __description__, __title__, __url__, __version__
+from "{{ cookiecutter.repo_name }}".__about__ import __author__, __author_email__, __description__, __title__, __url__, __version__
 
 PROJECT_HOME = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-__all__ = ["ModuleObject"]
 
 
 def init_logger(level="WARN"):
