@@ -12,25 +12,16 @@ with open(os.path.join(HERE, PACKAGE_NAME, "__about__.py"), "r", "utf-8") as f:
 
 
 def readme():
-    with open("README.md", "r", "utf-8") as f:
+    with open(os.path.join(HERE, "README.md"), "r", "utf-8") as f:
         return f.read()
 
 
-install_requires = [
-    "click",
-    "Sphinx",
-    "coverage",
-    "awscli",
-    "flake8",
-    "python-dotenv>=0.5.1",
-]
+install_requires = ["click", "Sphinx", "coverage", "awscli", "flake8", "fire", "python-dotenv>=0.5.1"]
 extra_requires = {
     "dev": ["black", "coverage", "flake8", "ipykernel", "ipython", "pytest>=5.0.0"],
     "docs": ["mock", "sphinx", "sphinx_rtd_theme", "recommonmark"],
 }
-extra_requires["all"] = list(
-    set((item for value in extra_requires.values() for item in value))
-)
+extra_requires["all"] = list(set((item for value in extra_requires.values() for item in value)))
 
 setup(
     name=about["__title__"],
@@ -48,6 +39,6 @@ setup(
     include_package_data=False,  # True to include files listed in ./MANIFEST.in,
     entry_points="""
         [console_scripts]
-        s1m=s1m.cli:main
+        {{ cookiecutter.repo_name }}={{ cookiecutter.repo_name }}.command_line:main
     """,
 )

@@ -3,7 +3,7 @@ import logging
 
 from dotenv import load_dotenv
 
-from "{{ cookiecutter.repo_name }}".__about__ import __author__, __author_email__, __description__, __title__, __url__, __version__
+from {{ cookiecutter.repo_name }}.__about__ import __author__, __author_email__, __description__, __title__, __url__, __version__
 
 PROJECT_HOME = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
