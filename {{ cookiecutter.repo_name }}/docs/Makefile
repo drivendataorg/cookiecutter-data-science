@@ -45,6 +45,11 @@ html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+doc:
+	sphinx-apidoc -f -o source .. ../setup.py
+	@echo
+	@echo "Docstring modules built into docs/source/ folder"
+
 
 dirhtml:
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
