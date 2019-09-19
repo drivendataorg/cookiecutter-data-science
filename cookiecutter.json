@@ -1,10 +1,11 @@
 {
     "project_name": "project_name",
     "repo_name": "{{ cookiecutter.project_name.lower().strip().replace(' ', '_') }}",
-    "author_name": "Your name (or your organization/company/team)",
+    "author_name": "Your name, organization  or team",
     "description": "A short description of the project.",
     "open_source_license": ["MIT", "BSD-3-Clause", "No license file"],
     "s3_bucket": "[OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')",
     "aws_profile": "default",
-    "python_interpreter": ["python3", "python"]
+    "python_interpreter": ["python3", "python"],
+		"version": "0.1.0"
 }
