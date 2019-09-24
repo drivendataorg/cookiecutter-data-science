@@ -7,6 +7,8 @@ Sphinx
 coverage
 awscli
 flake8
+python-lambda-local==0.1.8
+ipdb==0.12.2
 python-dotenv>=0.5.1
 {% if cookiecutter.python_interpreter != 'python3' %}
 

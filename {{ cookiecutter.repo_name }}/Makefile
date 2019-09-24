@@ -76,6 +76,18 @@ endif
 test_environment:
 	$(PYTHON_INTERPRETER) test_environment.py
 
+
+## Deploy on Amazon Lambda using Serverless
+run_localtest:
+	python-lambda-local -f lambda_function -t 30 main.py resources/others/event.json
+
+config_serverless:
+	npm install -g serverless
+	sls plugin install -n serverless-python-requirements
+
+deploy:
+	serverless deploy -v
+
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################

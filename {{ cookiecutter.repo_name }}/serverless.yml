@@ -1,0 +1,29 @@
+service: 
+
+provider:
+  name: aws
+  runtime: python3.7
+  timeout: 900
+  memorySize: 3008
+
+puglins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+    fileName: requirements-prod.txt
+    slim: true
+    zip: true
+
+package:
+  exclude:
+    - node_modules/**
+    - .venv/**
+
+functions:
+  generate_score:
+    handler: main.lambda_function
+
+plugins:
+  - serverless-python-requirements
