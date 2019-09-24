@@ -1,4 +1,4 @@
-service: 
+service: {{ cookiecutter.repo_name }}
 
 provider:
   name: aws
@@ -19,6 +19,7 @@ custom:
 package:
   exclude:
     - node_modules/**
+    - venv/**
     - .venv/**
 
 functions:
