@@ -1,0 +1,33 @@
+name: data-science
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.7
+  - pip
+  - pytorch 
+  - cpuonly
+  - torchvision 
+  - numpy 
+  - scipy 
+  - matplotlib 
+  - pandas 
+  - seaborn 
+  - scikit-learn 
+  - dask 
+  - distributed
+  - ipython 
+  - jupyterlab
+  - xarray
+  - pip:
+    - mlflow
+    - tqdm
+    - dvc
+    - cookiecutter
+    - click
+    - Sphinx
+    - coverage
+    - awscli
+    - flake8
+    - python-dotenv>=0.5.1

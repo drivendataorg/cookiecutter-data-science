@@ -1,0 +1,14 @@
+cmd: python src/data/make_dataset.py
+deps:
+- md5: d751713988987e9331980363e24189ce.dir
+  path: data/raw
+- md5: d41d8cd98f00b204e9800998ecf8427e
+  path: src/data/make_dataset.py
+md5: b6846fadaff7e5481be03e7d1e38a6bd
+outs:
+- cache: true
+  md5: d751713988987e9331980363e24189ce.dir
+  metric: false
+  path: data/processed
+  persist: true
+wdir: .

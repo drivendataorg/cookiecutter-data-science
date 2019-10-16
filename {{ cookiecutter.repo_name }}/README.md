@@ -7,7 +7,6 @@ Project Organization
 ------------
 
     ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
     │   ├── external       <- Data from third party sources.
@@ -49,9 +48,19 @@ Project Organization
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
     │       └── visualize.py
     │
-    └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
 
 
 --------
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+
+<h2> Init projet with </h2>
+1. git init
+2. dvc init
+3. #add data to data/raw
+4. dvc add data/raw
+5. # create and activate conda environnement conda env create -f environment.yml
+6. py.test tests
+7. dvc run -f 1-process_data.dvc -d src/data/make_dataset.py -o data/processed  python src/data/make_dataset.py data/raw da
+ta/processed
+
