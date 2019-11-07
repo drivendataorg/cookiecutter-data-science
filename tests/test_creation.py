@@ -96,11 +96,11 @@ class TestCookieSetup(object):
             'references',
             'reports',
             'reports/figures',
-            'src',
-            'src/data',
-            'src/features',
-            'src/models',
-            'src/visualization',
+            '{{ cookiecutter.repo_name}}',
+            '{{ cookiecutter.repo_name}}/data',
+            '{{ cookiecutter.repo_name}}/features',
+            '{{ cookiecutter.repo_name}}/models',
+            '{{ cookiecutter.repo_name}}/visualization',
         ]
 
         ignored_dirs = [
