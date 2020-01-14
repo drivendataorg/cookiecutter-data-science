@@ -55,12 +55,12 @@ Project Organization
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
 
 <h2> Init projet with </h2>
-1. git init
-2. dvc init
-3. #add data to data/raw
-4. dvc add data/raw
-5. pip install -e .
-6. py.test tests
+1. git init  
+2. dvc init  
+3. #add data to data/raw  
+4. dvc add data/raw  
+5. pip install -e .  
+6. py.test tests  
 7. dvc run -f 1-process_data.dvc -d src/data/make_dataset.py -o data/processed  python src/data/make_dataset.py data/raw da
-ta/processed
+ta/processed  
 
