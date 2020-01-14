@@ -59,7 +59,7 @@ Project Organization
 2. dvc init
 3. #add data to data/raw
 4. dvc add data/raw
-5. pip install -e
+5. # create and activate conda environnement conda env create -f environment.yml
 6. py.test tests
 7. dvc run -f 1-process_data.dvc -d src/data/make_dataset.py -o data/processed  python src/data/make_dataset.py data/raw da
 ta/processed
