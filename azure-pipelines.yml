@@ -6,42 +6,93 @@
 trigger:
 - master
 
-strategy:
-  matrix:
-    linux-36:
-      imageName: 'ubuntu-latest'
-      python.version: '3.6'
-    linux-37:
-      imageName: 'ubuntu-latest'
-      python.version: '3.7'
-    mac-36:
-      imageName: 'macos-latest'
-      python.version: '3.6'
-    mac-37:
-      imageName: 'macos-latest'
-      python.version: '3.7'
-    windows-36:
-      imageName: 'windows-latest'
-      python.version: '3.6'
-    windows-37:
-      imageName: 'windows-latest'
-      python.version: '3.7'
+jobs:
+- job:
+  displayName: ubuntu-latest
+  pool:
+    vmImage: 'ubuntu-latest'
+  strategy:
+    matrix:
+      Python37:
+        python.version: '3.7'
+      Python36:
+        python.version: '3.6'
 
-pool:
-  vmImage: $(imageName)
+  steps:
+  - bash: echo "##vso[task.prependpath]$CONDA/bin"
+    displayName: Add conda to PATH
 
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+    displayName: 'Use Python $(python.version)'
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install dependencies'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+  - script: |
+      pip install pytest pytest-azurepipelines
+      pytest
+    displayName: 'pytest'
+
+- job:
+  displayName: macOS-latest
+  pool:
+    vmImage: 'macOS-latest'
+  strategy:
+    matrix:
+      Python37:
+        python.version: '3.7'
+      Python36:
+        python.version: '3.6'
+
+  steps:
+  - bash: echo "##vso[task.prependpath]$CONDA/bin"
+    displayName: Add conda to PATH
+
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+    displayName: 'Use Python $(python.version)'
+
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install dependencies'
+
+  - script: |
+      pip install pytest pytest-azurepipelines
+      pytest
+    displayName: 'pytest'
+
+- job:
+  displayName: windows-latest
+  pool:
+    vmImage: 'windows-latest'
+  strategy:
+    matrix:
+      Python37:
+        python.version: '3.7'
+      Python36:
+        python.version: '3.6'
+
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+    displayName: 'Use Python $(python.version)'
+
+  - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+    displayName: Add conda to PATH
+
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install dependencies'
+
+  - script: |
+      pip install pytest pytest-azurepipelines
+      pytest
+    displayName: 'pytest'
