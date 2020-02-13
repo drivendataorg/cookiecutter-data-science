@@ -17,6 +17,17 @@ pip_only_packages = [
 packages += ['awscli']
 {% endif %}
 
+{% if cookiecutter.pydata_packages == "basic" %}
+packages += [
+    'ipython',
+    'jupyter',
+    'matplotlib',
+    'numpy',
+    'pandas',
+    'scikit-learn',
+]
+{% endif %}
+
 dependencies = '{{ cookiecutter.dependency_file }}'
 
 def write_dependencies():
@@ -30,6 +41,7 @@ def write_dependencies():
             ]
 
             f.write("\n".join(lines))
+            f.write("\n")
 
     elif dependencies == 'environment.yml':
         with open(dependencies, 'w') as f:

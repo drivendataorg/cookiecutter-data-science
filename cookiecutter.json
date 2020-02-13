@@ -6,22 +6,25 @@
     "description": "A short description of the project.",
     "python_version_number": "3.7",
     "dataset_storage": [
-        {"none": {}},
+        {"none": "none"},
         {"azure": {"container": "container-name"}},
         {"s3": {"bucket": "bucket-name", "aws_profile": "default"}},
         {"gcs": {"bucket": "bucket-name"}}
     ],
     "environment_manager" : [
-        "none",
-        "conda",
         "virtualenv",
-        "pipenv"
+        "conda",
+        "pipenv",
+        "none"
     ],
     "dependency_file": [
-        "none",
         "requirements.txt",
         "environment.yml",
         "Pipfile"
+    ],
+    "pydata_packages": [
+        "none",
+        "basic"
     ],
     "open_source_license": ["MIT", "BSD-3-Clause", "No license file"]
 }
