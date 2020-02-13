@@ -54,7 +54,7 @@ Disagree with a couple of the default folder names? Working on a project that's 
 
 ## Getting started
 
-With this in mind, we've created a data science cookiecutter template for projects in Python. Your analysis doesn't have to be in Python, but the template does provide some Python boilerplate that you'd want to remove (in the `src` folder for example, and the Sphinx documentation skeleton in `docs`).
+With this in mind, we've created a data science cookiecutter template for projects in Python. Your analysis doesn't have to be in Python, but the template does provide some Python boilerplate that you'd want to remove (in the `{{ cookiecutter.module_name }}` folder for example, and the Sphinx documentation skeleton in `docs`).
 
 ### Requirements
 
@@ -103,8 +103,8 @@ cookiecutter https://github.com/drivendata/cookiecutter-data-science
 │                         generated with `pip freeze > requirements.txt`
 │
 ├── setup.py           <- Make this project pip installable with `pip install -e`
-├── src                <- Source code for use in this project.
-│   ├── __init__.py    <- Makes src a Python module
+├── {{ cookiecutter.module_name }}                <- Source code for use in this project.
+│   ├── __init__.py    <- Makes {{ cookiecutter.module_name }} a Python module
 │   │
 │   ├── data           <- Scripts to download or generate data
 │   │   └── make_dataset.py
@@ -129,7 +129,7 @@ There are some opinions implicit in the project structure that have grown out of
 
 ### Data is immutable
 
-Don't ever edit your raw data, especially not manually, and especially not in Excel. Don't overwrite your raw data. Don't save multiple versions of the raw data. Treat the data (and its format) as immutable. The code you write should move the raw data through a pipeline to your final analysis. You shouldn't have to run all of the steps every time you want to make a new figure (see [Analysis is a DAG](#analysis-is-a-dag)), but anyone should be able to reproduce the final products with only the code in `src` and the data in `data/raw`.
+Don't ever edit your raw data, especially not manually, and especially not in Excel. Don't overwrite your raw data. Don't save multiple versions of the raw data. Treat the data (and its format) as immutable. The code you write should move the raw data through a pipeline to your final analysis. You shouldn't have to run all of the steps every time you want to make a new figure (see [Analysis is a DAG](#analysis-is-a-dag)), but anyone should be able to reproduce the final products with only the code in `{{ cookiecutter.module_name }}` and the data in `data/raw`.
 
 Also, if data is immutable, it doesn't need source control in the same way that code does. Therefore, ***by default, the data folder is included in the `.gitignore` file.*** If you have a small amount of data that rarely changes, you may want to include the data in the repository. Github currently warns if files are over 50MB and rejects files over 100MB. Some other options for storing/syncing large data include [AWS S3](https://aws.amazon.com/s3/) with a syncing tool (e.g., [`s3cmd`](http://s3tools.org/s3cmd)), [Git Large File Storage](https://git-lfs.github.com/), [Git Annex](https://git-annex.branchable.com/), and [dat](http://dat-data.com/). Currently by default, we ask for an S3 bucket and use [AWS CLI](http://docs.aws.amazon.com/cli/latest/reference/s3/index.html) to sync data in the `data` folder with the server.
 
@@ -141,7 +141,7 @@ Since notebooks are challenging objects for source control (e.g., diffs of the `
 
  1. Follow a naming convention that shows the owner and the order the analysis was done in. We use the format `<step>-<ghuser>-<description>.ipynb` (e.g., `0.3-bull-visualize-distributions.ipynb`).
 
- 2. Refactor the good parts. Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at `src/data/make_dataset.py` and load data from `data/interim`. If it's useful utility code, refactor it to `src`.
+ 2. Refactor the good parts. Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at `{{ cookiecutter.module_name }}/data/make_dataset.py` and load data from `data/interim`. If it's useful utility code, refactor it to `{{ cookiecutter.module_name }}`.
 
  Now by default we turn the project into a Python package (see the `setup.py` file). You can import your code and use it in notebooks with a cell like the following:
 
@@ -149,10 +149,10 @@ Since notebooks are challenging objects for source control (e.g., diffs of the `
 # OPTIONAL: Load the "autoreload" extension so that code can change
 %load_ext autoreload
 
-# OPTIONAL: always reload modules so that as you change code in src, it gets loaded
+# OPTIONAL: always reload modules so that as you change code in {{ cookiecutter.module_name }}, it gets loaded
 %autoreload 2
 
-from src.data import make_dataset
+from {{ cookiecutter.module_name }}.data import make_dataset
 ```
 
 ### Analysis is a DAG
@@ -192,10 +192,10 @@ OTHER_VARIABLE=something
 
 #### Use a package to load these variables automatically.
 
-If you look at the stub script in `src/data/make_dataset.py`, it uses a package called [python-dotenv](https://github.com/theskumar/python-dotenv) to load up all the entries in this file as environment variables so they are accessible with `os.environ.get`. Here's an example snippet adapted from the `python-dotenv` documentation:
+If you look at the stub script in `{{ cookiecutter.module_name }}/data/make_dataset.py`, it uses a package called [python-dotenv](https://github.com/theskumar/python-dotenv) to load up all the entries in this file as environment variables so they are accessible with `os.environ.get`. Here's an example snippet adapted from the `python-dotenv` documentation:
 
 ```python
-# src/data/dotenv_example.py
+# {{ cookiecutter.module_name }}/data/dotenv_example.py
 import os
 from dotenv import load_dotenv, find_dotenv
 

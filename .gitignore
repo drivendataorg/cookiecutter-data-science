@@ -7,3 +7,8 @@ docs/site/
 .cache/*
 tests/__pycache__/*
 *.pytest_cache/
+*.pyc
+
+# other local dev info
+.vscode/
+cookiecutter_data_science.egg-info/

@@ -1,0 +1,7 @@
+-r requirements.txt
+
+mkdocs
+mkdocs-cinder
+pipenv
+pytest
+virtualenvwrapper
