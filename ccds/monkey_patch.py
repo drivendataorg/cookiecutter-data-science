@@ -24,22 +24,30 @@ def _prompt_choice_and_subitems(cookiecutter_dict, env, key, options, no_input):
 
     if no_input:
         selected = rendered_options[0]
-    
-    selected = read_user_choice(key, rendered_options)
+    else:
+        selected = read_user_choice(key, rendered_options)
     
     selected_item = [list(c.values())[0] for c in options if list(c.keys())[0] == selected][0]
 
     result[selected] = {}
 
     # then, fill in the sub values for that item
-    for subkey, raw in selected_item.items():
-        # We are dealing with a regular variable
-        val = render_variable(env, raw, cookiecutter_dict)
+    if isinstance(selected_item, dict):
+        for subkey, raw in selected_item.items():
+            # We are dealing with a regular variable
+            val = render_variable(env, raw, cookiecutter_dict)
 
-        if not no_input:
-            val = read_user_variable(subkey, val)
+            if not no_input:
+                val = read_user_variable(subkey, val)
 
-        result[selected][subkey] = val
+            result[selected][subkey] = val
+    elif isinstance(selected_item, list):
+        val = prompt_choice_for_config(
+            cookiecutter_dict, env, selected, selected_item, no_input
+        )
+        result[selected] = val
+    elif isinstance(selected_item, str):
+        result[selected] = selected_item
 
     return result
 
@@ -103,54 +111,3 @@ def prompt_for_config(context, no_input=False):
             raise UndefinedVariableInTemplate(msg, err, context)
 
     return cookiecutter_dict
-
-# from cookiecutter.main import cookiecutter
-# from cookiecutter import prompt
-# from cookiecutter.cli import main as cc_main
-
-# class NestedQuestion:
-#     ''' [{'a': {'val1': 'default1', 'val2': 'default2'}}]
-    
-#         Interprets lists as questions with multiple options, where the
-#         and dictionaries as single questions with defaults values.
-#     '''
-#     @classmethod
-#     def update_context(cls, context, question_structure):
-#         qd = question_structure
-#         if isinstance(qd, list):
-#             selection = cls.get_user_option(qd)
-            
-#             name, vals = list(selection.items())[0]
-            
-#             context[name] = {}
-#             cls.update_context(context[name], vals)
-
-#         elif isinstance(qd, dict):
-#             for k, v in qd.items():
-#                 context[k]= {}
-                
-#                 if isinstance(v, (dict, list)):
-#                     context[k] = cls.update_context(context[k], v)
-#                 else:
-#                     context[k] = cls.get_user_input(k, v)
-            
-#         return context
-
-#     @staticmethod
-#     def get_user_input(key, default):
-#         return prompt.read_user_variable(key, default)
-#         # return input(f"{key} [{default}]: ") or default
-
-#     @staticmethod
-#     def get_user_option(options):
-#         prompt.read_user_choice()
-        
-#         # input_msg = '\n'.join(
-#         #     f" [{ix + 1}] - {list(value.keys())[0]}" for ix, value in enumerate(options)
-#         # )
-
-#         # prepend = 'Select an item:\n'
-#         # postpend = "\n - Enter number [1]: "
-        
-#         # ix = int(input(prepend + input_msg + postpend) or 1) - 1
-#         # return options[ix]

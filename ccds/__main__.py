@@ -23,6 +23,8 @@ from ccds.monkey_patch import prompt_for_config
 
 prompt.prompt_for_config = prompt_for_config
 
+# for use in tests need monkey-patched api main
+from cookiecutter import main as api_main
 from cookiecutter import cli
 main = cli.main
 

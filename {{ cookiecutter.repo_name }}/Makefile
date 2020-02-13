@@ -6,6 +6,7 @@
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PROJECT_NAME = {{ cookiecutter.repo_name }}
+PYTHON_VERSION = {{ cookiecutter.python_version_number }}
 PYTHON_INTERPRETER = python{{ cookiecutter.python_version_number }}
 
 
@@ -13,14 +14,19 @@ PYTHON_INTERPRETER = python{{ cookiecutter.python_version_number }}
 # COMMANDS                                                                      #
 #################################################################################
 
+{% if cookiecutter.dependency_file != 'none' %}
 ## Install Python Dependencies
 requirements:
+	{% if "requirements.txt" == cookiecutter.dependency_file -%}
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+	{% elif "environment.yml" == cookiecutter.dependency_file -%}
+	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
+	{% elif "Pipfile" == cookiecutter.dependency_file -%}
+	pipenv install
+	{% endif %}
+{% endif %}
 
-## Make Dataset
-data: requirements
-	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/data/make_dataset.py
 
 ## Delete all compiled Python files
 clean:
@@ -31,43 +37,47 @@ clean:
 lint:
 	flake8 {{ cookiecutter.module_name }}
 
-{% if cookiecutter.dataset_storage.s3 %}
+{% if not cookiecutter.dataset_storage.none %}
 ## Download Data from storage system
 sync_data_down:
-	{% if cookiecutter.dataset_storage.s3 %}
+	{% if cookiecutter.dataset_storage.s3 -%}
 	aws s3 sync s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/\
 		data/ {% if cookiecutter.dataset_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.dataset_storage.s3.aws_profile }}{% endif %}
-	{% elif cookiecutter.dataset_storage.azure %}
+	{% elif cookiecutter.dataset_storage.azure -%}
 	az storage blob download-batch -s {{ cookiecutter.dataset_storage.azure.container }}/data/ \
 		-d data/
-	{% elif cookiecutter.dataset_storage.gcs %}
-	gsutil cp {{ cookiecutter.dataset_storage.gcs.bucket }}/data/ data/
+	{% elif cookiecutter.dataset_storage.gcs -%}
+	gsutil rsync gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/ data/
 	{% endif %}
 
 ## Upload Data to storage system
 sync_data_up:
-	{% if cookiecutter.dataset_storage.s3 %}
+	{% if cookiecutter.dataset_storage.s3 -%}
 	aws s3 sync s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/ data/\
 		{% if cookiecutter.dataset_storage.s3.aws_profile %} --profile $(PROFILE){% endif %}
-	{% elif cookiecutter.dataset_storage.azure %}
+	{% elif cookiecutter.dataset_storage.azure -%}
 	az storage blob upload-batch -d {{ cookiecutter.dataset_storage.azure.container }}/data/ \
 		-s data/
-	{% elif cookiecutter.dataset_storage.gcs %}
-	gsutil cp data/ {{ cookiecutter.dataset_storage.gcs.bucket }}/data/
+	{% elif cookiecutter.dataset_storage.gcs -%}
+	gsutil rsync data/ gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/
 	{% endif %}
 {% endif %}
 
 {% if cookiecutter.environment_manager != 'none' %}
 ## Set up python interpreter environment
 create_environment:
-	{% if cookiecutter.environment_manager == 'conda' %}
-	conda create --name $(PROJECT_NAME) python={{ cookiecutter.python_version_number }}{% if cookiecutter.dependency_file == 'environment.yml' %} -f environment.yml{% endif %}
+	{% if cookiecutter.environment_manager == 'conda' -%}
+	{% if cookiecutter.dependency_file != 'environment.yml' %}
+	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
+	{% else -%}
+	conda env create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -f environment.yml
+	{% endif %}
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"	
-	{% elif cookiecutter.environment_manager == 'virtualenv' %}
+	{% elif cookiecutter.environment_manager == 'virtualenv' -%}
 	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
-	{% elif cookiecutter.environment_manager == 'pipenv' %}
-	pipenv install
+	{% elif cookiecutter.environment_manager == 'pipenv' -%}
+	pipenv --python $(PYTHON_VERSION)
 	@echo ">>> New pipenv created. Activate with:\npipenv shell"
 	{% endif %}
 {% endif %}
@@ -77,7 +87,9 @@ create_environment:
 # PROJECT RULES                                                                 #
 #################################################################################
 
-
+## Make Dataset
+data: requirements
+	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/data/make_dataset.py
 
 #################################################################################
 # Self Documenting Commands                                                     #

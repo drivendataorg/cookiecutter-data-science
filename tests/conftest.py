@@ -1,47 +1,75 @@
-import sys
-import pytest
-import shutil
+from contextlib import contextmanager
+from itertools import product
+import json
 from pathlib import Path
-from cookiecutter import main
+import shutil
+import sys
+import tempfile
+
+from ccds.__main__ import api_main
+import pytest
+
 
 CCDS_ROOT = Path(__file__).parents[1].resolve()
 
-args = {
-        'project_name': 'DrivenData',
-        'author_name': 'DrivenData',
-        'open_source_license': 'BSD-3-Clause',
-        'python_interpreter': 'python'
-        }
 
+default_args = {
+    'project_name': 'my_test_project',
+    'repo_name': 'my-test-repo',
+    'module_name': 'project_module',
+    'author_name': 'DrivenData',
+    'description': 'A test project',
+    'open_source_license' : 'MIT',
+    'dataset_storage': {"azure": {"container": "container-name"}},
+}
 
-def system_check(basename):
-    platform = sys.platform
-    if 'linux' in platform:
-        basename = basename.lower()
-    return basename
+def config_generator():
+    cookiecutter_json = json.load((CCDS_ROOT / 'cookiecutter.json').open('r'))
 
+    # python versions for the created environment
+    py_version = [('python_version_number', v) for v in ['3.7']]
 
-@pytest.fixture(scope='class', params=[{}, args])
-def default_baked_project(tmpdir_factory, request):
-    temp = tmpdir_factory.mktemp('data-project')
-    out_dir = Path(temp).resolve()
-
-    pytest.param = request.param
-    main.cookiecutter(
-        str(CCDS_ROOT),
-        no_input=True,
-        extra_context=pytest.param,
-        output_dir=out_dir
+    configs = product(
+        py_version,
+        [('environment_manager', opt) for opt in cookiecutter_json['environment_manager']],
+        [('dependency_file', opt) for opt in cookiecutter_json['dependency_file']],
+        [('pydata_packages', opt) for opt in cookiecutter_json['pydata_packages']],
     )
 
-    pn = pytest.param.get('project_name') or 'project_name'
-    
-    # project name gets converted to lower case on Linux but not Mac
-    pn = system_check(pn)
+    def _is_valid(config):
+        config = dict(config)
+        #  Pipfile + pipenv only valid combo for either
+        if (config['environment_manager'] == 'pipenv') ^ (config['dependency_file'] == 'Pipfile'):
+            return False
+        # conda is the only valid env manager for environment.yml
+        if (config['dependency_file'] == 'environment.yml') and (config['environment_manager'] != 'conda'):
+            return False
+        return True
 
-    proj = out_dir / pn
-    request.cls.path = proj
-    yield 
+    # remove invalid configs
+    configs = [
+        c for c in configs if _is_valid(c)
+    ]
+
+    for c in configs:
+        config = dict(c)
+        config.update(default_args)
+        yield config
+
+
+@contextmanager
+def bake_project(config):
+    temp = Path(tempfile.mkdtemp(suffix='data-project')).resolve()
+
+    api_main.cookiecutter(
+        str(CCDS_ROOT),
+        no_input=True,
+        extra_context=config,
+        output_dir=temp,
+        overwrite_if_exists=True
+    )
+
+    yield temp /  config['repo_name']
 
     # cleanup after
-    shutil.rmtree(out_dir)
+    shutil.rmtree(temp)
