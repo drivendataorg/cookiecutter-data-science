@@ -146,7 +146,7 @@ def verify_makefile_commands(root, config):
     else:
         raise ValueError(f"Environment manager '{config['environment_manager']}' not found in test harnesses.")
 
-    result = run(["bash", harness_path, root.resolve()], stderr=PIPE, stdout=PIPE)
+    result = run(["bash", str(harness_path), str(root.resolve())], stderr=PIPE, stdout=PIPE)
 
     # normally hidden by pytest except in failure we want this displayed
     print("\n======================= STDOUT ======================")
