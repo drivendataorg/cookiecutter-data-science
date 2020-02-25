@@ -1,4 +1,5 @@
 # Cookiecutter Machine Learning research
+> _Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>._
 
 _A more robust ML starting point._
 
@@ -17,8 +18,16 @@ _A more robust ML starting point._
 
     cookiecutter https://github.com/davebulaval/cookiecutter-data-science.git
 
+### The arguments definitions
+ - project_name: The name to be given to the project.
+ - author_name: The name to be shown into the README as the author.
+ - description: The description of the project to be shown into the README.
+ - open_source_license: The license to be set into the project.
+ - DVC_setting: The setting parameter to initialize the Data Version Control (DVC) into the repository.
+ - python_version: The python3 version to be used for the configuration.
+ - create_conda_env: The setting parameter to initialize a conda environment using the project name.
 
-And follow the instruction.
+*The Makefile is still in development.*
 
 ### The resulting directory structure
 ------------
@@ -34,8 +43,6 @@ The directory structure of your new project looks like this:
 │   ├── interim        <- Intermediate data that has been transformed.
 │   ├── processed      <- The final, canonical data sets for modeling.
 │   └── raw            <- The original, immutable data dump.
-│
-├── docs               <- A default Sphinx project; see sphinx-doc.org for details
 │
 ├── models             <- Trained and serialized models, model predictions, or model summaries
 │
@@ -70,3 +77,4 @@ The directory structure of your new project looks like this:
 │
 └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
 ```
+
