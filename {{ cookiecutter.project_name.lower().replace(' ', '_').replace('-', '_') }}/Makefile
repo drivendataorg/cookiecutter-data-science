@@ -58,8 +58,8 @@ ifeq (True,$(HAS_CONDA))
 	@echo ">>> Detected conda, creating conda environment."
 	@conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) anaconda -y -q
 	@conda install pytorch torchvision cudatoolkit=10.1 -c pytorch -y
-	@while read requirement; do \
-	    conda install --yes $requirement; \
+	@while read -r requirement; do \
+	    conda install --yes $(requirement); \
 	done < requirements.txt
 else
 	$(error Conda not install.)
