@@ -59,7 +59,7 @@ ifeq (True,$(HAS_CONDA))
 	@conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) anaconda -y -q
 	@conda install pytorch torchvision cudatoolkit=10.1 -c pytorch -y
 	@while read requirement; do \
-	    echo $(requirement)
+	    echo $(requirement) \
 	    conda install --yes $(requirement); \
 	done < requirements.txt
 else
