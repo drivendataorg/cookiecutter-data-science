@@ -11,6 +11,8 @@ else
 	PYTHON_VERSION={{ cookiecutter.python_interpreter }}
 endif
 
+GIT_REMOTE_URL = {{ cookiecutter.git_remote_url }}
+
 ifeq (,$(shell which conda))
     HAS_CONDA=False
 else
@@ -47,6 +49,14 @@ ifeq (True,$(HAS_CONDA))
 else
 	$(error Conda not install.)
 endif
+
+init_git:
+	@echo ">>> Init of the git repository."
+	@git init -q
+	@git remote add origin $(GIT_REMOTE_URL)
+	@git add .
+	@git commit -m "initial commit"
+	@git push -u origin master
 
 ## Test python environment is setup correctly
 test_environment:

@@ -21,5 +21,6 @@
   "create_conda_env": [
     "Yes",
     "No"
-  ]
+  ],
+  "git_remote_url": "Git remote URL to set the repository."
 }

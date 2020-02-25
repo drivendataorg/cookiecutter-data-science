@@ -24,8 +24,9 @@ _A more robust ML starting point._
  - description: The description of the project to be shown into the README.
  - open_source_license: The license to be set into the project.
  - DVC_setting: The setting parameter to initialize the Data Version Control (DVC) into the repository.
- - python_version: The python3 version to be used for the configuration.
+ - python_interpreter: The python3 version to be used for the configuration.
  - create_conda_env: The setting parameter to initialize a conda environment using the project name.
+ - git_remote_url: The url for the Git remote to be set to. This will also do the initial commit of the repo.
 
 *The Makefile is still in development.*
 
