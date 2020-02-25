@@ -57,8 +57,7 @@ init_environment:
 ifeq (True,$(HAS_CONDA))
 	@echo ">>> Detected conda, creating conda environment."
 	@conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) anaconda -y -q
-	@source activate $(PROJECT_NAME)
-	@pip install -r requirements.txt
+	@conda run -n $(PROJECT_NAME) pip install -r requirements.txt
 else
 	$(error Conda not install.)
 endif
