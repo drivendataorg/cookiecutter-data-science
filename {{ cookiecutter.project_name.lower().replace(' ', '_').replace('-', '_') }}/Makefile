@@ -38,8 +38,8 @@ lint:
 ## Set up python interpreter environment
 create_environment:
 ifeq (True,$(HAS_CONDA))
-    @echo ">>> Detected conda, creating conda environment."
-    @conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) anaconda -y -q
+	@echo ">>> Detected conda, creating conda environment."
+	@conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) anaconda -y -q
 else
 	$(error Conda not install.)
 endif
