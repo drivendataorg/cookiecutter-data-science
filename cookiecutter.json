@@ -1,7 +1,5 @@
 {
     "project_name": "What is the name to be given to the project?",
-    "_copy_without_render": "tesssst",
-    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
     "author_name": "Your name (or your organization/company/team)",
     "description": "A short description of the project.",
     "open_source_license": ["MIT", "BSD-3-Clause", "No license file"],
