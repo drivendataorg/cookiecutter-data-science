@@ -53,10 +53,12 @@ lint:
 	flake8 src
 
 ## Set up python interpreter environment
-create_environment:
+init_environment:
 ifeq (True,$(HAS_CONDA))
 	@echo ">>> Detected conda, creating conda environment."
 	@conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) anaconda -y -q
+	@conda activate $(PROJECT_NAME)
+	@pip install -r requirements.txt
 else
 	$(error Conda not install.)
 endif
@@ -72,13 +74,20 @@ ifeq (True,$(HAS_GIT))
 else
 	$(error Git not install.)
 endif
+
 init_dvc:
 ifeq (True,$(HAS_DVC))
 	@echo ">>> Init of DVC"
-	@
+	@dvc init -q
+	@dvc add data/raw -q
+	@dvc run -f 1-process_data.dvc -d src/data/make_dataset.py -o data/processed python src/data/make_dataset.py data/raw data/processed
 else
 	$(error DVC not install.)
 endif
+
+execute_init_test:
+	@echo ">>> Execute init test"
+	@py.test tests
 
 ## Test python environment is setup correctly
 test_environment:

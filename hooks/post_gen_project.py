@@ -7,7 +7,7 @@ data_version_control = True if "{{ cookiecutter.DVC_setting }}" == "Yes" else Fa
 
 if conda_env_creation:
     try:
-        subprocess.run(["make", "create_environment"], check=True)
+        subprocess.run(["make", "init_environment"], check=True)
     except subprocess.CalledProcessError:
         sys.exit(1)
 try:
@@ -16,4 +16,12 @@ except subprocess.CalledProcessError:
     sys.exit(1)
 
 if data_version_control:
-    pass
+    try:
+        subprocess.run(["make", "init_dvc"], check=True)
+    except subprocess.CalledProcessError:
+        sys.exit(1)
+
+try:
+    subprocess.run(["make", "execute_init_test"], check=True)
+except subprocess.CalledProcessError:
+    sys.exit(1)
