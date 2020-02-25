@@ -8,5 +8,5 @@ if data_version_control:
     pass
 
 if conda_env_creation:
-    exit_status = subprocess.run(["make create_environment"])
+    exit_status = subprocess.run(["make", "create_environment"])
     print(exit_status.returncode)
