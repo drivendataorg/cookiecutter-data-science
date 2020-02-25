@@ -57,8 +57,10 @@ init_environment:
 ifeq (True,$(HAS_CONDA))
 	@echo ">>> Detected conda, creating conda environment."
 	@conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) anaconda -y -q
-	@conda install pytorch torchvision cudatoolkit=10.1 -c pytorch
-	@bash while read requirement; do conda install --yes $requirement; done < requirements.txt
+	@conda install pytorch torchvision cudatoolkit=10.1 -c pytorch -y
+	@while read requirement; do \
+	    conda install --yes $requirement; \
+	done < requirements.txt
 else
 	$(error Conda not install.)
 endif
@@ -88,6 +90,10 @@ endif
 execute_init_test:
 	@echo ">>> Execute init test"
 	@py.test tests
+
+test_remote_url:
+	@echo ">>> Testing remote URL"
+	@git ls-remote $(GIT_REMOTE_URL)
 
 ## Test python environment is setup correctly
 test_environment:

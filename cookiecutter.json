@@ -22,5 +22,5 @@
     "Yes",
     "No"
   ],
-  "git_remote_url": "Git remote URL to set the repository."
+  "git_remote_url": "Git remote URL to set the repository. *Must be an empty repository!*"
 }
