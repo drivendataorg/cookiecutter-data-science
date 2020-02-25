@@ -19,6 +19,17 @@ else
     HAS_CONDA=True
 endif
 
+ifeq (,$(shell which git))
+	HAS_GIT=False
+else
+	HAS_CONDA=True
+endif
+
+ifeq (,$(shell which dvc))
+	HAS_DVC=False
+else
+	HAS_DVC=True
+endif
 #################################################################################
 # COMMANDS                                                                      #
 #################################################################################
@@ -51,12 +62,23 @@ else
 endif
 
 init_git:
+ifeq (True,$(HAS_GIT))
 	@echo ">>> Init of the git repository."
 	@git init -q
 	@git remote add origin $(GIT_REMOTE_URL)
 	@git add .
 	@git commit -m "initial commit"
 	@git push -u origin master
+else
+	$(error Git not install.)
+endif
+init_dvc:
+ifeq (True,$(HAS_DVC))
+	@echo ">>> Init of DVC"
+	@
+else
+	$(error DVC not install.)
+endif
 
 ## Test python environment is setup correctly
 test_environment:
