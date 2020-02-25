@@ -5,11 +5,11 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PROJECT_NAME = {{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}
 PYTHON_INTERPRETER = python3
-{% if cookiecutter.python_interpreter == 'latest' -%}
-  - PYTHON_VERSION=3
-{% else -%}
-  - PYTHON_VERSION={{ cookiecutter.python_interpreter }}
-{% endif -%}
+ifeq (latest,{{ cookiecutter.python_interpreter }})
+	PYTHON_VERSION = 3
+else
+	PYTHON_VERSION={{ cookiecutter.python_interpreter }}
+endif
 
 ifeq (,$(shell which conda))
     HAS_CONDA=False
