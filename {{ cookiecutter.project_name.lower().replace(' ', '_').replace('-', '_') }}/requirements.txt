@@ -9,9 +9,8 @@ awscli
 flake8
 python-dotenv>=0.5.1
 
-# ML packages
+# ML management packages
 poutyne
-sacred
+mlflow
 numpy
 notif
-torch
