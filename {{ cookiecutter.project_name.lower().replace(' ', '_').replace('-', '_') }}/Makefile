@@ -3,14 +3,14 @@
 #################################################################################
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-PROJECT_NAME = {{ cookiecutter.project_name }}
+PROJECT_NAME = {{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}
 PYTHON_INTERPRETER = python3
 PYTHON_VERSION = {{ cookiecutter.python_interpreter }}
 
 ifeq (,$(shell which conda))
-HAS_CONDA=False
+    HAS_CONDA=False
 else
-HAS_CONDA=True
+    HAS_CONDA=True
 endif
 
 #################################################################################
@@ -39,7 +39,7 @@ lint:
 create_environment:
 ifeq (True,$(HAS_CONDA))
     @echo ">>> Detected conda, creating conda environment."
-    conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION)
+    @conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) anaconda -y -q
 else
 	$(error Conda not install.)
 endif
