@@ -1,0 +1,19 @@
+cmd: python src/models/train_model.py
+deps:
+- md5: d41d8cd98f00b204e9800998ecf8427e
+  path: src/models/train_model.py
+- md5: d751713988987e9331980363e24189ce.dir
+  path: data/processed
+md5: aae5283d45ea683bcce139f2f98beabb
+outs:
+- cache: true
+  md5: d751713988987e9331980363e24189ce.dir
+  metric: false
+  path: models
+  persist: true
+- cache: false
+  md5: d41d8cd98f00b204e9800998ecf8427e
+  metric: true
+  path: reports/training_metrics.txt
+  persist: false
+wdir: .

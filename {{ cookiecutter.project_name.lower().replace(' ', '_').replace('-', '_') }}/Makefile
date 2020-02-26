@@ -58,6 +58,7 @@ ifeq (True,$(HAS_CONDA))
 	@echo ">>> Detected conda, creating conda environment."
 	@conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) anaconda -y -q
 	@conda install pytorch torchvision cudatoolkit=10.1 -c pytorch -y
+	@conda install -c anaconda msgpack-python -y
 	@conda run -n $(PROJECT_NAME) python -m pip install --upgrade pip -q
 	@conda run -n $(PROJECT_NAME) python -m pip install --upgrade -r requirements.txt -q
 else
