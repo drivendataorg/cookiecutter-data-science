@@ -4,7 +4,7 @@
 _A more robust ML starting point._
 
 
-## Prerequisites:
+## Prerequisite:
 -----------
  - Cookiecutter
 
@@ -19,21 +19,20 @@ _A more robust ML starting point._
     cookiecutter https://github.com/davebulaval/cookiecutter-data-science.git
 
 ### The arguments definitions
- - project_name: The name to be given to the project.
- - author_name: The name to be shown into the README as the author.
- - description: The description of the project to be shown into the README.
- - open_source_license: The license to be set into the project.
- - DVC_setting: The setting parameter to initialize the Data Version Control (DVC) into the repository.
- - python_interpreter: The python3 version to be used for the configuration.
- - create_conda_env: The setting parameter to initialize a conda environment using the project name. It also install the basic requirements packages for any ML projects.
- - git_remote_url: The url for the Git remote to be set to. This will also do the initial commit of the repo.
-
-*The Makefile is still in development.*
+ - `project_name`: The name to be given to the project.
+ - `author_name`: The name to be shown into the README as the author.
+ - `description`: The description of the project to be shown into the README.
+ - `open_source_license`: The license to be set into the project.
+ - `DVC_setting`: The setting parameter to initialize the Data Version Control (DVC) into the repository.
+ - `python_interpreter`: The python3 version to be used for the configuration.
+ - `create_conda_env`: The setting parameter to initialize a conda environment using the project name. It also install the basic requirements packages for any ML projects.
+ - `git_remote_url`: The url for the Git remote to be set to. This will also do the initial commit of the repo * Need to be an empty repository*.
 
 ### The resulting directory structure
 ------------
 
 The directory structure of your new project looks like this: 
+ > The Makefile is still in development.
 
 ```
 ├── LICENSE
