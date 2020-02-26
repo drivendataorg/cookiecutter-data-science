@@ -59,6 +59,7 @@ ifeq (True,$(HAS_CONDA))
 	@conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) anaconda -y -q
 	@conda install pytorch torchvision cudatoolkit=10.1 -c pytorch -y
 	@conda run -n $(PROJECT_NAME) python -m pip install --upgrade pip -q
+	@conda run -n $(PROJECT_NAME) python -m pip install --upgrade msgpack-python
 	@while read -r requirement; do \
 	    echo $(requirement); \
 	    conda run -n $(PROJECT_NAME) python -m pip install --upgrade "$$requirement" -q; \

@@ -1,11 +1,8 @@
-# external requirements
 click
 Sphinx
 coverage
 flake8
 python-dotenv
-
-# ML management packages
 poutyne
 mlflow
 numpy
