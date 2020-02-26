@@ -17,7 +17,7 @@ ___A more robust ML base repository for flexible and easier research.___
 ## To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/davebulaval/cookiecutter-research-machine-learning.git
+    cookiecutter https://github.com/davebulaval/cookiecutter-machine-learning-research..git
 
 ### The arguments definitions
  - `project_name`: The name to be given to the project.
