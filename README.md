@@ -1,7 +1,8 @@
 # Cookiecutter Machine Learning research
 > _Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>._
 
-_A more robust ML starting point._
+
+_A more robust ML base repository for flexible and easier research._
 
 
 ## Prerequisite:
@@ -16,7 +17,7 @@ _A more robust ML starting point._
 ## To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/davebulaval/cookiecutter-data-science.git
+    cookiecutter https://github.com/davebulaval/cookiecutter-research-machine-learning.git
 
 ### The arguments definitions
  - `project_name`: The name to be given to the project.
