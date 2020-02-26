@@ -6,6 +6,5 @@ poutyne
 mlflow
 numpy
 notif
-pylint
 yapf
 pytest
