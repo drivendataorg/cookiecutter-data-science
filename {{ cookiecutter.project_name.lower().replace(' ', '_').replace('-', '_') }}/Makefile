@@ -56,7 +56,7 @@ lint:
 init_environment:
 ifeq (True,$(HAS_CONDA))
 	@echo ">>> Detected conda, creating conda environment."
-	@conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) msgpack-python msgpack flake8 anaconda -y -q
+	@conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) msgpack-python flake8 anaconda -y -q
 	@conda install pytorch torchvision cudatoolkit=10.1 -c pytorch -y
 	@conda run -n $(PROJECT_NAME) python -m pip install --upgrade pip -q
 	@while read -r requirement; do \
