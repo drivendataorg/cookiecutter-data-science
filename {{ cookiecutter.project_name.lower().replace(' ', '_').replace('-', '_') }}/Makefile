@@ -92,7 +92,7 @@ ifeq (True,$(HAS_DVC))
 	@echo ">>> Init of DVC"
 	@dvc init -q
 	@dvc add data/raw -q
-	@dvc run -f 1-process_data.dvc -d src/data/make_dataset.py -o data/processed conda run -n $(PROJECT_NAME) python -m src/data/make_dataset.py data/raw data/processed
+	@dvc run -f 1-process_data.dvc -d src/data/make_dataset.py -o data/processed conda run -n $(PROJECT_NAME) python -m src.data.make_dataset data/raw data/processed
 else
 	$(error DVC not install.)
 endif
