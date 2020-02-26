@@ -1,9 +1,11 @@
 click
 Sphinx
 coverage
-flake8
 python-dotenv
 poutyne
 mlflow
 numpy
 notif
+pylint
+yapf
+pytest
