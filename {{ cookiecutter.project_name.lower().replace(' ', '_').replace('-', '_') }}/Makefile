@@ -97,10 +97,6 @@ else
 	$(error DVC not install.)
 endif
 
-execute_init_test:
-	@echo ">>> Execute init test"
-	@py.test tests
-
 test_remote_url:
 	@echo ">>> Testing remote URL"
 	@git ls-remote $(GIT_REMOTE_URL)

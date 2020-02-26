@@ -3,6 +3,6 @@ import subprocess
 import sys
 
 try:
-    subprocess.run(["make", "execute_init_test"], check=True)
+    subprocess.run(["py.test", "tests"], check=True)
 except subprocess.CalledProcessError:
     sys.exit(1)
