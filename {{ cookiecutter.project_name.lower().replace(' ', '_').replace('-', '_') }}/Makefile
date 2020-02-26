@@ -56,10 +56,9 @@ lint:
 init_environment:
 ifeq (True,$(HAS_CONDA))
 	@echo ">>> Detected conda, creating conda environment."
-	@conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) anaconda -y -q
+	@conda create -n $(PROJECT_NAME) python=$(PYTHON_VERSION) msgpack-python msgpack flake8 anaconda -y -q
 	@conda install pytorch torchvision cudatoolkit=10.1 -c pytorch -y
 	@conda run -n $(PROJECT_NAME) python -m pip install --upgrade pip -q
-	@conda run -n $(PROJECT_NAME) python -m pip install --upgrade msgpack-python
 	@while read -r requirement; do \
 	    echo $(requirement); \
 	    conda run -n $(PROJECT_NAME) python -m pip install --upgrade "$$requirement" -q; \
@@ -85,7 +84,7 @@ ifeq (True,$(HAS_DVC))
 	@echo ">>> Init of DVC"
 	@dvc init -q
 	@dvc add data/raw -q
-	@dvc run -f 1-process_data.dvc -d src/data/make_dataset.py -o data/processed python src/data/make_dataset.py data/raw data/processed
+	@dvc run -f 1-process_data.dvc -d src/data/make_dataset.py -o data/processed conda run -n $(PROJECT_NAME) python -m src/data/make_dataset.py data/raw data/processed
 else
 	$(error DVC not install.)
 endif
