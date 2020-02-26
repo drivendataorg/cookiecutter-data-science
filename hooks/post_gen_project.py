@@ -26,8 +26,3 @@ if data_version_control:
         subprocess.run(["make", "init_dvc"], check=True)
     except subprocess.CalledProcessError:
         sys.exit(1)
-
-try:
-    subprocess.run(["make", "execute_init_test"], check=True)
-except subprocess.CalledProcessError:
-    sys.exit(1)
