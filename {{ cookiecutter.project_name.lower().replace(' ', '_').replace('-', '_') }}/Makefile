@@ -22,7 +22,7 @@ endif
 ifeq (,$(shell which git))
 	HAS_GIT=False
 else
-	HAS_CONDA=True
+	HAS_GIT=True
 endif
 
 ifeq (,$(shell which dvc))
