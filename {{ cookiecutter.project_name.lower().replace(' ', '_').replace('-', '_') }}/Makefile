@@ -61,7 +61,7 @@ ifeq (True,$(HAS_CONDA))
 	@conda run -n $(PROJECT_NAME) python -m pip install --upgrade pip -q
 	@while read -r requirement; do \
 	    echo $(requirement); \
-	    conda run -n $(PROJECT_NAME) python -m pip install --upgrade "$$requirement" -q -y; \
+	    conda run -n $(PROJECT_NAME) python -m pip install --upgrade "$$requirement" -q; \
 	done < requirements.txt
 else
 	$(error Conda not install.)
