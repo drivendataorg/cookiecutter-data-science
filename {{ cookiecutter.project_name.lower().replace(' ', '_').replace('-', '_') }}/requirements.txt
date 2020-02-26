@@ -8,3 +8,4 @@ numpy
 notif
 yapf
 pytest
+hydra-core
