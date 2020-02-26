@@ -1,8 +1,8 @@
-# Cookiecutter Machine Learning research
+# Cookiecutter for Machine Learning (ML) research project
+
+___A more robust ML base repository for flexible and easier research.___
+
 > _Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>._
-
-
-_A more robust ML base repository for flexible and easier research._
 
 
 ## Prerequisite:
