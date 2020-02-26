@@ -4,7 +4,7 @@ Sphinx
 coverage
 flake8
 python-dotenv
-msgpack
+msgpack-python
 
 # ML management packages
 poutyne
