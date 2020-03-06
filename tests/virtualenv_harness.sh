@@ -23,6 +23,10 @@ cd $1
 TEMP_ENV_ROOT=$(mktemp -d "${TMPDIR:-/tmp/}$(basename $0).XXXXXXXXXXXX")
 export WORKON_HOME=$TEMP_ENV_ROOT
 
+# Set these because we're going to change environments later
+export VIRTUALENVWRAPPER_PYTHON=$(which python)
+export VIRTUALENVWRAPPER_VIRTUALENV=$(which virtualenv)
+
 # virtualenvwrapper.sh must be on the PATH on the test host machine,
 # which should be the case if virtualenvwrapper is pip installed in
 # the base Python
@@ -35,6 +39,7 @@ else
             FIND_RESULT=$(find $path -maxdepth 1 -name "virtualenvwrapper.sh")
             if [[ "$FIND_RESULT" ]]; then
                 VIRTUALENVWRAPPER_SCRIPT=$FIND_RESULT
+                break
             fi
         fi
     done
