@@ -3,6 +3,7 @@ from pathlib import Path
 from subprocess import run, PIPE
 
 import pytest
+import chardet
 
 from conftest import bake_project, config_generator
 
@@ -34,7 +35,7 @@ def test_baking_configs(config):
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
         verify_makefile_commands(project_directory, config)
-            
+
 
 def verify_folders(root, config):
     ''' Tests that expected folders and only expected folders exist.
@@ -148,9 +149,11 @@ def verify_makefile_commands(root, config):
 
     result = run(["bash", str(harness_path), str(root.resolve())], stderr=PIPE, stdout=PIPE)
 
+    encoding = chardet.detect(result.stdout)["encoding"]
+
     # normally hidden by pytest except in failure we want this displayed
     print("\n======================= STDOUT ======================")
-    print(result.stdout.decode())
+    print(result.stdout.decode(encoding=encoding))
     print("\n======================= STDERR ======================")
-    print(result.stderr.decode())
+    print(result.stderr.decode(encoding=encoding))
     assert result.returncode == 0

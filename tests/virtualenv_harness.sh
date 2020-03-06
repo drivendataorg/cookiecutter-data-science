@@ -29,8 +29,17 @@ export WORKON_HOME=$TEMP_ENV_ROOT
 if [[ $(which virtualenvwrapper.sh) ]]; then
     VIRTUALENVWRAPPER_SCRIPT=$(which virtualenvwrapper.sh)
 else
-    VIRTUALENVWRAPPER_SCRIPT=$(find ${PATH//:/ } -name "virtualenvwrapper.sh" -maxdepth 1)
+    for path in ${PATH//:/ }; do
+        if [ -d "$path" ]; then
+            echo "Searching $path for virtualenvwrapper.sh"
+            FIND_RESULT=$(find $path -maxdepth 1 -name "virtualenvwrapper.sh")
+            if [[ "$FIND_RESULT" ]]; then
+                VIRTUALENVWRAPPER_SCRIPT=$FIND_RESULT
+            fi
+        fi
+    done
 fi
+echo VIRTUALENVWRAPPER_SCRIPT=$VIRTUALENVWRAPPER_SCRIPT
 source $VIRTUALENVWRAPPER_SCRIPT
 
 make create_environment
