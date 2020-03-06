@@ -7,7 +7,7 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_VERSION = {{ cookiecutter.python_version_number }}
-PYTHON_INTERPRETER = python{{ cookiecutter.python_version_number }}
+PYTHON_INTERPRETER = python
 
 
 #################################################################################
@@ -71,7 +71,7 @@ create_environment:
 	{% else -%}
 	conda env create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -f environment.yml
 	{% endif %}
-	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"	
+	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
 	{% elif cookiecutter.environment_manager == 'virtualenv' -%}
 	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
