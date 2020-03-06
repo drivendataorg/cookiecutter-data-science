@@ -26,7 +26,12 @@ export WORKON_HOME=$TEMP_ENV_ROOT
 # virtualenvwrapper.sh must be on the PATH on the test host machine,
 # which should be the case if virtualenvwrapper is pip installed in
 # the base Python
-source $(which virtualenvwrapper.sh)
+if [[ $(which virtualenvwrapper.sh) ]]; then
+    VIRTUALENVWRAPPER_SCRIPT=$(which virtualenvwrapper.sh)
+else
+    VIRTUALENVWRAPPER_SCRIPT=$(find ${PATH//:/ } -name "virtualenvwrapper.sh" -maxdepth 1)
+fi
+source $VIRTUALENVWRAPPER_SCRIPT
 
 make create_environment
 
