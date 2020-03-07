@@ -37,6 +37,7 @@ if [ -z $(which virtualenvwrapper.sh) ]; then
                 # Add shebang to top of virtualenvwrapper.sh
                 # Windows bash needs this to know it's executable
                 sed -i '1s/^/#!\/bin\/sh\n/' "$VIRTUALENVWRAPPER_SCRIPT"
+                head "$VIRTUALENVWRAPPER_SCRIPT"
                 break
             fi
         fi
