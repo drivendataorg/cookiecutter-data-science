@@ -150,6 +150,8 @@ def verify_makefile_commands(root, config):
     result = run(["bash", str(harness_path), str(root.resolve())], stderr=PIPE, stdout=PIPE)
 
     encoding = chardet.detect(result.stdout)["encoding"]
+    if encoding is None:
+        encoding = "utf-8"
 
     # normally hidden by pytest except in failure we want this displayed
     print("\n======================= STDOUT ======================")
