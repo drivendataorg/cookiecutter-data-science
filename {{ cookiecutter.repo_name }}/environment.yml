@@ -6,7 +6,6 @@ dependencies:
   # IDE
   - jupyter
   - jupyterlab
-  - nb_conda_kernels # switch conda envs in jupyter
   # Input/Output
   - netcdf4
   # Numerics
@@ -25,20 +24,7 @@ dependencies:
   - isort
   - pre-commit
   - pytest # REQUIRED, DO NOT REMOVE
-  - pytest-sugar
-  # Regridding
-  # Currently, xesmf breaks with esmpy v8.0.0. There is an issue with PIO and MPI.
-  # See e.g. https://github.com/conda-forge/esmpy-feedstock/issues/28
-  - esmpy<=7.1.0
-  - xesmf
-  # Statistics
-  - eofs
-  - xskillscore
   # Visualization
   - cartopy
   - matplotlib
   - nc-time-axis
-  - pip
-  - pip:
-    - pytest-tldr
-    - git+https://github.com/bradyrx/esmtools
