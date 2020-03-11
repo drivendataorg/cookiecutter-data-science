@@ -1,0 +1,30 @@
+name: {{ cookiecutter.project_name.lower().replace(' ', '_') }}
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  # IDE
+  - jupyter
+  - jupyterlab
+  # Input/Output
+  - netcdf4
+  # Numerics
+  - numpy
+  - pandas
+  - scipy
+  - xarray
+  # Performance
+  - bottleneck
+  - dask
+  - numba
+  # Project Management
+  - black
+  - coveralls
+  - flake8
+  - isort
+  - pre-commit
+  - pytest # REQUIRED, DO NOT REMOVE
+  # Visualization
+  - cartopy
+  - matplotlib
+  - nc-time-axis
