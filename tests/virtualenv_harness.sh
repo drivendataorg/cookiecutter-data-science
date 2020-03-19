@@ -26,25 +26,23 @@ export WORKON_HOME=$TEMP_ENV_ROOT
 # virtualenvwrapper.sh must be on the PATH on the test host machine,
 # which should be the case if virtualenvwrapper is pip installed in
 # the base Python
-# if [ -z $(which virtualenvwrapper.sh) ]; then
-#     for path in ${PATH//:/ }; do
-#         if [ -d "$path" ]; then
-#             echo "Searching $path for virtualenvwrapper.sh"
-#             FIND_RESULT=$(find $path -maxdepth 1 -name "virtualenvwrapper.sh")
-#             if [[ "$FIND_RESULT" ]]; then
-#                 VIRTUALENVWRAPPER_SCRIPT=$FIND_RESULT
-#                 echo VIRTUALENVWRAPPER_SCRIPT=$VIRTUALENVWRAPPER_SCRIPT
-#                 # Add shebang to top of virtualenvwrapper.sh
-#                 # Windows bash needs this to know it's executable
-#                 sed -i '1s/^/#!\/bin\/sh\n/' "$VIRTUALENVWRAPPER_SCRIPT"
-#                 head "$VIRTUALENVWRAPPER_SCRIPT"
-#                 break
-#             fi
-#         fi
-#     done
-# fi
+if [ -z $(which virtualenvwrapper.sh) ]; then
+    for path in ${PATH//:/ }; do
+        if [ -d "$path" ]; then
+            echo "Searching $path for virtualenvwrapper.sh"
+            FIND_RESULT=$(find $path -maxdepth 1 -name "virtualenvwrapper.sh")
+            if [[ "$FIND_RESULT" ]]; then
+                VIRTUALENVWRAPPER_SCRIPT=$FIND_RESULT
+                echo VIRTUALENVWRAPPER_SCRIPT=$VIRTUALENVWRAPPER_SCRIPT
+                break
+            fi
+        fi
+    done
+else
+    VIRTUALENVWRAPPER_SCRIPT=$(which virtualenvwrapper.sh)
+fi
 
-source $(which virtualenvwrapper.sh)
+source "$VIRTUALENVWRAPPER_SCRIPT"
 
 make create_environment
 
