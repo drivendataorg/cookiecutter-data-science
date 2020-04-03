@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+    mlflow:
+        build:
+            context: .
+            dockerfile: Dockerfile_mlflow
+        container_name: project_mlflow
+        ports:
+             - "5000:5000"
+        entrypoint:
+             - /opt/conda/bin/mlflow 
+             - server
+             - --host
+             - "0.0.0.0"
+             - --workers
+             - "1"
+             - --port
+             - "5000"
+             - --backend-store-uri 
+             - file:///opt/mlruns
