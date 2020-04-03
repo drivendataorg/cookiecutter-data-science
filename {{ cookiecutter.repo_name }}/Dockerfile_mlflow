@@ -1,0 +1,3 @@
+FROM continuumio/miniconda3:4.7.12
+
+RUN  /opt/conda/bin/conda install -c conda-forge mlflow==1.3 boto3==1.10.1 -y --freeze-installed && conda clean -afy
