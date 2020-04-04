@@ -9,3 +9,9 @@ tests/__pycache__/*
 *.pytest_cache/
 
 .idea
+
+\{\{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') \}\}/src/models/logging/
+
+\{\{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') \}\}/src/models/mlruns/
+
+\{\{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') \}\}/src/models/outputs/

@@ -1,0 +1,3 @@
+dataset:
+  name: korean
+  path: datasets/openaddress_korea_dataset.p

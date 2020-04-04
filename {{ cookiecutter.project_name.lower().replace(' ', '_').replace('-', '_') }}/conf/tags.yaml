@@ -1,0 +1,10 @@
+tags:
+  StreetNumber: 0
+  StreetName: 1
+  Unit: 2
+  Municipality: 3
+  Province: 4
+  PostalCode: 5
+  Orientation: 6
+  GeneralDelivery: 7
+  unknown: 8

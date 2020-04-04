@@ -1,0 +1,3 @@
+embeddings:
+  path: embedding-models/cc.fr.300.bin
+  character_level: False

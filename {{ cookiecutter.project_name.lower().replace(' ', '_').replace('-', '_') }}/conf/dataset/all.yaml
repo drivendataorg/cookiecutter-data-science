@@ -1,0 +1,3 @@
+dataset:
+  name: all
+  path: datasets/merged_data/merged_data_undersampling.p

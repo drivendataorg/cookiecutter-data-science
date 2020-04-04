@@ -1,0 +1,3 @@
+dataset:
+  name: italian
+  path: datasets/openaddress_italy_dataset.p

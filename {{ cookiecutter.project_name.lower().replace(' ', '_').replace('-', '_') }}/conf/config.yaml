@@ -1,0 +1,34 @@
+# Data loader
+data_loader:
+  batch_size: 2048
+
+# seed
+setting:
+  seed: 42
+
+defaults:
+  - optimizer: SGD
+  - model: bi_lstm
+  - dataset: canadian
+  - embeddings: fast_text
+  - hydra/job_logging: colorlog #to init plugin
+  - hydra/hydra_logging: colorlog
+  - tags
+
+# Trainer
+trainer:
+  learning_rate: 0.001
+  batch_size: 32
+  num_epochs: 120
+  patience: 30
+
+# Infra configs
+poutyne:
+  logging: True
+  root_logging_directory: "logging"
+device: "cuda:0"
+
+other_lang_dataset:
+  - italian: datasets/openaddress_italy_dataset.p
+  - korean: datasets/openaddress_korea_dataset.p
+  - netherland: datasets/openaddress_netherlands_dataset.p

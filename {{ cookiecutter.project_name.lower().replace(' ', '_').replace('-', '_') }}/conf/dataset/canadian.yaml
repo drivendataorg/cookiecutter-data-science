@@ -1,0 +1,3 @@
+dataset:
+  name: canadian
+  path: datasets/openaddress_ca_dataset.p

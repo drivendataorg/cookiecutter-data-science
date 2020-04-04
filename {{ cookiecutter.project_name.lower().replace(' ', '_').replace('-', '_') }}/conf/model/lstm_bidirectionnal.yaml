@@ -1,0 +1,5 @@
+model:
+  hidden_state_dim: 300
+  num_hidden_layer: 1
+  dropout: 0.4
+  bidirectional: True

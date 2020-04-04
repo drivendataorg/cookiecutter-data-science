@@ -2,3 +2,9 @@ mkdocs
 mkdocs-cinder
 cookiecutter
 pytest
+torch
+torchvision
+poutyne
+mlflow
+omegaconf
+hydra

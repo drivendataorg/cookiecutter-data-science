@@ -9,3 +9,6 @@ notif
 yapf
 pytest
 hydra-core
+hydra-colorlog
+torch
+torchvision

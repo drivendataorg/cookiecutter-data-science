@@ -1,0 +1,3 @@
+dataset:
+  name: netherlands
+  path: datasets/openaddress_netherlands_dataset.p
