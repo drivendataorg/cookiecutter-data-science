@@ -6,7 +6,7 @@ from conftest import system_check
 
 def no_curlies(filepath):
     """ Utility to make sure no curly braces appear in a file.
-        That is, was jinja able to render everthing?
+        That is, was Jinja able to render everything?
     """
     with open(filepath, 'r') as f:
         data = f.read()
