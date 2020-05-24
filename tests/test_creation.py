@@ -33,7 +33,7 @@ class TestCookieSetup(object):
             assert project.name == 'project_name'
 
     def test_author(self):
-        setup_ = self.path / 'setup.py'
+        setup_ = str(self.path / 'setup.py')
         args = ['python', setup_, '--author']
         p = check_output(args).decode('ascii').strip()
         if pytest.param.get('author_name'):
@@ -50,7 +50,7 @@ class TestCookieSetup(object):
                 assert 'DrivenData' == next(fin).strip()
 
     def test_setup(self):
-        setup_ = self.path / 'setup.py'
+        setup_ = str(self.path / 'setup.py')
         args = ['python', setup_, '--version']
         p = check_output(args).decode('ascii').strip()
         assert p == '0.1.0'
@@ -61,7 +61,7 @@ class TestCookieSetup(object):
         assert no_curlies(license_path)
 
     def test_license_type(self):
-        setup_ = self.path / 'setup.py'
+        setup_ = str(self.path / 'setup.py')
         args = ['python', setup_, '--license']
         p = check_output(args).decode('ascii').strip()
         if pytest.param.get('open_source_license'):
@@ -110,4 +110,3 @@ class TestCookieSetup(object):
         abs_expected_dirs = [str(self.path / d) for d in expected_dirs]
         abs_dirs, _, _ = list(zip(*os.walk(self.path)))
         assert len(set(abs_expected_dirs + ignored_dirs) - set(abs_dirs)) == 0
-
