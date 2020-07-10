@@ -15,8 +15,8 @@ jobs:
     matrix:
       Python37:
         python.version: '3.7'
-      Python36:
-        python.version: '3.6'
+#      Python36:
+#        python.version: '3.6'
 
   steps:
   - bash: echo "##vso[task.prependpath]$CONDA/bin"
