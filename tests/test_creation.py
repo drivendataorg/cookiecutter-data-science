@@ -148,14 +148,26 @@ def verify_makefile_commands(root, config):
         raise ValueError(f"Environment manager '{config['environment_manager']}' not found in test harnesses.")
 
     result = run(["bash", str(harness_path), str(root.resolve())], stderr=PIPE, stdout=PIPE)
+    result_returncode = result.returncode
 
     encoding = chardet.detect(result.stdout)["encoding"]
     if encoding is None:
+        print("encoding was none")
         encoding = "utf-8"
+    print("encoding:")
+    print(encoding)
 
     # normally hidden by pytest except in failure we want this displayed
     print("\n======================= STDOUT ======================")
     print(result.stdout.decode(encoding=encoding))
+
+    encoding = chardet.detect(result.stderr)["encoding"]
+    if encoding is None:
+        print("encoding was none")
+        encoding = "utf-8"
+    print("encoding:")
+    print(encoding)
+
     print("\n======================= STDERR ======================")
     print(result.stderr.decode(encoding=encoding))
-    assert result.returncode == 0
+    assert result_returncode == 0
