@@ -10,7 +10,7 @@ from conftest import bake_project, config_generator
 
 def no_curlies(filepath):
     """ Utility to make sure no curly braces appear in a file.
-        That is, was jinja able to render everthing?
+        That is, was Jinja able to render everything?
     """
     data = filepath.open('r').read()
 

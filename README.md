@@ -80,7 +80,7 @@ The directory structure of your new project looks like this:
 │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
 │       └── visualize.py
 │
-└── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
+└── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 ```
 
 ## Contributing
