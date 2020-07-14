@@ -3,6 +3,7 @@ from pathlib import Path
 from subprocess import run, PIPE
 
 import pytest
+import chardet
 
 from conftest import bake_project, config_generator
 
@@ -34,7 +35,7 @@ def test_baking_configs(config):
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
         verify_makefile_commands(project_directory, config)
-            
+
 
 def verify_folders(root, config):
     ''' Tests that expected folders and only expected folders exist.
@@ -146,11 +147,27 @@ def verify_makefile_commands(root, config):
     else:
         raise ValueError(f"Environment manager '{config['environment_manager']}' not found in test harnesses.")
 
-    result = run(["bash", harness_path, root.resolve()], stderr=PIPE, stdout=PIPE)
+    result = run(["bash", str(harness_path), str(root.resolve())], stderr=PIPE, stdout=PIPE)
+    result_returncode = result.returncode
+
+    encoding = chardet.detect(result.stdout)["encoding"]
+    if encoding is None:
+        print("encoding was none")
+        encoding = "utf-8"
+    print("encoding:")
+    print(encoding)
 
     # normally hidden by pytest except in failure we want this displayed
     print("\n======================= STDOUT ======================")
-    print(result.stdout.decode())
+    print(result.stdout.decode(encoding=encoding))
+
+    encoding = chardet.detect(result.stderr)["encoding"]
+    if encoding is None:
+        print("encoding was none")
+        encoding = "utf-8"
+    print("encoding:")
+    print(encoding)
+
     print("\n======================= STDERR ======================")
-    print(result.stderr.decode())
-    assert result.returncode == 0
+    print(result.stderr.decode(encoding=encoding))
+    assert result_returncode == 0

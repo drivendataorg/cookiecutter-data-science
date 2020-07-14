@@ -7,7 +7,7 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_VERSION = {{ cookiecutter.python_version_number }}
-PYTHON_INTERPRETER = python{{ cookiecutter.python_version_number }}
+PYTHON_INTERPRETER = python
 
 
 #################################################################################
@@ -26,7 +26,6 @@ requirements:
 	pipenv install
 	{% endif %}
 {% endif %}
-
 
 ## Delete all compiled Python files
 clean:
@@ -72,9 +71,9 @@ create_environment:
 	{% else -%}
 	conda env create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -f environment.yml
 	{% endif %}
-	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"	
+	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
 	{% elif cookiecutter.environment_manager == 'virtualenv' -%}
-	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
+	@bash -c "if [ ! -z `which virtualenvwrapper.sh` ]; then source `which virtualenvwrapper.sh`; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); else mkvirtualenv.bat $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); fi"
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
 	{% elif cookiecutter.environment_manager == 'pipenv' -%}
 	pipenv --python $(PYTHON_VERSION)
