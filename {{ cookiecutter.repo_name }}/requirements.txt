@@ -1,0 +1,7 @@
+# Local package
+-e .
+
+# External packages.
+python-dotenv>=0.5.1
+pytest
+Sphinx
