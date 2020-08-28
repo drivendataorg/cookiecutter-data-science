@@ -1,3 +1,10 @@
+################# USER ADDED ########################
+# add your files to ignore here
+
+
+#####################################################
+################## DEFAULTS #########################
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
