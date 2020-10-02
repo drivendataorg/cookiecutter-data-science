@@ -1,0 +1,9 @@
+# Exclude everything by default
+*
+
+# Include git files
+!.gitignore
+!.gitkeep
+
+# Include DVC files
+!*.dvc
