@@ -46,6 +46,7 @@ The directory structure of your new project looks like this:
 │   ├── interim        <- Intermediate data that has been transformed.
 │   ├── processed      <- The final, canonical data sets for modeling.
 │   └── raw            <- The original, immutable data dump.
+├── data.dvc           <- A data version control file (optional); see dvc.org for details
 │
 ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
 │
