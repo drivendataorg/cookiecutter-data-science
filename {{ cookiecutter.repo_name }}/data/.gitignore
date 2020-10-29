@@ -1,7 +1,6 @@
 # Ignore all files in sub-directories by default
+# but not the sub-directories themselves
 */*
-
-# Include the sub-directories themselves
 !*/
 
 # Include git files
