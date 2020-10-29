@@ -1,5 +1,8 @@
-# Exclude everything by default
-*
+# Ignore all files in sub-directories by default
+*/*
+
+# Include the sub-directories themselves
+!*/
 
 # Include git files
 !.gitignore
