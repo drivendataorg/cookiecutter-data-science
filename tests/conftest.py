@@ -24,7 +24,7 @@ default_args = {
 }
 
 def config_generator():
-    cookiecutter_json = json.load((CCDS_ROOT / 'cookiecutter.json').open('r'))
+    cookiecutter_json = json.load((CCDS_ROOT / 'ccds.json').open('r'))
 
     # python versions for the created environment
     py_version = [('python_version_number', v) for v in ['3.7']]
