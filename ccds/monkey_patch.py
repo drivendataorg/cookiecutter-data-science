@@ -1,18 +1,14 @@
 from collections import OrderedDict
 import json
+from pathlib import Path
 
 import click
-from past.builtins import basestring
-
-from future.utils import iteritems
-
-from jinja2.exceptions import UndefinedError
-
 from cookiecutter.exceptions import UndefinedVariableInTemplate
 from cookiecutter.environment import StrictEnvironment
-
-
+from cookiecutter.generate import generate_context
 from cookiecutter.prompt import (prompt_choice_for_config, render_variable, read_user_variable, read_user_choice)
+from jinja2.exceptions import UndefinedError
+
 
 def _prompt_choice_and_subitems(cookiecutter_dict, env, key, options, no_input):
     result = {}
@@ -64,7 +60,7 @@ def prompt_for_config(context, no_input=False):
     # First pass: Handle simple and raw variables, plus choices.
     # These must be done first because the dictionaries keys and
     # values might refer to them.
-    for key, raw in iteritems(context[u'cookiecutter']):
+    for key, raw in context[u'cookiecutter'].items():
         if key.startswith(u'_'):
             cookiecutter_dict[key] = raw
             continue
@@ -95,7 +91,7 @@ def prompt_for_config(context, no_input=False):
             raise UndefinedVariableInTemplate(msg, err, context)
 
     # Second pass; handle the dictionaries.
-    for key, raw in iteritems(context[u'cookiecutter']):
+    for key, raw in context[u'cookiecutter'].items():
 
         try:
             if isinstance(raw, dict):
@@ -111,3 +107,18 @@ def prompt_for_config(context, no_input=False):
             raise UndefinedVariableInTemplate(msg, err, context)
 
     return cookiecutter_dict
+
+
+def generate_context_wrapper(*args, **kwargs):
+    ''' Hardcoded in cookiecutter, so we override:
+        https://github.com/cookiecutter/cookiecutter/blob/2bd62c67ec3e52b8e537d5346fd96ebd82803efe/cookiecutter/main.py#L85
+    '''
+    # replace full path to cookiecutter.json with full path to ccds.json
+    kwargs['context_file'] = str(Path(kwargs['context_file']).with_name('ccds.json'))
+    
+    parsed_context = generate_context(*args, **kwargs)
+
+    # replace key
+    parsed_context['cookiecutter'] = parsed_context['ccds']
+    del parsed_context['ccds']
+    return parsed_context
