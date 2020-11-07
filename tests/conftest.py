@@ -1,6 +1,7 @@
 from contextlib import contextmanager
 from itertools import product
 import json
+from os import major
 from pathlib import Path
 import shutil
 import sys
@@ -26,8 +27,10 @@ default_args = {
 def config_generator():
     cookiecutter_json = json.load((CCDS_ROOT / 'ccds.json').open('r'))
 
-    # python versions for the created environment
-    py_version = [('python_version_number', v) for v in ['3.7']]
+    # python versions for the created environment; match the root
+    # python version since Pipenv needs to be able to find an executable
+    running_py_version = f"{sys.version_info.major}.{sys.version_info.minor}"
+    py_version = [('python_version_number', v) for v in [running_py_version]]
 
     configs = product(
         py_version,

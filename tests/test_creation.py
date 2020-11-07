@@ -141,6 +141,7 @@ def verify_makefile_commands(root, config):
     elif config["environment_manager"] == 'virtualenv':
         harness_path = test_path / "virtualenv_harness.sh"
     elif config["environment_manager"] == 'pipenv':
+
         harness_path = test_path / "pipenv_harness.sh"
     elif config["environment_manager"] == 'none':
         return True
@@ -152,22 +153,10 @@ def verify_makefile_commands(root, config):
 
     encoding = chardet.detect(result.stdout)["encoding"]
     if encoding is None:
-        print("encoding was none")
         encoding = "utf-8"
-    print("encoding:")
-    print(encoding)
 
     # normally hidden by pytest except in failure we want this displayed
     print("\n======================= STDOUT ======================")
-    print(result.stdout.decode(encoding=encoding))
-
-    encoding = chardet.detect(result.stderr)["encoding"]
-    if encoding is None:
-        print("encoding was none")
-        encoding = "utf-8"
-    print("encoding:")
-    print(encoding)
 
     print("\n======================= STDERR ======================")
-    print(result.stderr.decode(encoding=encoding))
     assert result_returncode == 0
