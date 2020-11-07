@@ -1,8 +1,6 @@
 from collections import OrderedDict
-import json
 from pathlib import Path
 
-import click
 from cookiecutter.exceptions import UndefinedVariableInTemplate
 from cookiecutter.environment import StrictEnvironment
 from cookiecutter.generate import generate_context

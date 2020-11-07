@@ -1,14 +1,12 @@
 from contextlib import contextmanager
 from itertools import product
 import json
-from os import major
 from pathlib import Path
 import shutil
 import sys
 import tempfile
 
 from ccds.__main__ import api_main
-import pytest
 
 
 CCDS_ROOT = Path(__file__).parents[1].resolve()
