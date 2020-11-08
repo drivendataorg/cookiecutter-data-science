@@ -6,4 +6,5 @@ mkdocs
 mkdocs-cinder
 pipenv
 pytest
-virtualenvwrapper
+virtualenvwrapper; sys_platform 1= 'win32'
+virtualenvwrapper-win; sys_platform == 'win32'
