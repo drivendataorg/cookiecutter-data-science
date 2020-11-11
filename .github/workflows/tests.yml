@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest]
         python-version: [3.6, 3.7, 3.8]
 
     steps:
@@ -31,7 +31,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r dev-requirements.txt --use-feature=2020-resolver
 
-
-      - name: Run mocked tests
+      - name: Run tests
         run: |
           pytest -vvv
