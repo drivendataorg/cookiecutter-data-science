@@ -1,7 +1,10 @@
+{% if cookiecutter.python_interpreter != 'python3' %}
+
 # local package
 -e .
+{% endif %}
 
-# external requirements
+# external requirements 
 click
 Sphinx
 coverage
