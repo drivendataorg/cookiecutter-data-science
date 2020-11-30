@@ -34,7 +34,7 @@ class TestCookieSetup(object):
 
     def test_author(self):
         setup_ = self.path / 'setup.py'
-        args = ['python', str(setup_), '--author']
+        args = ['python3', str(setup_), '--author']
         p = check_output(args).decode('ascii').strip()
         if pytest.param.get('author_name'):
             assert p == 'DrivenData'
@@ -51,7 +51,7 @@ class TestCookieSetup(object):
 
     def test_setup(self):
         setup_ = self.path / 'setup.py'
-        args = ['python', str(setup_), '--version']
+        args = ['python3', str(setup_), '--version']
         p = check_output(args).decode('ascii').strip()
         assert p == '0.1.0'
 
@@ -62,7 +62,7 @@ class TestCookieSetup(object):
 
     def test_license_type(self):
         setup_ = self.path / 'setup.py'
-        args = ['python', str(setup_), '--license']
+        args = ['python3', str(setup_), '--license']
         p = check_output(args).decode('ascii').strip()
         if pytest.param.get('open_source_license'):
             assert p == 'BSD-3'
@@ -73,10 +73,6 @@ class TestCookieSetup(object):
         reqs_path = self.path / 'requirements.txt'
         assert reqs_path.exists()
         assert no_curlies(reqs_path)
-        if pytest.param.get('python_interpreter'):
-            with open(reqs_path) as fin:
-                lines = list(map(lambda x: x.strip(), fin.readlines()))
-            assert 'pathlib2' in lines
 
     def test_makefile(self):
         makefile_path = self.path / 'Makefile'
@@ -86,21 +82,14 @@ class TestCookieSetup(object):
     def test_folders(self):
         expected_dirs = [
             'data',
-            'data/external',
-            'data/interim',
             'data/processed',
             'data/raw',
             'docs',
-            'models',
             'notebooks',
-            'references',
-            'reports',
-            'reports/figures',
-            'src',
-            'src/data',
-            'src/features',
-            'src/models',
-            'src/visualization',
+            'notebooks/Final',
+            'notebooks/Lab',
+            'notebooks/templates',
+            'src'
         ]
 
         ignored_dirs = [

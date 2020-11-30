@@ -4,15 +4,15 @@
 -e .
 {% endif %}
 
-# external requirements 
+# configuration requirements 
 click
 Sphinx
-coverage
-awscli
 flake8
+yapf
+pytest
+pytest-flakes
+pytest-cov
+pytest-xdist
 python-dotenv>=0.5.1
-{% if cookiecutter.python_interpreter != 'python3' %}
 
-# backwards compatibility
-pathlib2
-{% endif %}
+# external tools requirements

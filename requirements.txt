@@ -2,5 +2,3 @@ mkdocs
 mkdocs-cinder
 cookiecutter
 pytest
-pytest-cov
-pytest-pylint
