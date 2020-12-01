@@ -23,13 +23,13 @@ if __name__ == '__main__':
         remove_file(cli_file)
 
     if 'n' == '{{ cookiecutter.notebooks|lower }}':
-        remove_dir('LICENSE')
+        remove_dir('notebooks')
 
     if 'n' == '{{ cookiecutter.module|lower }}':
-        remove_dir('LICENSE')
+        remove_dir('{{ cookiecutter.project_slug }}')
 
     if 'n' == '{{ cookiecutter.airflow_setup|lower }}':
-        remove_dir('LICENSE')
+        remove_dir('airflow_setup')
 
     if 'n' == '{{ cookiecutter.cloud_functions|lower }}':
-        remove_dir('LICENSE')
+        remove_dir('cloud_functions')
