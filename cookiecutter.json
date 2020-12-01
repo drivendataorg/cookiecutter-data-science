@@ -4,7 +4,6 @@
     "author_name": "MantisAI",
     "description": "A short description of the project.",
     "open_source_license": ["MIT", "BSD-3-Clause", "No license file"],
-    "dvc_s3_remote": "[OPTIONAL] the s3 remote used with dvc (Include the 's3://')",
     "aws_profile": "default",
     "python_interpreter": ["python3", "python"]
 }

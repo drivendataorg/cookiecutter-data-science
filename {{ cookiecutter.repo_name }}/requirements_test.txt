@@ -1,3 +1,4 @@
+awscli
 black
 flake8
 ipdb

@@ -1,11 +1,8 @@
-.PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3
-
 #################################################################################
 # GLOBALS                                                                       #
 #################################################################################
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-BUCKET = {{ cookiecutter.s3_bucket }}
 PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_VERSION = {{ cookiecutter.python_interpreter }}
@@ -22,9 +19,9 @@ $(VIRTUALENV)/.installed: requirements.txt
 	@if [ -d $(VIRTUALENV) ]; then rm -rf $(VIRTUALENV); fi
 	@mkdir -p $(VIRTUALENV)
 	virtualenv --python $(PYTHON_VERSION) $(VIRTUALENV)
-	$(VIRTUALENV)/bin/pip3 install -r requirements.txt --use-feature=2020-resolver
-	$(VIRTUALENV)/bin/pip3 install -r requirements_test.txt --use-feature=2020-resolver
-	$(VIRTUALENV)/bin/pip3 install -e . --use-feature=2020-resolver
+	$(VIRTUALENV)/bin/pip3 install -r requirements.txt
+	$(VIRTUALENV)/bin/pip3 install -r requirements_test.txt
+	$(VIRTUALENV)/bin/pip3 install -e .
 	touch $@
 
 # Update the requirements to latest. This is required because typically we won't
@@ -38,7 +35,7 @@ update-requirements-txt:
 	@if [ -d $(VIRTUALENV) ]; then rm -rf $(VIRTUALENV); fi
 	@mkdir -p $(VIRTUALENV)
 	virtualenv --python $(PYTHON_VERSION) $(VIRTUALENV)
-	$(VIRTUALENV)/bin/pip3 install -r unpinned_requirements.txt --use-feature=2020-resolver
+	$(VIRTUALENV)/bin/pip3 install -r unpinned_requirements.txt
 	echo "# Created by 'make update-requirements-txt'. DO NOT EDIT!" > requirements.txt
 	$(VIRTUALENV)/bin/pip freeze | grep -v pkg-resources==0.0.0 >> requirements.txt
 
@@ -46,11 +43,13 @@ update-requirements-txt:
 virtualenv: $(VIRTUALENV)/.installed
 
 # Delete all compiled Python files
+.PHONY: clean
 clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
 # Lint using flake8
+.PHONY: lint
 lint:
 	flake8 src
 
