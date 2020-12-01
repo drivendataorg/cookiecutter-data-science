@@ -1,6 +1,6 @@
 version:  '3.7'
 services:
-{% if cookiecutter.python_interpreter != 'python3' %}
+{% if cookiecutter.notebooks == 'y' %}
 ## this is for working with dask; uncomment if needed
 #  scheduler:
 #    context: ./notebooks
@@ -40,10 +40,10 @@ services:
     #   environment:
     #         - DASK_SCHEDULER_ADDRESS="tcp://scheduler:8786"
       #extra_hosts:
-      #  - "mymachine:192.168.2.43"
+      #  - "mymachine:<your_ip>"
 {% endif %}
-{% if cookiecutter.python_interpreter != 'python3' %}
-    sql2gee:
+{% if cookiecutter.module == 'y' %}
+  {{cookiecutter.repo_name}}:
     # Makefile fills PROJECT_NAME to current directory name.
     # add UID to allow multiple users run this in parallel
     container_name: {{cookiecutter.repo_name}}_4000

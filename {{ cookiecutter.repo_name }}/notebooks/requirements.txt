@@ -1,19 +1,19 @@
-{% if cookiecutter.python_interpreter != 'python3' %}
+{% if cookiecutter.module == 'y' %}
 
 # local package
--e .
+# -e .
 {% endif %}
 
-# configuration requirements 
+# configuration requirements
 
 python-dotenv>=0.5.1
 
 # external tools requirements
-tqdm 
-pandas 
-geopandas 
-simpledbf 
-matplotlib 
+tqdm
+pandas
+geopandas
+simpledbf
+matplotlib
 rtree
 rasterio
 fiona

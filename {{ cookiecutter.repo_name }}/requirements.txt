@@ -1,12 +1,15 @@
-{% if cookiecutter.python_interpreter != 'python3' %}
+{% if cookiecutter.module == 'y' %}
 
 # local package
--e .
+# -e .
 {% endif %}
 
-# configuration requirements 
+# configuration requirements
 click
 Sphinx
+watchdog>=0.8.3
+sphinx-rtd-theme>=0.4.3
+recommonmark>=0.6.0
 flake8
 yapf
 pytest
