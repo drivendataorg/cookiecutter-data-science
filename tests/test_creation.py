@@ -89,7 +89,7 @@ class TestCookieSetup(object):
             'notebooks/Final',
             'notebooks/Lab',
             'notebooks/templates',
-            'src'
+            'tests'
         ]
 
         ignored_dirs = [
@@ -99,4 +99,10 @@ class TestCookieSetup(object):
         abs_expected_dirs = [str(self.path / d) for d in expected_dirs]
         abs_dirs, _, _ = list(zip(*os.walk(self.path)))
         assert len(set(abs_expected_dirs + ignored_dirs) - set(abs_dirs)) == 0
+
+    # def test_bake_and_run_tests(cookies):
+    #     self.path
+    #     assert result.project.isdir()
+    #     run_inside_dir('python setup.py test', str(result.project)) == 0
+    #     print("test_bake_and_run_tests path", str(result.project))
 

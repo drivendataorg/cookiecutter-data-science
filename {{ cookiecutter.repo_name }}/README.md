@@ -7,49 +7,60 @@ Project Organization
 ------------
 
     ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
     ├── README.md          <- The top-level README for developers using this project.
+    ├── CHANGELOG.md          <- The top-level README for developers using this project.
+    ├── env.default  				<- Environment vars definition
+    ├── Makefile           			<- Makefile with commands
+    ├──.editorconfig				<- Helps maintain consistent coding styles
+    ├── Dockerfile         			<- Environment definition
+    ├── docker-compose.yml  			<- Environment definition
+    ├── .dockerignore  			<- files don't want to copy inside container
+    ├── .gitignore  				<- files don't want to copy in githubs
+    ├── .github  				<- github configs
+    │   └── pull_request_template.md
+    ├── requirements.txt / setup.py   	<- The requirements or config file
+    ├── setup.cfg   				<- The requirements file
+    ├── docs 					<- A default Sphinx project.
+    │   └── __init__.py
+    ├── test                			<- Test setup folder using pytest
+    │   └── __init__.py
+    ├── tox.ini            			<- tox file with settings for running tox;
+    |
     ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
+    │   ├── processed      <- The final, canonical data sets for modeling.
+    │   └── raw            <- The original, immutable data dump.
+    |
+{% if cookiecutter.python_interpreter != 'python3' %}
+    ├── notebooks           <- Naming convention is a number (for ordering),
+    │   │                     the creator's initials, and a short `-` delimited e.g.
+    │   │                     `1.0-jqp-initial-data-exploration`.
     │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
+    │   ├──jupyter_notebook_config.py
+    │   ├── template_notebooks <- where the notebooks template will live.
     │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
+    │   ├── Lab                <- Testing and development
     │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
+    │   └── Final            <- The final cleaned notebooks for reports/ designers /
+    |				   developers etc.
     │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+{% endif %}
+{% if cookiecutter.python_interpreter != 'python3' %}
+    ├── cloudFunctions
+    │   ├── name_cloud_function      <- The final, canonical data sets for modeling.
+    │   └── raw            <- The original, immutable data dump.
+    │
+{% endif %}
+{% if cookiecutter.python_interpreter != 'python3' %}
+    ├── airflowDataProject
+    │   ├── processed      <- The final, canonical data sets for modeling.
+    │   └── raw            <- The original, immutable data dump.
+    │
+{% endif %}
+{% if cookiecutter.python_interpreter != 'python3' %}
+    └─ src                  <- Source code for use in this project.
+        └── __init__.py     <- Makes src a Python module
+{% endif %}
+
 
 
 --------
