@@ -19,6 +19,13 @@ endif
 #################################################################################
 # COMMANDS                                                                      #
 #################################################################################
+## Initiate Docker compose and build services:
+.PHONY: up
+up:
+	docker-compose build && docker-compose up
+
+
+
 
 ## Install Python Dependencies
 requirements: test_environment

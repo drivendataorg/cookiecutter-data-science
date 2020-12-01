@@ -13,9 +13,9 @@
     "aws_profile": "default",
     "python_interpreter": ["python3"],
     "version": "0.1.0",
-    "use_pypi_deployment_with_travis": "y",
+    "use_pypi_deployment_with_travis": "n",
     "add_pyup_badge": "n",
-    "command_line_interface": ["Click", "No command-line interface"],
+    "command_line_interface": [ "No command-line interface", "Click"],
     "create_author_file": "y",
     "open_source_license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3","BSD-3-Clause", "Not open source"]
 }

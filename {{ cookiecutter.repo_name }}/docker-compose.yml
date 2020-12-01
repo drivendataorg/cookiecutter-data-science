@@ -1,0 +1,75 @@
+version:  '3.7'
+services:
+{% if cookiecutter.python_interpreter != 'python3' %}
+## this is for working with dask; uncomment if needed
+#  scheduler:
+#    context: ./notebooks
+#    dockerfile: Dockerfile
+#    #image: daskdev/dask
+#    hostname: dask-scheduler
+#    ports:
+#      - "8786:8786"
+#      - "8787:8787"
+#    command: ["dask-scheduler"]
+#
+#  worker:
+#    context: ./notebooks
+#    dockerfile: Dockerfile
+#    #image: daskdev/dask
+#    volumes:
+#        - ${LOCAL_WORKING_DIR}:/home/jovyan/work
+#        - ${LOCAL_WORKING_DIR2}:/home/jovyan/work/mars
+#        - ${LOCAL_DATASETS}:/home/jovyan/work/datasets
+#        - ${LOCAL_MODULES}:/home/jovyan/work/modules
+#    hostname: dask-worker
+#    command: ["dask-worker", "tcp://scheduler:8786"]
+    datascience-notebook:
+      build:
+        context: ./notebooks
+        dockerfile: Dockerfile
+      volumes:
+        - ${LOCAL_WORKING_DIR}:/home/jovyan/work
+        - ${LOCAL_DATASETS}:/home/jovyan/work/datasets
+        - ${LOCAL_MODULES}:/home/jovyan/work/modules
+        - ${LOCAL_SSL_CERTS}:/etc/ssl/notebook
+      ports:
+        - 8888:8888
+      container_name: jupyter_notebook
+      command: "start-notebook.sh \
+        --NotebookApp.token=''"
+    #   environment:
+    #         - DASK_SCHEDULER_ADDRESS="tcp://scheduler:8786"
+      #extra_hosts:
+      #  - "mymachine:192.168.2.43"
+{% endif %}
+{% if cookiecutter.python_interpreter != 'python3' %}
+    sql2gee:
+    # Makefile fills PROJECT_NAME to current directory name.
+    # add UID to allow multiple users run this in parallel
+    container_name: {{cookiecutter.repo_name}}_4000
+    hostname: {{cookiecutter.repo_name}}
+    # These variables are passed into the container.
+    environment:
+        - UID=4000
+        - PROJECT_PATH=/home/nodummy/{{cookiecutter.repo_name}}
+        - MODULE_NAME={{cookiecutter.repo_name}}
+    env_file:
+        - .env
+    # Run with user priviliges by default.
+    user: nodummy
+    image: {{cookiecutter.repo_name}}:nodummy
+    build:
+        context: .
+        # Build for current user.
+        target: user
+        dockerfile: Dockerfile
+        # These variables are passed to Dockerfile.
+        args:
+        - HOST_UID=4000
+        - HOST_USER=nodummy
+    # Run container as a service. Replace with something useful.
+    command: ["tail", "-f", "/dev/null"]
+    tty: true
+    volumes:
+        - .:/home/nodummy/projects/{{cookiecutter.repo_name}}
+{% endif %}

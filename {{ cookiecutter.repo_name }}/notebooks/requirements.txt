@@ -1,0 +1,51 @@
+{% if cookiecutter.python_interpreter != 'python3' %}
+
+# local package
+-e .
+{% endif %}
+
+# configuration requirements 
+
+python-dotenv>=0.5.1
+
+# external tools requirements
+tqdm 
+pandas 
+geopandas 
+simpledbf 
+matplotlib 
+rtree
+rasterio
+fiona
+rio-tiler-mosaic
+simplejson
+vega
+descartes
+plotly
+pivottablejs
+cufflinks
+LMIPy
+statsmodels
+ipyleaflet
+nbdime
+tinycss2
+autopep8
+termcolor
+graphviz
+rasterstats
+rio-cogeo
+appdirs
+Click>=6.0
+cachetools
+geocube
+pycountry
+earthengine-api
+jupytemplate
+zarr
+gcsfs
+python-dotenv
+s3fs
+carto==1.11.1
+google-cloud-storage
+google-api-python-client
+nbdev
