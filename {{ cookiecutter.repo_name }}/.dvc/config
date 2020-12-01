@@ -1,4 +1,0 @@
-[core]
-    remote = s3
-['remote "s3"']
-    url = {{ cookiecutter.dvc_s3_remote }}
