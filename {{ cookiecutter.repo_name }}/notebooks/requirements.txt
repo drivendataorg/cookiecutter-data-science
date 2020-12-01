@@ -43,7 +43,6 @@ earthengine-api
 jupytemplate
 zarr
 gcsfs
-python-dotenv
 s3fs
 carto==1.11.1
 google-cloud-storage
