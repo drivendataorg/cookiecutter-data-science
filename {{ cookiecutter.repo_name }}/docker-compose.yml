@@ -23,18 +23,17 @@ services:
 #        - ${LOCAL_MODULES}:/home/jovyan/work/modules
 #    hostname: dask-worker
 #    command: ["dask-worker", "tcp://scheduler:8786"]
-    datascience-notebook:
+  {{cookiecutter.project_slug}}-notebooks:
       build:
         context: ./notebooks
         dockerfile: Dockerfile
       volumes:
-        - ${LOCAL_WORKING_DIR}:/home/jovyan/work
-        - ${LOCAL_DATASETS}:/home/jovyan/work/datasets
-        - ${LOCAL_MODULES}:/home/jovyan/work/modules
-        - ${LOCAL_SSL_CERTS}:/etc/ssl/notebook
+        - ./data:/home/jovyan/work
+        - ./notebooks:/home/jovyan/work/datasets
+        - /opt/ssl-certs/jupyter:/etc/ssl/notebook
       ports:
         - 8888:8888
-      container_name: jupyter_notebook
+      container_name: {{cookiecutter.project_slug}}_jupyter_notebook
       command: "start-notebook.sh \
         --NotebookApp.token=''"
     #   environment:
