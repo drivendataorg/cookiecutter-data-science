@@ -17,9 +17,8 @@ services:
 #    dockerfile: Dockerfile
 #    #image: daskdev/dask
 #    volumes:
-#        - ${LOCAL_WORKING_DIR}:/home/jovyan/work
-#        - ${LOCAL_WORKING_DIR2}:/home/jovyan/work/mars
-#        - ${LOCAL_DATASETS}:/home/jovyan/work/datasets
+#        - ./data:/home/jovyan/work/datasets
+#        - ./notebooks:/home/jovyan/work/notebooks
 #        - ${LOCAL_MODULES}:/home/jovyan/work/modules
 #    hostname: dask-worker
 #    command: ["dask-worker", "tcp://scheduler:8786"]
@@ -28,8 +27,8 @@ services:
         context: ./notebooks
         dockerfile: Dockerfile
       volumes:
-        - ./data:/home/jovyan/work
-        - ./notebooks:/home/jovyan/work/datasets
+        - ./data:/home/jovyan/work/datasets
+        - ./notebooks:/home/jovyan/work/notebooks
         - /opt/ssl-certs/jupyter:/etc/ssl/notebook
       ports:
         - 8888:8888
