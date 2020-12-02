@@ -50,3 +50,9 @@ distinguished_name = req_distinguished_name
 # the environment
 if 'NB_UMASK' in os.environ:
     os.umask(int(os.environ['NB_UMASK'], 8))
+
+
+#make template directory
+c.JupyterLabTemplates.template_dirs = ['./templates']
+c.JupyterLabTemplates.include_default = True
+c.JupyterLabTemplates.include_core_paths = True
