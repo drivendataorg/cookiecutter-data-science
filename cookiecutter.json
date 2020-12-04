@@ -1,3 +1,3 @@
 {
-    "DEPRECATED": "Use of cookiecutter command is deprecated; please use ccds command for the new version, or add @v1 to your git URL to use deprecated template."
+    "DEPRECATED": "Use of the `cookiecutter` command is deprecated. Please use `ccds` in place of `cookiecutter`. To continue using the deprecated template, use `cookiecutter ... -c v1`."
 }
