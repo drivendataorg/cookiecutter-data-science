@@ -3553,77 +3553,146 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     color: #222;
 }
 .alert {
-    padding: 15px;
-    margin-bottom: 21px;
-    border: 1px solid transparent;
-    border-radius: 0;
-}
-.alert h4 {
-    margin-top: 0;
-    color: inherit;
-}
-.alert .alert-link {
-    font-weight: bold;
-}
-.alert>p, .alert>ul {
-    margin-bottom: 0;
-}
-.alert>p+p {
-    margin-top: 5px;
-}
-.alert-dismissable {
-    padding-right: 35px;
-}
-.alert-dismissable .close {
     position: relative;
-    top: -2px;
-    right: -21px;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+  }
+  
+  .alert-heading {
     color: inherit;
-}
-.alert-success {
-    color: #fff;
-    background-color: #43ac6a;
-    border-color: #3c9a5f;
-}
-.alert-success hr {
-    border-top-color: #358753;
-}
-.alert-success .alert-link {
-    color: #e6e6e6;
-}
-.alert-info {
-    color: #fff;
-    background-color: #5bc0de;
-    border-color: #3db5d8;
-}
-.alert-info hr {
-    border-top-color: #2aabd2;
-}
-.alert-info .alert-link {
-    color: #e6e6e6;
-}
-.alert-warning {
-    color: #fff;
-    background-color: #e99002;
-    border-color: #d08002;
-}
-.alert-warning hr {
-    border-top-color: #b67102;
-}
-.alert-warning .alert-link {
-    color: #e6e6e6;
-}
-.alert-danger {
-    color: #fff;
-    background-color: #f04124;
-    border-color: #ea2f10;
-}
-.alert-danger hr {
-    border-top-color: #d32a0e;
-}
-.alert-danger .alert-link {
-    color: #e6e6e6;
-}
+  }
+  
+  .alert-link {
+    font-weight: 700;
+  }
+  
+  .alert-dismissible {
+    padding-right: 4rem;
+  }
+  
+  .alert-dismissible .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.75rem 1.25rem;
+    color: inherit;
+  }
+  
+  .alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+  }
+  
+  .alert-primary hr {
+    border-top-color: #9fcdff;
+  }
+  
+  .alert-primary .alert-link {
+    color: #002752;
+  }
+  
+  .alert-secondary {
+    color: #383d41;
+    background-color: #e2e3e5;
+    border-color: #d6d8db;
+  }
+  
+  .alert-secondary hr {
+    border-top-color: #c8cbcf;
+  }
+  
+  .alert-secondary .alert-link {
+    color: #202326;
+  }
+  
+  .alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+  
+  .alert-success hr {
+    border-top-color: #b1dfbb;
+  }
+  
+  .alert-success .alert-link {
+    color: #0b2e13;
+  }
+  
+  .alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+  }
+  
+  .alert-info hr {
+    border-top-color: #abdde5;
+  }
+  
+  .alert-info .alert-link {
+    color: #062c33;
+  }
+  
+  .alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+  }
+  
+  .alert-warning hr {
+    border-top-color: #ffe8a1;
+  }
+  
+  .alert-warning .alert-link {
+    color: #533f03;
+  }
+  
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+  
+  .alert-danger hr {
+    border-top-color: #f1b0b7;
+  }
+  
+  .alert-danger .alert-link {
+    color: #491217;
+  }
+  
+  .alert-light {
+    color: #818182;
+    background-color: #fefefe;
+    border-color: #fdfdfe;
+  }
+  
+  .alert-light hr {
+    border-top-color: #ececf6;
+  }
+  
+  .alert-light .alert-link {
+    color: #686868;
+  }
+  
+  .alert-dark {
+    color: #1b1e21;
+    background-color: #d6d8d9;
+    border-color: #c6c8ca;
+  }
+  
+  .alert-dark hr {
+    border-top-color: #b9bbbe;
+  }
+  
+  .alert-dark .alert-link {
+    color: #040505;
+  }
+
+
 @-webkit-keyframes progress-bar-stripes {
     from {
     background-position: 40px 0;
@@ -5147,15 +5216,6 @@ label, .control-label, .help-block, .checkbox, .radio {
 .list-group {
     font-size: 12px;
     font-weight: 300;
-}
-.alert {
-    font-size: 12px;
-    font-weight: 300;
-}
-.alert a, .alert .alert-link {
-    font-weight: normal;
-    color: #fff;
-    text-decoration: underline;
 }
 .label {
     padding-right: 1em;

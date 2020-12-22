@@ -10,23 +10,28 @@ body {
     color: #343838;
 }
 h1, h2, h3, h4, h5, h6 {
-    font-family:'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family:'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #222;
 }
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
     color: #B1B7B9;
 }
+
+h2 {
+    margin-top: 35px;
+}
+
 h1, h2 {
     font-weight: 700;
 }
 h4 {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 300;
     margin-top: 20px;
     font-style: italic;
 }
 h5 {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 300;
     font-variant: small-caps;
 }
@@ -41,7 +46,7 @@ pre {
     margin-bottom: 25px;
 }
 .lead {
-    font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family:"Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 400;
     line-height: 1.4;
     letter-spacing: 0.0312em;
@@ -54,7 +59,8 @@ pre {
 .bs-sidenav {
     background-image: url("../img/grid11.png");
     background-repeat: repeat;
-    font-size: 12px;
+    font-family: Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
 }
 .well {
     background-color: #FCFDFF;
@@ -71,7 +77,7 @@ pre {
     box-shadow: none;
 }
 #mkdocs-search-query {
-    font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family:"Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 20px;
     font-weight: 700;
     color: #343838;

@@ -5,39 +5,57 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A project template and directory structure for Python data science projects.">  
-    <link rel="shortcut icon" href="./img/favicon.ico">
+    <meta name="description" content="A project template and directory structure for Python data science projects.">
+    
+    
+    <link rel="shortcut icon" href="img/favicon.ico">
 
+    
     <title>Home - Cookiecutter Data Science</title>
+    
 
-    <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
-    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
-    <link href="./css/base.css" rel="stylesheet">
-    <link href="./css/cinder.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/highlight.css">
+    <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="css/base.min.css" rel="stylesheet">
+    <link href="css/cinder.min.css" rel="stylesheet">
 
-
-    <link href="./css/extra.css" rel="stylesheet">
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="css/extra.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
         <![endif]-->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-    <script>
-    WebFont.load({
-        google: {
-            families: ['Open Sans', 'PT Sans']
-        }
-    });
-    </script>
-
     
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-54096005-4', 'auto');
+    ga('send', 'pageview');
+    </script>
+    
+
+     
 </head>
 
 <body class="homepage" >
@@ -58,7 +76,9 @@
 
             <!-- Main title -->
 
-            <a class="navbar-brand" href=".">Cookiecutter Data Science</a>
+            
+              <a class="navbar-brand" href=".">Cookiecutter Data Science</a>
+            
         </div>
 
         <!-- Expanded navigation -->
@@ -67,11 +87,11 @@
             <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                            <i class="fa fa-search"></i> Search
+                            <i class="fas fa-search"></i> Search
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/drivendata/cookiecutter-data-science/"><i class="fa fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/drivendata/cookiecutter-data-science/edit/master/docs/docs/index.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -79,6 +99,7 @@
 </div>
 
     <div class="container">
+        
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -153,7 +174,7 @@
 <p>Consistency within a project is more important. Consistency within one module or function is the most important. ... However, know when to be inconsistent -- sometimes style guide recommendations just aren't applicable. When in doubt, use your best judgment. Look at other examples and decide what looks best. And don't hesitate to ask!</p>
 </blockquote>
 <h2 id="getting-started">Getting started</h2>
-<p>With this in mind, we've created a data science cookiecutter template for projects in Python. Your analysis doesn't have to be in Python, but the template does provide some Python boilerplate that you'd want to remove (in the <code>src</code> folder for example, and the Sphinx documentation skeleton in <code>docs</code>).</p>
+<p>With this in mind, we've created a data science cookiecutter template for projects in Python. Your analysis doesn't have to be in Python, but the template does provide some Python boilerplate that you'd want to remove (in the <code>{{ cookiecutter.module_name }}</code> folder for example, and the Sphinx documentation skeleton in <code>docs</code>).</p>
 <h3 id="requirements">Requirements</h3>
 <ul>
 <li>Python 2.7 or 3.5</li>
@@ -161,14 +182,12 @@
 </ul>
 <h3 id="starting-a-new-project">Starting a new project</h3>
 <p>Starting a new project is as easy as running this command at the command line. No need to create a directory first, the cookiecutter will do it for you.</p>
-<pre><code class="nohighlight">cookiecutter https://github.com/drivendata/cookiecutter-data-science
+<pre><code class="language-nohighlight">cookiecutter https://github.com/drivendata/cookiecutter-data-science
 </code></pre>
-
 <h3 id="example">Example</h3>
-<script type="text/javascript" src="https://asciinema.org/a/9bgl5qh17wlop4xyxu9n9wr02.js" id="asciicast-9bgl5qh17wlop4xyxu9n9wr02" async></script>
-
+<p><a href="https://asciinema.org/a/244658"><img alt="asciicast" src="https://asciinema.org/a/244658.svg" /></a></p>
 <h2 id="directory-structure">Directory structure</h2>
-<pre><code class="nohighlight">├── LICENSE
+<pre><code class="language-nohighlight">├── LICENSE
 ├── Makefile           &lt;- Makefile with commands like `make data` or `make train`
 ├── README.md          &lt;- The top-level README for developers using this project.
 ├── data
@@ -194,8 +213,8 @@
 │                         generated with `pip freeze &gt; requirements.txt`
 │
 ├── setup.py           &lt;- Make this project pip installable with `pip install -e`
-├── src                &lt;- Source code for use in this project.
-│   ├── __init__.py    &lt;- Makes src a Python module
+├── {{ cookiecutter.module_name }}                &lt;- Source code for use in this project.
+│   ├── __init__.py    &lt;- Makes {{ cookiecutter.module_name }} a Python module
 │   │
 │   ├── data           &lt;- Scripts to download or generate data
 │   │   └── make_dataset.py
@@ -211,13 +230,12 @@
 │   └── visualization  &lt;- Scripts to create exploratory and results oriented visualizations
 │       └── visualize.py
 │
-└── tox.ini            &lt;- tox file with settings for running tox; see tox.testrun.org
+└── tox.ini            &lt;- tox file with settings for running tox; see tox.readthedocs.io
 </code></pre>
-
 <h2 id="opinions">Opinions</h2>
 <p>There are some opinions implicit in the project structure that have grown out of our experience with what works and what doesn't when collaborating on data science projects. Some of the opinions are about workflows, and some of the opinions are about tools that make life easier. Here are some of the beliefs which this project is built on—if you've got thoughts, please <a href="#contributing">contribute or share them</a>.</p>
 <h3 id="data-is-immutable">Data is immutable</h3>
-<p>Don't ever edit your raw data, especially not manually, and especially not in Excel. Don't overwrite your raw data. Don't save multiple versions of the raw data. Treat the data (and its format) as immutable. The code you write should move the raw data through a pipeline to your final analysis. You shouldn't have to run all of the steps every time you want to make a new figure (see <a href="#analysis-is-a-dag">Analysis is a DAG</a>), but anyone should be able to reproduce the final products with only the code in <code>src</code> and the data in <code>data/raw</code>.</p>
+<p>Don't ever edit your raw data, especially not manually, and especially not in Excel. Don't overwrite your raw data. Don't save multiple versions of the raw data. Treat the data (and its format) as immutable. The code you write should move the raw data through a pipeline to your final analysis. You shouldn't have to run all of the steps every time you want to make a new figure (see <a href="#analysis-is-a-dag">Analysis is a DAG</a>), but anyone should be able to reproduce the final products with only the code in <code>{{ cookiecutter.module_name }}</code> and the data in <code>data/raw</code>.</p>
 <p>Also, if data is immutable, it doesn't need source control in the same way that code does. Therefore, <strong><em>by default, the data folder is included in the <code>.gitignore</code> file.</em></strong> If you have a small amount of data that rarely changes, you may want to include the data in the repository. Github currently warns if files are over 50MB and rejects files over 100MB. Some other options for storing/syncing large data include <a href="https://aws.amazon.com/s3/">AWS S3</a> with a syncing tool (e.g., <a href="http://s3tools.org/s3cmd"><code>s3cmd</code></a>), <a href="https://git-lfs.github.com/">Git Large File Storage</a>, <a href="https://git-annex.branchable.com/">Git Annex</a>, and <a href="http://dat-data.com/">dat</a>. Currently by default, we ask for an S3 bucket and use <a href="http://docs.aws.amazon.com/cli/latest/reference/s3/index.html">AWS CLI</a> to sync data in the <code>data</code> folder with the server.</p>
 <h3 id="notebooks-are-for-exploration-and-communication">Notebooks are for exploration and communication</h3>
 <p>Notebook packages like the <a href="http://jupyter.org/">Jupyter notebook</a>, <a href="http://beakernotebook.com/">Beaker notebook</a>, <a href="http://zeppelin-project.org/">Zeppelin</a>, and other literate programming tools are very effective for exploratory data analysis. However, these tools can be less effective for reproducing an analysis. When we use notebooks in our work, we often subdivide the <code>notebooks</code> folder. For example, <code>notebooks/exploratory</code> contains initial explorations, whereas <code>notebooks/reports</code> is more polished work that can be exported as html to the <code>reports</code> directory.</p>
@@ -227,22 +245,21 @@
 <p>Follow a naming convention that shows the owner and the order the analysis was done in. We use the format <code>&lt;step&gt;-&lt;ghuser&gt;-&lt;description&gt;.ipynb</code> (e.g., <code>0.3-bull-visualize-distributions.ipynb</code>).</p>
 </li>
 <li>
-<p>Refactor the good parts. Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at <code>src/data/make_dataset.py</code> and load data from <code>data/interim</code>. If it's useful utility code, refactor it to <code>src</code>.</p>
+<p>Refactor the good parts. Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at <code>{{ cookiecutter.module_name }}/data/make_dataset.py</code> and load data from <code>data/interim</code>. If it's useful utility code, refactor it to <code>{{ cookiecutter.module_name }}</code>.</p>
 </li>
 </ol>
 <p>Now by default we turn the project into a Python package (see the <code>setup.py</code> file). You can import your code and use it in notebooks with a cell like the following:</p>
 <pre><code># OPTIONAL: Load the &quot;autoreload&quot; extension so that code can change
 %load_ext autoreload
 
-# OPTIONAL: always reload modules so that as you change code in src, it gets loaded
+# OPTIONAL: always reload modules so that as you change code in {{ cookiecutter.module_name }}, it gets loaded
 %autoreload 2
 
-from src.data import make_dataset
+from {{ cookiecutter.module_name }}.data import make_dataset
 </code></pre>
-
 <h3 id="analysis-is-a-dag">Analysis is a DAG</h3>
 <p>Often in an analysis you have long-running steps that preprocess data or train models. If these steps have been run already (and you have stored the output somewhere like the <code>data/interim</code> directory), you don't want to wait to rerun them every time. We prefer <a href="https://www.gnu.org/software/make/"><code>make</code></a> for managing steps that depend on each other, especially the long-running ones. Make is a common tool on Unix-based platforms (and <a href="">is available for Windows</a>). Following the <a href="https://www.gnu.org/software/make/"><code>make</code> documentation</a>, <a href="https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions">Makefile conventions</a>, and <a href="http://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Portable-Make.html#Portable-Make">portability guide</a> will help ensure your Makefiles work effectively across systems. Here are <a href="http://zmjones.com/make/">some</a> <a href="http://blog.kaggle.com/2012/10/15/make-for-data-scientists/">examples</a> to <a href="https://web.archive.org/web/20150206054212/http://www.bioinformaticszen.com/post/decomplected-workflows-makefiles/">get started</a>. A number of data folks use <code>make</code> as their tool of choice, including <a href="https://bost.ocks.org/mike/make/">Mike Bostock</a>.</p>
-<p>There are other tools for managing DAGs that are written in Python instead of a DSL (e.g., <a href="http://paver.github.io/paver/#">Paver</a>, <a href="http://luigi.readthedocs.org/en/stable/index.html">Luigi</a>, <a href="http://pythonhosted.org/airflow/cli.html">Airflow</a>, <a href="https://bitbucket.org/snakemake/snakemake/wiki/Home">Snakemake</a>, <a href="http://www.ruffus.org.uk/">Ruffus</a>, or <a href="https://pythonhosted.org/joblib/memory.html">Joblib</a>). Feel free to use these if they are more appropriate for your analysis.</p>
+<p>There are other tools for managing DAGs that are written in Python instead of a DSL (e.g., <a href="http://paver.github.io/paver/#">Paver</a>, <a href="http://luigi.readthedocs.org/en/stable/index.html">Luigi</a>, <a href="https://airflow.apache.org/index.html">Airflow</a>, <a href="https://snakemake.readthedocs.io/en/stable/">Snakemake</a>, <a href="http://www.ruffus.org.uk/">Ruffus</a>, or <a href="https://pythonhosted.org/joblib/memory.html">Joblib</a>). Feel free to use these if they are more appropriate for your analysis.</p>
 <h3 id="build-from-the-environment-up">Build from the environment up</h3>
 <p>The first step in reproducing an analysis is always reproducing the computational environment it was run in. You need the same tools, the same libraries, and the same versions to make everything play nicely together.</p>
 <p>One effective approach to this is use <a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a> (we recommend <a href="https://virtualenvwrapper.readthedocs.org/en/latest/">virtualenvwrapper</a> for managing virtualenvs). By listing all of your requirements in the repository (we include a <code>requirements.txt</code> file) you can easily track the packages needed to recreate the analysis. Here is a good workflow:</p>
@@ -257,16 +274,15 @@ from src.data import make_dataset
 <p>You <em>really</em> don't want to leak your AWS secret key or Postgres username and password on Github. Enough said — see the <a href="http://12factor.net/config">Twelve Factor App</a> principles on this point. Here's one way to do this:</p>
 <h4 id="store-your-secrets-and-config-variables-in-a-special-file">Store your secrets and config variables in a special file</h4>
 <p>Create a <code>.env</code> file in the project root folder. Thanks to the <code>.gitignore</code>, this file should never get committed into the version control repository. Here's an example:</p>
-<pre><code class="nohighlight"># example .env file
+<pre><code class="language-nohighlight"># example .env file
 DATABASE_URL=postgres://username:password@localhost:5432/dbname
 AWS_ACCESS_KEY=myaccesskey
 AWS_SECRET_ACCESS_KEY=mysecretkey
 OTHER_VARIABLE=something
 </code></pre>
-
 <h4 id="use-a-package-to-load-these-variables-automatically">Use a package to load these variables automatically.</h4>
-<p>If you look at the stub script in <code>src/data/make_dataset.py</code>, it uses a package called <a href="https://github.com/theskumar/python-dotenv">python-dotenv</a> to load up all the entries in this file as environment variables so they are accessible with <code>os.environ.get</code>. Here's an example snippet adapted from the <code>python-dotenv</code> documentation:</p>
-<pre><code class="python"># src/data/dotenv_example.py
+<p>If you look at the stub script in <code>{{ cookiecutter.module_name }}/data/make_dataset.py</code>, it uses a package called <a href="https://github.com/theskumar/python-dotenv">python-dotenv</a> to load up all the entries in this file as environment variables so they are accessible with <code>os.environ.get</code>. Here's an example snippet adapted from the <code>python-dotenv</code> documentation:</p>
+<pre><code class="language-python"># {{ cookiecutter.module_name }}/data/dotenv_example.py
 import os
 from dotenv import load_dotenv, find_dotenv
 
@@ -279,7 +295,6 @@ load_dotenv(dotenv_path)
 database_url = os.environ.get(&quot;DATABASE_URL&quot;)
 other_variable = os.environ.get(&quot;OTHER_VARIABLE&quot;)
 </code></pre>
-
 <h4 id="aws-cli-configuration">AWS CLI configuration</h4>
 <p>When using Amazon S3 to store data, a simple method of managing AWS access is to set your access keys to environment variables. However, managing mutiple sets of keys on a single machine (e.g. when working on multiple projects) it is best to use a <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html">credentials file</a>, typically located in <code>~/.aws/credentials</code>. A typical file might look like:</p>
 <pre><code>[default]
@@ -290,7 +305,6 @@ aws_secret_access_key=mysecretkey
 aws_access_key_id=myprojectaccesskey
 aws_secret_access_key=myprojectsecretkey
 </code></pre>
-
 <p>You can add the profile name when initialising a project; assuming no applicable environment variables are set, the profile credentials will be used be default.</p>
 <h3 id="be-conservative-in-changing-the-default-folder-structure">Be conservative in changing the default folder structure</h3>
 <p>To keep this structure broadly applicable for many different kinds of projects, we think the best approach is to be liberal in changing the folders around for <em>your</em> project, but be conservative in changing the default structure for <em>all</em> projects.</p>
@@ -303,65 +317,115 @@ aws_secret_access_key=myprojectsecretkey
 <ul>
 <li><a href="http://projecttemplate.net/index.html">Project Template</a> - An R data analysis template</li>
 <li>"<a href="http://nicercode.github.io/blog/2013-04-05-projects/">Designing projects</a>" on Nice R Code</li>
-<li>"<a href="http://www.carlboettiger.info/2012/05/06/research-workflow.html">My research workflow</a>" on Carlboettifer.info</li>
+<li>"<a href="http://www.carlboettiger.info/2012/05/06/research-workflow.html">My research workflow</a>" on Carlboettiger.info</li>
 <li>"<a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424">A Quick Guide to Organizing Computational Biology Projects</a>" in PLOS Computational Biology</li>
 </ul>
 <p>Finally, a huge thanks to the <a href="https://cookiecutter.readthedocs.org/en/latest/">Cookiecutter</a> project (<a href="https://github.com/audreyr/cookiecutter">github</a>), which is helping us all spend less time thinking about and writing boilerplate and more time getting things done.</p></div>
         
+        
     </div>
 
-    <footer class="col-md-12 text-center">
-        <hr>
-        <p>
-        <small>Project maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>.<br></small>
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>Project maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>.</small><br>
+            
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
         
-        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p></small>
-    </footer>
-
-    <script src="./js/jquery-1.10.2.min.js"></script>
-    <script src="./js/bootstrap-3.0.3.min.js"></script>
-    <script src="./js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script>
-    var base_url = '.';
-    </script>
-    <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
-    <script src="./js/base.js"></script>
-    <script src="./search/require.js"></script>
-    <script src="./search/search.js"></script>
+    
 
-    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        From here you can search these documents. Enter your search terms below.
-                    </p>
-                    <form role="form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
-                        </div>
-                    </form>
-                    <div id="mkdocs-search-results"></div>
-                </div>
-                <div class="modal-footer">
-                </div>
+    <script>var base_url = "."</script>
+    
+    <script src="js/base.js"></script>
+    <script src="search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
             </div>
         </div>
     </div>
-
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
     </body>
 
 </html>
 
 <!--
-MkDocs version : 0.17.3
-Build Date UTC : 2018-04-13 23:26:04
+MkDocs version : 1.1.2
+Build Date UTC : 2020-12-22 18:43:40.520262+00:00
 -->

@@ -1,12 +1,9 @@
-body {
-    padding-top: 70px;
+html {
+    scroll-padding-top: 70px;
 }
 
-h1[id]:before, h2[id]:before, h3[id]:before, h4[id]:before, h5[id]:before, h6[id]:before {
-    content: "";
-    display: block;
-    margin-top: -75px;
-    height: 75px;
+body {
+    padding-top: 70px;
 }
 
 p > img {
@@ -103,6 +100,8 @@ div.source-links {
     .bs-sidebar.affix {
         position: fixed; /* Undo the static from mobile first approach */
         top: 80px;
+        max-height: calc(100% - 180px);
+        overflow-y: auto;
     }
     .bs-sidebar.affix-bottom {
         position: absolute; /* Undo the static from mobile first approach */
@@ -133,9 +132,6 @@ div.source-links {
     left: 100%;
     margin-top: 0px;
     margin-left: 0px;
-    -webkit-border-radius: 0 6px 6px 6px;
-    -moz-border-radius: 0 6px 6px;
-    border-radius: 0 6px 6px 6px;
 }
 
 .dropdown-submenu:hover>.dropdown-menu {
@@ -167,7 +163,127 @@ div.source-links {
 .dropdown-submenu.pull-left>.dropdown-menu {
     left: -100%;
     margin-left: 00px;
-    -webkit-border-radius: 6px 0 6px 6px;
-    -moz-border-radius: 6px 0 6px 6px;
-    border-radius: 6px 0 6px 6px;
+}
+/* Start Bootstrap Callouts CSS Source by Chris Pratt (https://codepen.io/chrisdpratt/pen/IAymB) MIT License*/
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+    background-color: #FCFDFF;
+}
+.bs-callout h4 {
+    font-style: normal;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+.bs-callout code {
+    border-radius: 3px;
+}
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+.bs-callout-default {
+    border-left-color: #FA023C; /*modified from upstream default by Christopher Simpkins*/
+}
+.bs-callout-default h4 {
+    color: #FA023C; /*modified from upstream default by Christopher Simpkins*/
+}
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+.bs-callout-primary h4 {
+    color: #428bca;
+}
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+.bs-callout-info {
+    border-left-color: #5bc0de;
+}
+.bs-callout-info h4 {
+    color: #5bc0de;
+}
+/* End Bootstrap Callouts CSS Source by Chris Pratt */
+
+/* Headerlinks */
+.headerlink {
+    display: none;
+    padding-left: .5em;
+}
+
+h1:hover .headerlink, h2:hover .headerlink, h3:hover .headerlink, h4:hover .headerlink, h5:hover .headerlink, h6:hover .headerlink {
+    display: inline-block;
+}
+
+/* Admonitions */
+.admonition {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+    background-color: #FCFDFF;
+}
+
+.admonition p:last-child {
+    margin-bottom: 0;
+}
+.admonition code {
+    border-radius: 3px;
+}
+.admonition+.admonition {
+    margin-top: -5px;
+}
+
+.admonition.note { /* csslint allow: adjoining-classes */
+    border-left-color: #428bca;
+}
+
+.admonition.warning { /* csslint allow: adjoining-classes */
+    border-left-color: #f0ad4e;
+}
+
+.admonition.danger { /* csslint allow: adjoining-classes */
+    border-left-color: #d9534f;
+}
+
+.admonition-title {
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.admonition.note > .admonition-title {
+    color: #428bca;
+}
+
+.admonition.warning > .admonition-title {
+    color: #f0ad4e;
+}
+
+.admonition.danger > .admonition-title {
+    color: #d9534f;
 }
