@@ -72,7 +72,7 @@ cookiecutter https://github.com/drivendata/cookiecutter-data-science
 
 ### Example
 
-[![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
+<script id="asciicast-244658" src="https://asciinema.org/a/244658.js" async></script>
 
 ## Directory structure
 
