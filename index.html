@@ -174,7 +174,7 @@
 <p>Consistency within a project is more important. Consistency within one module or function is the most important. ... However, know when to be inconsistent -- sometimes style guide recommendations just aren't applicable. When in doubt, use your best judgment. Look at other examples and decide what looks best. And don't hesitate to ask!</p>
 </blockquote>
 <h2 id="getting-started">Getting started</h2>
-<p>With this in mind, we've created a data science cookiecutter template for projects in Python. Your analysis doesn't have to be in Python, but the template does provide some Python boilerplate that you'd want to remove (in the <code>{{ cookiecutter.module_name }}</code> folder for example, and the Sphinx documentation skeleton in <code>docs</code>).</p>
+<p>With this in mind, we've created a data science cookiecutter template for projects in Python. Your analysis doesn't have to be in Python, but the template does provide some Python boilerplate that you'd want to remove (in the <code>src</code> folder for example, and the Sphinx documentation skeleton in <code>docs</code>).</p>
 <h3 id="requirements">Requirements</h3>
 <ul>
 <li>Python 2.7 or 3.5</li>
@@ -185,7 +185,8 @@
 <pre><code class="language-nohighlight">cookiecutter https://github.com/drivendata/cookiecutter-data-science
 </code></pre>
 <h3 id="example">Example</h3>
-<p><a href="https://asciinema.org/a/244658"><img alt="asciicast" src="https://asciinema.org/a/244658.svg" /></a></p>
+<script id="asciicast-244658" src="https://asciinema.org/a/244658.js" async></script>
+
 <h2 id="directory-structure">Directory structure</h2>
 <pre><code class="language-nohighlight">├── LICENSE
 ├── Makefile           &lt;- Makefile with commands like `make data` or `make train`
@@ -213,8 +214,8 @@
 │                         generated with `pip freeze &gt; requirements.txt`
 │
 ├── setup.py           &lt;- Make this project pip installable with `pip install -e`
-├── {{ cookiecutter.module_name }}                &lt;- Source code for use in this project.
-│   ├── __init__.py    &lt;- Makes {{ cookiecutter.module_name }} a Python module
+├── src                &lt;- Source code for use in this project.
+│   ├── __init__.py    &lt;- Makes src a Python module
 │   │
 │   ├── data           &lt;- Scripts to download or generate data
 │   │   └── make_dataset.py
@@ -235,7 +236,7 @@
 <h2 id="opinions">Opinions</h2>
 <p>There are some opinions implicit in the project structure that have grown out of our experience with what works and what doesn't when collaborating on data science projects. Some of the opinions are about workflows, and some of the opinions are about tools that make life easier. Here are some of the beliefs which this project is built on—if you've got thoughts, please <a href="#contributing">contribute or share them</a>.</p>
 <h3 id="data-is-immutable">Data is immutable</h3>
-<p>Don't ever edit your raw data, especially not manually, and especially not in Excel. Don't overwrite your raw data. Don't save multiple versions of the raw data. Treat the data (and its format) as immutable. The code you write should move the raw data through a pipeline to your final analysis. You shouldn't have to run all of the steps every time you want to make a new figure (see <a href="#analysis-is-a-dag">Analysis is a DAG</a>), but anyone should be able to reproduce the final products with only the code in <code>{{ cookiecutter.module_name }}</code> and the data in <code>data/raw</code>.</p>
+<p>Don't ever edit your raw data, especially not manually, and especially not in Excel. Don't overwrite your raw data. Don't save multiple versions of the raw data. Treat the data (and its format) as immutable. The code you write should move the raw data through a pipeline to your final analysis. You shouldn't have to run all of the steps every time you want to make a new figure (see <a href="#analysis-is-a-dag">Analysis is a DAG</a>), but anyone should be able to reproduce the final products with only the code in <code>src</code> and the data in <code>data/raw</code>.</p>
 <p>Also, if data is immutable, it doesn't need source control in the same way that code does. Therefore, <strong><em>by default, the data folder is included in the <code>.gitignore</code> file.</em></strong> If you have a small amount of data that rarely changes, you may want to include the data in the repository. Github currently warns if files are over 50MB and rejects files over 100MB. Some other options for storing/syncing large data include <a href="https://aws.amazon.com/s3/">AWS S3</a> with a syncing tool (e.g., <a href="http://s3tools.org/s3cmd"><code>s3cmd</code></a>), <a href="https://git-lfs.github.com/">Git Large File Storage</a>, <a href="https://git-annex.branchable.com/">Git Annex</a>, and <a href="http://dat-data.com/">dat</a>. Currently by default, we ask for an S3 bucket and use <a href="http://docs.aws.amazon.com/cli/latest/reference/s3/index.html">AWS CLI</a> to sync data in the <code>data</code> folder with the server.</p>
 <h3 id="notebooks-are-for-exploration-and-communication">Notebooks are for exploration and communication</h3>
 <p>Notebook packages like the <a href="http://jupyter.org/">Jupyter notebook</a>, <a href="http://beakernotebook.com/">Beaker notebook</a>, <a href="http://zeppelin-project.org/">Zeppelin</a>, and other literate programming tools are very effective for exploratory data analysis. However, these tools can be less effective for reproducing an analysis. When we use notebooks in our work, we often subdivide the <code>notebooks</code> folder. For example, <code>notebooks/exploratory</code> contains initial explorations, whereas <code>notebooks/reports</code> is more polished work that can be exported as html to the <code>reports</code> directory.</p>
@@ -245,17 +246,17 @@
 <p>Follow a naming convention that shows the owner and the order the analysis was done in. We use the format <code>&lt;step&gt;-&lt;ghuser&gt;-&lt;description&gt;.ipynb</code> (e.g., <code>0.3-bull-visualize-distributions.ipynb</code>).</p>
 </li>
 <li>
-<p>Refactor the good parts. Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at <code>{{ cookiecutter.module_name }}/data/make_dataset.py</code> and load data from <code>data/interim</code>. If it's useful utility code, refactor it to <code>{{ cookiecutter.module_name }}</code>.</p>
+<p>Refactor the good parts. Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at <code>src/data/make_dataset.py</code> and load data from <code>data/interim</code>. If it's useful utility code, refactor it to <code>src</code>.</p>
 </li>
 </ol>
 <p>Now by default we turn the project into a Python package (see the <code>setup.py</code> file). You can import your code and use it in notebooks with a cell like the following:</p>
 <pre><code># OPTIONAL: Load the &quot;autoreload&quot; extension so that code can change
 %load_ext autoreload
 
-# OPTIONAL: always reload modules so that as you change code in {{ cookiecutter.module_name }}, it gets loaded
+# OPTIONAL: always reload modules so that as you change code in src, it gets loaded
 %autoreload 2
 
-from {{ cookiecutter.module_name }}.data import make_dataset
+from src.data import make_dataset
 </code></pre>
 <h3 id="analysis-is-a-dag">Analysis is a DAG</h3>
 <p>Often in an analysis you have long-running steps that preprocess data or train models. If these steps have been run already (and you have stored the output somewhere like the <code>data/interim</code> directory), you don't want to wait to rerun them every time. We prefer <a href="https://www.gnu.org/software/make/"><code>make</code></a> for managing steps that depend on each other, especially the long-running ones. Make is a common tool on Unix-based platforms (and <a href="">is available for Windows</a>). Following the <a href="https://www.gnu.org/software/make/"><code>make</code> documentation</a>, <a href="https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions">Makefile conventions</a>, and <a href="http://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Portable-Make.html#Portable-Make">portability guide</a> will help ensure your Makefiles work effectively across systems. Here are <a href="http://zmjones.com/make/">some</a> <a href="http://blog.kaggle.com/2012/10/15/make-for-data-scientists/">examples</a> to <a href="https://web.archive.org/web/20150206054212/http://www.bioinformaticszen.com/post/decomplected-workflows-makefiles/">get started</a>. A number of data folks use <code>make</code> as their tool of choice, including <a href="https://bost.ocks.org/mike/make/">Mike Bostock</a>.</p>
@@ -281,8 +282,8 @@ AWS_SECRET_ACCESS_KEY=mysecretkey
 OTHER_VARIABLE=something
 </code></pre>
 <h4 id="use-a-package-to-load-these-variables-automatically">Use a package to load these variables automatically.</h4>
-<p>If you look at the stub script in <code>{{ cookiecutter.module_name }}/data/make_dataset.py</code>, it uses a package called <a href="https://github.com/theskumar/python-dotenv">python-dotenv</a> to load up all the entries in this file as environment variables so they are accessible with <code>os.environ.get</code>. Here's an example snippet adapted from the <code>python-dotenv</code> documentation:</p>
-<pre><code class="language-python"># {{ cookiecutter.module_name }}/data/dotenv_example.py
+<p>If you look at the stub script in <code>src/data/make_dataset.py</code>, it uses a package called <a href="https://github.com/theskumar/python-dotenv">python-dotenv</a> to load up all the entries in this file as environment variables so they are accessible with <code>os.environ.get</code>. Here's an example snippet adapted from the <code>python-dotenv</code> documentation:</p>
+<pre><code class="language-python"># src/data/dotenv_example.py
 import os
 from dotenv import load_dotenv, find_dotenv
 
@@ -427,5 +428,5 @@ aws_secret_access_key=myprojectsecretkey
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2020-12-22 18:43:40.520262+00:00
+Build Date UTC : 2020-12-22 18:46:37.158505+00:00
 -->
