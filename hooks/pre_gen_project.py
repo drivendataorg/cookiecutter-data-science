@@ -4,16 +4,16 @@ def deprecation_warning():
 =============================================================================
 *** DEPRECATION WARNING ***
 
-Cookiecutter data science is moving to V2 soon, which will entail using
+Cookiecutter data science is moving to v2 soon, which will entail using
 the command `ccds ...` rather than `cookiecutter ...`. The cookiecutter command
-will continue to work and this version of the template will still be available,
-but you will need to explicitly use the @v1 git tag to select it.
+will continue to work, and this version of the template will still be available.
+To use the legacy template, you will need to explicitly use `-c v1` to select it.
 
-Please update any scripts/automation you have to append the @v1 tag, which is
-available now.
+Please update any scripts/automation you have to append the `-c v1` option,
+which is available now.
 
 For example:
-    cookiecutter https://github.com/drivendata/cookiecutter-data-science@v1
+    cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
 =============================================================================
 
     """)
