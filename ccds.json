@@ -45,6 +45,10 @@
         "yes",
         "no"
     ],
+    "nbautoexport": [
+        "yes",
+        "no"
+    ],
     "open_source_license": [
         "MIT",
         "BSD-3-Clause",

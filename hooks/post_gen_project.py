@@ -37,6 +37,10 @@ packages += [
 ]
 # {% endif %}
 
+# {% if cookiecutter.nbautoexport == "yes" %}
+packages += ['nbautoexport']
+# {% endif %}
+
 # track packages that are not available through conda
 pip_only_packages = [
     "awscli",
