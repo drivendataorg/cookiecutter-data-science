@@ -1,0 +1,9 @@
+version: "3"
+services:
+  jupyterlab:
+    image: {{ cookiecutter.repo_name }}
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080"
