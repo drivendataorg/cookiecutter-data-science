@@ -85,7 +85,7 @@ def verify_files(root, config):
         "docs/getting-started.rst",
         "docs/index.rst",
         "docs/make.bat",
-        "ethics.md"
+        "ethics.md",
         "notebooks/.gitkeep",
         "notebooks/.nbautoexport",
         "references/.gitkeep",
