@@ -8,7 +8,7 @@ _A logical, reasonably standardized, but flexible project structure for doing an
 
 ### Requirements to use the cookiecutter template:
 -----------
- - Python 2.7 or 3.5
+ - Python 2.7 or 3.5+
  - [Cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html) >= 1.4.0: This can be installed with pip by or conda depending on how you manage your Python packages:
 
 ``` bash
@@ -26,10 +26,19 @@ $ conda install cookiecutter
 ### To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/drivendata/cookiecutter-data-science
+    cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
 
 
 [![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
+
+### New version of Cookiecutter Data Science
+------------
+Cookiecutter data science is moving to v2 soon, which will entail using
+the command `ccds ...` rather than `cookiecutter ...`. The cookiecutter command
+will continue to work, and this version of the template will still be available.
+To use the legacy template, you will need to explicitly use `-c v1` to select it.
+Please update any scripts/automation you have to append the `-c v1` option (as above),
+which is available now.
 
 
 ### The resulting directory structure
@@ -63,7 +72,10 @@ The directory structure of your new project looks like this:
 ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
 │                         generated with `pip freeze > requirements.txt`
 │
+├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+│
 ├── {{ cookiecutter.module_name }}                <- Source code for use in this project.
+│   │
 │   ├── __init__.py    <- Makes {{ cookiecutter.module_name }} a Python module
 │   │
 │   ├── data           <- Scripts to download or generate data

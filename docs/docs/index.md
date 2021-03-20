@@ -72,7 +72,7 @@ cookiecutter https://github.com/drivendata/cookiecutter-data-science
 
 ### Example
 
-[![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
+<script id="asciicast-244658" src="https://asciinema.org/a/244658.js" async></script>
 
 ## Directory structure
 
@@ -155,7 +155,7 @@ Since notebooks are challenging objects for source control (e.g., diffs of the `
 from {{ cookiecutter.module_name }}.data import make_dataset
 ```
 
-### Analysis is a DAG
+### Analysis is a directed acyclic graph ([DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph))
 
 Often in an analysis you have long-running steps that preprocess data or train models. If these steps have been run already (and you have stored the output somewhere like the `data/interim` directory), you don't want to wait to rerun them every time. We prefer [`make`](https://www.gnu.org/software/make/) for managing steps that depend on each other, especially the long-running ones. Make is a common tool on Unix-based platforms (and [is available for Windows]()). Following the [`make` documentation](https://www.gnu.org/software/make/), [Makefile conventions](https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions), and [portability guide](http://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Portable-Make.html#Portable-Make) will help ensure your Makefiles work effectively across systems. Here are [some](http://zmjones.com/make/) [examples](http://blog.kaggle.com/2012/10/15/make-for-data-scientists/) to [get started](https://web.archive.org/web/20150206054212/http://www.bioinformaticszen.com/post/decomplected-workflows-makefiles/). A number of data folks use `make` as their tool of choice, including [Mike Bostock](https://bost.ocks.org/mike/make/).
 
