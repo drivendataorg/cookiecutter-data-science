@@ -1,0 +1,36 @@
+
+name: tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    # Run every Sunday
+    - cron: "0 0 * * 0"
+
+jobs:
+  build:
+    name: ${{ matrix.os }}, Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: [3.6, 3.7, 3.8]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r dev-requirements.txt --use-feature=2020-resolver
+
+      - name: Run tests
+        run: |
+          pytest -vvv
