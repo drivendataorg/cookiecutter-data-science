@@ -44,7 +44,7 @@ which is available now.
 ### The resulting directory structure
 ------------
 
-The directory structure of your new project looks like this: 
+The directory structure of your new project looks like this:
 
 ```
 ├── LICENSE
@@ -64,6 +64,8 @@ The directory structure of your new project looks like this:
 │                         the creator's initials, and a short `-` delimited description, e.g.
 │                         `1.0-jqp-initial-data-exploration`.
 │
+├── pyproject.toml     <- Project configuration file with settings for running black; see setuptools.readthedocs.io
+│
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
 │
 ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
@@ -71,6 +73,8 @@ The directory structure of your new project looks like this:
 │
 ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
 │                         generated with `pip freeze > requirements.txt`
+│
+├── setup.cfg          <- Configuration file for flake8 and pep8
 │
 ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
 │
