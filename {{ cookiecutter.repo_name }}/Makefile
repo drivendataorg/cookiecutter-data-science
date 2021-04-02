@@ -1,4 +1,4 @@
-.PHONY: clean data lint requirements sync_data_down sync_data_up
+.PHONY: clean data lint format requirements sync_data_down sync_data_up
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -36,6 +36,10 @@ clean:
 ## Lint using flake8
 lint:
 	flake8 {{ cookiecutter.module_name }}
+
+## Format with black
+format:
+	black --config pyproject.toml {{ cookiecutter.module_name }}
 
 {% if not cookiecutter.dataset_storage.none %}
 ## Download Data from storage system
@@ -82,6 +86,10 @@ create_environment:
 	{% endif %}
 {% endif %}
 
+## Wrapper for format and lint
+pre-commit:
+	make format
+	make lint
 
 #################################################################################
 # PROJECT RULES                                                                 #
