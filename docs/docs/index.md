@@ -220,7 +220,7 @@ aws_secret_access_key=mysecretkey
 aws_access_key_id=myprojectaccesskey
 aws_secret_access_key=myprojectsecretkey
 ```
-You can add the profile name when initialising a project; assuming no applicable environment variables are set, the profile credentials will be used be default.
+You can add the profile name when initialising a project; assuming no applicable environment variables are set, the profile credentials will be used by default.
 
 ### Be conservative in changing the default folder structure
 
