@@ -1,4 +1,4 @@
 {
-    "project_name": "nothing",
+    "project_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
     "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}"
 }
