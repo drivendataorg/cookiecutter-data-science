@@ -1,0 +1,43 @@
+exclude: projects/etl/
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: check-yaml
+        exclude: '.github'
+      - id: check-ast
+      - id: check-added-large-files
+        args: ['--maxkb=2048']
+      - id: check-case-conflict
+
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v2.16.0
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.1.0
+    hooks:
+      - id: nbqa-black
+      - id: nbqa-pyupgrade
+        args: [--py36-plus]
+      - id: nbqa-isort
+
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: python
+        types: [ python ]
+      - id: flake8
+        name: flake8
+        entry: flake8
+        language: python
+        types: [ python ]
+      - id: mypy
+        name: mypy
+        entry: mypy
+        language: python
+        types: [ python ]

@@ -1,0 +1,104 @@
+name: PR flow
+
+on: [push]
+
+env:
+  poetry-version: {{ cookiecutter.poetry_version }}
+  python-version: 3.9
+  docker-registry: 003209562630.dkr.ecr.eu-central-1.amazonaws.com
+  aws-region: eu-central-1
+  s3-code-bucket: prod-analyzer-code
+  env: 'prod'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # - name: Install necessary system packages
+      #   run: sudo apt-get -y install hmmer
+
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.python-version }}
+      - run: |
+          pip install poetry==${{ env.poetry-version }}
+
+      - name: Cache poetry virtualenv
+        id: cache-poetry
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Add github token to gitconfig for clonning dependencies
+        run: |
+          git config --global url."https://api:${{ secrets.CHECKOUT_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
+      - name: Install dependencies
+        if: steps.cache-poetry.outputs.cache-hit != 'true'
+        run: poetry install
+
+      - name: Cleanup token
+        run: git config --global --remove-section url."https://api:${{ secrets.CHECKOUT_TOKEN }}@github.com/"
+
+      - name: Lint
+        run: |
+          git ls-files | xargs poetry run pre-commit run --files
+          poetry run cz check -m ${{ toJSON(github.event.head_commit.message) }}
+
+      - name: Test
+        run: poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=rnd --cov-report=xml --cov-report=html
+
+      - name: Upload pytest test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: pytest-results-${{ env.python-version }}
+          path: |
+            junit/test-results.xml
+            coverage.xml
+            htmlcov
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
+
+
+  deploy:
+    needs: test
+    if: ${{ github.ref == 'refs/heads/master' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # - name: Install necessary system packages
+      #   run: sudo apt-get -y install hmmer
+
+      - name: Set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.python-version }}
+      - run: |
+          pip install poetry==${{ env.poetry-version }}
+
+      - name: Cache poetry virtualenv
+        id: cache-poetry
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        if: steps.cache-poetry.outputs.cache-hit != 'true'
+        run: poetry install
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "action@github.com"
+          poetry run semantic-release publish
+
