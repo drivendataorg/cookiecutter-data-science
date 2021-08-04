@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "{{ cookiecutter.repo_name }}"
 version = "{{ cookiecutter.version }}"
-description = {{ cookiecutter.description }}
+description = "{{ cookiecutter.description }}"
 authors = ["{{ cookiecutter.author_name }}"]
 
 [tool.poetry.dependencies]
