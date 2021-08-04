@@ -1,4 +1,0 @@
-mkdocs
-mkdocs-cinder
-cookiecutter
-pytest

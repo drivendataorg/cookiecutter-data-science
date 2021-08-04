@@ -22,11 +22,11 @@ endif
 
 ## Install Python Dependencies
 requirements: test_environment
-	$(PYTHON_INTERPRETER) -m poetry install
+	poetry install
 
 ## Make Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
+	$(PYTHON_INTERPRETER) {{ cookiecutter.repo_name}}/data/make_dataset.py data/raw data/processed
 
 ## Delete all compiled Python files
 clean:
@@ -35,7 +35,7 @@ clean:
 
 ## Lint using flake8
 lint:
-	flake8 src
+	poetry run pre-commit run --all-files
 
 ## Upload Data to S3
 sync_data_to_s3:
@@ -55,21 +55,24 @@ endif
 
 ## Set up python interpreter environment
 create_environment:
-ifeq (True,$(HAS_CONDA))
-		@echo ">>> Detected conda, creating conda environment."
-ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
-	conda create --name $(PROJECT_NAME) python=3
-else
-	conda create --name $(PROJECT_NAME) python=2.7
-endif
-		@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
-else
-	$(PYTHON_INTERPRETER) -m poetry install
-	@echo ">>> Installing dependencies inside of poetry venv\n\
-	# export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
-	# @bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
-	# @echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
-endif
+# ifeq (True,$(HAS_CONDA))
+# 		@echo ">>> Detected conda, creating conda environment."
+# ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
+# 	conda create --name $(PROJECT_NAME) python=3
+# else
+# 	conda create --name $(PROJECT_NAME) python=2.7
+# endif
+# 		@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
+# else
+	@echo ">>> Installing dependencies inside of poetry venv\n"
+	poetry install
+	@echo ">>> Installing git commit hooks"
+	poetry run pre-commit install
+	poetry run pre-commit install --hook-type commit-msg
+#	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
+#	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
+#	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
+#	endif
 
 ## Test python environment is setup correctly
 test_environment:
