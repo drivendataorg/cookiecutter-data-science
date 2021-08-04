@@ -78,7 +78,6 @@ Here's an instruction how to do it: https://code.visualstudio.com/docs/python/en
  * Merge to master should be done after a review and at least one aprove and without unresolved issues
  * You should test your code if possible - use pytest for that
  * Whether possible - typehint your code. It's MUCH easier later to debug stuff.
- * Create subfolders in experiments folder in case you it's something that's not sure to be re-usable
  * If necessary, install our existing code (from other repositories in NaturalAntibody workspace) using poetry (git+https protocol)
  * In your commit message, on a first line, try to add task number like NARD-<number>. This way it should link to an issue in JIRA
 
