@@ -6,12 +6,11 @@ authors = ["{{ cookiecutter.author_name }}"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-python-dotenv>=0.5.1
+python-dotenv = ">=0.5.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
 pylint = "^2.6.0"
-pytest = "^5.2"
 pre-commit = "^2.7.1"
 mypy = "^0.790"
 flake8 = "^3.8.4"
@@ -34,7 +33,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
 version_variable = [
-    "{{ cookiecutter.repo_name }}\/__init__.py\:__version__",
+    "{{ cookiecutter.repo_name }}/__init__.py:__version__",
     "pyproject.toml:version"
 ]
 upload_to_pypi = false
