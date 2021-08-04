@@ -28,10 +28,8 @@ Project Organization
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
     │   └── figures        <- Generated graphics and figures to be used in reporting
     │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
     ├── pyproject.toml     <- makes project poetry and pip installable (poetry install) so src can be imported
+                              also containing dependencies
     ├── {{ cookiecutter.repo_name }} <- Source code for use in this project.
     │   ├── __init__.py    <- Makes src a Python module
     │   │
@@ -62,3 +60,41 @@ Run these commands:
 * poetry install
 * poetry run pre-commit install
 * poetry run pre-commit install --hook-type commit-msg
+
+
+**Important note**: After running these commands you will need to run git commit either using poetry (`poetry run git commit`) or enable venv in your terminal (`poetry shell`)
+
+
+### Python and missing imports
+
+Because of use of virtualenv editor will probably not see any imports correctly. To fix that in VSCode you need to choose interpreter.
+Here's an instruction how to do it: https://code.visualstudio.com/docs/python/environments
+
+**It might require restart of VSCode after poetry install** (only install is problematic when new virtualenv is created, but further updates are handled correctly)
+
+## Work conventions
+
+ * Each task should be done in a separate branch
+ * Merge to master should be done after a review and at least one aprove and without unresolved issues
+ * You should test your code if possible - use pytest for that
+ * Whether possible - typehint your code. It's MUCH easier later to debug stuff.
+ * Create subfolders in experiments folder in case you it's something that's not sure to be re-usable
+ * If necessary, install our existing code (from other repositories in NaturalAntibody workspace) using poetry (git+https protocol)
+ * In your commit message, on a first line, try to add task number like NARD-<number>. This way it should link to an issue in JIRA
+
+
+## Suggested editor extensions
+We're mostly using VSCode in our workflow. These extensions should be installed at minimum:
+
+ * Editorconfig (code conventions)
+ * Mypy (typings verifier)
+ * Python extension
+ * Jupyter (should be installed by python extension)
+ * Pylance (should be installed by python extension)
+
+Other extensions that could be installed are:
+
+ * Project manager (easily switch between projects)
+ * Docker extension
+ * Remote containers editing
+ * GitLens - some additional info about commits inside your editor
