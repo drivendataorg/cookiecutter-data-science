@@ -36,7 +36,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.semantic_release]
 version_variable = [
-    "{{ cookiecutter.repo_name }}/__init__.py:__version__",
+    "{{ cookiecutter.repo_name }}/__init__.py\:__version__",
     "pyproject.toml:version"
 ]
 upload_to_pypi = false
