@@ -13,11 +13,6 @@ pytest = "^6.2.4"
 click = "^8.0.1"
 
 [tool.poetry.dev-dependencies]
-Sphinx = "^4.1.2"
-coverage = "^5.5"
-awscli = "^1.20.13"
-flake8 = "^3.9.2"
-python-dotenv = "^0.19.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

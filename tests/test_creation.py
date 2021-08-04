@@ -53,7 +53,7 @@ class TestCookieSetup(object):
         setup_ = self.path / 'setup.py'
         args = ['python', str(setup_), '--version']
         p = check_output(args).decode('ascii').strip()
-        assert p == '0.1.0'
+        assert p == "{{ cookiecutter.version }}"
 
     def test_license(self):
         license_path = self.path / 'LICENSE'

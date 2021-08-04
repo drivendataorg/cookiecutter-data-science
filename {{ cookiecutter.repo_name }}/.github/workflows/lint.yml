@@ -10,6 +10,7 @@ env:
   s3-code-bucket: prod-analyzer-code
   env: 'prod'
 
+{% raw -%}
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -102,3 +103,4 @@ jobs:
           git config --global user.email "action@github.com"
           poetry run semantic-release publish
 
+{%- endraw %}
