@@ -54,9 +54,10 @@ Project Organization
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
 
-## How to start working
+## How to start
+Either use `Makefile` (type `make` in your terminal), which will show you available commands and use `make create_enviroment` or if you prefer, run these
+manually:
 
-Run these commands:
 * poetry install
 * poetry run pre-commit install
 * poetry run pre-commit install --hook-type commit-msg
