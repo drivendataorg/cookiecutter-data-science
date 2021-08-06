@@ -48,7 +48,7 @@ jobs:
 
       - name: Lint
         run: |
-          git ls-files | xargs poetry run pre-commit run --files
+          poetry run pre-commit run --all-files
           poetry run cz check -m ${{ toJSON(github.event.head_commit.message) }}
 
       - name: Test
