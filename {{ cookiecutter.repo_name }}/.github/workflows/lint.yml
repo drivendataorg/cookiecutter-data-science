@@ -50,10 +50,10 @@ jobs:
         run: |
           poetry run pre-commit run --all-files
           poetry run cz check -m ${{ toJSON(github.event.head_commit.message) }}
-
+{%- endraw %}
       - name: Test
-        run: poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=rnd --cov-report=xml --cov-report=html
-
+        run: poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov={{ cookiecutter.repo_name }} --cov-report=xml --cov-report=html
+{% raw -%}
       - name: Upload pytest test results
         uses: actions/upload-artifact@v2
         with:
