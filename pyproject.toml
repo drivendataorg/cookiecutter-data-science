@@ -5,7 +5,7 @@ description = ""
 authors = ["Piotr Deszyński <deszynski@red-sky.pl>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.8,<3.10"
 mkdocs = "^1.2.2"
 mkdocs-cinder = "^1.2.0"
 cookiecutter = "^1.7.3"
