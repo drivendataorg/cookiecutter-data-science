@@ -9,6 +9,7 @@ env:
   aws-region: eu-central-1
   s3-code-bucket: prod-analyzer-code
   env: 'prod'
+  min-test-coverage-percent: 50
 
 {% raw -%}
 jobs:
@@ -52,7 +53,7 @@ jobs:
           poetry run cz check -m ${{ toJSON(github.event.head_commit.message) }}
 {%- endraw %}
       - name: Test
-        run: poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov={{ cookiecutter.repo_name }} --cov-report=xml --cov-report=html
+        run: poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov={{ cookiecutter.repo_name }} --cov-report=xml --cov-report=html --cov-report=term | tee pytest-coverage.txt
 {% raw -%}
       - name: Upload pytest test results
         uses: actions/upload-artifact@v2
@@ -60,10 +61,28 @@ jobs:
           name: pytest-results-${{ env.python-version }}
           path: |
             junit/test-results.xml
+            pytest-coverage.txt
             coverage.xml
-            htmlcov
+            htmlcov/
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
+
+      - name: Pytest coverage comment
+        uses: MishaKav/pytest-coverage-comment@v1.1.6
+        with:
+          pytest-coverage-path: pytest-coverage.txt
+          title: Analyzer subproject coverage report
+          badge-title: Analyzer subproject coverage
+          hide-badge: false
+          hide-report: false
+          create-new-comment: true
+          hide-comment: false
+          junitxml-path: junit/test-results.xml
+        if: ${{ always() }}
+
+      - name: Fail on too low coverage
+        if: ${{ github.ref != 'refs/heads/master' }}
+        run: poetry run coverage report --fail-under=${{ env.min-test-coverage-percent }}
 
 
   deploy:
