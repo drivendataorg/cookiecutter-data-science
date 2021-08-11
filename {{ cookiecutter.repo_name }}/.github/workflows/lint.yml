@@ -1,6 +1,11 @@
 name: PR flow
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
 
 env:
   poetry-version: {{ cookiecutter.poetry_version }}
@@ -50,7 +55,7 @@ jobs:
       - name: Lint
         run: |
           poetry run pre-commit run --all-files
-          poetry run cz check -m ${{ toJSON(github.event.head_commit.message) }}
+          poetry run cz check -m "$(git log --format=%B -n 1)"
 {%- endraw %}
       - name: Test
         run: poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov={{ cookiecutter.repo_name }} --cov-report=xml --cov-report=html --cov-report=term | tee pytest-coverage.txt
