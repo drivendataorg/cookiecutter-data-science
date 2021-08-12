@@ -58,8 +58,11 @@ jobs:
           poetry run cz check -m "$(git log --format=%B -n 1)"
 {%- endraw %}
       - name: Test
-        run: poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov={{ cookiecutter.repo_name }} --cov-report=xml --cov-report=html --cov-report=term | tee pytest-coverage.txt
+        run: poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov={{ cookiecutter.repo_name }} --cov-report=xml --cov-report=html --cov-report=term
 {% raw -%}
+      - name: Save pytest coverage report in text form
+        run: poetry run coverage report > pytest-coverage.txt
+
       - name: Upload pytest test results
         uses: actions/upload-artifact@v2
         with:

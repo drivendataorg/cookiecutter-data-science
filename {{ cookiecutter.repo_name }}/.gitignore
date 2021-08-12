@@ -87,3 +87,7 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+/junit
+coverage.xml
+/htmlcov
