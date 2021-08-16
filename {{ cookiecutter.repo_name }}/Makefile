@@ -26,7 +26,7 @@ requirements: test_environment
 
 ## Make Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) {{ cookiecutter.repo_name}}/data/make_dataset.py data/raw data/processed
+	poetry run python {{ cookiecutter.repo_name}}/data/make_dataset.py data/raw data/processed
 
 ## Delete all compiled Python files
 clean:
@@ -53,8 +53,12 @@ else
 	aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
 endif
 
+.git:
+	@echo ">> Not a git repository, initializing repository"
+	@git init
+
 ## Set up python interpreter environment
-create_environment:
+create_environment: .git
 # ifeq (True,$(HAS_CONDA))
 # 		@echo ">>> Detected conda, creating conda environment."
 # ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
@@ -67,6 +71,9 @@ create_environment:
 	@echo ">>> Installing dependencies inside of poetry venv\n"
 	poetry install
 	@echo ">>> Installing git commit hooks"
+	ifneq($(git rev-parse --is-inside-work-tree),true)
+		git init
+	endif
 	poetry run pre-commit install
 	poetry run pre-commit install --hook-type commit-msg
 #	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
