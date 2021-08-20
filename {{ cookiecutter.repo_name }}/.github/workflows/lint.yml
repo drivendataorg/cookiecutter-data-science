@@ -58,18 +58,15 @@ jobs:
           poetry run cz check -m "$(git log --format=%B -n 1)"
 {%- endraw %}
       - name: Test
-        run: poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov={{ cookiecutter.repo_name }} --cov-report=xml --cov-report=html --cov-report=term
+        run: poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov={{ cookiecutter.repo_name }} --cov-report=xml --cov-report=html --cov-report=term-missing > pytest-output.txt
 {% raw -%}
-      - name: Save pytest coverage report in text form
-        run: poetry run coverage report > pytest-coverage.txt
-
       - name: Upload pytest test results
         uses: actions/upload-artifact@v2
         with:
           name: pytest-results-${{ env.python-version }}
           path: |
+            pytest-output.txt
             junit/test-results.xml
-            pytest-coverage.txt
             coverage.xml
             htmlcov/
         # Use always() to always run this step to publish test results when there are test failures
@@ -78,7 +75,7 @@ jobs:
       - name: Pytest coverage comment
         uses: MishaKav/pytest-coverage-comment@v1.1.6
         with:
-          pytest-coverage-path: pytest-coverage.txt
+          pytest-coverage-path: pytest-output.txt
           title: Coverage report
           badge-title: Coverage
           hide-badge: false
