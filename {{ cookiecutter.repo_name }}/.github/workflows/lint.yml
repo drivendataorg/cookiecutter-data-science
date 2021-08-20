@@ -80,7 +80,7 @@ jobs:
           badge-title: Coverage
           hide-badge: false
           hide-report: false
-          create-new-comment: true
+          create-new-comment: false
           hide-comment: false
           junitxml-path: junit/test-results.xml
         if: ${{ always() }}
