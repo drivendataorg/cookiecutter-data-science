@@ -100,9 +100,9 @@ We welcome contributions! [See the docs for guidelines](https://drivendata.githu
 ### Installing development requirements
 ------------
 
-    pip install -r requirements.txt
+    poetry install
 
 ### Running the tests
 ------------
 
-    py.test tests
+    poetry run py.test tests
