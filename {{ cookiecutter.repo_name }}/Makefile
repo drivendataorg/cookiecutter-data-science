@@ -71,9 +71,6 @@ create_environment: .git
 	@echo ">>> Installing dependencies inside of poetry venv\n"
 	poetry install
 	@echo ">>> Installing git commit hooks"
-	ifneq($(git rev-parse --is-inside-work-tree),true)
-		git init
-	endif
 	poetry run pre-commit install
 	poetry run pre-commit install --hook-type commit-msg
 #	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
