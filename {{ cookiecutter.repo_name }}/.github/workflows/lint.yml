@@ -29,6 +29,7 @@ jobs:
 
       - name: Setup python
         uses: actions/setup-python@v2
+        id: setup-python
         with:
           python-version: ${{ env.python-version }}
       - run: |
@@ -39,7 +40,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.cache/pypoetry/virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-poetry-${{ hashFiles('**/poetry.lock') }}
 
       - name: Add github token to gitconfig for clonning dependencies
         run: |
