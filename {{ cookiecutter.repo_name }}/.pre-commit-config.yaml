@@ -1,0 +1,31 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: master
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-case-conflict
+      - id: debug-statements
+      - id: detect-private-key
+      - id: check-merge-conflict
+      - id: check-added-large-files
+  - repo: https://github.com/PyCQA/isort
+    rev: main
+    hooks:
+      - id: isort
+        args:
+          - --profile
+          - black
+  - repo: https://github.com/psf/black
+    rev: 21.9b0
+    hooks:
+      - id: black
+      - id: black-jupyter
+  - repo: https://github.com/mwouts/jupytext
+    rev: v1.12.0
+    hooks:
+      - id: jupytext
+

@@ -39,7 +39,7 @@ class TestCookieSetup(object):
         if pytest.param.get('author_name'):
             assert p == 'DrivenData'
         else:
-            assert p == 'Your name (or your organization/company/team)'
+            assert p == 'Author'
 
     def test_readme(self):
         readme_path = self.path / 'README.md'
@@ -64,10 +64,10 @@ class TestCookieSetup(object):
         setup_ = self.path / 'setup.py'
         args = ['python', str(setup_), '--license']
         p = check_output(args).decode('ascii').strip()
-        if pytest.param.get('open_source_license'):
+        if pytest.param.get('license'):
             assert p == 'BSD-3'
         else:
-            assert p == 'MIT'
+            pass
 
     def test_requirements(self):
         reqs_path = self.path / 'requirements.txt'
