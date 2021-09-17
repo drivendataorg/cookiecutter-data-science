@@ -26,7 +26,7 @@ requirements: test_environment
 
 ## Make Dataset
 data: requirements
-	poetry run python {{ cookiecutter.repo_name}}/data/make_dataset.py data/raw data/processed
+	poetry run python {{ cookiecutter.repo_name }}/data/make_dataset.py data/raw data/processed
 
 ## Delete all compiled Python files
 clean:
@@ -40,17 +40,17 @@ lint:
 ## Upload Data to S3
 sync_data_to_s3:
 ifeq (default,$(PROFILE))
-	aws s3 sync data/ s3://$(BUCKET)/data/
+	aws s3 sync data/ s3://$(BUCKET)/{{ cookiecutter.repo_name }}/data/
 else
-	aws s3 sync data/ s3://$(BUCKET)/data/ --profile $(PROFILE)
+	aws s3 sync data/ s3://$(BUCKET)/{{ cookiecutter.repo_name }}/data/ --profile $(PROFILE)
 endif
 
 ## Download Data from S3
 sync_data_from_s3:
 ifeq (default,$(PROFILE))
-	aws s3 sync s3://$(BUCKET)/data/ data/
+	aws s3 sync s3://$(BUCKET)/{{ cookiecutter.repo_name }}/data/ data/
 else
-	aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
+	aws s3 sync s3://$(BUCKET)/{{ cookiecutter.repo_name }}/data/ data/ --profile $(PROFILE)
 endif
 
 .git:
@@ -109,7 +109,7 @@ test_environment:
 # 	* print line
 # Separate expressions are necessary because labels cannot be delimited by
 # semicolon; see <http://stackoverflow.com/a/11799865/1968>
-.PHONY: help
+.PHONY: help clean lint requirements
 help:
 	@echo "$$(tput bold)Available rules:$$(tput sgr0)"
 	@echo
