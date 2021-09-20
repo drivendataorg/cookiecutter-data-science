@@ -44,7 +44,7 @@ which is available now.
 ### The resulting directory structure
 ------------
 
-The directory structure of your new project looks like this: 
+The directory structure of your new project looks like this:
 
 ```
 ├── LICENSE
@@ -75,6 +75,8 @@ The directory structure of your new project looks like this:
 ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
 ├── src                <- Source code for use in this project.
 │   ├── __init__.py    <- Makes src a Python module
+|   |
+|   ├── settings.py    <- Settings for this module (for e.g. a data path).
 │   │
 │   ├── data           <- Scripts to download or generate data
 │   │   └── make_dataset.py

@@ -32,6 +32,8 @@ Project Organization
                               also containing dependencies
     ├── {{ cookiecutter.repo_name }} <- Source code for use in this project.
     │   ├── __init__.py    <- Makes src a Python module
+    |   |
+    |   ├── settings.py    <- Settings for this module (for e.g. a data path).
     │   │
     │   ├── data           <- Scripts to download or generate data
     │   │   └── make_dataset.py
