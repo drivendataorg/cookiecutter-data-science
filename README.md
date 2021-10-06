@@ -41,7 +41,7 @@ Please update any scripts/automation you have to append the `-c v1` option (as a
 which is available now.
 
 
-### The resulting directory structure
+### The resulting directory structuressssssss
 ------------
 
 The directory structure of your new project looks like this: 
