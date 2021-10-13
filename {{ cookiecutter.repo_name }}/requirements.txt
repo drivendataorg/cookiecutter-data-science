@@ -1,6 +1,19 @@
 # local package
 -e .
 
+#Common tools
+pandas
+numpy
+matplotlib
+scipy
+seaborn
+psycopg2-binary
+jupyterlab
+notebook
+
+#Testing
+pytest
+
 # external requirements
 click
 Sphinx
