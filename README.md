@@ -26,7 +26,16 @@ $ conda install cookiecutter
 ### To start a new project, run:
 ------------
 
-    cookiecutter -c v1 https://github.com/Giving-Tuesday/cookiecutter-data-science
+    cookiecutter https://github.com/Giving-Tuesday/cookiecutter-data-science
+
+You can create a new conda environment named after your project by running
+
+    make create_environment
+
+Then go to `<repo_name>/data/make_dataset.py` and define your raw data pulls from
+the database and run:
+
+    make data
 
 ### The resulting directory structure
 ------------

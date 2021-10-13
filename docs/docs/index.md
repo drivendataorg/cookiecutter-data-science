@@ -67,7 +67,7 @@ With this in mind, we've created a data science cookiecutter template for projec
 Starting a new project is as easy as running this command at the command line. No need to create a directory first, the cookiecutter will do it for you.
 
 ```nohighlight
-cookiecutter https://github.com/drivendata/cookiecutter-data-science
+cookiecutter https://github.com/Giving-Tuesday/cookiecutter-data-science
 ```
 
 ### Example
@@ -78,47 +78,42 @@ cookiecutter https://github.com/drivendata/cookiecutter-data-science
 
 ```nohighlight
 ├── LICENSE
-├── Makefile           <- Makefile with commands like `make data` or `make train`
+├── Makefile           <- Makefile with commands like `make data` or `make create_environment`
+│
+├── .env               <- Set your environment variables. Put database settings here
+|
 ├── README.md          <- The top-level README for developers using this project.
-├── data
-│   ├── external       <- Data from third party sources.
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
 │
 ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
 │
-├── models             <- Trained and serialized models, model predictions, or model summaries
-│
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
-│
-├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-│
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
+├── tests              <- Where to place tests. Preferably use pytest
 │
 ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
 │                         generated with `pip freeze > requirements.txt`
 │
-├── setup.py           <- Make this project pip installable with `pip install -e`
-├── src                <- Source code for use in this project.
-│   ├── __init__.py    <- Makes src a Python module
+├── setup.py           <- makes project pip installable (pip install -e .) so project can be imported
+│
+├── {{cookiecutter.project_name}}        <- Source code for use in this project.
+│   ├── __init__.py    <- Makes this a Python module
 │   │
-│   ├── data           <- Scripts to download or generate data
-│   │   └── make_dataset.py
+│   ├── data           <- Scripts to download or generate data
+│   |   └── external           <- Data from third party sources.
+│   |   └── processed          <- The final, canonical data sets for modeling.
+│   |   └── raw                <- The original, immutable data dump (likely from sql).
+│   │   └── make_dataset.py    <- Scripts to download or generate data
 │   │
-│   ├── features       <- Scripts to turn raw data into features for modeling
-│   │   └── build_features.py
+│   ├── core           <- Main business logic, models, predictions, summaries, etc
+│   │   └── main.py    <- Typical project entrypoint
 │   │
-│   ├── models         <- Scripts to train models and then use trained models to make
-│   │   │                 predictions
-│   │   ├── predict_model.py
-│   │   └── train_model.py
+│   ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering)
+│   │                         and a short `-` delimited description, e.g.
+│   │                         `1.0-initial-data-exploration`.
 │   │
-│   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-│       └── visualize.py
+│   ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+│   |
+│   └── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
+│       └── figures        <- Generated graphics and figures to be used in reporting
+│
 │
 └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 ```
@@ -208,29 +203,9 @@ load_dotenv(dotenv_path)
 database_url = os.environ.get("DATABASE_URL")
 other_variable = os.environ.get("OTHER_VARIABLE")
 ```
-
-#### AWS CLI configuration
-When using Amazon S3 to store data, a simple method of managing AWS access is to set your access keys to environment variables. However, managing mutiple sets of keys on a single machine (e.g. when working on multiple projects) it is best to use a [credentials file](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html), typically located in `~/.aws/credentials`. A typical file might look like:
-```
-[default]
-aws_access_key_id=myaccesskey
-aws_secret_access_key=mysecretkey
-
-[another_project]
-aws_access_key_id=myprojectaccesskey
-aws_secret_access_key=myprojectsecretkey
-```
-You can add the profile name when initialising a project; assuming no applicable environment variables are set, the profile credentials will be used by default.
-
-### Be conservative in changing the default folder structure
-
-To keep this structure broadly applicable for many different kinds of projects, we think the best approach is to be liberal in changing the folders around for _your_ project, but be conservative in changing the default structure for _all_ projects.
-
-We've created a <span class="label label-info">folder-layout</span> label specifically for issues proposing to add, subtract, rename, or move folders around. More generally, we've also created a <span class="label label-warning">needs-discussion</span> label for issues that should have some careful discussion and broad support before being implemented.
-
 ## Contributing
 
-The Cookiecutter Data Science project is opinionated, but not afraid to be wrong. Best practices change, tools evolve, and lessons are learned. **The goal of this project is to make it easier to start, structure, and share an analysis.** [Pull requests](https://github.com/drivendata/cookiecutter-data-science/pulls) and [filing issues](https://github.com/drivendata/cookiecutter-data-science/issues) is encouraged. We'd love to hear what works for you, and what doesn't.
+The Cookiecutter Data Science project is opinionated, but not afraid to be wrong. Best practices change, tools evolve, and lessons are learned. **The goal of this project is to make it easier to start, structure, and share an analysis.** [Pull requests](https://github.com/Giving-Tuesday/cookiecutter-data-science/pulls) and [filing issues](https://github.com/Giving-Tuesday/cookiecutter-data-science/issues) is encouraged. We'd love to hear what works for you, and what doesn't.
 
 If you use the Cookiecutter Data Science project, link back to this page or [give us a holler](https://twitter.com/drivendataorg) and [let us know](mailto:info@drivendata.org)!
 
