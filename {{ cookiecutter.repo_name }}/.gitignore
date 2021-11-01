@@ -87,3 +87,6 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# exclude model weights
+/model_weights/
