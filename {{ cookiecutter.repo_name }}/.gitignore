@@ -90,3 +90,6 @@ target/
 
 # exclude model weights
 /model_weights/
+
+# exclude logs
+/logs/
