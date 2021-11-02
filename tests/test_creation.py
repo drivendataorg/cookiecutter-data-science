@@ -8,7 +8,7 @@ def no_curlies(filepath):
     """ Utility to make sure no curly braces appear in a file.
         That is, was Jinja able to render everything?
     """
-    with open(filepath, 'r') as f:
+    with open(filepath, 'r', encoding='utf-8') as f:
         data = f.read()
 
     template_strings = [
@@ -46,7 +46,7 @@ class TestCookieSetup(object):
         assert readme_path.exists()
         assert no_curlies(readme_path)
         if pytest.param.get('project_name'):
-            with open(readme_path) as fin:
+            with open(readme_path, encoding='utf-8') as fin:
                 assert 'DrivenData' == next(fin).strip()
 
     def test_setup(self):
@@ -90,16 +90,16 @@ class TestCookieSetup(object):
             'datasets/interim',
             'datasets/final',
             'datasets/raw',
-            'docs',
-            'models',
+            'logs',
+            'model_weights',
             'notebooks',
-            'references',
             'reports',
             'reports/figures',
             'src',
             'src/data',
             'src/features',
             'src/models',
+            'src/utils',
             'src/visualization',
         ]
 
@@ -109,5 +109,5 @@ class TestCookieSetup(object):
 
         abs_expected_dirs = [str(self.path / d) for d in expected_dirs]
         abs_dirs, _, _ = list(zip(*os.walk(self.path)))
+        print(set(abs_expected_dirs + ignored_dirs) - set(abs_dirs))
         assert len(set(abs_expected_dirs + ignored_dirs) - set(abs_dirs)) == 0
-
