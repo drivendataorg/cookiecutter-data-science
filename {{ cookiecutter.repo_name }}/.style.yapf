@@ -1,0 +1,4 @@
+[style]
+based_on_style = pep8
+COLUMN_LIMIT = 120
+ALLOW_SPLIT_BEFORE_DICT_VALUE = false

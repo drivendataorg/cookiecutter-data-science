@@ -1,0 +1,19 @@
+repos:
+  - repo: https://github.com/pre-commit/mirrors-yapf.git
+    rev: 'v0.30.0'
+    hooks:
+      - id: yapf
+        entry: bash -c 'yapf "$@"; git add -u' --
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.7.3
+    hooks:
+      - id: flake8
+        args: ['--config=.flake8']
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: detect-private-key
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-json
+      - id: check-yaml
