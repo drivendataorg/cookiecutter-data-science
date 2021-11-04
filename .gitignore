@@ -7,3 +7,6 @@ docs/site/
 .cache/*
 tests/__pycache__/*
 *.pytest_cache/
+
+# Pycharm
+.idea
