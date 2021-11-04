@@ -1,13 +1,25 @@
-# Cookiecutter Data Science
+# Cookiecutter Data Science <!-- omit in toc -->
 
 _A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
 
 
-#### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
+Base on [drivendata/cookiecutter-data-science](https://github.com/drivendata/cookiecutter-data-science), and modified by personal experience.
 
+Difference with the original repository
+- add [yapf](https://github.com/google/yapf), python formatter, into project structure
+- add pre-commit for git hook
+- change folders name that all folder names are unique within the project 
 
-### Requirements to use the cookiecutter template:
------------
+## TOC <!-- omit in toc -->
+- [Requirements to use the cookiecutter template](#requirements-to-use-the-cookiecutter-template)
+- [To start a new project, run:](#to-start-a-new-project-run)
+- [The resulting directory structure](#the-resulting-directory-structure)
+- [Installing development requirements](#installing-development-requirements)
+- [Running the tests](#running-the-tests)
+- [Acknowledgements](#acknowledgements)
+
+## Requirements to use the cookiecutter template
+
  - Python 2.7 or 3.5+
  - [Cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html) >= 1.4.0: This can be installed with pip by or conda depending on how you manage your Python packages:
 
@@ -23,26 +35,11 @@ $ conda install cookiecutter
 ```
 
 
-### To start a new project, run:
-------------
+## To start a new project, run:
 
-    cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
+    cookiecutter -c v1 https://github.com/daniel-code/cookiecutter-data-science
 
-
-[![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
-
-### New version of Cookiecutter Data Science
-------------
-Cookiecutter data science is moving to v2 soon, which will entail using
-the command `ccds ...` rather than `cookiecutter ...`. The cookiecutter command
-will continue to work, and this version of the template will still be available.
-To use the legacy template, you will need to explicitly use `-c v1` to select it.
-Please update any scripts/automation you have to append the `-c v1` option (as above),
-which is available now.
-
-
-### The resulting directory structure
-------------
+## The resulting directory structure
 
 The directory structure of your new project looks like this: 
 
@@ -98,16 +95,14 @@ The directory structure of your new project looks like this:
 └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 ```
 
-## Contributing
-
-We welcome contributions! [See the docs for guidelines](https://drivendata.github.io/cookiecutter-data-science/#contributing).
-
-### Installing development requirements
-------------
+## Installing development requirements
 
     pip install -r requirements.txt
 
-### Running the tests
-------------
+## Running the tests
 
     py.test tests
+
+## Acknowledgements
+- [drivendata/cookiecutter-data-science](https://github.com/drivendata/cookiecutter-data-science)
+
