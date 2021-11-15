@@ -8,5 +8,5 @@
     "aws_profile": "default",
     "setup_project": ["Yes - select this", "No - for testing purposes only"],
     "use_data_version_control": ["y", "n"],
-    "python_interpreter": ["python3", "python"]
+    "python_interpreter": ["conda", "poetry"]
 }
