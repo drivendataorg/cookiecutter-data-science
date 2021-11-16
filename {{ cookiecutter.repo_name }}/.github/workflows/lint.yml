@@ -57,10 +57,17 @@ jobs:
         run: |
           poetry run pre-commit run --all-files
           poetry run cz check -m "$(git log --format=%B -n 1)"
+
 {%- endraw %}
       - name: Test
-        run: poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov={{ cookiecutter.repo_name }} --cov-report=xml --cov-report=html --cov-report=term-missing > pytest-output.txt
+        run: |
+          OUTPUT=$(poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov={{ cookiecutter.repo_name }} --cov-report=xml --cov-report=html --cov-report=term-missing)
+          CODE=$?
+          echo "$OUTPUT" > pytest-output.txt
+          echo "$OUTPUT"
+          exit $CODE
 {% raw -%}
+
       - name: Upload pytest test results
         uses: actions/upload-artifact@v2
         with:
