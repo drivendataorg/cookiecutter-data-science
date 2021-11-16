@@ -66,8 +66,7 @@ jobs:
           echo "$OUTPUT" > pytest-output.txt
           echo "$OUTPUT"
           exit $CODE
-{% raw -%}
-
+{% raw %}
       - name: Upload pytest test results
         uses: actions/upload-artifact@v2
         with:
