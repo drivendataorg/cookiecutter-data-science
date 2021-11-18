@@ -1,4 +1,4 @@
-.PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3
+.PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3 initialize_version_control
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -25,8 +25,29 @@ requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
+{% if cookiecutter.use_data_version_control == 'y' %}
+.dvc: requirements
+	git init
+	dvc init
+	dvc config cache.type reflink,copy
+	dvc remote add -d origin s3://$(BUCKET)/data
+ifneq (default,$(PROFILE))
+	dvc remote modify origin profile $(PROFILE)
+endif
+	dvc add data
+	dvc push
+	git add data.dvc
+	git commit -m 'Initialize data version control'
+
+## Inititalize git + dvc if data version conrol is used
+initialize_version_control: .dvc
+{% else %}
+initialize_version_control: requirements
+	@echo ">>> Data version control setup is skipped for this project"
+{% endif %}
+
 ## Make Dataset
-data: requirements
+data: initialize_version_control
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
 
 ## Delete all compiled Python files
@@ -40,24 +61,43 @@ lint:
 
 ## Upload Data to S3
 sync_data_to_s3:
+{% if cookiecutter.use_data_version_control == 'y' %}
+	dvc add data
+	dvc push data.dvc
+	git commit data.dvc -m "Save data directory"
+{% else %}
 ifeq (default,$(PROFILE))
 	aws s3 sync data/ s3://$(BUCKET)/data/
 else
 	aws s3 sync data/ s3://$(BUCKET)/data/ --profile $(PROFILE)
 endif
+{% endif %}
 
 ## Download Data from S3
 sync_data_from_s3:
+{% if cookiecutter.use_data_version_control == 'y' %}
+	dvc pull data.dvc
+{% else %}
 ifeq (default,$(PROFILE))
 	aws s3 sync s3://$(BUCKET)/data/ data/
 else
 	aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
 endif
+{% endif %}
 
 ## Set up python interpreter environment
 init:
+{% if cookiecutter.python_interpreter == 'poetry' %}
 	poetry install
 	poetry run pre-commit install
+{% elif cookiecutter.python_interpreter == 'conda' %}
+ifeq (True,$(HAS_CONDA))
+		@echo ">>> Detected conda, creating conda environment."
+	conda create --name $(PROJECT_NAME) python=3
+else
+        @echo ">>> Missing conda binary."
+endif
+{% endif %}
 
 ## Test python environment is setup correctly
 test_environment:
@@ -85,6 +125,7 @@ test_environment:
 # 		* go to next line
 # 		* if line starts with doc comment, strip comment character off and loop
 # 	* remove target prerequisites
+# 	A
 # 	* append hold space (+ newline) to line
 # 	* replace newline plus comments by `---`
 # 	* print line

@@ -13,8 +13,10 @@ Project Organization
     │   ├── external       <- Data from third party sources.
     │   ├── interim        <- Intermediate data that has been transformed.
     │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
+    │   └── raw            <- The original, immutable data dump.{% if cookiecutter.use_data_version_control == 'y' %}
     │
+    ├── data.dvc           <- Data version control file; see dvc.org for details
+    │{% endif %}    
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries

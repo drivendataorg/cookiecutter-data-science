@@ -35,13 +35,14 @@ def default_baked_project(tmpdir_factory, request):
     )
 
     pn = pytest.param.get('project_name') or 'project_name'
-    
+
     # project name gets converted to lower case on Linux but not Mac
     pn = system_check(pn)
 
     proj = out_dir / pn
     request.cls.path = proj
-    yield 
+    yield
 
     # cleanup after
     shutil.rmtree(out_dir)
+
