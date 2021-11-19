@@ -4,8 +4,11 @@ _A logical, reasonably standardized, but flexible project structure for doing an
 
 This template is based on [Project homepage](http://drivendata.github.io/cookiecutter-data-science/), but adds couple of
 convenience functions:
-- package management with poetry
+- data version control with dvc
+- package management with poetry/conda
 - pre-commit hooks to facilitate code quality
+  - black code formatting
+  - jupytext conversion of notebooks on commit for better reviewing
 - auto setup
 
 

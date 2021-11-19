@@ -22,10 +22,14 @@ endif
 
 ## Install Python Dependencies
 requirements: test_environment
+{% if cookiecutter.python_interpreter == 'poetry' %}
+	poetry install
+{% elif cookiecutter.python_interpreter == 'conda' %}
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+{% endif %}
 
-{% if cookiecutter.use_data_version_control == 'y' %}
+{% if cookiecutter.use_data_version_control == 'Yes' %}
 .dvc: requirements
 	git init
 	dvc init
@@ -39,7 +43,7 @@ endif
 	git add data.dvc
 	git commit -m 'Initialize data version control'
 
-## Inititalize git + dvc if data version conrol is used
+## Inititalize git + dvc if data version control is used
 initialize_version_control: .dvc
 {% else %}
 initialize_version_control: requirements
@@ -61,7 +65,7 @@ lint:
 
 ## Upload Data to S3
 sync_data_to_s3:
-{% if cookiecutter.use_data_version_control == 'y' %}
+{% if cookiecutter.use_data_version_control == 'Yes' %}
 	dvc add data
 	dvc push data.dvc
 	git commit data.dvc -m "Save data directory"
@@ -75,7 +79,7 @@ endif
 
 ## Download Data from S3
 sync_data_from_s3:
-{% if cookiecutter.use_data_version_control == 'y' %}
+{% if cookiecutter.use_data_version_control == 'Yes' %}
 	dvc pull data.dvc
 {% else %}
 ifeq (default,$(PROFILE))
@@ -94,8 +98,9 @@ init:
 ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, creating conda environment."
 	conda create --name $(PROJECT_NAME) python=3
+	pre-commit install
 else
-        @echo ">>> Missing conda binary."
+	@echo ">>> Missing conda binary."
 endif
 {% endif %}
 
