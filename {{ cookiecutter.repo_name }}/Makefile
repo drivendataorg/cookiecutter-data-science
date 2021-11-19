@@ -1,5 +1,5 @@
 .PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3 initialize_version_control
-
+.ONESHELL:
 #################################################################################
 # GLOBALS                                                                       #
 #################################################################################
@@ -10,8 +10,6 @@ PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 {% if cookiecutter.python_interpreter == 'poetry' %}
 PYTHON_INTERPRETER = poetry run python
-{% else %}
-PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
 {% endif %}
 
 
@@ -30,13 +28,15 @@ requirements:
 {% if cookiecutter.python_interpreter == 'poetry' %}
 	poetry install
 {% elif cookiecutter.python_interpreter == 'conda' %}
-	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
-	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+	conda install -n $(PROJECT_NAME) pip setuptools wheel conda-build mamba
+	mamba install -n $(PROJECT_NAME) -c conda-forge --file requirements.txt
+	source ~/miniconda3/etc/profile.d/conda.sh
+	conda activate $(PROJECT_NAME)
+	python -m pip install -e .
 {% endif %}
 
 {% if cookiecutter.use_data_version_control == 'Yes' %}
 .dvc: requirements
-	git init
 	dvc init
 	dvc config cache.type reflink,copy
 	dvc remote add -d origin s3://$(BUCKET)/data
@@ -103,7 +103,13 @@ init:
 ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, creating conda environment."
 	conda create --name $(PROJECT_NAME) python=3
+	conda install -n $(PROJECT_NAME) pip setuptools wheel conda-build mamba
+	mamba install -n $(PROJECT_NAME) -c conda-forge --file requirements.txt
+	source ~/miniconda3/etc/profile.d/conda.sh
+	conda activate $(PROJECT_NAME)
 	pre-commit install
+	echo $$(which python)
+	python -m pip install -e .
 else
 	@echo ">>> Missing conda binary."
 endif
