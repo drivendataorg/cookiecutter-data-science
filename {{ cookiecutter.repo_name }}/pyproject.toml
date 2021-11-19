@@ -26,3 +26,9 @@ pre-commit = "^2.13"
 line-length = 88
 target-version = ['py39']
 include = '\.pyi?$'
+
+{% if cookiecutter.python_interpreter == 'poetry' %}
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+{% endif %}
