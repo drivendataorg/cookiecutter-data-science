@@ -1,5 +1,5 @@
 .PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3 initialize_version_control
-
+.ONESHELL:
 #################################################################################
 # GLOBALS                                                                       #
 #################################################################################
@@ -8,7 +8,10 @@ PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = {{ cookiecutter.s3_bucket }}
 PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
-PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
+{% if cookiecutter.python_interpreter == 'poetry' %}
+PYTHON_INTERPRETER = poetry run python
+{% endif %}
+
 
 ifeq (,$(shell which conda))
 HAS_CONDA=False
@@ -21,13 +24,19 @@ endif
 #################################################################################
 
 ## Install Python Dependencies
-requirements: test_environment
-	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
-	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+requirements:
+{% if cookiecutter.python_interpreter == 'poetry' %}
+	poetry install
+{% elif cookiecutter.python_interpreter == 'conda' %}
+	conda install -n $(PROJECT_NAME) pip setuptools wheel conda-build mamba
+	mamba install -n $(PROJECT_NAME) -c conda-forge --file requirements.txt
+	source ~/miniconda3/etc/profile.d/conda.sh
+	conda activate $(PROJECT_NAME)
+	python -m pip install -e .
+{% endif %}
 
-{% if cookiecutter.use_data_version_control == 'y' %}
+{% if cookiecutter.use_data_version_control == 'Yes' %}
 .dvc: requirements
-	git init
 	dvc init
 	dvc config cache.type reflink,copy
 	dvc remote add -d origin s3://$(BUCKET)/data
@@ -39,7 +48,7 @@ endif
 	git add data.dvc
 	git commit -m 'Initialize data version control'
 
-## Inititalize git + dvc if data version conrol is used
+## Inititalize git + dvc if data version control is used
 initialize_version_control: .dvc
 {% else %}
 initialize_version_control: requirements
@@ -61,7 +70,7 @@ lint:
 
 ## Upload Data to S3
 sync_data_to_s3:
-{% if cookiecutter.use_data_version_control == 'y' %}
+{% if cookiecutter.use_data_version_control == 'Yes' %}
 	dvc add data
 	dvc push data.dvc
 	git commit data.dvc -m "Save data directory"
@@ -75,7 +84,7 @@ endif
 
 ## Download Data from S3
 sync_data_from_s3:
-{% if cookiecutter.use_data_version_control == 'y' %}
+{% if cookiecutter.use_data_version_control == 'Yes' %}
 	dvc pull data.dvc
 {% else %}
 ifeq (default,$(PROFILE))
@@ -94,14 +103,17 @@ init:
 ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, creating conda environment."
 	conda create --name $(PROJECT_NAME) python=3
+	conda install -n $(PROJECT_NAME) pip setuptools wheel conda-build mamba
+	mamba install -n $(PROJECT_NAME) -c conda-forge --file requirements.txt
+	source ~/miniconda3/etc/profile.d/conda.sh
+	conda activate $(PROJECT_NAME)
+	pre-commit install
+	echo $$(which python)
+	python -m pip install -e .
 else
-        @echo ">>> Missing conda binary."
+	@echo ">>> Missing conda binary."
 endif
 {% endif %}
-
-## Test python environment is setup correctly
-test_environment:
-	$(PYTHON_INTERPRETER) test_environment.py
 
 #################################################################################
 # PROJECT RULES                                                                 #

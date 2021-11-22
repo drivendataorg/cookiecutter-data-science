@@ -1,6 +1,3 @@
-# local package
--e .
-
 # external requirements
 click
 Sphinx
@@ -10,6 +7,7 @@ flake8
 python-dotenv>=0.5.1
 mlflow
 pre-commit
-{% if cookiecutter.use_data_version_control == 'y' %}
+conda-build
+{% if cookiecutter.use_data_version_control == 'Yes' %}
 dvc[s3]
 {% endif %}

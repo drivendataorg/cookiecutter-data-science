@@ -4,9 +4,10 @@
     "author_name": "Author",
     "description": "A short description of the project.",
     "license": ["MIT License", "BSD License", "ISC License", "GNU General Public License v3", "Apache Software License 2.0", "Not open source"],
-    "s3_bucket": "[OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')",
-    "aws_profile": "default",
-    "setup_project": ["Yes - select this", "No - for testing purposes only"],
-    "use_data_version_control": ["y", "n"],
+    "s3_bucket": "{{ 'cf-developer-playground/' ~ cookiecutter.repo_name }}",
+    "aws_profile": "production",
+    "environment_setup": ["Yes", "No"],
+    "git_setup": ["Yes", "No"],
+    "use_data_version_control": ["Yes", "No"],
     "python_interpreter": ["conda", "poetry"]
 }

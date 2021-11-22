@@ -4,14 +4,19 @@ _A logical, reasonably standardized, but flexible project structure for doing an
 
 This template is based on [Project homepage](http://drivendata.github.io/cookiecutter-data-science/), but adds couple of
 convenience functions:
-- package management with poetry
+- data version control with dvc
+- package management with poetry/conda
 - pre-commit hooks to facilitate code quality
+    - black code formatting
+    - isort formatting
+    - jupytext conversion of notebooks on commit for better reviewing
 - auto setup
+- initial set up for MLFlow
 
 
 ### Requirements to use the cookiecutter template:
 -----------
- - Python 2.7 or 3.5+
+ - ~~Python 2.7 or 3.5+~~ Only Python 3.5+ now
  - [Cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html) >= 1.4.0: This can be installed with pip by or conda depending on how you manage your Python packages:
 
 ``` bash
