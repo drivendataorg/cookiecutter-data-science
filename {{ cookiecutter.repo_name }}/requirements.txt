@@ -11,3 +11,4 @@ conda-build
 {% if cookiecutter.use_data_version_control == 'Yes' %}
 dvc[s3]
 {% endif %}
+git+ssh://git@github.com/contentful/cf-data-tools
