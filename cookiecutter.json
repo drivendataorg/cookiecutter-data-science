@@ -4,7 +4,7 @@
     "author_name": "Author",
     "description": "A short description of the project.",
     "license": ["MIT License", "BSD License", "ISC License", "GNU General Public License v3", "Apache Software License 2.0", "Not open source"],
-    "s3_bucket": "{{ 'cf-developer-playground/' ~ cookiecutter.repo_name }}",
+    "s3_bucket": "{{ 'ml-projects-artifacts-prd/' ~ cookiecutter.repo_name }}",
     "aws_profile": "production",
     "environment_setup": ["Yes", "No"],
     "git_setup": ["Yes", "No"],
