@@ -5,6 +5,8 @@
 
 Project Organization
 ------------
+
+```
 ├── LICENSE
 ├── Makefile           <- Makefile with commands like `make data` or `make create_environment`
 │
@@ -44,6 +46,8 @@ Project Organization
 │
 │
 └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+
+```
 
 --------
 
