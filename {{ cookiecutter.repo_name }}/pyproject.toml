@@ -43,7 +43,7 @@ commit_version_number = true
 changelog_file = "CHANGELOG.md"
 hvcs = "github"
 build_command = "poetry build"
-commit_subject = "bump: {version}"
+commit_subject = "bump: {version} [skip ci]"
 
 [tool.commitizen]
 name = "cz_conventional_commits"

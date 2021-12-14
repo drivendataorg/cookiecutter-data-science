@@ -103,6 +103,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.CHECKOUT_TOKEN }}
+          fetch-depth: 0
 
       # - name: Install necessary system packages
       #   run: sudo apt-get -y install hmmer
@@ -127,7 +130,7 @@ jobs:
 
       - name: Create release
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "action@github.com"
