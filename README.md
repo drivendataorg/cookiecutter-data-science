@@ -1,4 +1,4 @@
-# Cookiecutter Data Science Template
+# Data Science Template
 
 _A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
 
@@ -28,7 +28,7 @@ $ conda install cookiecutter
 ### To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/Vastra-Gotalandsregionen/cookiecutter-data-science     
+    cookiecutter https://github.com/Vastra-Gotalandsregionen/data-science-template
 
 [![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
 
