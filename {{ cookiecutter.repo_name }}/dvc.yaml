@@ -1,0 +1,54 @@
+stages:
+  prepare:
+    cmd: python {{ cookiecutter.module_name}}/data/make_dataset.py
+    deps:
+    - data/raw
+    - {{ cookiecutter.module_name}}/data/make_dataset.py
+    params:
+    - seed
+    - prepare.split
+    outs:
+    - data/interim
+  visualize:
+    cmd: python {{ cookiecutter.module_name}}/visualization/visualize.py
+    deps:
+    - data/raw
+    - {{ cookiecutter.module_name}}/visualization/visualize.py
+    outs:
+    - reports/figures/image1.png
+  featurize:
+    cmd: python {{ cookiecutter.module_name}}/features/build_features.py
+    deps:
+    - data/interim
+    - {{ cookiecutter.module_name}}/features/build_features.py
+    outs:
+    - data/processed
+  train:
+    cmd: python {{ cookiecutter.module_name}}/models/train_model.py
+    deps:
+    - data/processed
+    - {{ cookiecutter.module_name}}/models/train_model.py
+    params:
+    - seed
+    - train.batch_size
+    - train.learning_rate
+    outs:
+    - models/model
+  evaluate:
+    cmd: python {{ cookiecutter.module_name}}/models/evaluate_model.py
+    deps:
+    - data/processed
+    - {{ cookiecutter.module_name}}/models/evaluate_model.py
+    - models/model
+    metrics:
+    - models/scores.json:
+        cache: false
+    plots:
+    - models/prc.json:
+        cache: false
+        x: recall
+        y: precision
+    - models/roc.json:
+        cache: false
+        x: fpr
+        y: tpr

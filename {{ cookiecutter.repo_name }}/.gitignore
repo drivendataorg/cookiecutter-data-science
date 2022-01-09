@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*$py.class
 
 # C extensions
 *.so
@@ -41,7 +42,8 @@ htmlcov/
 .cache
 nosetests.xml
 coverage.xml
-*.cover
+*,cover
+.hypothesis/
 
 # Translations
 *.mo
@@ -49,6 +51,14 @@ coverage.xml
 
 # Django stuff:
 *.log
+local_settings.py
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
 
 # Sphinx documentation
 docs/_build/
@@ -56,34 +66,48 @@ docs/_build/
 # PyBuilder
 target/
 
-# DotEnv configuration
-.env
+# IPython Notebook
+.ipynb_checkpoints
 
-# Database
-*.db
-*.rdb
+# pyenv
+.python-version
 
-# Pycharm
-.idea
+# celery beat schedule file
+celerybeat-schedule
 
-# VS Code
-.vscode/
+# dotenv
+/.env
 
-# Spyder
-.spyproject/
+# virtualenv
+.venv/
+venv/
+ENV/
 
-# Jupyter NB Checkpoints
-.ipynb_checkpoints/
+# Spyder project settings
+.spyderproject
 
-# exclude data from source control by default
-/data/
+# Rope project settings
+.ropeproject
 
-# Mac OS-specific storage files
-.DS_Store
+.idea/
+.pytest_cache/
 
-# vim
-*.swp
-*.swo
+# Confidential
+credentials.*
 
-# Mypy cache
-.mypy_cache/
+# Javascript
+node_modules/
+.config.json
+.config.json.backup
+package-lock.json
+
+config.env
+
+# certs
+*.srl
+*.csr
+*.key
+*.pem
+
+# doit
+*.doit.db*

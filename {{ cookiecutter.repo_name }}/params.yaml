@@ -1,0 +1,8 @@
+seed: 20211121
+
+prepare:
+  split: 0.15
+
+train:
+  batch_size: 64
+  learning_rate: 0.001
