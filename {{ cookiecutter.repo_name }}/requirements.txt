@@ -3,6 +3,7 @@
 
 # external requirements (please freeze version to the one you are using)
 bandit>=1.7.0
+black>=21.10b0
 doit>=0.33.1
 dvc>=2.8.1
 flake8>=3.9.1
@@ -12,5 +13,6 @@ pylint>=2.11.1
 pytest>=6.1.1
 pytest-cov>=2.11.1
 python-dotenv>=0.19.1
+tokenize-rt>=4.2.1
 
 # Add new requirements below
