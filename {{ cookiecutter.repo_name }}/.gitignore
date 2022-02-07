@@ -111,3 +111,6 @@ config.env
 
 # doit
 *.doit.db*
+
+# Generated docs
+public/

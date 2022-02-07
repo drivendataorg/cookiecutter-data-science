@@ -21,7 +21,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Initialize ```git``` and ```dvc``` and create an initial commit before doing anything else:
+Initialize [git](https://git-scm.com/docs/gittutorial) and [DVC](https://dvc.org/doc/start) and create an initial commit before doing anything else:
 ```
 git init
 dvc init
@@ -29,20 +29,25 @@ git add .
 git commit -m "Initial commit"
 ```
 
-Use ```doit``` to run linting and tests:
+Use [doit](https://pydoit.org/usecases.html) to run linting and tests:
 ```
 doit lint
 doit pytest
 ```
 
-Use ```dvc``` to create reproducible ML-pipelines and experiments with git tracking:
+Use [DVC](https://dvc.org/doc/start) to create reproducible ML-pipelines and experiments with git tracking:
 ```
 dvc repro
 dvc exp run
 ```
 
-Use ```mlflow``` to run lots of experiments that you do not want to track with git.
+Use [mlflow](https://www.mlflow.org/docs/latest/tutorials-and-examples/index.html) to run lots of experiments that you do not want to track with git.
 
+Use [mkdocs-material](https://squidfunk.github.io/mkdocs-material/reference/) structure to update the documentation. Test locally with 'serve' and build with 'build':
+```
+mkdocs serve
+mkdocs build --site-dir public
+```
 
 Project Organization
 ------------
@@ -94,4 +99,4 @@ Project Organization
 
 --------
 
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience.</small></p>
+<p><small>Project based on the <a target="_blank" href="https://github.com/Vastra-Gotalandsregionen/data-science-template">data science project template</a>. #cookiecutterdatascience.</small></p>
