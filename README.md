@@ -47,7 +47,7 @@ The directory structure of your new project looks like this:
     │   ├── processed      <- The final, canonical data sets for modeling.
     │   └── raw            <- The original, immutable data dump.
     │
-    ├── docs               <- TODO, add documentation templates
+    ├── docs               <- Documentation template with hints
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
