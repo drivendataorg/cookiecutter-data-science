@@ -5,20 +5,13 @@
 
 To build a docker image:
 ```
-docker build -t {{cookiecutter.repo_name}} -f Dockerfile .
+docker build -t {{cookiecutter.repo_name}} --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) -f Dockerfile .
 ```
 
-To start a docker container (as your current user/group), mount current directory and connect to the container:
+To start a docker container, mount current directory and connect to the container:
 ```
-docker run -d --rm -it --user $(id -u):$(id -g) --volume $(pwd):/workspace --name {{cookiecutter.repo_name}} {{cookiecutter.repo_name}}
+docker run -d --rm -it --volume $(pwd):/workspace --name {{cookiecutter.repo_name}} {{cookiecutter.repo_name}}
 docker exec -it {{cookiecutter.repo_name}} /bin/bash
-```
-
-If you want to use python environments instead, use the commands below. That creates a virtual python environment in your current folder, activates it and installs dependencies with pip
-```
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
 ```
 
 Initialize [git](https://git-scm.com/docs/gittutorial) and [DVC](https://dvc.org/doc/start) and create an initial commit before doing anything else:
