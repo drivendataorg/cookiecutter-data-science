@@ -1,4 +1,4 @@
-from doit.tools import LongRunning
+{% if cookiecutter.python_interpreter == 'python3' %}from doit.tools import LongRunning
 
 
 def task_pytest():
@@ -19,3 +19,7 @@ def task_lint():
             "actions": [LongRunning(c)],
             "doc": "runs black formatting and linting",
         }
+{% else %}def define_r_tasks():
+    return {"actions": ["echo 'define your r tasks'"]}
+
+{% endif %}

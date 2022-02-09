@@ -1,7 +1,7 @@
 site_name: {{ cookiecutter.project_name }} dokumentation
 # site_url: https://site/
 site_favicon: favicon.ico
-# repo_url: https://git/<fill_in_group_name>/{{ cookiecutter.repo_name }}
+# repo_url: git_url/<fill_in_group_name>/{{ cookiecutter.repo_name }}
 repo_name: {{ cookiecutter.repo_name }}
 docs_dir: docs
 theme:

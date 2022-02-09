@@ -2,13 +2,23 @@
 
 _A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
 
-_Adapted to Västra Götalandregionens data science processes._
+_Adapted to Region Västra Götaland's data science processes._
 
-#### [Original project homepage](http://drivendata.github.io/cookiecutter-data-science/)
-#### [Original fork with doit, loguru, dvc, mlflow, pylint, etc](https://github.com/iKintosh/cookiecutter-data-science)
+## Start your new Python or R project from our template!
+You can choose which language to use when selecting interpreter. By using our template you can easily create reproducible data science projects to share with your colleagues.
 
+You will get:
+ - Folder structure
+ - Documentation
+ - Tools for reproducibility
+ - Dockerfile with Python installed
+ - (if selected) R + RStudio Server
 
-### Requirements to use the template:
+You will **NOT** get:
+ - Messy projects
+ - Things that only work on your machine
+
+### Requirements to install and use the project templating tool:
 -----------
  - Python 3.5+
  - [Cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html) >= 1.4.0: This can be installed with pip by or conda depending on how you manage your Python packages:
@@ -16,14 +26,6 @@ _Adapted to Västra Götalandregionens data science processes._
 ``` bash
 $ pip install cookiecutter
 ```
-
-or
-
-``` bash
-$ conda config --add channels conda-forge
-$ conda install cookiecutter
-```
-
 
 ### To start a new project, run:
 ------------
@@ -96,3 +98,6 @@ If you work at Västra Götalandsregionen, or you simply want to use and develop
 ------------
 
     py.test tests
+
+#### [Original project homepage](http://drivendata.github.io/cookiecutter-data-science/)
+#### [Original fork with doit, loguru, dvc, mlflow, pylint, etc](https://github.com/iKintosh/cookiecutter-data-science)

@@ -107,3 +107,17 @@ class TestCookieSetup(object):
         abs_dirs, _, _ = list(zip(*os.walk(self.path)))
 
         assert len(set(abs_expected_dirs) - set(abs_dirs)) == 0
+
+    def test_files(self):
+        module_name = "project_name"
+        if pytest.param.get("project_name"):
+            module_name = "drivendata"
+
+        _, _, abs_files = list(
+            zip(*os.walk(os.path.join(self.path, module_name, "data")))
+        )
+
+        assert len(abs_files[0]) == 3
+        assert abs_files[0][0] == ".gitkeep"
+        assert abs_files[0][1] == "__init__.py"
+        assert abs_files[0][2] == "make_dataset.py"

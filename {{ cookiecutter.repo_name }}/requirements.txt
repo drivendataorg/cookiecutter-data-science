@@ -1,4 +1,4 @@
-# local package
+{% if cookiecutter.python_interpreter == 'python3' %}# local package
 -e .
 
 # external requirements (please freeze version to the one you are using)
@@ -16,5 +16,10 @@ pytest>=6.1.1
 pytest-cov>=2.11.1
 python-dotenv>=0.19.1
 tokenize-rt>=4.2.1
-
+{% else %}# external requirements (please freeze version to the one you are using)
+doit>=0.33.1
+dvc>=2.8.1
+mkdocs-material>=8.1.9
+mkdocs-git-revision-date-plugin>=0.3.1
+{% endif %}
 # Add new requirements below
