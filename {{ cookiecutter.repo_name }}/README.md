@@ -11,7 +11,7 @@ docker build -t {{cookiecutter.repo_name}} --build-arg USER_ID=$(id -u) --build-
 
 To start a docker container, mount current directory and connect to the container:
 {% if cookiecutter.python_interpreter == 'R' %}```
-docker run --rm -d -p 8787:8787 -it --volume $(pwd):/home/rstudio -e PASSWORD=yourpasswordhere --name {{cookiecutter.repo_name}} {{cookiecutter.repo_name}}
+docker run --rm -d -p 8787:8787 -it --volume $(pwd):/home/rstudio -e PASSWORD=yourpasswordhere -e USERID=$(id -u) -e GROUPID=GROUP_ID=$(id -g) --name {{cookiecutter.repo_name}} {{cookiecutter.repo_name}}
 ```
 Visit [localhost:8787](http://localhost:8787) in your browser and log in with username ```rstudio``` and the password you set when starting the container. Use the terminal in RStudio to run things like ```git``` and ```dvc```.{% else %}```
 docker run -d --rm -it --volume $(pwd):/workspace --name {{cookiecutter.repo_name}} {{cookiecutter.repo_name}}
