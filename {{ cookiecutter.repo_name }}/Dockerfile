@@ -1,12 +1,18 @@
-{% if cookiecutter.python_interpreter == 'R' %}FROM rocker/rstudio:4.1.2
+{% if cookiecutter.python_interpreter == 'R' %}FROM rocker/tidyverse:4.1.2
 
 ENV RENV_VERSION 0.15.2-2
-RUN R -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))"
+
+RUN echo "options(repos = c(CRAN = 'https://ftpmirror1.infania.net/mirror/CRAN'),\
+	 download.file.method = 'libcurl')" >> ${R_HOME}/etc/Rprofile.site
+
+RUN R -e "install.packages('remotes')"
 RUN R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
 
 WORKDIR /home/rstudio
 COPY renv.lock .
+RUN R -e 'renv::activate()'
 RUN R -e 'renv::restore()'
+
 {% else %}# Ubuntu with python, git and text-editors installed
 FROM ubuntu:20.04
 
