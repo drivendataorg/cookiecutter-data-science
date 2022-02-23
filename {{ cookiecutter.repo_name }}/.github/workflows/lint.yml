@@ -23,6 +23,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.CHECKOUT_TOKEN }}
 
       # - name: Install necessary system packages
       #   run: sudo apt-get -y install hmmer
@@ -56,7 +59,14 @@ jobs:
       - name: Lint
         run: |
           poetry run pre-commit run --all-files
-          poetry run cz check -m "$(git log --format=%B -n 1)"
+
+      - name: Validate commit messages
+        env:
+          BASEBRANCH: ${{ github.event.pull_request.head.ref }}
+          TARGETBRANCH: ${{ github.event.pull_request.base.ref }}
+        run: |
+          bash .github/workflows/checkCommits.sh origin/${BASEBRANCH} origin/${TARGETBRANCH}
+        if: ${{ github.ref != 'refs/heads/master' }}
 
 {%- endraw %}
       - name: Test
