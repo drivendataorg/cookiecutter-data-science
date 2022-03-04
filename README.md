@@ -91,18 +91,23 @@ The directory structure of your new project looks like this:
 │   │
 │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
 │       └── visualize.py
-│
-└── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+
 ```
 
 ## Contributing
 
 We welcome contributions! [See the docs for guidelines](https://drivendata.github.io/cookiecutter-data-science/#contributing).
 
-### Installing development requirements
+### Installing requirements
 ------------
 
     pip install -r requirements.txt
+
+
+### Installing development requirements
+------------
+
+    pip install -r dev-requirements.txt
 
 ### Running the tests
 ------------
