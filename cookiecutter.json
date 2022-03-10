@@ -1,6 +1,7 @@
 {
     "project_name": "project_name",
     "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+    "aws_infra_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('_', '-') }}",
     "author_name": "Author",
     "description": "A short description of the project.",
     "license": ["MIT License", "BSD License", "ISC License", "GNU General Public License v3", "Apache Software License 2.0", "Not open source"],
@@ -9,5 +10,6 @@
     "environment_setup": ["Yes", "No"],
     "git_setup": ["Yes", "No"],
     "use_data_version_control": ["Yes", "No"],
-    "python_interpreter": ["conda", "poetry"]
+    "python_interpreter": ["poetry", "conda"],
+    "inference_container": ["Yes", "No"]
 }

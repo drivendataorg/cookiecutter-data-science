@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  predictions:
+    build: .
+    env_file:
+      - ../.env
+    environment:
+      REDSHIFT_HOST: 'host.docker.internal'
+    command:
+      - "2022-02-24"

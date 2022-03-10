@@ -1,0 +1,8 @@
+FROM python:3.9
+COPY poetry.lock pyproject.toml /app/
+WORKDIR /app
+RUN pip install poetry
+COPY . .
+RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-dev --no-interaction --no-ansi
+ENTRYPOINT ["python", "src/models/predict_model.py"]
+

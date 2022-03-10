@@ -56,4 +56,15 @@ Project Organization
 
 --------
 
+
+{% if cookiecutter.inference_container == 'Yes' %}
+
+## How to deploy
+
+We have an established deployment process for batch inference of ML models that is based on our K8 infrastructure. 
+To generate the necessary infrastructure please refer to these [docs and templates]('./deployment_templates/README.md') 
+
+{% endif %}
+
+
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
