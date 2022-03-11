@@ -1,0 +1,63 @@
+from datetime import datetime, timedelta
+from os import environ
+
+from airflow import DAG
+from airflow.kubernetes.secret import Secret
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+from airflow.sensors.external_task import ExternalTaskSensor
+from utils.k8s.pod_operator_utils import k8s_env_var, k8s_resources
+
+default_resources = k8s_resources(min_memory="600Mi", max_memory="600Mi", min_cpu="50m", max_cpu="300m")
+default_args = {"retries": 1, "retry_delay": timedelta(minutes=2)}
+
+# it is stored in the DBT_SECRET_NAME reference on k8s (for some reason)
+REDSHIFT_K8S_SECRET = environ["AIRFLOW_K8S_DBT_SECRET_NAME"]
+
+SECRET_ENVS = [
+    Secret("env", "REDSHIFT_HOST", REDSHIFT_K8S_SECRET, "REDSHIFT_HOST"),
+    Secret("env", "REDSHIFT_PORT", REDSHIFT_K8S_SECRET, "REDSHIFT_PORT"),
+    Secret("env", "REDSHIFT_USER", REDSHIFT_K8S_SECRET, "REDSHIFT_USER"),
+    Secret("env", "REDSHIFT_PASSWORD", REDSHIFT_K8S_SECRET, "REDSHIFT_PASSWORD"),
+    Secret("env", "REDSHIFT_DB", REDSHIFT_K8S_SECRET, "REDSHIFT_DB"),
+]
+
+ENV_VARS = [
+    k8s_env_var("REDSHIFT_READ_GROUPS", "analysts:datacruncher"),
+]
+
+with DAG(
+    "{{ cookiecutter.repo_name }}",
+    default_args=default_args,
+    schedule_interval="30 2 * * *",  # every day at 2:30am
+    catchup=False,  # Prevents from multiple runs if the real first run is after start_date
+    start_date=datetime(2022, 2, 25),
+    description="Runs the {{ cookiecutter.project_name }} Model and writes a predition into redshift.",
+) as dag:
+    wait_for_dbt_dag = ExternalTaskSensor(
+        task_id="wait_for_dbt_dag",
+        external_dag_id="dbt_core_models_all_models",
+        external_task_id="dbt_test_core_models_all_models",
+        check_existence=True,
+        mode="reschedule",
+        exponential_backoff=True,
+        timeout=60*60*24  # Wait for one day until it fails
+    )
+
+    run_model = KubernetesPodOperator(
+        namespace="airflow",
+        image="{{'427052161823.dkr.ecr.us-east-1.amazonaws.com/contentful/data/ml-' ~ cookiecutter.aws_infra_name ~ ':latest'}}",
+        annotations={"iam.amazonaws.com/role": "{{'airflow_dag_' cookiecutter.repo_name }}"},
+        name=dag.dag_id,
+        task_id="run_{{ cookiecutter.repo_name }}_model",
+        image_pull_policy="Always",
+        get_logs=True,
+        in_cluster=True,
+        startup_timeout_seconds=180,
+        resources=default_resources,
+        secrets=SECRET_ENVS,
+        env_vars=ENV_VARS,
+        arguments=["{{ ds }}"],
+        is_delete_operator_pod=True,
+    )
+
+wait_for_dbt_dag >> run_model
