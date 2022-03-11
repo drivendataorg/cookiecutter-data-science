@@ -12,7 +12,7 @@ Follow these steps:
 `cp .{{ cookiecutter.repo_name }} <path_to_data_infrastructure_repo>/src/modules/dags/ml-predictions/`
 
 3. add the following module to `<path_to_data_infrastructure_repo>/src/modules/dags/main.tf`:  
-```
+```terraform
 module "{{ 'ml-' ~ cookiecutter.aws_infra_name }}" {
   source                        = "{{'./ml-predictions/' ~ cookiecutter.aws_infra_name }}"
   environment                   = var.environment
@@ -21,8 +21,12 @@ module "{{ 'ml-' ~ cookiecutter.aws_infra_name }}" {
 }
 ```
 
-5. create a branch, commit and make a PR. Once it is accepted the infrastructure will be available.
+4. add the following to `<path_to_data_infrastructure_repo>/src/production/us-east-1/airflow/ecr-repositories.tf`:
+```terraform
+module "{{'ml-' ~ cookiecutter.aws_infra_name }}" {
+  source = "../../../modules/ecr"
+  ecr_name = "{{ 'contentful/data/ml-' ~ cookiecutter.aws_infra_name }}"
+}
+```
 
-
-
-
+5. create a branch, commit and make a PR. Once it is accepted and merged the infrastructure will be available.
