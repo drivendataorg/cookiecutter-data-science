@@ -23,11 +23,10 @@ $ conda install cookiecutter
 ```
 
 
-### To start a new project, run:
+### To start a new project (installs v2 by default), run:
 ------------
 
-    cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
-
+    cookiecutter https://github.com/drivendata/cookiecutter-data-science  # use flag -c v1 for version1
 
 [![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
 
