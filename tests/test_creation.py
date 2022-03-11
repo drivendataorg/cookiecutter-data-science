@@ -118,6 +118,11 @@ class TestCookieSetup(object):
         )
 
         assert len(abs_files[0]) == 3
-        assert abs_files[0][0] == ".gitkeep"
-        assert abs_files[0][1] == "__init__.py"
-        assert abs_files[0][2] == "make_dataset.py"
+        assert ".gitkeep" in abs_files[0]
+        assert "__init__.py" in abs_files[0]
+        assert "make_dataset.py" in abs_files[0]
+
+    def test_gitlab_pipeline(self):
+        _, _, abs_files = list(zip(*os.walk(self.path)))
+
+        assert ".gitlab-ci.yml" in abs_files[0]

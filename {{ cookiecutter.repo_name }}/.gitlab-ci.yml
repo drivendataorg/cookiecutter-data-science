@@ -1,0 +1,4 @@
+include:
+  - project: 'aiplattform/templates/gitlab-ci-pipelines'
+    ref: main
+    file: '/gitlab-ci-container.yml'
