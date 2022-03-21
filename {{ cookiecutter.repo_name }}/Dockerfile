@@ -14,26 +14,20 @@ RUN R -e 'renv::activate()'
 RUN R -e 'renv::restore()'
 
 {% else %}# Ubuntu with python, git and text-editors installed
-FROM ubuntu:20.04
+FROM nvidia/cuda:11.4.0-base-ubuntu20.04
 
-# Nvidia container examples (pick one to base your container on)
-# FROM nvcr.io/nvidia/tensorflow:21.10-tf2-py3
-# FROM nvcr.io/nvidia/pytorch:21.11-py3
+RUN apt -y update \
+    && apt install python3 python3-pip git -y \
+    && apt install python-is-python3 -y \
+    && addgroup --gid 999 researcher \
+    && adduser --home /workspace --disabled-password --gecos '' --uid 999 --gid 999 researcher
 
-ARG USER_ID
-ARG GROUP_ID
-WORKDIR /workspace
-COPY setup.py .{% endif %}
-
-RUN apt -y update
-RUN apt install python3 python3-pip git nano vim -y
-RUN apt install python-is-python3 -y
-
-COPY requirements.txt .
+COPY requirements.txt setup.py ./
 RUN pip install -r requirements.txt
-{% if cookiecutter.python_interpreter == 'python3' %}
-RUN addgroup --gid $GROUP_ID user
-RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
-USER user
+
+USER researcher
 WORKDIR /workspace
+
+CMD ["dvc", "repro"]
+
 {% endif %}
