@@ -3,10 +3,23 @@
 
 {{cookiecutter.description}}
 
+Dependencies:
+
+* Update environment variable `KUBE_CLUSTER_CA` in your Dockerfile to comply with the appropriate certificate authority.
+* Update environment variable `KUBE_CLUSTER_SERVER` in your Dockerfile to the correct Kubernetes server name. 
+
+  Example:
+  
+  ```Dockerfile
+  FROM nvidia/cuda:11.4.0-base-ubuntu20.04
+  
+  ENV KUBE_CLUSTER_CA="abcd1234"
+  ENV KUBE_CLUSTER_SERVER="https://acme.domain.com:6443"
+  ```
+
 To build a docker image:
-```{% if cookiecutter.python_interpreter == 'R' %}
-docker build -t {{cookiecutter.repo_name}} -f Dockerfile .{% else %}
-docker build -t {{cookiecutter.repo_name}} --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) -f Dockerfile .{% endif %}
+```
+docker build {{cookiecutter.repo_name}} -t {{cookiecutter.repo_name}}
 ```
 
 To start a docker container, mount current directory and connect to the container:
@@ -14,7 +27,7 @@ To start a docker container, mount current directory and connect to the containe
 docker run --rm -d -p 8787:8787 -it --volume $(pwd):/home/rstudio -e PASSWORD=yourpasswordhere -e USERID=$(id -u) -e GROUPID=GROUP_ID=$(id -g) --name {{cookiecutter.repo_name}} {{cookiecutter.repo_name}}
 ```
 Visit [localhost:8787](http://localhost:8787) in your browser and log in with username ```rstudio``` and the password you set when starting the container. Use the terminal in RStudio to run things like ```git``` and ```dvc```.{% else %}```
-docker run -d --rm -it --volume $(pwd):/workspace --name {{cookiecutter.repo_name}} {{cookiecutter.repo_name}}
+docker run -d -t -v {{cookiecutter.repo_name}}:/workspace/dvc -v $(pwd)/{{cookiecutter.repo_name}}:/workspace/{{cookiecutter.repo_name}} --name {{cookiecutter.repo_name}} {{cookiecutter.repo_name}} bash
 docker exec -it {{cookiecutter.repo_name}} /bin/bash
 ```{% endif %}
 {% if cookiecutter.python_interpreter == 'R' %}
