@@ -47,6 +47,20 @@ class TestCookieSetup(object):
         assert "dvc>=2.8.1" in lines
         assert "mlflow>=1.21.0" not in lines
 
+    def test_dockerfile(self):
+        dockerfile_path = self.path / "Dockerfile"
+        assert dockerfile_path.exists()
+        assert no_curlies(dockerfile_path)
+        with open(dockerfile_path) as fin:
+            lines = list(map(lambda x: x.strip(), fin.readlines()))
+        
+        assert lines[0] == "FROM rocker/tidyverse:4.1.2"
+        assert "RUN pip install -r requirements.txt" in lines
+
+    def test_kubetemplate(self):
+        kubetemplate_path = self.path / "kube.template"
+        assert kubetemplate_path.exists()
+
     def test_folders(self):
         module_name = pytest.param.get("project_name")
 

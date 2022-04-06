@@ -78,6 +78,21 @@ class TestCookieSetup(object):
         assert doitfile_path.exists()
         assert no_curlies(doitfile_path)
 
+    def test_dockerfile(self):
+        dockerfile_path = self.path / "Dockerfile"
+        assert dockerfile_path.exists()
+        assert no_curlies(dockerfile_path)
+        with open(dockerfile_path) as fin:
+            lines = list(map(lambda x: x.strip(), fin.readlines()))
+        
+        assert lines[0] == "FROM nvidia/cuda:11.4.0-base-ubuntu20.04"
+        assert lines[-1] == 'CMD ["dvc", "repro"]'
+        assert "RUN pip install -r requirements.txt" in lines
+
+    def test_kubetemplate(self):
+        kubetemplate_path = self.path / "kube.template"
+        assert kubetemplate_path.exists()
+
     def test_folders(self):
         module_name = "project_name"
         if pytest.param.get("project_name"):
