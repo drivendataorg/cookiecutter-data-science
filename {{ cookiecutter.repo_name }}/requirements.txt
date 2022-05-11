@@ -13,3 +13,31 @@ python-dotenv>=0.5.1
 # backwards compatibility
 pathlib2
 {% endif %}
+
+# IDE
+jupyterlab>=3
+ipywidgets>=7.6
+
+# calculations
+pandas
+numpy
+
+# ML libs
+scikit-learn
+
+# plotting
+matplotlib==3.5.1
+seaborn==0.11.2
+
+# widgets in plotting
+jupyter-dash
+
+# notebook formatting
+nbqa
+black
+isort
+nbstripout
+
+# config loading
+omegaconf==2.1.1
+hydra-core
