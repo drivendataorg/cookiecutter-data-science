@@ -54,4 +54,29 @@ Project Organization
 
 --------
 
+### Setup
+--------
+
+``` bash
+$ conda create -n [NAME OF ENVIRONMENT] python=3.10     # Create a conda env to set your python version
+$ conda activate [NAME OF ENVIRONMENT]                  # Activate the environment
+$ python3 -m venv .venv                                 # Create a target virtual environment directory and set config paths
+$ source .venv/bin/activate                             # Activate the virtual environment
+$ python3 -m pip install -r requirements.txt            # Install requirements using pip
+```
+
+After following these series of steps, you only need to activate the virtual environment in the parent directory and skip the `conda activate` step. 
+
+Check that the location of your Python interpreter is correct by running:
+```
+which python
+```
+It should be in the `.venv` directory.
+
+To leave the virtual environment, run:
+``` bash
+deactivate
+```
+
+---------
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>

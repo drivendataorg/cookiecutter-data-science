@@ -13,7 +13,6 @@ python-dotenv>=0.5.1
 # backwards compatibility
 pathlib2
 {% endif %}
-
 # IDE
 jupyterlab>=3
 ipywidgets>=7.6
