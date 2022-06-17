@@ -1,5 +1,5 @@
 import os
-
+import subprocess
 """ This module loads folder structure and specific paths """
 
 # First level dirs
@@ -17,8 +17,7 @@ PARS_DIR = os.path.join(DATA_DIR,'params')
 IMG_DIR = os.path.join(REPORTS_DIR,'img')
 RMD_DIR = os.path.join(REPORTS_DIR,'rmd')
 
-#GENERAL dirs
+#GIT
 GIT_PATH = os.path.join(ROOT_DIR,'.git')
-
-
-
+REPO_URL = subprocess.run(["git", "config", "--get", "remote.origin.url"],
+                            capture_output=True, text=True).stdout.strip("\n")

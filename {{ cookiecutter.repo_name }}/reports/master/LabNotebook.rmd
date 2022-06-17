@@ -1,4 +1,20 @@
 ---
+# USAGE
+# This file should be compiled within its folder
+# rmarkdown::render('LabNotebook.rmd', output_format = 'all', output_dir = "../pdf")
+
+
+#COLOR DEFINITIONS
+# 74B72E  #Pear Green: Lab notebooks
+# 005780  #Mykonos Blue: Reports. Use white letter in the  cover
+# 000000  #Black
+# FFFFFF  #White
+# 383E42  #Anthracite
+params:
+  set_template: x,
+  set_csl: y
+
+
 title: "Computational Lab Notebook"
 subtitle: "{{ cookiecutter.project_name }}"
 author: "{{ cookiecutter.author_name }}"
@@ -7,7 +23,7 @@ header-includes:
   - \usepackage{pdfpages}
 output:
   pdf_document:
-    template: /home/javier/.pandoc/templates/eisvogel.latex
+    template: ./utils/eisvogel.latex
     toc: true
     number_sections: yes
     latex_engine: xelatex
@@ -16,28 +32,29 @@ output:
     toc_depth: '4'
   html_document: default
 titlepage: true
-titlepage-background: /home/javier/Imágenes/bombus-transparency.jpg
-#titlepage-color: "74B72E"  #Pear Green, color of lab notebooks
+titlepage-color: "74B72E"  #Pear Green, color of lab notebooks
 titlepage-text-color: "000000" 
 titlepage-rule-color: "383E42" #Anthracite
 titlepage-rule-height: 2
-csl: ../references/frontiers-in-neuroscience.csl
-bibliography: ../bib-proposal.bib  
+csl: ./utils/frontiers-in-neuroscience.csl
 biblio-style: "apalike"
 link-citations: true
 urlcolor: blue
 linkcolor: blue
 graphics: yes
-
 ---
+
+
 ```{r setup, include=TRUE, echo=FALSE}
 library(reticulate)
 use_virtualenv("~/Environments/insect-vision/")
 ```
 
+
+
 \newpage
 
-```{r child = here::here("./reports/LabNotebook/information.rmd")}
+```{r child = here::here("./rmd/information.rmd")}
 ```
 
 \newpage
@@ -78,5 +95,6 @@ use_virtualenv("~/Environments/insect-vision/")
 
 
 \newpage
+
 
 # References
