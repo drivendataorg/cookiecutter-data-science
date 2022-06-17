@@ -1,0 +1,118 @@
+# Computing tools, code snippets, and tips. 
+
+## CODE: Fast prototipying in code (2021-12-27)
+One of my biggest mistakes is to try to build, at first, a very complicated piece of software, which is amendable
+for programmer, but also efficient as hell. **I must focus on building a working piece of software and then improve
+it!**
+
+## TIP: 7 Dead-Simple Steps To Build A Daily Writing Habit (2021-01-29)
+Extracted from [Dickie Bush's Website](https://typeshare.co/dickiebush/posts/7-dead-simple-steps-to-build-a-daily-writing-habit)
+Writing for 90 minutes every day is the most powerful personal habit you can develop. Here’s how to do start doing it today:
+
+1. **Create your sacred hours.** Here’s some truth. You don’t “find” time to write. Just like you don’t “find time” to see your significant other or “find time” to go to the gym. When something matters, you have to MAKE time. And then organize the rest of your day around that time. To find your sacred hours, ask yourself 2 questions: 1) What time of day am I most productive? 2) What time of day can I be least responsive? From that overlap, choose 90 minutes. This is when you’ll write.
+
+2. **Set up an idea capture system.** To write consistently, you need to capture ideas. Everywhere. Notebooks by your bed. Whiteboards throughout your office. Waterproof notepads in the shower. Quick capture on your phone. Start treating ideas as precious currency and give your mind the confidence to come up with them, knowing you’ll revisit them later.
+
+3. **Design your creative environment.** Writing is 99% taking long walks and avoiding the internet’s distractions. So take the time to intentionally craft your environment. Internet blockers, minimal distractions, comfortable desk chair, high-quality headphones, relaxing candles, hand-picked playlist - whatever it is that gets you into a creative flow.
+
+4. **Set your constraints.** “Write every day” is hard. “Write 250-word essays about productivity for software engineers for 45 minutes at 9:00 AM every day” is much easier. Length, topic, platform, cadence, location, duration. Creativity thrives from constraints, so choose yours wisely.
+
+5. **Give yourself permission to create junk.** Here’s some more truth. Every good piece of writing you’ve ever seen started out as junk. Your best ideas will come only after you get the bad ones out of the way - so lean into this. Smash your perfectionism by lowering the quality bar, then improve it.
+
+6. **Track your streak and never miss twice.** Find a way to get dopamine from the process, not the result. Every time you complete a writing session, find a way to celebrate. Get a big calendar and mark a big red X day after day after day. And if you do miss a day, don’t worry. Double down on getting it done the next day, so you don’t start building a “not writing” habit.
+
+7. **Find accountability and community.** Lastly, writing doesn’t have to be lonely. The internet has democratized access to friendship — it’s never been easier to find other people with the same goals and interests as you. Find an accountability partner who will write every day alongside you. And better yet, immerse yourself in a community of other writers who inspire and support you.
+
+The best part about this system is you can set it up in 30 minutes and start writing today. No more "once I ... then I'll start writing."
+
+Follow the steps, start today, and stick to it for a year.
+
+And I promise, you'll look back in 365 days with amazement at what the simple habit of writing every day unlocks.
+
+## TIP: Pixar storyboard artist Emma Coats shared their "22 Rules For Storytelling."
+Extracted from [Dickie Bush's Twitter](https://twitter.com/dickiebush/status/1453725972876775424)
+
+1. **You admire a character for trying more than for their successes.**  Your audience loves the story - the path - the ups and downs. For stories, brands, and products - focus on the how and why (and less on the what).
+
+2. **You gotta keep in mind what’s interesting to you as an audience, not what’s fun to do as a writer.** They can be very different.  Focus on delivering to the audience.  This is similar to [craigclemens](https://twitter.com/craigclemens) first rule of writing:
+
+> You, the writer, are completely irrelevant.
+
+3. **Trying for theme is important, but you won’t see what the story is actually about til you’re at the end of it. Now rewrite.**  Your original idea rarely ends up the same as your final idea.  So don't overthink it - take something, get it going, then refine it.
+
+4. **Once upon a time there was...** ___. Every day, ___. One day ___. Because of that, ___. Because of that, ___. Until finally ___.
+This one is my favorite.  Whether you're a writer, an entrepreneur, or a brand, you can use this "story spine" to effortlessly create a narrative.
+
+5. **Simplify. Focus. Combine characters. Hop over detours.** You’ll feel like you’re losing valuable stuff but it sets you free.  This goes far beyond storytelling.  The goal for every writer, marketer, or entrepreneur should be to add constraints and do more with less.
+
+6. **What is your character good at, comfortable with? Throw the polar opposite at them. Challenge them. How do they deal?**  Think of this like the inversion technique.  What is everyone in your niche saying? How can you say the same things, but in different ways?
+
+7. **Come up with your ending before you figure out your middle.** Seriously. Endings are hard, get yours working up front.  Stories, sales pages, brand pitches - always start with the end in mind and work backward from there.
+
+8. **Finish your story, let go even if it’s not perfect.** In an ideal world you have both, but move on. Do better next time. Don't let perfectionism keep you from publishing.  Reminds me of this famous quote:
+
+> No book is ever finished, it is merely abandoned.
+
+9. **When you’re stuck, make a list of what WOULDN’T happen next.** Lots of times the material to get you unstuck will show up.  This is the ultimate hack to overcome writer's block.  Make a list of everything you *don't* want to write about to get the juices flowing.
+
+10. **Pull apart the stories you like.** What you like in them is a part of you; you’ve got to recognize it before you can use it.  90% of being a good writer or storyteller is being a good *noticer*.  ***Notice when things resonate with you and start asking why***. (No se puede subrayar texto en Markdown. En HTML, esto es posible con la etiqueta \<u\>, aunque, por lo general, no se recomienda hacerlo para evitar confusiones, porque los hipervínculos se muestran como texto subrayado.)
+
+11. **Putting it on paper lets you start fixing it.** If it stays in your head, a perfect idea, you’ll never share it with anyone.  Your head is the worst place to store ideas.  This is why [tferriss](https://twitter.com/tferriss) commits to writing 2 crappy pages per day.  Focus on getting the raw material.
+
+12. Discount the 1st thing that comes to mind. And the 2nd, 3rd, 4th, 5th – get the obvious out of the way. Surprise yourself.  This reminds me of [julian's](https://twitter.com/julian) Creativity Faucet idea.
+
+> To find your best ideas, you need to unclog all the junk first.
+
+13. **Give your characters opinions.** Passive/malleable might seem likable to you as you write, but it’s poison to the audience.  Your opinions should make your audience take a stand.  No "it seems" or "maybes" or "potentiallys" - take a stand and don't hedge.
+
+14. **Why must you tell THIS story?** What’s the belief burning within you that your story feeds off of? That’s the heart of it.
+
+15. **If you were your character, in this situation, how would you feel?** Honesty lends credibility to unbelievable situations.  The best writers and storytellers strike the balance of authenticity (like telling personal stories) while still providing value to the audience.
+
+16. **What are the stakes? Give us a reason to root for the character.** What happens if they don’t succeed? Stack the odds against.  "Stakes" are part of the foundation on which every good story is built.
+
+17. **No work is ever wasted.** If it’s not working, let go and move on - it’ll come back around to be useful later.  You won't always put our your best stuff. And trying to do so is impossible (and leads to burnout). ***So focus on showing up - consistency creates competence.***
+
+18. **You have to know yourself: the difference between doing your best & fussing. Story is testing, not refining.**  Too often people get caught up in trying to plan every step from A to Z.  And this "planning" is really procrastination in disguise.
+
+19. **Coincidences to get characters into trouble are great; coincidences to get them out of it are cheating.**
+
+20. **Exercise:** take the building blocks of a ~~movie~~ paper you dislike. How would you rearrange them into what you DO like?  You can use this for every creative medium. When something doesn't resonate with you (an article, a tweet, an ad, a story) ask why. *Then, make it better.*
+
+21. **You gotta identify with your situation/characters, can’t just write ‘cool’.** What would make YOU act that way?  This goes both ways - you need to put yourself in your character's shoes AND your audience's shoes.  Make your listener feel understood (through authenticity).
+
+22. **What’s the essence of your story?** Most economical telling of it? If you know that, you can build from there.  And the best for last - ask yourself: what are you *really* trying to say (in as few words as possible).  Strip away everything that distracts from that goal.
+
+## CODE: git store credential
+
+general formula:
+```bash
+// local
+git config credential.helper store
+// global
+git config --global credential.helper store
+```
+
+
+```bash
+$ git config credential.helper store
+$ git push http://example.com/repo.git
+Username: <type your username>
+Password: <type your password>
+```
+Notice that **Password** is the code obtained from the [github access token](https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+​
+
+_several days later_
+
+```bash
+$ git push http://example.com/repo.git
+[your credentials are used automatically]
+```
+
+
+## CODE: Multiple output files in rmarkdown
+
+```R
+rmarkdown::render('your.Rmd', output_format = 'all', output_dir = "your_dir")
+```

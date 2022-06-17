@@ -1,0 +1,82 @@
+---
+title: "Computational Lab Notebook"
+subtitle: "{{ cookiecutter.project_name }}"
+author: "{{ cookiecutter.author_name }}"
+date: '`r paste("Last Revision: ",Sys.Date())`'
+header-includes:
+  - \usepackage{pdfpages}
+output:
+  pdf_document:
+    template: /home/javier/.pandoc/templates/eisvogel.latex
+    toc: true
+    number_sections: yes
+    latex_engine: xelatex
+  word_document:
+    toc: yes
+    toc_depth: '4'
+  html_document: default
+titlepage: true
+titlepage-background: /home/javier/Imágenes/bombus-transparency.jpg
+#titlepage-color: "74B72E"  #Pear Green, color of lab notebooks
+titlepage-text-color: "000000" 
+titlepage-rule-color: "383E42" #Anthracite
+titlepage-rule-height: 2
+csl: ../references/frontiers-in-neuroscience.csl
+bibliography: ../bib-proposal.bib  
+biblio-style: "apalike"
+link-citations: true
+urlcolor: blue
+linkcolor: blue
+graphics: yes
+
+---
+```{r setup, include=TRUE, echo=FALSE}
+library(reticulate)
+use_virtualenv("~/Environments/insect-vision/")
+```
+
+\newpage
+
+```{r child = here::here("./reports/LabNotebook/information.rmd")}
+```
+
+\newpage
+
+```{r child = here::here("./reports/LabNotebook/changelog.rmd")}
+```
+
+\newpage
+
+```{r child = here::here("./reports/LabNotebook/workflow.rmd")}
+```
+
+\newpage
+
+```{r child = here::here("./reports/LabNotebook/Daily.rmd")}
+```
+
+\newpage
+
+```{r child = here::here("./reports/LabNotebook/preliminary-results.rmd")}
+```
+
+\newpage
+
+```{r child = here::here("./reports/LabNotebook/meetings.rmd")}
+```
+
+\newpage
+
+```{r child = here::here("./reports/LabNotebook/tips.rmd")}
+```
+
+\newpage
+
+```{r child = here::here("./reports/LabNotebook/papers-analysis.rmd")}
+```
+
+
+
+\newpage
+
+# References

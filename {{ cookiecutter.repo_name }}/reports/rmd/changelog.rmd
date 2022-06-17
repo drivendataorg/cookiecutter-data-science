@@ -1,0 +1,26 @@
+# Changelog
+
+```{r changelog,include=TRUE, echo=FALSE}
+library(tidyverse)
+library(formattable)
+library(kableExtra)
+source_python('/home/javier/Neuroscience/insect-attention/src/changelog.py')
+df <- get_changelog()
+df<-df %>% mutate(Commit = paste0("\\href{https://github.com/jpalma-espinosa/insect-attention/commit/", substr(Commit, 1,7), "}{",substr(Commit, 1,7), "}"))
+```
+
+```{r changelogTab,include=TRUE, echo=FALSE}
+# escape special char as LaTex was crying
+df<-df %>% mutate_all( stringr::str_replace_all, pattern=fixed("_"), replacement="\\_")  
+
+if (knitr::is_html_output())
+    {
+      knitr::kable(df, col.names =c('DATETIME (UTC)', 'COMMIT', 'LOG'), format = "html" , escape = F)
+    }else{
+      kbl(df, linesep="",col.names =c('DATETIME (UTC)', 'COMMIT', 'LOG'), escape = F) %>%
+        kable_styling(font_size=8,latex_options = c("stripped","scale_down", "HOLD_position"),position = "center")%>%
+        row_spec(0,bold=T,hline_after = F)
+    }
+```
+
+

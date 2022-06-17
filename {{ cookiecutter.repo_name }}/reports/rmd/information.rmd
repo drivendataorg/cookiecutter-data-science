@@ -1,0 +1,30 @@
+# Information
+
+## Project name
+
+"{{ cookiecutter.project_name }}"
+
+## Project date
+
+This project started in "{{ cookiecutter.month }}", "{{ cookiecutter.year }}"
+
+## Description
+
+"{{ cookiecutter.description }}"
+
+## Publications
+
+not yet
+
+## Digital verification
+
+not yet
+
+## Github
+
+The whole project is archived in github as digital repository. It may be found in the following link: <>
+
+## Additional Credits
+* Title image made by [Suren Nersisyan](https://twitter.com/surenart)
+* This document was done with the [Eisvogel Template, by Pascal Wagler](https://github.com/Wandmalfarbe/pandoc-latex-template)
+* Project structure inspired by [Cookiecutter Data Science](https://drivendata.github.io/cookiecutter-data-science/), a fork from [Cookiecutter](https://cookiecutter.readthedocs.io/) 

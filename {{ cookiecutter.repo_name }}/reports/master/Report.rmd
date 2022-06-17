@@ -1,0 +1,27 @@
+---
+title: "Ph.D. Project Proposal"
+author: "Javier Palma Espinosa"
+date: '`r paste(Sys.Date())`'
+output:
+  pdf_document:
+    template: /home/javier/.pandoc/templates/eisvogel.latex
+    toc: true
+titlepage: true
+titlepage-background: /home/javier/Imágenes/fondoRmd.png
+csl: ../references/nature-neuroscience.csl
+bibliography: ../bib-proposal.bib  
+
+
+---
+
+# Abstract
+
+# Introduction
+
+# Methods
+
+# Results
+
+# Discussion
+
+# References

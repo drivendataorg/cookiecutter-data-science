@@ -1,0 +1,60 @@
+# Papers summary
+
+
+
+
+
+## Dynamics of a Large-Scale Spiking Neural Network with Quadratic Integrate-and-Fire Neurons [@ye2021dynamics]
+### Introduction
+* Since the work of wilson and cowan, the mean-field approximation has become a common method to reduce the network dynamics to the mean firing rate, constructing a low-dimensional mean field model.
+* Brunel et al. [-@brunel2000dynamics] derived the mean fiel approximation of the network with interacting excitatory and inhibitory neurons to study the synchonization of the neurons.
+* Brunel and Wang built a working memory network and reduced it to a mean-field model to research the computational mechanisms of how the brain stored the information temporarily.
+* In the paper, Ye derived a mean-field model from a network of QIF neurons, and analyzed the dynamical properties of the network using bifurcation analysis.
+
+### Results
+1. In the synchronization state, the mean-field firing rates are also in agreement with the population firing rates
+2. By changing the external input $I_{ext}$ and the excitatory coupling $J_e$, the autor studied the bifurcation plane. Ten regions were found: fold, hopf and period doubling
+3. Ye points out that in the synchronized states, the brain could be in a neural state where information is transmited and coded, as synchronization is a way to cope with noise and protect the information.
+4. In bistable regime, the network induces persisten activity even after the stimuli has vanished.  This persisten activity "underlies short-term information storage in the brain fuynctions, such as working memory, motor control, and spatial navigation"
+
+
+```{r echo=FALSE, fig.cap="Bifurcation Analysis", out.width = '70%', fig.align='center'}
+knitr::include_graphics('../figures/yeFig2.png')
+```
+
+**Surprisingly, this paper does not take into account the network topology, nor weighted $J_e$**
+
+## Selective attention model with spiking elements [@chik2009selective]
+### Introduction
+1. Visual attention in human and monkey brains is realized by a large-scale distributed neural network that includes several cortical and subcortical areas with bottom-up and top-down flow of information between them.
+2. **Despite intensive studies of neuronal activity related to attetnion, it is still unclear what neuronal mechanisms are used by the brain to implement attention.**
+3. Two types of attentional modulation has been proposed:
+	+ Increased excitation of neurons representing attended stimuli is observed while neural activity evoked by unattended stimuli is reduced to a low level.
+	+ Gamma range oscillations correlate with the activity of neurons in the attentional focus.
+
+*The model proposed by the authors, using hodgkin-Huxley neurons, aims to elucidate how selective attention can be represented by the synchrony and suppresion of neural activity in a network of interactive spiking elements*
+
+
+
+### Results
+1. The model exhibits five global dynamical states: Partial synchronization A; Transition state; Global synchronization; Partial synchronization B; Quiescence.  
+	1. Partial synchronization is interpreted as selective attention, where population A or B is "attending" to some stimuli.
+	2. Transition state is interpreted as different degrees of attention concentration (could be attentional shift?)
+2. **There remain many uncertainties abouth the complete bifurcation structure of the model, therefore further investigations are required**
+3. In the simulations, selective attention (associated with partial synchronization) always favours a group with higher frequency
+
+
+```{r echo=FALSE, fig.show = "hold", fig.cap="Model(left) and bifurcation space(right)", out.width = "50%", fig.align ="default"}
+knitr::include_graphics('../figures/chik-fig1.png')
+knitr::include_graphics('../figures/chik-fig2.png')
+```
+
+
+
+### Discusion
+1. They showed that an inhibitory neuron connected to an assembly of spiking neurons is able to synchronize their activities.
+2. When comparing the results of the simulation with experimental data, it was observed that the population of neurons that were "attending" exhibit a higher frequency. This is in line with experiments showing that attention is related with gamma band activity.
+3. **Experimental evidence indicates that attention focusing is related to coherent oscillatory spiking activity in the gamma band**.  However, the question about the neuronal mechanism underlying synchronization remains unanswered. The authors discuse two potentail mechanisms, previously proposed by @niebur2002synchrony
+	1. Lateral coupling betrween neurons in the population
+	2. common input to all neurons in the population.
+4. The simulations provide an argument in favour of the second hypothesis, in where a top-down signaling process is stimulated by a bottom-up excitatory signal from the same population, generating a sort of closed loop.
