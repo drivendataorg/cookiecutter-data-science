@@ -36,7 +36,7 @@ RUN apt -y update \
     && chmod +x kubectl \
     && mv kubectl /usr/local/bin/ \
     && curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash \
-    && curl -L -o runai.tar.gz https://github.com/run-ai/runai-cli/releases/download/v2.2.77/runai-cli-v2.2.77-linux-amd64.tar.gz \
+    && curl -L -o runai.tar.gz https://github.com/run-ai/runai-cli/releases/download/v2.3.4/runai-cli-v2.3.4-linux-amd64.tar.gz \
     && tar xvzf runai.tar.gz \
     && ./install-runai.sh \
     && envsubst < /tmp/kube.template > /tmp/kube.config
