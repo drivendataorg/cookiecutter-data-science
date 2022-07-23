@@ -1,15 +1,28 @@
 ---
+# USAGE
+# This file should be compiled within its folder
+# rmarkdown::render('LabNotebook.rmd', output_format = 'all', output_dir = "../pdf")
+#COLOR DEFINITIONS
+# 74B72E  #Pear Green: Lab notebooks
+# 005780  #Mykonos Blue: Reports. Use white letter in the  cover
+# 000000  #Black
+# FFFFFF  #White
+# 383E42  #Anthracite
+
 title: "Ph.D. Project Proposal"
 author: "Javier Palma Espinosa"
 date: '`r paste(Sys.Date())`'
 output:
   pdf_document:
-    template: /home/javier/.pandoc/templates/eisvogel.latex
+    template: ./utils/eisvogel.latex
     toc: true
 titlepage: true
-titlepage-background: /home/javier/Imágenes/fondoRmd.png
-csl: ../references/nature-neuroscience.csl
-bibliography: ../bib-proposal.bib  
+titlepage-color: 005780  #Mykonos Blue: Reports. Use white letter in the  cover
+titlepage-text-color: "000000" 
+titlepage-rule-color: "383E42" #Anthracite
+titlepage-rule-height: 2
+csl: ./utils/frontiers-in-neuroscience.csl
+#bibliography: ../bib-proposal.bib  
 
 
 ---

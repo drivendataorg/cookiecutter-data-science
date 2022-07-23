@@ -18,6 +18,3 @@ $commands_used
 
 * __Results:__  
 ---
-
-
-
