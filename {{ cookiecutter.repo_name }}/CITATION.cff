@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this data/software, please cite it as below."
+authors:
+- family-names: "{{ cookiecutter.author_name.split()[0] }}"
+  given-names: "{{ cookiecutter.author_name.split()[1] }}"
+  orcid: "{{ cookiecutter.orcid }}"
+title: "{{ cookiecutter.project_name.lower().replace(' ', '_') }}"
+version: 0.0.1
+date-released: ""
+doi: ""
+{% if cookiecutter.vcs == 'Github' %}
+url: "{{ 'https://github.com/'~cookiecutter.vcs_username }}"
+{% elif cookiecutter.vcs == 'Gitlab' %}
+url: "{{ 'https://gitlab.com/'~cookiecutter.vcs_username }}"
+{% else %}
+url: ""
+{% endif %}

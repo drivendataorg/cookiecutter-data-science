@@ -111,3 +111,7 @@ class TestCookieSetup(object):
         abs_dirs, _, _ = list(zip(*os.walk(self.path)))
         assert len(set(abs_expected_dirs + ignored_dirs) - set(abs_dirs)) == 0
 
+    def test_citationfile(self):
+        citation_path = self.path / 'CITATION.cff'
+        assert citation_path.exists()
+        assert no_curlies(citation_path)
