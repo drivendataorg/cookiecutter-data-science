@@ -7,6 +7,7 @@ Sphinx
 coverage
 awscli
 flake8
+isort
 python-dotenv>=0.5.1
 {% if cookiecutter.python_interpreter != 'python3' %}
 
