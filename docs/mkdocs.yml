@@ -8,5 +8,5 @@ google_analytics: ['UA-54096005-4', 'auto']
 theme: cinder
 extra_css:
   - css/extra.css
-pages:
+nav:
   - Home: index.md
