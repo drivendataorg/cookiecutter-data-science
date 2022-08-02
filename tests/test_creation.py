@@ -1,7 +1,7 @@
+import sys
 from pathlib import Path
 from subprocess import PIPE, run
 
-import chardet
 import pytest
 from conftest import bake_project, config_generator
 
@@ -143,7 +143,8 @@ def verify_makefile_commands(root, config):
     )
     result_returncode = result.returncode
 
-    encoding = chardet.detect(result.stdout + result.stderr)["encoding"]
+    encoding = sys.stdout.encoding
+
     if encoding is None:
         encoding = "utf-8"
 

@@ -9,11 +9,11 @@ requirements:
 
 format:
 	isort ccds hooks tests
-	black ccds hooks tests --exclude "hooks/post_gen_project.py"
+	black ccds hooks tests setup.py --exclude "hooks/post_gen_project.py"
 	
 lint:
-	flake8 ccds hooks tests
-	black --check ccds hooks tests --exclude "hooks/post_gen_project.py"
+	flake8 ccds hooks tests setup.py
+	black --check ccds hooks tests setup.py --exclude "hooks/post_gen_project.py"
 
 
 ###     DOCS

@@ -1,5 +1,6 @@
 def deprecation_warning():
-    print("""
+    print(
+        """
 
 =============================================================================
 *** DEPRECATION WARNING ***
@@ -16,7 +17,8 @@ For example:
     cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
 =============================================================================
 
-    """)
+    """
+    )
 
 
 deprecation_warning()
