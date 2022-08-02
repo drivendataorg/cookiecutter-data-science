@@ -1,24 +1,18 @@
 from pathlib import Path
-from subprocess import run, PIPE
+from subprocess import PIPE, run
 
-import pytest
 import chardet
-
+import pytest
 from conftest import bake_project, config_generator
 
 
 def no_curlies(filepath):
-    """ Utility to make sure no curly braces appear in a file.
-        That is, was Jinja able to render everything?
+    """Utility to make sure no curly braces appear in a file.
+    That is, was Jinja able to render everything?
     """
-    data = filepath.open('r').read()
+    data = filepath.open("r").read()
 
-    template_strings = [
-        '{{',
-        '}}',
-        '{%',
-        '%}'
-    ]
+    template_strings = ["{{", "}}", "{%", "%}"]
 
     template_strings_in_file = [s in data for s in template_strings]
     return not any(template_strings_in_file)
@@ -26,8 +20,8 @@ def no_curlies(filepath):
 
 @pytest.mark.parametrize("config", config_generator())
 def test_baking_configs(config):
-    """ For every generated config in the config_generator, run all
-        of the tests.
+    """For every generated config in the config_generator, run all
+    of the tests.
     """
     print("using config", config)
     with bake_project(config) as project_directory:
@@ -37,22 +31,21 @@ def test_baking_configs(config):
 
 
 def verify_folders(root, config):
-    ''' Tests that expected folders and only expected folders exist.
-    '''
+    """Tests that expected folders and only expected folders exist."""
     expected_dirs = [
-        '.',
-        'data',
-        'data/external',
-        'data/interim',
-        'data/processed',
-        'data/raw',
-        'docs',
-        'models',
-        'notebooks',
-        'references',
-        'reports',
-        'reports/figures',
-        config['module_name'],
+        ".",
+        "data",
+        "data/external",
+        "data/interim",
+        "data/processed",
+        "data/raw",
+        "docs",
+        "models",
+        "notebooks",
+        "references",
+        "reports",
+        "reports/figures",
+        config["module_name"],
         f"{config['module_name']}/data",
         f"{config['module_name']}/features",
         f"{config['module_name']}/models",
@@ -61,23 +54,23 @@ def verify_folders(root, config):
 
     expected_dirs = [
         #  (root / d).resolve().relative_to(root) for d in expected_dirs
-         Path(d) for d in expected_dirs
+        Path(d)
+        for d in expected_dirs
     ]
 
     existing_dirs = [
-        d.resolve().relative_to(root) for d in root.glob('**') if d.is_dir()
+        d.resolve().relative_to(root) for d in root.glob("**") if d.is_dir()
     ]
 
     assert sorted(existing_dirs) == sorted(expected_dirs)
 
 
 def verify_files(root, config):
-    ''' Test that expected files and only expected files exist.
-    '''
+    """Test that expected files and only expected files exist."""
     expected_files = [
-        'Makefile',
-        'README.md',
-        'setup.py',
+        "Makefile",
+        "README.md",
+        "setup.py",
         ".env",
         ".gitignore",
         "data/external/.gitkeep",
@@ -109,17 +102,13 @@ def verify_files(root, config):
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):
-        expected_files.append('LICENSE')
+        expected_files.append("LICENSE")
 
     expected_files.append(config["dependency_file"])
 
-    expected_files = [
-         Path(f) for f in expected_files
-    ]
+    expected_files = [Path(f) for f in expected_files]
 
-    existing_files = [
-        f.relative_to(root) for f in root.glob('**/*') if f.is_file()
-    ]
+    existing_files = [f.relative_to(root) for f in root.glob("**/*") if f.is_file()]
 
     assert sorted(existing_files) == sorted(expected_files)
 
@@ -128,34 +117,41 @@ def verify_files(root, config):
 
 
 def verify_makefile_commands(root, config):
-    """ Actually shell out to bash and run the make commands for:
-        - create_environment
-        - requirements
-        Ensure that these use the proper environment.
+    """Actually shell out to bash and run the make commands for:
+    - create_environment
+    - requirements
+    Ensure that these use the proper environment.
     """
     test_path = Path(__file__).parent
 
-    if config["environment_manager"] == 'conda':
+    if config["environment_manager"] == "conda":
         harness_path = test_path / "conda_harness.sh"
-    elif config["environment_manager"] == 'virtualenv':
+    elif config["environment_manager"] == "virtualenv":
         harness_path = test_path / "virtualenv_harness.sh"
-    elif config["environment_manager"] == 'pipenv':
+    elif config["environment_manager"] == "pipenv":
 
         harness_path = test_path / "pipenv_harness.sh"
-    elif config["environment_manager"] == 'none':
+    elif config["environment_manager"] == "none":
         return True
     else:
-        raise ValueError(f"Environment manager '{config['environment_manager']}' not found in test harnesses.")
+        raise ValueError(
+            f"Environment manager '{config['environment_manager']}' not found in test harnesses."
+        )
 
-    result = run(["bash", str(harness_path), str(root.resolve())], stderr=PIPE, stdout=PIPE)
+    result = run(
+        ["bash", str(harness_path), str(root.resolve())], stderr=PIPE, stdout=PIPE
+    )
     result_returncode = result.returncode
 
-    encoding = chardet.detect(result.stdout)["encoding"]
+    encoding = chardet.detect(result.stdout + result.stderr)["encoding"]
     if encoding is None:
         encoding = "utf-8"
 
     # normally hidden by pytest except in failure we want this displayed
     print("\n======================= STDOUT ======================")
+    print(result.stdout.decode(encoding))
 
     print("\n======================= STDERR ======================")
+    print(result.stderr.decode(encoding))
+
     assert result_returncode == 0

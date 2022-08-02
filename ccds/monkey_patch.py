@@ -1,16 +1,21 @@
 from collections import OrderedDict
 from pathlib import Path
 
-from cookiecutter.exceptions import UndefinedVariableInTemplate
 from cookiecutter.environment import StrictEnvironment
+from cookiecutter.exceptions import UndefinedVariableInTemplate
 from cookiecutter.generate import generate_context
-from cookiecutter.prompt import (prompt_choice_for_config, render_variable, read_user_variable, read_user_choice)
+from cookiecutter.prompt import (
+    prompt_choice_for_config,
+    read_user_choice,
+    read_user_variable,
+    render_variable,
+)
 from jinja2.exceptions import UndefinedError
 
 
 def _prompt_choice_and_subitems(cookiecutter_dict, env, key, options, no_input):
     result = {}
-    
+
     # first, get the selection
     rendered_options = [
         render_variable(env, list(raw.keys())[0], cookiecutter_dict) for raw in options
@@ -20,8 +25,10 @@ def _prompt_choice_and_subitems(cookiecutter_dict, env, key, options, no_input):
         selected = rendered_options[0]
     else:
         selected = read_user_choice(key, rendered_options)
-    
-    selected_item = [list(c.values())[0] for c in options if list(c.keys())[0] == selected][0]
+
+    selected_item = [
+        list(c.values())[0] for c in options if list(c.keys())[0] == selected
+    ][0]
 
     result[selected] = {}
 
@@ -58,8 +65,8 @@ def prompt_for_config(context, no_input=False):
     # First pass: Handle simple and raw variables, plus choices.
     # These must be done first because the dictionaries keys and
     # values might refer to them.
-    for key, raw in context[u'cookiecutter'].items():
-        if key.startswith(u'_'):
+    for key, raw in context["cookiecutter"].items():
+        if key.startswith("_"):
             cookiecutter_dict[key] = raw
             continue
 
@@ -89,7 +96,7 @@ def prompt_for_config(context, no_input=False):
             raise UndefinedVariableInTemplate(msg, err, context)
 
     # Second pass; handle the dictionaries.
-    for key, raw in context[u'cookiecutter'].items():
+    for key, raw in context["cookiecutter"].items():
 
         try:
             if isinstance(raw, dict):
@@ -97,7 +104,9 @@ def prompt_for_config(context, no_input=False):
                 val = render_variable(env, raw, cookiecutter_dict)
 
                 if not no_input:
-                    val = read_user_dict(key, val)
+                    val = read_user_dict(  # noqa: F821 referencable in patched context
+                        key, val
+                    )
 
                 cookiecutter_dict[key] = val
         except UndefinedError as err:
@@ -108,15 +117,15 @@ def prompt_for_config(context, no_input=False):
 
 
 def generate_context_wrapper(*args, **kwargs):
-    ''' Hardcoded in cookiecutter, so we override:
-        https://github.com/cookiecutter/cookiecutter/blob/2bd62c67ec3e52b8e537d5346fd96ebd82803efe/cookiecutter/main.py#L85
-    '''
+    """Hardcoded in cookiecutter, so we override:
+    https://github.com/cookiecutter/cookiecutter/blob/2bd62c67ec3e52b8e537d5346fd96ebd82803efe/cookiecutter/main.py#L85
+    """
     # replace full path to cookiecutter.json with full path to ccds.json
-    kwargs['context_file'] = str(Path(kwargs['context_file']).with_name('ccds.json'))
-    
+    kwargs["context_file"] = str(Path(kwargs["context_file"]).with_name("ccds.json"))
+
     parsed_context = generate_context(*args, **kwargs)
 
     # replace key
-    parsed_context['cookiecutter'] = parsed_context['ccds']
-    del parsed_context['ccds']
+    parsed_context["cookiecutter"] = parsed_context["ccds"]
+    del parsed_context["ccds"]
     return parsed_context

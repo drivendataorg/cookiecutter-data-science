@@ -1,7 +1,10 @@
 -r requirements.txt
 -e .
 
+black
 chardet
+flake8
+isort
 mkdocs
 mkdocs-cinder
 pipenv
