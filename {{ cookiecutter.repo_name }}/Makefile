@@ -1,4 +1,4 @@
-.PHONY: clean data lint requirements sync_data_down sync_data_up
+.PHONY: clean data lint format requirements sync_data_down sync_data_up
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -33,9 +33,15 @@ clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
-## Lint using flake8
+## Lint using flake8 and black (use `make format` to do formatting)
 lint:
 	flake8 {{ cookiecutter.module_name }}
+	black --check --config pyproject.toml {{ cookiecutter.module_name }}
+
+
+## Format source code with black
+format:
+	black --config pyproject.toml {{ cookiecutter.module_name }}
 
 {% if not cookiecutter.dataset_storage.none %}
 ## Download Data from storage system
