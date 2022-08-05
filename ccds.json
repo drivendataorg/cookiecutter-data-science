@@ -4,7 +4,7 @@
     "module_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
     "author_name": "Your name (or your organization/company/team)",
     "description": "A short description of the project.",
-    "python_version_number": "3.7",
+    "python_version_number": "3.10",
     "dataset_storage": [
         {"none": "none"},
         {"azure": {"container": "container-name"}},
@@ -26,5 +26,5 @@
         "none",
         "basic"
     ],
-    "open_source_license": ["MIT", "BSD-3-Clause", "No license file"]
+    "open_source_license": ["No license file", "MIT", "BSD-3-Clause"]
 }

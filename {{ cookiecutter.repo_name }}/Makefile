@@ -33,11 +33,13 @@ clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
-## Lint using flake8
+## Lint using flake8 and black (use `make format` to do formatting)
 lint:
 	flake8 {{ cookiecutter.module_name }}
+	black --check --config pyproject.toml {{ cookiecutter.module_name }}
 
-## Format with black
+
+## Format source code with black
 format:
 	black --config pyproject.toml {{ cookiecutter.module_name }}
 
@@ -86,10 +88,6 @@ create_environment:
 	{% endif %}
 {% endif %}
 
-## Wrapper for format and lint
-pre-commit:
-	make format
-	make lint
 
 #################################################################################
 # PROJECT RULES                                                                 #
