@@ -9,21 +9,25 @@ requirements:
 
 format:
 	isort ccds hooks tests
-	black ccds hooks tests setup.py --exclude "hooks/post_gen_project.py"
+	black ccds hooks tests setup.py
 	
 lint:
 	flake8 ccds hooks tests setup.py
-	black --check ccds hooks tests setup.py --exclude "hooks/post_gen_project.py"
+	black --check ccds hooks tests setup.py
 
 
 ###     DOCS
+
 docs-serve:
 	cd docs && mkdocs serve
 
 ###     TESTS
 
 test: _prep
-	pytest
+	pytest -vvv
+
+test-fastest: _prep
+	pytest -vvv -FFF
 
 test-debug-last:
 	pytest --lf --pdb
@@ -31,5 +35,10 @@ test-debug-last:
 _clean_manual_test:
 	rm -rf manual_test
 
-manual_test: _prep _clean_manual_test
-	cd manual_test && ccds 
+manual-test: _prep _clean_manual_test
+	mkdir -p manual_test
+	cd manual_test && python -m ccds ..
+
+manual-test-debug: _prep _clean_manual_test
+	mkdir -p manual_test
+	cd manual_test && python -m pdb ../ccds/__main__.py ..

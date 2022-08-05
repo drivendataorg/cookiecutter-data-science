@@ -2,8 +2,7 @@ import sys
 from pathlib import Path
 from subprocess import PIPE, run
 
-import pytest
-from conftest import bake_project, config_generator
+from conftest import bake_project
 
 
 def no_curlies(filepath):
@@ -18,8 +17,7 @@ def no_curlies(filepath):
     return not any(template_strings_in_file)
 
 
-@pytest.mark.parametrize("config", config_generator())
-def test_baking_configs(config):
+def test_baking_configs(config, fast):
     """For every generated config in the config_generator, run all
     of the tests.
     """
@@ -27,7 +25,9 @@ def test_baking_configs(config):
     with bake_project(config) as project_directory:
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
-        verify_makefile_commands(project_directory, config)
+
+        if fast < 2:
+            verify_makefile_commands(project_directory, config)
 
 
 def verify_folders(root, config):

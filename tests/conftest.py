@@ -6,6 +6,8 @@ from contextlib import contextmanager
 from itertools import product
 from pathlib import Path
 
+import pytest
+
 from ccds.__main__ import api_main
 
 CCDS_ROOT = Path(__file__).parents[1].resolve()
@@ -22,7 +24,7 @@ default_args = {
 }
 
 
-def config_generator():
+def config_generator(fast=False):
     cookiecutter_json = json.load((CCDS_ROOT / "ccds.json").open("r"))
 
     # python versions for the created environment; match the root
@@ -61,6 +63,41 @@ def config_generator():
         config = dict(c)
         config.update(default_args)
         yield config
+
+        # just do a single config if fast passed once or three times
+        if fast in [1, 3]:
+            break
+
+
+def pytest_addoption(parser):
+    """Pass -F/--fast multiple times to speed up tests
+
+    default - execute makefile commands, all configs
+
+     -F - execute makefile commands, single config
+     -FF - skip makefile commands, all configs
+     -FFF - skip makefile commands, single config
+    """
+    parser.addoption(
+        "--fast",
+        "-F",
+        action="count",
+        default=0,
+        help="Speed up tests by skipping configs and/or Makefile validation",
+    )
+
+
+@pytest.fixture
+def fast(request):
+    return request.config.getoption("--fast")
+
+
+def pytest_generate_tests(metafunc):
+    # setup config fixture to get all of the results from config_generator
+    if "config" in metafunc.fixturenames:
+        metafunc.parametrize(
+            "config", config_generator(metafunc.config.getoption("fast"))
+        )
 
 
 @contextmanager
