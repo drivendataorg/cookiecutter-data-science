@@ -1,4 +1,6 @@
 from pathlib import Path
+import shutil
+
 
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
@@ -59,3 +61,12 @@ if "{{ cookiecutter.open_source_license }}" == "No license file":
 # Jinja tojson escapes single-quotes with \u0027 since it's meant for HTML/JS
 pyproject_text = Path("pyproject.toml").read_text()
 Path("pyproject.toml").write_text(pyproject_text.replace(r"\u0027", "'"))
+
+# {% if cookiecutter.include_skeleton_code == "No" %}
+# remove everything except __init__.py so result is an empty package
+for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
+    if generated_path.is_dir():
+        shutil.rmtree(generated_path)
+    elif generated_path.name != "__init__.py":
+        generated_path.unlink()
+# {% endif %}

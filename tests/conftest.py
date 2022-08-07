@@ -21,6 +21,7 @@ default_args = {
     "description": "A test project",
     "open_source_license": "MIT",
     "dataset_storage": {"azure": {"container": "container-name"}},
+    "include_skeleton_code": "No",
 }
 
 
@@ -40,6 +41,7 @@ def config_generator(fast=False):
         ],
         [("dependency_file", opt) for opt in cookiecutter_json["dependency_file"]],
         [("pydata_packages", opt) for opt in cookiecutter_json["pydata_packages"]],
+        [("include_skeleton_code", opt) for opt in cookiecutter_json["include_skeleton_code"]],
     )
 
     def _is_valid(config):
@@ -66,7 +68,7 @@ def config_generator(fast=False):
         yield config
 
         # just do a single config if fast passed once or three times
-        if fast in [1, 3]:
+        if fast == 1 or fast >= 3:
             break
 
 
