@@ -1,0 +1,9 @@
+ame: python-starter
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pre_commit=2.20.0
+  - prospector=1.7.7
+  - black=22.6.0
+  - pytest=7.1.2
