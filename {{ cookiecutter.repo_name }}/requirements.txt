@@ -16,6 +16,7 @@ pytest>=6.1.1
 pytest-cov>=2.11.1
 python-dotenv>=0.19.1
 tokenize-rt>=4.2.1
+jupyterlab==3.2.8
 {% else %}# external requirements (please freeze version to the one you are using)
 doit>=0.33.1
 dvc>=2.8.1

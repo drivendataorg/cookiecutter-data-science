@@ -137,7 +137,7 @@ class TestCookieSetup(object):
         assert "__init__.py" in abs_files[0]
         assert "make_dataset.py" in abs_files[0]
 
-    # def test_gitlab_pipeline(self):
-    #     _, _, abs_files = list(zip(*os.walk(self.path)))
+    def test_gitlab_pipeline(self):
+        _, _, abs_files = list(zip(*os.walk(self.path)))
 
-    #     assert ".gitlab-ci.yml" in abs_files[0]
+        assert ".gitlab-ci.yml" in abs_files[0]
