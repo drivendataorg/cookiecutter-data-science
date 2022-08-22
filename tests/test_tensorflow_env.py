@@ -17,7 +17,7 @@ def no_curlies(filepath):
     return not any(template_strings_in_file)
 
 
-@pytest.mark.usefixtures("default_baked_project")
+@pytest.mark.usefixtures("tensorflow_project")
 class TestCookieSetup(object):
     def test_project_name(self):
         project = self.path
@@ -71,7 +71,7 @@ class TestCookieSetup(object):
         if pytest.param.get("python_interpreter"):
             with open(reqs_path) as fin:
                 lines = list(map(lambda x: x.strip(), fin.readlines()))
-            assert "dvc>=2.8.1" in lines
+            assert "# Example: expackage==2.4.1" in lines
 
     def test_doitfile(self):
         doitfile_path = self.path / "dodo.py"
@@ -85,13 +85,9 @@ class TestCookieSetup(object):
         with open(dockerfile_path) as fin:
             lines = list(map(lambda x: x.strip(), fin.readlines()))
         
-        assert lines[0] == "FROM nvidia/cuda:11.4.0-base-ubuntu20.04"
-        assert lines[-1] == 'CMD ["dvc", "repro"]'
+        assert lines[0] == "FROM registry.git.vgregion.se/aiplattform/images/tensorflow:0.1.0"
+        assert lines[-1] == 'WORKDIR /workspace'
         assert "RUN pip install -r requirements.txt" in lines
-
-    def test_kubetemplate(self):
-        kubetemplate_path = self.path / "kube.template"
-        assert kubetemplate_path.exists()
 
     def test_folders(self):
         module_name = "project_name"

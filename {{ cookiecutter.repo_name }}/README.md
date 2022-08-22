@@ -5,17 +5,6 @@
 
 Dependencies:
 
-* Update environment variable `KUBE_CLUSTER_CA` in your Dockerfile to comply with the appropriate certificate authority.
-* Update environment variable `KUBE_CLUSTER_SERVER` in your Dockerfile to the correct Kubernetes server name. 
-
-  Example:
-  
-  ```Dockerfile
-  FROM nvidia/cuda:11.4.0-base-ubuntu20.04
-  
-  ENV KUBE_CLUSTER_CA="abcd1234"
-  ENV KUBE_CLUSTER_SERVER="https://acme.domain.com:6443"
-  ```
 
 To build a docker image:
 ```

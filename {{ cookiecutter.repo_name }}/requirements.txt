@@ -1,26 +1,3 @@
-{% if cookiecutter.python_interpreter == 'python3' %}# local package
--e .
-
-# external requirements (please freeze version to the one you are using)
-bandit>=1.7.0
-black>=21.10b0
-doit>=0.33.1
-dvc>=2.8.1
-flake8>=3.9.1
-loguru>=0.5.3
-mkdocs-material>=8.1.9
-mkdocs-git-revision-date-plugin>=0.3.1
-mlflow>=1.21.0
-pylint>=2.11.1
-pytest>=6.1.1
-pytest-cov>=2.11.1
-python-dotenv>=0.19.1
-tokenize-rt>=4.2.1
-jupyterlab==3.2.8
-{% else %}# external requirements (please freeze version to the one you are using)
-doit>=0.33.1
-dvc>=2.8.1
-mkdocs-material>=8.1.9
-mkdocs-git-revision-date-plugin>=0.3.1
-{% endif %}
-# Add new requirements below
+# Here you can add additional python packages to your liking.
+# Just make sure you lock the versions!
+# Example: expackage==2.4.1
