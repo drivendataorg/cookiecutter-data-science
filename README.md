@@ -4,15 +4,16 @@ _A logical, reasonably standardized, but flexible project structure for doing an
 
 _Adapted to Region Västra Götaland's data science processes._
 
-## Start your new Python or R project from our template!
+## Start your new PyTorch, Tensorflow or R project from our template!
 You can choose which language to use when selecting interpreter. By using our template you can easily create reproducible data science projects to share with your colleagues.
 
 You will get:
  - Folder structure
  - Documentation
  - Tools for reproducibility
- - Dockerfile with Python installed
- - (if selected) R + RStudio Server
+ - (if selected) Dockerfile with PyTorch + Jupyter installed
+ - (if selected) Dockerfile with Tensorflow + Jupyter installed
+ - (if selected) Dockerfile with R + RStudio Server installed
 
 You will **NOT** get:
  - Messy projects
