@@ -9,7 +9,7 @@ See [here](https://git.vgregion.se/aiplattform/docs/researchers/-/blob/main/docs
 
 ## Usage
 
-Learn more about the purpose and how to use this model [here](förtroende)
+Learn more about the purpose and how to use this model [here](docs/index.md)
 
 Project Organization
 ------------
