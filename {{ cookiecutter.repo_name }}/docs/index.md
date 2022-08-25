@@ -84,105 +84,102 @@ Who should you contact for more information?
 
 Primary intended uses and users.
 
-### Användningsfall utanför tillämpningsområdet
+### Use cases outside the scope of application
 
-Alternativa tänkbara eller faktiska användningsfall, eventuellt med specifika
-betänkanden eller kommentarer.
+Alternative conceivable or actual use cases, for example with specific reports or comments.
 
-## Faktorer
+## Factors
 
-### Relevanta faktorer
+### Relevant factors
 
-De faktorer som kan påverka processen/modellen/algoritmen. Det kan handla om 3 huvudsakliga typer av faktorer: Olika grupper av objekt, t.ex. ålder och kön
-i en modell för ansiktsigenkänning, byggnadsändamål och byggnadsstorlek i en modell för att hitta byggnader eller olika längd på meningar i en NLP-modell.
-Påverkan av olika instrument, t.ex. kameramodell och bearbetningsmetoder. Miljön, t.ex. belysning, plats, m.m.
+The factors that can affect the process/model/algorithm. There are three main factors: Different groups of objects, e.g. age and sex in a model for face recognition, building purpose and building size in a model for finding buildings or different length of sentences in an NLP model.
 
-### Utvärderingsfaktorer
+The impact of various instruments, e.g. camera model and processing methods. The environment, e.g. lighting, location, etc.
 
-De faktorer (av dem som nämns i 4.1.) som har utvärderats. Varför har de utvärderats eller inte (t.ex. för att det inte fanns tillgängligt eller ansetts vara
+### Evaluation factors
+
+The factors (mentioned in 4.1.) that have been evaluated. Why have they been evaluated or not (e.g. because it was not available or considered to be
 relevant)?
 
-## Utvärdering av modellen
+## Evaluation of the model
 
-Kort (1-2meningar) beskrivning om vilka mått som använts.
+Brief (1-2 sentences) description of the measurements used.
 
-### Resultat
+### Result
 
-Processens/modellens/algoritmens prestanda beskriven med siffror och grafer för helheten.
+The performance of the process/model/algorithm described with numbers and graphs for the whole.
 
-### Användarresultat
+### User results
 
-Gäller enbart för processer.
+Only applies to processes.
 
-Resultat från användning i verkligheten. Kan vara under en testperiod eller i produktion (vilket det är ska anges). Ska ge en indikation om processens
-prestanda, exempel på mätvärden: Användarbetyg, antal omprövningar och andel som ändrade resultatet, stickprovskontroller
+Results from real-world use. May be in a test period or in production (whichever is to be specified). Should give an indication of the process
+performance, Example metrics: User rating, number of retests and percentage that changed the result, acceptance sampling.
 
-### Unitära resultat
+### Unitary results
 
-Vad är modellens prestanda för de enskilda faktorerna (t.ex. olika kön, byggnadsändamål eller meningslängder) beskriven med siffror och grafer för
-helheten?
+What is the performance of the model for the individual factors (e.g. different genders, building purposes or sentence lengths) described with numbers and graphs for
+the whole?
 
-### Trösklar och jämförelser
+### Thresholds and comparisons
 
-Trösklar för när processen/modellen/algoritmen (enligt oss) är tillämpbar (t.ex. ett krav på precision/recall från "högre instans"), jämförelser med andra
-processer/modeller/algoritmer och metoder, m.m.
+Thresholds for when the process/model/algorithm (in our opinion) is applicable (eg a requirement for precision/recall from "higher instance"), comparisons with others
+processes/models/algorithms and methods, etc.
 
-### Utvärderingsmetod
+### Evaluation method
 
-Hur har utvärderingsvärdena (t.ex. precision/recall) räknats fram? Kan hänvisa till extern information om oförändrade standardmetoder används och en egen
-beskrivning inte tillför något.
+How have the evaluation values (e.g. precision/recall) been calculated? Can refer to external information if unchanged standard methods are used and a custom description adds nothing.
 
 ## Data
 
-### Utvärderingsdata
+### Evaluation data
 
 Information om det data som använts för att genomföra utvärderingen (källa, utbredning, förbehandling, m.m.). uppmärksamma särskilt om det finns
 personuppgifter eller skyddsvärd information i utvärderingsdata.
 
-### Träningsdata
+### Training data
 
-Information om det data som använts för att träna modellen (källa, utbredning, förbehandling, m.m.). uppmärksamma särskilt om det finns personuppgifter eller
-skyddsvärd information i utvärderingsdata.
+Information about the data used to train the model (source, distribution, preprocessing, etc.). pay particular attention to whether there is personal data or
+information worthy of protection in evaluation data.
 
-## Övervakning, loggning och profilering
+## Monitoring, logging and profiling
 
-Beskriv om systemet genererar loggar samt någon form av övervakning. Ta särskild hänsyn till mänsklig interaktion med dessa loggar eller övervakning
+Describe whether the system generates logs and any form of monitoring. Pay particular attention to human interaction with these logs or monitoring
 
-## Etiska aspekter
+## Ethical aspects
 
-EU-kommissionens Etiska riktlinjer för tillförlitlig AI ställer upp tre komponenter i sitt ramverk för tillförlitlig AI: Inkluderar, men är inte begränsat
-till: Laglig AI, Etisk AI och Robust AI. Etisk AI omfattar i sin tur fyra principer:
-- Respekt för människans autonomi
-- Förebyggande av skada
-- Rättvisa
-- Förklarbarhet.
-Dessa principer finns förklarade i detalj i riktlinjerna. De kan med fördel vara vägledande för den redovisning som görs under denna rubrik.
+The European Commission's Ethical Guidelines for Trusted AI sets out three components of its framework for Trusted AI: Includes, but is not limited to
+to: Legal AI, Ethical AI and Robust AI. Ethical AI in turn encompasses four principles:
+- Respect for human autonomy
+- Prevention of injury
+- Justice
+- Explainability
+These principles are explained in detail in the guidelines. They can be useful as a guide for the report made under this heading.
 
-## Juridiska aspekter
+## Legal aspects
 
-Krav som ställs på processen/modellen/algoritmen utifrån gällande lagar och förordningar.Kan ha delvis överlapp med Etiska aspekter, t.ex. gällande
-personuppgifter. Uppdelningen som gäller är att kapitlet Etiska ställningstaganden ska hantera den etiska sidan ("bör man") och Juridiska
-aspekterska hantera den juridiska sidan ("får man").
+Requirements placed on the process/model/algorithm based on current laws and regulations. May have partial overlap with ethical aspects, e.g. current
+personal data. The division that applies is that the chapter Ethical positions should handle the ethical side ("should one") and Legal
+aspects dealing with the legal side ("can one").
 
-### Integritetslagstiftning
+### Privacy legislation
 
-Uppmärksamma särskilt den data som används och då i förhållande till t.ex. GDPR
+Pay particular attention to the data that is used and then in relation to e.g. GDPR
 
-### Sekretess eller annan skyddslagstiftning
+### Privacy or other protection legislation
 
-Överväg vilken information gällande sekretess som är relevant att uppmärksamma
+Consider what privacy information is relevant to pay attention to
 
-### Omprövning och överklagande
+### review and appeals
 
-Enbart för processer.
-Kan man få beslutet omprövat (av en mänsklig handläggare) eller överklagat? Hur?
+For processes only. Can the decision be reviewed (by a human administrator) or appealed? How?
 
-### Tillsyn
+### Supervision
 
-Finns det någon som har tillsyn? Externt eller internt? Myndighet, företag eller annan?
+Is there someone supervising? External or internal? Authority, company or other?
 
-## Betänkanden och rekommendationer
+## Reports and recommendations
 
-Finns det några ytterligare aspekter att ta hänsyn till, som inte hanterats i någon annan rubrik? Indikerar t.ex. resultaten på att det behövs mer tester? Fanns det
-några faktorer/grupper som inte täckts av det använda data? Finns det några andra betänkanden eller rekommendationer som en användare eller vidareutvecklare av
-modellen bör tänka på?
+Are there any additional aspects to consider that have not been addressed in another heading? Indicates e.g. the results that more tests are needed? Is there
+any factors/groups not covered by the data used? Are there any other reports or recommendations that a user or further developer of
+model should consider?
