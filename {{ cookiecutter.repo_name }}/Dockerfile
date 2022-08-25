@@ -7,7 +7,7 @@ ENV UID=1000
 RUN apt -y update \
     && apt install python3-pip git -y \
     && addgroup --gid $GID researcher \
-    && adduser --home /workspace --disabled-password --gecos '' --uid $UID --gid $GID researcher \
+    && adduser --home /workspace --disabled-password --gecos '' --uid $UID --gid $GID researcher
 
 COPY requirements.txt setup.py ./
 RUN pip install -r requirements.txt
