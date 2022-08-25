@@ -3,57 +3,17 @@
 
 {{cookiecutter.description}}
 
-Dependencies:
+## Developing
 
+See [here](https://git.vgregion.se/aiplattform/docs/researchers/-/blob/main/docs/developing.md) to get started with your project or updating an existing one.
 
-To build a docker image:
-```
-docker build {{cookiecutter.repo_name}} -t {{cookiecutter.repo_name}}
-```
+## Usage
 
-To start a docker container, mount current directory and connect to the container:
-{% if cookiecutter.python_interpreter == 'R' %}```
-docker run --rm -d -p 8787:8787 -it --volume $(pwd):/home/rstudio -e PASSWORD=yourpasswordhere -e USERID=$(id -u) -e GROUPID=GROUP_ID=$(id -g) --name {{cookiecutter.repo_name}} {{cookiecutter.repo_name}}
-```
-Visit [localhost:8787](http://localhost:8787) in your browser and log in with username ```rstudio``` and the password you set when starting the container. Use the terminal in RStudio to run things like ```git``` and ```dvc```.{% else %}```
-docker run -d -t -v {{cookiecutter.repo_name}}:/workspace/dvc -v $(pwd)/{{cookiecutter.repo_name}}:/workspace/{{cookiecutter.repo_name}} --name {{cookiecutter.repo_name}} {{cookiecutter.repo_name}} bash
-docker exec -it {{cookiecutter.repo_name}} /bin/bash
-```{% endif %}
-{% if cookiecutter.python_interpreter == 'R' %}
-Install packages as you normally do in R, then save a list of installed packages and versions with ```renv::snapshot()```, you can then rebuild your docker image to have your packages installed for the next time you restart your container.
-See [RStudio-reproducibility](https://rstudio.github.io/renv/articles/renv.html#reproducibility) for more details on R-package management.
-{% endif %}
-Initialize [git](https://git-scm.com/docs/gittutorial) and [DVC](https://dvc.org/doc/start) and create an initial commit before doing anything else:
-```
-git init
-dvc init
-git add .
-git commit -m "Initial commit"
-```
-
-Use [doit](https://pydoit.org/usecases.html) to run linting and tests:
-```
-doit lint
-doit pytest
-```
-
-Use [DVC](https://dvc.org/doc/start) to create reproducible ML-pipelines and experiments with git tracking:
-```
-dvc repro
-dvc exp run
-```
-{% if cookiecutter.python_interpreter == 'python3' %}
-Use [mlflow](https://www.mlflow.org/docs/latest/tutorials-and-examples/index.html) to run lots of experiments that you do not want to track with git.
-{% endif %}
-Use [mkdocs-material](https://squidfunk.github.io/mkdocs-material/reference/) structure to update the documentation. Test locally with 'serve' and build with 'build':
-```
-mkdocs serve
-mkdocs build --site-dir public
-```
+Learn more about the purpose and how to use this model [here](docs/index.md)
 
 Project Organization
 ------------
-{% if cookiecutter.python_interpreter == 'python3' %}
+{% if cookiecutter.python_interpreter == 'Tensorflow' or cookiecutter.python_interpreter == 'PyTorch'  %}
     ├── LICENSE
     ├── dodo.py            <- Makefile-like multiplatform CLI
     ├── README.md          <- The top-level README for developers using this project.

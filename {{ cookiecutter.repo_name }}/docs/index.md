@@ -4,148 +4,182 @@ hide:
 ---
 # {{ cookiecutter.project_name }}
 ---
-Baserad på [DIGG förtroendemodell](https://www.digg.se/publicerat/publikationer/2020/testa-ny-teknik-for-automatisering-inom-offentlig-forvaltning)
-## Översiktlig sammanfattning
-En sammanfattning av innehållet i övriga kortet. Ska gå att förstå av en "okunnig".
+Based on [DIGG förtroendemodell](https://www.digg.se/publicerat/publikationer/2020/testa-ny-teknik-for-automatisering-inom-offentlig-forvaltning)
+## Summary
 
-|Typ                   | Process, Modell eller Algoritm |
-|--------------------- | ------------------------------ |
-|In                    |                                |
-|Ut                    |                                |
-|Ingår i               |                                |
-|Arkitektur            |                                |
-|Dokument Version      |                                |
-|Algoritm Version      |                                |
+A layman's summary of this project.
 
-### Tänkt användning
-Varför har det utvecklats? Vad har målen varit? Användningsområden?
+| Type              | Process, Model or Algorithm |
+| ----------------- | --------------------------- |
+| In                |                             |
+| Out               |                             |
+| Included in       |                             |
+| Architecture      |                             |
+| Document Version  |                             |
+| Algorithm Version |                             |
 
-### Prestanda
-Hur väl fungerar det? (beskrivet i enkla termer)
+### Usage
 
-### Begränsningar
-När fungerar det mindre bra (ska innehålla konkreta exempel, bilder om möjligt), antingen p.g.a. avsiktliga avgränsningar eller oavsiktliga biverkningar.
+Why was this developed? What was the purpose? What has been the goals? Areas of use?
 
-### Processöversikt
-Gäller enbart för beskrivning av Processen.
 
-En enkel processkiss med indata, underprocesser/modeller/algoritmer, och utdata
+### Performance
 
-## Modellinformation
-Person eller organisation som utvecklat processen/modell/algoritmen. När processen/modellen/algoritmen utvecklats och dess version.
+How well does it work? (describe in simple terms)
 
-### Arkitektur
-Gäller enbart för modeller & algoritmer.
 
-Grundläggande om modellens/algoritmens arkitektur. Vid en välkänd modell/algoritm kan det räcka att ange dess namn och konfiguration samt länk till
-artikel med mer information, annars behövs även en kort sammanfattning. M: Ska ge personer med kunskap om AI förståelse för begränsningar och betänkanden
-inbyggda i själva modellarkitekturen.
+### Limitations 
 
-### Teknisk plattform
-Gäller enbart för processer.
+When does it not work as well as intended (must include concrete examples, pictures if possible), either due to intentional delimitations or unintended side effects.
 
-Beskriv i ord eller bild vald teknisk plattform, ta särskilt hänseende till och uppmärksamma ev. molnlösningar
+### Process overview
 
-### Träning
-Vilka parametrar som använts vid träning, t.ex. antal epoker, batchstorlek, lossfunktion, learning rate, etc.
+Applies only to description of the process.
+A simple process sketch with input data, sub-processes/models/algorithms, and output data
 
-### Begränsningar
-Mer ingående information om begränsningar och avgränsningar.
+## Model information
 
-### Implementationsdetaljer
-T.ex. användning av ramverk, programvara, m.m.
+Person or organization that developed the process/model/algorithm. When the process/model/algorithm was developed and its version.
 
-### Artiklar eller andra resurser för mer information
-Länkar till externa resurser, t.ex. artikel där processen/modellen/algoritmen introduceras, eller andra som haft liknande användning eller som av annan
-anledning är relevant.
 
-### Licens
-Hur är processen/modellen/algoritmen licenserad? Vad krävs för att få använda den?
+### Architecture
 
-### Kontaktperson
-Vem ska man kontakta för mer information
+Only applies to models & algorithms.
 
-### Avsedd användning
-Primära avsedda användningar och användare.
+Basics about the architecture of the model/algorithm. In the case of a well-known model/algorithm, it may be sufficient to indicate its name and configuration as well as a link to its article with more information, otherwise a short summary is also needed. This should give people with knowledge of AI an understanding of limitations and reports
+built into the model architecture itself.
 
-### Användningsfall utanför tillämpningsområdet
-Alternativa tänkbara eller faktiska användningsfall, eventuellt med specifika
-betänkanden eller kommentarer.
+### Technical platform
 
-## Faktorer
-### Relevanta faktorer
-De faktorer som kan påverka processen/modellen/algoritmen. Det kan handla om 3 huvudsakliga typer av faktorer: Olika grupper av objekt, t.ex. ålder och kön
-i en modell för ansiktsigenkänning, byggnadsändamål och byggnadsstorlek i en modell för att hitta byggnader eller olika längd på meningar i en NLP-modell.
-Påverkan av olika instrument, t.ex. kameramodell och bearbetningsmetoder. Miljön, t.ex. belysning, plats, m.m.
+Only applies to processes.
 
-### Utvärderingsfaktorer
-De faktorer (av dem som nämns i 4.1.) som har utvärderats. Varför har de utvärderats eller inte (t.ex. för att det inte fanns tillgängligt eller ansetts vara
+Describe in words or pictures the chosen technical platform, take into account and pay attention to any cloud solutions.
+
+### Training
+
+Which parameters were used during training, e.g. number of epochs, batch size, loss function, learning rate, etc.
+
+### Limitations
+
+More detailed information about limitations and delimitations.
+
+### Implementation details
+
+For example, use of frameworks, software, etc.
+
+### Articles or other resources for more information
+
+Links to external resources, e.g. articles where the process/model/algorithm is introduced, or others that had similar use or as by another
+reason is relevant.
+
+### License
+
+How is the process/model/algorithm licensed? What is required to use it?
+
+### Contact person
+
+Who should you contact for more information?
+
+### Intended use
+
+Primary intended uses and users.
+
+### Use cases outside the scope of application
+
+Alternative conceivable or actual use cases, for example with specific reports or comments.
+
+## Factors
+
+### Relevant factors
+
+The factors that can affect the process/model/algorithm. There are three main factors: Different groups of objects, e.g. age and sex in a model for face recognition, building purpose and building size in a model for finding buildings or different length of sentences in an NLP model.
+
+The impact of various instruments, e.g. camera model and processing methods. The environment, e.g. lighting, location, etc.
+
+### Evaluation factors
+
+The factors (mentioned in 4.1.) that have been evaluated. Why have they been evaluated or not (e.g. because it was not available or considered to be
 relevant)?
 
-## Utvärdering av modellen
-Kort (1-2meningar) beskrivning om vilka mått som använts.
+## Evaluation of the model
 
-### Resultat
-Processens/modellens/algoritmens prestanda beskriven med siffror och grafer för helheten.
+Brief (1-2 sentences) description of the measurements used.
 
-### Användarresultat
-Gäller enbart för processer.
+### Result
 
-Resultat från användning i verkligheten. Kan vara under en testperiod eller i produktion (vilket det är ska anges). Ska ge en indikation om processens
-prestanda, exempel på mätvärden: Användarbetyg, antal omprövningar och andel som ändrade resultatet, stickprovskontroller
+The performance of the process/model/algorithm described with numbers and graphs for the whole.
 
-### Unitära resultat
-Vad är modellens prestanda för de enskilda faktorerna (t.ex. olika kön, byggnadsändamål eller meningslängder) beskriven med siffror och grafer för
-helheten?
+### User results
 
-### Trösklar och jämförelser
-Trösklar för när processen/modellen/algoritmen (enligt oss) är tillämpbar (t.ex. ett krav på precision/recall från "högre instans"), jämförelser med andra
-processer/modeller/algoritmer och metoder, m.m.
+Only applies to processes.
 
-### Utvärderingsmetod
-Hur har utvärderingsvärdena (t.ex. precision/recall) räknats fram? Kan hänvisa till extern information om oförändrade standardmetoder används och en egen
-beskrivning inte tillför något.
+Results from real-world use. May be in a test period or in production (whichever is to be specified). Should give an indication of the process
+performance, Example metrics: User rating, number of retests and percentage that changed the result, acceptance sampling.
+
+### Unitary results
+
+What is the performance of the model for the individual factors (e.g. different genders, building purposes or sentence lengths) described with numbers and graphs for
+the whole?
+
+### Thresholds and comparisons
+
+Thresholds for when the process/model/algorithm (in our opinion) is applicable (eg a requirement for precision/recall from "higher instance"), comparisons with others
+processes/models/algorithms and methods, etc.
+
+### Evaluation method
+
+How have the evaluation values (e.g. precision/recall) been calculated? Can refer to external information if unchanged standard methods are used and a custom description adds nothing.
 
 ## Data
-### Utvärderingsdata
+
+### Evaluation data
+
 Information om det data som använts för att genomföra utvärderingen (källa, utbredning, förbehandling, m.m.). uppmärksamma särskilt om det finns
 personuppgifter eller skyddsvärd information i utvärderingsdata.
 
-### Träningsdata
-Information om det data som använts för att träna modellen (källa, utbredning, förbehandling, m.m.). uppmärksamma särskilt om det finns personuppgifter eller
-skyddsvärd information i utvärderingsdata.
+### Training data
 
-## Övervakning, loggning och profilering
-Beskriv om systemet genererar loggar samt någon form av övervakning. Ta särskild hänsyn till mänsklig interaktion med dessa loggar eller övervakning
+Information about the data used to train the model (source, distribution, preprocessing, etc.). pay particular attention to whether there is personal data or
+information worthy of protection in evaluation data.
 
-## Etiska aspekter
-EU-kommissionens Etiska riktlinjer för tillförlitlig AI ställer upp tre komponenter i sitt ramverk för tillförlitlig AI: Inkluderar, men är inte begränsat
-till: Laglig AI, Etisk AI och Robust AI. Etisk AI omfattar i sin tur fyra principer:
-- Respekt för människans autonomi
-- Förebyggande av skada
-- Rättvisa
-- Förklarbarhet.
-Dessa principer finns förklarade i detalj i riktlinjerna. De kan med fördel vara vägledande för den redovisning som görs under denna rubrik.
+## Monitoring, logging and profiling
 
-## Juridiska aspekter
-Krav som ställs på processen/modellen/algoritmen utifrån gällande lagar och förordningar.Kan ha delvis överlapp med Etiska aspekter, t.ex. gällande
-personuppgifter. Uppdelningen som gäller är att kapitlet Etiska ställningstaganden ska hantera den etiska sidan ("bör man") och Juridiska
-aspekterska hantera den juridiska sidan ("får man").
+Describe whether the system generates logs and any form of monitoring. Pay particular attention to human interaction with these logs or monitoring
 
-### Integritetslagstiftning
-Uppmärksamma särskilt den data som används och då i förhållande till t.ex. GDPR
+## Ethical aspects
 
-### Sekretess eller annan skyddslagstiftning
-Överväg vilken information gällande sekretess som är relevant att uppmärksamma
+The European Commission's Ethical Guidelines for Trusted AI sets out three components of its framework for Trusted AI: Includes, but is not limited to
+to: Legal AI, Ethical AI and Robust AI. Ethical AI in turn encompasses four principles:
+- Respect for human autonomy
+- Prevention of injury
+- Justice
+- Explainability
+These principles are explained in detail in the guidelines. They can be useful as a guide for the report made under this heading.
 
-### Omprövning och överklagande
-Enbart för processer.
-Kan man få beslutet omprövat (av en mänsklig handläggare) eller överklagat? Hur?
+## Legal aspects
 
-### Tillsyn
-Finns det någon som har tillsyn? Externt eller internt? Myndighet, företag eller annan?
+Requirements placed on the process/model/algorithm based on current laws and regulations. May have partial overlap with ethical aspects, e.g. current
+personal data. The division that applies is that the chapter Ethical positions should handle the ethical side ("should one") and Legal
+aspects dealing with the legal side ("can one").
 
-## Betänkanden och rekommendationer
-Finns det några ytterligare aspekter att ta hänsyn till, som inte hanterats i någon annan rubrik? Indikerar t.ex. resultaten på att det behövs mer tester? Fanns det
-några faktorer/grupper som inte täckts av det använda data? Finns det några andra betänkanden eller rekommendationer som en användare eller vidareutvecklare av
-modellen bör tänka på?
+### Privacy legislation
+
+Pay particular attention to the data that is used and then in relation to e.g. GDPR
+
+### Privacy or other protection legislation
+
+Consider what privacy information is relevant to pay attention to
+
+### review and appeals
+
+For processes only. Can the decision be reviewed (by a human administrator) or appealed? How?
+
+### Supervision
+
+Is there someone supervising? External or internal? Authority, company or other?
+
+## Reports and recommendations
+
+Are there any additional aspects to consider that have not been addressed in another heading? Indicates e.g. the results that more tests are needed? Is there
+any factors/groups not covered by the data used? Are there any other reports or recommendations that a user or further developer of
+model should consider?
