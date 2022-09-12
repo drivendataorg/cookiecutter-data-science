@@ -85,7 +85,7 @@ class TestCookieSetup(object):
         with open(dockerfile_path) as fin:
             lines = list(map(lambda x: x.strip(), fin.readlines()))
         
-        assert lines[1] == "FROM registry.git.vgregion.se/aiplattform/images/pytorch:0.1.0"
+        assert lines[1] == "FROM registry.git.vgregion.se/aiplattform/images/pytorch:0.1.1"
         assert lines[-1] == 'WORKDIR /workspace'
         assert "RUN pip install -r requirements.txt" in lines
 

@@ -49,7 +49,7 @@ class TestCookieSetup(object):
         with open(dockerfile_path) as fin:
             lines = list(map(lambda x: x.strip(), fin.readlines()))
         
-        assert lines[2] == "FROM registry.git.vgregion.se/aiplattform/images/r:0.1.0"
+        assert lines[2] == "FROM registry.git.vgregion.se/aiplattform/images/r:0.1.1"
         assert "RUN pip install -r requirements.txt" in lines
 
     def test_folders(self):
