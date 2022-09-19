@@ -1,5 +1,6 @@
 import os
 import pytest
+from pathlib import Path
 from subprocess import check_output
 from conftest import system_check
 
@@ -84,10 +85,18 @@ class TestCookieSetup(object):
         assert no_curlies(dockerfile_path)
         with open(dockerfile_path) as fin:
             lines = list(map(lambda x: x.strip(), fin.readlines()))
+        dockerfile_text = Path(dockerfile_path).read_text()
         
         assert lines[1] == "FROM registry.git.vgregion.se/aiplattform/images/pytorch:0.1.1"
         assert lines[-1] == 'WORKDIR /workspace'
-        assert "RUN pip install -r requirements.txt" in lines
+        assert "ADD http://aiav2.vgregion.se/VGC%20Root%20CA%20v2.crt /tmp/vgc_root.der" in lines
+        assert "ADD http://aiav2.vgregion.se/VGC%20Issuing%201%20CA%20v2.crt /tmp/vgc_issuing1.der" in lines
+        assert "ADD http://aiav2.vgregion.se/VGC%20Issuing%202%20CA%20v2.crt /tmp/vgc_issuing2.der" in lines
+        assert """RUN pip install -r requirements.txt \\
+    && openssl x509 -inform der -in /tmp/vgc_root.der -out /usr/local/share/ca-certificates/vgc_root.crt \\
+    && openssl x509 -inform der -in /tmp/vgc_issuing1.der -out /usr/local/share/ca-certificates/vgc_issuing1.crt \\
+    && openssl x509 -inform der -in /tmp/vgc_issuing2.der -out /usr/local/share/ca-certificates/vgc_issuing2.crt \\
+    && update-ca-certificates""" in dockerfile_text
 
     def test_folders(self):
         module_name = "project_name"
