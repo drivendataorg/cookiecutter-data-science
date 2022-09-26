@@ -55,11 +55,12 @@ class TestCookieSetup(object):
         assert "ADD http://aiav2.vgregion.se/VGC%20Root%20CA%20v2.crt /tmp/vgc_root.der" in lines
         assert "ADD http://aiav2.vgregion.se/VGC%20Issuing%201%20CA%20v2.crt /tmp/vgc_issuing1.der" in lines
         assert "ADD http://aiav2.vgregion.se/VGC%20Issuing%202%20CA%20v2.crt /tmp/vgc_issuing2.der" in lines
-        assert """RUN pip install -r requirements.txt \\
-    && openssl x509 -inform der -in /tmp/vgc_root.der -out /usr/local/share/ca-certificates/vgc_root.crt \\
-    && openssl x509 -inform der -in /tmp/vgc_issuing1.der -out /usr/local/share/ca-certificates/vgc_issuing1.crt \\
-    && openssl x509 -inform der -in /tmp/vgc_issuing2.der -out /usr/local/share/ca-certificates/vgc_issuing2.crt \\
-    && update-ca-certificates""" in dockerfile_text
+        assert "pip install -r requirements.txt"
+        assert "openssl x509 -inform der -in /tmp/vgc_root.der -out /usr/local/share/ca-certificates/vgc_root.crt"
+        assert "openssl x509 -inform der -in /tmp/vgc_issuing1.der -out /usr/local/share/ca-certificates/vgc_issuing1.crt"
+        assert "openssl x509 -inform der -in /tmp/vgc_issuing1_2.der -out /usr/local/share/ca-certificates/vgc_issuing1_2.crt"
+        assert "openssl x509 -inform der -in /tmp/vgc_issuing2.der -out /usr/local/share/ca-certificates/vgc_issuing2.crt"
+        assert "update-ca-certificates"
 
     def test_folders(self):
         module_name = pytest.param.get("project_name")
