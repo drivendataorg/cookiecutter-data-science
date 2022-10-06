@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           token: ${{ secrets.CHECKOUT_TOKEN }}
@@ -31,7 +31,7 @@ jobs:
       #   run: sudo apt-get -y install hmmer
 
       - name: Setup python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         id: setup-python
         with:
           python-version: ${{ env.python-version }}
@@ -40,7 +40,7 @@ jobs:
 
       - name: Cache poetry virtualenv
         id: cache-poetry
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.cache/pypoetry/virtualenvs
           key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-poetry-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
@@ -112,7 +112,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.CHECKOUT_TOKEN }}
           fetch-depth: 0
@@ -121,7 +121,7 @@ jobs:
       #   run: sudo apt-get -y install hmmer
 
       - name: Set up python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ env.python-version }}
       - run: |
@@ -129,7 +129,7 @@ jobs:
 
       - name: Cache poetry virtualenv
         id: cache-poetry
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.cache/pypoetry/virtualenvs
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}

@@ -1,7 +1,7 @@
-exclude: projects/etl/
+default_install_hook_types: [pre-commit, commit-msg]
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
+    rev: v4.1.0
     hooks:
       - id: trailing-whitespace
       - id: check-yaml
@@ -12,7 +12,7 @@ repos:
       - id: check-case-conflict
 
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v2.16.0
+    rev: v2.21.2
     hooks:
       - id: commitizen
         stages: [commit-msg]

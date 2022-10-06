@@ -7,7 +7,7 @@ authors = ["{{ cookiecutter.author_name }}"]
 include = ["{{ cookiecutter.repo_name }}/py.typed"]
 
 [tool.poetry.dependencies]
-python = "^3.8,<3.10"
+python = "^3.9,<3.10"
 python-dotenv = ">=0.5.1"
 
 [tool.poetry.dev-dependencies]
