@@ -36,13 +36,13 @@ clean:
 lint:
 	flake8 {{ cookiecutter.module_name }}
 	black --check --config pyproject.toml {{ cookiecutter.module_name }}
-	isort --check {{ cookiecutter.module_name }}
+	isort --check --profile black {{ cookiecutter.module_name }}
 
 
 ## Format source code with black
 .PHONY: format
 format:
-	isort {{ cookiecutter.module_name }}
+	isort --profile black {{ cookiecutter.module_name }}
 	black --config pyproject.toml {{ cookiecutter.module_name }}
 
 {% if not cookiecutter.dataset_storage.none %}
