@@ -21,7 +21,7 @@ default_args = {
     "description": "A test project",
     "open_source_license": "MIT",
     "dataset_storage": {"azure": {"container": "container-name"}},
-    "include_skeleton_code": "No",
+    "include_code_scaffold": "No",
 }
 
 
@@ -41,7 +41,10 @@ def config_generator(fast=False):
         ],
         [("dependency_file", opt) for opt in cookiecutter_json["dependency_file"]],
         [("pydata_packages", opt) for opt in cookiecutter_json["pydata_packages"]],
-        [("include_skeleton_code", opt) for opt in cookiecutter_json["include_skeleton_code"]],
+        [
+            ("include_code_scaffold", opt)
+            for opt in cookiecutter_json["include_code_scaffold"]
+        ],
     )
 
     def _is_valid(config):

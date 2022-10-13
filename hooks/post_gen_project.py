@@ -1,6 +1,5 @@
-from pathlib import Path
 import shutil
-
+from pathlib import Path
 
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
@@ -16,11 +15,21 @@ packages = [
     "isort",
     "pip",
     "python-dotenv",
+    "setuptools",
+    "wheel",
 ]
 
 # {% if cookiecutter.dataset_storage.s3 %}
 packages += ["awscli"]
 # {% endif %} #
+
+# {% if cookiecutter.include_code_scaffold == "Yes" %}
+packages += [
+    "typer",
+    "python-dotenv",
+    "loguru",
+]
+# {% endif %}
 
 # {% if cookiecutter.pydata_packages == "basic" %}
 packages += [
@@ -62,7 +71,7 @@ if "{{ cookiecutter.open_source_license }}" == "No license file":
 pyproject_text = Path("pyproject.toml").read_text()
 Path("pyproject.toml").write_text(pyproject_text.replace(r"\u0027", "'"))
 
-# {% if cookiecutter.include_skeleton_code == "No" %}
+# {% if cookiecutter.include_code_scaffold == "No" %}
 # remove everything except __init__.py so result is an empty package
 for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
     if generated_path.is_dir():
