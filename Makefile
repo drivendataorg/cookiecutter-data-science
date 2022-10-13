@@ -1,16 +1,32 @@
+## GLOBALS
+
+PROJECT_NAME = cookiecutter-data-science
+PYTHON_VERSION = 3.10
+PYTHON_INTERPRETER = python
+
+
 ###     UTILITIES
 _prep:
 	rm -f **/*/.DS_store
 
 
-###     DEV TOOLS
-requirements:
-	pip install -U -r dev-requirements.txt
+###     DEV COMMANDS
 
+## Set up python interpreter environment
+create_environment:
+	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
+	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
+
+## Install Python Dependencies
+requirements:
+	$(PYTHON_INTERPRETER) -m pip install -r dev-requirements.txt
+
+## Format the code using isort and black
 format:
 	isort ccds hooks tests
 	black ccds hooks tests setup.py
-	
+
+## Lint using flake8 + black
 lint:
 	flake8 ccds hooks tests setup.py
 	black --check ccds hooks tests setup.py
