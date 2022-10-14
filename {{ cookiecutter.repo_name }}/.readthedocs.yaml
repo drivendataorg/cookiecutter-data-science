@@ -1,0 +1,21 @@
+version: 2
+
+# Set the version of Python and other tools you might need
+build:
+  os: ubuntu-22.04
+  tools:
+    python: "3.10"
+  jobs:
+    pre_build:
+      # Generate on-the-fly Sphinx configuration from Jupyter Book's _config.yml
+      - "jupyter-book config sphinx ./"
+
+python:
+   install:
+   - requirements: requirements_jb.txt
+#   - method: pip
+#     path: .
+
+formats:
+  - pdf
+  - epub
