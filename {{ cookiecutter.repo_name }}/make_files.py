@@ -54,7 +54,7 @@ else:
             'logo: ' + dir_notes + '/figures/logo_png.png\n\n'
 
             '# for pdf/latex\n'
-            'project: ' + {{cookiecutter.proj_name}} + '\n'
+            'project: ' + {{cookiecutter.project_name}} + '\n'
             'author: ' + {{cookiecutter.author_name}} + '\n'
             'sphinx:\n'
             '   config:\n'
