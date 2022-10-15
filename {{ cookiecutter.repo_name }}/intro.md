@@ -7,5 +7,5 @@ It does not go in-depth into any particular topic - check out [the Jupyter Book 
 
 Check out the content pages bundled with this sample book to see more.
 
-```{tableofcontents}
+```{tableofcontents} 
 ```
