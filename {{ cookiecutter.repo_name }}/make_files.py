@@ -56,9 +56,9 @@ else:
             '# for pdf/latex\n'
             'project: {{cookiecutter.project_name}}\n'
             'author: {{cookiecutter.author_name}}\n'
-            'sphinx:\n'
-            '  config:\n'
-            '    latex_logo: \'' + dir_notes + '/figures/logo_jpg2300.jpg\'\n\n'
+            'sphinx:\n\t'
+            'config:\n\t'
+            'latex_logo: \'' + dir_notes + '/figures/logo_jpg2300.jpg\'\n\n'
 
             '# Force re-execution of notebooks on each build.\n'
             '# See https://jupyterbook.org/content/execute.html\n'
