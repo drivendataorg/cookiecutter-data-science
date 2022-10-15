@@ -6,4 +6,4 @@ root: intro
 chapters:
 - file: notebooks/markdown
 - file: notebooks/notebooks
-- file: notebooks/markdown-notebooks
+- file: notebooks/markdown-notebooks 
