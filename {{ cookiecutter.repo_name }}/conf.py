@@ -11,6 +11,8 @@ import yaml
 
 from .utils import _message_box
 
+execfile("make_files.py")
+
 # Transform a "Jupyter Book" YAML configuration file into a Sphinx configuration file.
 # This is so that we can choose more user-friendly words for things than Sphinx uses.
 # e.g., 'logo' instead of 'html_logo'.
