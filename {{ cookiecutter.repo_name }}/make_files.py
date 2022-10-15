@@ -50,12 +50,12 @@ else:
             '# Learn more at https://jupyterbook.org/customize/config.html\n\n'
 
             '# for html\n'
-            'title: \{\{cookiecutter.project_name\}\}\n'
+            'title: {{cookiecutter.project_name}}\n'
             'logo: ' + dir_notes + '/figures/logo_png.png\n\n'
 
             '# for pdf/latex\n'
-            'project: \{\{cookiecutter.project_name\}\}\n'
-            'author: \{\{cookiecutter.author_name\}\}\n'
+            'project: {{cookiecutter.project_name}}\n'
+            'author: {{cookiecutter.author_name}}\n'
             'sphinx:\n'
             '   config:\n'
             '       latex_logo: \'' + dir_notes + '/figures/logo_jpg2300.jpg\'\n\n'
