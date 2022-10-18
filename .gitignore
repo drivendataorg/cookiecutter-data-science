@@ -3,6 +3,9 @@ docs/site/
 # OSX Junk
 .DS_Store
 
+# Jetbrains
+.idea
+
 # test cache
 .cache/*
 tests/__pycache__/*

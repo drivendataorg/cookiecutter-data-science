@@ -1,9 +1,62 @@
 # Cookiecutter Data Science
 
-_A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
+Originally dapted from [cookiecutter-data-science](http://drivendata.github.io/cookiecutter-data-science/).
 
+### TODO
+- edit config interactions
+- remove unnecessary components
+- build on this- create additional cookiecutters
+  - create a [user_config](https://cookiecutter.readthedocs.io/en/stable/advanced/user_config.html)
+  - lots of good stuff in [hypermodern python](https://github.com/cjolowicz/cookiecutter-hypermodern-python)
+    - packaging (poetry)
+    - testing (nox, pytest, coverage.py, codecov)
+    - linting and formating, and style guidance (flake8, black, prettier, mypy, typeguard, pyupgrade)
+    - CI (GH actions, dependabot, pre-commit, github labeler)
+    - docs (sphinx, read the docs, etc; xdoctest, autodoc, napolean, sphinx-click)
+    - others (click, bandit, safety)
+  - [python best practices](https://github.com/sourcery-ai/python-best-practices-cookiecutter)
+    - pytest, black, mypy, flake8, pre-commit, docker, gh actions
+  - [ML focused DS](https://github.com/crmne/cookiecutter-modern-datascience)
+    - pipenv, prefect, weights and biases, fastAPI (including asyncio), Typer
+    - pandas, numpy, scipy, seaborn, jupyterlab installed
+    - black, autoflake, pylint, pytest, github pages
+  - [jupyter driven](https://github.com/executablebooks/cookiecutter-jupyter-book)
+    - alternate perspective on how something like this basic fork could have been built
+  - dbt focused cookiecutter (one for each environment)
+- include post hooks to create a new environment with pyenv
+  - clean up requirements.txt
 
-#### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
+### Unnecessary components
+- data/
+  - rename directories
+- docs/
+  - learn sphynx or remove the whole directory and everything that installs it
+- models/
+  - delete
+- notebooks/
+- references/
+- reports/
+- src/
+  - rename directories
+- .env
+  - add typical env vars (directories, db creds)
+- .gitignore
+- LICENSE
+  - delete it and it's install parts in the slug
+- Makefile
+  - learn how makefiles work and then decide what to do
+- README.md
+  - edit as I go
+- requirements.txt
+  - think about how to square this with a clean version of base_data_env and then make todos
+- setup.py
+  - edit variables and their install parts in the slug
+- test_environment.py
+  - delete it and its install parts in the slug
+- tox.ini
+  - learn flake8 and get more opinionated about this
+
+Everything below here has not been edited from the original
 
 
 ### Requirements to use the cookiecutter template:
