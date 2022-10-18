@@ -1,4 +1,4 @@
-{% if cookiecutter.python_interpreter == 'python3' %}from doit.tools import LongRunning
+{% if cookiecutter.image == 'python3' %}from doit.tools import LongRunning
 
 
 def task_pytest():

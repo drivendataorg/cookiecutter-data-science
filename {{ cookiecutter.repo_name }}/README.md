@@ -13,7 +13,7 @@ Learn more about the purpose and how to use this model [here](docs/index.md)
 
 Project Organization
 ------------
-{% if cookiecutter.python_interpreter == 'Tensorflow' or cookiecutter.python_interpreter == 'PyTorch'  %}
+{% if cookiecutter.image == 'Tensorflow' or cookiecutter.image == 'PyTorch'  %}
     ├── LICENSE
     ├── dodo.py            <- Makefile-like multiplatform CLI
     ├── README.md          <- The top-level README for developers using this project.

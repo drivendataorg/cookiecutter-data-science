@@ -1,7 +1,7 @@
 import os
 
 REMOVE_PATHS = [
-    {% if cookiecutter.python_interpreter == "R" %}
+    {% if cookiecutter.image == "R" %}
     "setup.py",
     "setup.cfg",
     "pytest.ini",

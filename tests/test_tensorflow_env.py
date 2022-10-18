@@ -69,7 +69,7 @@ class TestCookieSetup(object):
         reqs_path = self.path / "requirements.txt"
         assert reqs_path.exists()
         assert no_curlies(reqs_path)
-        if pytest.param.get("python_interpreter"):
+        if pytest.param.get("image"):
             with open(reqs_path) as fin:
                 lines = list(map(lambda x: x.strip(), fin.readlines()))
             assert "# Example: expackage==2.4.1" in lines
@@ -87,7 +87,7 @@ class TestCookieSetup(object):
             lines = list(map(lambda x: x.strip(), fin.readlines()))
         dockerfile_text = Path(dockerfile_path).read_text()
 
-        assert lines[0] == "FROM registry.git.vgregion.se/aiplattform/images/tensorflow:0.1.3"
+        assert lines[0] == "FROM registry.git.vgregion.se/aiplattform/images/tensorflow:0.1.4"
         assert lines[-1] == 'WORKDIR /workspace'
         assert "ADD http://aiav2.vgregion.se/VGC%20Root%20CA%20v2.crt /tmp/vgc_root.der" in lines
         assert "ADD http://aiav2.vgregion.se/VGC%20Issuing%201%20CA%20v2.crt /tmp/vgc_issuing1.der" in lines

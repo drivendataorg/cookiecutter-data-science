@@ -1,4 +1,4 @@
-{% if cookiecutter.python_interpreter == 'python3' %}stages:
+{% if cookiecutter.image == 'pytorch' or cookiecutter.image == 'tensorflow' %}stages:
   prepare:
     cmd: python {{ cookiecutter.module_name}}/data/make_dataset.py
     deps:

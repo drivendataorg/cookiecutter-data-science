@@ -10,7 +10,7 @@ tensorflow_args = {
     "project_name": "DrivenData",
     "author_name": "DrivenData",
     "open_source_license": "BSD-3-Clause",
-    "python_interpreter": "Tensorflow",
+    "image": "Tensorflow",
 }
 
 
@@ -48,7 +48,7 @@ pytorch_args = {
     "project_name": "DrivenData",
     "author_name": "DrivenData",
     "open_source_license": "MIT",
-    "python_interpreter": "PyTorch",
+    "image": "PyTorch",
 }
 
 # One case with defaults args, one with specific args
@@ -78,7 +78,7 @@ def pytorch_project(tmpdir_factory, request):
 r_args = {
     "project_name": "r_project_name",
     "author_name": "r_author",
-    "python_interpreter": "R",
+    "image": "R",
 }
 
 
