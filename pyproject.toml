@@ -2,7 +2,7 @@
 name = "cookiecutter-data-science"
 version = "0.1.0"
 description = ""
-authors = ["Piotr Deszyński <deszynski@red-sky.pl>"]
+authors = ["NaturalAntibody"]
 
 [tool.poetry.dependencies]
 python = "^3.8,<3.10"

@@ -12,6 +12,7 @@ This will ensure that you won't by mistake commit your own settings to a reposit
 '''
 import os
 from pathlib import Path
+from typing import TypedDict
 
 from dotenv import load_dotenv
 
@@ -19,4 +20,18 @@ load_dotenv()
 
 BASE = os.path.dirname(__file__)
 
-DATA_PATH = os.getenv("DATA_PATH", Path(BASE) / '..' / 'data')
+class Settings(TypedDict):
+    DATA_PATH: Path
+
+class UpdateSettings(Settings, total=False):
+    ...
+
+def load_settings() -> Settings:
+    return {
+        'DATA_PATH': Path(os.getenv("DATA_PATH", Path(BASE) / '..' / 'data')),
+    }
+
+settings: Settings = load_settings()
+
+def update_settings(new_settings: UpdateSettings):
+    settings.update(new_settings)
