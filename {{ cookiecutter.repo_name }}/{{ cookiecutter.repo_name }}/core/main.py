@@ -6,7 +6,8 @@ Project entrypoint
 """
 
 def sample_function():
+    print("I am at the sample function")
     return True
 
 if __name__ == "__main__":
-    pass
+    print("Main.py ran as __main__")
