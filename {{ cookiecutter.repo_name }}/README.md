@@ -8,9 +8,7 @@ Project Organization
 
 ```
 ├── LICENSE
-├── Makefile           <- Makefile with commands like `make data` or `make create_environment`
 │
-├── .env               <- Set your environment variables. Put database settings here
 |
 ├── README.md          <- The top-level README for developers using this project.
 │

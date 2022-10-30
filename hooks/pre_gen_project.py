@@ -9,10 +9,10 @@ data work.
 Feel free to modify it as you wish!
 
 Originally based off the following cookie-cutter:
- https://github.com/drivendata/cookiecutter-data-science
+ https://github.com/giving-tuesday/cookiecutter-data-science
 =============================================================================
 
-    """)
+""")
 
 
 giving_tuesday_preamble()
