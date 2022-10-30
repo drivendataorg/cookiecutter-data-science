@@ -1,0 +1,1 @@
+-e git+ssh://git@github.com/Giving-Tuesday/classypy.git@master#egg=classypy
