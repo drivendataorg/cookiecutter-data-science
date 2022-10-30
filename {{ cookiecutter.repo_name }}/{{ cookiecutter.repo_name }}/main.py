@@ -1,4 +1,5 @@
 from .annotation.fileA import fileA_func
+import classypy
 
 def main():
     """

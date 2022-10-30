@@ -16,7 +16,7 @@ Project Organization
 │
 ├── tests              <- Where to place tests. To be expanded
 │
-├── requirements.txt   <- The requirements file. This should be pretty minimal given databricks will handle most things
+├── requirements.txt   <- The requirements file. This should be pretty minimal given databricks will handle most things. The exception is typically in-house packages like classpy
 │
 ├── setup.py           <- makes project pip installable (pip install -e .) so project can be imported. Should not be used in databricks
 │
@@ -27,15 +27,9 @@ Project Organization
 │   │
 │   ├── ingestion           <- Initial ingestion of data, and standardization into either DBFS or Hive
 │   │
-│   ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering)
-│   │                         and a short `-` delimited description, e.g.
-│   │                         `1.0-initial-data-exploration`.
+│   ├── annotation           <- Intermediary results, manipulations, and validation
 │   │
-│   ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-│   |
-│   └── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│       └── figures        <- Generated graphics and figures to be used in reporting
-│
+│   └── results           <- Generation of clean and final data, outputs
 │
 └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
