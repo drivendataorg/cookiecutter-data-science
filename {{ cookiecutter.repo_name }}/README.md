@@ -14,6 +14,8 @@ Project Organization
 │
 ├── docs               <- Databricks Notebooks explaining things or visualizations. Reports also go here
 │
+├── pipelines          <- Databricks pipelines go here. Sample pipeline included
+|
 ├── tests              <- Where to place tests. To be expanded
 │
 ├── requirements.txt   <- The requirements file. This should be pretty minimal given databricks will handle most things. The exception is typically in-house packages like classpy
