@@ -12,26 +12,20 @@ Project Organization
 |
 ├── README.md          <- The top-level README for developers using this project.
 │
-├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+├── docs               <- Databricks Notebooks explaining things or visualizations. Reports also go here
 │
-├── tests              <- Where to place tests. Preferably use pytest
+├── tests              <- Where to place tests. To be expanded
 │
-├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-│                         generated with `pip freeze > requirements.txt`
+├── requirements.txt   <- The requirements file. This should be pretty minimal given databricks will handle most things
 │
-├── setup.py           <- makes project pip installable (pip install -e .) so project can be imported
+├── setup.py           <- makes project pip installable (pip install -e .) so project can be imported. Should not be used in databricks
 │
 ├── {{cookiecutter.project_name}}        <- Source code for use in this project.
 │   ├── __init__.py    <- Makes this a Python module
 │   │
-│   ├── data           <- Scripts to download or generate data
-│   |   └── external           <- Data from third party sources.
-│   |   └── processed          <- The final, canonical data sets for modeling.
-│   |   └── raw                <- The original, immutable data dump (likely from sql).
-│   │   └── make_dataset.py    <- Scripts to download or generate data
+│   ├── main.py    <- Typical project entrypoint
 │   │
-│   ├── core           <- Main business logic, models, predictions, summaries, etc
-│   │   └── main.py    <- Typical project entrypoint
+│   ├── ingestion           <- Initial ingestion of data, and standardization into either DBFS or Hive
 │   │
 │   ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering)
 │   │                         and a short `-` delimited description, e.g.
