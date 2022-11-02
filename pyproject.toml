@@ -5,11 +5,11 @@ description = ""
 authors = ["NaturalAntibody"]
 
 [tool.poetry.dependencies]
-python = "^3.8,<3.10"
+python = "^3.9"
 mkdocs = "^1.2.3"
 mkdocs-cinder = "^1.2.0"
 cookiecutter = "^1.7.3"
-pytest = "^6.2.4"
+pytest = ">=7.2"
 click = "^8.0.1"
 
 [tool.poetry.dev-dependencies]
