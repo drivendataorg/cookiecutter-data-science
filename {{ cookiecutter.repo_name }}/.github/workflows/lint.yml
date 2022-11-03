@@ -77,7 +77,7 @@ jobs:
           exit $CODE
 {% raw %}
       - name: Upload pytest test results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pytest-results-${{ env.python-version }}
           path: |
@@ -89,7 +89,7 @@ jobs:
         if: ${{ always() }}
 
       - name: Pytest coverage comment
-        uses: MishaKav/pytest-coverage-comment@v1.1.6
+        uses: MishaKav/pytest-coverage-comment@main
         with:
           pytest-coverage-path: pytest-output.txt
           title: Coverage report
