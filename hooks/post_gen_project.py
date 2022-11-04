@@ -1,9 +1,9 @@
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
+from urllib.request import urlretrieve
+
 from ccds.hook_utils.custom_config import write_custom_config
 from ccds.hook_utils.dependencies import write_dependencies
-import os
-from urllib.request import urlretrieve
 
 #
 #  TEMPLATIZED VARIABLES FILLED IN BY COOKIECUTTER
