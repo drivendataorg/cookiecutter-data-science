@@ -33,15 +33,16 @@ packages += [
 ]
 # {% endif %}
 
-# {% if cookiecutter.nbautoexport == "yes" %}
-packages += ["nbautoexport"]
-# {% endif %}
-
 # track packages that are not available through conda
 pip_only_packages = [
     "awscli",
     "python-dotenv",
 ]
+
+# {% if cookiecutter.nbautoexport == "yes" %}
+packages += ["nbautoexport"]
+pip_only_packages += ["nbautoexport"]
+# {% endif %}
 
 #
 #  POST-GENERATION FUNCTIONS
