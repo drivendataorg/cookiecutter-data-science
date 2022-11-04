@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
 from ccds.hook_utils.custom_config import write_custom_config
 from ccds.hook_utils.dependencies import write_dependencies
-=======
 import os
 from urllib.request import urlretrieve
-
->>>>>>> c2d521f (add deon option)
 
 #
 #  TEMPLATIZED VARIABLES FILLED IN BY COOKIECUTTER
@@ -38,7 +34,7 @@ packages += [
 # {% endif %}
 
 # {% if cookiecutter.nbautoexport == "yes" %}
-packages += ['nbautoexport']
+packages += ["nbautoexport"]
 # {% endif %}
 
 # track packages that are not available through conda
@@ -64,6 +60,6 @@ write_custom_config("{{ cookiecutter.custom_config }}")
 # {% if cookiecutter.ethics_checklist == "yes" %}
 urlretrieve(
     "https://raw.githubusercontent.com/drivendataorg/deon/master/examples/ethics.md",
-    "ethics.md"
+    "ethics.md",
 )
 # {% endif %}
