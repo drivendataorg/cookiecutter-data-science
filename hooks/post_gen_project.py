@@ -47,6 +47,19 @@ pip_only_packages = [
     "python-dotenv",
 ]
 
+docs_path = Path("{{ cookiecutter.project_name }} ") / "docs"
+# {% if cookiecutter.docs == "sphinx" %}
+packages += ["sphinx"]
+shutil.rmtree(docs_path / "mkdocs")
+shutil.move(docs_path / "sphinx", docs_path)
+# {% elif cookiecutter.docs == "mkdocs" %}
+packages += ["mkdocs"]
+pip_only_packages += ["mkdocs"]
+# {% else %}
+shutil.rmtree(docs_path / "mkdocs")
+shutil.rmtree(docs_path / "sphinx")
+# {% endif %}
+
 #
 #  POST-GENERATION FUNCTIONS
 #
