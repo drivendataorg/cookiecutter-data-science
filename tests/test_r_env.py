@@ -51,7 +51,7 @@ class TestCookieSetup(object):
             lines = list(map(lambda x: x.strip(), fin.readlines()))
         dockerfile_text = Path(dockerfile_path).read_text()
 
-        assert lines[2] == "FROM registry.git.vgregion.se/aiplattform/images/r:0.1.2"
+        assert lines[2] == "FROM registry.git.vgregion.se/aiplattform/images/r:0.1.3"
         assert "ADD http://aiav2.vgregion.se/VGC%20Root%20CA%20v2.crt /tmp/vgc_root.der" in lines
         assert "ADD http://aiav2.vgregion.se/VGC%20Issuing%201%20CA%20v2.crt /tmp/vgc_issuing1.der" in lines
         assert "ADD http://aiav2.vgregion.se/VGC%20Issuing%202%20CA%20v2.crt /tmp/vgc_issuing2.der" in lines
