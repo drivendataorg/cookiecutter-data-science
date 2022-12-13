@@ -53,7 +53,7 @@ sync_data_down:
 	az storage blob download-batch -s {{ cookiecutter.dataset_storage.azure.container }}/data/ \
 		-d data/
 	{% elif cookiecutter.dataset_storage.gcs -%}
-	gsutil rsync gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/ data/
+	gsutil rsync -r gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/ data/
 	{% endif %}
 
 ## Upload Data to storage system
@@ -65,7 +65,7 @@ sync_data_up:
 	az storage blob upload-batch -d {{ cookiecutter.dataset_storage.azure.container }}/data/ \
 		-s data/
 	{% elif cookiecutter.dataset_storage.gcs -%}
-	gsutil rsync data/ gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/
+	gsutil rsync -r data/ gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/
 	{% endif %}
 {% endif %}
 
