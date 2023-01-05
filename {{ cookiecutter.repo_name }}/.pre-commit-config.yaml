@@ -16,15 +16,28 @@ repos:
     hooks:
       - id: commitizen
         stages: [commit-msg]
+
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.5.3
     hooks:
+      - id: nbqa-isort
       - id: nbqa-black
       - id: nbqa-pyupgrade
-        args: [--py36-plus]
-      - id: nbqa-isort
+        args: [--py39-plus]
+
   - repo: local
     hooks:
+      - id: isort
+        name: isort
+        entry: isort
+        language: python
+        types: [python]
+      - id: yapf
+        name: yapf
+        entry: yapf
+        language: python
+        types: [python]
+        args: ["-i"]
       - id: pylint
         name: pylint
         entry: pylint

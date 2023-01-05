@@ -9,10 +9,9 @@ on:
 
 env:
   python-version: "3.10"
-  docker-registry: 003209562630.dkr.ecr.eu-central-1.amazonaws.com
+  docker-registry: XXX.dkr.ecr.eu-central-1.amazonaws.com
   aws-region: eu-central-1
-  s3-code-bucket: prod-analyzer-code
-  env: 'prod'
+  env: prod
   min-test-coverage-percent: 50
 
 {% raw -%}
@@ -44,7 +43,7 @@ jobs:
           path: ~/.cache/pypoetry/virtualenvs
           key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-poetry-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
 
-      - name: Add github token to gitconfig for clonning dependencies
+      - name: Add github token to gitconfig for cloning dependencies
         run: |
           git config --global url."https://api:${{ secrets.CHECKOUT_TOKEN }}@github.com/".insteadOf "https://github.com/"
 
@@ -137,11 +136,11 @@ jobs:
       - name: Add github token to gitconfig for cloning dependencies
         run: |
           git config --global url."https://api:${{ secrets.CHECKOUT_TOKEN }}@github.com/".insteadOf "https://github.com/"
-      
+
       - name: Install dependencies
         if: steps.cache-poetry.outputs.cache-hit != 'true'
         run: poetry install
-        
+
       - name: Cleanup token
         run: git config --global --remove-section url."https://api:${{ secrets.CHECKOUT_TOKEN }}@github.com/"
 

@@ -1,10 +1,33 @@
-{{cookiecutter.project_name}}
-==============================
+# {{cookiecutter.project_name}}
 
 {{cookiecutter.description}}
 
-Project Organization
-------------
+## How to start
+
+Init the git repo (e.g. with `git init`).
+
+`./create_environment` or if you prefer, run these
+manually:
+
+* `poetry install`
+* `poetry run pre-commit install`
+* `poetry run pre-commit install --hook-type commit-msg`
+
+**Important note**: After running these commands you will need to run git commit either using poetry (`poetry run git commit`) or enable venv in your terminal (`poetry shell`)
+
+To fetch from and upload data to S3 use the following commands:
+
+* `poetry run cli sync-data-from-s3`
+* `poetry run cli sync-data-to-s3`
+
+### Python and missing imports
+
+Because of use of virtualenv editor will probably not see any imports correctly. To fix that in VSCode you need to choose interpreter.
+Here's an instruction how to do it: https://code.visualstudio.com/docs/python/environments
+
+**It might require restart of VSCode after poetry install** (only install is problematic when new virtualenv is created, but further updates are handled correctly)
+
+## Project Organization
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
@@ -15,15 +38,11 @@ Project Organization
     │   ├── processed      <- The final, canonical data sets for modeling.
     │   └── raw            <- The original, immutable data dump.
     │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
     ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
     │                         the creator's initials, and a short `-` delimited description, e.g.
     │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
     │   └── figures        <- Generated graphics and figures to be used in reporting
@@ -55,25 +74,6 @@ Project Organization
 --------
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
-
-## How to start
-Either use `Makefile` (type `make` in your terminal), which will show you available commands and use `make create_enviroment` or if you prefer, run these
-manually:
-
-* poetry install
-* poetry run pre-commit install
-* poetry run pre-commit install --hook-type commit-msg
-
-
-**Important note**: After running these commands you will need to run git commit either using poetry (`poetry run git commit`) or enable venv in your terminal (`poetry shell`)
-
-
-### Python and missing imports
-
-Because of use of virtualenv editor will probably not see any imports correctly. To fix that in VSCode you need to choose interpreter.
-Here's an instruction how to do it: https://code.visualstudio.com/docs/python/environments
-
-**It might require restart of VSCode after poetry install** (only install is problematic when new virtualenv is created, but further updates are handled correctly)
 
 ## Work conventions
 
