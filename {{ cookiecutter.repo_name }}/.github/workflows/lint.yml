@@ -9,8 +9,6 @@ on:
 
 env:
   python-version: "3.10"
-  docker-registry: XXX.dkr.ecr.eu-central-1.amazonaws.com
-  aws-region: eu-central-1
   env: prod
   min-test-coverage-percent: 50
 
@@ -28,20 +26,15 @@ jobs:
       # - name: Install necessary system packages
       #   run: sudo apt-get -y install hmmer
 
-      - name: Setup python
+      - name: Install poetry
+        run: pipx install poetry
+
+      - name: Set up python
         uses: actions/setup-python@v4
         id: setup-python
         with:
           python-version: ${{ env.python-version }}
-      - run: |
-          pip install poetry
-
-      - name: Cache poetry virtualenv
-        id: cache-poetry
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pypoetry/virtualenvs
-          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-poetry-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
+          cache: 'poetry'
 
       - name: Add github token to gitconfig for cloning dependencies
         run: |
@@ -69,10 +62,11 @@ jobs:
 {%- endraw %}
       - name: Test
         run: |
+          set +e
           OUTPUT=$(poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov={{ cookiecutter.repo_name }} --cov-report=xml --cov-report=html --cov-report=term-missing)
           CODE=$?
-          echo "$OUTPUT" > pytest-output.txt
           echo "$OUTPUT"
+          echo "$OUTPUT" > pytest-output.txt
           exit $CODE
 {% raw %}
       - name: Upload pytest test results
