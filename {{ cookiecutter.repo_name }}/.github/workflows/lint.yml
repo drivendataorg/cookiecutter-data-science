@@ -112,20 +112,15 @@ jobs:
       # - name: Install necessary system packages
       #   run: sudo apt-get -y install hmmer
 
+      - name: Install poetry
+        run: pipx install poetry
+
       - name: Set up python
         uses: actions/setup-python@v4
         id: setup-python
         with:
           python-version: ${{ env.python-version }}
-      - run: |
-          pip install poetry
-
-      - name: Cache poetry virtualenv
-        id: cache-poetry
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pypoetry/virtualenvs
-          key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-poetry-${{ hashFiles('**/poetry.lock', '**/.pre-commit-config.yaml') }}
+          cache: "poetry"
 
       - name: Add github token to gitconfig for cloning dependencies
         run: |

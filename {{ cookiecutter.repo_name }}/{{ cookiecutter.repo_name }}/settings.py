@@ -27,6 +27,7 @@ class UpdateSettings(TypedDict, total=False):
 
 @dataclass
 class Settings:
+    # pylint: disable=invalid-name
     DATA_PATH: Path
     # OTHER_PATH: Path = field(init=False)
 
