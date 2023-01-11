@@ -1,52 +1,67 @@
 [tool.poetry]
+authors = ["{{ cookiecutter.author_name }}"]
+description = "{{ cookiecutter.description }}"
 name = "{{ cookiecutter.repo_name }}"
 version = "{{ cookiecutter.version }}"
-description = "{{ cookiecutter.description }}"
-authors = ["{{ cookiecutter.author_name }}"]
 
 include = ["{{ cookiecutter.repo_name }}/py.typed"]
 
+[tool.poetry.scripts]
+{{ cookiecutter.repo_name }} = "{{ cookiecutter.repo_name }}.__main__:cli"
+
 [tool.poetry.dependencies]
 python = "^3.9"
+
 python-dotenv = ">=0.21.0"
 
 [tool.poetry.dev-dependencies]
-pylint = ">=2.12.0"
-python-dotenv = ">=0.21.0"
-pytest = ">=7.2"
-pre-commit = ">=2.20.0"
-mypy = ">=0.982"
-flake8 = ">=5.0.4"
+awscli = ">=1.27.47"
+click = ">=8.1.3"
+commitizen = ">=2.39.1"
+coverage = ">=2.39.1"
+flake8 = ">=6.0.0"
+mypy = ">=0.991"
+pre-commit = ">=2.21.0 "
+pylint = ">=2.14.0"
+pytest = ">=7.2.0"
 pytest-cov = ">=4.0.0"
-setuptools = ">=65.3.0"
-autopep8 = ">=2.0.0"
 pytest-icdiff = ">=0.6"
-rope = ">=1.4.0"
+python-dotenv = ">=0.21.0"
 python-semantic-release = ">=7.32.2"
-commitizen = ">=2.37.0"
-coverage = ">=6.5"
-Sphinx = ">=5.1.0"
-awscli = ">=1.27.0"
-click = "^8.1.3"
+rope = ">=1.6.0"
+setuptools = ">=65.6.3"
+toml = ">=0.10.2"
+yapf = ">=0.32.0"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
 
 [tool.semantic_release]
-version_variable = [
-    "{{ cookiecutter.repo_name }}/__init__.py:__version__",
-    "pyproject.toml:version"
-]
-upload_to_pypi = false
-commit_version_number = true
-changelog_file = "CHANGELOG.md"
-hvcs = "github"
 build_command = "poetry build"
+changelog_file = "CHANGELOG.md"
 commit_subject = "bump: {version} [skip ci]"
+commit_version_number = true
+hvcs = "github"
+upload_to_pypi = false
+version_variable = [
+  "{{ cookiecutter.repo_name }}/__init__.py:__version__",
+  "pyproject.toml:version",
+]
 
 [tool.commitizen]
 name = "cz_conventional_commits"
 
+[tool.black]
+line-length = 120
+
 [tool.isort]
+line_length = 120
 profile = "black"
+
+[tool.yapf]
+column_limit = 120
+split_before_first_argument = false
+
+[tool.pytest.ini_options]
+filterwarnings = "ignore::DeprecationWarning"

@@ -1,19 +1,20 @@
 [tool.poetry]
+authors = ["NaturalAntibody"]
+description = ""
 name = "cookiecutter-data-science"
 version = "0.1.0"
-description = ""
-authors = ["NaturalAntibody"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+
+cookiecutter = "^1.7.3"
+
+[tool.poetry.group.dev.dependencies]
 mkdocs = "^1.2.3"
 mkdocs-cinder = "^1.2.0"
-cookiecutter = "^1.7.3"
 pytest = ">=7.2"
-click = "^8.0.1"
-
-[tool.poetry.dev-dependencies]
+yapf = "^0.32.0"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]

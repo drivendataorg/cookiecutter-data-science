@@ -25,13 +25,15 @@ confidence=
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use "--disable=all --enable=classes
 # --disable=W".
-disable=missing-module-docstring,
-        missing-function-docstring,
+disable=file-ignored,
+        suppressed-message,
+        useless-suppression,
+        deprecated-pragma,
+        use-symbolic-message-instead,
+        missing-module-docstring,
         missing-class-docstring,
-        ; temporarily - until it is being fixed by pylint to support Option and Union generics
-        unsubscriptable-object,
-        ; temporary - until pylint will handle mongoengine
+        missing-function-docstring,
+        raise-missing-from,
         no-member,
-        unspecified-encoding,
-        use-dict-literal
-
+        # yapf takes care of too long lines, ones which can't be broken are fine
+        line-too-long
