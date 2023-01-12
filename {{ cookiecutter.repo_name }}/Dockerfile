@@ -1,6 +1,6 @@
-{% if cookiecutter.image == 'Tensorflow' %}FROM registry.git.vgregion.se/aiplattform/images/tensorflow:0.1.4{% endif %}
-{% if cookiecutter.image == 'PyTorch' %}FROM registry.git.vgregion.se/aiplattform/images/pytorch:0.1.2{% endif %}
-{% if cookiecutter.image == 'R' %}FROM registry.git.vgregion.se/aiplattform/images/r:0.1.3{% endif %}
+{% if cookiecutter.image == 'Tensorflow' %}FROM registry.git.vgregion.se/aiplattform/images/tensorflow:0.2.0{% endif %}
+{% if cookiecutter.image == 'PyTorch' %}FROM registry.git.vgregion.se/aiplattform/images/pytorch:0.2.0{% endif %}
+{% if cookiecutter.image == 'R' %}FROM registry.git.vgregion.se/aiplattform/images/r:0.2.0{% endif %}
 ENV GID=1000
 ENV UID=1000
 
