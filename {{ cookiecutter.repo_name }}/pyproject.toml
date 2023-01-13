@@ -46,9 +46,9 @@ hvcs = "github"
 upload_to_pypi = false
 version_source = "tag"
 version_variable = [
-  "{{ cookiecutter.repo_name }}/__init__.py:__version__",
-  "pyproject.toml:version",
+  "{{ cookiecutter.repo_name }}/__init__.py:__version__"
 ]
+version_toml = 'pyproject.toml:tool.poetry.version'
 
 [tool.commitizen]
 name = "cz_conventional_commits"
