@@ -7,7 +7,8 @@ ENV UID=1000
 RUN apt -y update \
     && apt install -y --no-install-recommends python3-pip git openssl {% if cookiecutter.image != 'R' %}\
     && addgroup --gid $GID researcher \
-    && adduser --home /workspace --shell /bin/bash --disabled-password --gecos '' --uid $UID --gid $GID researcher
+    && adduser --home /workspace --shell /bin/bash --disabled-password --gecos '' --uid $UID --gid $GID researcher \
+    && chown -R 1000:1000 /workspace
     {% endif %}
 
 ADD http://aiav2.vgregion.se/VGC%20Root%20CA%20v2.crt /tmp/vgc_root.der
