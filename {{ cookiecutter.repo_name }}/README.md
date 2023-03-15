@@ -83,6 +83,9 @@ Project Organization
     ├── renv.lock          <- R packages for reproducing the analysis environment, e.g.
     |                         generated with `renv::restore()`
     |
+    ├── r-start.sh         <- An R start script that will be available in your Docker image as
+    |                         /usr/local/bin/r-start
+    |
     ├── requirements.txt   <- Python requirements file for reproducing the analysis environment. 
     |                         Used in **addition** to R for things like documentation and DVC.
     │
