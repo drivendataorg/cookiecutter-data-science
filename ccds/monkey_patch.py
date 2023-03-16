@@ -97,7 +97,6 @@ def prompt_for_config(context, no_input=False):
 
     # Second pass; handle the dictionaries.
     for key, raw in context["cookiecutter"].items():
-
         try:
             if isinstance(raw, dict):
                 # We are dealing with a dict variable
