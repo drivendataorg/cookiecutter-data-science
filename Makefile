@@ -1,3 +1,6 @@
+.PHONY: _prep create_environment requirements format lint docs docs-serve test \
+	test-fastest test-debug-fastest _clean_manual_test manual-test manual-test-debug
+
 ## GLOBALS
 
 PROJECT_NAME = cookiecutter-data-science
@@ -33,6 +36,9 @@ lint:
 
 
 ###     DOCS
+
+docs:
+	cd docs && mkdocs build
 
 docs-serve:
 	cd docs && mkdocs serve
