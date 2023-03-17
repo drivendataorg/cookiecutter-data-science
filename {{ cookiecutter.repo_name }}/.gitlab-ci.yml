@@ -1,20 +1,2 @@
-stages:
- - Build
-
-variables:
-  build_number: "${CI_PIPELINE_ID}-${CI_COMMIT_SHORT_SHA}"
-  image: "registry.git.vgregion.se/${CI_PROJECT_PATH}"
-
-default:
-  tags:
-  - ai
-  before_script:
-  - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-
-Build image:
-  stage: Build
-  script:
-  - docker build . -t $image:$build_number
-  - docker tag $image:$build_number $image:latest
-  - docker push $image:$build_number
-  - docker push $image:latest
+include:
+  - remote: 'https://git.vgregion.se/aiplattform/templates/researcher-ci-pipeline/-/raw/main/researcher-gitlab-ci.yml'
