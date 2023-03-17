@@ -51,7 +51,11 @@ class TestCookieSetup(object):
             lines = list(map(lambda x: x.strip(), fin.readlines()))
         dockerfile_text = Path(dockerfile_path).read_text()
 
-        assert lines[2] == "FROM registry.git.vgregion.se/aiplattform/images/r:0.2.0"
+        assert lines[0] == "FROM registry.git.vgregion.se/aiplattform/images/r:0.3.0"
+        assert lines[-5] == 'RUN R -e \'renv::activate()\' && R -e \'renv::restore()\''
+        assert lines[-3] == 'USER root'
+        assert lines[-2] == 'EXPOSE 8787'
+        
         assert "ADD http://aiav2.vgregion.se/VGC%20Root%20CA%20v2.crt /tmp/vgc_root.der" in lines
         assert "ADD http://aiav2.vgregion.se/VGC%20Issuing%201%20CA%20v2.crt /tmp/vgc_issuing1.der" in lines
         assert "ADD http://aiav2.vgregion.se/VGC%20Issuing%202%20CA%20v2.crt /tmp/vgc_issuing2.der" in lines
@@ -61,6 +65,8 @@ class TestCookieSetup(object):
         assert "openssl x509 -inform der -in /tmp/vgc_issuing1_2.der -out /usr/local/share/ca-certificates/vgc_issuing1_2.crt"
         assert "openssl x509 -inform der -in /tmp/vgc_issuing2.der -out /usr/local/share/ca-certificates/vgc_issuing2.crt"
         assert "update-ca-certificates"
+        assert 'echo "setwd(\"/workspace/\")" > /home/rstudio/.Rprofile'
+        assert 'COPY renv.lock /workspace/renv.lock'
 
     def test_folders(self):
         module_name = pytest.param.get("project_name")
