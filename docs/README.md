@@ -1,4 +1,4 @@
-A ReadMe for generating docs
+Information for generating docs
 ----------
 
 Install requirements:
