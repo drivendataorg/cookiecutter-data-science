@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "{{cookiecutter.repo_name}}"
+version = "0.1.0"
+description = "{{cookiecutter.description}}"
+authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
+
+[build-system]
+requires = ["poetry-core>=1.0.4"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = "^{{cookiecutter.python_version}}"
+
+[tool.black]
+line-length = 119
+target-version = ['py39']
+
+[tool.ruff]
+select = [
+    "F", # Pyflakes
+    "E", # pycodestyle
+    "YTT", # flake8-2020
+    "W", # Warning
+    "C", # Complexity (mccabe+) & comprehensions
+    "B", # flake8-bugbear
+    "UP", # pyupgrade
+    "I", # isort
+    "ANN" # annotations
+]
+line-length = 119
+target-version = "py39"
+
+[tool.ruff.isort]
+combine-as-imports = false
+
+[tool.mypy]
+ignore_missing_imports = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+strict_equality = true
+show_error_codes = true
+install_types = true
+no_namespace_packages = true
+check_untyped_defs = true
