@@ -1,6 +1,6 @@
 # Cookiecutter Data Science
 
-_A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
+_A flexible project structure for doing and sharing data science work, based on Cookiecutter Data Science Project._
 
 
 #### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
@@ -22,14 +22,14 @@ $ conda config --add channels conda-forge
 $ conda install cookiecutter
 ```
 
+## Provenant Data Modified Template
+
 
 ### To start a new project, run:
 ------------
 
-    cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
+    cookiecutter https://github.com/rhm2k/cookiecutter-PData-python
 
-
-[![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
 
 ### New version of Cookiecutter Data Science
 ------------
@@ -48,7 +48,6 @@ The directory structure of your new project looks like this:
 
 ```
 ├── LICENSE
-├── Makefile           <- Makefile with commands like `make data` or `make train`
 ├── README.md          <- The top-level README for developers using this project.
 ├── data
 │   ├── external       <- Data from third party sources.
@@ -56,23 +55,24 @@ The directory structure of your new project looks like this:
 │   ├── processed      <- The final, canonical data sets for modeling.
 │   └── raw            <- The original, immutable data dump.
 │
-├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+├── docs               <- At least a 'getting started.md' and an index file of docs
 │
 ├── models             <- Trained and serialized models, model predictions, or model summaries
 │
 ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
 │                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
+│                         `1.0-rhm-initial-data-exploration`.
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
 │
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
+├── artifacts            <- Generated analysis as HTML, PDF, LaTeX, etc.
+│   ├── figures        <- Generated graphics and figures to be used in reporting
+│   ├── logs           <- Generated logs to be used in reporting
+│   └── output         <- Generated files, datasets (e.g. CSV files)
 │
 ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
 │                         generated with `pip freeze > requirements.txt`
 │
-├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
 ├── src                <- Source code for use in this project.
 │   ├── __init__.py    <- Makes src a Python module
 │   │
@@ -90,7 +90,7 @@ The directory structure of your new project looks like this:
 │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
 │       └── visualize.py
 │
-└── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+└── setup.py           <- makes it pip installable (pip install -e .) so src can be imported
 ```
 
 ## Contributing
