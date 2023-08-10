@@ -45,6 +45,11 @@ class TestCookieSetup(object):
             with open(readme_path) as fin:
                 assert "DrivenData" == next(fin).strip()
 
+    def test_pre_commit_config(self):
+        pre_commit_config_path = self.path / ".pre-commit-config.yaml"
+        assert pre_commit_config_path.exists()
+        assert no_curlies(pre_commit_config_path)
+
     def test_setup(self):
         setup_ = self.path / "setup.py"
         args = ["python", str(setup_), "--version"]

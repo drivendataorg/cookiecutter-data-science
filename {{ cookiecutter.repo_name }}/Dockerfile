@@ -21,6 +21,7 @@ COPY renv.lock /workspace/renv.lock
 COPY r-start.sh /usr/local/bin/r-start{% endif %}
 
 RUN pip install -r requirements.txt --no-cache-dir \
+    && pip install --no-cache-dir pre-commit==3.3.3 \
     && openssl x509 -inform der -in /tmp/vgc_root.der -out /usr/local/share/ca-certificates/vgc_root.crt \
     && openssl x509 -inform der -in /tmp/vgc_issuing1.der -out /usr/local/share/ca-certificates/vgc_issuing1.crt \
     && openssl x509 -inform der -in /tmp/vgc_issuing1_2.der -out /usr/local/share/ca-certificates/vgc_issuing1_2.crt \

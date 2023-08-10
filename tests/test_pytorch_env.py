@@ -79,6 +79,11 @@ class TestCookieSetup(object):
         assert doitfile_path.exists()
         assert no_curlies(doitfile_path)
 
+    def test_pre_commit_config(self):
+        pre_commit_config_path = self.path / ".pre-commit-config.yaml"
+        assert pre_commit_config_path.exists()
+        assert no_curlies(pre_commit_config_path)
+
     def test_dockerfile(self):
         dockerfile_path = self.path / "Dockerfile"
         assert dockerfile_path.exists()
