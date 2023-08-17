@@ -1,0 +1,7 @@
+default_context:
+  project_name: "acme"
+  repo_name: "acme"
+  module_name: "acme"
+  author_name: "acme@domain.com"
+  description: "Test"
+cookiecutters_dir: "~/.cookiecutters/"
