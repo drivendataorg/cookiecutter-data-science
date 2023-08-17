@@ -26,10 +26,10 @@ RUN pip install -r requirements.txt --no-cache-dir \
     && openssl x509 -inform der -in /tmp/vgc_issuing1.der -out /usr/local/share/ca-certificates/vgc_issuing1.crt \
     && openssl x509 -inform der -in /tmp/vgc_issuing1_2.der -out /usr/local/share/ca-certificates/vgc_issuing1_2.crt \
     && openssl x509 -inform der -in /tmp/vgc_issuing2.der -out /usr/local/share/ca-certificates/vgc_issuing2.crt \
-    && update-ca-certificates \
+    && update-ca-certificates \ 
     {% if cookiecutter.image == 'R' %}&& chown -R 1000:1000 /workspace/ \
     && echo "setwd(\"/workspace/\")" > /home/rstudio/.Rprofile \
-    && chmod +x /usr/local/bin/r-start \{% endif %}
+    && chmod +x /usr/local/bin/r-start \ {%- endif -%}
     && rm requirements.txt {% if cookiecutter.image != 'R' %} setup.py {% endif %}
 
 USER researcher
