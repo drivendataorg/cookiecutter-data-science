@@ -1,5 +1,5 @@
 ---
-name: Docker Image CI
+name: Hadolint
 
 on: [push]
 
