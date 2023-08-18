@@ -13,9 +13,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Create ${{ matrix.ai_framework }} files
         run: |
-          cp tests/.cookiecutterrc ~/.cookiecutterrc
           pip3 install cookiecutter
-          cookiecutter . --no-input image=${{ matrix.ai_framework }}
+          cookiecutter . --no-input image=${{ matrix.ai_framework }} --config-file tests/.cookiecutterrc
       - uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: acme/Dockerfile
