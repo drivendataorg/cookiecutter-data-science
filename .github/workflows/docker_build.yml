@@ -1,0 +1,22 @@
+---
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ai_framework: ["Tensorflow", "PyTorch", "R"]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create ${{ matrix.ai_framework }} files
+        run: |
+          cp tests/.cookiecutterrc ~/.cookiecutterrc
+          pip3 install cookiecutter
+          cookiecutter . --no-input image=${{ matrix.ai_framework }}
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: acme/Dockerfile
+          ignore: DL3027,DL3045,DL3002,DL3045
