@@ -1,21 +1,23 @@
+"""init_py}}"""
 import sys
 from pathlib import Path
-
 from dotenv import find_dotenv, load_dotenv
 from loguru import logger
 
-dotenv_path = find_dotenv()
-load_dotenv(dotenv_path)
+DOTENV_PATH = find_dotenv()
+load_dotenv(DOTENV_PATH)
 
-fmt = "{time:YYYY-MM-DD HH:mm:ss} | {level} | {name} :: {module} :: {function} :: {line} - {message}"
+FMT_ = "{time:YYYY-MM-DD HH:mm:ss} "\
+    "| {level} | {name} :: {module} :: {function} :: {line} - {message}"
 
-config = {
+
+CONFIG_ = {
     "handlers": [
         {"sink": sys.stdout, "level": "DEBUG"},
-        {"sink": "log.log", "format": fmt, "level": "DEBUG"},
+        {"sink": "log.log", "format": FMT_, "level": "DEBUG"},
     ]
 }
 
-logger.configure(**config)
+logger.configure(**CONFIG_)
 
-source_path = Path(__file__).resolve().parents[1]
+SOURCE_PATH = Path(__file__).resolve().parents[1]
