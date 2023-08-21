@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ai_framework: ["Tensorflow", "Pytorch", "R"]
+        ai_framework: ["Tensorflow", "PyTorch", "R"]
     steps:
     - uses: actions/checkout@v3
     - name: Pylint ${{ matrix.ai_framework }} files
