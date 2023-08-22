@@ -1,0 +1,2 @@
+[MASTER]
+init-hook='import sys; sys.path.append("acme")'
