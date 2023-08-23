@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ai_framework: ["Tensorflow", "Pytorch", "R"]
+        ai_framework: ["Tensorflow", "PyTorch", "R"]
     steps:
     - uses: actions/checkout@v3
     - name: Pylint ${{ matrix.ai_framework }} files
       run: |
-        pip3 install pylint cookiecutter
+        pip3 install pylint cookiecutter python-dotenv loguru
         cookiecutter . --no-input image=${{ matrix.ai_framework }} --config-file tests/.cookiecutterrc
         find ./acme -name "*.py" | xargs pylint

@@ -1,7 +1,9 @@
+"""Make dataset"""
 from {{ cookiecutter.module_name }} import logger
 
 
 def main():
+    """Main"""
     logger.info('your log message')
 
 
