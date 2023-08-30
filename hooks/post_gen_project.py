@@ -1,3 +1,5 @@
+from pathlib import Path
+
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
 from ccds.hook_utils.custom_config import write_custom_config
@@ -50,3 +52,12 @@ write_dependencies(
 )
 
 write_custom_config("{{ cookiecutter.custom_config }}")
+
+# Remove LICENSE if "No license file"
+if "{{ cookiecutter.open_source_license }}" == "No license file":
+    Path("LICENSE").unlink()
+
+# Make single quotes prettier
+# Jinja tojson escapes single-quotes with \u0027 since it's meant for HTML/JS
+pyproject_text = Path("pyproject.toml").read_text()
+Path("pyproject.toml").write_text(pyproject_text.replace(r"\u0027", "'"))
