@@ -1,45 +1,35 @@
 # Cookiecutter Data Science
 
-_A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
+_A logical, reasonably standardized but flexible project structure for doing and sharing data science work._
 
+**Cookiecutter Data Science (CCDS)** is a tool for setting up a data science project template that incorporates best practices. To learn more about CCDS's philosophy, visit the project homepage](http://drivendata.github.io/cookiecutter-data-science/).
 
-#### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
+> ℹ️ Cookiecutter Data Science v2 requires installing the new cookiecutter-data-science Python package, which extends the functionality of the [cookiecutter](https://cookiecutter.readthedocs.io/en/stable/README.html) templating utility. Use the provided `ccds` command-line program instead of `cookiecutter`.
 
+## Installation
 
-### Requirements to use the cookiecutter template:
------------
- - Python 3.7+
- - [Cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html) >= 1.4.0: This can be installed with pip by or conda depending on how you manage your Python packages:
+Cookiecutter Data Science v2 requires Python 3.7+. Since this is a cross-project utility application, we recommend installing it with [pipx](https://pypa.github.io/pipx/). Installation command options:
 
-``` bash
-$ pip install cookiecutter
+```bash
+# With pipx from PyPI (recommended)
+pipx install cookiecutter-data-science
+
+# With pip from PyPI
+pip install cookiecutter-data-science
+
+# With conda from conda-forge (coming soon)
+# conda install cookiecutter-data-science -c conda-forge
 ```
 
-or
+## Usage
 
-``` bash
-$ conda config --add channels conda-forge
-$ conda install cookiecutter
+To start a new project, run:
+
+```bash
+ccds https://github.com/drivendata/cookiecutter-data-science
 ```
-
-
-### To start a new project, run:
-------------
-
-    cookiecutter -c v1 https://github.com/drivendata/cookiecutter-data-science
-
 
 [![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
-
-### New version of Cookiecutter Data Science
-------------
-Cookiecutter data science is moving to v2 soon, which will entail using
-the command `ccds ...` rather than `cookiecutter ...`. The cookiecutter command
-will continue to work, and this version of the template will still be available.
-To use the legacy template, you will need to explicitly use `-c v1` to select it.
-Please update any scripts/automation you have to append the `-c v1` option (as above),
-which is available now.
-
 
 ### The resulting directory structure
 ------------
@@ -64,7 +54,8 @@ The directory structure of your new project looks like this:
 │                         the creator's initials, and a short `-` delimited description, e.g.
 │                         `1.0-jqp-initial-data-exploration`.
 │
-├── pyproject.toml     <- Project configuration file with settings for running black; see setuptools.readthedocs.io
+├── pyproject.toml     <- Project configuration file with package metadata for {{ cookiecutter.module_name }}
+│                         and configuration for tools like black
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
 │
@@ -74,9 +65,7 @@ The directory structure of your new project looks like this:
 ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
 │                         generated with `pip freeze > requirements.txt`
 │
-├── setup.cfg          <- Configuration file for flake8 and pep8
-│
-├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+├── setup.cfg          <- Configuration file for flake8
 │
 ├── {{ cookiecutter.module_name }}                <- Source code for use in this project.
 │   │
@@ -98,22 +87,28 @@ The directory structure of your new project looks like this:
 
 ```
 
+## Using v1
+
+If you want to use the old v1 project template, you need to have either the cookiecutter-data-science package or cookiecutter package installed. Then, use either command-line program with the `-c v1` option:
+
+```bash
+ccds https://github.com/drivendata/cookiecutter-data-science -c v1
+# or equivalently
+cookiecutter https://github.com/drivendata/cookiecutter-data-science -c v1
+```
+
 ## Contributing
 
 We welcome contributions! [See the docs for guidelines](https://drivendata.github.io/cookiecutter-data-science/#contributing).
 
-### Installing requirements
-------------
-
-    pip install -r requirements.txt
-
-
 ### Installing development requirements
-------------
 
-    pip install -r dev-requirements.txt
+```bash
+pip install -r dev-requirements.txt
+```
 
 ### Running the tests
-------------
 
-    py.test tests
+```bash
+pytest tests
+```
