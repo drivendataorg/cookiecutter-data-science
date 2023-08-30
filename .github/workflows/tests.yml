@@ -3,11 +3,13 @@ name: tests
 
 on:
   push:
-    branches: [master]
+    branches: [master, v2]
   pull_request:
+    branches: [master, v2]
   schedule:
     # Run every Sunday
     - cron: "0 0 * * 0"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -16,15 +18,16 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python-version: [3.7, 3.8, 3.9, "3.10"]
+        python-version: [3.7, 3.8, 3.9, "3.10", "3.11", "3.12"]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
 
       - name: Install dependencies
         run: |
@@ -34,7 +37,7 @@ jobs:
       - name: Lint
         run: |
           make lint
-      
+
       - name: Run tests
         run: |
           make test
