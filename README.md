@@ -4,7 +4,7 @@ _A logical, reasonably standardized but flexible project structure for doing and
 
 **Cookiecutter Data Science (CCDS)** is a tool for setting up a data science project template that incorporates best practices. To learn more about CCDS's philosophy, visit the project homepage](http://drivendata.github.io/cookiecutter-data-science/).
 
-> ℹ️ Cookiecutter Data Science v2 requires installing the new cookiecutter-data-science Python package, which extends the functionality of the [cookiecutter](https://cookiecutter.readthedocs.io/en/stable/README.html) templating utility. Use the provided `ccds` command-line program instead of `cookiecutter`.
+> ℹ️ Cookiecutter Data Science v2 has changed from v1. It now requires installing the new cookiecutter-data-science Python package, which extends the functionality of the [cookiecutter](https://cookiecutter.readthedocs.io/en/stable/README.html) templating utility. Use the provided `ccds` command-line program instead of `cookiecutter`.
 
 ## Installation
 
@@ -21,7 +21,7 @@ pip install cookiecutter-data-science
 # conda install cookiecutter-data-science -c conda-forge
 ```
 
-## Usage
+## Starting a new project
 
 To start a new project, run:
 
@@ -32,13 +32,12 @@ ccds https://github.com/drivendata/cookiecutter-data-science
 [![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
 
 ### The resulting directory structure
-------------
 
-The directory structure of your new project looks like this:
+The directory structure of your new project will look something like this (depending on the settings that you choose):
 
 ```
-├── LICENSE
-├── Makefile           <- Makefile with commands like `make data` or `make train`
+├── LICENSE            <- Open-source license if one is chosen
+├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
 ├── README.md          <- The top-level README for developers using this project.
 ├── data
 │   ├── external       <- Data from third party sources.
@@ -67,24 +66,23 @@ The directory structure of your new project looks like this:
 │
 ├── setup.cfg          <- Configuration file for flake8
 │
-├── {{ cookiecutter.module_name }}                <- Source code for use in this project.
-│   │
-│   ├── __init__.py    <- Makes {{ cookiecutter.module_name }} a Python module
-│   │
-│   ├── data           <- Scripts to download or generate data
-│   │   └── make_dataset.py
-│   │
-│   ├── features       <- Scripts to turn raw data into features for modeling
-│   │   └── build_features.py
-│   │
-│   ├── models         <- Scripts to train models and then use trained models to make
-│   │   │                 predictions
-│   │   ├── predict_model.py
-│   │   └── train_model.py
-│   │
-│   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-│       └── visualize.py
-
+└── {{ cookiecutter.module_name }}                <- Source code for use in this project.
+    │
+    ├── __init__.py    <- Makes {{ cookiecutter.module_name }} a Python module
+    │
+    ├── data           <- Scripts to download or generate data
+    │   └── make_dataset.py
+    │
+    ├── features       <- Scripts to turn raw data into features for modeling
+    │   └── build_features.py
+    │
+    ├── models         <- Scripts to train models and then use trained models to make
+    │   │                 predictions
+    │   ├── predict_model.py
+    │   └── train_model.py
+    │
+    └── visualization  <- Scripts to create exploratory and results oriented visualizations
+        └── visualize.py
 ```
 
 ## Using v1

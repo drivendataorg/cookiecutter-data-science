@@ -1,9 +1,9 @@
 Generating the docs
 ----------
 
-Install requirements:
+Install development requirements:
 
-    pip install -r requirements.txt
+    pip install -r dev-requirements.txt
 
 Change directories into the docs folder:
 
