@@ -15,7 +15,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     {% if cookiecutter.open_source_license == 'MIT' %}"License :: OSI Approved :: MIT License"{% elif cookiecutter.open_source_license == 'BSD-3-Clause' %}"License :: OSI Approved :: BSD License"{% endif %}
 ]
-requires-python = ">={{ cookiecutter.python_version_number }}"
+requires-python = "=={{ cookiecutter.python_version_number }}"
 
 [tool.black]
 line-length = 99
