@@ -145,7 +145,7 @@ def verify_makefile_commands(root, config):
         executable = "bash"
 
     result = run(
-        ["bash", str(harness_path), str(root.resolve())], stderr=PIPE, stdout=PIPE
+        [executable, str(harness_path), str(root.resolve())], stderr=PIPE, stdout=PIPE
     )
     result_returncode = result.returncode
 
