@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 from subprocess import PIPE, run
@@ -138,7 +139,7 @@ def verify_makefile_commands(root, config):
             f"Environment manager '{config['environment_manager']}' not found in test harnesses."
         )
 
-    if os.getenv("GITHUB_ACTIONS") and os.getenv("RUNNER_OS") == "Windows:
+    if os.getenv("GITHUB_ACTIONS") and os.getenv("RUNNER_OS") == "Windows":
         executable = r"C:\Program Files\Git\bin\bash.EXE"
     else:
         executable = "bash"
