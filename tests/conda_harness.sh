@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -ex
 
 # enable conda commands inside the script
@@ -12,7 +12,7 @@ function finish {
     if [[ $(which python) == *"$PROJECT_NAME"* ]]; then
         conda deactivate
     fi
-
+    
     conda env remove -n $PROJECT_NAME -y
 }
 trap finish EXIT
@@ -20,7 +20,7 @@ trap finish EXIT
 # source the steps in the test
 source $CCDS_ROOT/test_functions.sh
 
-# navigate to the generated project and run make commands
+# navigate to the generated project and run make commands 
 cd $1
 
 # Fix for conda issue https://github.com/conda/conda/issues/7267 on MacOS
