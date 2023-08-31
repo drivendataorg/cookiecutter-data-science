@@ -33,6 +33,6 @@ def write_dependencies(
 
             lines += [f'"{module_name}" ={{editable = true, path = "."}}']
 
-            lines += ["", "[requires]", f'python_version = "{ python_version }"']
+            lines += ["", "[requires]", f'python_version = "{python_version}"']
 
             f.write("\n".join(lines))
