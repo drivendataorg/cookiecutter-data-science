@@ -138,6 +138,11 @@ def verify_makefile_commands(root, config):
             f"Environment manager '{config['environment_manager']}' not found in test harnesses."
         )
 
+    if os.getenv("GITHUB_ACTIONS") and os.getenv("RUNNER_OS") == "Windows:
+        executable = r"C:\Program Files\Git\bin\bash.EXE"
+    else:
+        executable = "bash"
+
     result = run(
         ["bash", str(harness_path), str(root.resolve())], stderr=PIPE, stdout=PIPE
     )

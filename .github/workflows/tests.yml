@@ -66,12 +66,6 @@ jobs:
           python -m pip install --upgrade pip
           make requirements
 
-      # make seems to incorrectly use WSL bash instead of Git bash on Windows
-      - name: Add correct bash to PATH for Windows
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: |
-          echo "C:/Program Files/Git/bin/sh" >> $GITHUB_PATH
-
       - name: Run tests
         run: |
           make test
