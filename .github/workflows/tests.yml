@@ -61,10 +61,14 @@ jobs:
             pyproject.toml
             dev-requirements.txt
 
-      - name: Install make on Windows
+      - name: Setup for Windows
         if: ${{ matrix.os == 'windows-latest' }}
         run: |
+          # Install GNU make
           choco install --verbose make
+          # Set executable paths
+          echo "BASH_EXECUTABLE=C:\Program Files\Git\bin\bash.EXE" >> "$GITHUB_ENV"
+          echo "CONDA_EXECUTABLE=${CONDA}/bin/conda" >> "$GITHUB_ENV"
 
       - name: Install dependencies
         run: |
