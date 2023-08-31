@@ -9,7 +9,7 @@ Change directories into the docs folder:
 
     cd docs
 
-Use [mkdocs](http://www.mkdocs.org/) structure to update the documentation. Test locally with:
+Use [mkdocs](https://www.mkdocs.org/) structure to update the documentation. Test locally with:
 
     mkdocs serve
 
