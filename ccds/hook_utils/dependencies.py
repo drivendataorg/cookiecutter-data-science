@@ -12,7 +12,7 @@ def write_dependencies(
 
     elif dependencies == "environment.yml":
         with open(dependencies, "w") as f:
-            lines = [f"name: { repo_name }", "dependencies:"]
+            lines = [f"name: {repo_name}", "dependencies:"]
 
             lines += [f"  - {p}" for p in packages if p not in pip_only_packages]
 
@@ -31,7 +31,7 @@ def write_dependencies(
             lines = ["[packages]"]
             lines += [f'{p} = "*"' for p in sorted(packages)]
 
-            lines += [f'"{ module_name }" ={{editable = true, path = "."}}']
+            lines += [f'"{module_name}" ={{editable = true, path = "."}}']
 
             lines += ["", "[requires]", f'python_version = "{ python_version }"']
 
