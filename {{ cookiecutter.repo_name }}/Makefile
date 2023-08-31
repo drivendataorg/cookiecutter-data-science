@@ -76,7 +76,7 @@ create_environment:
 	{% if cookiecutter.dependency_file != 'environment.yml' %}
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
 	{% else -%}
-	conda env create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -f environment.yml
+	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -f environment.yml
 	{% endif %}
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
 	{% elif cookiecutter.environment_manager == 'virtualenv' -%}
