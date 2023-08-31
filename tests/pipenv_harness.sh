@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -ex
 
 PROJECT_NAME=$(basename $1)
@@ -9,7 +9,7 @@ function finish {
     if [[ $(which python) == *"$PROJECT_NAME"* ]]; then
         exit
     fi
-    
+
     pipenv --rm
 }
 trap finish EXIT
@@ -17,7 +17,7 @@ trap finish EXIT
 # source the steps in the test
 source $CCDS_ROOT/test_functions.sh
 
-# navigate to the generated project and run make commands 
+# navigate to the generated project and run make commands
 cd $1
 make create_environment
 

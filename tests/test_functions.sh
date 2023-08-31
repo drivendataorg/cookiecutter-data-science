@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 function run_tests () {
     python --version
     python -c "print('python runs....')"
