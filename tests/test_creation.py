@@ -70,7 +70,6 @@ def verify_files(root, config):
     expected_files = [
         "Makefile",
         "README.md",
-        "setup.py",
         "pyproject.toml",
         "setup.cfg",
         ".env",

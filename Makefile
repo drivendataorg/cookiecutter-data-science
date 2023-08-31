@@ -27,12 +27,12 @@ requirements:
 ## Format the code using isort and black
 format:
 	isort ccds hooks tests
-	black ccds hooks tests setup.py
+	black ccds hooks tests
 
 ## Lint using flake8 + black
 lint:
-	flake8 ccds hooks tests setup.py
-	black --check ccds hooks tests setup.py
+	flake8 ccds hooks tests
+	black --check ccds hooks tests
 
 
 ###     DOCS
