@@ -1,8 +1,10 @@
 #!/bin/bash
 set -ex
 
+: "${CONDA_EXECUTABLE:=conda}"
+
 # enable conda commands inside the script
-eval "$(conda shell.bash hook)"
+eval "$($CONDA_EXECUTABLE shell.bash hook)"
 
 PROJECT_NAME=$(basename $1)
 CCDS_ROOT=$(dirname $0)
@@ -10,10 +12,10 @@ CCDS_ROOT=$(dirname $0)
 # configure exit / teardown behavior
 function finish {
     if [[ $(which python) == *"$PROJECT_NAME"* ]]; then
-        conda deactivate
+        $CONDA_EXECUTABLE deactivate
     fi
 
-    conda env remove -n $PROJECT_NAME -y
+    $CONDA_EXECUTABLE env remove -n $PROJECT_NAME -y
 }
 trap finish EXIT
 
@@ -30,7 +32,7 @@ then
 fi
 
 make create_environment
-conda activate $PROJECT_NAME
+$CONDA_EXECUTABLE activate $PROJECT_NAME
 make requirements
 
 run_tests $PROJECT_NAME
