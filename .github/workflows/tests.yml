@@ -75,9 +75,10 @@ jobs:
           # Install GNU make
           choco install --verbose make
           # Add bundled conda to PATH
-          echo "${CONDA}\Scripts" >> $GITHUB_PATH
+          # echo "${CONDA}\Scripts" >> $GITHUB_PATH
           # Set executable paths
           echo "CONDA_EXECUTABLE=$MAMBA_EXE" >> "$GITHUB_ENV"
+          echo "CONDA_SHELL_HOOK=micromamba shell hook --shell bash" >> "$GITHUB_ENV"
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
 
       - name: Install dependencies

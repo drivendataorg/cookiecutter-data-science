@@ -2,9 +2,9 @@
 set -ex
 
 : "${CONDA_EXECUTABLE:=conda}"
+: "${CONDA_SHELL_HOOK:=$CONDA_EXECUTABLE shell.bash hook}
 
-# enable conda commands inside the script
-eval "$($CONDA_EXECUTABLE shell.bash hook)"
+eval "$($CONDA_SHELL_HOOK)"
 
 PROJECT_NAME=$(basename $1)
 CCDS_ROOT=$(dirname $0)
@@ -31,8 +31,8 @@ then
     sudo chown -R $USER /usr/local/miniconda
 fi
 
-make create_environment
+make create_environment CONDA_EXECUTABLE=$CONDA_EXECUTABLE
 $CONDA_EXECUTABLE activate $PROJECT_NAME
-make requirements
+make requirements CONDA_EXECUTABLE=$CONDA_EXECUTABLE
 
 run_tests $PROJECT_NAME
