@@ -61,13 +61,18 @@ jobs:
             pyproject.toml
             dev-requirements.txt
 
-      - uses: conda-incubator/setup-miniconda@v2
+      # - uses: conda-incubator/setup-miniconda@v2
+      #   with:
+      #     python-version: ${{ matrix.python-version }}
+
+      - uses: mamba-org/setup-micromamba@v1
         with:
-          python-version: ${{ matrix.python-version }}
+          init-shell: bash
 
       - name: Setup for Windows
         if: ${{ matrix.os == 'windows-latest' }}
         run: |
+          which mamba
           # Install GNU make
           choco install --verbose make
           # Add bundled conda to PATH
@@ -84,8 +89,10 @@ jobs:
         run: |
           which make
           make --version
-          # which conda
+          which conda
           conda --version
+          which mamba
+          mamba --version
           which pipenv
           pipenv --version
           which virtualenv
