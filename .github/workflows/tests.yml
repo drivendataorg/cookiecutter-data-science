@@ -68,6 +68,8 @@ jobs:
       - uses: mamba-org/setup-micromamba@v1
         with:
           init-shell: bash
+          cache-downloads: true
+
 
       - name: Setup for Windows
         if: ${{ matrix.os == 'windows-latest' }}
@@ -78,7 +80,7 @@ jobs:
           # echo "${CONDA}\Scripts" >> $GITHUB_PATH
           # Set executable paths
           echo "CONDA_EXECUTABLE=$MAMBA_EXE" >> "$GITHUB_ENV"
-          echo "CONDA_SHELL_HOOK=micromamba shell hook --shell bash" >> "$GITHUB_ENV"
+          echo "CONDA_SHELL_HOOK=$MAMBA_EXE shell hook --shell bash" >> "$GITHUB_ENV"
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
 
       - name: Install dependencies
