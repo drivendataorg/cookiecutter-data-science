@@ -6,7 +6,7 @@ PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_VERSION = {{ cookiecutter.python_version_number }}
 PYTHON_INTERPRETER = python
-
+CONDA_EXECUTABLE ?= conda
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -20,7 +20,7 @@ requirements:
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 	{% elif "environment.yml" == cookiecutter.dependency_file -%}
-	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
+	$(CONDA_EXECUTABLE) env update --name $(PROJECT_NAME) --file environment.yml --prune
 	{% elif "Pipfile" == cookiecutter.dependency_file -%}
 	pipenv install
 	{% endif %}
@@ -79,9 +79,9 @@ sync_data_up:
 create_environment:
 	{% if cookiecutter.environment_manager == 'conda' -%}
 	{% if cookiecutter.dependency_file != 'environment.yml' %}
-	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
+	$(CONDA_EXECUTABLE) create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
 	{% else -%}
-	conda env create --name $(PROJECT_NAME) -f environment.yml
+	$(CONDA_EXECUTABLE) env create --name $(PROJECT_NAME) -f environment.yml
 	{% endif %}
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
 	{% elif cookiecutter.environment_manager == 'virtualenv' -%}

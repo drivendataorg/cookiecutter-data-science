@@ -36,8 +36,8 @@ then
     sudo chown -R $USER /usr/local/miniconda
 fi
 
-make create_environment SHELL=$BASH_EXECUTABLE PATH=$PATH
+make create_environment CONDA_EXECUTABLE=$CONDA_EXECUTABLE
 $CONDA_EXECUTABLE activate $PROJECT_NAME
-make requirements SHELL=$BASH_EXECUTABLE PATH=$PATH
+make requirements CONDA_EXECUTABLE=$CONDA_EXECUTABLE
 
 run_tests $PROJECT_NAME
