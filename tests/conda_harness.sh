@@ -2,7 +2,7 @@
 set -ex
 
 : "${CONDA_EXECUTABLE:=conda}"
-: "${CONDA_SHELL_HOOK:=$CONDA_EXECUTABLE shell.bash hook}
+: "${CONDA_SHELL_HOOK:=$CONDA_EXECUTABLE shell.bash hook}"
 
 eval "$($CONDA_SHELL_HOOK)"
 

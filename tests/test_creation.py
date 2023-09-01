@@ -142,8 +142,6 @@ def verify_makefile_commands(root, config):
             f"Environment manager '{config['environment_manager']}' not found in test harnesses."
         )
 
-    print("PATH=", os.getenv("PATH"))
-
     result = run(
         [BASH_EXECUTABLE, str(harness_path), str(root.resolve())],
         stderr=PIPE,
@@ -157,6 +155,7 @@ def verify_makefile_commands(root, config):
         encoding = "utf-8"
 
     # normally hidden by pytest except in failure we want this displayed
+    print("PATH=", os.getenv("PATH"))
     print("\n======================= STDOUT ======================")
     print(result.stdout.decode(encoding))
 
