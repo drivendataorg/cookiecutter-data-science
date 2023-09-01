@@ -46,7 +46,7 @@ jobs:
         python-version: ["3.11"] #[3.7, 3.8, 3.9, "3.10", "3.11"]
     defaults:
       run:
-        shell: bash
+        shell: bash -el {0}
 
     steps:
       - uses: actions/checkout@v3
