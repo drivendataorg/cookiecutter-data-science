@@ -63,7 +63,6 @@ jobs:
 
       - uses: conda-incubator/setup-miniconda@v2
         with:
-          auto-update-conda: true
           python-version: ${{ matrix.python-version }}
 
       - name: Setup for Windows
@@ -71,8 +70,8 @@ jobs:
         run: |
           # Install GNU make
           choco install --verbose make
-          # Add conda to PATH
-          # echo "${CONDA}\Scripts" >> $GITHUB_PATH
+          # Add bundled conda to PATH
+          echo "${CONDA}\Scripts" >> $GITHUB_PATH
           # Set executable paths
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
 
