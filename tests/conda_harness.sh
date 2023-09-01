@@ -1,15 +1,8 @@
 #!/bin/bash
 set -ex
 
-# Set conda executable default if environment variable not defined
-: "${CONDA_EXECUTABLE:=conda}"
-echo CONDA_EXECUTABLE=$CONDA_EXECUTABLE
-
-echo conda_harness PATH=$PATH
-which make
-
 # enable conda commands inside the script
-eval "$($CONDA_EXECUTABLE shell.bash hook)"
+eval "$(conda shell.bash hook)"
 
 PROJECT_NAME=$(basename $1)
 CCDS_ROOT=$(dirname $0)
@@ -17,10 +10,10 @@ CCDS_ROOT=$(dirname $0)
 # configure exit / teardown behavior
 function finish {
     if [[ $(which python) == *"$PROJECT_NAME"* ]]; then
-        $CONDA_EXECUTABLE deactivate
+        conda deactivate
     fi
 
-    $CONDA_EXECUTABLE env remove -n $PROJECT_NAME -y
+    conda env remove -n $PROJECT_NAME -y
 }
 trap finish EXIT
 
@@ -36,8 +29,8 @@ then
     sudo chown -R $USER /usr/local/miniconda
 fi
 
-make create_environment CONDA_EXECUTABLE=$CONDA_EXECUTABLE
-$CONDA_EXECUTABLE activate $PROJECT_NAME
-make requirements CONDA_EXECUTABLE=$CONDA_EXECUTABLE
+make create_environment
+conda activate $PROJECT_NAME
+make requirements
 
 run_tests $PROJECT_NAME

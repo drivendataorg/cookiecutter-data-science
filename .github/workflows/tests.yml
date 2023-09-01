@@ -67,12 +67,13 @@ jobs:
           # Install GNU make
           choco install --verbose make
           which make
+          make --version
+          # Add conda to PATH
+          echo "${CONDA}\Scripts" >> $GITHUB_PATH
+          which conda
+          conda --version
           # Set executable paths
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
-          # echo "CONDA_EXECUTABLE=$(which conda)" >> "$GITHUB_ENV"
-          # echo "/c/Program Files/Git/bin" >> $GITHUB_PATH
-          # echo "${CONDA}\bin" >> $GITHUB_PATH
-          echo "${CONDA}\Scripts" >> $GITHUB_PATH
 
       - name: Install dependencies
         run: |
