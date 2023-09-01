@@ -142,6 +142,8 @@ def verify_makefile_commands(root, config):
             f"Environment manager '{config['environment_manager']}' not found in test harnesses."
         )
 
+    print("PATH=", os.getenv("PATH"))
+
     result = run(
         [BASH_EXECUTABLE, str(harness_path), str(root.resolve())],
         stderr=PIPE,

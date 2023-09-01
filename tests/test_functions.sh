@@ -1,4 +1,6 @@
 function run_tests () {
+    echo PATH=$PATH
+
     python --version
     python -c "print('python runs....')"
 

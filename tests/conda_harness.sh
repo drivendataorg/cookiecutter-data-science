@@ -3,6 +3,7 @@ set -ex
 
 # Set conda executable default if environment variable not defined
 : "${CONDA_EXECUTABLE:=conda}"
+echo CONDA_EXECUTABLE=$CONDA_EXECUTABLE
 
 # enable conda commands inside the script
 eval "$($CONDA_EXECUTABLE shell.bash hook)"
