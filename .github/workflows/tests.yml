@@ -85,7 +85,7 @@ jobs:
         run: |
           which make
           make --version
-          which conda
+          # which conda
           conda --version
           which pipenv
           pipenv --version
