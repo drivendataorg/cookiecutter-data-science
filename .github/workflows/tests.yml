@@ -66,12 +66,8 @@ jobs:
         run: |
           # Install GNU make
           choco install --verbose make
-          which make
-          make --version
           # Add conda to PATH
           echo "${CONDA}\Scripts" >> $GITHUB_PATH
-          which conda
-          conda --version
           # Set executable paths
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
 
@@ -79,6 +75,17 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           make requirements
+
+      - name: Check dependencies
+        run: |
+          which make
+          make --version
+          which conda
+          conda --version
+          which pipenv
+          pipenv --version
+          which virtualenv
+          virtualenv --version
 
       - name: Run tests
         run: |
