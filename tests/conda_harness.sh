@@ -5,6 +5,8 @@ set -ex
 : "${CONDA_EXECUTABLE:=conda}"
 echo CONDA_EXECUTABLE=$CONDA_EXECUTABLE
 
+echo conda_harness PATH=$PATH
+
 # enable conda commands inside the script
 eval "$($CONDA_EXECUTABLE shell.bash hook)"
 

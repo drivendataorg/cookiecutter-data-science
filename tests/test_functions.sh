@@ -1,5 +1,5 @@
 function run_tests () {
-    echo PATH=$PATH
+    echo run_tests PATH=$PATH
 
     python --version
     python -c "print('python runs....')"
