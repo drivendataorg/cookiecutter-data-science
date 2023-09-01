@@ -68,10 +68,10 @@ jobs:
           choco install --verbose make
           which make
           # Set executable paths
-          echo "BASH_EXECUTABLE=C:\Program Files\Git\bin\bash.EXE" >> "$GITHUB_ENV"
-          echo "CONDA_EXECUTABLE=${CONDA}\bin\conda" >> "$GITHUB_ENV"
-          echo "/c/Program Files/Git/bin" >> $GITHUB_PATH
-          echo "${CONDA}\bin" >> $GITHUB_PATH
+          echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
+          echo "CONDA_EXECUTABLE=$(which conda)" >> "$GITHUB_ENV"
+          # echo "/c/Program Files/Git/bin" >> $GITHUB_PATH
+          # echo "${CONDA}\bin" >> $GITHUB_PATH
 
       - name: Install dependencies
         run: |
