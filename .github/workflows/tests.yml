@@ -66,6 +66,7 @@ jobs:
         run: |
           # Install GNU make
           choco install --verbose make
+          which make
           # Set executable paths
           echo "BASH_EXECUTABLE=C:\Program Files\Git\bin\bash.EXE" >> "$GITHUB_ENV"
           echo "CONDA_EXECUTABLE=${CONDA}/bin/conda" >> "$GITHUB_ENV"
