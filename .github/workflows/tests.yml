@@ -79,7 +79,7 @@ jobs:
           # Install GNU make
           choco install --verbose make
           # Add bundled conda to PATH
-          # echo "${CONDA}\Scripts" >> $GITHUB_PATH
+          echo "${CONDA}\Scripts" >> $GITHUB_PATH
           # Add micromamba to PATH
           # echo "C:\Users\runneradmin\micromamba-bin" >> $GITHUB_PATH
           # Set executable paths
@@ -99,6 +99,7 @@ jobs:
           which make
           make --version
           echo $CONDA_EXECUTABLE
+          which $CONDA_EXECUTABLE
           $CONDA_EXECUTABLE --version
           which pipenv
           pipenv --version
