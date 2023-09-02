@@ -76,11 +76,11 @@ jobs:
       # Use mamba for faster environment resolution in conda tests
       # regular conda takes 3x time
       # micromamba does not work because it does not fully reproduce conda CLI's API
-      - uses: conda-incubator/setup-miniconda@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-          miniforge-variant: Mambaforge
-          use-mamba: true
+      # - uses: conda-incubator/setup-miniconda@v2
+      #   with:
+      #     python-version: ${{ matrix.python-version }}
+      #     miniforge-variant: Mambaforge
+      #     use-mamba: true
 
       - name: Setup for Windows
         if: ${{ matrix.os == 'windows-latest' }}
@@ -90,7 +90,7 @@ jobs:
           # Add conda binaries directory to PATH so that conda is accessible
           echo "${CONDA}\Scripts" >> $GITHUB_PATH
           # Use mamba instead of conda
-          echo "CONDA_EXECUTABLE=mamba" >> "$GITHUB_ENV"
+          # echo "CONDA_EXECUTABLE=mamba" >> "$GITHUB_ENV"
           # Set bash executable explicitly since Make may pick wrong shell
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
 
