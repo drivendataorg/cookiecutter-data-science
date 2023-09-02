@@ -25,10 +25,13 @@ source $CCDS_ROOT/test_functions.sh
 cd $1
 
 # Fix for conda issue https://github.com/conda/conda/issues/7267 on MacOS
-if [ -e /usr/local/miniconda ]
-then
+if [ -e /usr/local/miniconda ]; then
     sudo chown -R $USER /usr/local/miniconda
 fi
+if [ -e $CONDA_PREFIX ]; then
+    sudo chown -R $USER $CONDA_PREFIX
+fi
+
 
 echo "Creating environment..."
 make create_environment CONDA_EXECUTABLE=$CONDA_EXECUTABLE
