@@ -1,8 +1,10 @@
 #!/bin/bash
 set -ex
 
+# Default value if CONDA_EXECUTABLE not specified
 : "${CONDA_EXECUTABLE:=conda}"
 
+# enable conda commands inside the script
 eval "$(conda shell.bash hook)"
 
 PROJECT_NAME=$(basename $1)

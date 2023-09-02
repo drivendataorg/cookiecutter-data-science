@@ -42,8 +42,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest] #[ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.11"] #[3.7, 3.8, 3.9, "3.10", "3.11"]
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: [3.7, 3.8, 3.9, "3.10", "3.11"]
     defaults:
       run:
         shell: bash -el {0}
@@ -51,6 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # Even though we use setup-miniconda, this is still useful for pip caching
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
@@ -61,30 +62,36 @@ jobs:
             pyproject.toml
             dev-requirements.txt
 
+      - name: Cache conda packages
+        uses: actions/cache@v2
+        env:
+          # Increase this value to reset cache explicitly
+          CACHE_NUMBER: 0
+        with:
+          path: ~/conda_pkgs_dir
+          key:
+            ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{
+            hashFiles('ccds/hook_utils/dependencies.py') }}
+
+      # Use mamba for faster environment resolution in conda tests
+      # regular conda takes 3x time
+      # micromamba does not work because it does not fully reproduce conda CLI's API
       - uses: conda-incubator/setup-miniconda@v2
         with:
           python-version: ${{ matrix.python-version }}
           miniforge-variant: Mambaforge
           use-mamba: true
 
-      # - uses: mamba-org/setup-micromamba@v1
-      #   with:
-      #     init-shell: bash
-      #     cache-downloads: true
-
-
       - name: Setup for Windows
         if: ${{ matrix.os == 'windows-latest' }}
         run: |
           # Install GNU make
           choco install --verbose make
-          # Add bundled conda to PATH
+          # Add conda binaries directory to PATH so that conda is accessible
           echo "${CONDA}\Scripts" >> $GITHUB_PATH
-          # Add micromamba to PATH
-          # echo "C:\Users\runneradmin\micromamba-bin" >> $GITHUB_PATH
-          # Set executable paths
+          # Use mamba instead of conda
           echo "CONDA_EXECUTABLE=mamba" >> "$GITHUB_ENV"
-          # echo "CONDA_SHELL_HOOK=micromamba shell hook --shell bash" >> "$GITHUB_ENV"
+          # Set bash executable explicitly since Make may pick wrong shell
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
 
       - name: Install dependencies
