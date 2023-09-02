@@ -46,7 +46,7 @@ docs-serve:
 ###     TESTS
 
 test: _prep
-	pytest -vvv
+	pytest -vvv --durations=0
 
 test-fastest: _prep
 	pytest -vvv -FFF
