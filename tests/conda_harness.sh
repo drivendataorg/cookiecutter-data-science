@@ -31,8 +31,14 @@ then
     sudo chown -R $USER /usr/local/miniconda
 fi
 
+echo "Creating environment..."
 make create_environment CONDA_EXECUTABLE=$CONDA_EXECUTABLE
+
+echo "Activating environment..."
 $CONDA_EXECUTABLE activate $PROJECT_NAME
+
+echo "Installing requirements..."
 make requirements CONDA_EXECUTABLE=$CONDA_EXECUTABLE
 
+echo "Running tests..."
 run_tests $PROJECT_NAME
