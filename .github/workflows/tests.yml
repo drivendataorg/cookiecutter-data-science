@@ -101,13 +101,21 @@ jobs:
 
       - name: Check dependencies
         run: |
-          echo $BASH_EXECUTABLE
-          $BASH_EXECUTABLE --version
+          if [[ -z "${BASH_EXECUTABLE}" ]]; then
+            echo $BASH_EXECUTABLE
+            $BASH_EXECUTABLE --version
+          else
+            bash --version
+          fi
           which make
           make --version
-          echo $CONDA_EXECUTABLE
-          which $CONDA_EXECUTABLE
-          $CONDA_EXECUTABLE --version
+          if [[ -z "${BASH_EXECUTABLE}" ]]; then
+            which $CONDA_EXECUTABLE
+            $CONDA_EXECUTABLE --version
+          else
+            which conda
+            conda --version
+          fi
           which pipenv
           pipenv --version
           which virtualenv
