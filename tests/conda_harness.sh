@@ -2,9 +2,8 @@
 set -ex
 
 : "${CONDA_EXECUTABLE:=conda}"
-: "${CONDA_SHELL_HOOK:=$CONDA_EXECUTABLE shell.bash hook}"
 
-eval "$($CONDA_SHELL_HOOK)"
+eval "$(conda shell.bash hook)"
 
 PROJECT_NAME=$(basename $1)
 CCDS_ROOT=$(dirname $0)
@@ -12,7 +11,7 @@ CCDS_ROOT=$(dirname $0)
 # configure exit / teardown behavior
 function finish {
     if [[ $(which python) == *"$PROJECT_NAME"* ]]; then
-        $CONDA_EXECUTABLE deactivate
+        conda deactivate  # Mamba still has you use conda activate/deactivate
     fi
 
     $CONDA_EXECUTABLE env remove -n $PROJECT_NAME -y
@@ -35,7 +34,7 @@ echo "Creating environment..."
 make create_environment CONDA_EXECUTABLE=$CONDA_EXECUTABLE
 
 echo "Activating environment..."
-$CONDA_EXECUTABLE activate $PROJECT_NAME
+conda activate $PROJECT_NAME  # Mamba still has you use conda activate/deactivate
 
 echo "Installing requirements..."
 make requirements CONDA_EXECUTABLE=$CONDA_EXECUTABLE
