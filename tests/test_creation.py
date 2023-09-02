@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from pathlib import Path
@@ -25,7 +26,7 @@ def test_baking_configs(config, fast):
     """For every generated config in the config_generator, run all
     of the tests.
     """
-    print("using config", config)
+    print("using config", json.dumps(config, indent=2))
     with bake_project(config) as project_directory:
         verify_folders(project_directory, config)
         verify_files(project_directory, config)

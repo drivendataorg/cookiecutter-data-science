@@ -59,9 +59,10 @@ def config_generator(fast=False):
     # remove invalid configs
     configs = [c for c in configs if _is_valid(c)]
 
-    for c in configs:
+    for ind, c in enumerate(configs):
         config = dict(c)
         config.update(default_args)
+        config["repo_name"] += f"-{ind}"
         yield config
 
         # just do a single config if fast passed once or three times
