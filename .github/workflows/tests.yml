@@ -61,14 +61,16 @@ jobs:
             pyproject.toml
             dev-requirements.txt
 
-      # - uses: conda-incubator/setup-miniconda@v2
-      #   with:
-      #     python-version: ${{ matrix.python-version }}
-
-      - uses: mamba-org/setup-micromamba@v1
+      - uses: conda-incubator/setup-miniconda@v2
         with:
-          init-shell: bash
-          cache-downloads: true
+          python-version: ${{ matrix.python-version }}
+          miniforge-variant: Mambaforge
+          use-mamba: true
+
+      # - uses: mamba-org/setup-micromamba@v1
+      #   with:
+      #     init-shell: bash
+      #     cache-downloads: true
 
 
       - name: Setup for Windows
@@ -79,10 +81,10 @@ jobs:
           # Add bundled conda to PATH
           # echo "${CONDA}\Scripts" >> $GITHUB_PATH
           # Add micromamba to PATH
-          echo "C:\Users\runneradmin\micromamba-bin" >> $GITHUB_PATH
+          # echo "C:\Users\runneradmin\micromamba-bin" >> $GITHUB_PATH
           # Set executable paths
-          echo "CONDA_EXECUTABLE=micromamba" >> "$GITHUB_ENV"
-          echo "CONDA_SHELL_HOOK=micromamba shell hook --shell bash" >> "$GITHUB_ENV"
+          echo "CONDA_EXECUTABLE=mamba" >> "$GITHUB_ENV"
+          # echo "CONDA_SHELL_HOOK=micromamba shell hook --shell bash" >> "$GITHUB_ENV"
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
 
       - name: Install dependencies
