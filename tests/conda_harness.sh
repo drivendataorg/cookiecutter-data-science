@@ -28,10 +28,6 @@ cd $1
 if [ -e /usr/local/miniconda ]; then
     sudo chown -R $USER /usr/local/miniconda
 fi
-if [ -e $CONDA_PREFIX ]; then
-    sudo chown -R $USER $CONDA_PREFIX
-fi
-
 
 echo "Creating environment..."
 make create_environment CONDA_EXECUTABLE=$CONDA_EXECUTABLE
