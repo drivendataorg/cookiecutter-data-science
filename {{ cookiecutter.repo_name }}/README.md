@@ -15,7 +15,6 @@ Project Organization
 ------------
 {% if cookiecutter.image == 'Tensorflow' or cookiecutter.image == 'PyTorch'  %}
     ├── LICENSE
-    ├── dodo.py            <- Makefile-like multiplatform CLI
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
     │   ├── external       <- Data from third party sources (ex. script config files)
@@ -59,7 +58,6 @@ Project Organization
     └── pytest.ini         <- config file with settings for running pytest
 {% else %}
     ├── LICENSE
-    ├── dodo.py            <- Makefile-like multiplatform CLI
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
     │   ├── external       <- Data from third party sources (ex. script config files)
