@@ -42,7 +42,6 @@ $ pip install cookiecutter
 The directory structure of your new project looks like this: 
 ```
     ├── LICENSE
-    ├── dodo.py            <- Makefile-like multiplatform CLI
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
     │   ├── external       <- Data from third party sources (ex. script config files)

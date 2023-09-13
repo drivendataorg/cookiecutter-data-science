@@ -79,11 +79,6 @@ class TestCookieSetup(object):
                 lines = list(map(lambda x: x.strip(), fin.readlines()))
             assert "# Example: expackage==2.4.1" in lines
 
-    def test_doitfile(self):
-        doitfile_path = self.path / "dodo.py"
-        assert doitfile_path.exists()
-        assert no_curlies(doitfile_path)
-
     def test_dockerfile(self):
         dockerfile_path = self.path / "Dockerfile"
         assert dockerfile_path.exists()

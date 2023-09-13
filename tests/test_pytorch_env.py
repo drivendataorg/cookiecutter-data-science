@@ -74,11 +74,6 @@ class TestCookieSetup(object):
                 lines = list(map(lambda x: x.strip(), fin.readlines()))
             assert "# Example: expackage==2.4.1" in lines
 
-    def test_doitfile(self):
-        doitfile_path = self.path / "dodo.py"
-        assert doitfile_path.exists()
-        assert no_curlies(doitfile_path)
-
     def test_pre_commit_config(self):
         pre_commit_config_path = self.path / ".pre-commit-config.yaml"
         assert pre_commit_config_path.exists()
