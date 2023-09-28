@@ -1,4 +1,4 @@
-exclude: '^docs/|/data/'
+exclude: '^docs/|/data/|/models/'
 default_stages: [commit]
 
 repos:
