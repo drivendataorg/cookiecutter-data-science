@@ -6,7 +6,6 @@ from subprocess import PIPE, run
 
 from conftest import bake_project
 
-
 BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
 
 
