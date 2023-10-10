@@ -36,13 +36,11 @@ clean:
 lint:
 	flake8 {{ cookiecutter.module_name }}
 	black --check --config pyproject.toml {{ cookiecutter.module_name }}
-	isort --check --profile black {{ cookiecutter.module_name }}
 
 
 ## Format source code with black
 .PHONY: format
 format:
-	isort --profile black {{ cookiecutter.module_name }}
 	black --config pyproject.toml {{ cookiecutter.module_name }}
 
 {% if not cookiecutter.dataset_storage.none %}
@@ -98,7 +96,7 @@ create_environment:
 # PROJECT RULES                                                                 #
 #################################################################################
 
-{% if cookiecutter.include_code_scaffold != 'Yes' %}
+{% if cookiecutter.include_code_scaffold == 'Yes' %}
 ## Make Dataset
 .PHONY: data
 data: requirements

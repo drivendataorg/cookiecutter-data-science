@@ -26,7 +26,6 @@ packages += ["awscli"]
 # {% if cookiecutter.include_code_scaffold == "Yes" %}
 packages += [
     "typer",
-    "python-dotenv",
     "loguru",
 ]
 # {% endif %}
