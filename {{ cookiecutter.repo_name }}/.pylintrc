@@ -2,6 +2,7 @@
 max-line-length=120
 max-args=10
 min-public-methods=0
+good-names=X,W,b,df,i,j,T,ax,ds,x,y,z
 
 [MASTER]
 extension-pkg-allow-list=math,freesasa
@@ -25,12 +26,7 @@ confidence=
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use "--disable=all --enable=classes
 # --disable=W".
-disable=file-ignored,
-        suppressed-message,
-        useless-suppression,
-        deprecated-pragma,
-        use-symbolic-message-instead,
-        missing-module-docstring,
+disable=missing-module-docstring,
         missing-class-docstring,
         missing-function-docstring,
         raise-missing-from,
