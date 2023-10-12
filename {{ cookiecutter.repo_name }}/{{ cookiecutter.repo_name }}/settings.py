@@ -1,4 +1,4 @@
-'''
+"""
 Stores re-usable settings for this module. If you need them, just import this file.
 
 It is important that you should use these settings only on an entry layer of your code. If you would use them
@@ -9,13 +9,15 @@ Production settings will be injected by Environment variables.
 
 If you want to customize these settings, create a .env file instead of editing them here.
 This will ensure that you won't by mistake commit your own settings to a repository.
-'''
-from dataclasses import dataclass, field
-import os
+"""
+from dataclasses import dataclass
 from pathlib import Path
 from typing import TypedDict
 
 from dotenv import load_dotenv
+
+# from dataclasses import field
+# import os
 
 load_dotenv()
 
@@ -25,10 +27,12 @@ BASE = Path(__file__).parent.parent
 class UpdateSettings(TypedDict, total=False):
     DATA_PATH: Path
 
+
 @dataclass
 class Settings:
     # pylint: disable=invalid-name
     DATA_PATH: Path
+
     # OTHER_PATH: Path = field(init=False)
 
     # def __post_init__(self):
@@ -41,9 +45,7 @@ class Settings:
         # self.__post_init__()
 
 
-settings = Settings(
-    DATA_PATH=BASE / "data_path",
-)
+settings = Settings(DATA_PATH=BASE / "data_path", )
 
 
 def update_settings(new_settings: UpdateSettings):

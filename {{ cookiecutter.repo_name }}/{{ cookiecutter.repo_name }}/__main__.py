@@ -29,4 +29,5 @@ def sync_data_from_s3():
         stdout=subprocess.PIPE,
     )
 
+
 cli()
