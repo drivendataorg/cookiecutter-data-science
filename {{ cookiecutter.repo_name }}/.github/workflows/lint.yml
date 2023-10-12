@@ -139,5 +139,6 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "action@github.com"
+          poetry run semantic-release version
           poetry run semantic-release publish
 {%- endraw %}
