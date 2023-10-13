@@ -6,7 +6,6 @@ from subprocess import PIPE, run
 
 from conftest import bake_project
 
-
 BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
 
 
@@ -51,11 +50,15 @@ def verify_folders(root, config):
         "reports",
         "reports/figures",
         config["module_name"],
-        f"{config['module_name']}/data",
-        f"{config['module_name']}/features",
-        f"{config['module_name']}/models",
-        f"{config['module_name']}/visualization",
     ]
+
+    if config["include_code_scaffold"] == "Yes":
+        expected_dirs += [
+            f"{config['module_name']}/data",
+            f"{config['module_name']}/features",
+            f"{config['module_name']}/models",
+            f"{config['module_name']}/visualization",
+        ]
 
     expected_dirs = [
         #  (root / d).resolve().relative_to(root) for d in expected_dirs
@@ -95,20 +98,24 @@ def verify_files(root, config):
         "reports/figures/.gitkeep",
         "models/.gitkeep",
         f"{config['module_name']}/__init__.py",
-        f"{config['module_name']}/data/__init__.py",
-        f"{config['module_name']}/data/make_dataset.py",
-        f"{config['module_name']}/features/__init__.py",
-        f"{config['module_name']}/features/build_features.py",
-        f"{config['module_name']}/models/__init__.py",
-        f"{config['module_name']}/models/train_model.py",
-        f"{config['module_name']}/models/predict_model.py",
-        f"{config['module_name']}/visualization/__init__.py",
-        f"{config['module_name']}/visualization/visualize.py",
     ]
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):
         expected_files.append("LICENSE")
+
+    if config["include_code_scaffold"] == "Yes":
+        expected_files += [
+            f"{config['module_name']}/data/__init__.py",
+            f"{config['module_name']}/data/make_dataset.py",
+            f"{config['module_name']}/features/__init__.py",
+            f"{config['module_name']}/features/build_features.py",
+            f"{config['module_name']}/models/__init__.py",
+            f"{config['module_name']}/models/train_model.py",
+            f"{config['module_name']}/models/predict_model.py",
+            f"{config['module_name']}/visualization/__init__.py",
+            f"{config['module_name']}/visualization/visualize.py",
+        ]
 
     expected_files.append(config["dependency_file"])
 

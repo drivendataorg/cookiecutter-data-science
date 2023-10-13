@@ -58,15 +58,19 @@ def config_generator(fast=False):
 
     # remove invalid configs
     configs = [c for c in configs if _is_valid(c)]
+    include_code_scaffold = True
 
     for ind, c in enumerate(configs):
         config = dict(c)
         config.update(default_args)
+        # Alternate including the code scaffold
+        config["include_code_scaffold"] = "Yes" if include_code_scaffold else "No"
+        include_code_scaffold = not include_code_scaffold
         config["repo_name"] += f"-{ind}"
         yield config
 
         # just do a single config if fast passed once or three times
-        if fast in [1, 3]:
+        if fast == 1 or fast >= 3:
             break
 
 

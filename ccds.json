@@ -26,5 +26,6 @@
         "none",
         "basic"
     ],
-    "open_source_license": ["No license file", "MIT", "BSD-3-Clause"]
+    "open_source_license": ["No license file", "MIT", "BSD-3-Clause"],
+    "include_code_scaffold": ["Yes", "No"]
 }
