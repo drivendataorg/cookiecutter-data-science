@@ -55,7 +55,7 @@ packages += ["{{ cookiecutter.docs }}"]
 pip_only_packages += ["{{ cookiecutter.docs }}"]
 docs_subpath = docs_path / "{{ cookiecutter.docs }}"
 for obj in docs_subpath.iterdir():
-    shutil.move(obj, docs_path)
+    shutil.move(str(obj), str(docs_path))
 # {% endif %}
 shutil.rmtree(docs_path / "mkdocs")
 shutil.rmtree(docs_path / "sphinx")
