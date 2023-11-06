@@ -80,9 +80,6 @@ instance/
 # Scrapy stuff:
 .scrapy
 
-# Sphinx documentation
-docs/_build/
-
 # MkDocs documentation
 docs/site/
 

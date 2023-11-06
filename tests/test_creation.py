@@ -115,16 +115,7 @@ def verify_files(root, config):
             f"{config['module_name']}/visualization/visualize.py",
         ]
 
-    if config["docs"] == "sphinx":
-        expected_files += [
-            "docs/Makefile",
-            "docs/commands.rst",
-            "docs/conf.py",
-            "docs/getting-started.rst",
-            "docs/index.rst",
-            "docs/make.bat",
-        ]
-    elif config["docs"] == "mkdocs":
+    if config["docs"] == "mkdocs":
         expected_files += [
             "docs/mkdocs.yml",
             "docs/README.md",

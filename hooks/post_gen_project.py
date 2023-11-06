@@ -58,7 +58,6 @@ for obj in docs_subpath.iterdir():
     shutil.move(str(obj), str(docs_path))
 # {% endif %}
 shutil.rmtree(docs_path / "mkdocs")
-shutil.rmtree(docs_path / "sphinx")
 
 #
 #  POST-GENERATION FUNCTIONS

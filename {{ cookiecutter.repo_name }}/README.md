@@ -14,7 +14,7 @@
 │   ├── processed      <- The final, canonical data sets for modeling.
 │   └── raw            <- The original, immutable data dump.
 │
-├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+├── docs               <- A default mkdocs project; see mkdocs.org for details
 │
 ├── models             <- Trained and serialized models, model predictions, or model summaries
 │
