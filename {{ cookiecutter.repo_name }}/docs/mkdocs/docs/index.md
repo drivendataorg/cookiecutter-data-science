@@ -1,12 +1,15 @@
 # {{ cookiecutter.project_name }} documentation!
+{% if cookiecutter.project_description is not none %}
+## Description
 
+{{ cookiecutter.description}}
+{% endif %}
 ## Commands
 
 The Makefile contains the central entry points for common tasks related to this project.
-
 {% if not cookiecutter.dataset_storage.none %}
-Syncing data to cloud storage
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Syncing data to cloud storage
+
 {% if cookiecutter.dataset_storage.s3 -%}
 * `make sync_data_up` will use `aws s3 sync` to recursively sync files in `data/` up to `s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/`.
 * `make sync_data_down` will use `aws s3 sync` to recursively sync files from `s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/` to `data/`.
@@ -18,12 +21,3 @@ Syncing data to cloud storage
 * `make sync_data_down` will use `gsutil rsync` to recursively sync files in `gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/` to `data/`.
 {% endif %}
 {% endif %}
-
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md            # The documentation homepage.
-        getting-started.md  # Set-up instructions
-        ...       # Other markdown pages, images and other files.

@@ -57,7 +57,11 @@ docs_subpath = docs_path / "{{ cookiecutter.docs }}"
 for obj in docs_subpath.iterdir():
     shutil.move(str(obj), str(docs_path))
 # {% endif %}
-shutil.rmtree(docs_path / "mkdocs")
+
+# Remove all remaining docs templates
+for docs_template in docs_path.iterdir():
+    if docs_template.is_dir() and not docs_template.name == "docs":
+        shutil.rmtree(docs_template)
 
 #
 #  POST-GENERATION FUNCTIONS
