@@ -3,7 +3,7 @@ import shutil
 import sys
 import tempfile
 from contextlib import contextmanager
-from itertools import product
+from itertools import cycle, product
 from pathlib import Path
 
 import pytest
@@ -19,8 +19,6 @@ default_args = {
     "module_name": "project_module",
     "author_name": "DrivenData",
     "description": "A test project",
-    "open_source_license": "MIT",
-    "dataset_storage": {"azure": {"container": "container-name"}},
 }
 
 
@@ -58,14 +56,23 @@ def config_generator(fast=False):
 
     # remove invalid configs
     configs = [c for c in configs if _is_valid(c)]
-    include_code_scaffold = True
+
+    # cycle over all values other multi-select fields that should be inter-operable
+    # and that we don't need to handle with combinatorics
+    cycle_fields = [
+        "dataset_storage",
+        "open_source_license",
+        "include_code_scaffold",
+        "docs",
+    ]
+    cyclers = {k: cycle(cookiecutter_json[k]) for k in cycle_fields}
 
     for ind, c in enumerate(configs):
         config = dict(c)
         config.update(default_args)
         # Alternate including the code scaffold
-        config["include_code_scaffold"] = "Yes" if include_code_scaffold else "No"
-        include_code_scaffold = not include_code_scaffold
+        for field, cycler in cyclers.items():
+            config[field] = next(cycler)
         config["repo_name"] += f"-{ind}"
         yield config
 

@@ -47,6 +47,22 @@ pip_only_packages = [
     "python-dotenv",
 ]
 
+# Use the selected documentation package specified in the config,
+# or none if none selected
+docs_path = Path("docs")
+# {% if cookiecutter.docs != "none" %}
+packages += ["{{ cookiecutter.docs }}"]
+pip_only_packages += ["{{ cookiecutter.docs }}"]
+docs_subpath = docs_path / "{{ cookiecutter.docs }}"
+for obj in docs_subpath.iterdir():
+    shutil.move(str(obj), str(docs_path))
+# {% endif %}
+
+# Remove all remaining docs templates
+for docs_template in docs_path.iterdir():
+    if docs_template.is_dir() and not docs_template.name == "docs":
+        shutil.rmtree(docs_template)
+
 #
 #  POST-GENERATION FUNCTIONS
 #

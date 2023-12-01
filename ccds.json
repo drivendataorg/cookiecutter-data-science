@@ -11,7 +11,7 @@
         {"s3": {"bucket": "bucket-name", "aws_profile": "default"}},
         {"gcs": {"bucket": "bucket-name"}}
     ],
-    "environment_manager" : [
+    "environment_manager": [
         "virtualenv",
         "conda",
         "pipenv",
@@ -27,5 +27,6 @@
         "basic"
     ],
     "open_source_license": ["No license file", "MIT", "BSD-3-Clause"],
+    "docs": ["mkdocs", "none"],
     "include_code_scaffold": ["Yes", "No"]
 }
