@@ -26,13 +26,13 @@ requirements:
 
 ## Format the code using isort and black
 format:
-	isort --profile black ccds hooks tests "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
-	black ccds hooks tests "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
+	isort --profile black ccds hooks tests docs/scripts "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
+	black ccds hooks tests docs/scripts "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
 	
 lint:
-	flake8 ccds hooks tests "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
-	isort --check --profile black ccds hooks tests "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
-	black --check ccds hooks tests "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
+	flake8 ccds hooks tests docs/scripts "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
+	isort --check --profile black ccds hooks tests docs/scripts "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
+	black --check ccds hooks tests docs/scripts "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
 
 
 ###     DOCS

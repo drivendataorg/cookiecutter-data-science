@@ -1,3 +1,18 @@
 h1, h2, h3 {
     margin-top: 77px;
 }
+
+#termynal {
+    height: 80ex !important; /* 40 lines of 2ex */
+    min-height: 80ex !important;
+    max-height: 80ex !important;
+    overflow: scroll !important;
+}
+
+[data-ty] {
+    line-height: 2ex !important; 
+}
+
+.inline-input, .default-text {
+    display: inline-block !important;
+}

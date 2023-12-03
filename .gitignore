@@ -1,4 +1,7 @@
+# generated docs items
 docs/site/
+docs/docs/_partials/termynal.md
+docs/docs/_partials/*/*.html
 
 # test cache
 manual_test/

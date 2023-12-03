@@ -1,11 +1,14 @@
 -e .
 
+ansi2html
 black
 chardet
 flake8
 isort
 mkdocs
 mkdocs-cinder
+mkdocs-include-markdown-plugin
+pexpect
 pipenv
 pytest
 virtualenvwrapper; sys_platform != 'win32'
