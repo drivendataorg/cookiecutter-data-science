@@ -64,9 +64,6 @@ def run_scripts():
     try:
         output = []
         output += execute_command_and_get_output(f"ccds {CCDS_ROOT}", ccds_script)
-        output += execute_command_and_get_output(
-            "tree my_analysis", [(pexpect.EOF, "")]
-        )
         return output
 
     finally:
