@@ -131,6 +131,7 @@ help:
 #################################################################################
 # LOCAL WORKSPACE SETUP                                                         #
 #################################################################################
+.PHONY: venv
 venv:
 	python3 -m venv $(VENV)
 	@echo 'Path to Python executable $(shell pwd)/$(PYTHON)'
