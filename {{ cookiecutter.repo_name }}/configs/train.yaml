@@ -1,0 +1,34 @@
+project_name: deep_school_lecture
+experiment_name: poster_classification
+track_in_clearml: true
+trainer_config:
+  min_epochs: 7
+  max_epochs: 20
+  check_val_every_n_epoch: 2
+  log_every_n_steps: 30
+  gradient_clip_val: null
+  gradient_clip_algorithm: null
+  deterministic: false
+  fast_dev_run: false
+  default_root_dir: null
+  detect_anomaly: false
+data_config:
+  img_size:
+  - 224
+  - 224
+  batch_size: 58
+  train_size: 0.8
+  num_workers: 10
+  pin_memory: true
+  num_samples: 5800
+module_config:
+  model_name: efficientnet_b0
+  pretrained: true
+  model_kwargs:
+    drop_rate: 0.5
+  binarization_threshold: 0.2
+  optimizer:
+    target_class: torch.optim.AdamW
+    kwargs:
+      lr: 1e-3
+      weight_decay: 1e-5
