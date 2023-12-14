@@ -1,0 +1,67 @@
+default_language_version:
+  python: python3.10
+repos:
+  - repo: local
+    hooks:
+    - id: flake8
+      name: flake8
+      description: wemake-python-styleguide enforcement
+      entry: flake8
+      args: ["--config=setup.cfg"]
+      language: python
+      types: [python]
+      additional_dependencies: [wemake-python-styleguide>=0.17.0]
+  - repo: https://github.com/myint/docformatter
+    rev: v1.7.5
+    hooks:
+      - id: docformatter
+        args: ["--in-place"]
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 'v1.5.1'
+    hooks:
+    - id: mypy
+      additional_dependencies: [types-PyYAML>=6.0.12.12]
+  - repo: 'https://github.com/pre-commit/pre-commit-hooks'
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+        args: ['--maxkb=2048']
+      - id: check-toml
+      - id: check-json
+      - id: check-yaml
+        args:
+          - '--unsafe'
+      - id: double-quote-string-fixer
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: end-of-file-fixer
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
+      - id: detect-private-key
+  - repo: 'https://github.com/pycqa/isort'
+    rev: 5.12.0
+    hooks:
+      - id: isort
+  - repo: 'https://github.com/psf/black'
+    rev: 23.1.0
+    hooks:
+      - id: black
+        args: ["--skip-string-normalization", "--line-length=120"]
+  - repo: https://github.com/asottile/add-trailing-comma
+    rev: v2.5.1
+    hooks:
+      - id: add-trailing-comma
+  - repo: 'https://github.com/executablebooks/mdformat'
+    rev: 0.7.16
+    hooks:
+      - id: mdformat
+  - repo: 'https://github.com/kynan/nbstripout'
+    rev: 0.6.1
+    hooks:
+      - id: nbstripout
+  - repo: https://github.com/pryorda/dockerfilelint-precommit-hooks
+    rev: v0.1.0
+    hooks:
+    - id: dockerfilelint
+      stages: [commit]
