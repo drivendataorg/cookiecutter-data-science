@@ -82,7 +82,7 @@ def render_termynal():
 
     conv = Ansi2HTMLConverter(inline=True)
     html_lines = [
-        '<div id="termynal" data-termynal class="termy" data-ty-lineDelay="100" data-ty-typeDelay="50" title="Cookiecutter Data Science">'
+        '<div id="termynal" data-termynal class="termy" data-ty-macos data-ty-lineDelay="100" data-ty-typeDelay="50" title="Cookiecutter Data Science">'
     ]
 
     for line_ix, result in enumerate(results):
