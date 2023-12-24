@@ -88,10 +88,6 @@ def render_termynal():
     for line_ix, result in enumerate(results):
         # style bash user inputs
         if result.startswith("$"):
-            # add blank line before next bash command for readability if not the first line
-            if line_ix != 0:
-                html_lines.append("<span data-ty></span>")
-
             result = conv.convert(result.strip("$"), full=False)
             html_lines.append(
                 f'<span data-ty="input" data-ty-prompt="$">{result}</span>'
