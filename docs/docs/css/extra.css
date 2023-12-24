@@ -7,10 +7,15 @@ h1, h2, h3 {
     min-height: 80ex !important;
     max-height: 80ex !important;
     overflow: scroll !important;
+    font-size: 1.5ex !important;
 }
 
 [data-ty] {
     line-height: 2ex !important; 
+}
+
+.newline {
+    line-height: 0 !important;
 }
 
 .inline-input, .default-text {

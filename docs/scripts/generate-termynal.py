@@ -84,6 +84,7 @@ def render_termynal():
     html_lines = [
         '<div id="termynal" data-termynal class="termy" data-ty-macos data-ty-lineDelay="100" data-ty-typeDelay="50" title="Cookiecutter Data Science">'
     ]
+    result_collector = []
 
     for line_ix, result in enumerate(results):
         # style bash user inputs
@@ -95,21 +96,33 @@ def render_termynal():
 
         # style inline cookiecutter user inputs
         elif ":" in result and user_input in result:
-            default_text, user_input = result.split(":", 1)
-            default_text = conv.convert(default_text + ":", full=False)
-            out_line = f'<span data-ty class="default-text">{default_text}</span>'
-            out_line += f'<span class="inline-input" data-ty="input" data-ty-delay="500" data-ty-prompt="">{user_input}</span>'
+            # treat all the options that were output as a single block
+            if len(result_collector) > 1:
+                prev_results = conv.convert(
+                    "\n".join(result_collector[:-1]), full=False
+                )
+                html_lines.append(f"<span data-ty>{prev_results}</span>")
+
+            # split the line up into the prompt text with options, the default, and the user input
+            prompt, user_input = result.strip().split(":", 1)
+            prompt = conv.convert(prompt, full=False)
+            prompt = f'<span data-ty class="inline-input">{result_collector[-1].strip()} {prompt}:</span>'
+            user_input = conv.convert(user_input.strip(), full=False)
+
+            # treat the cookiecutter prompt as a shell prompt
+            out_line = f"{prompt}"
             html_lines.append(out_line)
+            html_lines.append('<span data-ty class="newline"></span>')
+            result_collector = []
 
             try:
                 _, user_input = next(script)
             except StopIteration:
                 user_input = "STOP ITER"  # never true so we just capture the remaining rows after the script
 
-        # style all other lines as new lines
+        # collect all the other lines for a single output
         else:
-            result = conv.convert(result, full=False)
-            html_lines.append(f"<span data-ty>{result}</span>")
+            result_collector.append(result)
 
     html_lines.append("</div>")
     output = "\n".join(html_lines)
