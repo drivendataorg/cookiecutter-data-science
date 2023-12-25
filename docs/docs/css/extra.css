@@ -12,6 +12,7 @@ h1, h2, h3 {
 
 [data-ty] {
     line-height: 2ex !important; 
+    white-space: pre;
 }
 
 .newline {

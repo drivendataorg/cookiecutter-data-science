@@ -111,6 +111,7 @@ def render_termynal():
 
             # treat the cookiecutter prompt as a shell prompt
             out_line = f"{prompt}"
+            out_line += f'<span class="inline-input" data-ty="input" data-ty-delay="500" data-ty-prompt="">{user_input}</span>'
             html_lines.append(out_line)
             html_lines.append('<span data-ty class="newline"></span>')
             result_collector = []
