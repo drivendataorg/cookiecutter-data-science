@@ -83,7 +83,10 @@ ccds https://github.com/drivendata/cookiecutter-data-science
 
 ### Example
 
-<script id="asciicast-244658" src="https://asciinema.org/a/244658.js" async></script>
+{%
+   include-markdown "./_partials/termynal.md"
+%}
+
 
 ## Directory structure
 
