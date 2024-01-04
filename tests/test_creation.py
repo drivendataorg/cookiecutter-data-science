@@ -137,6 +137,7 @@ def verify_files(root, config):
 
 def verify_makefile_commands(root, config):
     """Actually shell out to bash and run the make commands for:
+    - blank command listing commands
     - create_environment
     - requirements
     Ensure that these use the proper environment.

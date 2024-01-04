@@ -41,6 +41,7 @@ then
     source `which virtualenvwrapper.sh`
 fi
 
+make
 make create_environment
 
 # workon not sourced
