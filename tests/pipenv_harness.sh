@@ -19,6 +19,7 @@ source $CCDS_ROOT/test_functions.sh
 
 # navigate to the generated project and run make commands 
 cd $1
+make
 make create_environment
 
 # can happen outside of environment since pipenv knows based on Pipfile

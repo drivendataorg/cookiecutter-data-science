@@ -29,6 +29,7 @@ then
     sudo chown -R $USER /usr/local/miniconda
 fi
 
+make
 make create_environment
 conda activate $PROJECT_NAME
 make requirements
