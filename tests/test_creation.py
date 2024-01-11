@@ -172,9 +172,14 @@ def verify_makefile_commands(root, config):
     # normally hidden by pytest except in failure we want this displayed
     print("PATH=", os.getenv("PATH"))
     print("\n======================= STDOUT ======================")
-    print(result.stdout.decode(encoding))
+    stdout_output = result.stdout.decode(encoding)
+    print(stdout_output)
 
     print("\n======================= STDERR ======================")
     print(result.stderr.decode(encoding))
+
+    # Check that makefile help ran successfully
+    assert "Available rules:" in stdout_output
+    assert "clean                    Delete all compiled Python files" in stdout_output
 
     assert result_returncode == 0
