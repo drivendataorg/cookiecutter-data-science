@@ -4,8 +4,10 @@ name: tests
 on:
   push:
     branches: [master, v2]
+    paths-ignore: "docs/**"
   pull_request:
     branches: [master, v2]
+    paths-ignore: "docs/**"
   schedule:
     # Run every Sunday
     - cron: "0 0 * * 0"
