@@ -1,12 +1,61 @@
+---
+hide:
+- navigation
+---
 # Cookiecutter Data Science
 
-_A logical, reasonably standardized but flexible project structure for doing and sharing data science work._
+_A logical, flexible, and reasonably standardized project structure for doing and sharing data science work._
+
+[![tests](https://github.com/drivendata/cookiecutter-data-science/workflows/tests/badge.svg?branch=v2)](https://github.com/drivendata/cookiecutter-data-science/actions/workflows/tests.yml?query=branch%3Av2)
+
+
+## Quickstart
+
+!!! info "Changes in v2"
+
+    Cookiecutter Data Science v2 now requires installing the new `cookiecutter-data-science` Python package, which extends the functionality of the [`cookiecutter`](https://cookiecutter.readthedocs.io/en/stable/README.html) templating utility. Use the provided `ccds` command-line program instead of `cookiecutter`.
+
+=== "With pipx (recommended)"
+
+    ```bash
+    pipx install cookiecutter-data-science
+
+    # From the parent directory where you want your project
+    ccds https://github.com/drivendata/cookiecutter-data-science
+    ```
+
+=== "With pip"
+
+    ```bash
+    pip install cookiecutter-data-science
+    `
+    # From the parent directory where you want your project
+    ccds https://github.com/drivendata/cookiecutter-data-science
+    ```
+
+=== "With conda (coming soon!)"
+
+    ```bash
+    # conda install cookiecutter-data-science -c conda-forge
+
+    # From the parent directory where you want your project
+    # ccds https://github.com/drivendata/cookiecutter-data-science
+    ```
+
+=== "Use the v1 template"
+
+    ```bash
+    pip install cookiecutter
+
+    # From the parent directory where you want your project
+    cookiecutter https://github.com/drivendata/cookiecutter-data-science -c v1
+    ```
 
 ## Why use this project structure?
 
 > We're not talking about bikeshedding the indentation aesthetics or pedantic formatting standards — ultimately, data science code quality is about correctness and reproducibility.
 
-When we think about data analysis, we often think just about the resulting reports, insights, or visualizations. While these end products are generally the main event, it's easy to focus on making the products _look nice_ and ignore the _quality of the code that generates them_. Because these end products are created programmatically, **code quality is still important**! And we're not talking about bikeshedding the indentation aesthetics or pedantic formatting standards — ultimately, data science code quality is about correctness and reproducibility.
+When we think about data analysis, we often think just about the resulting reports, insights, or visualizations. While these end products are generally the main event, it's easy to focus on making the products _look nice_ and ignore the _quality of the code that generates them_. Because these end products are created programmatically, **code quality is still important**! And we're not talking about bikeshedding the indentation aesthetics or pedantic formatting standards — ultimately, **data science code quality is about correctness and reproducibility**.
 
 It's no secret that good analyses are often the result of very scattershot and serendipitous explorations. Tentative experiments and rapidly testing approaches that might not work out are all part of the process for getting to the good stuff, and there is no magic bullet to turn data exploration into a simple, linear progression.
 
@@ -56,7 +105,6 @@ Disagree with a couple of the default folder names? Working on a project that's 
 
 With this in mind, we've created a data science cookiecutter template for projects in Python. Your analysis doesn't have to be in Python, but the template does provide some Python boilerplate that you'd want to remove (in the `{{ cookiecutter.module_name }}` folder for example, and the mkdocs documentation skeleton in `docs`).
 
-> ℹ️ Cookiecutter Data Science v2 has changed from v1. It now requires installing the new cookiecutter-data-science Python package, which extends the functionality of the [cookiecutter](https://cookiecutter.readthedocs.io/en/stable/README.html) templating utility. Use the provided `ccds` command-line program instead of `cookiecutter`.
 
 ### Installation
 
@@ -142,6 +190,16 @@ The directory structure of your new project will look something like this (depen
         └── visualize.py
 ```
 
+## Using the v1 template
+
+If you want to use the old v1 project template, you need to have either the cookiecutter-data-science package or cookiecutter package installed. Then, use either command-line program with the `-c v1` option:
+
+```bash
+ccds https://github.com/drivendata/cookiecutter-data-science -c v1
+# or equivalently
+cookiecutter https://github.com/drivendata/cookiecutter-data-science -c v1
+```
+
 ## Opinions
 
 There are some opinions implicit in the project structure that have grown out of our experience with what works and what doesn't when collaborating on data science projects. Some of the opinions are about workflows, and some of the opinions are about tools that make life easier. Here are some of the beliefs which this project is built on—if you've got thoughts, please [contribute or share them](#contributing).
@@ -164,7 +222,7 @@ Since notebooks are challenging objects for source control (e.g., diffs of the `
 
  Now by default we turn the project into a Python package (see the `setup.py` file). You can import your code and use it in notebooks with a cell like the following:
 
-```
+```python
 # OPTIONAL: Load the "autoreload" extension so that code can change
 %load_ext autoreload
 
