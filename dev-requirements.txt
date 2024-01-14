@@ -6,7 +6,7 @@ chardet
 flake8
 isort
 mkdocs
-mkdocs-cinder
+mkdocs-material
 mkdocs-gen-files
 mkdocs-include-markdown-plugin
 pexpect

@@ -1,9 +1,26 @@
-h1, h2, h3 {
-    margin-top: 77px;
+.md-typeset h1 {
+    font-weight: 800;
+    color: #222;
+    margin-bottom: -0.25rem;
+}
+
+.md-typeset h2,
+.md-typeset h3 {
+    font-weight: 600;
+    color: #222;
+}
+
+.md-sidebar--secondary {
+    order: 0;
+}
+
+.md-grid {
+    max-width: 1080px;
 }
 
 #termynal {
-    height: 80ex !important; /* 40 lines of 2ex */
+    /* 40 lines of 2ex */
+    height: 80ex !important;
     min-height: 80ex !important;
     max-height: 80ex !important;
     overflow: scroll !important;
@@ -11,7 +28,7 @@ h1, h2, h3 {
 }
 
 [data-ty] {
-    line-height: 2ex !important; 
+    line-height: 2ex !important;
     white-space: pre;
 }
 
@@ -19,6 +36,7 @@ h1, h2, h3 {
     line-height: 0 !important;
 }
 
-.inline-input, .default-text {
+.inline-input,
+.default-text {
     display: inline-block !important;
 }
