@@ -143,7 +143,10 @@ if __name__ == "__main__":
 else:
     import mkdocs_gen_files
 
-    with mkdocs_gen_files.open(
-        Path(CCDS_ROOT / "docs" / "docs" / "_partials" / "termynal.md"), "w"
-    ) as f:
-        f.write(render_termynal())
+    with mkdocs_gen_files.open("index.md", "r") as f:
+        index = f.read()
+
+    index = index.replace("<!-- TERMYNAL OUTPUT -->", render_termynal())
+
+    with mkdocs_gen_files.open("index.md", "w") as f:
+        f.write(index)
