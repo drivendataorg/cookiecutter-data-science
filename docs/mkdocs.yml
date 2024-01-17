@@ -15,8 +15,6 @@ extra_css:
   - css/extra.css
 extra_javascript:
   - js/extra.js
-exclude_docs: |
-  _partials/termynal.md
 markdown_extensions:
   - admonition
   - pymdownx.details

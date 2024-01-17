@@ -131,10 +131,7 @@ ccds https://github.com/drivendata/cookiecutter-data-science
 
 ### Example
 
-{%
-   include-markdown "./_partials/termynal.md"
-%}
-
+<!-- TERMYNAL OUTPUT -->
 
 ## Directory structure
 
