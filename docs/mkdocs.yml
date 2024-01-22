@@ -7,6 +7,7 @@ copyright: Project maintained by the friendly folks at <a target=_blanks href="h
 theme: 
   favicon: favicon.ico
   features:
+    - navigation.instant
     - toc.follow
     - toc.integrate
   logo: logo.svg
