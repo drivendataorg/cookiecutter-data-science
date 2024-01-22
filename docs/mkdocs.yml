@@ -8,7 +8,6 @@ theme:
   favicon: favicon.ico
   features:
     - navigation.instant
-    - toc.follow
     - toc.integrate
   logo: logo.svg
   name: material
