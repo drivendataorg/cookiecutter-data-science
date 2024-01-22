@@ -10,11 +10,6 @@
     color: #222;
 }
 
-.md-nav__item,
-.md-nav__item--active {
-    padding: 0 !important;
-}
-
 #termynal {
     /* 40 lines of 2ex */
     height: 80ex !important;
