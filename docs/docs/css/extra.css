@@ -10,12 +10,9 @@
     color: #222;
 }
 
-.md-sidebar--secondary {
-    order: 0;
-}
-
-.md-grid {
-    max-width: 1080px;
+.md-nav__item,
+.md-nav__item--active {
+    padding: 0 !important;
 }
 
 #termynal {
