@@ -1,6 +1,6 @@
 # Cookiecutter Data Science
 
-_A logical and flexible project structure for doing and sharing data science work._
+_A logical, flexible, and reasonably standardized project structure for doing and sharing data science work._
 
 [![tests](https://github.com/drivendata/cookiecutter-data-science/workflows/tests/badge.svg?branch=v2)](https://github.com/drivendata/cookiecutter-data-science/actions/workflows/tests.yml?query=branch%3Av2)
 
