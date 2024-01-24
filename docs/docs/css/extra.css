@@ -10,14 +10,6 @@
     color: #222;
 }
 
-.md-sidebar--secondary {
-    order: 0;
-}
-
-.md-grid {
-    max-width: 1080px;
-}
-
 #termynal {
     /* 40 lines of 2ex */
     height: 80ex !important;

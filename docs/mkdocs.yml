@@ -4,13 +4,26 @@ site_url: https://cookiecutter-data-science.drivendata.org
 repo_url: https://github.com/drivendata/cookiecutter-data-science
 edit_uri: edit/master/docs/docs
 copyright: Project maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>.
-google_analytics: ['UA-54096005-4', 'auto']
 theme: 
   favicon: favicon.ico
+  features:
+    - navigation.instant
+    - toc.integrate
   logo: logo.svg
   name: material
   palette:
     primary: black
+nav:
+  - Home: index.md
+  - Why ccds?: why.md
+  - Opinions: opinions.md
+  - Contributing: contributing.md
+  - Related projects: related.md
+  - v1 Template: v1.md
+extra:
+  analytics:
+    provider: google
+    property: G-DX14MC19WY
 extra_css:
   - css/extra.css
 extra_javascript:
@@ -25,7 +38,7 @@ markdown_extensions:
         kwds:
           case: lower
   - toc:
-      toc_depth: 3
+      toc_depth: 2
 plugins:
   - include-markdown
   - termynal:
