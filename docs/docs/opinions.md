@@ -2,11 +2,11 @@
 
 There are some opinions implicit in the default structure that have grown out of our experience with what works and what doesn't when collaborating on data science projects. Some of the opinions are about workflows, and some of the opinions are about tools that make life easier. Here are some of the beliefs which this project is built on—if you've got thoughts, please [contribute or share them](#contributing).
 
-## Data analysis is a directed acyclic graph ([DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph))
+## Data analysis is a directed acyclic graph
 
 In a strong evidentiary argument, each claim is supported by one or more claims or axioms further upstream. Similarly, in a valid data analysis project, each intermediate value leading to the final product is either data from an external system of record or is the result of such data passing through a piece of code.
 
-**Every piece of data or work product in an analysis tree should be the result of a dependency graph** that can be **traced backwards** to examine what combination of code and data it came from or **run forwards** to recreate any artifact of the analysis. To put this in terms of data structures, a proper data analysis pipeline is a directed acyclic graph (DAG).
+**Every piece of data or work product in an analysis tree should be the result of a dependency graph** that can be **traced backwards** to examine what combination of code and data it came from or **run forwards** to recreate any artifact of the analysis. To put this in terms of data structures, a proper data analysis pipeline is a directed acyclic graph ([DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)).
 
 ### Data is immutable
 
