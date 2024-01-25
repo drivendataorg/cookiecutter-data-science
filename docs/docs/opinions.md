@@ -25,6 +25,7 @@ Some **do**s and **don't**s that follow from treating data analysis as a DAG:
 ### Data should (mostly) not be kept in source control
 
 Another consequence of treating data as immutable is that it doesn't need source control in the same way that code does. Therefore, ***by default, the `data` folder is included in the `.gitignore` file.*** If you have a small amount of data that rarely changes, you _may_ want to include the data in the repository. GitHub [currently](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github#file-size-limits) warns you if files are over 50MB and rejects any files over 100MB. Some other options for storing/syncing large data include [AWS S3](https://aws.amazon.com/s3/) with a syncing tool (e.g., [`cloudpathlib`](https://github.com/drivendataorg/cloudpathlib), [`s3cmd`](https://s3tools.org/s3cmd)), [`geesefs`](https://github.com/yandex-cloud/geesefs), [Git Large File Storage](https://git-lfs.github.com/), [Git Annex](https://git-annex.branchable.com/), and [dat](https://github.com/dat-ecosystem/dat).
+
 ### Tools for DAGs
 
 DAGs are so common in data and software processes that many tools have been built to manage them. We prefer [`make`](https://www.gnu.org/software/make/) for managing steps that depend on each other, especially the long-running	 ones. Make is a common tool on Unix-based platforms (and is available for Windows via [chocolatey](https://community.chocolatey.org/packages/make)). Following the [`make` documentation](https://www.gnu.org/software/make/), [Makefile conventions](https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions), and [portability guide](https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Portable-Make.html#Portable-Make) will help ensure your Makefiles work effectively across systems. Here are [some](http://zmjones.com/make/) [examples](https://blog.kaggle.com/2012/10/15/make-for-data-scientists/) to [get started](https://web.archive.org/web/20150206054212/https://www.bioinformaticszen.com/post/decomplected-workflows-makefiles/). A number of data folks use `make` as their tool of choice, including [Mike Bostock](https://bost.ocks.org/mike/make/).
@@ -105,6 +106,7 @@ other_variable = os.environ.get("OTHER_VARIABLE")
 ```
 
 ### AWS CLI configuration
+
 When using Amazon S3 to store data, a simple method of managing AWS access is to set your access keys to environment variables. However, managing mutiple sets of keys on a single machine (e.g. when working on multiple projects) it is best to use a [credentials file](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html), typically located in `~/.aws/credentials`. A typical file might look like:
 ```
 [default]
@@ -131,7 +133,7 @@ A project's organizational needs may differ from the start and can change over t
 
 Some projects don't require multiple sub-directories to organize their module code. When a few python files can effectively accomplish all that is required, flattening folders into files can make things easier to track and maintain. You can see an example of this in our [cyfi package](https://github.com/drivendataorg/cyfi/tree/main/cyfi)). If it's in the template but you don't need it, delete it!
 
-#### Example 2: Exapanding
+#### Example 2: Expanding
 
 By contrast, we've added more folders to organize module code on more complex projects. A good example of this is our [zamba package](https://github.com/drivendataorg/zamba/tree/master/zamba)) for which we've introduced new folders to handle task-specific portions of the codebase.
 
