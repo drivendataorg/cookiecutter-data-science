@@ -16,7 +16,6 @@ packages = [
     "pip",
     "python-dotenv",
     "setuptools",
-    "wheel",
 ]
 
 # {% if cookiecutter.dataset_storage.s3 %}
