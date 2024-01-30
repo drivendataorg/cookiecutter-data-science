@@ -33,8 +33,9 @@ packages += [
 # {% if cookiecutter.pydata_packages == "basic" %}
 packages += [
     "ipython",
-    "jupyter",
+    "jupyterlab",
     "matplotlib",
+    "notebook",
     "numpy",
     "pandas",
     "scikit-learn",
