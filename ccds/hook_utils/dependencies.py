@@ -14,6 +14,8 @@ def write_dependencies(
         with open(dependencies, "w") as f:
             lines = [
                 f"name: {repo_name}",
+                "channels:",
+                "  - conda-forge",
                 "dependencies:",
             ]
 

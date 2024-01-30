@@ -16,7 +16,6 @@ packages = [
     "pip",
     "python-dotenv",
     "setuptools",
-    "wheel",
 ]
 
 # {% if cookiecutter.dataset_storage.s3 %}
@@ -33,8 +32,9 @@ packages += [
 # {% if cookiecutter.pydata_packages == "basic" %}
 packages += [
     "ipython",
-    "jupyter",
+    "jupyterlab",
     "matplotlib",
+    "notebook",
     "numpy",
     "pandas",
     "scikit-learn",
