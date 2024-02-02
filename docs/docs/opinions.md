@@ -4,13 +4,11 @@ There are some opinions implicit in the default structure that have grown out of
 
 ## Data analysis is a directed acyclic graph
 
-In a strong evidentiary argument, each claim is supported by one or more claims or axioms further upstream. Similarly, in a valid data analysis project, each intermediate value leading to the final product is either data from an external system of record or is the result of such data passing through a piece of code.
+The most important features of a quality data analysis are **correctness** and **reproducibility**—anyone should be able to re-run your analysis using only your module code and raw data and produce the same final products. The best way to ensure correctness is to test your analysis code. **The best way to ensure reproducibility is to treat your data analysis pipeline as a directed acyclic graph** ([DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)), meaning that every result or conclusion in your analysis can be traced backwards to examine what combination of code and data it came from or run forwards to recreate any artifact of the analysis. 
 
-**Every piece of data or work product in an analysis tree should be the result of a dependency graph** that can be **traced backwards** to examine what combination of code and data it came from or **run forwards** to recreate any artifact of the analysis. To put this in terms of data structures, a proper data analysis pipeline is a directed acyclic graph ([DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)).
+### Raw data is immutable
 
-### Data is immutable
-
-That proper data analysis is a DAG entails that **data must be treated as immutable**—it's okay to read and copy data to manipulate it into new outputs, but never okay to change it in place. This informs the design of the default `data/` directory subfolders in which data originates from `raw` and `external`, intermediate analytical outputs get serialized or cached in `interim`, and final products end up in `processed` (the number or names of these folders is less important than flow of data between them). 
+That proper data analysis is a DAG means that **raw data must be treated as immutable**—it's okay to read and copy raw data to manipulate it into new outputs, but never okay to change it in place. This informs the design of the default `data/` directory subfolders in which data originates from `raw` and `external`, intermediate analytical outputs get serialized or cached in `interim`, and final products end up in `processed` (the number or names of these folders is less important than flow of data between them). 
 
 Some **do**s and **don't**s that follow from treating data analysis as a DAG:
 
