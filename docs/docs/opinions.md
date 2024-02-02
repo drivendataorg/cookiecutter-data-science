@@ -67,7 +67,7 @@ from {{ cookiecutter.module_name }}.data import make_dataset
 
 Different modeling pipelines are different, so we don't provide a lot of baked-in structure to the `models/` directory. However, documenting modeling experiments is critical to enable reproducibility, continuous learning, and improvement. You should implement experiment documentation procedures that enable you to, at minimum, identify the provenance of the data and the version of the code that the experiment used, as well as the metrics used to measure performance.
 
-For smaller projects, starting with homegrown tracking in standard file formats like `json` is fine. You can graduate to experiment tracking tools (e.g., [MLflow](https://mlflow.org/)) if it's warranted or if they're the lingua franca for your team.
+For smaller projects, starting with homegrown tracking in standard file formats like `json` is fine. You can graduate to experiment tracking tools (e.g., [MLflow](https://mlflow.org/)) if it's warranted or if they're standard for your team.
 
 
 ## Build from the environment up
