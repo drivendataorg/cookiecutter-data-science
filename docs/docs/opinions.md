@@ -18,9 +18,9 @@ Some **do**s and **don't**s that follow from treating data analysis as a DAG:
 * ✅ **Do** serialize or cache the intermediate outputs of long-running steps.
 * ✅ **Do** make it possible (and ideally, documented and automated) for anyone to reproduce your final data products with only the code in `{{ cookiecutter.module_name }}` and the data in `data/raw` (and `data/external`).
 
-* **Don't** _ever_ edit your raw data, especially not manually, and _especially_ not in Excel. This includes changing file formats or fixing errors that might break a tool that's trying to read your data file.
-* **Don't** overwrite your raw data with a newly processed or cleaned version.
-* **Don't** save multiple versions of the raw data. 
+* ⛔ **Don't** _ever_ edit your raw data, especially not manually, and _especially_ not in Excel. This includes changing file formats or fixing errors that might break a tool that's trying to read your data file.
+* ⛔ **Don't** overwrite your raw data with a newly processed or cleaned version.
+* ⛔ **Don't** save multiple versions of the raw data. 
 
 ### Data should (mostly) not be kept in source control
 
