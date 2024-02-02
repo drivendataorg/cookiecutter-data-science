@@ -24,7 +24,16 @@ Some **do**s and **don't**s that follow from treating data analysis as a DAG:
 
 ### Data should (mostly) not be kept in source control
 
-Another consequence of treating data as immutable is that it doesn't need source control in the same way that code does. Therefore, ***by default, the `data` folder is included in the `.gitignore` file.*** If you have a small amount of data that rarely changes, you _may_ want to include the data in the repository. GitHub [currently](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github#file-size-limits) warns you if files are over 50MB and rejects any files over 100MB. Some other options for storing/syncing large data include [AWS S3](https://aws.amazon.com/s3/) with a syncing tool (e.g., [`cloudpathlib`](https://github.com/drivendataorg/cloudpathlib), [`s3cmd`](https://s3tools.org/s3cmd)), [`geesefs`](https://github.com/yandex-cloud/geesefs), [Git Large File Storage](https://git-lfs.github.com/), [Git Annex](https://git-annex.branchable.com/), and [dat](https://github.com/dat-ecosystem/dat).
+Another consequence of treating data as immutable is that data doesn't need source control in the same way that code does. Therefore, ***by default, the `data` folder is included in the `.gitignore` file.*** If you have a small amount of data that rarely changes, you _may_ want to include the data in the repository. GitHub [currently](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github#file-size-limits) warns you if files are over 50MB and rejects any files over 100MB. 
+
+If you have larger amounts of data, consider storing and syncing with a cloud service like [Amazon S3](https://aws.amazon.com/s3/), [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview), or [Google Cloud Storage](https://cloud.google.com/storage/docs/introduction). We've had a good experience with Amazon S3, if you're not tied to any particular cloud provider. Syncing tools can help you manage the data. Some examples:
+
+- Amazon S3: [`awscli`](https://aws.amazon.com/cli/), [`s3cmd`](https://s3tools.org/s3cmd), [`s5cmd`](https://github.com/peak/s5cmd), [`geesefs`](https://github.com/yandex-cloud/geesefs)
+- Azure Blob Storage: [`azcopy`](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10)
+- Google Cloud Platform: [`gcloud`](https://cloud.google.com/storage/docs/discover-object-storage-gcloud)
+- Supports multiple clouds: [`cloudpathlib`](https://github.com/drivendataorg/cloudpathlib), [`fsspec`](https://filesystem-spec.readthedocs.io/en/stable/)
+
+There is also the [Git Large File Storage (LFS)](https://git-lfs.github.com/) extension which lets you track large files in git but stores the files on a separate server. GitHub provides [some storage compatible with Git LFS](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage).
 
 ### Tools for DAGs
 
