@@ -4,6 +4,8 @@ There are some opinions implicit in the default structure that have grown out of
 
 ## Data analysis is a directed acyclic graph
 
+> Don't _ever_ edit your raw data, especially not manually, and _especially_ not in Excel.
+
 The most important features of a quality data analysis are **correctness** and **reproducibility**—anyone should be able to re-run your analysis using only your module code and raw data and produce the same final products. The best way to ensure correctness is to test your analysis code. **The best way to ensure reproducibility is to treat your data analysis pipeline as a directed acyclic graph** ([DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph)), meaning that every result or conclusion in your analysis can be traced backwards to examine what combination of code and data it came from or run forwards to recreate any artifact of the analysis. 
 
 ### Raw data is immutable
@@ -22,7 +24,7 @@ Some **do**s and **don't**s that follow from treating data analysis as a DAG:
 
 ### Data should (mostly) not be kept in source control
 
-Another consequence of treating data as immutable is that data doesn't need source control in the same way that code does. Therefore, ***by default, the `data` folder is included in the `.gitignore` file.*** If you have a small amount of data that rarely changes, you _may_ want to include the data in the repository. GitHub [currently](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github#file-size-limits) warns you if files are over 50MB and rejects any files over 100MB. 
+Another consequence of treating data as immutable is that data doesn't need source control in the same way that code does. Therefore, **by default, the `data` folder is included in the `.gitignore` file.** If you have a small amount of data that rarely changes, you _may_ want to include the data in the repository. GitHub [currently](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github#file-size-limits) warns you if files are over 50MB and rejects any files over 100MB. 
 
 If you have larger amounts of data, consider storing and syncing with a cloud service like [Amazon S3](https://aws.amazon.com/s3/), [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview), or [Google Cloud Storage](https://cloud.google.com/storage/docs/introduction). We've had a good experience with Amazon S3, if you're not tied to any particular cloud provider. Syncing tools can help you manage the data. Some examples:
 
@@ -40,6 +42,8 @@ DAGs are so common in data and software processes that many tools have been buil
 There are other tools for managing DAGs that are written in Python, instead of their own language. Popular ones include [Airflow](https://airflow.apache.org/index.html), [Luigi](https://luigi.readthedocs.org/en/stable/index.html), [Snakemake](https://snakemake.readthedocs.io/en/stable/), [Prefect](https://github.com/PrefectHQ/prefect), [Dagster](https://github.com/dagster-io/dagster), and [Joblib](https://joblib.readthedocs.io/en/latest/memory.html). Feel free to use these if they are more appropriate for your analysis.
 
 ## Notebooks are for exploration and communication, source files are for repetition
+
+> Source code is superior for replicability because it is more portable, can be tested more easily, and is easier to code review.
 
 Notebook packages like [Jupyter notebook](https://jupyter.org/), [Zeppelin](https://zeppelin-project.org/), and other literate programming tools are very effective for exploratory data analysis because they enable rapid iteration and visualization of results. However, these tools can be less effective for reproducing an analysis. Source code is superior for replicability because it is more portable, can be tested more easily, and is easier to code review. 
 
@@ -71,7 +75,6 @@ For smaller projects, starting with homegrown tracking in standard file formats 
 ## Build from the environment up
 
 The first step in reproducing an analysis is always replicating the computational environment it was run in. You need the same tools, the same libraries, and the same versions to make everything play nicely together.
-
 
 Doing so in Python requires choosing and configuring an environment management tool. The ecosystem for this tooling has evolved a lot in recent years. 
 
@@ -144,11 +147,11 @@ A project's organizational needs may differ from the start and can change over t
 
 #### Example 1: Simplifying
 
-Some projects don't require multiple sub-directories to organize their module code. When a few python files can effectively accomplish all that is required, flattening folders into files can make things easier to track and maintain. You can see an example of this in our [cyfi package](https://github.com/drivendataorg/cyfi/tree/main/cyfi)). If it's in the template but you don't need it, delete it!
+Some projects don't require multiple sub-directories to organize their module code. When a few python files can effectively accomplish all that is required, flattening folders into files can make things easier to track and maintain. You can see an example of this in our [cyfi package](https://github.com/drivendataorg/cyfi/tree/main/cyfi). If it's in the template but you don't need it, delete it!
 
 #### Example 2: Expanding
 
-By contrast, we've added more folders to organize module code on more complex projects. A good example of this is our [zamba package](https://github.com/drivendataorg/zamba/tree/master/zamba)) for which we've introduced new folders to handle task-specific portions of the codebase.
+By contrast, we've added more folders to organize module code on more complex projects. A good example of this is our [zamba package](https://github.com/drivendataorg/zamba/tree/master/zamba) for which we've introduced new folders to handle task-specific portions of the codebase.
 
 #### Example 3: Re-organizing
 
