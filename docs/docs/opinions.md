@@ -75,7 +75,13 @@ For smaller projects, starting with homegrown tracking in standard file formats 
 The first step in reproducing an analysis is always replicating the computational environment it was run in. You need the same tools, the same libraries, and the same versions to make everything play nicely together.
 
 
-Doing so in Python requires choosing and configuring an environment management tool. The ecosystem for this tooling has evolved a lot in recent years. We tend to prefer [`anaconda`](https://www.anaconda.com/download) for managing environments and dependencies these days, but [`pipenv`](https://pipenv.pypa.io/en/latest/), [`poetry`](https://python-poetry.org/), and our previously recommended [`virtualenvwrapper`](https://virtualenvwrapper.readthedocs.io/en/latest/) are all valid choices. Cookiecutter v2 lets you pick from among many of these, or to initialize your project without one so you can roll your own. 
+Doing so in Python requires choosing and configuring an environment management tool. The ecosystem for this tooling has evolved a lot in recent years. 
+
+For data science work, we prefer to use the **conda** package manager because it also manages non-Python packages, including system library dependencies that you often run into in data science. Our recommended way to install conda is with [Miniforge](https://github.com/conda-forge/miniforge), though the [Miniconda and Anaconda installers](https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html) from Anaconda are also popular. 
+
+You can also use Python-only environment managers. Popular tools in this category include [virtualenv](https://virtualenv.pypa.io/en/latest/), [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/stable/), [Poetry](https://python-poetry.org/), [Pipenv](https://pipenv.pypa.io/en/latest/), and others.
+
+Cookiecutter v2 lets you pick from among many of these, or to initialize your project without one so you can roll your own. 
 
 If you have more complex requirements for recreating your environment, consider a virtual machine based approach such as [Docker](https://www.docker.com/) or [Vagrant](https://www.vagrantup.com/). Both of these tools use text-based formats (Dockerfile and Vagrantfile respectively) that you can easily add to source control to describe how to create a virtual machine with the requirements you need. You might also consider using [`pip-tools`](https://github.com/jazzband/pip-tools) or [`conda-lock`](https://github.com/conda/conda-lock) to generate a file that appropriately pins your dependencies.
 
