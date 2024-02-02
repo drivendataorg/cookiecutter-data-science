@@ -136,7 +136,7 @@ We've created a <span class="label label-info">folder-layout</span> label specif
 
 ### Examples of template adaptation and evolution
 
-A project's organizational needs may differ from the start and can change over time. Here are a few examples of how we've adapted this template in our own work.
+A project's organizational needs may differ from the start and can change over time. Here are some examples of directions to go in evolving your project structure. 
 
 #### Example 1: Simplifying
 
