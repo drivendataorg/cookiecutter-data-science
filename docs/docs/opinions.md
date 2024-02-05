@@ -1,6 +1,6 @@
 # Opinions
 
-There are some opinions implicit in the default structure that have grown out of our experience with what works and what doesn't when collaborating on data science projects. Some of the opinions are about workflows, and some of the opinions are about tools that make life easier. Here are some of the beliefs which this project is built on—if you've got thoughts, please [contribute or share them](#contributing).
+The default project structure reflects certain opinions about how to do collaborative data science work. These opinions grew out of our own experiences with what works and what doesn't. Some of these opinions are about workflows, and others are about tools that can make the process easier. These opinions are discussed below. If you have any thoughts, please [contribute or share them](/contributing/).
 
 ## Data analysis is a directed acyclic graph
 
