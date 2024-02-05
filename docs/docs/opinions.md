@@ -51,7 +51,7 @@ When we use notebooks in our work, we often subdivide the `notebooks/` folder to
 
 ### Refactor the good parts into source code 
 
-Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at `{{ cookiecutter.module_name }}/data/make_dataset.py` and load data from `data/interim`. If it's useful utility code, refactor it to `{{ cookiecutter.module_name }}`. Classic signs that you are ready to move from a notebook to source code include duplicating old notebooks to start new ones, copy/pasting functions between notebooks, and creating object-oriented classes within notebooks.
+Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at `{{ cookiecutter.module_name }}/data/make_dataset.py` and load data from `data/interim/`. If it's useful utility code, refactor it to `{{ cookiecutter.module_name }}`. Classic signs that you are ready to move from a notebook to source code include duplicating old notebooks to start new ones, copy/pasting functions between notebooks, and creating object-oriented classes within notebooks.
 
 We make it easy to refactor notebook code because the ccds template makes your project a Python package by default and installs it locally in the requirements file of your chosen environment manager. This enables you to import your project's source code and use it in notebooks with a cell like the following:
 
