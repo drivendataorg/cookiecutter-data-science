@@ -24,7 +24,7 @@ Some **do**s and **don't**s that follow from treating data analysis as a DAG:
 
 ### Data should (mostly) not be kept in source control
 
-Another consequence of treating data as immutable is that data doesn't need source control in the same way that code does. Therefore, **by default, the `data` folder is included in the `.gitignore` file.** If you have a small amount of data that rarely changes, you _may_ want to include the data in the repository. GitHub [currently](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github#file-size-limits) warns you if files are over 50MB and rejects any files over 100MB. 
+Another consequence of treating data as immutable is that data doesn't need source control in the same way that code does. Therefore, **by default, the `data/` folder is included in the `.gitignore` file.** If you have a small amount of data that rarely changes, you _may_ want to include the data in the repository. GitHub [currently](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github#file-size-limits) warns you if files are over 50MB and rejects any files over 100MB. 
 
 If you have larger amounts of data, consider storing and syncing with a cloud service like [Amazon S3](https://aws.amazon.com/s3/), [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview), or [Google Cloud Storage](https://cloud.google.com/storage/docs/introduction). We've had a good experience with Amazon S3, if you're not tied to any particular cloud provider. Syncing tools can help you manage the data. Some examples:
 
