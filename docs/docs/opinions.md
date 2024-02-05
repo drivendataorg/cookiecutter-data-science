@@ -10,7 +10,7 @@ The most important features of a quality data analysis are **correctness** and *
 
 ### Raw data is immutable
 
-That proper data analysis is a DAG means that **raw data must be treated as immutable**—it's okay to read and copy raw data to manipulate it into new outputs, but never okay to change it in place. This informs the design of the default `data/` directory subfolders in which data originates from `raw` and `external`, intermediate analytical outputs get serialized or cached in `interim`, and final products end up in `processed` (the number or names of these folders is less important than flow of data between them). 
+That proper data analysis is a DAG means that **raw data must be treated as immutable**—it's okay to read and copy raw data to manipulate it into new outputs, but never okay to change it in place. This informs the design of the default `data/` directory subfolders in which data originates from `raw/` and `external/`, intermediate analytical outputs get serialized or cached in `interim/`, and final products end up in `processed/` (the number or names of these folders is less important than flow of data between them). 
 
 Some **do**s and **don't**s that follow from treating data analysis as a DAG:
 
