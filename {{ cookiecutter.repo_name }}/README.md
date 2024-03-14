@@ -1,5 +1,9 @@
 # {{cookiecutter.project_name}}
 
+<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
+    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
+</a>
+
 {{cookiecutter.description}}
 
 ## Project Organization
@@ -56,4 +60,3 @@
 
 --------
 
-<small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">Cookiecutter Data Science project template</a>. #cookiecutterdatascience</small>

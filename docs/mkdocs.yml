@@ -9,14 +9,20 @@ theme:
   features:
     - navigation.instant
     - toc.integrate
-  logo: logo.svg
+  logo: ccds.png
   name: material
+  custom_dir: overrides
   palette:
-    primary: black
+    primary: custom
+    accent: custom
+  font:
+    text: Work Sans
+    code: Space Mono
 nav:
   - Home: index.md
   - Why ccds?: why.md
   - Opinions: opinions.md
+  - Using the template: using-the-template.md
   - Contributing: contributing.md
   - Related projects: related.md
   - v1 Template: v1.md

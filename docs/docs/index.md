@@ -2,13 +2,11 @@
 
 _A logical, flexible, and reasonably standardized project structure for doing and sharing data science work._
 
-[![tests](https://github.com/drivendata/cookiecutter-data-science/workflows/tests/badge.svg?branch=v2)](https://github.com/drivendata/cookiecutter-data-science/actions/workflows/tests.yml?query=branch%3Av2)
+<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
+    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
+</a>
 
 ## Quickstart
-
-!!! info "Changes in v2"
-
-    Cookiecutter Data Science v2 now requires installing the new `cookiecutter-data-science` Python package, which extends the functionality of the [`cookiecutter`](https://cookiecutter.readthedocs.io/en/stable/README.html) templating utility. Use the provided `ccds` command-line program instead of `cookiecutter`.
 
 === "With pipx (recommended)"
 
@@ -46,6 +44,10 @@ _A logical, flexible, and reasonably standardized project structure for doing an
     cookiecutter https://github.com/drivendata/cookiecutter-data-science -c v1
     ```
 
+!!! info "Changes in v2"
+
+    Cookiecutter Data Science v2 now requires installing the new `cookiecutter-data-science` Python package, which extends the functionality of the [`cookiecutter`](https://cookiecutter.readthedocs.io/en/stable/README.html) templating utility. Use the provided `ccds` command-line program instead of `cookiecutter`.
+
 ## Installation
 
 Cookiecutter Data Science v2 requires Python 3.7+. Since this is a cross-project utility application, we recommend installing it with [pipx](https://pypa.github.io/pipx/). Installation command options:
@@ -72,6 +74,17 @@ ccds https://github.com/drivendata/cookiecutter-data-science
 ## Example
 
 <!-- TERMYNAL OUTPUT -->
+
+
+Now that you've got your project, you're ready to go! You should do the following:
+
+ - **Check out the directory structure** below so you know what's in the project and how to use it.
+ - **Read the [opinions](opinions.md)** that are baked into the project so you understand best practices and the philosophy behind the project structure.
+ - **Read the [using the template](using-the-template.md) guide** to understand what you might to to get started on a project that uses the template.
+
+
+ Enjoy!
+
 
 ## Directory structure
 

@@ -1,3 +1,21 @@
+:root {
+    --md-primary-fg-color:        #328F97;
+    --md-primary-fg-color--light: #328F97;
+    --md-primary-fg-color--dark:  #328F97;
+
+    --md-footer-bg-color: white;
+    --md-footer-fg-color: #222;
+    --md-footer-fg-color--light: #222;
+    --md-footer-fg-color--lighter: #222;
+}
+
+.md-typeset {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
 .md-typeset h1 {
     font-weight: 800;
     color: #222;
@@ -8,6 +26,21 @@
 .md-typeset h3 {
     font-weight: 600;
     color: #222;
+}
+
+.md-typeset code {
+    font-size: .8em;
+}
+
+.md-header__title {
+    font-family: "Space Mono";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.5rem;
+}
+
+.md-typeset > p, .md-typeset > ul, .md-typeset > ol, .md-typeset > blockquote, .md-typeset > div.admonition {
+    max-width: 75%;
 }
 
 #termynal {
@@ -31,4 +64,13 @@
 .inline-input,
 .default-text {
     display: inline-block !important;
+}
+
+.md-logo img {
+    height: 3rem !important;
+}
+
+.md-header, .md-footer, .md-footer-meta {
+    color: #222;
+    background-color: white;
 }
