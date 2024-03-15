@@ -71,7 +71,7 @@ Now that you've got your project, you're ready to go! You should do the followin
 
  - **Check out the directory structure** below so you know what's in the project and how to use it.
  - **Read the [opinions](opinions.md)** that are baked into the project so you understand best practices and the philosophy behind the project structure.
- - **Read the [using the template](using-the-template.md) guide** to understand what you might to to get started on a project that uses the template.
+ - **Read the [using the template](using-the-template.md) guide** to understand how to get started on a project that uses the template.
 
 
  Enjoy!
