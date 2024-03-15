@@ -66,6 +66,11 @@
     max-width: 35rem;
 }
 
+.md-typeset blockquote {
+    font-size: 1.0rem;
+    font-weight: 300;
+}
+
 #termynal {
     /* 40 lines of 2ex */
     height: 80ex !important;
