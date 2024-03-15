@@ -23,15 +23,17 @@ generate.generate_context = generate_context_wrapper
 from cookiecutter import cli
 from cookiecutter import main as api_main  # noqa: F401 referenced by tests
 
+
 def default_ccds_main(f):
-    """ Set the default for the cookiecutter template argument to the CCDS template.
-    """
+    """Set the default for the cookiecutter template argument to the CCDS template."""
+
     def _main(*args, **kwargs):
         f.params[1].default = "https://github.com/drivendata/cookiecutter-data-science"
         return f(*args, **kwargs)
-    
+
     return _main
-    
+
+
 main = default_ccds_main(cli.main)
 
 

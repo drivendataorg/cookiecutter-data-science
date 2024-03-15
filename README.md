@@ -26,7 +26,7 @@ pip install cookiecutter-data-science
 To start a new project, run:
 
 ```bash
-ccds https://github.com/drivendata/cookiecutter-data-science
+ccds
 ```
 
 [![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
