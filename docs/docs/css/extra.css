@@ -30,6 +30,11 @@
     color: #222;
 }
 
+.md-typeset a {
+    color: #297c82;
+    word-break: break-word;
+}
+
 .md-typeset code {
     font-size: .8em;
     background-color: #f5f5f5;
@@ -91,4 +96,8 @@
 .md-header, .md-footer, .md-footer-meta {
     color: #222;
     background-color: white;
+}
+
+.md-nav__link--active {
+    font-weight: 600;
 }
