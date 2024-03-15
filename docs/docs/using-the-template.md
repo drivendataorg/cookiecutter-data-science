@@ -2,7 +2,7 @@
 
 Ok, so you've created your project. You've [read the opinions section](opinions.md). You're ready to start doing some work.
 
-Here's a quick guide of the kinds of things we do once our project is ready to go.
+Here's a quick guide of the kinds of things we do once our project is ready to go. We'll walk through this example using git and GitHub for version control and jupyter notebooks for exploration, but you can use whatever tools you like.
 
 ## Set up version control
 
@@ -26,32 +26,7 @@ If you use GitHub and have the [gh cli tool](https://cli.github.com/) you can ea
 gh repo create
 ```
 
-You'll be asked a series of questions to set up the repository on GitHub, for example:
-
-```
-gh repo create
-? What would you like to do? Push an existing local repository to GitHub
-? Path to local repository: .  # CCDS generated folder you are in
-? Repository name: testccds    # Name of the project 
-? Repository owner: pjbull     # Github username
-? Description: Testing         # A short description of the project
-? Visibility: Private          # 
-✓ Created repository pjbull/testccds on GitHub
-? Add a remote? Yes
-? What should the new remote be called? origin
-\✓ Added remote https://github.com/pjbull/testccds.git
-? Would you like to push commits from the current branch to "origin"? Yes
-Enumerating objects: 23, done.
-Counting objects: 100% (23/23), done.
-Delta compression using up to 12 threads
-Compressing objects: 100% (20/20), done.
-Writing objects: 100% (23/23), 6.47 KiB | 6.47 MiB/s, done.
-Total 23 (delta 0), reused 0 (delta 0), pack-reused 0
-To https://github.com/pjbull/testccds.git
- * [new branch]      HEAD -> main
-branch 'main' set up to track 'origin/main'.
-✓ Pushed commits to https://github.com/pjbull/testccds.git
-```
+You'll be asked a series of questions to set up the repository on GitHub. Once you're done you'll be able to push the changes in your local repository to GitHub. 
 
 ## Create a Python virutal environment
 

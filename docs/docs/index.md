@@ -8,6 +8,8 @@ _A logical, flexible, and reasonably standardized project structure for doing an
 
 ## Quickstart
 
+Cookiecutter Data Science v2 requires Python 3.7+. Since this is a cross-project utility application, we recommend installing it with [pipx](https://pypa.github.io/pipx/). Installation command options:
+
 === "With pipx (recommended)"
 
     ```bash
@@ -23,7 +25,7 @@ _A logical, flexible, and reasonably standardized project structure for doing an
     pip install cookiecutter-data-science
     `
     # From the parent directory where you want your project
-    ccds https://github.com/drivendata/cookiecutter-data-science
+    ccds
     ```
 
 === "With conda (coming soon!)"
@@ -32,7 +34,7 @@ _A logical, flexible, and reasonably standardized project structure for doing an
     # conda install cookiecutter-data-science -c conda-forge
 
     # From the parent directory where you want your project
-    # ccds https://github.com/drivendata/cookiecutter-data-science
+    # ccds
     ```
 
 === "Use the v1 template"
@@ -48,28 +50,17 @@ _A logical, flexible, and reasonably standardized project structure for doing an
 
     Cookiecutter Data Science v2 now requires installing the new `cookiecutter-data-science` Python package, which extends the functionality of the [`cookiecutter`](https://cookiecutter.readthedocs.io/en/stable/README.html) templating utility. Use the provided `ccds` command-line program instead of `cookiecutter`.
 
-## Installation
-
-Cookiecutter Data Science v2 requires Python 3.7+. Since this is a cross-project utility application, we recommend installing it with [pipx](https://pypa.github.io/pipx/). Installation command options:
-
-```bash
-# With pipx from PyPI (recommended)
-pipx install cookiecutter-data-science
-
-# With pip from PyPI
-pip install cookiecutter-data-science
-
-# With conda from conda-forge (coming soon)
-# conda install cookiecutter-data-science -c conda-forge
-```
 
 ## Starting a new project
 
 Starting a new project is as easy as running this command at the command line. No need to create a directory first, the cookiecutter will do it for you.
 
 ```bash
-ccds https://github.com/drivendata/cookiecutter-data-science
+ccds
 ```
+
+The `ccds` commandline tool defaults to the Cookiecutter Data Science template, but you can pass your own template as the first argument if you want.
+
 
 ## Example
 
