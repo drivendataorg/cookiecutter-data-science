@@ -35,10 +35,20 @@
     word-break: break-word;
 }
 
+.md-typeset pre {
+    display: flex;
+}
+
 .md-typeset code {
     font-size: .8em;
     background-color: #f5f5f5;
     color: #193d3d;
+    min-width: 35rem;
+    flex-shrink: 1;
+}
+
+.js .md-typeset .tabbed-labels {
+    max-width: 35rem;
 }
 
 .md-typeset .admonition.info,
@@ -48,6 +58,7 @@
 .md-typeset .info > .admonition-title,
 .md-typeset .info > summary {
   background-color: #328F9726;
+  border-color: #328F97;
 }
 
 .md-typeset .info > .admonition-title::before,
