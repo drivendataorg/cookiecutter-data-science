@@ -35,23 +35,40 @@
     word-break: break-word;
 }
 
+.md-typeset pre {
+    display: flex;
+}
+
 .md-typeset code {
     font-size: .8em;
     background-color: #f5f5f5;
     color: #193d3d;
+    min-width: 35rem;
+    flex-shrink: 1;
+}
+
+.js .md-typeset .tabbed-labels {
+    max-width: 35rem;
 }
 
 .md-typeset .admonition.info,
-.md-typeset details.info {
+.md-typeset details.info,
+.md-typeset .admonition.note,
+.md-typeset details.note {
   border-color: #328F97;
 }
 .md-typeset .info > .admonition-title,
-.md-typeset .info > summary {
+.md-typeset .info > summary,
+.md-typeset .note > .admonition-title,
+.md-typeset .note > summary {
   background-color: #328F9726;
+  border-color: #328F97;
 }
 
 .md-typeset .info > .admonition-title::before,
-.md-typeset .info > summary::before {
+.md-typeset .info > summary::before,
+.md-typeset .note > .admonition-title::before,
+.md-typeset .note > summary::before {
   background-color: #328F97;
 }
 
