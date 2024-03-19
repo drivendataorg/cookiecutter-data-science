@@ -1,6 +1,6 @@
 import json
-from pathlib import Path
 import re
+from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parents[2]
 
