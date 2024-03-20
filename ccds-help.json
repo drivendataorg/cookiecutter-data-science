@@ -44,7 +44,7 @@
     {
         "field": "dataset_storage",
         "help": {
-            "description": "A cloud storage location for where data should be stored; controls `sync_data_up` and `sync_data_down` Makefile commands.",
+            "description": "A cloud storage location for where data should be stored; controls `sync_data_up` and `sync_data_down` Makefile commands. You will be asked for different additional configuration information depending on your choice.",
             "more_information": ""
         },
         "choices": [

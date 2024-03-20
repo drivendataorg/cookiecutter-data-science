@@ -9,6 +9,34 @@ def _table_row(items, delimiter="|"):
     return f"| {' | '.join(items)} |"
 
 
+def _table_header():
+    return [
+        _table_row(
+            (   
+                "Choice",
+                "Sub-field",
+                "Description",
+                "More information",
+            )
+        ),
+        _table_row(["---"] * 4),
+    ]
+
+def _new_section(item, item_type, default, description, more_info=""):
+    return ([
+        f"## {item.replace("_", " ").title()}"
+        "",
+        f"**Type:** {item_type}",
+        "",
+        f"**Default value:** `{default}`",
+        "",
+        description,
+        "",
+        f"_Find more information here:_ {more_info}" if more_info else "",
+        "",
+    ] + (_table_header() if item_type != "string" else []))
+
+
 def _ccds_help_to_lookups(help, prefix="", out=None):
     if out is None:
         out = {}
@@ -39,40 +67,19 @@ def build_help_table_rows(data, help_lookup, lookup_prefix=""):
             if m := re.search(r"{{ cookiecutter\.(.*) }}", top_value):
                 top_value = f"`{m.group(1)}`"
 
-            body_items.append(
-                _table_row(
-                    (
-                        top_key,
-                        "string",
-                        top_value,
-                        "",
-                        item_help["description"],
-                        item_help["more_information"],
-                    )
-                )
-            )
+            section = _new_section(top_key, "string", top_value, item_help["description"], item_help["more_information"])
         elif isinstance(top_value, list):
             choices_help = help_lookup[f"{lookup_prefix}{top_key}"]
-            body_items.append(
-                _table_row(
-                    (
-                        top_key,
-                        "choice",
-                        "",
-                        "",
-                        choices_help["description"],
-                        choices_help["more_information"],
-                    )
-                )
-            )
+
+            default = list(top_value[0].keys())[0] if isinstance(top_value[0], dict) else top_value[0]
+
+            section = _new_section(top_key, "choice", default, choices_help["description"], choices_help["more_information"])
             for ix, choice in enumerate(top_value):
                 if isinstance(choice, str):
                     item_help = help_lookup[f"{lookup_prefix}{top_key}.{choice}"]
-                    body_items.append(
+                    section.append(
                         _table_row(
                             (
-                                " ",
-                                "choice",
                                 choice,
                                 "",
                                 item_help["description"],
@@ -83,11 +90,9 @@ def build_help_table_rows(data, help_lookup, lookup_prefix=""):
                 elif isinstance(choice, dict):
                     choice_key = list(choice.keys())[0]
                     item_help = help_lookup[f"{lookup_prefix}{top_key}.{choice_key}"]
-                    body_items.append(
+                    section.append(
                         _table_row(
                             (
-                                " ",
-                                "choice",
                                 choice_key,
                                 "",
                                 item_help["description"],
@@ -102,11 +107,9 @@ def build_help_table_rows(data, help_lookup, lookup_prefix=""):
                             subfield_help = help_lookup[
                                 f"{lookup_prefix}{top_key}.{choice_key}.{subfield_key}"
                             ]
-                            body_items.append(
+                            section.append(
                                 _table_row(
                                     (
-                                        " ",
-                                        "choice",
                                         choice_key,
                                         subfield_key,
                                         subfield_help["description"],
@@ -115,6 +118,7 @@ def build_help_table_rows(data, help_lookup, lookup_prefix=""):
                                 )
                             )
 
+        body_items += (section + [""])
     return body_items
 
 
@@ -126,23 +130,9 @@ def render_options_table():
         help = json.load(f)
         help_lookup = _ccds_help_to_lookups(help)
 
-    header = [
-        _table_row(
-            (
-                "Prompt",
-                "Type",
-                "Choice/Default",
-                "Sub-choice",
-                "Description",
-                "More information",
-            )
-        ),
-        _table_row(["---"] * 6),
-    ]
-
     body_items = build_help_table_rows(data, help_lookup)
 
-    output = "\n".join(header + body_items)
+    output = "\n".join(body_items)
     return output
 
 
