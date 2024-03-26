@@ -1,0 +1,31 @@
+include: 
+  - project: 'streeteasy/se_data_data_product/templates/pipeline_templates'
+    file: 'templates/docker-pipeline.yml'
+
+
+variables:
+  ARTIFACT_NAME: {{ cookiecutter.repo_name }}
+  ARTIFACT_MAJOR_VERSION: "0"
+  ARTIFACT_MINOR_VERSION: "1"
+  ARTIFACT_PATCH: "${CI_COMMIT_SHORT_SHA}"
+  
+    
+
+Build Docker:
+    extends: 
+      - .docker_build
+    script:
+    - SERVICE_VERSION=${ARTIFACT_MAJOR_VERSION}.${ARTIFACT_MINOR_VERSION}.${CI_PIPELINE_IID}
+    - REPOSITORY_TAG=${IMAGE_NAME}:"${SERVICE_VERSION}"
+    - docker build -t ${REPOSITORY_TAG} --build-arg SERVICE_VERSION=${SERVICE_VERSION} .
+
+
+Publish Docker:
+    extends: 
+      - .docker_publish
+    script:
+    - SERVICE_VERSION=${ARTIFACT_MAJOR_VERSION}.${ARTIFACT_MINOR_VERSION}.${CI_PIPELINE_IID}
+    - REPOSITORY_TAG=${IMAGE_NAME}:"${SERVICE_VERSION}"
+    - docker build -t ${REPOSITORY_TAG} --build-arg SERVICE_VERSION=${SERVICE_VERSION} .
+    - docker push ${REPOSITORY_TAG}
+

@@ -20,6 +20,9 @@ zgny-aip-mlflow = "^0.1.31"
 # aip-doit-modules = "^1.3.585"
 # zgny-aip-snowflake = "^0.2.27"
 # zgny-aip-mlflow = "^2.11.3"
+{% else %}
+metaflow = "^2.11.0"
+
 {% endif %}
 
 
