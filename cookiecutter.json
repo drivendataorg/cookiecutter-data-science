@@ -1,5 +1,6 @@
 {
     "project_name": "project_name",
+    "zillow_project": "If True, this will create a zillow project using zillow infra",
     "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
     "author_name": "Your name (or your organization/company/team)",
     "author_email": "Your email address",
