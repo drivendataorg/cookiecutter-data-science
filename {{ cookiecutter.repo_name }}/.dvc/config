@@ -1,0 +1,7 @@
+[core]
+    remote = datalake
+    autostage = true
+['remote "datalake"']
+    url = s3://streeteasy-datalake/research/ml/transaction_matching/dvc
+    profile = sedatalakeprodreadwrite
+# NOTE: need to set if/else  for zillow / personal projects

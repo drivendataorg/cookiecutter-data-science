@@ -1,0 +1,56 @@
+[tool.poetry]
+name = "{{ cookiecutter.repo_name }}"
+packages = [{include = "{{ cookiecutter.repo_name }}", from="src"}]
+version = "0.1.0"
+description = "{{ cookiecutter.description }}"
+authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+pandas = "^1.5.3"
+lightgbm = "^3.3.5"
+scikit-learn = "^1.2"
+dotenv = "*"
+# category-encoders = "^2.6.0"
+# dataframe-schema = {version = "^2.0.41", source = "artifactory"}
+
+{% if cookiecutter.zillow_project == 'true' %}
+zgny-aip-mlflow = "^0.1.31"
+# aip-doit-modules = "^1.3.585"
+# zgny-aip-snowflake = "^0.2.27"
+# zgny-aip-mlflow = "^2.11.3"
+{% endif %}
+
+
+[tool.poetry.dev-dependencies]
+black = ">=18"
+pytest = "^7.1.2"
+
+[tool.poetry.group.research.dependencies]
+dvc = ">=2"
+dvc-s3 = "^2.21.0"
+seaborn = "^0.12.2"
+altair = "^4.2.2"
+ipykernel = "^6.23.0"
+hyperopt = "^0.2.7"
+# envkey = "^2"
+# se = {version = "8.5.472", source = "artifactory", extras=["snowflake"]}
+# imbalanced-learn = "^0.10.1"
+
+
+{% if cookiecutter.zillow_project == 'true' %}
+[[tool.poetry.source]]
+name = "artifactory"
+url = "https://artifactory.zgtools.net/artifactory/api/pypi/pypi-local/simple"
+default = false
+secondary = true
+{% endif %}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+

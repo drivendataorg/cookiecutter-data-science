@@ -1,0 +1,17 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    - id: check-yaml
+    - id: check-json
+    - id: check-ast
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+    - id: black
+  - repo: https://github.com/pycqa/flake8
+    rev: '3.9.2' # pick a git hash / tag to point to
+    hooks:
+    - id: flake8
