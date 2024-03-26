@@ -3,6 +3,14 @@
 {{ cookiecutter.jira_ticket }}
 {{cookiecutter.description}}
 
+Project Philosophy
+- use metaflow as a flow base
+- use metaflow/dvc for model registy
+
+## Deliverables
+- package
+- docker image
+
 Project Organization
 ------------
 
@@ -19,9 +27,9 @@ Project Organization
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
+    ├── notebooks          <- Jupyter notebooks. Naming convention is a number-letter (for alphanumeric ordering),
+    │                          and a short `-` delimited description, e.g.
+    │                         `1a-pull-raw-data`.
     │
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
@@ -31,10 +39,10 @@ Project Organization
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
     │                         generated with `pip freeze > requirements.txt`
     │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+    ├── project.toml       <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
+    │   ├── __init__.py    <- Makes src a Python module, and stores version
+    │   ├──inference_flow.py <- Standart flow for pulling data and model, and uploading inference
     │   ├── data           <- Scripts to download or generate data
     │   │   └── make_dataset.py
     │   │
