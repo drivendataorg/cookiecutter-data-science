@@ -1,6 +1,6 @@
 {{cookiecutter.project_name}}
 ==============================
-
+{{ cookiecutter.jira_ticket }}
 {{cookiecutter.description}}
 
 Project Organization

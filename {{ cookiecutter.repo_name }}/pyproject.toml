@@ -55,5 +55,6 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 
-
+[tool.poetry_bumpversion.file."src/__init__.py"]
+# Duplicate the line above to add more files
 
