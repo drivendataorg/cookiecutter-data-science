@@ -1,5 +1,5 @@
-from distutils.dir_util import copy_tree
 from pathlib import Path
+from shutil import copytree
 from tempfile import TemporaryDirectory
 from urllib.request import urlretrieve
 from zipfile import ZipFile
@@ -46,6 +46,6 @@ def write_custom_config(user_input_config):
             local_path = tmp
 
     # write whatever the user supplied into the project
-    copy_tree(local_path, ".")
+    copytree(local_path, ".")
 
     tmp.cleanup()
