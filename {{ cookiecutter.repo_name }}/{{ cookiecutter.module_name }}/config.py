@@ -10,6 +10,7 @@ from loguru import logger
 # Load environment variables from .env file if it exists
 load_dotenv()
 
+
 # Check if the package is installed as editable
 def _is_editable():
     # https://peps.python.org/pep-0660/#frontend-requirements
@@ -21,6 +22,7 @@ def _is_editable():
         return json.loads(direct_url_data).get("dir_info", {}).get("editable", False)
     except importlib.metadata.PackageNotFoundError:
         return False
+
 
 IS_EDITABLE = _is_editable()
 
