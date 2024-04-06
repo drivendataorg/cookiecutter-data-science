@@ -168,4 +168,4 @@ Unfortunately, GNU Make is not typically pre-installed on Windows. Here are a fe
       ```
 - **Windows Subsystem for Linux**. WSL is a full, non-virtualized Linux environment inside Windows. You can use it to run all of your data science workflows on Ubuntu, and it will have Make included. See instructions for installing WSL [here](https://learn.microsoft.com/en-us/windows/wsl/install).
 - **Cygwin**. A Unix-like development environment that includes Make. See instructions about installing Cygwin [here](https://www.cygwin.com/install.html).
-- **MingW**. A GNU development environment that runs on Windows and includes Make. See information about installing MingW [here](https://www.mingw-w64.org/downloads/).
+- **MinGW**. A GNU development environment that runs on Windows and includes Make. See information about installing MinGW [here](https://www.mingw-w64.org/downloads/).
