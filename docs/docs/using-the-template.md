@@ -35,7 +35,7 @@ You'll be asked a series of questions to set up the repository on GitHub. Once y
 make RECIPE_NAME
 ```
 
-Where `RECIPE_NAME`, is the same of a recipe like `requirements` or `sync_data_up`. Projects created by CCDS include a Makefile with several recipes we've predefined. You'll see them referenced in the sections below.
+where `RECIPE_NAME` is the same of a recipe like `requirements` or `sync_data_up`. Projects created by CCDS include a Makefile with several recipes we've predefined. You'll see them referenced in the sections below.
 
 !!! tip
 
