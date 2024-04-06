@@ -27,6 +27,20 @@ gh repo create
 
 You'll be asked a series of questions to set up the repository on GitHub. Once you're done you'll be able to push the changes in your local repository to GitHub.
 
+## Make as a task runner
+
+[GNU Make](https://www.gnu.org/software/make/) is a tool that is typically pre-installed on Linux and macOS systems, and we use it as a "task runner" for CCDS projects. This means that when we have a series of shell commands we might want to run, such setting up a virtual environment or syncing the data to cloud storage, we set them up as recipes in the `Makefile`. To use a recipe, simply call
+
+```bash
+make RECIPE_NAME
+```
+
+Where `RECIPE_NAME`, is the same of a recipe like `requirements` or `sync_data_up`. Projects created by CCDS include a Makefile with several recipes we've predefined. You'll see them referenced in the sections below.
+
+!!! tip
+
+    If you are using Windows, you may need to install Make. See the ["Installing Make on Windows"](#installing-make-on-windows) section below.
+
 ## Create a Python virtual environment
 
 We often use Python for our data science projects. We use a virtual environment to manage the packages we use in our project. This is a way to keep the packages we use in our project separate from the packages we use in other projects. This is especially important when we are working on multiple projects at the same time.
@@ -134,3 +148,24 @@ Now you'll be able to [create a Pull Request in GitHub](https://docs.github.com/
 ## Changing the `Makefile`
 
 There's no magic in the Makefile. We often add project-specific commands or update the existing ones over the course of a project. For example, we've added scripts to generate reports with pandoc, build and serve documentation, publish static sites from assets, package code for distribution, and more.
+
+## Installing Make on Windows
+
+Unfortunately, GNU Make is not typically pre-installed on Windows. Here are a few different options for getting Make:
+
+- **Use a package manager.** You will need to install the package manager first if you don't already have it.
+    - [chocolatey](https://community.chocolatey.org/) ([entry for Make](https://community.chocolatey.org/packages/make))
+      ```bash
+      choco install make
+      ```
+    - [winget](https://winget.run/) ([entry for Make](https://winget.run/pkg/GnuWin32/Make))
+      ```bash
+      winget install -e --id GnuWin32.Make
+      ```
+    - [scoop](https://scoop.sh/) ([entry for Make](https://scoop.sh/#/apps?q=make&id=c43ff861c0f1713336e5304d85334a29ffb86317))
+      ```bash
+      scoop install main/make
+      ```
+- **Windows Subsystem for Linux**. WSL is a full, non-virtualized Linux environment inside Windows. You can use it to run all of your data science workflows on Ubuntu, and it will have Make included. See instructions for installing WSL [here](https://learn.microsoft.com/en-us/windows/wsl/install).
+- **Cygwin**. A Unix-like development environment that includes Make. See instructions about installing Cygwin [here](https://www.cygwin.com/install.html).
+- **MingW**. A GNU development environment that runs on Windows and includes Make. See information about installing MingW [here](https://www.mingw-w64.org/downloads/).
