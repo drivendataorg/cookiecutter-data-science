@@ -25,9 +25,9 @@ If you use GitHub and have the [gh cli tool](https://cli.github.com/) you can ea
 gh repo create
 ```
 
-You'll be asked a series of questions to set up the repository on GitHub. Once you're done you'll be able to push the changes in your local repository to GitHub. 
+You'll be asked a series of questions to set up the repository on GitHub. Once you're done you'll be able to push the changes in your local repository to GitHub.
 
-## Create a Python virutal environment
+## Create a Python virtual environment
 
 We often use Python for our data science projects. We use a virtual environment to manage the packages we use in our project. This is a way to keep the packages we use in our project separate from the packages we use in other projects. This is especially important when we are working on multiple projects at the same time.
 
@@ -63,7 +63,7 @@ git checkout -b initial-exploration
 
 ## Open a notebook
 
-!!! note 
+!!! note
 
     The following assumes you're using a Jupyter notebook, but while the specific commands for another notebook tool may look a little bit different, the process guidance still applies.
 
@@ -80,7 +80,7 @@ Now you're ready to do some analysis! Make sure that your project-specific envir
     - `3` - Modeling - training machine learning models
     - `4` - Publication - Notebooks that get turned directly into reports
 - `pjb` - Your initials; this is helpful for knowing who created the notebook and prevents collisions from people working in the same notebook.
-- `data-source-1` - A description of what the notebook covers 
+- `data-source-1` - A description of what the notebook covers
 
 Now that you have your notebook going, start your analysis!
 
