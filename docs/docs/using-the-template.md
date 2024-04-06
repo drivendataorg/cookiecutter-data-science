@@ -35,7 +35,7 @@ You'll be asked a series of questions to set up the repository on GitHub. Once y
 make RECIPE_NAME
 ```
 
-where `RECIPE_NAME` is the same of a recipe like `requirements` or `sync_data_up`. Projects created by CCDS include a Makefile with several recipes we've predefined. You'll see them referenced in the sections below. To see a list of all available commands, just call
+where `RECIPE_NAME` is the same of a recipe like `requirements` or `sync_data_up`. Projects created by CCDS include a `Makefile` with several recipes we've predefined. You'll see them referenced in the sections below. To see a list of all available commands, just call
 
 ```bash
 make
@@ -153,7 +153,7 @@ Now you'll be able to [create a Pull Request in GitHub](https://docs.github.com/
 
 ## Changing the `Makefile`
 
-There's no magic in the Makefile. We often add project-specific commands or update the existing ones over the course of a project. For example, we've added scripts to generate reports with pandoc, build and serve documentation, publish static sites from assets, package code for distribution, and more.
+There's no magic in the `Makefile`. We often add project-specific commands or update the existing ones over the course of a project. For example, we've added scripts to generate reports with pandoc, build and serve documentation, publish static sites from assets, package code for distribution, and more.
 
 ## Installing Make on Windows
 
