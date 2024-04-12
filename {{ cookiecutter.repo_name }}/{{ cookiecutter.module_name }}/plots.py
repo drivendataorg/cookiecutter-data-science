@@ -11,11 +11,13 @@ app = typer.Typer()
 
 @app.command()
 def main(
-    input_path: Path = PROCESSED_DATA_DIR / "some_dataset.csv",
-    output_path: Path = FIGURES_DIR / "some_plot.png",
+    # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
+    input_path: Path = PROCESSED_DATA_DIR / "dataset.csv",
+    output_path: Path = FIGURES_DIR / "plot.png",
+    # -----------------------------------------
 ):
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
-    logger.info("Generating some plot from some data...")
+    logger.info("Generating plot from data...")
     for i in tqdm(range(10), total=10):
         if i == 5:
             logger.info("Something happened for iteration 5.")
