@@ -185,6 +185,7 @@ def verify_makefile_commands(root, config):
 
     assert result_returncode == 0
 
+
 def lint(root):
     """Run the linters on the project."""
     result = run(
