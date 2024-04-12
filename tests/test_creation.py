@@ -29,6 +29,7 @@ def test_baking_configs(config, fast):
     with bake_project(config) as project_directory:
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
+        lint(project_directory)
 
         if fast < 2:
             verify_makefile_commands(project_directory, config)
