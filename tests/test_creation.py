@@ -102,7 +102,6 @@ def verify_files(root, config):
 
     if config["include_code_scaffold"] == "Yes":
         expected_files += [
-            f"{config['module_name']}/__init__.py",
             f"{config['module_name']}/config.py",
             f"{config['module_name']}/dataset.py",
             f"{config['module_name']}/features.py",
