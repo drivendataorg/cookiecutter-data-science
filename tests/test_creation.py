@@ -105,15 +105,14 @@ def verify_files(root, config):
 
     if config["include_code_scaffold"] == "Yes":
         expected_files += [
-            f"{config['module_name']}/data/__init__.py",
-            f"{config['module_name']}/data/make_dataset.py",
-            f"{config['module_name']}/features/__init__.py",
-            f"{config['module_name']}/features/build_features.py",
-            f"{config['module_name']}/models/__init__.py",
-            f"{config['module_name']}/models/train_model.py",
-            f"{config['module_name']}/models/predict_model.py",
-            f"{config['module_name']}/visualization/__init__.py",
-            f"{config['module_name']}/visualization/visualize.py",
+            f"{config['module_name']}/__init__.py",
+            f"{config['module_name']}/config.py",
+            f"{config['module_name']}/dataset.py",
+            f"{config['module_name']}/features.py",
+            f"{config['module_name']}/modeling/__init__.py",
+            f"{config['module_name']}/modeling/train.py",
+            f"{config['module_name']}/modeling/predict.py",
+            f"{config['module_name']}/plots.py",
         ]
 
     if config["docs"] == "mkdocs":
