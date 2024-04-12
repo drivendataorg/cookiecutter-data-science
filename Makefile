@@ -28,7 +28,7 @@ requirements:
 format:
 	isort --profile black ccds hooks tests docs/scripts "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
 	black ccds hooks tests docs/scripts "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
-	
+
 lint:
 	flake8 ccds hooks tests docs/scripts "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
 	isort --check --profile black ccds hooks tests docs/scripts "{{ cookiecutter.repo_name }}/{{ cookiecutter.module_name }}"
