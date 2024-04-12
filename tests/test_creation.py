@@ -55,10 +55,7 @@ def verify_folders(root, config):
 
     if config["include_code_scaffold"] == "Yes":
         expected_dirs += [
-            f"{config['module_name']}/data",
-            f"{config['module_name']}/features",
-            f"{config['module_name']}/models",
-            f"{config['module_name']}/visualization",
+            f"{config['module_name']}/modeling",
         ]
 
     if config["docs"] == "mkdocs":
