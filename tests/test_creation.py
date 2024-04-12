@@ -183,3 +183,29 @@ def verify_makefile_commands(root, config):
     assert "clean                    Delete all compiled Python files" in stdout_output
 
     assert result_returncode == 0
+
+def lint(root):
+    """Run the linters on the project."""
+    result = run(
+        ["make", "lint"],
+        cwd=root,
+        stderr=PIPE,
+        stdout=PIPE,
+    )
+    result_returncode = result.returncode
+
+    encoding = sys.stdout.encoding
+
+    if encoding is None:
+        encoding = "utf-8"
+
+    # normally hidden by pytest except in failure we want this displayed
+    print("PATH=", os.getenv("PATH"))
+    print("\n======================= STDOUT ======================")
+    stdout_output = result.stdout.decode(encoding)
+    print(stdout_output)
+
+    print("\n======================= STDERR ======================")
+    print(result.stderr.decode(encoding))
+
+    assert result_returncode == 0
