@@ -1,10 +1,10 @@
 from pathlib import Path
 
+import typer
 from loguru import logger
 from tqdm import tqdm
-import typer
 
-from {{ cookiecutter.module_name }}.config import RAW_DATA_DIR, PROCESSED_DATA_DIR
+from {{ cookiecutter.module_name }}.config import PROCESSED_DATA_DIR, RAW_DATA_DIR
 
 app = typer.Typer()
 

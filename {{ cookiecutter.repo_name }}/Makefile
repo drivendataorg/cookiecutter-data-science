@@ -35,7 +35,7 @@ clean:
 .PHONY: lint
 lint:
 	flake8 {{ cookiecutter.module_name }}
-	isort --check --profile black {{ cookiecutter.module_name }}
+	isort --check --diff --profile black {{ cookiecutter.module_name }}
 	black --check --config pyproject.toml {{ cookiecutter.module_name }}
 
 ## Format source code with black
