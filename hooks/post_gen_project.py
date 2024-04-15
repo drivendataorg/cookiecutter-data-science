@@ -15,7 +15,6 @@ packages = [
     "isort",
     "pip",
     "python-dotenv",
-    "setuptools",
 ]
 
 # {% if cookiecutter.dataset_storage.s3 %}
@@ -26,6 +25,7 @@ packages += ["awscli"]
 packages += [
     "typer",
     "loguru",
+    "tqdm",
 ]
 # {% endif %}
 

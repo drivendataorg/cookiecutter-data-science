@@ -29,6 +29,7 @@ def test_baking_configs(config, fast):
     with bake_project(config) as project_directory:
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
+        lint(project_directory)
 
         if fast < 2:
             verify_makefile_commands(project_directory, config)
@@ -54,10 +55,7 @@ def verify_folders(root, config):
 
     if config["include_code_scaffold"] == "Yes":
         expected_dirs += [
-            f"{config['module_name']}/data",
-            f"{config['module_name']}/features",
-            f"{config['module_name']}/models",
-            f"{config['module_name']}/visualization",
+            f"{config['module_name']}/modeling",
         ]
 
     if config["docs"] == "mkdocs":
@@ -104,15 +102,13 @@ def verify_files(root, config):
 
     if config["include_code_scaffold"] == "Yes":
         expected_files += [
-            f"{config['module_name']}/data/__init__.py",
-            f"{config['module_name']}/data/make_dataset.py",
-            f"{config['module_name']}/features/__init__.py",
-            f"{config['module_name']}/features/build_features.py",
-            f"{config['module_name']}/models/__init__.py",
-            f"{config['module_name']}/models/train_model.py",
-            f"{config['module_name']}/models/predict_model.py",
-            f"{config['module_name']}/visualization/__init__.py",
-            f"{config['module_name']}/visualization/visualize.py",
+            f"{config['module_name']}/config.py",
+            f"{config['module_name']}/dataset.py",
+            f"{config['module_name']}/features.py",
+            f"{config['module_name']}/modeling/__init__.py",
+            f"{config['module_name']}/modeling/train.py",
+            f"{config['module_name']}/modeling/predict.py",
+            f"{config['module_name']}/plots.py",
         ]
 
     if config["docs"] == "mkdocs":
@@ -181,5 +177,32 @@ def verify_makefile_commands(root, config):
     # Check that makefile help ran successfully
     assert "Available rules:" in stdout_output
     assert "clean                    Delete all compiled Python files" in stdout_output
+
+    assert result_returncode == 0
+
+
+def lint(root):
+    """Run the linters on the project."""
+    result = run(
+        ["make", "lint"],
+        cwd=root,
+        stderr=PIPE,
+        stdout=PIPE,
+    )
+    result_returncode = result.returncode
+
+    encoding = sys.stdout.encoding
+
+    if encoding is None:
+        encoding = "utf-8"
+
+    # normally hidden by pytest except in failure we want this displayed
+    print("PATH=", os.getenv("PATH"))
+    print("\n======================= STDOUT ======================")
+    stdout_output = result.stdout.decode(encoding)
+    print(stdout_output)
+
+    print("\n======================= STDERR ======================")
+    print(result.stderr.decode(encoding))
 
     assert result_returncode == 0
