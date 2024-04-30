@@ -22,17 +22,18 @@ endif
 
 ## Install Python Dependencies
 requirements: test_environment
-	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
-	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+        $(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
+        $(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
 ## Make Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
+        $(PYTHON_INTERPRETER) src/{{ cookiecutter.library_name }}/data/make_dataset.py data/raw data/processed
 
 ## Delete all compiled Python files
 clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
+	rm -rf build dist
 
 ## Lint using flake8
 lint:
@@ -41,17 +42,17 @@ lint:
 ## Upload Data to S3
 sync_data_to_s3:
 ifeq (default,$(PROFILE))
-	aws s3 sync data/ s3://$(BUCKET)/data/
+        aws s3 sync data/ s3://$(BUCKET)/data/
 else
-	aws s3 sync data/ s3://$(BUCKET)/data/ --profile $(PROFILE)
+        aws s3 sync data/ s3://$(BUCKET)/data/ --profile $(PROFILE)
 endif
 
 ## Download Data from S3
 sync_data_from_s3:
 ifeq (default,$(PROFILE))
-	aws s3 sync s3://$(BUCKET)/data/ data/
+        aws s3 sync s3://$(BUCKET)/data/ data/
 else
-	aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
+        aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
 endif
 
 ## Set up python interpreter environment
@@ -80,6 +81,50 @@ test_environment:
 # PROJECT RULES                                                                 #
 #################################################################################
 
+## print project libraries used by the scripts 
+list_requirements:
+	# get list of immediate requirements
+	@pipreqs --mode no-pin --print | tr -cd '[:alnum:].[:space:]._-' | uniq > pipreqs.tmp
+	# add pipreqs to the list (to make it possible to run virtual env)
+	@echo 'pipreqs' >> pipreqs.tmp
+	# list all pip packages along their version
+	@pip list --format=freeze > pipfreeze.tmp
+	# join the reqs and the pip list
+	@awk -F"==" 'FNR==NR {dict[$$1]=$$1; next} {if (dict[$$1] != "") print $$0}' pipreqs.tmp pipfreeze.tmp
+	@rm pipfreeze.tmp pipreqs.tmp
+
+## saves conda environment to environment.yml
+save_environment:
+	# saving environment to environment.yml ...
+	@conda env export > environment.yml
+	# updating the requirements.txt file ...
+	@cat environment.yml \
+		| awk '/pip:/,EOF' \
+		| grep --invert-match 'pip:' \
+		| grep --invert-match 'prefix:' \
+		| sed 's/^ *- //g' > requirements.txt
+	@echo "saved" `cat requirements.txt | awk 'END{print NR}'` "packages" 
+
+## upgrades environment
+upgrade_environment:
+	@touch requirements.keep
+	@echo 'pruning packages list using keep list'
+	@grep -viG -f requirements.keep requirements.txt > requirements.pruned
+	@cat requirements.pruned | sed 's/==/>=/g' > requirements.upgrade
+	@echo 'upgrading packages'
+	@pip install -r requirements.upgrade --upgrade | tee requirements.upgrade.log
+	@rm requirements.upgrade requirements.pruned
+	@echo 'done'
+
+## enable src libs folder
+install:
+	@pip install --no-dependencies --editable .
+	@echo 'you can now import package in your notebooks and scripts'
+
+## Build package
+build:
+	python -m build --wheel
+
 
 
 #################################################################################
@@ -104,9 +149,11 @@ test_environment:
 # Separate expressions are necessary because labels cannot be delimited by
 # semicolon; see <http://stackoverflow.com/a/11799865/1968>
 .PHONY: help
+
+## prints the list of available commands
 help:
+	@echo ""
 	@echo "$$(tput bold)Available rules:$$(tput sgr0)"
-	@echo
 	@sed -n -e "/^## / { \
 		h; \
 		s/.*//; \
@@ -140,5 +187,7 @@ help:
 			printf "%s ", words[i]; \
 		} \
 		printf "\n"; \
-	}' \
-	| more $(shell test $(shell uname) = Darwin && echo '--no-init --raw-control-chars')
+	}' 
+	@echo ""
+
+# EOF
