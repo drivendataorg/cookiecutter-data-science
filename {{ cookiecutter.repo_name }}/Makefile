@@ -16,6 +16,10 @@ else
 HAS_CONDA=True
 endif
 
+PYTHON3_VERSION=3.11
+PYTHON2_VERSION=2.7
+
+
 #################################################################################
 # COMMANDS                                                                      #
 #################################################################################
@@ -60,9 +64,12 @@ create_environment:
 ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, creating conda environment."
 ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
-	conda create --name $(PROJECT_NAME) python=3
+	conda create --name $(PROJECT_NAME) python=$(PYTHON3_VERSION)
+	conda install --force-reinstall -y -q --name $(PROJECT_NAME) -c conda-forge --file requirements.txt
+
 else
-	conda create --name $(PROJECT_NAME) python=2.7
+	conda create --name $(PROJECT_NAME) python=$(PYTHON2_VERSION)
+	conda install --force-reinstall -y -q --name $(PROJECT_NAME) -c conda-forge --file requirements.txt
 endif
 		@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
 else
