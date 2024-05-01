@@ -1,0 +1,27 @@
+[build-system]
+requires = [
+    "setuptools",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "{{ cookiecutter.library_name }}"
+version = "0.1"
+description="{{ cookiecutter.description }}"
+authors = [
+    {name = "{{ cookiecutter.author_name }}", email = "{{ cookiecutter.author_email }}"},
+]
+
+requires-python = ">=3.11"
+license = {text = "{% if cookiecutter.open_source_license == 'MIT' %}MIT{% elif cookiecutter.open_source_license == 'BSD-3-Clause' %}BSD-3{% endif %}"}
+
+[tool.setuptools]
+include-package-data = true # default value
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["tests"]
+namespaces = true # default value is true
+
+# EOF
