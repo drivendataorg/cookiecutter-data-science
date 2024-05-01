@@ -10,7 +10,7 @@ name = "{{ cookiecutter.library_name }}"
 version = "0.1"
 description="{{ cookiecutter.description }}"
 authors = [
-    {name = "{{ cookiecutter.author_name }}", email = "{{ cookiecutter.author_email }}"},
+    {name = "{{ cookiecutter.author_name }}"},
 ]
 
 requires-python = ">=3.11"

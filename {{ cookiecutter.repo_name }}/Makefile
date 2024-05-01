@@ -37,6 +37,8 @@ data: requirements
 clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
+	find . -type d -name "*.egg-info_" -delete
+	pip uninstall -y `find ./dist -name '*.whl'` || test 1
 	rm -rf build dist
 
 ## Lint using flake8
@@ -128,9 +130,10 @@ install:
 	@pip install --no-dependencies --editable .
 	@echo 'you can now import package in your notebooks and scripts'
 
-## Build package
+## Build package & install
 build:
 	python -m build --wheel
+	pip install `find ./dist -name '*.whl'`
 
 #################################################################################
 # Self Documenting Commands                                                     #
