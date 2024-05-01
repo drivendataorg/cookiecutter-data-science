@@ -38,7 +38,8 @@ clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 	find . -type d -name "*.egg-info_" -delete
-	pip uninstall -y `find ./dist -name '*.whl'` || test 1
+	@echo 'uninstalling local library'
+	@if [ -d './dist' ]; then pip uninstall -y `find './dist' -name '*.whl'`; else echo 'pip: nothing to uninstall'; fi
 	rm -rf build dist
 
 ## Lint using flake8
@@ -133,7 +134,8 @@ install:
 ## Build package & install
 build:
 	python -m build --wheel
-	pip install `find ./dist -name '*.whl'`
+	@echo "installing project library: $(find ./dist -name '*.whl')"
+	@pip install `find ./dist -name '*.whl'`
 
 #################################################################################
 # Self Documenting Commands                                                     #
