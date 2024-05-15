@@ -79,7 +79,7 @@
     font-size: 0.9rem;
 }
 
-.md-typeset > p, .md-typeset > ul, .md-typeset > ol, .md-typeset > blockquote, .md-typeset > div.admonition {
+.md-typeset > h1, .md-typeset > h2, .md-typeset > h3, .md-typeset > p, .md-typeset > ul, .md-typeset > ol, .md-typeset > blockquote, .md-typeset > div.admonition {
     max-width: 35rem;
 }
 

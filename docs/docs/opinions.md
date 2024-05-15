@@ -2,9 +2,9 @@
 
 The default project structure reflects certain opinions about how to do collaborative data science work. These opinions grew out of our own experiences with what works and what doesn't. Some of these opinions are about workflows, and others are about tools that can make the process easier. These opinions are discussed below. If you have any thoughts, please [contribute or share them](contributing.md).
 
-## Data analysis is a directed acyclic graph
+### Data analysis is a directed acyclic graph
 
-> Don't _ever_ edit your raw data, especially not manually, and _especially_ not in Excel.
+_Don't ever edit your raw data. Especially not manually. And especially not in Excel._
 
 The most important features of a quality data analysis are **correctness** and **reproducibility**—anyone should be able to re-run your analysis using only your code and raw data and produce the same final products. The best way to ensure correctness is to test your analysis code. **The best way to ensure reproducibility is to treat your data analysis pipeline as a directed acyclic graph ([DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph))**. This means each step of your analysis is a node in a directed graph with no loops. You can run through the graph forwards to recreate any analysis output, or you can trace backwards from an output to examine the combination of code and data that created it.
 
@@ -59,7 +59,8 @@ We make it easy to refactor notebook code because the ccds template makes your p
 # OPTIONAL: Load the "autoreload" extension so that code can change
 %load_ext autoreload
 
-# OPTIONAL: always reload modules so that as you change code in {{ cookiecutter.module_name }}, it gets loaded
+# OPTIONAL: always reload modules so that as you change code
+# in {{ cookiecutter.module_name }}, it gets loaded
 %autoreload 2
 
 from {{ cookiecutter.module_name }}.data import make_dataset
@@ -133,6 +134,7 @@ aws_secret_access_key=mysecretkey
 aws_access_key_id=myprojectaccesskey
 aws_secret_access_key=myprojectsecretkey
 ```
+
 You can add the profile name when initialising a project; assuming no applicable environment variables are set, the profile credentials will be used be default.
 
 ## Encourage adaptation from a consistent default
