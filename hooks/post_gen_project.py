@@ -13,15 +13,15 @@ from ccds.hook_utils.dependencies import basic, packages, scaffold, write_depend
 packages_to_install = copy(packages)
 
 # {% if cookiecutter.dataset_storage.s3 %}
-packages += ["awscli"]
+packages_to_install += ["awscli"]
 # {% endif %} #
 
 # {% if cookiecutter.include_code_scaffold == "Yes" %}
-packages += scaffold
+packages_to_install += scaffold
 # {% endif %}
 
 # {% if cookiecutter.pydata_packages == "basic" %}
-packages += basic
+packages_to_install += basic
 # {% endif %}
 
 # track packages that are not available through conda
@@ -34,7 +34,7 @@ pip_only_packages = [
 # or none if none selected
 docs_path = Path("docs")
 # {% if cookiecutter.docs != "none" %}
-packages += ["{{ cookiecutter.docs }}"]
+packages_to_install += ["{{ cookiecutter.docs }}"]
 pip_only_packages += ["{{ cookiecutter.docs }}"]
 docs_subpath = docs_path / "{{ cookiecutter.docs }}"
 for obj in docs_subpath.iterdir():
@@ -51,7 +51,7 @@ for docs_template in docs_path.iterdir():
 #
 write_dependencies(
     "{{ cookiecutter.dependency_file }}",
-    packages,
+    packages_to_install,
     pip_only_packages,
     repo_name="{{ cookiecutter.repo_name }}",
     module_name="{{ cookiecutter.module_name }}",
