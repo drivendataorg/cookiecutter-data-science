@@ -1,7 +1,7 @@
 site_name: Cookiecutter Data Science
 site_description: A project template and directory structure for Python data science projects.
 site_url: https://cookiecutter-data-science.drivendata.org
-repo_url: https://github.com/drivendata/cookiecutter-data-science
+repo_url: https://github.com/drivendataorg/cookiecutter-data-science
 edit_uri: edit/master/docs/docs
 copyright: Project maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>.
 theme: 

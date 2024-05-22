@@ -48,7 +48,7 @@ Cookiecutter Data Science v2 requires Python 3.8+. Since this is a cross-project
     pip install cookiecutter
 
     # From the parent directory where you want your project
-    cookiecutter https://github.com/drivendata/cookiecutter-data-science -c v1
+    cookiecutter https://github.com/drivendataorg/cookiecutter-data-science -c v1
     ```
 
 !!! info "Use the ccds command-line tool"
