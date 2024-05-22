@@ -38,7 +38,7 @@ dependencies = [
 ccds = "ccds.__main__:main"
 
 [project.urls]
-"Homepage" = "https://drivendata.github.io/cookiecutter-data-science/"
-"Source Code" = "https://github.com/drivendata/cookiecutter-data-science/"
-"Bug Tracker" = "https://github.com/drivendata/cookiecutter-data-science/issues"
+"Homepage" = "https://cookiecutter-data-science.drivendata.org/"
+"Source Code" = "https://github.com/drivendataorg/cookiecutter-data-science/"
+"Bug Tracker" = "https://github.com/drivendataorg/cookiecutter-data-science/issues"
 "DrivenData" = "https://drivendata.co"
