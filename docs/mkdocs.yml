@@ -1,12 +1,60 @@
 site_name: Cookiecutter Data Science
 site_description: A project template and directory structure for Python data science projects.
-site_favicon: favicon.ico
+site_url: https://cookiecutter-data-science.drivendata.org
 repo_url: https://github.com/drivendata/cookiecutter-data-science
 edit_uri: edit/master/docs/docs
 copyright: Project maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>.
-google_analytics: ['UA-54096005-4', 'auto']
-theme: cinder
-extra_css:
-  - css/extra.css
+theme: 
+  favicon: favicon.ico
+  features:
+    - navigation.instant
+    - toc.integrate
+  logo: ccds.png
+  name: material
+  custom_dir: overrides
+  palette:
+    primary: custom
+    accent: custom
+  font:
+    text: Work Sans
+    code: Space Mono
 nav:
   - Home: index.md
+  - Why ccds?: why.md
+  - Opinions: opinions.md
+  - Using the template: using-the-template.md
+  - All options: all-options.md
+  - Contributing: contributing.md
+  - Related projects: related.md
+  - v1 Template: v1.md
+extra:
+  analytics:
+    provider: google
+    property: G-DX14MC19WY
+extra_css:
+  - css/extra.css
+extra_javascript:
+  - js/extra.js
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - tables
+  - toc:
+      toc_depth: 2
+plugins:
+  - include-markdown
+  - termynal:
+      title: bash
+      buttons: macos
+      prompt_literal_start:
+        - "$"
+  - gen-files:
+      scripts:
+        - scripts/generate-termynal.py
+        - scripts/configuration-table.py

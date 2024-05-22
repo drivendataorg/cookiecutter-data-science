@@ -1,3 +1,125 @@
-h1, h2, h3 {
-    margin-top: 77px;
+:root {
+    --md-primary-fg-color:        #328F97;
+    --md-primary-fg-color--light: #328F97;
+    --md-primary-fg-color--dark:  #328F97;
+
+    --md-accent-fg-color:         #328F97;
+
+    --md-footer-bg-color: white;
+    --md-footer-fg-color: #222;
+    --md-footer-fg-color--light: #222;
+    --md-footer-fg-color--lighter: #222;
+}
+
+.md-typeset {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.md-typeset h1 {
+    font-weight: 800;
+    color: #222;
+    margin-bottom: -0.25rem;
+}
+
+.md-typeset h2,
+.md-typeset h3 {
+    font-weight: 600;
+    color: #222;
+}
+
+.md-typeset a {
+    color: #297c82;
+    word-break: break-word;
+}
+
+.md-typeset pre {
+    display: flex;
+}
+
+.md-typeset code {
+    font-size: .8em;
+    background-color: #f5f5f5;
+    color: #193d3d;
+    min-width: 35rem;
+    flex-shrink: 1;
+}
+
+.js .md-typeset .tabbed-labels {
+    max-width: 35rem;
+}
+
+.md-typeset .admonition.info,
+.md-typeset details.info,
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-color: #328F97;
+}
+.md-typeset .info > .admonition-title,
+.md-typeset .info > summary,
+.md-typeset .note > .admonition-title,
+.md-typeset .note > summary {
+  background-color: #328F9726;
+  border-color: #328F97;
+}
+
+.md-typeset .info > .admonition-title::before,
+.md-typeset .info > summary::before,
+.md-typeset .note > .admonition-title::before,
+.md-typeset .note > summary::before {
+  background-color: #328F97;
+}
+
+.md-header__title {
+    font-family: "Space Mono";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.9rem;
+}
+
+.md-typeset > h1, .md-typeset > h2, .md-typeset > h3, .md-typeset > p, .md-typeset > ul, .md-typeset > ol, .md-typeset > blockquote, .md-typeset > div.admonition {
+    max-width: 35rem;
+}
+
+.md-typeset blockquote {
+    font-size: 1.0rem;
+    font-weight: 300;
+}
+
+#termynal {
+    /* 40 lines of 2ex */
+    height: 80ex !important;
+    min-height: 80ex !important;
+    max-height: 80ex !important;
+    overflow: scroll !important;
+    font-size: 1.5ex !important;
+}
+
+[data-ty] {
+    line-height: 2ex !important;
+    white-space: pre;
+}
+
+.newline {
+    line-height: 0 !important;
+}
+
+.inline-input,
+.default-text {
+    display: inline-block !important;
+}
+
+.md-logo img {
+    height: 3rem !important;
+}
+
+.md-header, .md-footer, .md-footer-meta {
+    color: #222;
+    background-color: white;
+}
+
+.md-nav__link--active {
+    font-weight: 600;
 }
