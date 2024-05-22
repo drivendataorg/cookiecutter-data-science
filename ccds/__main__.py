@@ -28,7 +28,9 @@ def default_ccds_main(f):
     """Set the default for the cookiecutter template argument to the CCDS template."""
 
     def _main(*args, **kwargs):
-        f.params[1].default = "https://github.com/drivendata/cookiecutter-data-science"
+        f.params[1].default = (
+            "https://github.com/drivendataorg/cookiecutter-data-science"
+        )
         return f(*args, **kwargs)
 
     return _main

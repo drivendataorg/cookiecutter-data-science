@@ -2,7 +2,7 @@
 
 _A logical, reasonably standardized but flexible project structure for doing and sharing data science work._
 
-**Cookiecutter Data Science (CCDS)** is a tool for setting up a data science project template that incorporates best practices. To learn more about CCDS's philosophy, visit the project homepage](https://drivendata.github.io/cookiecutter-data-science/).
+**Cookiecutter Data Science (CCDS)** is a tool for setting up a data science project template that incorporates best practices. To learn more about CCDS's philosophy, visit the project homepage](https://cookiecutter-data-science.drivendata.org/).
 
 > ℹ️ Cookiecutter Data Science v2 has changed from v1. It now requires installing the new cookiecutter-data-science Python package, which extends the functionality of the [cookiecutter](https://cookiecutter.readthedocs.io/en/stable/README.html) templating utility. Use the provided `ccds` command-line program instead of `cookiecutter`.
 
@@ -28,8 +28,6 @@ To start a new project, run:
 ```bash
 ccds
 ```
-
-[![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
 
 ### The resulting directory structure
 
@@ -90,14 +88,14 @@ The directory structure of your new project will look something like this (depen
 If you want to use the old v1 project template, you need to have either the cookiecutter-data-science package or cookiecutter package installed. Then, use either command-line program with the `-c v1` option:
 
 ```bash
-ccds https://github.com/drivendata/cookiecutter-data-science -c v1
+ccds https://github.com/drivendataorg/cookiecutter-data-science -c v1
 # or equivalently
-cookiecutter https://github.com/drivendata/cookiecutter-data-science -c v1
+cookiecutter https://github.com/drivendataorg/cookiecutter-data-science -c v1
 ```
 
 ## Contributing
 
-We welcome contributions! [See the docs for guidelines](https://drivendata.github.io/cookiecutter-data-science/#contributing).
+We welcome contributions! [See the docs for guidelines](https://cookiecutter-data-science.drivendata.org/contributing/).
 
 ### Installing development requirements
 
