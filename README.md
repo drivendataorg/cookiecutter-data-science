@@ -43,7 +43,7 @@ The directory structure of your new project will look something like this (depen
 │   ├── processed      <- The final, canonical data sets for modeling.
 │   └── raw            <- The original, immutable data dump.
 │
-├── docs               <- A default mkdocs project; see mkdocs.org for details
+├── docs               <- A default mkdocs project; see www.mkdocs.org for details
 │
 ├── models             <- Trained and serialized models, model predictions, or model summaries
 │
@@ -51,8 +51,8 @@ The directory structure of your new project will look something like this (depen
 │                         the creator's initials, and a short `-` delimited description, e.g.
 │                         `1.0-jqp-initial-data-exploration`.
 │
-├── pyproject.toml     <- Project configuration file with package metadata for {{ cookiecutter.module_name }}
-│                         and configuration for tools like black
+├── pyproject.toml     <- Project configuration file with package metadata for 
+│                         {{ cookiecutter.module_name }} and configuration for tools like black
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
 │
@@ -64,23 +64,22 @@ The directory structure of your new project will look something like this (depen
 │
 ├── setup.cfg          <- Configuration file for flake8
 │
-└── {{ cookiecutter.module_name }}                <- Source code for use in this project.
+└── {{ cookiecutter.module_name }}   <- Source code for use in this project.
     │
-    ├── __init__.py    <- Makes {{ cookiecutter.module_name }} a Python module
+    ├── __init__.py             <- Makes {{ cookiecutter.module_name }} a Python module
     │
-    ├── data           <- Scripts to download or generate data
-    │   └── make_dataset.py
+    ├── config.py               <- Store useful variables and configuration
     │
-    ├── features       <- Scripts to turn raw data into features for modeling
-    │   └── build_features.py
+    ├── dataset.py              <- Scripts to download or generate data
     │
-    ├── models         <- Scripts to train models and then use trained models to make
-    │   │                 predictions
-    │   ├── predict_model.py
-    │   └── train_model.py
+    ├── features.py             <- Code to create features for modeling
     │
-    └── visualization  <- Scripts to create exploratory and results oriented visualizations
-        └── visualize.py
+    ├── modeling                
+    │   ├── __init__.py 
+    │   ├── predict.py          <- Code to run model inference with trained models          
+    │   └── train.py            <- Code to train models
+    │
+    └── plots.py                <- Code to create visualizations   
 ```
 
 ## Using v1
