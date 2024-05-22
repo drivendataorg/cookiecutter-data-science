@@ -1,44 +1,27 @@
 import shutil
+from copy import copy
 from pathlib import Path
 
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
 from ccds.hook_utils.custom_config import write_custom_config
-from ccds.hook_utils.dependencies import write_dependencies
+from ccds.hook_utils.dependencies import basic, packages, scaffold, write_dependencies
 
 #
 #  TEMPLATIZED VARIABLES FILLED IN BY COOKIECUTTER
 #
-packages = [
-    "black",
-    "flake8",
-    "isort",
-    "pip",
-    "python-dotenv",
-]
+packages_to_install = copy(packages)
 
 # {% if cookiecutter.dataset_storage.s3 %}
-packages += ["awscli"]
+packages_to_install += ["awscli"]
 # {% endif %} #
 
 # {% if cookiecutter.include_code_scaffold == "Yes" %}
-packages += [
-    "typer",
-    "loguru",
-    "tqdm",
-]
+packages_to_install += scaffold
 # {% endif %}
 
 # {% if cookiecutter.pydata_packages == "basic" %}
-packages += [
-    "ipython",
-    "jupyterlab",
-    "matplotlib",
-    "notebook",
-    "numpy",
-    "pandas",
-    "scikit-learn",
-]
+packages_to_install += basic
 # {% endif %}
 
 # track packages that are not available through conda
@@ -51,7 +34,7 @@ pip_only_packages = [
 # or none if none selected
 docs_path = Path("docs")
 # {% if cookiecutter.docs != "none" %}
-packages += ["{{ cookiecutter.docs }}"]
+packages_to_install += ["{{ cookiecutter.docs }}"]
 pip_only_packages += ["{{ cookiecutter.docs }}"]
 docs_subpath = docs_path / "{{ cookiecutter.docs }}"
 for obj in docs_subpath.iterdir():
@@ -68,7 +51,7 @@ for docs_template in docs_path.iterdir():
 #
 write_dependencies(
     "{{ cookiecutter.dependency_file }}",
-    packages,
+    packages_to_install,
     pip_only_packages,
     repo_name="{{ cookiecutter.repo_name }}",
     module_name="{{ cookiecutter.module_name }}",

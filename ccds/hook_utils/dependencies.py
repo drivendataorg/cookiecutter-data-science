@@ -1,3 +1,28 @@
+packages = [
+    "black",
+    "flake8",
+    "isort",
+    "pip",
+    "python-dotenv",
+]
+
+basic = [
+    "ipython",
+    "jupyterlab",
+    "matplotlib",
+    "notebook",
+    "numpy",
+    "pandas",
+    "scikit-learn",
+]
+
+scaffold = [
+    "typer",
+    "loguru",
+    "tqdm",
+]
+
+
 def write_dependencies(
     dependencies, packages, pip_only_packages, repo_name, module_name, python_version
 ):

@@ -6,9 +6,14 @@ _A logical, flexible, and reasonably standardized project structure for doing an
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
 </a>
 
+!!! info "CCDS V2 Announcement"
+
+    Version 2 of Cookiecutter Data Science has launched recently. To learn more about what's different and what's in progress, see the [announcement blog post for more information](https://drivendata.co/blog/ccds-v2).
+
+
 ## Quickstart
 
-Cookiecutter Data Science v2 requires Python 3.7+. Since this is a cross-project utility application, we recommend installing it with [pipx](https://pypa.github.io/pipx/). Installation command options:
+Cookiecutter Data Science v2 requires Python 3.8+. Since this is a cross-project utility application, we recommend installing it with [pipx](https://pypa.github.io/pipx/). Installation command options:
 
 === "With pipx (recommended)"
 
@@ -46,7 +51,7 @@ Cookiecutter Data Science v2 requires Python 3.7+. Since this is a cross-project
     cookiecutter https://github.com/drivendata/cookiecutter-data-science -c v1
     ```
 
-!!! info "Changes in v2"
+!!! info "Use the ccds command-line tool"
 
     Cookiecutter Data Science v2 now requires installing the new `cookiecutter-data-science` Python package, which extends the functionality of the [`cookiecutter`](https://cookiecutter.readthedocs.io/en/stable/README.html) templating utility. Use the provided `ccds` command-line program instead of `cookiecutter`.
 
@@ -116,16 +121,16 @@ The directory structure of your new project will look something like this (depen
     │
     ├── __init__.py             <- Makes {{ cookiecutter.module_name }} a Python module
     │
-    ├── data                    <- Scripts to download or generate data
-    │   └── make_dataset.py
+    ├── config.py               <- Store useful variables and configuration
     │
-    ├── features                <- Scripts to turn raw data into features for modeling
-    │   └── build_features.py
+    ├── dataset.py              <- Scripts to download or generate data
     │
-    ├── models                  <- Scripts to train models and then use trained models 
-    │   ├── predict_model.py       to make predictions
-    │   └── train_model.py
+    ├── features.py             <- Code to create features for modeling
     │
-    └── visualization           <- Scripts to create exploratory and results-oriented 
-        └── visualize.py           visualizations
+    ├── modeling                
+    │   ├── __init__.py 
+    │   ├── predict.py          <- Code to run model inference with trained models          
+    │   └── train.py            <- Code to train models
+    │
+    └── plots.py                <- Code to create visualizations   
 ```

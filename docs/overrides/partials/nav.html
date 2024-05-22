@@ -1,0 +1,42 @@
+{#-
+  Vendored from:
+  https://github.com/squidfunk/mkdocs-material/blob/bd708f16bc477f98aad68ad203826605e0298b8a/material/templates/partials/nav.html
+-#}
+{% import "partials/nav-item.html" as item with context %}
+{% set class = "md-nav md-nav--primary" %}
+{% if "navigation.tabs" in features %}
+  {% set class = class ~ " md-nav--lifted" %}
+{% endif %}
+{% if "toc.integrate" in features %}
+  {% set class = class ~ " md-nav--integrated" %}
+{% endif %}
+<nav class="{{ class }}" aria-label="{{ lang.t('nav') }}" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" title="{{ config.site_name | e }}" class="md-nav__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
+      {% include "partials/logo.html" %}
+    </a>
+    {{ config.site_name }}
+  </label>
+  {% if config.repo_url %}
+    <div class="md-nav__source">
+      {% include "partials/source.html" %}
+    </div>
+  {% endif %}
+  <ul class="md-nav__list" data-md-scrollfix>
+    {% for nav_item in nav %}
+      {% set path = "__nav_" ~ loop.index %}
+      {{ item.render(nav_item, path, 1) }}
+    {% endfor %}
+  </ul>
+</nav>
+
+
+{#-
+  Added DD footer
+-#}
+<a href="https://drivendata.co/open-source.html" target="_blank" style="border-bottom: 0; padding-top: 3rem; display: block">
+  <img style="width: 60%" src="https://s3.amazonaws.com/drivendata/images/drivendata-logo.svg">
+</a>
+<p style="width: 60%">
+  Cookiecutter Data Science is a DrivenData project.
+</p>

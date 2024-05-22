@@ -2,6 +2,8 @@ import json
 import re
 from pathlib import Path
 
+from ccds.hook_utils.dependencies import basic
+
 PROJECT_ROOT = Path(__file__).parents[2]
 
 
@@ -94,13 +96,19 @@ def build_help_table_rows(data, help_lookup, lookup_prefix=""):
             for ix, choice in enumerate(top_value):
                 if isinstance(choice, str):
                     item_help = help_lookup[f"{lookup_prefix}{top_key}.{choice}"]
+                    more_info = (
+                        item_help["more_information"]
+                        if choice != "basic"
+                        else item_help["more_information"] + (", ".join(basic))
+                    )
+
                     section.append(
                         _table_row(
                             (
                                 choice,
                                 "",
                                 item_help["description"],
-                                item_help["more_information"],
+                                more_info,
                             )
                         )
                     )
