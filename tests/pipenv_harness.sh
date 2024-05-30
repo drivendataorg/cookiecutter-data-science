@@ -3,6 +3,7 @@ set -ex
 
 PROJECT_NAME=$(basename $1)
 CCDS_ROOT=$(dirname $0)
+MODULE_NAME=$2
 
 # configure exit / teardown behavior
 function finish {
@@ -27,3 +28,11 @@ make requirements
 
 # test with pipenv run
 pipenv run python -c "import sys; assert \"$PROJECT_NAME\" in sys.executable"
+
+# test importable
+pipenv run python -c "import $MODULE_NAME"
+
+# test config importable if scaffolded
+if [ -f "$MODULE_NAME/config.py" ]; then
+    pipenv run python -c "from $MODULE_NAME import config"
+fi
