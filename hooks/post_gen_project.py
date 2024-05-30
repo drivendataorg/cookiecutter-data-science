@@ -76,4 +76,7 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
         shutil.rmtree(generated_path)
     elif generated_path.name != "__init__.py":
         generated_path.unlink()
+    elif generated_path.name == "__init__.py":
+        # remove any content in __init__.py since it won't be available
+        generated_path.write_text("")
 # {% endif %}
