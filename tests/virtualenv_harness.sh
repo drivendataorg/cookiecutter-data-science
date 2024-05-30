@@ -3,6 +3,7 @@ set -e
 
 PROJECT_NAME=$(basename $1)
 CCDS_ROOT=$(dirname $0)
+MODULE_NAME=$2
 
 # configure exit / teardown behavior
 function finish {
@@ -55,4 +56,5 @@ fi
 
 make requirements
 
-run_tests $PROJECT_NAME
+run_tests $PROJECT_NAME $MODULE_NAME
+

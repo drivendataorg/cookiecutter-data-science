@@ -9,4 +9,11 @@ function run_tests () {
         exit 99
     fi
 
+    # test importable
+    python -c "import $2"
+
+    # test config importable if scaffolded
+    if [ -f "$2/config.py" ]; then
+        python -c "from $2 import config"
+    fi
 }

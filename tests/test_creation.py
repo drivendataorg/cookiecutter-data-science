@@ -9,6 +9,26 @@ from conftest import bake_project
 BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
 
 
+def _decode_print_stdout_stderr(result):
+    """Print command stdout and stderr to console to use when debugging failing tests
+    Normally hidden by pytest except in failure we want this displayed
+    """
+    encoding = sys.stdout.encoding
+
+    if encoding is None:
+        encoding = "utf-8"
+
+    print("\n======================= STDOUT ======================")
+    stdout = result.stdout.decode(encoding)
+    print(stdout)
+
+    print("\n======================= STDERR ======================")
+    stderr = result.stderr.decode(encoding)
+    print(stderr)
+
+    return stdout, stderr
+
+
 def no_curlies(filepath):
     """Utility to make sure no curly braces appear in a file.
     That is, was Jinja able to render everything?
@@ -154,31 +174,23 @@ def verify_makefile_commands(root, config):
         )
 
     result = run(
-        [BASH_EXECUTABLE, str(harness_path), str(root.resolve())],
+        [
+            BASH_EXECUTABLE,
+            str(harness_path),
+            str(root.resolve()),
+            str(config["module_name"]),
+        ],
         stderr=PIPE,
         stdout=PIPE,
     )
-    result_returncode = result.returncode
 
-    encoding = sys.stdout.encoding
-
-    if encoding is None:
-        encoding = "utf-8"
-
-    # normally hidden by pytest except in failure we want this displayed
-    print("PATH=", os.getenv("PATH"))
-    print("\n======================= STDOUT ======================")
-    stdout_output = result.stdout.decode(encoding)
-    print(stdout_output)
-
-    print("\n======================= STDERR ======================")
-    print(result.stderr.decode(encoding))
+    stdout_output, _ = _decode_print_stdout_stderr(result)
 
     # Check that makefile help ran successfully
     assert "Available rules:" in stdout_output
     assert "clean                    Delete all compiled Python files" in stdout_output
 
-    assert result_returncode == 0
+    assert result.returncode == 0
 
 
 def lint(root):
@@ -189,20 +201,6 @@ def lint(root):
         stderr=PIPE,
         stdout=PIPE,
     )
-    result_returncode = result.returncode
+    _, _ = _decode_print_stdout_stderr(result)
 
-    encoding = sys.stdout.encoding
-
-    if encoding is None:
-        encoding = "utf-8"
-
-    # normally hidden by pytest except in failure we want this displayed
-    print("PATH=", os.getenv("PATH"))
-    print("\n======================= STDOUT ======================")
-    stdout_output = result.stdout.decode(encoding)
-    print(stdout_output)
-
-    print("\n======================= STDERR ======================")
-    print(result.stderr.decode(encoding))
-
-    assert result_returncode == 0
+    assert result.returncode == 0
