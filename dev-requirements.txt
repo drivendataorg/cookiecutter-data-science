@@ -2,6 +2,7 @@
 
 ansi2html
 black
+build
 chardet
 flake8
 isort
@@ -13,5 +14,6 @@ pexpect
 pipenv
 pytest
 termynal
+twine
 virtualenvwrapper; sys_platform != 'win32'
 virtualenvwrapper-win; sys_platform == 'win32'
