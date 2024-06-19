@@ -63,6 +63,7 @@ def config_generator(fast=False):
         "dataset_storage",
         "open_source_license",
         "include_code_scaffold",
+        "linting_and_formatting",
         "docs",
     ]
     cyclers = {k: cycle(cookiecutter_json[k]) for k in cycle_fields}

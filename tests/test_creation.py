@@ -50,6 +50,7 @@ def test_baking_configs(config, fast):
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
         lint(project_directory)
+        format(project_directory)
 
         if fast < 2:
             verify_makefile_commands(project_directory, config)
@@ -100,7 +101,6 @@ def verify_files(root, config):
         "Makefile",
         "README.md",
         "pyproject.toml",
-        "setup.cfg",
         ".env",
         ".gitignore",
         "data/external/.gitkeep",
@@ -119,6 +119,9 @@ def verify_files(root, config):
     # conditional files
     if not config["open_source_license"].startswith("No license"):
         expected_files.append("LICENSE")
+
+    if config["linting_and_formatting"] == "flake8+black+isort":
+        expected_files.append("setup.cfg")
 
     if config["include_code_scaffold"] == "Yes":
         expected_files += [
@@ -197,6 +200,18 @@ def lint(root):
     """Run the linters on the project."""
     result = run(
         ["make", "lint"],
+        cwd=root,
+        stderr=PIPE,
+        stdout=PIPE,
+    )
+    _, _ = _decode_print_stdout_stderr(result)
+
+    assert result.returncode == 0
+
+def format(root):
+    """Run the linters on the project."""
+    result = run(
+        ["make", "format"],
         cwd=root,
         stderr=PIPE,
         stdout=PIPE,
