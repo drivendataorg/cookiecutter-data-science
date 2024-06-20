@@ -40,21 +40,22 @@ lint:
 ## Format source code with ruff
 .PHONY: format
 format:
-	ruff check --select I --fix {{ cookiecutter.module_name }}
+	ruff check --fix {{ cookiecutter.module_name }}
 	ruff format {{ cookiecutter.module_name }}
 {% elif cookiecutter.linting_and_formatting == 'flake8+black+isort' %}
 ## Lint using flake8, black, and isort (use `make format` to do formatting)
 .PHONY: lint
 lint:
 	flake8 {{ cookiecutter.module_name }}
-	isort --check --diff --profile black {{ cookiecutter.module_name }}
-	black --check --config pyproject.toml {{ cookiecutter.module_name }}
+	isort --check --diff {{ cookiecutter.module_name }}
+	black --check --verbose {{ cookiecutter.module_name }}
 
 ## Format source code with black
 .PHONY: format
 format:
-	isort --profile black {{ cookiecutter.module_name }}
-	black --config pyproject.toml {{ cookiecutter.module_name }}
+	isort {{ cookiecutter.module_name }}
+	black --verbose {{ cookiecutter.module_name }}
+	exit -1
 {% endif %}
 
 {% if not cookiecutter.dataset_storage.none %}
