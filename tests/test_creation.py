@@ -196,9 +196,11 @@ def verify_makefile_commands(root, config):
     # Check that linting and formatting ran successfully
     if config["linting_and_formatting"] == "ruff":
         assert "All checks passed!" in stdout_output
+        assert "left unchanged" in stdout_output
         assert "reformatted" not in stdout_output
     elif config["linting_and_formatting"] == "flake8+black+isort":
         assert "All done!" in stderr_output
+        assert "left unchanged" in stderr_output
         assert "reformatted" not in stderr_output
 
     assert result.returncode == 0

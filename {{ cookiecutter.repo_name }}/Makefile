@@ -48,14 +48,13 @@ format:
 lint:
 	flake8 {{ cookiecutter.module_name }}
 	isort --check --diff {{ cookiecutter.module_name }}
-	black --check --verbose {{ cookiecutter.module_name }}
+	black --check {{ cookiecutter.module_name }}
 
 ## Format source code with black
 .PHONY: format
 format:
 	isort {{ cookiecutter.module_name }}
-	black --verbose {{ cookiecutter.module_name }}
-	exit -1
+	black {{ cookiecutter.module_name }}
 {% endif %}
 
 {% if not cookiecutter.dataset_storage.none %}
