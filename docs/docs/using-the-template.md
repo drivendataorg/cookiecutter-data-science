@@ -132,7 +132,7 @@ Now it should be easy to do any refactoring you need to do to make your code mor
 
 We try to review every line of code written at DrivenData. Data science code in particular has the risk of executing without erroring, but not being "correct" (for example, you use standard deviation in a calculation rather than variance). We've found the best way to catch these kinds of mistakes is a second set of eyes looking at the code.
 
-Right now on GitHub, it is hard to observe and comment on changes that happen in Jupyter notebooks. We develop and maintain a tool called [`nbautoexport`](https://nbautoexport.drivendata.org/stable/) that automatically exports a `.py` version of your Jupyter noteobok every time you save it. This means that you can commit both the `.ipynb` and the `.py` to source control so that reviewers can leave line-by-line comments on your notebook code. To use it, you will need to add `nbautoexport` to your requirements file and then run `make requirements` to install it.
+Right now on GitHub, it is hard to observe and comment on changes that happen in Jupyter notebooks. We develop and maintain a tool called [`nbautoexport`](https://nbautoexport.drivendata.org/stable/) that automatically exports a `.py` version of your Jupyter notebook every time you save it. This means that you can commit both the `.ipynb` and the `.py` to source control so that reviewers can leave line-by-line comments on your notebook code. To use it, you will need to add `nbautoexport` to your requirements file and then run `make requirements` to install it.
 
 Once `nbautoexport` is installed, you can setup the nbautoexport tool for your project with the following commands at the commandline:
 
