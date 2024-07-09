@@ -103,6 +103,22 @@ data: requirements
 	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/data/make_dataset.py
 {% endif %}
 
+
+## Set up Git
+.PHONY: git
+git:
+	git init; \
+	
+
+## Set up Data Version Control (DVC)
+.PHONY: dvc
+dvc: git
+	pip install dvc
+	dvc init
+	git add .dvc .dvcignore
+	@echo ">>> DVC initialized. Remember to set up your remote storage with 'dvc remote add'."
+	
+
 #################################################################################
 # Self Documenting Commands                                                     #
 #################################################################################
