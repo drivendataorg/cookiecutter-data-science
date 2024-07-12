@@ -48,7 +48,7 @@ format:
 .PHONY: sync_data_down
 sync_data_down:
 	{% if cookiecutter.dataset_storage.s3 -%}
-	aws s3 sync s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/\
+	aws s3 sync s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/ \
 		data/ {% if cookiecutter.dataset_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.dataset_storage.s3.aws_profile }}{% endif %}
 	{% elif cookiecutter.dataset_storage.azure -%}
 	az storage blob download-batch -s {{ cookiecutter.dataset_storage.azure.container }}/data/ \
@@ -61,8 +61,8 @@ sync_data_down:
 .PHONY: sync_data_up
 sync_data_up:
 	{% if cookiecutter.dataset_storage.s3 -%}
-	aws s3 sync s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/ data/\
-		{% if cookiecutter.dataset_storage.s3.aws_profile %} --profile $(PROFILE){% endif %}
+	aws s3 sync data/ \
+		s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data {% if cookiecutter.dataset_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.dataset_storage.s3.aws_profile }}{% endif %}
 	{% elif cookiecutter.dataset_storage.azure -%}
 	az storage blob upload-batch -d {{ cookiecutter.dataset_storage.azure.container }}/data/ \
 		-s data/
