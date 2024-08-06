@@ -1,4 +1,4 @@
-{% if cookiecutter.image == 'Tensorflow' -%}FROM registry.git.vgregion.se/aiplattform/images/tensorflow:0.3.1
+{% if cookiecutter.image == 'Tensorflow' -%}FROM registry.git.vgregion.se/aiplattform/images/tensorflow:1.0.0
 {% elif cookiecutter.image == 'PyTorch' -%}FROM registry.git.vgregion.se/aiplattform/images/pytorch:1.1.1
 {% elif cookiecutter.image == 'R' -%}FROM registry.git.vgregion.se/aiplattform/images/r:0.4.1{%- endif %}
 ENV GID=1000
