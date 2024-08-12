@@ -23,6 +23,8 @@ generate.generate_context = generate_context_wrapper
 from cookiecutter import cli
 from cookiecutter import main as api_main  # noqa: F401 referenced by tests
 
+from ccds.version import __version__
+
 
 def default_ccds_main(f):
     """Set the default for the cookiecutter template argument to the CCDS template."""
@@ -31,6 +33,9 @@ def default_ccds_main(f):
         f.params[1].default = (
             "https://github.com/drivendataorg/cookiecutter-data-science"
         )
+        # The fifth parameter is the "checkout" option in the cookiecutter cli
+        # Per #389, set this to the currently released version by default
+        f.params[4].default = __version__
         return f(*args, **kwargs)
 
     return _main
