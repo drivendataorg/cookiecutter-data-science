@@ -82,6 +82,14 @@ The directory structure of your new project will look something like this (depen
     └── plots.py                <- Code to create visualizations   
 ```
 
+## Using unreleased changes
+
+By default, `ccds` will download the most recently _released_ version of the template. If there are any _unreleased_ changes to the template (or changes in a separate branch) that you want to incorporate, you can do so by checking out whatever branch you'd like to use (checkout `master` for the latest changes):
+
+```bash
+ccds -c master
+```
+
 ## Using v1
 
 If you want to use the old v1 project template, you need to have either the cookiecutter-data-science package or cookiecutter package installed. Then, use either command-line program with the `-c v1` option:
