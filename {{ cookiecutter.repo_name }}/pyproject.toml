@@ -10,7 +10,7 @@ include = ["{{ cookiecutter.repo_name }}/py.typed"]
 {{ cookiecutter.repo_name }} = "{{ cookiecutter.repo_name }}.__main__:cli"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 
 python-dotenv = ">=0.21.0"
 
@@ -26,11 +26,10 @@ pylint = ">=2.14.0"
 pytest = ">=7.4.2"
 pytest-icdiff = ">=0.8"
 pytest-cov = ">=4.1.0"
-python-dotenv = ">=0.21.0"
 python-semantic-release = ">=8.1.1"
 setuptools = ">=65.6.3"
 toml = ">=0.10.2"
-yapf = ">=0.40.0"
+black = ">=24.10"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
@@ -58,10 +57,6 @@ line-length = 120
 [tool.isort]
 line_length = 120
 profile = "black"
-
-[tool.yapf]
-column_limit = 120
-split_before_first_argument = false
 
 [tool.pytest.ini_options]
 filterwarnings = "ignore::DeprecationWarning"

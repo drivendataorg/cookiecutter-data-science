@@ -1,7 +1,7 @@
 default_install_hook_types: ['pre-commit', 'commit-msg']
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
       - id: check-yaml
@@ -10,21 +10,18 @@ repos:
       - id: check-added-large-files
         args: ['--maxkb=2048']
       - id: check-case-conflict
-
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.10.0
+    rev: v3.29.1
     hooks:
       - id: commitizen
         stages: [commit-msg]
-
   - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.7.0
+    rev: 1.9.0
     hooks:
       - id: nbqa-isort
       - id: nbqa-black
       - id: nbqa-pyupgrade
         args: [--py39-plus]
-
   - repo: local
     hooks:
       - id: isort
@@ -32,24 +29,23 @@ repos:
         entry: isort
         language: python
         types: [python]
-      - id: yapf
-        name: yapf
-        entry: yapf
+      - id: black
+        name: black
+        entry: black
         language: python
         types: [python]
-        args: ["-i"]
       - id: pylint
         name: pylint
         entry: pylint
         language: python
-        types: [ python ]
+        types: [python]
       - id: flake8
         name: flake8
         entry: flake8
         language: python
-        types: [ python ]
+        types: [python]
       - id: mypy
         name: mypy
         entry: mypy
         language: python
-        types: [ python ]
+        types: [python]
