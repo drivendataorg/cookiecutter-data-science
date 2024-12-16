@@ -9,16 +9,34 @@ _Currently not for production!_
 
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
+A modern, opinionated full-stack [CookieCutter](https://www.cookiecutter.io/) project template that prioritizes developer experience and cutting-edge tools. Built on the foundation of [CookieCutter Data Science](https://cookiecutter-data-science.drivendata.org/), this template incorporates carefully selected defaults, dependency stack, customizations, and contemporary best practices for Python development, research projects, and academic work.
 
-A fork of the gold standard [CookieCutter Data Science](https://cookiecutter-data-science.drivendata.org/) template complete with Gatlen's preferred defaults, software, and customizations for any Python, Research, or School Project.
+## Key Features
+- 🚀 Modern tooling (UV, Ruff, FastAPI, Pydantic, Typer, Loguru, Polars, etc.) over traditional defaults
+- 📦 Batteries-included configuration with sensible defaults
+- 🔧 Highly customizable while maintaining simplicity
+- 📈 Scales from personal projects to production
+- 🤝 Perfect for individuals and small teams
+- 🔄 Living template that evolves with the ecosystem
 
-This project is based on [CookieCutter](https://www.cookiecutter.io/), a Python based project boilerplate and templating tool. I'm writing this project so I can easily instantiate new projects with my preferred defaults, provide this to colleagues as a solid jumping off point, and to quickly adapt my preferred settings to other projects that I join.
-
-This is a living project, constantly to be updated as better packages and standards come out and as my preferences change. Note that even though this originated from [CookieCutter Data Science](https://cookiecutter-data-science.drivendata.org/), this is a general template and CCDS was chosen for its high quality starting point.
 
 ## Installation
 
 It is recommended to use [Cruft](https://cruft.github.io/cruft/) instead of [CookieCutter](https://www.cookiecutter.io/). The resulting project is the same, but with the added option of being able to sync your project with the original template if this repository updates as if it were an incomming commit.
+
+Install Cruft
+```bash
+    # MacOS Homebrew
+    brew install cruft
+```
+
+```bash
+    # Pip
+    pip install cruft
+```
+
+
+Clone using Cruft
 ```bash
     cruft create https://github.com/GatlenCulp/gatlens-opinionated-template
 ```
@@ -77,7 +95,7 @@ The directory structure of your new project will look something like this (depen
 ```
 
 ## Philosophy
-
+<!-- 
 This project is more of a hobby and research project more than it is a practical template. Gatlen really enjoys the occasional research on the tooling ecosystem and understanding which tools solve what problems and how. He tends to have a very prefectionist perspective on projects beyond what is practical. Many of the packages included in this project, Gatlen has not yet used, but rather examined and compared against other tools and determined to be something to leverage once the need arises. The selection of packages and tools are in a way, a reminder of what resources he has have determined in advance to likely be helpful.
 
 Here are a few guiding principles of this template to determine whether or not you should use it:
@@ -87,39 +105,115 @@ Here are a few guiding principles of this template to determine whether or not y
 4. **Good Defaults** -- To me, it's important to have good defaults on the packages I have set up so I can just import them and know I'm getting the best experience out of the box. A lot of this is the reason why I choose these modern packages -- because instead of having to bend over backwards to make things backwards compatible, the package can get a hard restart with decades of learning what the established greats did. I think about it this way: If The reset button were to be hit right now on the what tools and packages people used in Python, what do I wish they did?
 5. **Customizability** -- I love customizing my tools and opt for tools where I can do a lot of customization and fiddling.
 6. **Small Teams / Individual** -- As someone who personally tends to work by myself or with a few people on research projects, I gear this template towards iterating quickly and with high quality. If a tool requires such deep knowledge that someone has to spend a day researching it just to use, I don't want it.
-7. **Scalable** -- As noted above, this is mainly geared to individuals and small teams. However, in the case you want to scale production or team size or even if you move to a new and larger organization, I want those skills to transfer and for there to be little more to learn and so that you don't have to learn an entirely new skillset or library.
+7. **Scalable** -- As noted above, this is mainly geared to individuals and small teams. However, in the case you want to scale production or team size or even if you move to a new and larger organization, I want those skills to transfer and for there to be little more to learn and so that you don't have to learn an entirely new skillset or library. -->
 
-## Core Tools Outside Python
 
-**UV**
-Unlike CCDS, this tool was written expecting use with [UV](https://github.com/astral-sh/uv/tree/main), An extremely fast Python package and project manager, written in Rust which is a virtual environment tool, build tool, and more all wrapped into one. It's similar to Poetry or Rye + Virtual Environments + PipX + More but with massive speed benefits and interoperability with normal pip, written by team Astral, the same organization behind the ruff linter. UV has been increasing in popularity as of late and seems like it could be on the way to be one of the more ubiquitous tools around the python ecosystem. While I will try to allow for the other installation tools. When using tools like Docker or CI/CD, this time becomes important.
+## Philosophy 🧭
 
-**Taskfile**
-Task is a task runner / build tool that aims to be simpler and easier to use than, for example, GNU Make. This was chosen over PoeThePoet, Makefiles, and other similar tools for its out-of-the box simplicity and operability on Windows. This makes work with Github actions much simpler. The syntax is so simple I don't think anyone will have trouble with it.
+This template is primarily a research and learning project that explores modern Python development tools and practices. Rather than focusing solely on practical, production-ready solutions, it represents an aspirational view of Python development that emphasizes cutting-edge tools and emerging best practices.
 
-**GitHub Actions**
-For CI/CD I opted for GitHub Actions. I haven't used any of the other tools but given how simple, widespread, customizable, integrated, and portable GitHub actions are, I decided to include it as the defaults
+### Core Principles 🎯
 
-**Cursor/VS Code**
-Cursor is a fork on VS Code with better AI integration, compatible of using all the same extensions, settings, etc. Included in this project are some bootstrapped workspace, settings, and debug profiles. I tend to use VSCode/Cursor for everything I do for a variety of reasons including that it is extremely hackable, easy to write extensions for, has a great ecosystem, it can work on remote servers, and more. I don't even use JupyterLab for notebooks, opting to use VSCode's ecosystem so I can take advantage of the AI integration and all my preexisting settings.
+1. **Reset-Button Development** 🔄
+   - Reimagines Python tooling without legacy constraints
+   - Selects tools leveraging decades of lessons from established tools while avoiding their compromises
 
-**Docker (Orbstack)**
+2. **Research-Driven Exploration** 🔬
+   - Functions as a living laboratory for modern Python development
+   - No default goes unscruitinized, with curated promising technologies based on careful comparative analysis
 
-Docker is a containerization platform, helpful for launching apps in an isolated environment that will work anywhere. Building an app image allows you to quickly deploy and move operations.
+3. **Individual and Small Team Focus with Scalability** 👥
+   - Optimized for personal projects and small research teams
+   - Maintains professional standards that scale to larger organizations
+   - Prioritizes tools that don't require deep expertise to start using and are helpful at any scale.
 
-Orbstack is a super lightweight alternative to Docker Desktop for MacOS with the added ability for use with VMs.
+4. **Aspirational Over Practical** 🌟
+   - Embraces perfectionist ideals in tooling choices
+   - Values learning opportunities over conventional solutions
+   - Willing to trade immediate familiarity for better long-term solutions
 
-**AWS**
+5. **Thoughtfully Opinionated** 🤔
+   - Provides carefully selected defaults based on extensive research
+   - Maintains modularity and avoids vendor lock-in
+   - Prefers simple, non-intrusive APIs over heavyweight frameworks
+   - Examples: Loguru > logging, Polars > Pandas, UV > pip, FastAPI > Flask
 
-AWS is literally just so ubiquitous and mature and offers so many integrated services with easy configuration that I have decided to use this for launching infrastructure. Perhaps this will change with time but for now, this seems good. Much of the code in this template is NOT tied to AWS.
+6. **Quality Driven** ✨
+   - Emphasizes clean, maintainable code
+   - Incorporates professional-grade tooling and practices
+   - Focuses on developer experience without sacrificing robustness
 
-**Dev Containers**
+7. **Sexy**
+    - Just because coding is work doesn't mean it can't be fun. Sometimes you need those `pretty colors` and fancy ~graphs~ if you want that ADHD brain of yours pumped full of happy juice. I want my code to be like the notes of your overachieving classmate with a bullet journal.
 
-I haven't needed to use this much but I have been curious.
+> ⚠️ Note: This template intentionally prioritizes exploration and learning over immediate practicality. While all included tools have been carefully researched, not all have been extensively tested in production environments. Users should view this as a forward-looking reference implementation rather than a production-ready solution.
 
-**Git + GitHub**
+## Core Tools & Infrastructure 🛠️
 
-Git is pretty good. GitHub is pretty good. Both are ubiqituous and have good options. I'm happy with this.
+**[VS Code](https://code.visualstudio.com/) / [Cursor](https://www.cursor.com/)** 🖥️
+- Primary IDE with full ecosystem support
+- Cursor fork provides enhanced AI integration
+- Includes pre-configured workspace settings and debug profiles
+- Supports remote development and notebook integration
+- Replaces traditional Jupyter environments
+
+> While many IDEs exist, VS Code's hackability, extensive ecosystem, and remote capabilities make it ideal for modern development. Cursor extends this with AI features while maintaining full VS Code compatibility. The decision to use VS Code even for notebooks (over JupyterLab) allows for a consistent development experience with all settings and extensions available.
+
+**[UV](https://github.com/astral-sh/uv)** ⚡
+- Ultra-fast Rust-based Python package manager
+- Combines functionality of Poetry, virtualenv, and pipx
+- Created by Astral (Ruff team)
+- Significant performance benefits for CI/CD
+- Maintains pip compatibility
+
+> UV represents the next generation of Python package management. While tools like Poetry are mature, UV's Rust foundation provides exceptional speed (especially important in CI/CD) while maintaining compatibility with traditional pip workflows. Being from the Astral team (creators of Ruff) gives confidence in its long-term maintenance.
+
+**[Task](https://taskfile.dev/)** 🎯
+- Modern alternative to Make/Poetry scripts
+- Simple, cross-platform task runner
+- Excellent GitHub Actions integration
+- Clean, intuitive YAML syntax
+
+> Task was chosen over alternatives like Make, Poetry scripts, or Poe the Poet for its simplicity and cross-platform support. Its YAML syntax is immediately understandable, and it works seamlessly on Windows - a common pain point with Makefiles.
+
+**[Git](https://git-scm.com/) + [GitLFS](https://git-lfs.com/) + [GitHub](https://github.com/)** 📚
+- Industry standard version control
+- Extensive ecosystem and integrations
+- Built-in project management features
+- Git Large File Storage (LFS) is a little-setup solution for file larger than the typical script like JSON files or Python Notebooks. Even larger files are recommended to use another storage solution such as a database or ignoring.
+
+**[GitHub Actions](https://github.com/features/actions)** 🔄
+- Integrated CI/CD solution
+- Simple configuration and maintenance
+- Native GitHub integration
+- Extensive marketplace of actions
+
+> While there are many CI/CD solutions available, GitHub Actions provides the tightest integration with our repository platform. Its marketplace of pre-built actions and simple YAML configuration makes it ideal for small teams who need professional CI/CD without dedicated DevOps resources.
+
+**[Docker](https://www.docker.com/) + [Orbstack](https://orbstack.dev/)** 🐳
+- Standard containerization platform
+- Orbstack for MacOS (lighter Docker Desktop alternative)
+- VM support through Orbstack
+- Consistent development environments
+
+> Docker remains the standard for containerization, but Docker Desktop can be resource-intensive. Orbstack provides a lightweight alternative for MacOS users while maintaining full Docker compatibility and adding convenient VM capabilities. Kubernetes is being explored but may not be the best setup for small development.
+
+**[Dev Containers](https://containers.dev/)** 📦
+- Standardized development environments
+- VS Code integration
+- *Note: Under evaluation*
+
+> While Dev Containers show promise for standardizing development environments, they're included as an optional feature pending further evaluation by Gatlen.
+
+**[AWS](https://www.geeksforgeeks.org/aws-vs-google-cloud-platform-vs-azure/#)** ☁️
+- Mature cloud infrastructure platform
+- Comprehensive service ecosystem
+- Industry standard tooling
+- Template remains cloud-agnostic where possible
+
+> AWS was selected for its maturity and comprehensive service offering. However, recognizing that cloud preferences vary, the template maintains cloud-agnostic patterns where possible, allowing for easy adaptation to other providers.
+
+> 💡 These tool selections reflect a balance between modern capabilities, developer experience, and professional requirements. Each choice prioritizes simplicity and maintainability while ensuring scalability for growing projects.
 
 ## Chosen Stack
 
