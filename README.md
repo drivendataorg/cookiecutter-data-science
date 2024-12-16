@@ -1,32 +1,16 @@
-# Cookiecutter Data Science
+# Gatlen's Opinionated Template (GOTem)
 
-_A logical, reasonably standardized but flexible project structure for doing and sharing data science work._
+A fork of the gold standard [CookieCutter Data Science](https://cookiecutter-data-science.drivendata.org/) template complete with Gatlen's preferred defaults, software, and customizations for any Python, Research, or School Project.
 
-**Cookiecutter Data Science (CCDS)** is a tool for setting up a data science project template that incorporates best practices. To learn more about CCDS's philosophy, visit the [project homepage](https://cookiecutter-data-science.drivendata.org/).
+This project is based on [CookieCutter](https://www.cookiecutter.io/), a Python based project boilerplate and templating tool. I'm writing this project so I can easily instantiate new projects with my preferred defaults, provide this to colleagues as a solid jumping off point, and to quickly adapt my prferred settings to other projects that I join.
 
-> ℹ️ Cookiecutter Data Science v2 has changed from v1. It now requires installing the new cookiecutter-data-science Python package, which extends the functionality of the [cookiecutter](https://cookiecutter.readthedocs.io/en/stable/README.html) templating utility. Use the provided `ccds` command-line program instead of `cookiecutter`.
+This is a living project, constantly to be updated as better packages and standards come out and as my preferences change. Note that even though this originated from [CookieCutter Data Science](https://cookiecutter-data-science.drivendata.org/), this is a general template and CCDS was chosen for its high quality starting point.
 
 ## Installation
 
-Cookiecutter Data Science v2 requires Python 3.8+. Since this is a cross-project utility application, we recommend installing it with [pipx](https://pypa.github.io/pipx/). Installation command options:
-
+It is recommended to use [Cruft](https://cruft.github.io/cruft/) instead of [CookieCutter](https://www.cookiecutter.io/). The resulting project is the same, but with the added option of being able to sync your project with the original template if this repository updates as if it were an incomming commit.
 ```bash
-# With pipx from PyPI (recommended)
-pipx install cookiecutter-data-science
-
-# With pip from PyPI
-pip install cookiecutter-data-science
-
-# With conda from conda-forge (coming soon)
-# conda install cookiecutter-data-science -c conda-forge
-```
-
-## Starting a new project
-
-To start a new project, run:
-
-```bash
-ccds
+    cruft create https://github.com/GatlenCulp/gatlens-opinionated-template
 ```
 
 ### The resulting directory structure
@@ -80,16 +64,6 @@ The directory structure of your new project will look something like this (depen
     │   └── train.py            <- Code to train models
     │
     └── plots.py                <- Code to create visualizations   
-```
-
-## Using v1
-
-If you want to use the old v1 project template, you need to have either the cookiecutter-data-science package or cookiecutter package installed. Then, use either command-line program with the `-c v1` option:
-
-```bash
-ccds https://github.com/drivendataorg/cookiecutter-data-science -c v1
-# or equivalently
-cookiecutter https://github.com/drivendataorg/cookiecutter-data-science -c v1
 ```
 
 ## Contributing
