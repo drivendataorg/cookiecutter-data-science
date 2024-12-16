@@ -1,5 +1,3 @@
 {
     "remote.SSH.configFile": "${workspaceFolder}/secrets/ssh/config.ssh",
-    // For ML
-    "tensorBoard.logDirectory": "${workspaceFolder}/src/tensorboard/runs",
 }
