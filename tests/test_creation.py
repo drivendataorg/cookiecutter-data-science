@@ -10,6 +10,11 @@ from conftest import bake_project
 BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
 
 
+### GATLEN'S ADDED BITS ###
+CCDS_ORIGINAL_DIR = Path(".ccds-original")
+VSCODE_CONFIG_DIR = Path(".vscode")
+
+
 def _decode_print_stdout_stderr(result: CompletedProcess) -> tuple[str, str]:
     """Print command stdout and stderr to console to use when debugging failing tests
     Normally hidden by pytest except in failure we want this displayed
@@ -69,7 +74,7 @@ def test_baking_configs(config: dict[str, Any], fast: int) -> None:
         lint(project_directory)
 
         if fast < 2:
-            verify_makefile_commands(project_directory, config)
+            verify_makefile_commands(project_directory / CCDS_ORIGINAL_DIR, config)
 
 
 def verify_folders(root: Path, config: dict[str, Any]) -> None:
@@ -80,6 +85,8 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         config: Configuration dictionary
     """
     expected_dirs = [
+        str(CCDS_ORIGINAL_DIR),
+        str(VSCODE_CONFIG_DIR),
         ".",
         "data",
         "data/external",
@@ -94,24 +101,34 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         "reports/figures",
         config["module_name"],
     ]
+    
+    assert str(VSCODE_CONFIG_DIR) in expected_dirs
 
     if config["include_code_scaffold"] == "Yes":
         expected_dirs += [
             f"{config['module_name']}/modeling",
         ]
+    
+    assert str(VSCODE_CONFIG_DIR) in expected_dirs
 
     if config["docs"] == "mkdocs":
         expected_dirs += ["docs/docs"]
 
+    assert str(VSCODE_CONFIG_DIR) in expected_dirs
+    
     expected_dirs = [
         #  (root / d).resolve().relative_to(root) for d in expected_dirs
         Path(d)
         for d in expected_dirs
     ]
+    
+    assert VSCODE_CONFIG_DIR in expected_dirs
 
     existing_dirs = [
         d.resolve().relative_to(root) for d in root.glob("**") if d.is_dir()
     ]
+    
+    assert VSCODE_CONFIG_DIR.resolve().relative_to(root) in expected_dirs
 
     assert sorted(existing_dirs) == sorted(expected_dirs)
 
@@ -124,7 +141,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         config: Configuration dictionary
     """
     expected_files = [
-        "Makefile",
+        str(CCDS_ORIGINAL_DIR / "Makefile"),
         "README.md",
         "pyproject.toml",
         "setup.cfg",

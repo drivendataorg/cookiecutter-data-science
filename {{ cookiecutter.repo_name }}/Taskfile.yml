@@ -17,10 +17,14 @@ tasks:
     desc: Install Python dependencies
     cmds:
       {% if "requirements.txt" == cookiecutter.dependency_file %}
+      {% raw %}
       - '{{.PYTHON_INTERPRETER}} -m pip install -U pip'
       - '{{.PYTHON_INTERPRETER}} -m pip install -r requirements.txt'
+      {% endraw %}
       {% elif "environment.yml" == cookiecutter.dependency_file %}
+      {% raw %}
       - conda env update --name {{.PROJECT_NAME}} --file environment.yml --prune
+      {% endraw %}
       {% elif "Pipfile" == cookiecutter.dependency_file %}
       - pipenv install
       {% endif %}
@@ -32,13 +36,18 @@ tasks:
     cmds:
       {% if cookiecutter.environment_manager == 'conda' %}
       {% if cookiecutter.dependency_file != 'environment.yml' %}
+      {% raw %}
       - conda create --name {{.PROJECT_NAME}} python={{.PYTHON_VERSION}} -y
       - echo ">>> conda env created. Activate with: conda activate {{.PROJECT_NAME}}"
+      {% endraw %}
       {% else %}
+      {% raw %}
       - conda env create --name {{.PROJECT_NAME}} -f environment.yml
       - echo ">>> conda env created. Activate with: conda activate {{.PROJECT_NAME}}"
+      {% endraw %}
       {% endif %}
       {% elif cookiecutter.environment_manager == 'virtualenv' %}
+      {% raw %}
       - |
         if [ ! -z `which virtualenvwrapper.sh` ]; then 
           source `which virtualenvwrapper.sh`
@@ -47,9 +56,12 @@ tasks:
           mkvirtualenv.bat {{.PROJECT_NAME}} --python={{.PYTHON_INTERPRETER}}
         fi
       - echo ">>> New virtualenv created. Activate with: workon {{.PROJECT_NAME}}"
+      {% endraw %}
       {% elif cookiecutter.environment_manager == 'pipenv' %}
+      {% raw %}
       - pipenv --python {{.PYTHON_VERSION}}
       - echo ">>> New pipenv created. Activate with: pipenv shell"
+      {% endraw %}
       {% endif %}
   {% endif %}
 
@@ -66,14 +78,18 @@ tasks:
   lint:
     desc: Lint using flake8 and black
     cmds:
+      {% raw %}
       - flake8 {{.MODULE_NAME}}
       - isort --check --diff --profile black {{.MODULE_NAME}}
       - black --check --config pyproject.toml {{.MODULE_NAME}}
+      {% endraw %}
 
   format:
     desc: Format source code with black
     cmds:
+      {% raw %}
       - black --config pyproject.toml {{.MODULE_NAME}}
+      {% endraw %}
 
   ###############################################################################
   # Data Sync
@@ -112,7 +128,9 @@ tasks:
     desc: Make dataset
     deps: [requirements]
     cmds:
+      {% raw %}
       - '{{.PYTHON_INTERPRETER}} {{.MODULE_NAME}}/dataset.py'
+      {% endraw %}
   {% endif %}
 
   default:
