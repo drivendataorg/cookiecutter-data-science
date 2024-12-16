@@ -11,10 +11,10 @@ Change directories into the docs folder:
 
 Use [mkdocs](https://www.mkdocs.org/) structure to update the documentation. Test locally with:
 
-    mkdocs serve
+    uv run mkdocs serve
 
 Once the docs look good, publish to `gh-pages` branch with:
 
-    mkdocs gh-deploy --clean
+    uv run mkdocs gh-deploy --clean
 
 ** Note **: Never edit the generated site by hand because using `gh-deploy` blows away the `gh-pages` branch and you'll lose your edits.

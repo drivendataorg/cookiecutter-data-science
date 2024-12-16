@@ -1,9 +1,9 @@
-site_name: Cookiecutter Data Science
-site_description: A project template and directory structure for Python data science projects.
-site_url: https://cookiecutter-data-science.drivendata.org
-repo_url: https://github.com/drivendataorg/cookiecutter-data-science
+site_name: Gatlen's Opinionated Template (GOTem)
+site_description: A modern, opinionated full-stack CookieCutter project template that prioritizes developer experience and cutting-edge tools. Built on (and synced with) the foundation of CookieCutter Data Science (CCDS) V2, this template incorporates carefully selected defaults, dependency stack, customizations, and contemporary best practices for Python development, research projects, and academic work.
+site_url: https://gatlenculp.github.io/gatlens-opinionated-template/
+repo_url: https://github.com/GatlenCulp/gatlens-opinionated-template
 edit_uri: edit/master/docs/docs
-copyright: Project maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>.
+copyright: Upstream maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>, fork maintained by <a target=_blanks href="https://gatlen.notion.site">Gatlen Culp</a>.
 theme: 
   favicon: favicon.ico
   features:
@@ -26,7 +26,6 @@ nav:
   - All options: all-options.md
   - Contributing: contributing.md
   - Related projects: related.md
-  - v1 Template: v1.md
 extra:
   analytics:
     provider: google

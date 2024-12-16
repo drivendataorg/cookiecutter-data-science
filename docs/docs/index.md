@@ -1,15 +1,10 @@
-# Cookiecutter Data Science
+# Gatlen's Opinionated Template (GOTem)
 
-_A logical, flexible, and reasonably standardized project structure for doing and sharing data science work._
+_A modern, opinionated full-stack [CookieCutter](https://www.cookiecutter.io/) project template that prioritizes developer experience and cutting-edge tools. Built on (and synced with) the foundation of [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), this template incorporates carefully selected defaults, dependency stack, customizations, and contemporary best practices for Python development, research projects, and academic work._
 
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
 </a>
-
-!!! info "CCDS V2 Announcement"
-
-    Version 2 of Cookiecutter Data Science has launched recently. To learn more about what's different and what's in progress, see the [announcement blog post for more information](https://drivendata.co/blog/ccds-v2).
-
 
 ## Quickstart
 
