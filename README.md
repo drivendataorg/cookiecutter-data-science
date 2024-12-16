@@ -222,19 +222,41 @@ This template is primarily a research and learning project that explores modern 
 
 We welcome contributions! [See the docs for guidelines](./CONTRIBUTING.md).
 
-### Installing development requirements
+### Installing Requirements
 
+Create virtual environment
 ```bash
-pip install -r dev-requirements.txt
+    uv venv
+```
+
+Install general requirements
+```bash
+    uv pip install -e .
+```
+
+Install dev requirements
+```bash
+    uv pip install -r dev-requirements.txt
 ```
 
 ### Running the tests
 
 ```bash
-pytest tests
+    uvx pytest tests
 ```
-### Inspirations
-- https://github.com/crmne/cookiecutter-modern-datascience
-- https://github.com/drivendataorg/cookiecutter-data-science
-- https://github.com/fpgmaas/cookiecutter-uv
-- https://github.com/fastapi/full-stack-fastapi-template
+## Inspirations & Acknowledgments 🙏
+
+This project builds upon the excellent work of several established templates and projects:
+
+**[cookiecutter-data-science](https://github.com/drivendataorg/cookiecutter-data-science)** 📊
+- The original inspiration for this template
+- Established many best practices for data science project organization
+- Created by DrivenData, widely adopted in the data science community
+
+**[cookiecutter-modern-datascience](https://github.com/crmne/cookiecutter-modern-datascience)** 🔬
+
+**[cookiecutter-uv](https://github.com/fpgmaas/cookiecutter-uv)** ⚡
+
+**[full-stack-fastapi-template](https://github.com/fastapi/full-stack-fastapi-template)** 🚀
+
+> 💡 While this template draws inspiration from these excellent projects, it takes an opinionated approach to combining their best aspects while introducing modern tooling and development practices.

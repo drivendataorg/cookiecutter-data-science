@@ -6,10 +6,11 @@ build-backend = "flit_core.buildapi"
 name = "ccds"
 
 [project]
-name = "cookiecutter-data-science"
-version = "2.0.0"
-description = "A logical, reasonably standardized but flexible project structure for doing and sharing data science work."
+name = "gatlens-opinionated-template"
+version = "0.0.1"
+description = "A modern, opinionated full-stack CookieCutter project template that prioritizes developer experience and cutting-edge tools."
 authors = [
+  { name = "Gatlen Culp", email = "GatlenCulp@gmail.com" },
   { name = "DrivenData", email = "info@drivendata.org" },
 ]
 license = { file = "LICENSE" }
@@ -38,7 +39,5 @@ dependencies = [
 ccds = "ccds.__main__:main"
 
 [project.urls]
-"Homepage" = "https://cookiecutter-data-science.drivendata.org/"
-"Source Code" = "https://github.com/drivendataorg/cookiecutter-data-science/"
-"Bug Tracker" = "https://github.com/drivendataorg/cookiecutter-data-science/issues"
-"DrivenData" = "https://drivendata.co"
+"Source Code" = "https://github.com/GatlenCulp/gatlens-opinionated-template"
+"Gatlen's Portfolio" = "https://gatlen.notion.site/"
