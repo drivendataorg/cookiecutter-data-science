@@ -8,7 +8,25 @@ _A modern, opinionated full-stack [CookieCutter](https://www.cookiecutter.io/) p
 
 ## Quickstart
 
-Cookiecutter Data Science v2 requires Python 3.8+. Since this is a cross-project utility application, we recommend installing it with [pipx](https://pypa.github.io/pipx/). Installation command options:
+Cookiecutter Data Science v2 requires Python 3.8+. I recommend installing it with [UV](https://github.com/astral-sh/uv). Installation command options:
+
+=== "With uv (recommended)"
+
+    ```bash
+    uv pip install cookiecutter-data-science
+
+    # From the parent directory where you want your project
+    ccds
+    ```
+
+=== "With pipx"
+
+    ```bash
+    pipx install cookiecutter-data-science
+
+    # From the parent directory where you want your project
+    ccds
+    ```
 
 === "With pipx (recommended)"
 
@@ -35,15 +53,6 @@ Cookiecutter Data Science v2 requires Python 3.8+. Since this is a cross-project
 
     # From the parent directory where you want your project
     # ccds
-    ```
-
-=== "Use the v1 template"
-
-    ```bash
-    pip install cookiecutter
-
-    # From the parent directory where you want your project
-    cookiecutter https://github.com/drivendataorg/cookiecutter-data-science -c v1
     ```
 
 !!! info "Use the ccds command-line tool"
