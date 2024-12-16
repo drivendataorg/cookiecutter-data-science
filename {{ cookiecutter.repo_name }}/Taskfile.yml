@@ -52,10 +52,11 @@ tasks:
         if [ ! -z `which virtualenvwrapper.sh` ]; then 
           source `which virtualenvwrapper.sh`
           mkvirtualenv {{.PROJECT_NAME}} --python={{.PYTHON_INTERPRETER}}
+          echo ">>> New virtualenv created. Activate with: workon {{.PROJECT_NAME}}"
         else 
           mkvirtualenv.bat {{.PROJECT_NAME}} --python={{.PYTHON_INTERPRETER}}
+          echo ">>> New virtualenv created. Activate with: workon {{.PROJECT_NAME}}"
         fi
-      - echo ">>> New virtualenv created. Activate with: workon {{.PROJECT_NAME}}"
       {% endraw %}
       {% elif cookiecutter.environment_manager == 'pipenv' %}
       {% raw %}

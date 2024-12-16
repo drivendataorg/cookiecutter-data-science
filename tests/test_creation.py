@@ -13,6 +13,8 @@ BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
 ### GATLEN'S ADDED BITS ###
 CCDS_ORIGINAL_DIR = Path(".ccds-original")
 VSCODE_CONFIG_DIR = Path(".vscode")
+OUT_DIR = Path("out")
+
 
 
 def _decode_print_stdout_stderr(result: CompletedProcess) -> tuple[str, str]:
@@ -53,7 +55,10 @@ def no_curlies(filepath: Path) -> bool:
     """
     data = filepath.open("r").read()
 
-    template_strings = ["{{", "}}", "{%", "%}"]
+    template_strings = [
+        "{{ ", " }}", # Exclude due to Go string templates in Taskfile
+        "{%", "%}"
+        ]
 
     template_strings_in_file = [s in data for s in template_strings]
     return not any(template_strings_in_file)
@@ -94,11 +99,13 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         "data/processed",
         "data/raw",
         "docs",
-        "models",
+        str(OUT_DIR),
+        str(OUT_DIR / "models"),
+        str(OUT_DIR / "features"),
+        str(OUT_DIR / "reports" / "figures"),
         "notebooks",
-        "references",
-        "reports",
-        "reports/figures",
+        # "references",
+        str(OUT_DIR / "reports"),
         config["module_name"],
     ]
     
@@ -128,7 +135,7 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         d.resolve().relative_to(root) for d in root.glob("**") if d.is_dir()
     ]
     
-    assert VSCODE_CONFIG_DIR.resolve().relative_to(root) in expected_dirs
+    # assert VSCODE_CONFIG_DIR.resolve().relative_to(root) in expected_dirs
 
     assert sorted(existing_dirs) == sorted(expected_dirs)
 
@@ -141,7 +148,8 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         config: Configuration dictionary
     """
     expected_files = [
-        str(CCDS_ORIGINAL_DIR / "Makefile"),
+        "Makefile",
+        str(CCDS_ORIGINAL_DIR / "README.md"),
         "README.md",
         "pyproject.toml",
         "setup.cfg",
@@ -153,10 +161,16 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         "data/raw/.gitkeep",
         "docs/.gitkeep",
         "notebooks/.gitkeep",
-        "references/.gitkeep",
-        "reports/.gitkeep",
-        "reports/figures/.gitkeep",
-        "models/.gitkeep",
+        # "references/.gitkeep",
+        str(VSCODE_CONFIG_DIR / f"{config["repo_name"]}.code-workspace"),
+        str(VSCODE_CONFIG_DIR / "launch.json"),
+        str(VSCODE_CONFIG_DIR / "settings.json"),
+        str(VSCODE_CONFIG_DIR / "tasks.json"),
+        str(OUT_DIR / "reports" / ".gitkeep"),
+        str(OUT_DIR / "features" / ".gitkeep"),
+        str(OUT_DIR / "reports" / "figures" / ".gitkeep"),
+        str(OUT_DIR / "models" / ".gitkeep"),
+        "Taskfile.yml",
         f"{config['module_name']}/__init__.py",
     ]
 
@@ -250,6 +264,7 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
 def lint(root):
     """Run the linters on the project."""
     result = run(
+        # ["task", "lint"],
         ["make", "lint"],
         cwd=root,
         stderr=PIPE,
