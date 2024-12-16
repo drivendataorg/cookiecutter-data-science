@@ -1,3 +1,14 @@
+# Environments and Secrets
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+secrets/*
+!secrets/example*
+
 # Data
 /data/
 
