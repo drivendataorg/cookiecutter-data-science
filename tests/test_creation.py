@@ -2,16 +2,23 @@ import json
 import os
 import sys
 from pathlib import Path
-from subprocess import PIPE, run
+from subprocess import PIPE, CompletedProcess, run
+from typing import Any
 
 from conftest import bake_project
 
 BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
 
 
-def _decode_print_stdout_stderr(result):
+def _decode_print_stdout_stderr(result: CompletedProcess) -> tuple[str, str]:
     """Print command stdout and stderr to console to use when debugging failing tests
     Normally hidden by pytest except in failure we want this displayed
+    
+    Args:
+        result: CompletedProcess object from subprocess.run
+        
+    Returns:
+        Tuple of (stdout_string, stderr_string)
     """
     encoding = sys.stdout.encoding
 
@@ -29,9 +36,15 @@ def _decode_print_stdout_stderr(result):
     return stdout, stderr
 
 
-def no_curlies(filepath):
+def no_curlies(filepath: Path) -> bool:
     """Utility to make sure no curly braces appear in a file.
     That is, was Jinja able to render everything?
+    
+    Args:
+        filepath: Path to file to check
+        
+    Returns:
+        True if no template strings found, False otherwise
     """
     data = filepath.open("r").read()
 
@@ -41,9 +54,13 @@ def no_curlies(filepath):
     return not any(template_strings_in_file)
 
 
-def test_baking_configs(config, fast):
+def test_baking_configs(config: dict[str, Any], fast: int) -> None:
     """For every generated config in the config_generator, run all
     of the tests.
+    
+    Args:
+        config: Configuration dictionary
+        fast: Integer controlling test speed/depth
     """
     print("using config", json.dumps(config, indent=2))
     with bake_project(config) as project_directory:
@@ -55,8 +72,13 @@ def test_baking_configs(config, fast):
             verify_makefile_commands(project_directory, config)
 
 
-def verify_folders(root, config):
-    """Tests that expected folders and only expected folders exist."""
+def verify_folders(root: Path, config: dict[str, Any]) -> None:
+    """Tests that expected folders and only expected folders exist.
+    
+    Args:
+        root: Root directory path
+        config: Configuration dictionary
+    """
     expected_dirs = [
         ".",
         "data",
@@ -94,8 +116,13 @@ def verify_folders(root, config):
     assert sorted(existing_dirs) == sorted(expected_dirs)
 
 
-def verify_files(root, config):
-    """Test that expected files and only expected files exist."""
+def verify_files(root: Path, config: dict[str, Any]) -> None:
+    """Test that expected files and only expected files exist.
+    
+    Args:
+        root: Root directory path
+        config: Configuration dictionary
+    """
     expected_files = [
         "Makefile",
         "README.md",
@@ -151,12 +178,22 @@ def verify_files(root, config):
         assert no_curlies(root / f)
 
 
-def verify_makefile_commands(root, config):
+def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
     """Actually shell out to bash and run the make commands for:
     - blank command listing commands
     - create_environment
     - requirements
     Ensure that these use the proper environment.
+    
+    Args:
+        root: Root directory path
+        config: Configuration dictionary
+        
+    Returns:
+        True if verification succeeds
+        
+    Raises:
+        ValueError: If environment manager not found in test harnesses
     """
     test_path = Path(__file__).parent
 

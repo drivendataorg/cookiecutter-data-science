@@ -9,7 +9,9 @@ _Currently not for production!_
 
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-A modern, opinionated full-stack [CookieCutter](https://www.cookiecutter.io/) project template that prioritizes developer experience and cutting-edge tools. Built on the foundation of [CookieCutter Data Science](https://cookiecutter-data-science.drivendata.org/), this template incorporates carefully selected defaults, dependency stack, customizations, and contemporary best practices for Python development, research projects, and academic work.
+A modern, opinionated full-stack [CookieCutter](https://www.cookiecutter.io/) project template that prioritizes developer experience and cutting-edge tools. Built on (and synced with) the foundation of [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), this template incorporates carefully selected defaults, dependency stack, customizations, and contemporary best practices for Python development, research projects, and academic work.
+
+_The main functionality of this project is kept as close as possible to the CCDS template as to avoid additional maintenance on my end._
 
 ## Key Features
 - 🚀 Modern tooling (UV, Ruff, FastAPI, Pydantic, Typer, Loguru, Polars, etc.) over traditional defaults
@@ -94,7 +96,7 @@ The directory structure of your new project will look something like this (depen
     └── plots.py                <- Code to create visualizations   
 ```
 
-## Philosophy
+## Philosophy 🧭
 <!-- 
 This project is more of a hobby and research project more than it is a practical template. Gatlen really enjoys the occasional research on the tooling ecosystem and understanding which tools solve what problems and how. He tends to have a very prefectionist perspective on projects beyond what is practical. Many of the packages included in this project, Gatlen has not yet used, but rather examined and compared against other tools and determined to be something to leverage once the need arises. The selection of packages and tools are in a way, a reminder of what resources he has have determined in advance to likely be helpful.
 
@@ -107,8 +109,6 @@ Here are a few guiding principles of this template to determine whether or not y
 6. **Small Teams / Individual** -- As someone who personally tends to work by myself or with a few people on research projects, I gear this template towards iterating quickly and with high quality. If a tool requires such deep knowledge that someone has to spend a day researching it just to use, I don't want it.
 7. **Scalable** -- As noted above, this is mainly geared to individuals and small teams. However, in the case you want to scale production or team size or even if you move to a new and larger organization, I want those skills to transfer and for there to be little more to learn and so that you don't have to learn an entirely new skillset or library. -->
 
-
-## Philosophy 🧭
 
 This template is primarily a research and learning project that explores modern Python development tools and practices. Rather than focusing solely on practical, production-ready solutions, it represents an aspirational view of Python development that emphasizes cutting-edge tools and emerging best practices.
 
@@ -224,15 +224,17 @@ We welcome contributions! [See the docs for guidelines](./CONTRIBUTING.md).
 
 ### Installing Requirements
 
+It is recommended to use [UV](https://github.com/astral-sh/uv) for installations.
+
 Create virtual environment
 ```bash
     uv venv
 ```
 
-Install general requirements
+<!-- Install general requirements
 ```bash
     uv pip install -e .
-```
+``` -->
 
 Install dev requirements
 ```bash
@@ -241,8 +243,10 @@ Install dev requirements
 
 ### Running the tests
 
+<!-- uvx vs uv run  -->
+
 ```bash
-    uvx pytest tests
+    uv run pytest
 ```
 ## Inspirations & Acknowledgments 🙏
 
