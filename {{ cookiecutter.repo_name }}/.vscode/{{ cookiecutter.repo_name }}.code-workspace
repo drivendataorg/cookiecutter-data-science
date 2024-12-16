@@ -1,12 +1,21 @@
 {
 	"folders": [
 		{
+			"name": "root",
 			"path": ".."
-		}
+		},
+		// Option #02
+		// {
+		// 	"name": "package",
+		// 	"path": "../{{ cookiecutter.module_name }}/"
+		// }
 	],
 	"settings": {
 		// Excluded Files Won't Show in Sidebar
 		"files.exclude": {
+			// Option #02
+			"**/{{ cookiecutter.module_name }}/": false,
+			
 			// Version Control
 			"**/.git": false,
 			"**/.gitattributes": false,
@@ -72,9 +81,6 @@
 			"**/*.cover": false,
 
 			// Databases
-			"**/*.sqlite": false,
-			"**/*.sqlite3": false,
-			"**/*.db": false,
 			"**/dump.rdb": false,
 
 			// LaTeX
@@ -91,16 +97,17 @@
 			"**/*.synctex.gz*": true,
 			"**/*.toc": true,
 			"**/_minted*": true,
-
-			// Secrets & Security
-			"**/*.pem": false,
-			"**/*.key": false,
-			"**/*.crt": false,
-			"**/*.cer": false,
-			"**/*.ca-bundle": false,
-			"**/secrets": false,
-			"**/credentials": false
 		},
-		"explorerExclude.backup": {}
+		"explorerExclude.backup": {},
+		"workbench.colorCustomizations": {
+			"editor.lineHighlightBackground": "#1073cf2d",
+			"editor.lineHighlightBorder": "#9fced11f",
+			"statusBar.background": "#28632b",
+			"statusBar.foreground": "#ffffff",
+			"statusBarItem.hoverBackground": "#327e36",
+			"activityBar.background": "#422433",
+			"titleBar.activeBackground": "#5D3247",
+			"titleBar.activeForeground": "#FCF9FB"
+		}
 	}
 }

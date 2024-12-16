@@ -5,7 +5,7 @@
             "name": "Debug Main",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/src/main.py",
+            "program": "${workspaceFolder}/{{ cookiecutter.module_name }}/main.py",
             "console": "integratedTerminal"
         },
         {
