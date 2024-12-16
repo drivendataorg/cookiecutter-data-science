@@ -3,7 +3,7 @@
 
 ## GLOBALS
 
-PROJECT_NAME = cookiecutter-data-science
+PROJECT_NAME = gatlens-opinionated-template
 PYTHON_VERSION = 3.10
 PYTHON_INTERPRETER = python
 

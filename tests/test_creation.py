@@ -79,7 +79,7 @@ def test_baking_configs(config: dict[str, Any], fast: int) -> None:
         lint(project_directory)
 
         if fast < 2:
-            verify_makefile_commands(project_directory / CCDS_ORIGINAL_DIR, config)
+            verify_makefile_commands(project_directory, config)
 
 
 def verify_folders(root: Path, config: dict[str, Any]) -> None:
