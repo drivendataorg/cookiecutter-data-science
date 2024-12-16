@@ -28,14 +28,6 @@ Cookiecutter Data Science v2 requires Python 3.8+. I recommend installing it wit
     ccds
     ```
 
-=== "With pipx (recommended)"
-
-    ```bash
-    pipx install cookiecutter-data-science
-
-    # From the parent directory where you want your project
-    ccds
-    ```
 
 === "With pip"
 
