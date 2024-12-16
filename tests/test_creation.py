@@ -16,14 +16,13 @@ VSCODE_CONFIG_DIR = Path(".vscode")
 OUT_DIR = Path("out")
 
 
-
 def _decode_print_stdout_stderr(result: CompletedProcess) -> tuple[str, str]:
     """Print command stdout and stderr to console to use when debugging failing tests
     Normally hidden by pytest except in failure we want this displayed
-    
+
     Args:
         result: CompletedProcess object from subprocess.run
-        
+
     Returns:
         Tuple of (stdout_string, stderr_string)
     """
@@ -46,19 +45,21 @@ def _decode_print_stdout_stderr(result: CompletedProcess) -> tuple[str, str]:
 def no_curlies(filepath: Path) -> bool:
     """Utility to make sure no curly braces appear in a file.
     That is, was Jinja able to render everything?
-    
+
     Args:
         filepath: Path to file to check
-        
+
     Returns:
         True if no template strings found, False otherwise
     """
     data = filepath.open("r").read()
 
     template_strings = [
-        "{{ ", " }}", # Exclude due to Go string templates in Taskfile
-        "{%", "%}"
-        ]
+        "{{ ",
+        " }}",  # Exclude due to Go string templates in Taskfile
+        "{%",
+        "%}",
+    ]
 
     template_strings_in_file = [s in data for s in template_strings]
     return not any(template_strings_in_file)
@@ -67,7 +68,7 @@ def no_curlies(filepath: Path) -> bool:
 def test_baking_configs(config: dict[str, Any], fast: int) -> None:
     """For every generated config in the config_generator, run all
     of the tests.
-    
+
     Args:
         config: Configuration dictionary
         fast: Integer controlling test speed/depth
@@ -84,7 +85,7 @@ def test_baking_configs(config: dict[str, Any], fast: int) -> None:
 
 def verify_folders(root: Path, config: dict[str, Any]) -> None:
     """Tests that expected folders and only expected folders exist.
-    
+
     Args:
         root: Root directory path
         config: Configuration dictionary
@@ -99,6 +100,7 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         "data/processed",
         "data/raw",
         "docs",
+        "logs",
         "secrets",
         "secrets/schema",
         "secrets/schema/ssh",
@@ -112,33 +114,33 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         str(OUT_DIR / "reports"),
         config["module_name"],
     ]
-    
+
     assert str(VSCODE_CONFIG_DIR) in expected_dirs
 
     if config["include_code_scaffold"] == "Yes":
         expected_dirs += [
             f"{config['module_name']}/modeling",
         ]
-    
+
     assert str(VSCODE_CONFIG_DIR) in expected_dirs
 
     if config["docs"] == "mkdocs":
         expected_dirs += ["docs/docs"]
 
     assert str(VSCODE_CONFIG_DIR) in expected_dirs
-    
+
     expected_dirs = [
         #  (root / d).resolve().relative_to(root) for d in expected_dirs
         Path(d)
         for d in expected_dirs
     ]
-    
+
     assert VSCODE_CONFIG_DIR in expected_dirs
 
     existing_dirs = [
         d.resolve().relative_to(root) for d in root.glob("**") if d.is_dir()
     ]
-    
+
     # assert VSCODE_CONFIG_DIR.resolve().relative_to(root) in expected_dirs
 
     assert sorted(existing_dirs) == sorted(expected_dirs)
@@ -146,7 +148,7 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
 
 def verify_files(root: Path, config: dict[str, Any]) -> None:
     """Test that expected files and only expected files exist.
-    
+
     Args:
         root: Root directory path
         config: Configuration dictionary
@@ -159,6 +161,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         # "setup.cfg",
         ".gitignore",
         ".gitattributes",
+        "logs/.gitkeep",
         "data/external/.gitkeep",
         "data/interim/.gitkeep",
         "data/processed/.gitkeep",
@@ -226,14 +229,14 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
     - create_environment
     - requirements
     Ensure that these use the proper environment.
-    
+
     Args:
         root: Root directory path
         config: Configuration dictionary
-        
+
     Returns:
         True if verification succeeds
-        
+
     Raises:
         ValueError: If environment manager not found in test harnesses
     """

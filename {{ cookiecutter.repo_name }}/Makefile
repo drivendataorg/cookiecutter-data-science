@@ -41,7 +41,7 @@ lint:
 ## Format source code with black
 .PHONY: format
 format:
-	black --config pyproject.toml {{ cookiecutter.module_name }}
+	ruff --config pyproject.toml {{ cookiecutter.module_name }}
 
 {% if not cookiecutter.dataset_storage.none %}
 ## Download Data from storage system
