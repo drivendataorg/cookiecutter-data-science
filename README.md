@@ -1,5 +1,5 @@
 # Gatlen's Opinionated Template (GOTem)
-_Currently not for production!_
+_v0.0.1 is Currently not for production!_
 
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
     <img src="https://img.shields.io/badge/CCDS-Project%20fork-328F97?logo=cookiecutter" />
@@ -11,7 +11,7 @@ _Currently not for production!_
 
 A modern, opinionated full-stack [CookieCutter](https://www.cookiecutter.io/) project template that prioritizes developer experience and cutting-edge tools. Built on (and synced with) the foundation of [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), this template incorporates carefully selected defaults, dependency stack, customizations, and contemporary best practices for Python development, research projects, and academic work.
 
-_The main functionality of this project is kept as close as possible to the CCDS template as to avoid additional maintenance on my end._
+_The main functionality of this project is kept as close as possible to the CCDS template as to avoid additional maintenance on my end. This might mean a mismatch between practices I recommend and the ones they do. Ex: Makefiles on root, Taskfiles in template._
 
 ## Key Features
 - 🚀 Modern tooling (UV, Ruff, FastAPI, Pydantic, Typer, Loguru, Polars, etc.) over traditional defaults
@@ -161,12 +161,14 @@ This template is primarily a research and learning project that explores modern 
 
 **[UV](https://github.com/astral-sh/uv)** ⚡
 - Ultra-fast Rust-based Python package manager
-- Combines functionality of Poetry, virtualenv, and pipx
+- Combines functionality of Poetry, virtualenv, and pipx (with dirt easy deployment to PyPi.)
 - Created by Astral (Ruff team)
 - Significant performance benefits for CI/CD
 - Maintains pip compatibility
 
 > UV represents the next generation of Python package management. While tools like Poetry are mature, UV's Rust foundation provides exceptional speed (especially important in CI/CD) while maintaining compatibility with traditional pip workflows. Being from the Astral team (creators of Ruff) gives confidence in its long-term maintenance.
+
+<!-- TODO: Explain why not conda environment -->
 
 **[Task](https://taskfile.dev/)** 🎯
 - Modern alternative to Make/Poetry scripts
@@ -243,11 +245,18 @@ Install dev requirements
 
 ### Running the tests
 
-<!-- uvx vs uv run  -->
+<!-- uvx vs uv run https://docs.astral.sh/uv/concepts/tools/ -->
 
 ```bash
     uv run pytest
 ```
+
+_Note: configs[2-5] require conda to be installed. MiniConda has not yet been researched to see if it is the best option out there but it will make your run work:_
+
+```bash
+    brew install --cask miniconda
+```
+
 ## Inspirations & Acknowledgments 🙏
 
 This project builds upon the excellent work of several established templates and projects:
