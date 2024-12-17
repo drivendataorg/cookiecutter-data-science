@@ -5,35 +5,34 @@ PROJECT_NAME=$(basename $1)
 CCDS_ROOT=$(dirname $0)
 MODULE_NAME=$2
 
-# Configure exit / teardown behavior
+# configure exit / teardown behavior
 function finish {
-    if [ -d ".venv" ]; then
-        rm -rf .venv  # <--- [CHANGED] Remove virtual environment directory instead of using pipenv --rm
+    if [[ $(which python) == *"$PROJECT_NAME"* ]]; then
+        exit
     fi
+    
+    pipenv --rm
 }
 trap finish EXIT
 
-# Source the steps in the test
+# source the steps in the test
 source $CCDS_ROOT/test_functions.sh
 
-# Navigate to the generated project and run make commands 
+# navigate to the generated project and run make commands 
 cd $1
 make
+make create_environment
 
-# Create and activate virtual environment
-python -m venv .venv
-source .venv/bin/activate
+# can happen outside of environment since pipenv knows based on Pipfile
+make requirements
 
-# Install dependencies using uv
-uv pip install -r requirements.txt
+# test with pipenv run
+pipenv run python -c "import sys; assert \"$PROJECT_NAME\" in sys.executable"
 
-# Test python executable path
-python -c "import sys; assert \"$PROJECT_NAME\" in sys.executable"
+# test importable
+pipenv run python -c "import $MODULE_NAME"
 
-# Test module importability
-python -c "import $MODULE_NAME"
-
-# Test config importability if scaffolded
+# test config importable if scaffolded
 if [ -f "$MODULE_NAME/config.py" ]; then
-    python -c "from $MODULE_NAME import config"
+    pipenv run python -c "from $MODULE_NAME import config"
 fi
