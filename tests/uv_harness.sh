@@ -8,7 +8,7 @@ MODULE_NAME=$2
 # Configure exit / teardown behavior
 function finish {
     if [ -d ".venv" ]; then
-        rm -rf .venv  # <--- [CHANGED] Remove virtual environment directory instead of using pipenv --rm
+        rm -rf .venv
     fi
 }
 trap finish EXIT

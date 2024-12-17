@@ -277,5 +277,28 @@
                 } 
             }
         ]
+    },
+    {
+        "field": "use_github",
+        "help": {
+            "description": "Use your stored GitHub credentials to upload to your project as a private repo.",
+            "more_information": ""
+        },
+        "choices": [
+            {
+                "choice": "Yes",
+                "help": {
+                    "description": "Git instantiated into repo and uploaded to GitHub",
+                    "more_information": ""
+                } 
+            },
+            {
+                "choice": "No",
+                "help": {
+                    "description": "No VCS/Git instantiation.",
+                    "more_information": ""
+                } 
+            }
+        ]
     }
 ]

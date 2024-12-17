@@ -273,6 +273,8 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
         harness_path = test_path / "virtualenv_harness.sh"
     elif config["environment_manager"] == "pipenv":
         harness_path = test_path / "pipenv_harness.sh"
+    elif config["environment_manager"] == "uv":
+        harness_path = test_path / "uv_harness.sh"
     elif config["environment_manager"] == "none":
         return True
     else:

@@ -19,6 +19,7 @@ default_args = {
     "module_name": "project_module",
     "author_name": "DrivenData",
     "description": "A test project",
+    "use_github": "No"
 }
 
 

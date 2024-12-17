@@ -87,9 +87,11 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
 #  GATLEN'S UPLOAD TO GITHUB REPO CODE
 #
 
+# {% if cookiecutter.use_github == "Yes" %}
 configure_github_repo(
     directory=os.getcwd(),
     repo_name="{{ cookiecutter.repo_name }}",
     protection_type="main_and_dev",
     no_github=False
 )
+# {% endif %}
