@@ -7,7 +7,7 @@ name = "ccds"
 
 [project]
 name = "gatlens-opinionated-template"
-version = "0.0.1"
+version = "0.0.2"
 description = "A modern, opinionated full-stack CookieCutter project template that prioritizes developer experience and cutting-edge tools."
 authors = [
   { name = "Gatlen Culp", email = "GatlenCulp@gmail.com" },
@@ -48,3 +48,8 @@ addopts = """
 -vv
 --color=no
 """
+
+[[tool.uv.index]]
+name = "gatlens-opinionated-template"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"

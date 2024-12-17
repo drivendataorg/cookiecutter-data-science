@@ -46,14 +46,14 @@ Clone using Cruft
 ```bash
     cruft create https://github.com/GatlenCulp/gatlens-opinionated-template
 ``` -->
-Install CCDS
+Install Gatlen's Opinionated Template (GOTem)
 ```bash
-    uv tool install cookiecutter-data-science
+uv tool install gatlens-opinionated-template
 ```
 
 Instantiate my project
 ```bash
-    uvx --from cookiecutter-data-science ccds https://github.com/GatlenCulp/gatlens-opinionated-template
+uvx --from gatlens-opinionated-template gotem
 ```
 
 
@@ -371,7 +371,7 @@ It is recommended to use [UV](https://github.com/astral-sh/uv) for installations
 
 Create virtual environment
 ```bash
-    uv venv
+uv venv
 ```
 
 <!-- Install general requirements
@@ -381,7 +381,7 @@ Create virtual environment
 
 Install dev requirements
 ```bash
-    uv pip install -r dev-requirements.txt
+uv pip install -r dev-requirements.txt
 ```
 
 ### Running the tests
@@ -389,13 +389,13 @@ Install dev requirements
 <!-- uvx vs uv run https://docs.astral.sh/uv/concepts/tools/ -->
 
 ```bash
-    uv run pytest
+uv run pytest
 ```
 
 _Note: configs[2-5] require conda to be installed. MiniConda has not yet been researched to see if it is the best option out there but it will make your run work:_
 <!-- Conda-forge may be better -->
 ```bash
-    brew install --cask miniconda
+brew install --cask miniconda
 ```
 
 ## Inspirations & Acknowledgments 🙏

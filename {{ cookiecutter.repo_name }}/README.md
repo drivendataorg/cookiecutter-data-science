@@ -1,8 +1,6 @@
 # {{cookiecutter.project_name}}
 
-<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
-    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
-</a>
+![Uses the Cookiecutter Data Science project template, GOTem style](https://img.shields.io/badge/CCDS_GOTem-Project%20Instance-328F97?logo=cookiecutter)
 
 {{cookiecutter.description}}
 

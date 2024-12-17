@@ -120,34 +120,33 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         str(OUT_DIR / "reports"),
         config["module_name"],
     ]
-
-    assert str(VSCODE_CONFIG_DIR) in expected_dirs
+    
+    ignore_dirs = [
+        ".git"
+    ]
 
     if config["include_code_scaffold"] == "Yes":
         expected_dirs += [
             f"{config['module_name']}/modeling",
         ]
-
-    assert str(VSCODE_CONFIG_DIR) in expected_dirs
-
+        
     if config["docs"] == "mkdocs":
         expected_dirs += ["docs/docs"]
-
-    assert str(VSCODE_CONFIG_DIR) in expected_dirs
 
     expected_dirs = [
         #  (root / d).resolve().relative_to(root) for d in expected_dirs
         Path(d)
         for d in expected_dirs
     ]
-
-    assert VSCODE_CONFIG_DIR in expected_dirs
-
+    
     existing_dirs = [
-        d.resolve().relative_to(root) for d in root.glob("**") if d.is_dir()
+    d.resolve().relative_to(root)
+        for d in root.glob("**")
+        if d.is_dir() and not any(
+            ignore_dir in d.relative_to(root).parts
+            for ignore_dir in ignore_dirs
+        )
     ]
-
-    # assert VSCODE_CONFIG_DIR.resolve().relative_to(root) in expected_dirs
 
     assert sorted(existing_dirs) == sorted(expected_dirs)
 
@@ -202,6 +201,10 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         ".cursorrules",
         f"{config['module_name']}/__init__.py",
     ]
+    
+    ignore_dirs = [
+        ".git"
+    ]
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):
@@ -230,7 +233,14 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
 
     expected_files = [Path(f) for f in expected_files]
 
-    existing_files = [f.relative_to(root) for f in root.glob("**/*") if f.is_file()]
+    existing_files = [
+        f.relative_to(root)
+            for f in root.glob("**/*")
+            if f.is_file() and not any(
+                ignore_dir in f.relative_to(root).parts
+                for ignore_dir in ignore_dirs
+            )
+    ]
 
     assert sorted(existing_files) == sorted(expected_files)
 

@@ -3,6 +3,8 @@ import subprocess
 from pathlib import Path
 from typing import Literal
 
+# TODO: Refactor this entirely, maybe use github module or something.
+
 def configure_github_repo(
     directory: str | Path,
     repo_name: str,
