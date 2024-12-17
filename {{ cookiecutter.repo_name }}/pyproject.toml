@@ -68,6 +68,9 @@ addopts = """
 --code-highlight=yes
 """
 
+log_file = "./logs/pytest.log"
+
+
 [tool.pydoclint]
 style = "google"
 arg-type-hints-in-docstring = false
