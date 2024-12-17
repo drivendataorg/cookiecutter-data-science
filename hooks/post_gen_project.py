@@ -1,11 +1,13 @@
 import shutil
 from copy import copy
 from pathlib import Path
+import os
 
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
 from ccds.hook_utils.custom_config import write_custom_config
 from ccds.hook_utils.dependencies import basic, packages, scaffold, write_dependencies
+from ccds.hook_utils.configure_gh import configure_github_repo
 
 #
 #  TEMPLATIZED VARIABLES FILLED IN BY COOKIECUTTER
@@ -80,3 +82,14 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
         # remove any content in __init__.py since it won't be available
         generated_path.write_text("")
 # {% endif %}
+
+#
+#  GATLEN'S UPLOAD TO GITHUB REPO CODE
+#
+
+configure_github_repo(
+    directory=os.getcwd(),
+    repo_name="{{ cookiecutter.repo_name }}",
+    protection_type="main_and_dev",
+    no_github=False
+)
