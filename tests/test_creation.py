@@ -95,6 +95,7 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         str(VSCODE_CONFIG_DIR),
         ".",
         ".devcontainer",
+        ".github",
         ".github/actions",
         ".github/actions/setup-python-env",
         ".github/ISSUE_TEMPLATE",

@@ -17,14 +17,14 @@ runs:
   steps:
     - uses: actions/setup-python@v5
       with:
-        python-version: ${{ inputs.python-version }}
+        python-version: ${{inputs.python-version}}
 
     - name: Install uv
       uses: astral-sh/setup-uv@v2
       with:
-        version: ${{ inputs.uv-version }}
+        version: ${{inputs.uv-version}}
         enable-cache: "true"
-        cache-suffix: ${{ matrix.python-version }}
+        cache-suffix: ${{matrix.python-version}}
 
     - name: Install Python dependencies
       run: uv sync --frozen
