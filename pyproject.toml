@@ -36,7 +36,7 @@ dependencies = [
 ]
 
 [project.scripts]
-ccds = "ccds.__main__:main"
+gotem = "ccds.__main__:main"
 
 [project.urls]
 "Source Code" = "https://github.com/GatlenCulp/gatlens-opinionated-template"
