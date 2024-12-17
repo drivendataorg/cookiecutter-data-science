@@ -9,6 +9,7 @@ from ccds.hook_utils.configure_gh import configure_github_repo
 #   our workaround is to include these utility functions in the CCDS package
 from ccds.hook_utils.custom_config import write_custom_config
 from ccds.hook_utils.dependencies import basic, packages, scaffold, write_dependencies
+from ccds.hook_utils.configure_venv import configure_uv_venv
 
 #
 #  TEMPLATIZED VARIABLES FILLED IN BY COOKIECUTTER
@@ -90,9 +91,15 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
 
 # {% if cookiecutter.use_github == "Yes" %}
 configure_github_repo(
-    directory=os.getcwd(),
+    directory=Path.cwd(),
     repo_name="{{ cookiecutter.repo_name }}",
     protection_type="main_and_dev",
     no_github=False,
 )
+# {% endif %}
+
+# Install the virtual environment (uv only for now)
+# {% if cookiecutter.environment_manager == "uv" %}
+configure_uv_venv(directory=Path.cwd())
+
 # {% endif %}

@@ -1,5 +1,6 @@
 packages = [
     "black",
+    "ruff",
     "flake8",
     "isort",
     "pip",

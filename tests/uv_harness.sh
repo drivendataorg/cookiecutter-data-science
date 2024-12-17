@@ -21,7 +21,7 @@ cd $1
 make
 
 # Create and activate virtual environment
-python -m venv .venv
+uv venv
 source .venv/bin/activate
 
 # Install dependencies using uv

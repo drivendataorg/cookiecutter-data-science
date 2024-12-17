@@ -34,9 +34,10 @@ clean:
 ## Lint using flake8 and black (use `make format` to do formatting)
 .PHONY: lint
 lint:
-	flake8 {{ cookiecutter.module_name }}
-	isort --check --diff --profile black {{ cookiecutter.module_name }}
-	black --check --config pyproject.toml {{ cookiecutter.module_name }}
+	ruff {{ cookiecutter.module_name }}
+	prettier {{ cookiecutter.module_name }}
+	pyright {{ cookiecutter.module_name }}
+	
 
 ## Format source code with black
 .PHONY: format
