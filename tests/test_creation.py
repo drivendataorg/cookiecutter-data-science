@@ -10,7 +10,7 @@ from conftest import bake_project
 BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
 
 
-### GATLEN'S ADDED BITS ###
+# GATLEN'S ADDED BITS #
 CCDS_ORIGINAL_DIR = Path(".ccds-original")
 VSCODE_CONFIG_DIR = Path(".vscode")
 OUT_DIR = Path("out")
@@ -120,16 +120,14 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         str(OUT_DIR / "reports"),
         config["module_name"],
     ]
-    
-    ignore_dirs = [
-        ".git"
-    ]
+
+    ignore_dirs = [".git"]
 
     if config["include_code_scaffold"] == "Yes":
         expected_dirs += [
             f"{config['module_name']}/modeling",
         ]
-        
+
     if config["docs"] == "mkdocs":
         expected_dirs += ["docs/docs"]
 
@@ -138,13 +136,13 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         Path(d)
         for d in expected_dirs
     ]
-    
+
     existing_dirs = [
-    d.resolve().relative_to(root)
+        d.resolve().relative_to(root)
         for d in root.glob("**")
-        if d.is_dir() and not any(
-            ignore_dir in d.relative_to(root).parts
-            for ignore_dir in ignore_dirs
+        if d.is_dir()
+        and not any(
+            ignore_dir in d.relative_to(root).parts for ignore_dir in ignore_dirs
         )
     ]
 
@@ -201,10 +199,8 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         ".cursorrules",
         f"{config['module_name']}/__init__.py",
     ]
-    
-    ignore_dirs = [
-        ".git"
-    ]
+
+    ignore_dirs = [".git"]
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):
@@ -235,11 +231,11 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
 
     existing_files = [
         f.relative_to(root)
-            for f in root.glob("**/*")
-            if f.is_file() and not any(
-                ignore_dir in f.relative_to(root).parts
-                for ignore_dir in ignore_dirs
-            )
+        for f in root.glob("**/*")
+        if f.is_file()
+        and not any(
+            ignore_dir in f.relative_to(root).parts for ignore_dir in ignore_dirs
+        )
     ]
 
     assert sorted(existing_files) == sorted(expected_files)
