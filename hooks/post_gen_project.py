@@ -81,7 +81,9 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
         generated_path.unlink()
     elif generated_path.name == "__init__.py":
         # remove any content in __init__.py since it won't be available
-        generated_path.write_text("")
+        generated_path.write_text(
+            '"""{{ cookiecutter.module_name }}: {{ cookiecutter.project_short_description }}."""\n'
+        )
 # {% endif %}
 
 #
