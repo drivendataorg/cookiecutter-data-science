@@ -1,14 +1,13 @@
-"""
-Feature engineering pipeline for {{ cookiecutter.module_name }}.
+"""Feature engineering pipeline for {{ cookiecutter.module_name }}.
 
 Provides CLI interface to generate features from processed dataset.
 """
 
 from pathlib import Path
 
-import typer
-from loguru import logger
 from tqdm import tqdm
+from loguru import logger
+import typer
 
 from {{ cookiecutter.module_name }}.config import PROCESSED_DATA_DIR
 
@@ -21,7 +20,7 @@ def main(
     input_path: Path = PROCESSED_DATA_DIR / "dataset.csv", # noqa: ARG001 template arg
     output_path: Path = PROCESSED_DATA_DIR / "features.csv", # noqa: ARG001 template arg
     # -----------------------------------------
-):
+) -> None:
     """Generate features from the processed dataset and save to specified output path.
 
     Args:
@@ -32,13 +31,13 @@ def main(
         None
 
     Examples:
-        >>> main(input_path="data/processed/dataset.csv", 
+        >>> main(input_path="data/processed/dataset.csv",
         ...      output_path="data/processed/features.csv")
     """
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
     logger.info("Generating features from dataset...")
     for i in tqdm(range(10), total=10):
-        if i == 5:
+        if i == 5:  # noqa: PLR2004 example code
             logger.info("Something happened for iteration 5.")
     logger.success("Features generation complete.")
     # -----------------------------------------

@@ -1,5 +1,4 @@
-"""
-Command-line plotting utilities for {{ cookiecutter.module_name }}.
+"""Command-line plotting utilities for {{ cookiecutter.module_name }}.
 
 Usage:
     $ python -m {{ cookiecutter.module_name }}.plots [--input-path PATH] [--output-path PATH]
@@ -7,9 +6,9 @@ Usage:
 
 from pathlib import Path
 
-import typer
-from loguru import logger
 from tqdm import tqdm
+from loguru import logger
+import typer
 
 from {{ cookiecutter.module_name }}.config import FIGURES_DIR, PROCESSED_DATA_DIR
 
@@ -22,7 +21,7 @@ def main(
     input_path: Path = PROCESSED_DATA_DIR / "dataset.csv", # noqa: ARG001 template arg
     output_path: Path = FIGURES_DIR / "plot.png", # noqa: ARG001 template arg
     # -----------------------------------------
-):
+) -> None:
     """Generate plots from input data and save to specified output path.
 
     Args:
@@ -38,7 +37,7 @@ def main(
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
     logger.info("Generating plot from data...")
     for i in tqdm(range(10), total=10):
-        if i == 5:
+        if i == 5:  # noqa: PLR2004 example code
             logger.info("Something happened for iteration 5.")
     logger.success("Plot generation complete.")
     # -----------------------------------------
