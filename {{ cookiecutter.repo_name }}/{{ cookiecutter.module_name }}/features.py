@@ -22,6 +22,19 @@ def main(
     output_path: Path = PROCESSED_DATA_DIR / "features.csv", # noqa: ARG001 template arg
     # -----------------------------------------
 ):
+    """Generate features from the processed dataset and save to specified output path.
+
+    Args:
+        input_path: Path to the processed input dataset
+        output_path: Path where the generated features will be saved
+
+    Returns:
+        None
+
+    Examples:
+        >>> main(input_path="data/processed/dataset.csv", 
+        ...      output_path="data/processed/features.csv")
+    """
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
     logger.info("Generating features from dataset...")
     for i in tqdm(range(10), total=10):

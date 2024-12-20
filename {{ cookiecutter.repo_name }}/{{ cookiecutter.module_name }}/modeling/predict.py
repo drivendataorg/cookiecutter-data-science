@@ -23,6 +23,16 @@ def main(
     predictions_path: Path = PROCESSED_DATA_DIR / "test_predictions.csv", # noqa: ARG001 template arg
     # -----------------------------------------
 ):
+    """Generate predictions using a trained model.
+
+    Args:
+        features_path: Path to the test features CSV file
+        model_path: Path to the trained model file
+        predictions_path: Path where predictions will be saved
+
+    Returns:
+        None
+    """
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
     logger.info("Performing inference for model...")
     for i in tqdm(range(10), total=10):

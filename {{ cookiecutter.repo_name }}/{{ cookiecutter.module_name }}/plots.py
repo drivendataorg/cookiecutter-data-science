@@ -23,6 +23,18 @@ def main(
     output_path: Path = FIGURES_DIR / "plot.png", # noqa: ARG001 template arg
     # -----------------------------------------
 ):
+    """Generate plots from input data and save to specified output path.
+
+    Args:
+        input_path: Path to the input data file to generate plots from
+        output_path: Path where the generated plot will be saved
+
+    Returns:
+        None
+
+    Examples:
+        >>> main(input_path="data/dataset.csv", output_path="figures/plot.png")
+    """
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
     logger.info("Generating plot from data...")
     for i in tqdm(range(10), total=10):

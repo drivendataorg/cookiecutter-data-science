@@ -22,6 +22,19 @@ def main(
     output_path: Path = PROCESSED_DATA_DIR / "dataset.csv", # noqa: ARG001 template arg
     # ----------------------------------------------
 ):
+    """Process raw dataset and save to processed data directory.
+
+    Args:
+        input_path: Path to the raw input data file
+        output_path: Path where the processed dataset will be saved
+
+    Returns:
+        None
+
+    Examples:
+        >>> main(input_path="data/raw/dataset.csv",
+        ...      output_path="data/processed/dataset.csv")
+    """
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
     logger.info("Processing dataset...")
     for i in tqdm(range(10), total=10):

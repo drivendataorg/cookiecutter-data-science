@@ -23,6 +23,16 @@ def main(
     model_path: Path = MODELS_DIR / "model.pkl", # noqa: ARG001 template arg
     # -----------------------------------------
 ):
+    """Train a model using processed features and labels.
+
+    Args:
+        features_path: Path to the processed features CSV file
+        labels_path: Path to the processed labels CSV file
+        model_path: Path where the trained model will be saved
+
+    Returns:
+        None
+    """
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
     logger.info("Training some model...")
     for i in tqdm(range(10), total=10):
