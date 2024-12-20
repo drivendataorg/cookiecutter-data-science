@@ -1,3 +1,9 @@
+"""
+Data processing pipeline for {{ cookiecutter.module_name }}.
+
+Provides CLI interface to transform raw data into processed format.
+"""
+
 from pathlib import Path
 
 import typer

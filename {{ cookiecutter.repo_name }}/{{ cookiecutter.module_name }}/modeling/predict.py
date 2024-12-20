@@ -1,3 +1,9 @@
+"""
+Model inference pipeline for {{ cookiecutter.module_name }}.
+
+Provides CLI interface to generate predictions using trained models.
+"""
+
 from pathlib import Path
 
 import typer

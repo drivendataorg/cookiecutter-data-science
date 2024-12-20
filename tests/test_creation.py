@@ -121,7 +121,7 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         config["module_name"],
     ]
 
-    ignore_dirs = [".git"]
+    ignore_dirs = [".git", ".venv"]
 
     if config["include_code_scaffold"] == "Yes":
         expected_dirs += [
@@ -200,7 +200,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         f"{config['module_name']}/__init__.py",
     ]
 
-    ignore_dirs = [".git"]
+    ignore_dirs = [".git", ".venv"]
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):

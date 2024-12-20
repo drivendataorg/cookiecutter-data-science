@@ -1,3 +1,9 @@
+"""
+Feature engineering pipeline for {{ cookiecutter.module_name }}.
+
+Provides CLI interface to generate features from processed dataset.
+"""
+
 from pathlib import Path
 
 import typer

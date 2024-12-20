@@ -1,3 +1,9 @@
+"""
+Model training pipeline for {{ cookiecutter.module_name }}.
+
+Provides CLI interface to train models using processed features.
+"""
+
 from pathlib import Path
 
 import typer

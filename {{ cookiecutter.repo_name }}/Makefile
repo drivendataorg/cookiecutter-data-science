@@ -34,7 +34,7 @@ clean:
 ## Lint using flake8 and black (use `make format` to do formatting)
 .PHONY: lint
 lint:
-	ruff {{ cookiecutter.module_name }}
+	ruff check {{ cookiecutter.module_name }}
 	prettier {{ cookiecutter.module_name }}
 	pyright {{ cookiecutter.module_name }}
 	

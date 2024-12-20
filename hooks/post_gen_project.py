@@ -1,15 +1,14 @@
-import os
 import shutil
 from copy import copy
 from pathlib import Path
 
 from ccds.hook_utils.configure_gh import configure_github_repo
+from ccds.hook_utils.configure_venv import configure_uv_venv
 
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
 from ccds.hook_utils.custom_config import write_custom_config
 from ccds.hook_utils.dependencies import basic, packages, scaffold, write_dependencies
-from ccds.hook_utils.configure_venv import configure_uv_venv
 
 #
 #  TEMPLATIZED VARIABLES FILLED IN BY COOKIECUTTER

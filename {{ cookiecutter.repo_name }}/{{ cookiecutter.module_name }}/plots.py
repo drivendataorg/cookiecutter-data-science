@@ -1,3 +1,10 @@
+"""
+Command-line plotting utilities for {{ cookiecutter.module_name }}.
+
+Usage:
+    $ python -m {{ cookiecutter.module_name }}.plots [--input-path PATH] [--output-path PATH]
+"""
+
 from pathlib import Path
 
 import typer
