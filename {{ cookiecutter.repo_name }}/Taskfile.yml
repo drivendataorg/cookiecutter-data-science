@@ -1,10 +1,10 @@
-version: '3'
+version: "3"
 
 vars:
-  PROJECT_NAME: '{{ cookiecutter.repo_name }}'
-  PYTHON_VERSION: '{{ cookiecutter.python_version_number }}'
+  PROJECT_NAME: "{{ cookiecutter.repo_name }}"
+  PYTHON_VERSION: "{{ cookiecutter.python_version_number }}"
   PYTHON_INTERPRETER: python
-  MODULE_NAME: '{{ cookiecutter.module_name }}'
+  MODULE_NAME: "{{ cookiecutter.module_name }}"
 
 tasks:
   ###############################################################################
@@ -17,8 +17,8 @@ tasks:
     cmds:
       # {%- if "requirements.txt" == cookiecutter.dependency_file %}
       # {%- raw %}
-      - '{{.PYTHON_INTERPRETER}} -m pip install -U pip'
-      - '{{.PYTHON_INTERPRETER}} -m pip install -r requirements.txt'
+      - "{{.PYTHON_INTERPRETER}} -m pip install -U pip"
+      - "{{.PYTHON_INTERPRETER}} -m pip install -r requirements.txt"
       # {%- endraw %}
       # {%- elif "environment.yml" == cookiecutter.dependency_file %}
       # {%- raw %}
@@ -129,7 +129,7 @@ tasks:
     deps: [requirements]
     cmds:
       # {%- raw %}
-      - '{{.PYTHON_INTERPRETER}} {{.MODULE_NAME}}/dataset.py'
+      - "{{.PYTHON_INTERPRETER}} {{.MODULE_NAME}}/dataset.py"
       # {%- endraw %}
   # {%- endif %}
 

@@ -5,11 +5,7 @@
       "label": "python-checks",
       "type": "shell",
       "command": "poetry",
-      "args": [
-        "run",
-        "poe",
-        "check"
-      ],
+      "args": ["run", "poe", "check"],
       "group": "build",
       "detail": "Run all Python checks (format, lint, typecheck, test)",
       "runOptions": {

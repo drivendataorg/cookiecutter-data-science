@@ -1,4 +1,4 @@
-# {%- raw %}
+# {%- raw -%}
 name: "Setup Python Environment"
 description: "Set up Python environment for the given Python version"
 

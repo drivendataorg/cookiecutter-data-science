@@ -1,4 +1,4 @@
-# {%- raw %}
+# {%- raw -%}
 name: Main
 
 on:
