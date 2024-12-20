@@ -77,6 +77,7 @@ def test_baking_configs(config: dict[str, Any], fast: int) -> None:
     with bake_project(config) as project_directory:
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
+        install_requirements(project_directory)
         lint(project_directory)
 
         if fast < 2:
@@ -297,6 +298,17 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
 
     assert result.returncode == 0
 
+def install_requirements(root):
+    """Run the linters on the project."""
+    result = run(
+        ["make", "requirements"],
+        cwd=root,
+        stderr=PIPE,
+        stdout=PIPE,
+    )
+    _, _ = _decode_print_stdout_stderr(result)
+
+    assert result.returncode == 0
 
 def lint(root):
     """Run the linters on the project."""
