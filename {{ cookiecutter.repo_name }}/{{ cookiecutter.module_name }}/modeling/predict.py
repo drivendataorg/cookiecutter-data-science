@@ -5,9 +5,9 @@ Provides CLI interface to generate predictions using trained models.
 
 from pathlib import Path
 
-from tqdm import tqdm
-from loguru import logger
 import typer
+from loguru import logger
+from tqdm import tqdm
 
 from {{ cookiecutter.module_name }}.config import MODELS_DIR, PROCESSED_DATA_DIR
 

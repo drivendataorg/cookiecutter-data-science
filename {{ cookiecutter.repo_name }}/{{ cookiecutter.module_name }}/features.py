@@ -5,9 +5,9 @@ Provides CLI interface to generate features from processed dataset.
 
 from pathlib import Path
 
-from tqdm import tqdm
-from loguru import logger
 import typer
+from loguru import logger
+from tqdm import tqdm
 
 from {{ cookiecutter.module_name }}.config import PROCESSED_DATA_DIR
 
