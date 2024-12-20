@@ -1,4 +1,4 @@
-{% raw %}
+# {%- raw %}
 name: Main
 
 on:
@@ -70,4 +70,4 @@ jobs:
 
       - name: Check if documentation can be built
         run: uv run mkdocs build -s
-{% endraw %}
+# {% endraw %}

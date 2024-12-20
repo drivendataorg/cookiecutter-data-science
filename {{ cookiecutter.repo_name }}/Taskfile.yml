@@ -7,47 +7,46 @@ vars:
   MODULE_NAME: '{{ cookiecutter.module_name }}'
 
 tasks:
-  
   ###############################################################################
   # Dependencies & Environment
   ###############################################################################
 
-  {% if cookiecutter.dependency_file != 'none' %}
+  # {%- if cookiecutter.dependency_file != 'none' %}
   requirements:
     desc: Install Python dependencies
     cmds:
-      {% if "requirements.txt" == cookiecutter.dependency_file %}
-      {% raw %}
+      # {%- if "requirements.txt" == cookiecutter.dependency_file %}
+      # {%- raw %}
       - '{{.PYTHON_INTERPRETER}} -m pip install -U pip'
       - '{{.PYTHON_INTERPRETER}} -m pip install -r requirements.txt'
-      {% endraw %}
-      {% elif "environment.yml" == cookiecutter.dependency_file %}
-      {% raw %}
+      # {%- endraw %}
+      # {%- elif "environment.yml" == cookiecutter.dependency_file %}
+      # {%- raw %}
       - conda env update --name {{.PROJECT_NAME}} --file environment.yml --prune
-      {% endraw %}
-      {% elif "Pipfile" == cookiecutter.dependency_file %}
+      # {%- endraw %}
+      # {%- elif "Pipfile" == cookiecutter.dependency_file %}
       - pipenv install
-      {% endif %}
-  {% endif %}
+      # {%- endif %}
+  # {%- endif %}
 
-  {% if cookiecutter.environment_manager != 'none' %}
+  # {%- if cookiecutter.environment_manager != 'none' %}
   create-environment:
     desc: Set up python interpreter environment
     cmds:
-      {% if cookiecutter.environment_manager == 'conda' %}
-      {% if cookiecutter.dependency_file != 'environment.yml' %}
-      {% raw %}
+      # {%- if cookiecutter.environment_manager == 'conda' %}
+      # {%- if cookiecutter.dependency_file != 'environment.yml' %}
+      # {%- raw %}
       - conda create --name {{.PROJECT_NAME}} python={{.PYTHON_VERSION}} -y
       - echo ">>> conda env created. Activate with: conda activate {{.PROJECT_NAME}}"
-      {% endraw %}
-      {% else %}
-      {% raw %}
+      # {%- endraw %}
+      # {%- else %}
+      # {%- raw %}
       - conda env create --name {{.PROJECT_NAME}} -f environment.yml
       - echo ">>> conda env created. Activate with: conda activate {{.PROJECT_NAME}}"
-      {% endraw %}
-      {% endif %}
-      {% elif cookiecutter.environment_manager == 'virtualenv' %}
-      {% raw %}
+      # {%- endraw %}
+      # {%- endif %}
+      # {%- elif cookiecutter.environment_manager == 'virtualenv' %}
+      # {%- raw %}
       - |
         if [ ! -z `which virtualenvwrapper.sh` ]; then 
           source `which virtualenvwrapper.sh`
@@ -57,14 +56,14 @@ tasks:
           mkvirtualenv.bat {{.PROJECT_NAME}} --python={{.PYTHON_INTERPRETER}}
           echo ">>> New virtualenv created. Activate with: workon {{.PROJECT_NAME}}"
         fi
-      {% endraw %}
-      {% elif cookiecutter.environment_manager == 'pipenv' %}
-      {% raw %}
+      # {%- endraw %}
+      # {%- elif cookiecutter.environment_manager == 'pipenv' %}
+      # {%- raw %}
       - pipenv --python {{.PYTHON_VERSION}}
       - echo ">>> New pipenv created. Activate with: pipenv shell"
-      {% endraw %}
-      {% endif %}
-  {% endif %}
+      # {%- endraw %}
+      # {%- endif %}
+  # {%- endif %}
 
   ###############################################################################
   # Code Quality
@@ -79,60 +78,60 @@ tasks:
   lint:
     desc: Lint using flake8 and black
     cmds:
-      {% raw %}
+      # {%- raw %}
       - flake8 {{.MODULE_NAME}}
       - isort --check --diff --profile black {{.MODULE_NAME}}
       - black --check --config pyproject.toml {{.MODULE_NAME}}
-      {% endraw %}
+      # {%- endraw %}
 
   format:
     desc: Format source code with black
     cmds:
-      {% raw %}
+      # {%- raw %}
       - black --config pyproject.toml {{.MODULE_NAME}}
-      {% endraw %}
+      # {%- endraw %}
 
   ###############################################################################
   # Data Sync
   ###############################################################################
 
-  {% if not cookiecutter.dataset_storage.none %}
+  # {%- if not cookiecutter.dataset_storage.none %}
   sync-data-down:
     desc: Download data from storage system
     cmds:
-      {% if cookiecutter.dataset_storage.s3 %}
+      # {%- if cookiecutter.dataset_storage.s3 %}
       - aws s3 sync s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/ data/{% if cookiecutter.dataset_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.dataset_storage.s3.aws_profile }}{% endif %}
-      {% elif cookiecutter.dataset_storage.azure %}
+      # {%- elif cookiecutter.dataset_storage.azure %}
       - az storage blob download-batch -s {{ cookiecutter.dataset_storage.azure.container }}/data/ -d data/
-      {% elif cookiecutter.dataset_storage.gcs %}
+      # {%- elif cookiecutter.dataset_storage.gcs %}
       - gsutil -m rsync -r gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/ data/
-      {% endif %}
+      # {%- endif %}
 
   sync-data-up:
     desc: Upload data to storage system
     cmds:
-      {% if cookiecutter.dataset_storage.s3 %}
+      # {%- if cookiecutter.dataset_storage.s3 %}
       - aws s3 sync data/ s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data{% if cookiecutter.dataset_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.dataset_storage.s3.aws_profile }}{% endif %}
-      {% elif cookiecutter.dataset_storage.azure %}
+      # {%- elif cookiecutter.dataset_storage.azure %}
       - az storage blob upload-batch -d {{ cookiecutter.dataset_storage.azure.container }}/data/ -s data/
-      {% elif cookiecutter.dataset_storage.gcs %}
+      # {%- elif cookiecutter.dataset_storage.gcs %}
       - gsutil -m rsync -r data/ gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/
-      {% endif %}
-  {% endif %}
+      # {%- endif %}
+  # {%- endif %}
 
   ###############################################################################
   # Project Tasks
   ###############################################################################
 
-  {% if cookiecutter.include_code_scaffold == 'Yes' %}
+  # {%- if cookiecutter.include_code_scaffold == 'Yes' %}
   data:
     desc: Make dataset
     deps: [requirements]
     cmds:
-      {% raw %}
+      # {%- raw %}
       - '{{.PYTHON_INTERPRETER}} {{.MODULE_NAME}}/dataset.py'
-      {% endraw %}
-  {% endif %}
+      # {%- endraw %}
+  # {%- endif %}
 
   default:
     desc: List all available tasks

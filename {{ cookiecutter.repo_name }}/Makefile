@@ -35,7 +35,7 @@ clean:
 .PHONY: lint
 lint:
 	ruff check {{ cookiecutter.module_name }}
-	prettier {{ cookiecutter.module_name }}
+	prettier --check {{ cookiecutter.module_name }}
 	pyright {{ cookiecutter.module_name }}
 	
 
