@@ -18,9 +18,9 @@ app = typer.Typer()
 @app.command()
 def main(
     # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
-    features_path: Path = PROCESSED_DATA_DIR / "test_features.csv",
-    model_path: Path = MODELS_DIR / "model.pkl",
-    predictions_path: Path = PROCESSED_DATA_DIR / "test_predictions.csv",
+    features_path: Path = PROCESSED_DATA_DIR / "test_features.csv", # noqa: ARG001 template arg
+    model_path: Path = MODELS_DIR / "model.pkl", # noqa: ARG001 template arg
+    predictions_path: Path = PROCESSED_DATA_DIR / "test_predictions.csv", # noqa: ARG001 template arg
     # -----------------------------------------
 ):
     # ---- REPLACE THIS WITH YOUR OWN CODE ----

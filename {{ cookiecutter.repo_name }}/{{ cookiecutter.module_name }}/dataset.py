@@ -18,8 +18,8 @@ app = typer.Typer()
 @app.command()
 def main(
     # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
-    input_path: Path = RAW_DATA_DIR / "dataset.csv",
-    output_path: Path = PROCESSED_DATA_DIR / "dataset.csv",
+    input_path: Path = RAW_DATA_DIR / "dataset.csv", # noqa: ARG001 template arg
+    output_path: Path = PROCESSED_DATA_DIR / "dataset.csv", # noqa: ARG001 template arg
     # ----------------------------------------------
 ):
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
