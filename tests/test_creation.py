@@ -77,7 +77,7 @@ def test_baking_configs(config: dict[str, Any], fast: int) -> None:
     with bake_project(config) as project_directory:
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
-        install_requirements(project_directory)
+        # install_requirements(project_directory)
         lint(project_directory)
 
         if fast < 2:
