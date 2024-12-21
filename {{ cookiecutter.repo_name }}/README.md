@@ -23,7 +23,7 @@
 │   └── ⚡️ workflows                  
 │       ├── 🚀 main.yml               <- Automated cross-platform testing w/ uv, precommit, deptry, 
 │       └── 🚀 on-release-main.yml    <- Automated mkdocs updates
-├── 💻 .vscode                    <- Preconfigured extensions, debug profiles, workspaces, and tasks for VSCode/Cursor powerusers
+├── 💻 .vscode                        <- Preconfigured extensions, debug profiles, workspaces, and tasks for VSCode/Cursor powerusers
 │   ├── 🚀 launch.json
 │   ├── ⚙️ settings.json
 │   ├── 📋 tasks.json
