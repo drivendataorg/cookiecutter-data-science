@@ -34,6 +34,11 @@ lint:
 	isort --check --profile black ccds hooks tests docs/scripts
 	black --check ccds hooks tests docs/scripts
 
+# lint:
+# 	ruff check hooks docs/scripts
+# 	prettier --check docs
+
+# pyright .
 
 ###     DOCS
 
