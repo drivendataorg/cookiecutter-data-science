@@ -35,7 +35,9 @@ clean:
 .PHONY: lint
 lint:
 	ruff check --config pyproject.toml {{ cookiecutter.module_name }}
-	prettier --check {{ cookiecutter.module_name }}
+	
+# TODO: Add prettier support
+# prettier --check {{ cookiecutter.module_name }}
 
 # TODO: Add pyright support	
 # pyright {{ cookiecutter.module_name }}
