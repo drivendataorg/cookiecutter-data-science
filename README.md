@@ -33,22 +33,11 @@ _I'm looking for a way to use [Cruft](https://cruft.github.io/cruft/) over [Cook
 
 <!-- It is recommended to use [Cruft](https://cruft.github.io/cruft/) instead of [CookieCutter](https://www.cookiecutter.io/). The resulting project is the same, but with the added option of being able to sync your project with the original template if this repository updates as if it were an incomming commit.
 
-Install Cruft
-```bash
-    # MacOS Homebrew
-    brew install cruft
-```
-
-```bash
-    # Pip
-    pip install cruft
-```
-
-
 Clone using Cruft
 ```bash
     cruft create https://github.com/GatlenCulp/gatlens-opinionated-template
 ``` -->
+
 Install Gatlen's Opinionated Template (GOTem)
 ```bash
 uv tool install gatlens-opinionated-template
