@@ -48,6 +48,15 @@ docs:
 docs-serve:
 	cd docs && mkdocs serve
 
+uv-docs:
+	cd docs && uv run mkdocs build
+
+uv-docs-serve:
+	cd docs && uv run mkdocs serve
+
+uv-docs-deploy:
+	cd docs && uv run mkdocs gh-deploy --clean
+
 ###     TESTS
 
 test: _prep

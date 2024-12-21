@@ -120,6 +120,13 @@
         },
         "choices": [
             {
+                "choice": "uv",
+                "help": {
+                    "description": "Modern, fast Python package installer and resolver written in Rust.",
+                    "more_information": "[Docs](https://github.com/astral-sh/uv)"
+                } 
+            },
+            {
                 "choice": "virtualenv",
                 "help": {
                     "description": "Simple wrapper on venv with more features.",
