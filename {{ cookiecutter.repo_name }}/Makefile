@@ -34,9 +34,11 @@ clean:
 ## Lint using flake8 and black (use `make format` to do formatting)
 .PHONY: lint
 lint:
-	ruff check {{ cookiecutter.module_name }}
+	ruff check --config pyproject.toml {{ cookiecutter.module_name }}
 	prettier --check {{ cookiecutter.module_name }}
-	pyright {{ cookiecutter.module_name }}
+
+# TODO: Add pyright support	
+# pyright {{ cookiecutter.module_name }}
 	
 
 ## Format source code with black

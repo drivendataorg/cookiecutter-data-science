@@ -142,9 +142,7 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         d.resolve().relative_to(root)
         for d in root.glob("**")
         if d.is_dir()
-        and not any(
-            ignore_dir in d.relative_to(root).parts for ignore_dir in ignore_dirs
-        )
+        and not any(ignore_dir in d.relative_to(root).parts for ignore_dir in ignore_dirs)
     ]
 
     assert sorted(existing_dirs) == sorted(expected_dirs)
@@ -178,7 +176,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         "data/external/.gitkeep",
         "data/interim/.gitkeep",
         "data/processed/.gitkeep",
-        f"docker/{config["repo_name"]}.Dockerfile",
+        f"docker/{config['repo_name']}.Dockerfile",
         "data/raw/.gitkeep",
         "docs/.gitkeep",
         "notebooks/01_name_example.ipynb",
@@ -188,7 +186,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         "secrets/schema/ssh/example.something.key",
         "secrets/schema/ssh/example.something.pub",
         # "references/.gitkeep",
-        str(VSCODE_CONFIG_DIR / f"{config["repo_name"]}.code-workspace"),
+        str(VSCODE_CONFIG_DIR / f"{config['repo_name']}.code-workspace"),
         str(VSCODE_CONFIG_DIR / "launch.json"),
         str(VSCODE_CONFIG_DIR / "settings.json"),
         str(VSCODE_CONFIG_DIR / "tasks.json"),
@@ -234,9 +232,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         f.relative_to(root)
         for f in root.glob("**/*")
         if f.is_file()
-        and not any(
-            ignore_dir in f.relative_to(root).parts for ignore_dir in ignore_dirs
-        )
+        and not any(ignore_dir in f.relative_to(root).parts for ignore_dir in ignore_dirs)
     ]
 
     assert sorted(existing_files) == sorted(expected_files)
