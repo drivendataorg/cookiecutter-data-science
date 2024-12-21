@@ -2,9 +2,62 @@
 _v0.0.1 is Currently not for production!_
 
 <!-- gotem .. --output-dir ./ignore is test -->
-[![tests](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml/badge.svg)](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml)
+<!-- https://github.com/Ileriayo/markdown-badges -->
+<!-- https://shields.io/badges/static-badge -->
+<!-- https://github.com/alexandresanlim/Badges4-README.md-Profile -->
+<!-- https://github.com/PatrickJS/awesome-cursorrules/tree/main?tab=readme-ov-file -->
 
-[![Uses the Cookiecutter Data Science project upstream](https://img.shields.io/badge/CCDS-Project%20fork-328F97?logo=cookiecutter)](https://cookiecutter-data-science.drivendata.org/) [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv) [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![tests](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml/badge.svg)](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml) [![Uses the Cookiecutter Data Science project upstream](https://img.shields.io/badge/CCDS-Project%20fork-328F97?logo=cookiecutter)](https://cookiecutter-data-science.drivendata.org/) [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv) [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+
+<!-- https://img.shields.io/badge/Cookiecutter-D4AA00?style=for-the-badge&logo=Cookiecutter&logoColor=white -->
+<!-- I love badges if not already clear lol -->
+Badges that need to be rearranged in stack.
+**OSes**
+![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
+![Widnows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+
+**Languages**https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626.svg?&style=for-the-badge&logo=Jupyter&logoColor=white)
+
+**Packages**
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![Pytest](https://img.shields.io/badge/pytest-%23ffffff.svg?style=for-the-badge&logo=pytest&logoColor=2f9fe3) 
+![Plotly](https://img.shields.io/badge/Plotly-%233F4F75.svg?style=for-the-badge&logo=plotly&logoColor=white)
+![WandB](https://img.shields.io/badge/Weights_&_Biases-FFBE00?style=for-the-badge&logo=WeightsAndBiases&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=Pydantic&logoColor=white)
+
+**Docs**
+![Github Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=github%20Pages&logoColor=white)
+
+
+**ML Packages**
+![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white) 
+
+**IDE**
+![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white) 
+
+**Install Options**
+![PyPi](https://img.shields.io/badge/pypi-%23ececec.svg?style=for-the-badge&logo=pypi&logoColor=1f73b7)
+![Homebrew](https://img.shields.io/badge/homebrew-FBB040?style=for-the-badge&logo=homebrew&logoColor=white)
+
+**VCS + CI/CD**
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/Github%20Actions-282a2e?style=for-the-badge&logo=githubactions&logoColor=367cfe)
+
+**Containerization**
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+<!-- https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white -->
+
+**Databases**
+![DuckDB](https://img.shields.io/badge/Duckdb-000000?style=for-the-badge&logo=Duckdb&logoColor=yellow)
+<!-- https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&logoColor=white -->
+
+
+**Lint**
+![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
+
 
 A modern, opinionated full-stack [CookieCutter](https://www.cookiecutter.io/) project template that prioritizes developer experience and cutting-edge tools. Built on (and synced with) the foundation of [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), this template incorporates carefully selected defaults, dependency stack, customizations, and contemporary best practices for Python development, research projects, and academic work.
 
@@ -54,53 +107,62 @@ uvx --from gatlens-opinionated-template gotem
 The directory structure of your new project will look something like this (depending on the settings that you choose):
 
 ```
-├── LICENSE            <- Open-source license if one is chosen
-├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
-├── README.md          <- The top-level README for developers using this project.
-├── data
-│   ├── external       <- Data from third party sources.
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
-│
-├── docs               <- A default mkdocs project; see www.mkdocs.org for details
-│
-├── models             <- Trained and serialized models, model predictions, or model summaries
-│
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
-│
-├── pyproject.toml     <- Project configuration file with package metadata for 
-│                         {{ cookiecutter.module_name }} and configuration for tools like black
-│
-├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-│
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
-│
-├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-│                         generated with `pip freeze > requirements.txt`
-│
-├── setup.cfg          <- Configuration file for flake8
-│
-└── {{ cookiecutter.module_name }}   <- Source code for use in this project.
-    │
-    ├── __init__.py             <- Makes {{ cookiecutter.module_name }} a Python module
-    │
-    ├── config.py               <- Store useful variables and configuration
-    │
-    ├── dataset.py              <- Scripts to download or generate data
-    │
-    ├── features.py             <- Code to create features for modeling
-    │
-    ├── modeling                
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
-    │   └── train.py            <- Code to train models
-    │
-    └── plots.py                <- Code to create visualizations   
+📁 .
+├── ⚙️ .cursorrules                    <- LLM instructions for Cursor IDE
+├── 💻 .devcontainer                   <- Devcontainer config
+├── ⚙️ .gitattributes                  <- GIT-LFS Setup Configuration
+├── 🧑‍💻 .github
+│   ├── ⚡️ actions
+│   │   └── 📁 setup-python-env       <- Automated python setup w/ uv
+│   ├── 💡 ISSUE_TEMPLATE             <- Templates for Raising Issues on GH
+│   ├── 💡 pull_request_template.md   <- Template for making GitHub PR
+│   └── ⚡️ workflows                  
+│       ├── 🚀 main.yml               <- Automated cross-platform testing w/ uv, precommit, deptry, 
+│       └── 🚀 on-release-main.yml    <- Automated mkdocs updates
+├── 💻 .vscode                        <- Preconfigured extensions, debug profiles, workspaces, and tasks for VSCode/Cursor powerusers
+│   ├── 🚀 launch.json
+│   ├── ⚙️ settings.json
+│   ├── 📋 tasks.json
+│   └── ⚙️ '{{ cookiecutter.repo_name }}.code-workspace'
+├── 📁 data
+│   ├── 📁 external                      <- Data from third party sources
+│   ├── 📁 interim                       <- Intermediate data that has been transformed
+│   ├── 📁 processed                     <- The final, canonical data sets for modeling
+│   └── 📁 raw                           <- The original, immutable data dump
+├── 🐳 docker                            <- Docker configuration for reproducability
+├── 📚 docs                              <- Project documentation (using mkdocs)
+├── 👩‍⚖️ LICENSE                           <- Open-source license if one is chosen
+├── 📋 logs                              <- Preconfigured logging directory for
+├── 👷‍♂️ Makefile                          <- Makefile with convenience commands (PyPi publishing, formatting, testing, and more)
+├── 🚀 Taskfile.yml                    <- Modern alternative to Makefile w/ same functionality
+├── 📁 notebooks                         <- Jupyter notebooks
+│   ├── 📓 01_name_example.ipynb
+│   └── 📰 README.md
+├── 🗑️ out
+│   ├── 📁 features                      <- Extracted Features
+│   ├── 📁 models                        <- Trained and serialized models
+│   └── 📚 reports                       <- Generated analysis
+│       └── 📊 figures                   <- Generated graphics and figures
+├── ⚙️ pyproject.toml                     <- Project configuration file w/ carefully selected dependency stacks
+├── 📰 README.md                         <- The top-level README
+├── 🔒 secrets                           <- Ignored project-level secrets directory to keep API keys and SSH keys safe and separate from your system (no setting up a new SSH-key in ~/.ssh for every project)
+│   └── ⚙️ schema                         <- Clearly outline expected variables
+│       ├── ⚙️ example.env
+│       └── 🔑 ssh
+│           ├── ⚙️ example.config.ssh
+│           ├── 🔑 example.something.key
+│           └── 🔑 example.something.pub
+└── 🚰 '{{ cookiecutter.module_name }}'  <- Easily publishable source code
+    ├── ⚙️ config.py                     <- Store useful variables and configuration (Preset)
+    ├── 🐍 dataset.py                    <- Scripts to download or generate data
+    ├── 🐍 features.py                   <- Code to create features for modeling
+    ├── 📁 modeling
+    │   ├── 🐍 __init__.py
+    │   ├── 🐍 predict.py               <- Code to run model inference with trained models
+    │   └── 🐍 train.py                 <- Code to train models
+    └── 🐍 plots.py                     <- Code to create visualizations
 ```
+
 
 ## Philosophy 🧭
 <!-- 

@@ -9,7 +9,7 @@ theme:
   features:
     - navigation.instant
     - toc.integrate
-  logo: ccds.png
+  logo: gotem.png
   name: material
   custom_dir: overrides
   palette:
