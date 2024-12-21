@@ -7,7 +7,7 @@ docs/docs/_partials/*/*.html
 manual_test/
 
 # other local dev info
-.vscode/
+# .vscode/
 
 # Mac OS-specific storage files
 .DS_Store
@@ -69,6 +69,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+.ruff_cache/
 cover/
 
 # Translations
