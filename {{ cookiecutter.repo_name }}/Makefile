@@ -22,7 +22,7 @@ requirements:
 	# {%- elif "Pipfile" == cookiecutter.dependency_file -%}
 	pipenv install
 	# {%- endif -%}
-# {%- endif -%}
+# {%- endif %}
 
 
 ## Delete all compiled Python files
@@ -74,25 +74,25 @@ sync_data_up:
 	# {%- endif -%}
 # {%- endif -%}
 
-# {%- if cookiecutter.environment_manager != 'none' -%}
+# {%- if cookiecutter.environment_manager != 'none' %}
 ## Set up python interpreter environment
 .PHONY: create_environment
 create_environment:
-	# {%- if cookiecutter.environment_manager == 'conda' -%}
-	# {%- if cookiecutter.dependency_file != 'environment.yml' -%}
+	# {%- if cookiecutter.environment_manager == 'conda' %}
+	# {%- if cookiecutter.dependency_file != 'environment.yml' %}
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
-	# {%- else -%}
+	# {%- else %}
 	conda env create --name $(PROJECT_NAME) -f environment.yml
-	# {%- endif -%}
+	# {%- endif %}
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
-	# {%- elif cookiecutter.environment_manager == 'virtualenv' -%}
+	# {%- elif cookiecutter.environment_manager == 'virtualenv' %}
 	@bash -c "if [ ! -z `which virtualenvwrapper.sh` ]; then source `which virtualenvwrapper.sh`; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); else mkvirtualenv.bat $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); fi"
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
-	# {%- elif cookiecutter.environment_manager == 'pipenv' -%}
+	# {%- elif cookiecutter.environment_manager == 'pipenv' %}
 	pipenv --python $(PYTHON_VERSION)
 	@echo ">>> New pipenv created. Activate with:\npipenv shell"
-	# {%- endif -%}
-# {%- endif -%}
+	# {%- endif %}
+# {%- endif %}
 
 
 #################################################################################
@@ -104,7 +104,7 @@ create_environment:
 .PHONY: data
 data: requirements
 	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/dataset.py
-# {%- endif -%}
+# {%- endif %}
 
 #################################################################################
 # Self Documenting Commands                                                     #

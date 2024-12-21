@@ -106,12 +106,17 @@ def fast(request):
 
 
 def pytest_generate_tests(metafunc):
-    # setup config fixture to get all of the results from config_generator
+    """setup config fixture to get all of the results from config_generator"""
+    
+    def make_test_id(config):
+        return f"{config['environment_manager']}-{config['dependency_file']}-{config['docs']}"
+    
     if "config" in metafunc.fixturenames:
         metafunc.parametrize(
-            "config", config_generator(metafunc.config.getoption("fast"))
+            "config", 
+            config_generator(metafunc.config.getoption("fast")),
+            ids=make_test_id
         )
-
 
 @contextmanager
 def bake_project(config):
