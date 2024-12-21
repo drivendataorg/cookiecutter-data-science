@@ -8,7 +8,6 @@ It's no secret that good analyses are often the result of very scattershot and s
 
 That being said, once started it is not a process that lends itself to thinking carefully about the structure of your code or project layout, so it's best to start with a clean, logical structure and stick to it throughout. We think it's a pretty big win all around to use a fairly standardized setup like this one. Here's why:
 
-
 ## Other people will thank you
 
 > Nobody sits around before creating a new Rails project to figure out where they want to put their views; they just run `rails new` to get a standard project skeleton like everybody else.
@@ -17,9 +16,9 @@ A well-defined, standard project structure means that a newcomer can begin to un
 
 Well organized code tends to be self-documenting in that the organization itself provides context for your code without much overhead. People will thank you for this because they can:
 
- - Collaborate more easily with you on this analysis
- - Learn from your analysis about the process and the domain
- - Feel confident in the conclusions at which the analysis arrives
+- Collaborate more easily with you on this analysis
+- Learn from your analysis about the process and the domain
+- Feel confident in the conclusions at which the analysis arrives
 
 A good example of this can be found in any of the major web development frameworks like Django or Ruby on Rails. Nobody sits around before creating a new Rails project to figure out where they want to put their views; they just run `rails new` to get a standard project skeleton like everybody else. Because that default project structure is _logical_ and _reasonably standard across most projects_, it is much easier for somebody who has never seen a particular project to figure out where they would find the various moving parts.
 
@@ -31,10 +30,10 @@ Ideally, that's how it should be when a colleague opens up your data science pro
 
 Ever tried to reproduce an analysis that you did a few months ago or even a few years ago? You may have written the code, but it's now impossible to decipher whether you should use `make_figures.py.old`, `make_figures_working.py` or `new_make_figures01.py` to get things done. Here are some questions we've learned to ask with a sense of existential dread:
 
-* Are we supposed to go in and join the column X to the data before we get started or did that come from one of the notebooks?
-* Come to think of it, which notebook do we have to run first before running the plotting code: was it "process data" or "clean data"?
-* Where did the shapefiles get downloaded from for the geographic plots?
-* _Et cetera, times infinity._
+- Are we supposed to go in and join the column X to the data before we get started or did that come from one of the notebooks?
+- Come to think of it, which notebook do we have to run first before running the plotting code: was it "process data" or "clean data"?
+- Where did the shapefiles get downloaded from for the geographic plots?
+- _Et cetera, times infinity._
 
 These types of questions are painful and are symptoms of a disorganized project. A good project structure encourages practices that make it easier to come back to old work, for example separation of concerns, abstracting analysis as a [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph), and engineering best practices like version control.
 

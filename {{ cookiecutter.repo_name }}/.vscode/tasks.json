@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "python-checks",
+      "type": "shell",
+      "command": "poetry",
+      "args": ["run", "poe", "check"],
+      "group": "build",
+      "detail": "Run all Python checks (format, lint, typecheck, test)",
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    }
+  ]
+}

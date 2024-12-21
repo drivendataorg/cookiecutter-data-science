@@ -13,7 +13,9 @@ mkdocs-include-markdown-plugin
 pexpect
 pipenv
 pytest
+ruff
 termynal
 twine
 virtualenvwrapper; sys_platform != 'win32'
 virtualenvwrapper-win; sys_platform == 'win32'
+uv

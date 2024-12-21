@@ -3,7 +3,7 @@
 
 ## GLOBALS
 
-PROJECT_NAME = cookiecutter-data-science
+PROJECT_NAME = gatlens-opinionated-template
 PYTHON_VERSION = 3.10
 PYTHON_INTERPRETER = python
 
@@ -34,6 +34,11 @@ lint:
 	isort --check --profile black ccds hooks tests docs/scripts
 	black --check ccds hooks tests docs/scripts
 
+# lint:
+# 	ruff check hooks docs/scripts
+# 	prettier --check docs
+
+# pyright .
 
 ###     DOCS
 

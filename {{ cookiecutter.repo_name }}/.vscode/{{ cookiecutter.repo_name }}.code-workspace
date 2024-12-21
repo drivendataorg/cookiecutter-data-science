@@ -1,0 +1,107 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": "..",
+    },
+    // Option #02
+    // {
+    // 	"name": "package",
+    // 	"path": "../{{ cookiecutter.module_name }}/"
+    // }
+  ],
+  "settings": {
+    // Excluded Files Won't Show in Sidebar
+    "files.exclude": {
+      // Option #02
+      "**/{{ cookiecutter.module_name }}/": false,
+
+      // Version Control
+      "**/.git": false,
+      "**/.gitattributes": false,
+      "**/.github": false,
+      "**/.gitignore": false,
+      "**/.hg": false,
+      "**/.svn": false,
+      "**/CVS": false,
+
+      // System Files
+      "**/.DS_Store": false,
+      "**/Thumbs.db": false,
+      "**/*.bak": false,
+      "**/*.sav": false,
+      "**/*.backup": false,
+      "**/.*.swp": false,
+      "**/*~[0-9]*": false,
+
+      // Development Environment
+      "**/__pycache__": false,
+      "**/*.py[cod]": false,
+      "**/*$py.class": false,
+      "**/.editorconfig": false,
+      "**/.env": false,
+      "**/.idea": false,
+      "**/.ipynb_checkpoints": false,
+      "**/.mypy_cache": false,
+      "**/.prettierrc": false,
+      "**/.pytest_cache": false,
+      "**/.python-version": false,
+      "**/.ruff_cache": false,
+      "**/.ruby-lsp": false,
+      "**/.venv": false,
+      "**/.vscode": false,
+      "**/*.sublime-*": false,
+      "**/venv": false,
+
+      // Build and Distribution
+      "**/build": false,
+      "**/dist": false,
+      "**/*.egg-info": false,
+      "**/wheels": false,
+      "**/downloads": false,
+
+      // Project Files
+      "**/logs": false,
+      "**/scripts": false,
+      "**/tests": false,
+      "CHANGELOG.md": false,
+      "LICENSE.md": false,
+      "MANIFEST": false,
+      "requirements.txt": false,
+
+      // Documentation
+      "**/docs/_build": false,
+      "**/site": false,
+
+      // Testing and Coverage
+      "**/.coverage": false,
+      "**/.coverage.*": false,
+      "**/htmlcov": false,
+      "**/coverage.xml": false,
+      "**/*.cover": false,
+
+      // Databases
+      "**/dump.rdb": false,
+
+      // LaTeX
+      "**/*.aux": true,
+      "**/*.bbl": true,
+      "**/*.bcf": true,
+      "**/*.blg": true,
+      "**/*.fdb_latexmk": true,
+      "**/*.fls": true,
+      "**/*.lof": true,
+      "**/*.log": false,
+      "**/*.lot": true,
+      "**/*.out": true,
+      "**/*.synctex.gz*": true,
+      "**/*.toc": true,
+      "**/_minted*": true,
+    },
+    "explorerExclude.backup": {},
+    "workbench.colorCustomizations": {
+      "editor.lineHighlightBackground": "#1073cf2d",
+      "editor.lineHighlightBorder": "#9fced11f",
+    },
+  },
+}

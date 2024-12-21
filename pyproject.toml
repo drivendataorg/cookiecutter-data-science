@@ -7,7 +7,7 @@ name = "ccds"
 
 [project]
 name = "gatlens-opinionated-template"
-version = "0.0.1"
+version = "0.0.2"
 description = "A modern, opinionated full-stack CookieCutter project template that prioritizes developer experience and cutting-edge tools."
 authors = [
   { name = "Gatlen Culp", email = "GatlenCulp@gmail.com" },
@@ -36,9 +36,20 @@ dependencies = [
 ]
 
 [project.scripts]
-ccds = "ccds.__main__:main"
+gotem = "ccds.__main__:main"
 
 [project.urls]
 "Source Code" = "https://github.com/GatlenCulp/gatlens-opinionated-template"
 "Documentation" = "https://gatlenculp.github.io/gatlens-opinionated-template/"
 "Gatlen's Portfolio" = "https://gatlen.notion.site/"
+
+[tool.pytest.ini_options]
+addopts = """
+-vv
+--color=no
+"""
+
+[[tool.uv.index]]
+name = "gatlens-opinionated-template"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"

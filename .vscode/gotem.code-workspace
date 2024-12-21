@@ -2,12 +2,44 @@
 	"folders": [
 		{
 			"path": ".."
-		}
+		},
 	],
 	"settings": {
 		"workbench.colorCustomizations": {
 			"editor.lineHighlightBackground": "#1073cf2d",
 			"editor.lineHighlightBorder": "#9fced11f"
-		}
+		},
+		"files.exclude": {
+			"**/.git": false,
+			"**/.svn": false,
+			"**/.hg": false,
+			"**/CVS": false,
+			"**/.DS_Store": false,
+			"**/Thumbs.db": false,
+			"**/.ruby-lsp": false,
+			"**/.pytest_cache": false,
+			"**/docker": false,
+			"**/venv": false,
+			"**/tests": false,
+			"**/scripts": false,
+			"**/logs": false,
+			"**/.github": false,
+			".editorconfig": false,
+			".gitignore": false,
+			".vscode": false,
+			".gitattributes": false,
+			".prettierrc": false,
+			"pytest.ini": false,
+			"requirements.txt": false,
+			"LICENSE.md": false,
+			"CHANGELOG.md": false,
+			"**/*.aux": false,
+			"**/*.fdb_latexmk": false,
+			"**/*.fls": false,
+			"**/*.bbl": false,
+			"**/*.out": false,
+			"**/*.synctex.gz*": false
+		},
+		"explorerExclude.backup": {},
 	}
 }

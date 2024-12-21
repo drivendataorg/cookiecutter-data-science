@@ -1,0 +1,32 @@
+# {%- raw -%}
+name: "Setup Python Environment"
+description: "Set up Python environment for the given Python version"
+
+inputs:
+  python-version:
+    description: "Python version to use"
+    required: true
+    default: "3.12"
+  uv-version:
+    description: "uv version to use"
+    required: true
+    default: "0.4.6"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{inputs.python-version}}
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v2
+      with:
+        version: ${{inputs.uv-version}}
+        enable-cache: "true"
+        cache-suffix: ${{matrix.python-version}}
+
+    - name: Install Python dependencies
+      run: uv sync --frozen
+      shell: bash
+# {% endraw %}

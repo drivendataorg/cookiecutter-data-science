@@ -4,7 +4,7 @@ site_url: https://gatlenculp.github.io/gatlens-opinionated-template/
 repo_url: https://github.com/GatlenCulp/gatlens-opinionated-template
 edit_uri: edit/master/docs/docs
 copyright: Upstream maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>, fork maintained by <a target=_blanks href="https://gatlen.notion.site">Gatlen Culp</a>.
-theme: 
+theme:
   favicon: favicon.ico
   features:
     - navigation.instant

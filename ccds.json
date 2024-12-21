@@ -2,9 +2,9 @@
     "project_name": "project_name",
     "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
     "module_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
-    "author_name": "Your name (or your organization/company/team)",
+    "author_name": "Your name, organization, company, or team)",
     "description": "A short description of the project.",
-    "python_version_number": "3.10",
+    "python_version_number": "3.12",
     "dataset_storage": [
         {"none": "none"},
         {"azure": {"container": "container-name"}},
@@ -12,6 +12,7 @@
         {"gcs": {"bucket": "bucket-name"}}
     ],
     "environment_manager": [
+        "uv",
         "virtualenv",
         "conda",
         "pipenv",
@@ -28,5 +29,6 @@
     ],
     "open_source_license": ["No license file", "MIT", "BSD-3-Clause"],
     "docs": ["mkdocs", "none"],
-    "include_code_scaffold": ["Yes", "No"]
+    "include_code_scaffold": ["Yes", "No"],
+    "use_github": ["Yes", "No"]
 }

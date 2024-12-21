@@ -1,3 +1,9 @@
+"""Project configuration and path management.
+
+Defines project-wide constants, directory structures, and logging setup.
+Automatically loads environment variables from .env if present.
+"""
+
 from pathlib import Path
 
 from dotenv import load_dotenv

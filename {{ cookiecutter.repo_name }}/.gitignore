@@ -1,3 +1,14 @@
+# Environments and Secrets
+.venv
+venv/
+
+# Ignore everything in secrets directory
+secrets/*
+
+# But don't ignore the schema directory
+!secrets/schema/
+!secrets/schema/**
+
 # Data
 /data/
 

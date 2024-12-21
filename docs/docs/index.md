@@ -28,7 +28,6 @@ Cookiecutter Data Science v2 requires Python 3.8+. I recommend installing it wit
     ccds
     ```
 
-
 === "With pip"
 
     ```bash
@@ -51,7 +50,6 @@ Cookiecutter Data Science v2 requires Python 3.8+. I recommend installing it wit
 
     Cookiecutter Data Science v2 now requires installing the new `cookiecutter-data-science` Python package, which extends the functionality of the [`cookiecutter`](https://cookiecutter.readthedocs.io/en/stable/README.html) templating utility. Use the provided `ccds` command-line program instead of `cookiecutter`.
 
-
 ## Starting a new project
 
 Starting a new project is as easy as running this command at the command line. No need to create a directory first, the cookiecutter will do it for you.
@@ -62,21 +60,17 @@ ccds
 
 The `ccds` commandline tool defaults to the Cookiecutter Data Science template, but you can pass your own template as the first argument if you want.
 
-
 ## Example
 
 <!-- TERMYNAL OUTPUT -->
 
-
 Now that you've got your project, you're ready to go! You should do the following:
 
- - **Check out the directory structure** below so you know what's in the project and how to use it.
- - **Read the [opinions](opinions.md)** that are baked into the project so you understand best practices and the philosophy behind the project structure.
- - **Read the [using the template](using-the-template.md) guide** to understand how to get started on a project that uses the template.
+- **Check out the directory structure** below so you know what's in the project and how to use it.
+- **Read the [opinions](opinions.md)** that are baked into the project so you understand best practices and the philosophy behind the project structure.
+- **Read the [using the template](using-the-template.md) guide** to understand how to get started on a project that uses the template.
 
-
- Enjoy!
-
+Enjoy!
 
 ## Directory structure
 
@@ -100,7 +94,7 @@ The directory structure of your new project will look something like this (depen
 │                         the creator's initials, and a short `-` delimited description, e.g.
 │                         `1.0-jqp-initial-data-exploration`.
 │
-├── pyproject.toml     <- Project configuration file with package metadata for 
+├── pyproject.toml     <- Project configuration file with package metadata for
 │                         {{ cookiecutter.module_name }} and configuration for tools like black
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
@@ -123,10 +117,10 @@ The directory structure of your new project will look something like this (depen
     │
     ├── features.py             <- Code to create features for modeling
     │
-    ├── modeling                
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
+    ├── modeling
+    │   ├── __init__.py
+    │   ├── predict.py          <- Code to run model inference with trained models
     │   └── train.py            <- Code to train models
     │
-    └── plots.py                <- Code to create visualizations   
+    └── plots.py                <- Code to create visualizations
 ```

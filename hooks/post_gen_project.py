@@ -2,6 +2,9 @@ import shutil
 from copy import copy
 from pathlib import Path
 
+from ccds.hook_utils.configure_gh import configure_github_repo
+from ccds.hook_utils.configure_venv import configure_uv_venv
+
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
 from ccds.hook_utils.custom_config import write_custom_config
@@ -78,5 +81,26 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
         generated_path.unlink()
     elif generated_path.name == "__init__.py":
         # remove any content in __init__.py since it won't be available
-        generated_path.write_text("")
+        generated_path.write_text(
+            '"""{{ cookiecutter.module_name }}: {{ cookiecutter.project_short_description }}."""\n'
+        )
+# {% endif %}
+
+#
+#  GATLEN'S UPLOAD TO GITHUB REPO CODE
+#
+
+# {% if cookiecutter.use_github == "Yes" %}
+configure_github_repo(
+    directory=Path.cwd(),
+    repo_name="{{ cookiecutter.repo_name }}",
+    protection_type="main_and_dev",
+    no_github=False,
+)
+# {% endif %}
+
+# Install the virtual environment (uv only for now)
+# {% if cookiecutter.environment_manager == "uv" %}
+configure_uv_venv(directory=Path.cwd())
+
 # {% endif %}
