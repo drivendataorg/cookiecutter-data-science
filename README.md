@@ -45,47 +45,20 @@ GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](htt
 
 **CCDS** is white bread: simple, familiar, unoffensive, and waiting for your choice of toppings. **GOTem** is the expert-crafted and opinionated “everything burger,” fully loaded from the start for any task you want to do (so long as you want to do it in a specific way). Some of the selections might be an acquired taste and users are encouraged to leave them off as they start and perhaps not all will appreciate my tastes even with time, but it is the setup I find \*_delicious_\*.
 
-<!-- TODO: Place the below side-by-side -->
 
-#### ✅ Use this if...
+| ✅ Use this if... | ❌ Do NOT use this if... |
+|------------------|------------------------|
+| **🎓 Learners**<br>You want to experiment, master new tools, and generally learn more about software development even when it's not super practical but intellectually interesting.<br>- *Modern and Supported Over Ubiquitous*: You prefer cutting-edge libraries with interesting ways of tackling problems (Loguru, Polars, FastAPI, Typer, UV) rather than sticking with old defaults. | **🛣️ Minimalists**<br>If you strictly want bare-bones or default setups, GOTem's "everything burger" approach might feel too "extra."<br>- You might dislike the *Modern Over Ubiquitous* philosophy, or find *Simplicity* overshadowed by new libraries. |
+| **👨‍💻 Hackers**<br>You want to produce code that's as **sexy** and elegant as it is functional. You want to learn the best way to do something and not just the fast or common way. Not a single default goes unscrutinized.<br>- *Customizability*: You love fiddling with tools and appreciate an architecture that's easy to reconfigure.<br>- *Sexy*: You enjoy "pretty colors" and fancy graphs that keep coding fun, vibrant, and ADHD-friendly.<br>- *Minimal and Modular*: Non-intrusive and simple APIs over heavyweight frameworks that require vendor lock-in. | **🔎 Micro-Optimizers**<br>If you insist on dissecting every customization before writing a single line of code, this template could be overwhelming (though you can learn a lot by reverse-engineering!).<br>- The *Aspirational Over Practical* angle may not suit you if you prefer proven, minimal configurations. |
+| **🍔 The "Everything Burger" Crowd**<br>You are fine with an opinionated setup with many bells and whistles you're expected to mostly ignore and are happy to strip out or ignore what you don't need until you're ready. You're glad that it offers a framework that is "hard to master" | **🕰️ Legacy Lovers**<br>If you favor tried-and-true defaults like the standard logging library, Pandas over Polars, or old frameworks like Django, GOTem's emphasis on newer tools may frustrate you.<br>- *Reset-Button Development* and *Research-Driven Exploration* may seem too experimental if you rely on stable, established methods. |
+| **⚡ Perfection and Performance Seekers**<br>You value speed and efficiency, picking libraries that push Python's capabilities. You enjoy finding the perfect tool or solution to a problem and are often annoyed with the way things are normally done.<br>- *Simplicity & Good Defaults*: You like tools that work right out of the box but can be tuned for performance.<br>- *Quality Driven*: You care about maintainable, professional-grade setups with robust tooling. | **🏛️ Anyone Needing Old-School Stability**<br>If you must have a well-trodden path with large legacy codebases and predictable updates, you're better off using standard defaults or [CCDS](https://cookiecutter-data-science.drivendata.org/).<br>- GOTem is intentionally *"Aspirational Over Practical"* at times and not always production-tested. |
+| **🏗️ Quick-Start Enthusiasts**<br>You want a template that practically configures itself so you can jump straight into work on any task you desire.<br>- *Small Teams / Individual*: The template is nimble enough for personal projects or small research squads while having high standards that make it maintainable in the long-term.<br>- *Scalable*: Even if your project grows, you want a structure and skillset that can expand gracefully without forcing a major tech overhaul. | |
 
-- **🤖 Legacy-Tool Skeptics** If you frequently mutter, “There has to be a better way,” this template might be your aha moment.
-- **🍔 The “Everything Burger” Crowd** Anyone who loves a fully loaded development setup and doesn’t mind removing foreign ingredients they don’t enjoy.
-- **🎓 Learners and Perfectionists** Developers who want to explore new tools, master best practices, and produce sexy code and outputs. Those who are in it for the work as much as they are about the artform.
-- **⚡ Performance Seekers** Crave modern, efficient libraries? This template prioritizes speed and powerful modern tools with simple syntax.
-- **🏗️ Quick-Start Enthusiasts** Need a template that practically sets itself up? GOTem lets you jump straight into coding with minimal overhead.
+If you find yourself nodding along to these **NOT for you** points, [CCDS](https://cookiecutter-data-science.drivendata.org/) or another minimal template might suit you better. GOTem is a fully loaded, opinionated experience—delicious to some, but not for all tastes!
 
-#### ❌ Do NOT use this if...
-
-- **🛣️ Minimalists** If you want a bare-bones or default setup, this template may seem too opinionated or “extra.”
-
-- **🔎 Micro-Optimizers** If you feel compelled to dissect every customization before writing a single line of code, you might prefer a simpler starting point (though GOTem can be a great reverse-engineering exercise).
-
-- **🕰️ Legacy Lovers** For anyone who prefers tried-and-true defaults to cutting-edge (sometimes experimental) tools. CCDS might be a more straightforward fit.
-
-If you find yourself nodding to these “NOT for you” points, consider sticking with CCDS instead for that classic, “white bread” experience.
 
 
 **[View the full documentation here](https://gatlenculp.github.io/gatlens-opinionated-template/) ➡️**
-
----
-
-_The main functionality of this project is kept as close as possible to the CCDS template as to avoid additional maintenance on my end. This might mean a mismatch between practices I recommend and the ones they do. Ex: Makefiles on root, Taskfiles in template._
-
-_See how CCDS compares with regular cookiecutter templates and my decisions [here](https://drivendata.co/blog/ccds-v2). For the most part, I look at CCDS as [Chesterton's Fence](https://www.lesswrong.com/tag/chesterton-s-fence), making sure to check my decisions against theirs before making changes. Still, the [CCDS team notes there's still some missing functionality](https://drivendata.co/blog/ccds-v2#whats-still-missing) including the [lack of a uv installer](https://github.com/drivendataorg/cookiecutter-data-science/discussions/403). The CCDS template still comes with some [nice features](https://drivendata.co/blog/ccds-v2#whats-new). CCDS has also considered [ruff as the default linting + formatting option](https://github.com/drivendataorg/cookiecutter-data-science/pull/387)_
-
-
-
-<!-- _I'm looking for a way to use [Cruft](https://cruft.github.io/cruft/) over [CookieCutter](https://www.cookiecutter.io/) + CCDS, but for now, CCDS needs to be used due to their custom configuration_ -->
-
-
-
-<!-- It is recommended to use [Cruft](https://cruft.github.io/cruft/) instead of [CookieCutter](https://www.cookiecutter.io/). The resulting project is the same, but with the added option of being able to sync your project with the original template if this repository updates as if it were an incomming commit.
-
-Clone using Cruft
-```bash
-    cruft create https://github.com/GatlenCulp/gatlens-opinionated-template
-``` -->
 
 ## Getting Started
 
@@ -119,6 +92,17 @@ pip install gatlens-opinionated-template
 gotem
 ```
 </details>
+
+
+<!-- _I'm looking for a way to use [Cruft](https://cruft.github.io/cruft/) over [CookieCutter](https://www.cookiecutter.io/) + CCDS, but for now, CCDS needs to be used due to their custom configuration_ -->
+
+
+<!-- It is recommended to use [Cruft](https://cruft.github.io/cruft/) instead of [CookieCutter](https://www.cookiecutter.io/). The resulting project is the same, but with the added option of being able to sync your project with the original template if this repository updates as if it were an incomming commit.
+
+Clone using Cruft
+```bash
+    cruft create https://github.com/GatlenCulp/gatlens-opinionated-template
+``` -->
 
 
 ### The resulting directory structure
@@ -197,45 +181,7 @@ Here are a few guiding principles of this template to determine whether or not y
 7. **Scalable** -- As noted above, this is mainly geared to individuals and small teams. However, in the case you want to scale production or team size or even if you move to a new and larger organization, I want those skills to transfer and for there to be little more to learn and so that you don't have to learn an entirely new skillset or library. -->
 
 
-This template is primarily a research and learning project that explores modern Python development tools and practices. Rather than focusing solely on practical, production-ready solutions, it represents an aspirational view of Python development that emphasizes cutting-edge tools and emerging best practices.
 
-### Core Principles 🎯
-
-1. **Reset-Button Development** 🔄
-   - Reimagines Python tooling without legacy constraints
-   - Selects tools leveraging decades of lessons from established tools while avoiding their compromises
-
-2. **Research-Driven Exploration** 🔬
-   - Functions as a living laboratory for modern Python development
-   - No default goes unscruitinized, with curated promising technologies based on careful comparative analysis
-
-3. **Individual and Small Team Focus with Scalability** 👥
-   - Optimized for personal projects and small research teams
-   - Maintains professional standards that scale to larger organizations
-   - Prioritizes tools that don't require deep expertise to start using and are helpful at any scale.
-
-4. **Aspirational Over Practical** 🌟
-   - Embraces perfectionist ideals in tooling choices
-   - Values learning opportunities over conventional solutions
-   - Willing to trade immediate familiarity for better long-term solutions
-
-5. **Thoughtfully Opinionated** 🤔
-   - Provides carefully selected defaults based on extensive research
-   - Maintains modularity and avoids vendor lock-in
-   - Prefers simple, non-intrusive APIs over heavyweight frameworks
-   - Examples: Loguru > logging, Polars > Pandas, UV > pip, FastAPI > Flask
-
-6. **Quality Driven** ✨
-   - Emphasizes clean, maintainable code
-   - Incorporates professional-grade tooling and practices
-   - Focuses on developer experience without sacrificing robustness
-
-7. **Sexy**
-    - Just because coding is work doesn't mean it can't be fun. Sometimes you need those `pretty colors` and fancy ~graphs~ if you want that ADHD brain of yours pumped full of happy juice. I want my code to be like the notes of your overachieving classmate with a bullet journal.
-
-> ⚠️ Note: This template intentionally prioritizes exploration and learning over immediate practicality. While all included tools have been carefully researched, not all have been extensively tested in production environments. Users should view this as a forward-looking reference implementation rather than a production-ready solution.
-
-
-## Contributing
+## Contributing ❤️
 
 If you plan major changes, consider upstreaming them to [CookieCutter Data Science (CCDS)](https://github.com/drivendataorg/cookiecutter-data-science). For minor fixes or adjustments to GOTem, submit an issue or pull request here. See [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
