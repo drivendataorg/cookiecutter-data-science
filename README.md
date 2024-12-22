@@ -1,22 +1,51 @@
 # Gatlen's Opinionated Template (GOTem)
-_v0.0.1 is Currently not for production!_
+**_A modern, opinionated full-stack [CookieCutter](https://www.cookiecutter.io/) project template that prioritizes developer experience and cutting-edge tools._**
 
+
+![PyPI - Version](https://img.shields.io/pypi/v/gatlens-opinionated-template?style=flat)[![tests](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml/badge.svg)](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml) [![Uses the Cookiecutter Data Science project upstream](https://img.shields.io/badge/CCDS-Project%20fork-328F97?logo=cookiecutter)](https://cookiecutter-data-science.drivendata.org/) [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv) ![GitHub stars](https://img.shields.io/github/stars/gatlenculp/homebrew-vivaria?style=social)
+
+> [!WARNING]
+> Not ready for production!
+
+<div align="center">
+  <img src="./docs/docs/gotem.png" alt="GOTem Logo" style="max-width: 250px;">
+  <br/>
+  <i>(CookieCutter + Goose)</i>
+</div>
+
+
+Built on (and synced with) the foundation of [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), this template incorporates carefully selected defaults, dependency stack, customizations, and contemporary best practices for Python development, research projects, and academic work.
+
+_The main functionality of this project is kept as close as possible to the CCDS template as to avoid additional maintenance on my end. This might mean a mismatch between practices I recommend and the ones they do. Ex: Makefiles on root, Taskfiles in template._
+
+**Key Features**
+- 🚀 Modern tooling (UV, Ruff, FastAPI, Pydantic, Typer, Loguru, Polars, etc.) over traditional defaults
+- 📦 Batteries-included configuration with sensible defaults
+- 🔧 Highly customizable while maintaining simplicity
+- 🤝 Perfect for individuals and small teams w/ scalability
+- 🔄 Living template that evolves with the ecosystem
+
+**[View the full documentation here](https://gatlenculp.github.io/gatlens-opinionated-template/) ➡️**
+
+---
+
+<!-- Other names: GaTem (Gatlen's Template) GOATemplate? Idk-->
 <!-- gotem .. --output-dir ./ignore is test -->
 <!-- https://github.com/Ileriayo/markdown-badges -->
 <!-- https://shields.io/badges/static-badge -->
 <!-- https://github.com/alexandresanlim/Badges4-README.md-Profile -->
 <!-- https://github.com/PatrickJS/awesome-cursorrules/tree/main?tab=readme-ov-file -->
 
-[![tests](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml/badge.svg)](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml) [![Uses the Cookiecutter Data Science project upstream](https://img.shields.io/badge/CCDS-Project%20fork-328F97?logo=cookiecutter)](https://cookiecutter-data-science.drivendata.org/) [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv) [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
+<!-- 
+Badges that need to be rearranged in stack. -->
 <!-- https://img.shields.io/badge/Cookiecutter-D4AA00?style=for-the-badge&logo=Cookiecutter&logoColor=white -->
 <!-- I love badges if not already clear lol -->
-Badges that need to be rearranged in stack.
-**OSes**
+<!-- **OSes**
 ![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
 ![Widnows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-**Languages**https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white
+**Languages**
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
 ![Jupyter](https://img.shields.io/badge/Jupyter-F37626.svg?&style=for-the-badge&logo=Jupyter&logoColor=white)
 
@@ -48,20 +77,18 @@ Badges that need to be rearranged in stack.
 
 **Containerization**
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-<!-- https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white -->
+https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white
 
 **Databases**
 ![DuckDB](https://img.shields.io/badge/Duckdb-000000?style=for-the-badge&logo=Duckdb&logoColor=yellow)
-<!-- https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&logoColor=white -->
+https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&logoColor=white
 
 
 **Lint**
 ![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) -->
 
 
-A modern, opinionated full-stack [CookieCutter](https://www.cookiecutter.io/) project template that prioritizes developer experience and cutting-edge tools. Built on (and synced with) the foundation of [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), this template incorporates carefully selected defaults, dependency stack, customizations, and contemporary best practices for Python development, research projects, and academic work.
-
-_The main functionality of this project is kept as close as possible to the CCDS template as to avoid additional maintenance on my end. This might mean a mismatch between practices I recommend and the ones they do. Ex: Makefiles on root, Taskfiles in template._
 
 _See how CCDS compares with regular cookiecutter templates and my decisions [here](https://drivendata.co/blog/ccds-v2). For the most part, I look at CCDS as [Chesterton's Fence](https://www.lesswrong.com/tag/chesterton-s-fence), making sure to check my decisions against theirs before making changes. Still, the [CCDS team notes there's still some missing functionality](https://drivendata.co/blog/ccds-v2#whats-still-missing) including the [lack of a uv installer](https://github.com/drivendataorg/cookiecutter-data-science/discussions/403). The CCDS template still comes with some [nice features](https://drivendata.co/blog/ccds-v2#whats-new). CCDS has also considered [ruff as the default linting + formatting option](https://github.com/drivendataorg/cookiecutter-data-science/pull/387)_
 
@@ -69,18 +96,10 @@ _See how CCDS compares with regular cookiecutter templates and my decisions [her
 
 <!-- CCDS V2 appears not to like git lfs much, expensive. -->
 
-## Key Features
-- 🚀 Modern tooling (UV, Ruff, FastAPI, Pydantic, Typer, Loguru, Polars, etc.) over traditional defaults
-- 📦 Batteries-included configuration with sensible defaults
-- 🔧 Highly customizable while maintaining simplicity
-- 📈 Scales from personal projects to production
-- 🤝 Perfect for individuals and small teams
-- 🔄 Living template that evolves with the ecosystem
-
 
 ## Installation
 
-_I'm looking for a way to use [Cruft](https://cruft.github.io/cruft/) over [CookieCutter](https://www.cookiecutter.io/) + CCDS, but for now, CCDS needs to be used due to their custom configuration_
+<!-- _I'm looking for a way to use [Cruft](https://cruft.github.io/cruft/) over [CookieCutter](https://www.cookiecutter.io/) + CCDS, but for now, CCDS needs to be used due to their custom configuration_ -->
 
 
 
