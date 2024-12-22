@@ -20,7 +20,7 @@ This page explains the chosen tools and why they were chosen.
 > While many IDEs exist, VS Code's hackability, extensive ecosystem, and remote capabilities make it ideal for modern development. Cursor extends this with AI features while maintaining full VS Code compatibility. The decision to use VS Code even for notebooks (over JupyterLab) allows for a consistent development experience with all settings and extensions available.
 </details>
 
-## 02 Task Running · [Task](https://taskfile.dev/) 🎯
+## 02 Task Running · [Taskfile](https://taskfile.dev/) 🎯
 
 
 - Modern alternative to Make/Poetry scripts
@@ -33,10 +33,7 @@ This page explains the chosen tools and why they were chosen.
 
 ## 03 VCS · [Git](https://git-scm.com/) + [GitLFS](https://git-lfs.com/) + [GitHub](https://github.com/) 📚
 
-![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-
-**[Git](https://git-scm.com/) + [GitLFS](https://git-lfs.com/) + [GitHub](https://github.com/)** 📚
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 - Industry standard version control
 - Extensive ecosystem and integrations
 - Built-in project management features

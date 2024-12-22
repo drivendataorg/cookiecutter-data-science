@@ -11,6 +11,9 @@ manual_test/
 
 # Mac OS-specific storage files
 .DS_Store
+Icon?
+Icon
+Icon[\r]
 
 # vim
 *.swp
