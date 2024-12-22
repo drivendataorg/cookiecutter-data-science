@@ -51,7 +51,7 @@ on its own.
 
 We often use Python for our data science projects. We use a virtual environment to manage the packages we use in our project. This is a way to keep the packages we use in our project separate from the packages we use in other projects. This is especially important when we are working on multiple projects at the same time.
 
-Cookicutter Data Science supports [a few options](opinions.md#build-from-the-environment-up) for Python virtual environment management, but no matter which you choose, you can create an environment with the following commands:
+Cookicutter Data Science supports [a few options](opinions.md#04-build-from-the-environment-up) for Python virtual environment management, but no matter which you choose, you can create an environment with the following commands:
 
 ```bash
 make create_environment
@@ -70,7 +70,7 @@ make requirements
 There's no universal advice for how to manage your data, but here are some recommendations for starting points depending on where the data comes from:
 
 - **Flat files (e.g., CSVs or spreadsheets) that are static** - Put these files into your `data/raw` folder and then run `make sync_data_up` to push the raw data to your cloud provider.
-- **Flat files that change and are extracted from somewhere** - Add a Python script to your source module in `data/make_dataset.py` that downloads the data and puts it in the `data/raw` folder. Then you can use this to get the latest and push it up to your cloud host as it changes (be careful not to [override your raw data](opinions.md/#data-analysis-is-a-directed-acyclic-graph)).
+- **Flat files that change and are extracted from somewhere** - Add a Python script to your source module in `data/make_dataset.py` that downloads the data and puts it in the `data/raw` folder. Then you can use this to get the latest and push it up to your cloud host as it changes (be careful not to [override your raw data](opinions.md/#0101-data-analysis-is-a-directed-acyclic-graph)).
 - **Databases you connect to with credentials** - Store your credentials in `.env`. We recommend adding a `db.py` file or similar to your `data` module that connects to the database and pulls data. If your queries generally fit into memory, you can just have functions in the `db.py` to load data that you use in analysis. If not, you'll want to add a script like above to download the data to the `data/raw` folder.
 
 ## Check out a branch
