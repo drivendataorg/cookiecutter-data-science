@@ -10,7 +10,7 @@ _A modern, opinionated full-stack [CookieCutter](https://www.cookiecutter.io/) p
 
 Gatlen's Opinionated Template (GOTem) works on all platforms w/ Python 3.10+. While I try my best to keep in-sync with the upstream [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), being a one-man-maintainer on this project means I may neglect features I tend not to use and deviations from what I use may not receive as thorough testing. If you wish to change any of the defaults, I recommend forking this project.
 
-I recommend installing gotem it with [UV](https://github.com/astral-sh/uv). GOTem is [Available on PyPi here](https://pypi.org/project/gatlens-opinionated-template/).
+I recommend installing gotem it with [uv](https://github.com/astral-sh/uv). GOTem is [Available on PyPi here](https://pypi.org/project/gatlens-opinionated-template/).
 
 === "With uv (recommended)"
 

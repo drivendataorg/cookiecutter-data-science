@@ -1,5 +1,5 @@
 # Gatlen's Opinionated Template (GOTem)
-**_A modern, opinionated full-stack [CookieCutter](https://www.cookiecutter.io/) project template that prioritizes developer experience and cutting-edge tools._**
+**_Cutting-edge, opinionated, and ambitious project builder for power users and researchers._**
 
 
 ![PyPI - Version](https://img.shields.io/pypi/v/gatlens-opinionated-template?style=flat)[![tests](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml/badge.svg)](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml) [![Uses the Cookiecutter Data Science project upstream](https://img.shields.io/badge/CCDS-Project%20fork-328F97?logo=cookiecutter)](https://cookiecutter-data-science.drivendata.org/) [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv) ![GitHub stars](https://img.shields.io/github/stars/gatlenculp/homebrew-vivaria?style=social)
@@ -33,6 +33,12 @@ GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](htt
 ### Who is this for?
 
 **CCDS** is white bread: simple, familiar, unoffensive, and waiting for your choice of toppings. **GOTem** is the expert-crafted and opinionated “everything burger,” fully loaded from the start for any task you want to do (so long as you want to do it in a specific way). Some of the selections might be an acquired taste and users are encouraged to leave them off as they start and perhaps not all will appreciate my tastes even with time, but it is the setup I find \*_delicious_\*.
+
+
+<!-- Don't use if you already have defaults you're comfortable with that you want to use. -->
+
+
+<!-- You just want code to work and don't care as much about good practice -->
 
 | **✅ Use GOTem if…**                                                                                                                                                                                   | **❌ Might Not Be for You if…**                                                                                                                                                                                      |
 |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
