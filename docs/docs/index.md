@@ -12,6 +12,8 @@ Gatlen's Opinionated Template (GOTem) works on all platforms w/ Python 3.10+. Wh
 
 I recommend installing gotem it with [uv](https://github.com/astral-sh/uv). GOTem is [Available on PyPi here](https://pypi.org/project/gatlens-opinionated-template/).
 
+<!-- uvx --from gatlens-opinionated-template gotem -->
+
 === "With uv (recommended)"
 
     ```bash
@@ -20,7 +22,6 @@ I recommend installing gotem it with [uv](https://github.com/astral-sh/uv). GOTe
     # From the parent directory where you want your project
     gotem
     ```
-<!-- uvx --from gatlens-opinionated-template gotem -->
 
 === "With pipx"
 
