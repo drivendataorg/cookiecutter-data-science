@@ -2,23 +2,27 @@
 
 This page explains the chosen tools and why they were chosen.
 
-## 01 IDE
+## 01 IDE · [VS Code](https://code.visualstudio.com/) / [Cursor](https://www.cursor.com/) 🖥️
 
 ![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 
-**[VS Code](https://code.visualstudio.com/) / [Cursor](https://www.cursor.com/)** 🖥️
+
 - Primary IDE with full ecosystem support
 - Cursor fork provides enhanced AI integration
 - Includes pre-configured workspace settings and debug profiles
 - Supports remote development and notebook integration
 - Replaces traditional Jupyter environments
 
+
+<details>
+<summary><b>Explanation</b></summary>
+
 > While many IDEs exist, VS Code's hackability, extensive ecosystem, and remote capabilities make it ideal for modern development. Cursor extends this with AI features while maintaining full VS Code compatibility. The decision to use VS Code even for notebooks (over JupyterLab) allows for a consistent development experience with all settings and extensions available.
+</details>
+
+## 02 Task Running · [Task](https://taskfile.dev/) 🎯
 
 
-## 02 Task Running
-
-**[Task](https://taskfile.dev/)** 🎯
 - Modern alternative to Make/Poetry scripts
 - Simple, cross-platform task runner
 - Excellent GitHub Actions integration
@@ -27,7 +31,7 @@ This page explains the chosen tools and why they were chosen.
 > Task was chosen over alternatives like Make, Poetry scripts, or Poe the Poet for its simplicity and cross-platform support. Its YAML syntax is immediately understandable, and it works seamlessly on Windows - a common pain point with Makefiles.
 
 
-## 03 VCS
+## 03 VCS · [Git](https://git-scm.com/) + [GitLFS](https://git-lfs.com/) + [GitHub](https://github.com/) 📚
 
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
@@ -38,11 +42,11 @@ This page explains the chosen tools and why they were chosen.
 - Built-in project management features
 - Git Large File Storage (LFS) is a little-setup solution for file larger than the typical script like JSON files or Python Notebooks. Even larger files are recommended to use another storage solution such as a database or ignoring.
 
-## 04 CI/CD
+## 04 CI/CD · [GitHub Actions](https://github.com/features/actions) 🔄
 
 ![GitHub Actions](https://img.shields.io/badge/Github%20Actions-282a2e?style=for-the-badge&logo=githubactions&logoColor=367cfe)
 
-**[GitHub Actions](https://github.com/features/actions)** 🔄
+
 - Integrated CI/CD solution
 - Simple configuration and maintenance
 - Native GitHub integration
@@ -50,12 +54,11 @@ This page explains the chosen tools and why they were chosen.
 
 > While there are many CI/CD solutions available, GitHub Actions provides the tightest integration with our repository platform. Its marketplace of pre-built actions and simple YAML configuration makes it ideal for small teams who need professional CI/CD without dedicated DevOps resources.
 
-## 05 Containerization
+## 05 Containerization · [Docker](https://www.docker.com/) + [Orbstack](https://orbstack.dev/) 🐳
 
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-![Kubernetes](https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Kubernetes](https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white)
 
-**[Docker](https://www.docker.com/) + [Orbstack](https://orbstack.dev/)** 🐳
+
 - Standard containerization platform
 - Orbstack for MacOS (lighter Docker Desktop alternative)
 - VM support through Orbstack
@@ -70,11 +73,9 @@ This page explains the chosen tools and why they were chosen.
 
 > While Dev Containers show promise for standardizing development environments, they're included as an optional feature pending further evaluation by Gatlen.
 
-## 06 Cloud Services
+## 06 Cloud Services · [AWS](https://www.geeksforgeeks.org/aws-vs-google-cloud-platform-vs-azure/#) ☁️
 
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
-
-**[AWS](https://www.geeksforgeeks.org/aws-vs-google-cloud-platform-vs-azure/#)** ☁️
 - Mature cloud infrastructure platform
 - Comprehensive service ecosystem
 - Industry standard tooling
@@ -88,7 +89,7 @@ This page explains the chosen tools and why they were chosen.
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
-**[UV](https://github.com/astral-sh/uv)** ⚡
+### 07.00 Package Manager · [UV](https://github.com/astral-sh/uv) ⚡
 - Ultra-fast Rust-based Python package manager
 - Combines functionality of Poetry, virtualenv, and pipx (with dirt easy deployment to PyPi.)
 - Created by Astral (Ruff team)
@@ -99,8 +100,7 @@ This page explains the chosen tools and why they were chosen.
 
 ### 07.01 Core Dependencies
 
-![Plotly](https://img.shields.io/badge/Plotly-%233F4F75.svg?style=for-the-badge&logo=plotly&logoColor=white)
-![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=Pydantic&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-%233F4F75.svg?style=for-the-badge&logo=plotly&logoColor=white) ![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=Pydantic&logoColor=white)
 
 Essential packages used across the project:
 ```toml
@@ -124,9 +124,7 @@ ai-apps = [
 
 ### 07.03 Training & Research
 
-![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white)
-![WandB](https://img.shields.io/badge/Weights_&_Biases-FFBE00?style=for-the-badge&logo=WeightsAndBiases&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white) ![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white) ![WandB](https://img.shields.io/badge/Weights_&_Biases-FFBE00?style=for-the-badge&logo=WeightsAndBiases&logoColor=white)
 
 Packages for machine learning model development and research:
 ```toml
@@ -201,8 +199,7 @@ data = [
 
 ### 07.09 Core Development
 
-![Pytest](https://img.shields.io/badge/pytest-%23ffffff.svg?style=for-the-badge&logo=pytest&logoColor=2f9fe3)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+![Pytest](https://img.shields.io/badge/pytest-%23ffffff.svg?style=for-the-badge&logo=pytest&logoColor=2f9fe3) [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 ```toml
 dev = [
