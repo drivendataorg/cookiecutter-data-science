@@ -59,7 +59,7 @@ uv-docs-serve:
 	cd docs && uv run mkdocs serve
 
 uv-docs-deploy:
-	cd docs && uv run mkdocs gh-deploy --clean
+	cd docs && uv run mkdocs build && uv run mkdocs gh-deploy --clean
 
 
 ###     TESTS

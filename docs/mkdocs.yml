@@ -19,13 +19,14 @@ theme:
     text: Work Sans
     code: Space Mono
 nav:
-  - Home: index.md
-  - Why ccds?: why.md
-  - Opinions: opinions.md
-  - Using the template: using-the-template.md
-  - All options: all-options.md
-  - Contributing: contributing.md
-  - Related projects: related.md
+  - 🏠 Home: index.md
+  - 🛠️ Core Tools: core-tools.md
+  - ❓ Why ccds?: why.md
+  - 🗯️ Opinions: opinions.md
+  - 📑 Using the template: using-the-template.md
+  - ⚙️ All options: all-options.md
+  - ❤️ Contributing: contributing.md
+  - 🔗 Related projects: related.md
 extra:
   analytics:
     provider: google
