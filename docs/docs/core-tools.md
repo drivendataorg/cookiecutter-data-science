@@ -1,6 +1,6 @@
-
 # Core Tools & Infrastructure 🛠️
 
+This page explains the chosen tools and why they were chosen.
 
 <!-- Other names: GaTem (Gatlen's Template) GOATemplate? Idk-->
 <!-- gotem .. --output-dir ./ignore is test -->
@@ -61,6 +61,10 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 ![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) -->
 
+
+
+## 01 IDE
+
 **[VS Code](https://code.visualstudio.com/) / [Cursor](https://www.cursor.com/)** 🖥️
 - Primary IDE with full ecosystem support
 - Cursor fork provides enhanced AI integration
@@ -70,16 +74,11 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 
 > While many IDEs exist, VS Code's hackability, extensive ecosystem, and remote capabilities make it ideal for modern development. Cursor extends this with AI features while maintaining full VS Code compatibility. The decision to use VS Code even for notebooks (over JupyterLab) allows for a consistent development experience with all settings and extensions available.
 
-**[UV](https://github.com/astral-sh/uv)** ⚡
-- Ultra-fast Rust-based Python package manager
-- Combines functionality of Poetry, virtualenv, and pipx (with dirt easy deployment to PyPi.)
-- Created by Astral (Ruff team)
-- Significant performance benefits for CI/CD
-- Maintains pip compatibility
-
-> UV represents the next generation of Python package management. While tools like Poetry are mature, UV's Rust foundation provides exceptional speed (especially important in CI/CD) while maintaining compatibility with traditional pip workflows. Being from the Astral team (creators of Ruff) gives confidence in its long-term maintenance.
 
 <!-- TODO: Explain why not conda environment -->
+
+
+## 02 Task Running
 
 **[Task](https://taskfile.dev/)** 🎯
 - Modern alternative to Make/Poetry scripts
@@ -89,11 +88,16 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 
 > Task was chosen over alternatives like Make, Poetry scripts, or Poe the Poet for its simplicity and cross-platform support. Its YAML syntax is immediately understandable, and it works seamlessly on Windows - a common pain point with Makefiles.
 
+
+## 03 VCS
+
 **[Git](https://git-scm.com/) + [GitLFS](https://git-lfs.com/) + [GitHub](https://github.com/)** 📚
 - Industry standard version control
 - Extensive ecosystem and integrations
 - Built-in project management features
 - Git Large File Storage (LFS) is a little-setup solution for file larger than the typical script like JSON files or Python Notebooks. Even larger files are recommended to use another storage solution such as a database or ignoring.
+
+## 04 CI/CD
 
 **[GitHub Actions](https://github.com/features/actions)** 🔄
 - Integrated CI/CD solution
@@ -102,6 +106,8 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 - Extensive marketplace of actions
 
 > While there are many CI/CD solutions available, GitHub Actions provides the tightest integration with our repository platform. Its marketplace of pre-built actions and simple YAML configuration makes it ideal for small teams who need professional CI/CD without dedicated DevOps resources.
+
+## 05 Containerization
 
 **[Docker](https://www.docker.com/) + [Orbstack](https://orbstack.dev/)** 🐳
 - Standard containerization platform
@@ -118,6 +124,8 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 
 > While Dev Containers show promise for standardizing development environments, they're included as an optional feature pending further evaluation by Gatlen.
 
+## 06 Cloud Services
+
 **[AWS](https://www.geeksforgeeks.org/aws-vs-google-cloud-platform-vs-azure/#)** ☁️
 - Mature cloud infrastructure platform
 - Comprehensive service ecosystem
@@ -128,68 +136,110 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 
 > 💡 These tool selections reflect a balance between modern capabilities, developer experience, and professional requirements. Each choice prioritizes simplicity and maintainability while ensuring scalability for growing projects.
 
-## Chosen Stack
-```python
-[project]
-# ... other attributes ...
-dependencies = [
-    "loguru>=0.7.3",         # Better logging
-    "plotly>=5.24.1",        # Interactive plotting
-    "pydantic>=2.10.3",      # Data validation
-    "rich>=13.9.4",          # Rich terminal output
-]
+## 07 Python Dependencies
 
-[dependency-groups]
-ai-apps = [  # AI application development packages
-    "ell-ai>=0.0.15",        # AI toolkit
-    "langchain>=0.3.12",     # LLM application framework
-    "megaparse>=0.0.45",     # Advanced text parsing
+**[UV](https://github.com/astral-sh/uv)** ⚡
+- Ultra-fast Rust-based Python package manager
+- Combines functionality of Poetry, virtualenv, and pipx (with dirt easy deployment to PyPi.)
+- Created by Astral (Ruff team)
+- Significant performance benefits for CI/CD
+- Maintains pip compatibility
+
+> UV represents the next generation of Python package management. While tools like Poetry are mature, UV's Rust foundation provides exceptional speed (especially important in CI/CD) while maintaining compatibility with traditional pip workflows. Being from the Astral team (creators of Ruff) gives confidence in its long-term maintenance.
+
+### 07.01 Core Dependencies
+Essential packages used across the project:
+```toml
+dependencies = [
+    "loguru>=0.7.3",         # Better logging with rich formatting and easy setup
+    "plotly>=5.24.1",        # Interactive visualization library
+    "pydantic>=2.10.3",      # Data validation and settings management
+    "rich>=13.9.4",          # Rich text and beautiful formatting in terminal
 ]
-ai-train = [  # Machine learning and model training packages
-    "datasets>=3.1.0",           # Dataset handling
-    "einops>=0.8.0",            # Tensor operations
-    "jaxtyping>=0.2.36",        # Type hints for JAX
-    "onnx>=1.17.0",             # ML model interoperability
-    "pytorch-lightning>=2.4.0",  # PyTorch training framework
-    "ray[tune]>=2.40.0",        # Distributed computing
-    "safetensors>=0.4.5",       # Safe tensor serialization
-    "scikit-learn>=1.6.0",      # Traditional ML algorithms
-    "shap>=0.46.0",             # Model explainability
+```
+
+### 07.02 Application Development
+Tools for building AI-powered applications:
+```toml
+ai-apps = [
+    "ell-ai>=0.0.15",        # Unified AI toolkit for rapid development
+    "langchain>=0.3.12",     # Framework for building LLM applications
+    "megaparse>=0.0.45",     # Advanced text parsing and extraction
+]
+```
+
+### 07.03 Training & Research
+Packages for machine learning model development and research:
+```toml
+ai-train = [
+    "datasets>=3.1.0",           # Efficient dataset handling and processing
+    "einops>=0.8.0",            # Clear tensor manipulation operations
+    "jaxtyping>=0.2.36",        # Type hints for tensor operations
+    "onnx>=1.17.0",             # Model format for cross-platform compatibility
+    "pytorch-lightning>=2.4.0",  # PyTorch training framework with less boilerplate
+    "ray[tune]>=2.40.0",        # Distributed computing and hyperparameter tuning
+    "safetensors>=0.4.5",       # Secure tensor serialization
+    "scikit-learn>=1.6.0",      # Traditional ML algorithms and utilities
+    "shap>=0.46.0",             # Model interpretability and explanations
     "torch>=2.5.1",             # Deep learning framework
-    "transformers>=4.47.0",     # Transformer models
+    "transformers>=4.47.0",     # State-of-the-art transformer models
     "umap-learn>=0.5.7",        # Dimensionality reduction
-    "wandb>=0.19.1",            # Experiment tracking
-    "nnsight>=0.3.7",           # ML Interp and Manipulation
+    "wandb>=0.19.1",            # Experiment tracking and visualization
+    "nnsight>=0.3.7",           # Neural network interpretation tools
 ]
-async = [  # Asynchronous programming
-    "uvloop>=0.21.0",           # Fast event loop implementation
+```
+
+### 07.04 Async Support
+```toml
+async = [
+    "uvloop>=0.21.0",           # High-performance event loop replacement
 ]
-cli = [  # Command-line interface tools
-    "typer>=0.15.1",            # CLI builder
+```
+
+### 07.05 CLI Tools
+```toml
+cli = [
+    "typer>=0.15.1",            # Modern CLI builder with type hints
 ]
-cloud = [  # Cloud infrastructure tools
-    "ansible>=11.1.0",          # Infrastructure automation
-    "boto3>=1.35.81",          # AWS SDK
+```
+
+### 07.06 Cloud Infrastructure
+```toml
+cloud = [
+    "ansible>=11.1.0",          # Infrastructure as code automation
+    "boto3>=1.35.81",          # AWS SDK for Python
 ]
-config = [  # Configuration management
-    "cookiecutter>=2.6.0",      # Project templating
-    "gin-config>=0.5.0",        # Config management
-    "jinja2>=3.1.4",           # Template engine
+```
+
+### 07.07 Configuration Management
+```toml
+config = [
+    "cookiecutter>=2.6.0",      # Project template engine
+    "gin-config>=0.5.0",        # Dependency injection configuration
+    "jinja2>=3.1.4",           # Template engine for code generation
 ]
-data = [  # Data processing and storage
-    "dagster>=1.9.5",           # Data orchestration
-    "duckdb>=1.1.3",           # Embedded analytics database
-    "lancedb>=0.17.0",         # Vector database
-    "networkx>=3.4.2",         # Graph operations
-    "numpy>=1.26.4",           # Numerical computing
-    "orjson>=3.10.12",         # Fast JSON parsing
-    "pillow>=10.4.0",          # Image processing
-    "polars>=1.17.0",          # Fast dataframes
-    "pygwalker>=0.4.9.13",     # Data visualization
-    "sqlmodel>=0.0.22",        # SQL ORM
-    "tomli>=2.0.1",            # TOML parsing
+```
+
+### 07.08 Data Management
+```toml
+data = [
+    "dagster>=1.9.5",           # Data orchestration and pipelines
+    "duckdb>=1.1.3",           # Fast analytical database
+    "lancedb>=0.17.0",         # Vector database for embeddings
+    "networkx>=3.4.2",         # Graph and network analysis
+    "numpy>=1.26.4",           # Numerical computing foundation
+    "orjson>=3.10.12",         # High-performance JSON operations
+    "pillow>=10.4.0",          # Image processing utilities
+    "polars>=1.17.0",          # Fast DataFrame operations
+    "pygwalker>=0.4.9.13",     # Interactive data visualization
+    "sqlmodel>=0.0.22",        # SQL database ORM
+    "tomli>=2.0.1",            # TOML file parsing
 ]
-dev = [  # Development tools
+```
+
+### 07.09 Core Development
+```toml
+dev = [                        # Development tools
     "bandit>=1.8.0",           # Security linter
     "better-exceptions>=0.3.3", # Improved error messages
     "cruft>=2.15.0",           # Project template management
@@ -218,44 +268,65 @@ dev = [  # Development tools
     "tox>=4.23.2",             # Test automation
     "uv>=0.5.7",               # Fast pip replacement
 ]
-dev-doc = [  # Documentation tools
-    "mdformat>=0.7.19",        # Markdown formatter
+```
+
+### 07.10 Documentation
+```toml
+dev-doc = [
+    "mdformat>=0.7.19",        # Markdown formatting
     "mkdocs-material>=9.5.48", # Documentation theme
-    "mkdocs>=1.6.1",          # Documentation generator
+    "mkdocs>=1.6.1",          # Documentation site generator
 ]
-dev-nb = [  # Notebook development tools
-    "jupyter-book>=1.0.3",     # Notebook publishing
-    "nbformat>=5.10.4",        # Notebook file format
-    "nbqa>=1.9.1",             # Notebook linting
-    "testbook>=0.4.2",         # Notebook testing
+```
+
+### 07.11 Notebook Development
+```toml
+dev-nb = [
+    "jupyter-book>=1.0.3",     # Notebook documentation publishing
+    "nbformat>=5.10.4",        # Notebook file handling
+    "nbqa>=1.9.1",             # Notebook code quality tools
+    "testbook>=0.4.2",         # Notebook testing framework
 ]
-gui = [  # Graphical interface tools
-    "streamlit>=1.41.1",       # Web app framework
+```
+
+### 07.12 GUI Applications
+```toml
+gui = [
+    "streamlit>=1.41.1",       # Rapid web app development
 ]
-misc = [  # Miscellaneous utilities
-    "boltons>=24.1.0",         # Python utilities
-    "cachetools>=5.5.0",       # Caching utilities
-    "wrapt>=1.17.0",           # Decorator utilities
-]
-nb = [  # Jupyter notebook tools
-    "chime>=0.7.0",            # Sound notifications
+```
+
+### 07.13 Notebook Environment
+```toml
+nb = [
+    "chime>=0.7.0",            # Audio notifications
     "ipykernel>=6.29.5",       # Jupyter kernel
-    "ipython>=7.34.0",         # Interactive Python shell
-    "ipywidgets>=8.1.5",       # Jupyter widgets
-    "jupyterlab>=4.3.3",       # Notebook IDE
+    "ipython>=7.34.0",         # Enhanced interactive shell
+    "ipywidgets>=8.1.5",       # Interactive widgets
+    "jupyterlab>=4.3.3",       # Modern notebook interface
 ]
-web = [  # Web development and scraping
-    "beautifulsoup4>=4.12.3",  # HTML parsing
-    "fastapi>=0.115.6",        # Web framework
+```
+
+### 07.14 Web Development
+```toml
+web = [
+    "beautifulsoup4>=4.12.3",  # HTML parsing and scraping
+    "fastapi>=0.115.6",        # Modern web API framework
     "playwright>=1.49.1",      # Browser automation
     "requests>=2.32.3",        # HTTP client
-    "scrapy>=2.12.0",          # Web scraping
+    "scrapy>=2.12.0",          # Web scraping framework
     "uvicorn>=0.33.0",         # ASGI server
-    "zrok>=0.4.42",            # Tunnel service
+    "zrok>=0.4.42",            # Tunnel service for local development
 ]
+```
 
-[tool.uv]
-default-groups = ["dev", "data", "nb"]
+### 07.15 Utilities
+```toml
+misc = [
+    "boltons>=24.1.0",         # Python utility functions
+    "cachetools>=5.5.0",       # Caching decorators and utilities
+    "wrapt>=1.17.0",           # Decorator utilities
+]
 ```
 
 <!-- TODO: Research Pachyderm -->
