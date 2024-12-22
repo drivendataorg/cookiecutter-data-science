@@ -23,23 +23,12 @@ GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](htt
 
 
 ### Key Features
-- **🚀 Modern Tooling** Get built-in support for UV, Ruff, FastAPI, Pydantic, Typer, Loguru, and Polars, so you’re ready to tackle cutting-edge Python.
 
-- **🙌 Instant Git Setup** Start coding fast with automatic repo creation, branch protections, and sensible defaults out of the box.
-
-- **🔧 Pre-Configured CI/CD** Ready-to-use GitHub Actions and QA checks save you from tedious setup, letting you focus on what matters—shipping quality code.
-
-- **📦 Seamless Publishing** One-stop shop for PyPI uploads, Makefile-driven tasks, and MkDocs docs, all baked right in.
-
-- **🤝 Small-Scale to Scalable** Perfect for solo devs yet robust enough to grow with your team or project scope.
-
-- **🔄 Living Template** Frequently updated to stay in line with Python’s evolving best practices—never worry about missing the next great tool.
-
-- **🏃‍♂️ Start Fast, Stay Strong** Encourages consistent structure, high-quality practices, and minimal friction from day one.
-
-- **🌐 Full-Stack Focus** Covers DevOps, IDE configurations, version control, databases, and more—so you don’t have to piece together your ecosystem.
-
-- **🥵 Rare Boilerplates** In addition to configuration for research, this also includes setup for LaTeX homework assignments, web apps, CLI tools, and more (not all at once of course). This is hopefully a one-stop-show of configurations.
+- **🚀 Modern Tooling & Living Template** – Start with built-in support for UV, Ruff, FastAPI, Pydantic, Typer, Loguru, and Polars so you can tackle cutting-edge Python immediately. Template updates as environment changes.
+- **🙌 Instant Git & CI/CD** – Enjoy automatic repo creation, branch protections, and preconfigured GitHub Actions that streamline your workflow from day one.  
+- **🤝 Small-Scale to Scalable** – Ideal for solo projects or small teams, yet robust enough to expand right along with your growth.  
+- **🏃‍♂️ Start Fast, Stay Strong** – Encourages consistent structure, high-quality code, and minimal friction throughout your project’s entire lifecycle.  
+- **🌐 Full-Stack + Rare Boilerplates** – Covers standard DevOps, IDE configs, and publishing steps, plus extra setups for LaTeX assignments, web apps, CLI tools, and more—perfect for anyone seeking a “one-stop” solution.
 
 ### Who is this for?
 
@@ -56,6 +45,9 @@ GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](htt
 If the right-hand column describes you better, [CookieCutter Data Science (CCDS)](https://cookiecutter-data-science.drivendata.org/) or another minimal template might be a better fit.
 
 **[View the full documentation here](https://gatlenculp.github.io/gatlens-opinionated-template/) ➡️**
+
+
+---
 
 ## Getting Started
 
@@ -163,8 +155,6 @@ The directory structure of your new project will look something like this (depen
     └── 🐍 plots.py                     <- Code to create visualizations
 ```
 
-
-## Philosophy 🧭
 <!-- 
 This project is more of a hobby and research project more than it is a practical template. Gatlen really enjoys the occasional research on the tooling ecosystem and understanding which tools solve what problems and how. He tends to have a very prefectionist perspective on projects beyond what is practical. Many of the packages included in this project, Gatlen has not yet used, but rather examined and compared against other tools and determined to be something to leverage once the need arises. The selection of packages and tools are in a way, a reminder of what resources he has have determined in advance to likely be helpful.
 
