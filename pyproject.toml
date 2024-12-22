@@ -41,7 +41,6 @@ gotem = "ccds.__main__:main"
 [project.urls]
 "Source Code" = "https://github.com/GatlenCulp/gatlens-opinionated-template"
 "Documentation" = "https://gatlenculp.github.io/gatlens-opinionated-template/"
-"Gatlen's Portfolio" = "https://gatlen.notion.site/"
 
 [tool.pytest.ini_options]
 addopts = """

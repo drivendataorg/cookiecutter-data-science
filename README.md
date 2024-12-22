@@ -5,25 +5,66 @@
 ![PyPI - Version](https://img.shields.io/pypi/v/gatlens-opinionated-template?style=flat)[![tests](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml/badge.svg)](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml) [![Uses the Cookiecutter Data Science project upstream](https://img.shields.io/badge/CCDS-Project%20fork-328F97?logo=cookiecutter)](https://cookiecutter-data-science.drivendata.org/) [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv) ![GitHub stars](https://img.shields.io/github/stars/gatlenculp/homebrew-vivaria?style=social)
 
 > [!WARNING]
-> Not ready for production!
+> Not yet ready for production!
 
 <div align="center">
   <a href="https://gatlenculp.github.io/gatlens-opinionated-template/">
     <img src="./docs/docs/gotem.png" alt="GOTem Logo" style="max-width: 250px;"/>
   </a>
   <br/>
-  <small><i>(CookieCutter + Gatlen's Stylistic Motif - The Troublesome Goose)</i></small>
+  <b>Gatlen's Opinionated Template</b>
+  <br/>
+  <small><i>(Logo = CookieCutter + Gatlen's Stylistic Motif - The Troublesome Goose)</i></small>
 </div>
+<br>
 
 
-Built on (and synced with) the foundation of [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), this template incorporates carefully selected defaults, dependency stack, customizations, and contemporary best practices for Python development, research projects, and academic work.
+GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), one of the most popular, flexible, and well maintained Python templates out there. GOTem extends CCDS with carefully selected defaults, dependency stack, customizations, additional features (that I maybe should have spent time contributing to the original project), and contemporary best practices. Ready for not just data science but also general Python development, research projects, and academic work.
 
-**Key Features**
-- 🚀 Modern tooling (UV, Ruff, FastAPI, Pydantic, Typer, Loguru, Polars, etc.) over traditional defaults
-- 📦 Batteries-included configuration with sensible defaults
-- 🔧 Highly customizable while maintaining simplicity
-- 🤝 Perfect for individuals and small teams w/ scalability
-- 🔄 Living template that evolves with the ecosystem
+
+### Key Features
+- **🚀 Modern Tooling** Get built-in support for UV, Ruff, FastAPI, Pydantic, Typer, Loguru, and Polars, so you’re ready to tackle cutting-edge Python.
+
+- **🙌 Instant Git Setup** Start coding fast with automatic repo creation, branch protections, and sensible defaults out of the box.
+
+- **🔧 Pre-Configured CI/CD** Ready-to-use GitHub Actions and QA checks save you from tedious setup, letting you focus on what matters—shipping quality code.
+
+- **📦 Seamless Publishing** One-stop shop for PyPI uploads, Makefile-driven tasks, and MkDocs docs, all baked right in.
+
+- **🤝 Small-Scale to Scalable** Perfect for solo devs yet robust enough to grow with your team or project scope.
+
+- **🔄 Living Template** Frequently updated to stay in line with Python’s evolving best practices—never worry about missing the next great tool.
+
+- **🏃‍♂️ Start Fast, Stay Strong** Encourages consistent structure, high-quality practices, and minimal friction from day one.
+
+- **🌐 Full-Stack Focus** Covers DevOps, IDE configurations, version control, databases, and more—so you don’t have to piece together your ecosystem.
+
+- **🥵 Rare Boilerplates** In addition to configuration for research, this also includes setup for LaTeX homework assignments, web apps, CLI tools, and more (not all at once of course). This is hopefully a one-stop-show of configurations.
+
+### Who this is for
+
+**CCDS** is white bread: simple, familiar, unoffensive, and waiting for your choice of toppings. **GOTem** is the expert-crafted and opinionated “everything burger,” fully loaded from the start for any task you want to do (so long as you want to do it in a specific way). Some of the selections might be an acquired taste and users are encouraged to leave them off as they start and perhaps not all will appreciate my tastes even with time, but it is the setup I find \*_delicious_\*.
+
+<!-- TODO: Place the below side-by-side -->
+
+#### ✅ Use this if...
+
+- **🤖 Legacy-Tool Skeptics** If you frequently mutter, “There has to be a better way,” this template might be your aha moment.
+- **🍔 The “Everything Burger” Crowd** Anyone who loves a fully loaded development setup and doesn’t mind removing foreign ingredients they don’t enjoy.
+- **🎓 Learners and Perfectionists** Developers who want to explore new tools, master best practices, and produce sexy code and outputs. Those who are in it for the work as much as they are about the artform.
+- **⚡ Performance Seekers** Crave modern, efficient libraries? This template prioritizes speed and powerful modern tools with simple syntax.
+- **🏗️ Quick-Start Enthusiasts** Need a template that practically sets itself up? GOTem lets you jump straight into coding with minimal overhead.
+
+#### ❌ Do NOT use this if...
+
+- **🛣️ Minimalists** If you want a bare-bones or default setup, this template may seem too opinionated or “extra.”
+
+- **🔎 Micro-Optimizers** If you feel compelled to dissect every customization before writing a single line of code, you might prefer a simpler starting point (though GOTem can be a great reverse-engineering exercise).
+
+- **🕰️ Legacy Lovers** For anyone who prefers tried-and-true defaults to cutting-edge (sometimes experimental) tools. CCDS might be a more straightforward fit.
+
+If you find yourself nodding to these “NOT for you” points, consider sticking with CCDS instead for that classic, “white bread” experience.
+
 
 **[View the full documentation here](https://gatlenculp.github.io/gatlens-opinionated-template/) ➡️**
 
@@ -33,9 +74,6 @@ _The main functionality of this project is kept as close as possible to the CCDS
 
 _See how CCDS compares with regular cookiecutter templates and my decisions [here](https://drivendata.co/blog/ccds-v2). For the most part, I look at CCDS as [Chesterton's Fence](https://www.lesswrong.com/tag/chesterton-s-fence), making sure to check my decisions against theirs before making changes. Still, the [CCDS team notes there's still some missing functionality](https://drivendata.co/blog/ccds-v2#whats-still-missing) including the [lack of a uv installer](https://github.com/drivendataorg/cookiecutter-data-science/discussions/403). The CCDS template still comes with some [nice features](https://drivendata.co/blog/ccds-v2#whats-new). CCDS has also considered [ruff as the default linting + formatting option](https://github.com/drivendataorg/cookiecutter-data-science/pull/387)_
 
-<!-- TODO: Research Pachyderm -->
-
-<!-- CCDS V2 appears not to like git lfs much, expensive. -->
 
 
 <!-- _I'm looking for a way to use [Cruft](https://cruft.github.io/cruft/) over [CookieCutter](https://www.cookiecutter.io/) + CCDS, but for now, CCDS needs to be used due to their custom configuration_ -->
@@ -49,7 +87,7 @@ Clone using Cruft
     cruft create https://github.com/GatlenCulp/gatlens-opinionated-template
 ``` -->
 
-## Installation
+## Getting Started
 
 <b>⚡️ With UV (Recommended)</b>
 
@@ -200,24 +238,4 @@ This template is primarily a research and learning project that explores modern 
 
 ## Contributing
 
-This is a very small project. If you have large Pull Requests to make, I recommend making them over with the upstream at [CookieCutter Data Science (CCDS)](https://github.com/drivendataorg/cookiecutter-data-science). If you have recommendations/changes/particular issues with my implementation, feel free to leave an issue but I'm not sure if I will be able to get around to it.
-
-[See the docs for guidelines](./CONTRIBUTING.md).
-
-
-## Inspirations & Acknowledgments 🙏
-
-This project builds upon the excellent work of several established templates and projects:
-
-**[cookiecutter-data-science](https://github.com/drivendataorg/cookiecutter-data-science)** 📊
-- The original inspiration for this template
-- Established many best practices for data science project organization
-- Created by DrivenData, widely adopted in the data science community
-
-**[cookiecutter-modern-datascience](https://github.com/crmne/cookiecutter-modern-datascience)** 🔬
-
-**[cookiecutter-uv](https://github.com/fpgmaas/cookiecutter-uv)** ⚡
-
-**[full-stack-fastapi-template](https://github.com/fastapi/full-stack-fastapi-template)** 🚀
-
-> 💡 While this template draws inspiration from these excellent projects, it takes an opinionated approach to combining their best aspects while introducing modern tooling and development practices.
+If you plan major changes, consider upstreaming them to [CookieCutter Data Science (CCDS)](https://github.com/drivendataorg/cookiecutter-data-science). For minor fixes or adjustments to GOTem, submit an issue or pull request here. See [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
