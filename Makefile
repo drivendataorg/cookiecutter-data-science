@@ -20,6 +20,10 @@ create_environment:
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
 
+publish:
+	uv build
+	uv publish
+
 ## Install Python Dependencies
 requirements:
 	$(PYTHON_INTERPRETER) -m pip install -r dev-requirements.txt
@@ -55,7 +59,8 @@ uv-docs-serve:
 	cd docs && uv run mkdocs serve
 
 uv-docs-deploy:
-	cd docs && uv run mkdocs gh-deploy --clean
+	cd docs && uv run mkdocs build && uv run mkdocs gh-deploy --clean
+
 
 ###     TESTS
 

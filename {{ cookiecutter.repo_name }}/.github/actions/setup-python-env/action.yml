@@ -29,4 +29,4 @@ runs:
     - name: Install Python dependencies
       run: uv sync --frozen
       shell: bash
-# {% endraw %}
+# {%- endraw %}
