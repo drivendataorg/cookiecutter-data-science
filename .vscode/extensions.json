@@ -1,0 +1,75 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+	// Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+
+	// List of extensions which should be recommended for users of this workspace.
+	"recommendations": [
+		// Python Development
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"ms-python.debugpy",
+		"njpwerner.autodocstring",
+		"rodolphebarbanneau.python-docstring-highlighter",
+		"kevinrose.vsc-python-indent",
+		"charliermarsh.ruff",
+		"sbsnippets.pytorch-snippets",
+
+		// Data Science & Notebooks
+		"ms-toolsai.jupyter",
+		"ms-toolsai.jupyter-renderers",
+		"mechatroner.rainbow-csv",
+
+		// Shell & Command Line
+		"mads-hartmann.bash-ide-vscode",
+		"timonwong.shellcheck",
+		"foxundermoon.shell-format",
+
+		// Remote Development
+		"ms-vscode-remote.remote-containers",
+		"ms-vscode-remote.remote-ssh",
+		"ms-vscode-remote.remote-ssh-edit",
+
+		// Document Formats & Preview
+		"james-yu.latex-workshop",
+		"mathematic.vscode-pdf",
+		"shd101wyy.markdown-preview-enhanced",
+		"vitaliymaz.vscode-svg-previewer",
+		"ctcuff.font-preview",
+
+		// Code Formatting & Style
+		"esbenp.prettier-vscode",
+		"mrmlnc.vscode-attrs-sorter",
+		"richie5um2.vscode-sort-json",
+		"2gua.rainbow-brackets",
+		"aaron-bond.better-comments",
+
+		// Project Management & Navigation
+		"alefragnani.project-manager",
+		"peterschmalfeldt.explorer-exclude",
+		"christian-kohler.path-intellisense",
+		"kisstkondoros.vscode-gutter-preview",
+
+		// Git & Version Control
+		"eamodio.gitlens",
+
+		// API Development
+		"humao.rest-client",
+
+		// Build Tools
+		"ms-vscode.makefile-tools",
+		"task.vscode-task",
+
+		// Configuration Files
+		"dotenv.dotenv-vscode",
+		"redhat.vscode-yaml",
+		"redhat.vscode-xml",
+
+		// Output & Debugging
+		"ibm.output-colorizer",
+		"usernamehw.errorlens"
+	],
+	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+	"unwantedRecommendations": [
+		"ms-python.black-formatter",
+	]
+}

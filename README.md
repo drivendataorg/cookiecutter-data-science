@@ -1,6 +1,6 @@
 # Gatlen's Opinionated Template (GOTem)
-**_Cutting-edge, opinionated, and ambitious project builder for power users and researchers._**
 
+**_Cutting-edge, opinionated, and ambitious project builder for power users and researchers._**
 
 ![PyPI - Version](https://img.shields.io/pypi/v/gatlens-opinionated-template?style=flat)[![tests](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml/badge.svg)](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml) [![Uses the Cookiecutter Data Science project upstream](https://img.shields.io/badge/CCDS-Project%20fork-328F97?logo=cookiecutter)](https://cookiecutter-data-science.drivendata.org/) [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv) ![GitHub stars](https://img.shields.io/github/stars/gatlenculp/homebrew-vivaria?style=social)
 
@@ -18,40 +18,35 @@
 </div>
 <br>
 
-
 GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), one of the most popular, flexible, and well maintained Python templates out there. GOTem extends CCDS with carefully selected defaults, dependency stack, customizations, additional features (that I maybe should have spent time contributing to the original project), and contemporary best practices. Ready for not just data science but also general Python development, research projects, and academic work.
-
 
 ### Key Features
 
 - **🚀 Modern Tooling & Living Template** – Start with built-in support for UV, Ruff, FastAPI, Pydantic, Typer, Loguru, and Polars so you can tackle cutting-edge Python immediately. Template updates as environment changes.
-- **🙌 Instant Git & CI/CD** – Enjoy automatic repo creation, branch protections, and preconfigured GitHub Actions that streamline your workflow from day one.  
-- **🤝 Small-Scale to Scalable** – Ideal for solo projects or small teams, yet robust enough to expand right along with your growth.  
-- **🏃‍♂️ Start Fast, Stay Strong** – Encourages consistent structure, high-quality code, and minimal friction throughout your project’s entire lifecycle.  
+- **🙌 Instant Git & CI/CD** – Enjoy automatic repo creation, branch protections, and preconfigured GitHub Actions that streamline your workflow from day one.
+- **🤝 Small-Scale to Scalable** – Ideal for solo projects or small teams, yet robust enough to expand right along with your growth.
+- **🏃‍♂️ Start Fast, Stay Strong** – Encourages consistent structure, high-quality code, and minimal friction throughout your project’s entire lifecycle.
 - **🌐 Full-Stack + Rare Boilerplates** – Covers standard DevOps, IDE configs, and publishing steps, plus extra setups for LaTeX assignments, web apps, CLI tools, and more—perfect for anyone seeking a “one-stop” solution.
 
 ### Who is this for?
 
 **CCDS** is white bread: simple, familiar, unoffensive, and waiting for your choice of toppings. **GOTem** is the expert-crafted and opinionated “everything burger,” fully loaded from the start for any task you want to do (so long as you want to do it in a specific way). Some of the selections might be an acquired taste and users are encouraged to leave them off as they start and perhaps not all will appreciate my tastes even with time, but it is the setup I find \*_delicious_\*.
 
-
 <!-- Don't use if you already have defaults you're comfortable with that you want to use. -->
-
 
 <!-- You just want code to work and don't care as much about good practice -->
 
-| **✅ Use GOTem if…**                                                                                                                                                                                   | **❌ Might Not Be for You if…**                                                                                                                                                                                      |
-|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| **🍔 You Want the “Everything Burger”** <br> - You’re cool with an opinionated, “fully loaded” setup, even if you don’t use all the bells and whistles up front. <br> - You love having modern defaults  (FastAPI, Polars, Loguru). at the ready for any case life throws at you from school work to research to websites | **🛣️ You’re a Minimalist** <br> - You prefer the bare bones or “default” approach. <br> - GOTem’s many integrations and new libraries feel too “extra” or opinionated for you, adding more complexity than you want. When you really just want to "get the task done".                                                           |
-| **🎓 You’re a Learner / Explorer** <br> - You like experimenting with cutting-edge tools (Polars, Typer, etc.) even if they’re not as common. <br> - “Modern Over Ubiquitous” libraries excite you.  | **🕰️ You’re a Legacy Lover** <br> - Tried-and-true frameworks (e.g., Django, Pandas, standard logging) give you comfort. <br> - You’d rather stick to old favorites than wrestle with fresh tech that might be less documented.                           |
-| **👨‍💻 You’re a Hacker / Tinkerer** <br> - You want code that’s as **sexy** and elegant as it is functional. <br> - You love tinkering, customizing, and “pretty colors” that keep the ADHD brain wrinkled. | **🔎 You’re a Micro-Optimizer** <br> - You need to dissect every configuration before even starting. <br> - GOTem’s “Aspirational Over Practical” angle might make you wary of unproven or cutting-edge setups.                                            |
-| **⚡ You’re a Perfection & Performance Seeker** <br> - You enjoy pushing Python’s boundaries in speed, design, and maintainability. <br> - You're always looking for the best solution, not just quick patches.  | **🏛️ You Need Old-School Stability** <br> - You want a large, established user base and predictable release cycles. <br> - You get uneasy about lesser-known or younger libraries that might break your production environment.                             |
-| **🏃‍♂️ You’re a Quick-Start Enthusiast** <br> - You want a template that practically configures itself so you can jump in. <br> - You like having robust CI/CD, Git setup, and docs all done for you.  | **🚶‍♂️ You Prefer Slow, Manual Setups** <br> - You don’t mind spending time creating everything from scratch for each new project. <br> - Doing things the classic or “official” way is more comfortable than using “opinionated” shortcuts.               |
+|                                                                                                                                                   **✅ Use GOTem if…**                                                                                                                                                   |                                                                                                                    **❌ Might Not Be for You if…**                                                                                                                     |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| **🍔 You Want the “Everything Burger”** <br> - You’re cool with an opinionated, “fully loaded” setup, even if you don’t use all the bells and whistles up front. <br> - You love having modern defaults (FastAPI, Polars, Loguru). at the ready for any case life throws at you from school work to research to websites | **🛣️ You’re a Minimalist** <br> - You prefer the bare bones or “default” approach. <br> - GOTem’s many integrations and new libraries feel too “extra” or opinionated for you, adding more complexity than you want. When you really just want to "get the task done". |
+|                                                           **🎓 You’re a Learner / Explorer** <br> - You like experimenting with cutting-edge tools (Polars, Typer, etc.) even if they’re not as common. <br> - “Modern Over Ubiquitous” libraries excite you.                                                            |                    **🕰️ You’re a Legacy Lover** <br> - Tried-and-true frameworks (e.g., Django, Pandas, standard logging) give you comfort. <br> - You’d rather stick to old favorites than wrestle with fresh tech that might be less documented.                     |
+|                                                        **👨‍💻 You’re a Hacker / Tinkerer** <br> - You want code that’s as **sexy** and elegant as it is functional. <br> - You love tinkering, customizing, and “pretty colors” that keep the ADHD brain wrinkled.                                                         |                            **🔎 You’re a Micro-Optimizer** <br> - You need to dissect every configuration before even starting. <br> - GOTem’s “Aspirational Over Practical” angle might make you wary of unproven or cutting-edge setups.                             |
+|                                                     **⚡ You’re a Perfection & Performance Seeker** <br> - You enjoy pushing Python’s boundaries in speed, design, and maintainability. <br> - You're always looking for the best solution, not just quick patches.                                                      |                    **🏛️ You Need Old-School Stability** <br> - You want a large, established user base and predictable release cycles. <br> - You get uneasy about lesser-known or younger libraries that might break your production environment.                     |
+|                                                           **🏃‍♂️ You’re a Quick-Start Enthusiast** <br> - You want a template that practically configures itself so you can jump in. <br> - You like having robust CI/CD, Git setup, and docs all done for you.                                                            |               **🚶‍♂️ You Prefer Slow, Manual Setups** <br> - You don’t mind spending time creating everything from scratch for each new project. <br> - Doing things the classic or “official” way is more comfortable than using “opinionated” shortcuts.               |
 
 If the right-hand column describes you better, [CookieCutter Data Science (CCDS)](https://cookiecutter-data-science.drivendata.org/) or another minimal template might be a better fit.
 
 **[View the full documentation here](https://gatlenculp.github.io/gatlens-opinionated-template/) ➡️**
-
 
 ---
 
@@ -75,6 +70,7 @@ pipx install gatlens-opinionated-template
 # From the parent directory where you want your project
 gotem
 ```
+
 </details>
 
 <details>
@@ -86,11 +82,10 @@ pip install gatlens-opinionated-template
 # From the parent directory where you want your project
 gotem
 ```
+
 </details>
 
-
 <!-- _I'm looking for a way to use [Cruft](https://cruft.github.io/cruft/) over [CookieCutter](https://www.cookiecutter.io/) + CCDS, but for now, CCDS needs to be used due to their custom configuration_ -->
-
 
 <!-- It is recommended to use [Cruft](https://cruft.github.io/cruft/) instead of [CookieCutter](https://www.cookiecutter.io/). The resulting project is the same, but with the added option of being able to sync your project with the original template if this repository updates as if it were an incomming commit.
 
@@ -98,7 +93,6 @@ Clone using Cruft
 ```bash
     cruft create https://github.com/GatlenCulp/gatlens-opinionated-template
 ``` -->
-
 
 ### The resulting directory structure
 
@@ -114,8 +108,8 @@ The directory structure of your new project will look something like this (depen
 │   │   └── 📁 setup-python-env       <- Automated python setup w/ uv
 │   ├── 💡 ISSUE_TEMPLATE             <- Templates for Raising Issues on GH
 │   ├── 💡 pull_request_template.md   <- Template for making GitHub PR
-│   └── ⚡️ workflows                  
-│       ├── 🚀 main.yml               <- Automated cross-platform testing w/ uv, precommit, deptry, 
+│   └── ⚡️ workflows
+│       ├── 🚀 main.yml               <- Automated cross-platform testing w/ uv, precommit, deptry,
 │       └── 🚀 on-release-main.yml    <- Automated mkdocs updates
 ├── 💻 .vscode                        <- Preconfigured extensions, debug profiles, workspaces, and tasks for VSCode/Cursor powerusers
 │   ├── 🚀 launch.json
@@ -161,7 +155,7 @@ The directory structure of your new project will look something like this (depen
     └── 🐍 plots.py                     <- Code to create visualizations
 ```
 
-<!-- 
+<!--
 This project is more of a hobby and research project more than it is a practical template. Gatlen really enjoys the occasional research on the tooling ecosystem and understanding which tools solve what problems and how. He tends to have a very prefectionist perspective on projects beyond what is practical. Many of the packages included in this project, Gatlen has not yet used, but rather examined and compared against other tools and determined to be something to leverage once the need arises. The selection of packages and tools are in a way, a reminder of what resources he has have determined in advance to likely be helpful.
 
 Here are a few guiding principles of this template to determine whether or not you should use it:
@@ -172,8 +166,6 @@ Here are a few guiding principles of this template to determine whether or not y
 5. **Customizability** -- I love customizing my tools and opt for tools where I can do a lot of customization and fiddling.
 6. **Small Teams / Individual** -- As someone who personally tends to work by myself or with a few people on research projects, I gear this template towards iterating quickly and with high quality. If a tool requires such deep knowledge that someone has to spend a day researching it just to use, I don't want it.
 7. **Scalable** -- As noted above, this is mainly geared to individuals and small teams. However, in the case you want to scale production or team size or even if you move to a new and larger organization, I want those skills to transfer and for there to be little more to learn and so that you don't have to learn an entirely new skillset or library. -->
-
-
 
 ## Contributing ❤️
 
