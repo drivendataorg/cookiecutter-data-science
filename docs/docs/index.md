@@ -18,8 +18,9 @@ I recommend installing gotem it with [UV](https://github.com/astral-sh/uv). GOTe
     uv pip install gatlens-opinionated-template
 
     # From the parent directory where you want your project
-    ccds
+    gotem
     ```
+<!-- uvx --from gatlens-opinionated-template gotem -->
 
 === "With pipx"
 
@@ -27,16 +28,16 @@ I recommend installing gotem it with [UV](https://github.com/astral-sh/uv). GOTe
     pipx install gatlens-opinionated-template
 
     # From the parent directory where you want your project
-    ccds
+    gotem
     ```
 
 === "With pip"
 
     ```bash
     pip install gatlens-opinionated-template
-    `
+    
     # From the parent directory where you want your project
-    ccds
+    gotem
     ```
 
 === "With conda (coming soon!)"

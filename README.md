@@ -8,15 +8,15 @@
 > Not ready for production!
 
 <div align="center">
-  <img src="./docs/docs/gotem.png" alt="GOTem Logo" style="max-width: 250px;">
+  <a href="https://gatlenculp.github.io/gatlens-opinionated-template/">
+    <img src="./docs/docs/gotem.png" alt="GOTem Logo" style="max-width: 250px;"/>
+  </a>
   <br/>
-  <i>(CookieCutter + Goose)</i>
+  <small><i>(CookieCutter + Gatlen's Stylistic Motif - The Troublesome Goose)</i></small>
 </div>
 
 
 Built on (and synced with) the foundation of [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), this template incorporates carefully selected defaults, dependency stack, customizations, and contemporary best practices for Python development, research projects, and academic work.
-
-_The main functionality of this project is kept as close as possible to the CCDS template as to avoid additional maintenance on my end. This might mean a mismatch between practices I recommend and the ones they do. Ex: Makefiles on root, Taskfiles in template._
 
 **Key Features**
 - 🚀 Modern tooling (UV, Ruff, FastAPI, Pydantic, Typer, Loguru, Polars, etc.) over traditional defaults
@@ -29,66 +29,7 @@ _The main functionality of this project is kept as close as possible to the CCDS
 
 ---
 
-<!-- Other names: GaTem (Gatlen's Template) GOATemplate? Idk-->
-<!-- gotem .. --output-dir ./ignore is test -->
-<!-- https://github.com/Ileriayo/markdown-badges -->
-<!-- https://shields.io/badges/static-badge -->
-<!-- https://github.com/alexandresanlim/Badges4-README.md-Profile -->
-<!-- https://github.com/PatrickJS/awesome-cursorrules/tree/main?tab=readme-ov-file -->
-
-
-<!-- 
-Badges that need to be rearranged in stack. -->
-<!-- https://img.shields.io/badge/Cookiecutter-D4AA00?style=for-the-badge&logo=Cookiecutter&logoColor=white -->
-<!-- I love badges if not already clear lol -->
-<!-- **OSes**
-![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
-![Widnows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-
-**Languages**
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
-![Jupyter](https://img.shields.io/badge/Jupyter-F37626.svg?&style=for-the-badge&logo=Jupyter&logoColor=white)
-
-**Packages**
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-![Pytest](https://img.shields.io/badge/pytest-%23ffffff.svg?style=for-the-badge&logo=pytest&logoColor=2f9fe3) 
-![Plotly](https://img.shields.io/badge/Plotly-%233F4F75.svg?style=for-the-badge&logo=plotly&logoColor=white)
-![WandB](https://img.shields.io/badge/Weights_&_Biases-FFBE00?style=for-the-badge&logo=WeightsAndBiases&logoColor=white)
-![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=Pydantic&logoColor=white)
-
-**Docs**
-![Github Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=github%20Pages&logoColor=white)
-
-
-**ML Packages**
-![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white) 
-
-**IDE**
-![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white) 
-
-**Install Options**
-![PyPi](https://img.shields.io/badge/pypi-%23ececec.svg?style=for-the-badge&logo=pypi&logoColor=1f73b7)
-![Homebrew](https://img.shields.io/badge/homebrew-FBB040?style=for-the-badge&logo=homebrew&logoColor=white)
-
-**VCS + CI/CD**
-![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/Github%20Actions-282a2e?style=for-the-badge&logo=githubactions&logoColor=367cfe)
-
-**Containerization**
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white
-
-**Databases**
-![DuckDB](https://img.shields.io/badge/Duckdb-000000?style=for-the-badge&logo=Duckdb&logoColor=yellow)
-https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&logoColor=white
-
-
-**Lint**
-![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) -->
-
-
+_The main functionality of this project is kept as close as possible to the CCDS template as to avoid additional maintenance on my end. This might mean a mismatch between practices I recommend and the ones they do. Ex: Makefiles on root, Taskfiles in template._
 
 _See how CCDS compares with regular cookiecutter templates and my decisions [here](https://drivendata.co/blog/ccds-v2). For the most part, I look at CCDS as [Chesterton's Fence](https://www.lesswrong.com/tag/chesterton-s-fence), making sure to check my decisions against theirs before making changes. Still, the [CCDS team notes there's still some missing functionality](https://drivendata.co/blog/ccds-v2#whats-still-missing) including the [lack of a uv installer](https://github.com/drivendataorg/cookiecutter-data-science/discussions/403). The CCDS template still comes with some [nice features](https://drivendata.co/blog/ccds-v2#whats-new). CCDS has also considered [ruff as the default linting + formatting option](https://github.com/drivendataorg/cookiecutter-data-science/pull/387)_
 
@@ -96,8 +37,6 @@ _See how CCDS compares with regular cookiecutter templates and my decisions [her
 
 <!-- CCDS V2 appears not to like git lfs much, expensive. -->
 
-
-## Installation
 
 <!-- _I'm looking for a way to use [Cruft](https://cruft.github.io/cruft/) over [CookieCutter](https://www.cookiecutter.io/) + CCDS, but for now, CCDS needs to be used due to their custom configuration_ -->
 
@@ -110,15 +49,38 @@ Clone using Cruft
     cruft create https://github.com/GatlenCulp/gatlens-opinionated-template
 ``` -->
 
-Install Gatlen's Opinionated Template (GOTem)
+## Installation
+
+<b>⚡️ With UV (Recommended)</b>
+
 ```bash
 uv tool install gatlens-opinionated-template
-```
 
-Instantiate my project
-```bash
+# From the parent directory where you want your project
 uvx --from gatlens-opinionated-template gotem
 ```
+
+<details>
+<summary><b>📦 With Pipx</b></summary>
+
+```bash
+pipx install gatlens-opinionated-template
+
+# From the parent directory where you want your project
+gotem
+```
+</details>
+
+<details>
+<summary><b>🐍 With Pip</b></summary>
+
+```bash
+pip install gatlens-opinionated-template
+
+# From the parent directory where you want your project
+gotem
+```
+</details>
 
 
 ### The resulting directory structure
@@ -238,40 +200,10 @@ This template is primarily a research and learning project that explores modern 
 
 ## Contributing
 
-We welcome contributions! [See the docs for guidelines](./CONTRIBUTING.md).
+This is a very small project. If you have large Pull Requests to make, I recommend making them over with the upstream at [CookieCutter Data Science (CCDS)](https://github.com/drivendataorg/cookiecutter-data-science). If you have recommendations/changes/particular issues with my implementation, feel free to leave an issue but I'm not sure if I will be able to get around to it.
 
-### Installing Requirements
+[See the docs for guidelines](./CONTRIBUTING.md).
 
-It is recommended to use [UV](https://github.com/astral-sh/uv) for installations.
-
-Create virtual environment
-```bash
-uv venv
-```
-
-<!-- Install general requirements
-```bash
-    uv pip install -e .
-``` -->
-
-Install dev requirements
-```bash
-uv pip install -r dev-requirements.txt
-```
-
-### Running the tests
-
-<!-- uvx vs uv run https://docs.astral.sh/uv/concepts/tools/ -->
-
-```bash
-uv run pytest
-```
-
-_Note: configs[2-5] require conda to be installed. MiniConda has not yet been researched to see if it is the best option out there but it will make your run work:_
-<!-- Conda-forge may be better -->
-```bash
-brew install --cask miniconda
-```
 
 ## Inspirations & Acknowledgments 🙏
 
