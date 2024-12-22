@@ -2,68 +2,9 @@
 
 This page explains the chosen tools and why they were chosen.
 
-<!-- Other names: GaTem (Gatlen's Template) GOATemplate? Idk-->
-<!-- gotem .. --output-dir ./ignore is test -->
-<!-- https://github.com/Ileriayo/markdown-badges -->
-<!-- https://shields.io/badges/static-badge -->
-<!-- https://github.com/alexandresanlim/Badges4-README.md-Profile -->
-<!-- https://github.com/PatrickJS/awesome-cursorrules/tree/main?tab=readme-ov-file -->
-
-
-<!-- 
-Badges that need to be rearranged in stack. -->
-<!-- https://img.shields.io/badge/Cookiecutter-D4AA00?style=for-the-badge&logo=Cookiecutter&logoColor=white -->
-<!-- I love badges if not already clear lol -->
-<!-- **OSes**
-![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
-![Widnows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-
-**Languages**
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
-![Jupyter](https://img.shields.io/badge/Jupyter-F37626.svg?&style=for-the-badge&logo=Jupyter&logoColor=white)
-
-**Packages**
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-![Pytest](https://img.shields.io/badge/pytest-%23ffffff.svg?style=for-the-badge&logo=pytest&logoColor=2f9fe3) 
-![Plotly](https://img.shields.io/badge/Plotly-%233F4F75.svg?style=for-the-badge&logo=plotly&logoColor=white)
-![WandB](https://img.shields.io/badge/Weights_&_Biases-FFBE00?style=for-the-badge&logo=WeightsAndBiases&logoColor=white)
-![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=Pydantic&logoColor=white)
-
-**Docs**
-![Github Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=github%20Pages&logoColor=white)
-
-
-**ML Packages**
-![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white) 
-
-**IDE**
-![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white) 
-
-**Install Options**
-![PyPi](https://img.shields.io/badge/pypi-%23ececec.svg?style=for-the-badge&logo=pypi&logoColor=1f73b7)
-![Homebrew](https://img.shields.io/badge/homebrew-FBB040?style=for-the-badge&logo=homebrew&logoColor=white)
-
-**VCS + CI/CD**
-![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/Github%20Actions-282a2e?style=for-the-badge&logo=githubactions&logoColor=367cfe)
-
-**Containerization**
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white
-
-**Databases**
-![DuckDB](https://img.shields.io/badge/Duckdb-000000?style=for-the-badge&logo=Duckdb&logoColor=yellow)
-https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&logoColor=white
-
-
-**Lint**
-![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff) -->
-
-
-
 ## 01 IDE
+
+![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 
 **[VS Code](https://code.visualstudio.com/) / [Cursor](https://www.cursor.com/)** 🖥️
 - Primary IDE with full ecosystem support
@@ -73,9 +14,6 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 - Replaces traditional Jupyter environments
 
 > While many IDEs exist, VS Code's hackability, extensive ecosystem, and remote capabilities make it ideal for modern development. Cursor extends this with AI features while maintaining full VS Code compatibility. The decision to use VS Code even for notebooks (over JupyterLab) allows for a consistent development experience with all settings and extensions available.
-
-
-<!-- TODO: Explain why not conda environment -->
 
 
 ## 02 Task Running
@@ -91,6 +29,9 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 
 ## 03 VCS
 
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+
 **[Git](https://git-scm.com/) + [GitLFS](https://git-lfs.com/) + [GitHub](https://github.com/)** 📚
 - Industry standard version control
 - Extensive ecosystem and integrations
@@ -98,6 +39,8 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 - Git Large File Storage (LFS) is a little-setup solution for file larger than the typical script like JSON files or Python Notebooks. Even larger files are recommended to use another storage solution such as a database or ignoring.
 
 ## 04 CI/CD
+
+![GitHub Actions](https://img.shields.io/badge/Github%20Actions-282a2e?style=for-the-badge&logo=githubactions&logoColor=367cfe)
 
 **[GitHub Actions](https://github.com/features/actions)** 🔄
 - Integrated CI/CD solution
@@ -108,6 +51,9 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 > While there are many CI/CD solutions available, GitHub Actions provides the tightest integration with our repository platform. Its marketplace of pre-built actions and simple YAML configuration makes it ideal for small teams who need professional CI/CD without dedicated DevOps resources.
 
 ## 05 Containerization
+
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white)
 
 **[Docker](https://www.docker.com/) + [Orbstack](https://orbstack.dev/)** 🐳
 - Standard containerization platform
@@ -126,6 +72,8 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 
 ## 06 Cloud Services
 
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+
 **[AWS](https://www.geeksforgeeks.org/aws-vs-google-cloud-platform-vs-azure/#)** ☁️
 - Mature cloud infrastructure platform
 - Comprehensive service ecosystem
@@ -138,6 +86,8 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 
 ## 07 Python Dependencies
 
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+
 **[UV](https://github.com/astral-sh/uv)** ⚡
 - Ultra-fast Rust-based Python package manager
 - Combines functionality of Poetry, virtualenv, and pipx (with dirt easy deployment to PyPi.)
@@ -148,6 +98,10 @@ https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&log
 > UV represents the next generation of Python package management. While tools like Poetry are mature, UV's Rust foundation provides exceptional speed (especially important in CI/CD) while maintaining compatibility with traditional pip workflows. Being from the Astral team (creators of Ruff) gives confidence in its long-term maintenance.
 
 ### 07.01 Core Dependencies
+
+![Plotly](https://img.shields.io/badge/Plotly-%233F4F75.svg?style=for-the-badge&logo=plotly&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=Pydantic&logoColor=white)
+
 Essential packages used across the project:
 ```toml
 dependencies = [
@@ -169,6 +123,11 @@ ai-apps = [
 ```
 
 ### 07.03 Training & Research
+
+![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white)
+![WandB](https://img.shields.io/badge/Weights_&_Biases-FFBE00?style=for-the-badge&logo=WeightsAndBiases&logoColor=white)
+
 Packages for machine learning model development and research:
 ```toml
 ai-train = [
@@ -221,6 +180,9 @@ config = [
 ```
 
 ### 07.08 Data Management
+
+![DuckDB](https://img.shields.io/badge/Duckdb-000000?style=for-the-badge&logo=Duckdb&logoColor=yellow)
+
 ```toml
 data = [
     "dagster>=1.9.5",           # Data orchestration and pipelines
@@ -238,8 +200,12 @@ data = [
 ```
 
 ### 07.09 Core Development
+
+![Pytest](https://img.shields.io/badge/pytest-%23ffffff.svg?style=for-the-badge&logo=pytest&logoColor=2f9fe3)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+
 ```toml
-dev = [                        # Development tools
+dev = [
     "bandit>=1.8.0",           # Security linter
     "better-exceptions>=0.3.3", # Improved error messages
     "cruft>=2.15.0",           # Project template management
@@ -271,6 +237,9 @@ dev = [                        # Development tools
 ```
 
 ### 07.10 Documentation
+
+![Github Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=github%20Pages&logoColor=white)
+
 ```toml
 dev-doc = [
     "mdformat>=0.7.19",        # Markdown formatting
@@ -297,6 +266,7 @@ gui = [
 ```
 
 ### 07.13 Notebook Environment
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626.svg?&style=for-the-badge&logo=Jupyter&logoColor=white)
 ```toml
 nb = [
     "chime>=0.7.0",            # Audio notifications
@@ -308,6 +278,9 @@ nb = [
 ```
 
 ### 07.14 Web Development
+
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+
 ```toml
 web = [
     "beautifulsoup4>=4.12.3",  # HTML parsing and scraping
