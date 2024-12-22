@@ -52,7 +52,7 @@ def no_curlies(filepath: Path) -> bool:
     Returns:
         True if no template strings found, False otherwise
     """
-    data = filepath.open("r").read()
+    data = filepath.open("r", encoding="utf-8").read()
 
     template_strings = [
         "{{ ",
