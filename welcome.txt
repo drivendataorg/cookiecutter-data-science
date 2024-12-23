@@ -1,0 +1,15 @@
+
+   ____  ___ _____              
+  / ___|/ _ \_   _|__ _ __ ___  
+ | |  _| | | || |/ _ \ '_ ` _ \ 
+ | |_| | |_| || |  __/ | | | | |
+  \____|\___/ |_|\___|_| |_| |_|
+                                
+~ Gatlen's Opinionated Template ~
+Cutting-edge, opinionated, and ambitious project builder for power users and researchers.
+
+This template has many built in features for you to explore including running Makefile
+tasks on VSCode events or shortcuts like this one is.
+
+Visit the documentation for more information: https://gatlenculp.github.io/gatlens-opinionated-template/
+
