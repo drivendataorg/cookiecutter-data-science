@@ -1,0 +1,220 @@
+// Team VSCode Workspace Configuration
+/*
+Add the object below to your projects.json file to add this project
+'~/Library/Application Support/Cursor/User/globalStorage/alefragnani.project-manager/projects.json'
+{
+  "name": "🍪 {{ cookiecutter.repo_name }} (Team Workspace)",
+  "rootPath": "/Path/to/your/project/{{ cookiecutter.repo_name }}/.vscode/{{ cookiecutter.repo_name }}.team.code-workspace",
+  "tags": [
+    "🪿 gotem"
+  ],
+  "enabled": true
+},
+*/
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": "..",
+    },
+    // Option #02
+    // {
+    // 	"name": "package",
+    // 	"path": "../{{ cookiecutter.module_name }}/"
+    // }
+  ],
+  "settings": {
+    "remote.SSH.configFile": "${workspaceFolder}/secrets/ssh/config.ssh",
+    
+    // Excluded Files Won't Show in Sidebar
+    "files.exclude": {
+      // Option #02
+      "**/{{ cookiecutter.module_name }}/": false,
+      // Version Control
+      "**/.git": false,
+      "**/.gitattributes": false,
+      "**/.github": false,
+      "**/.gitignore": false,
+      "**/.hg": false,
+      "**/.svn": false,
+      "**/CVS": false,
+      // System Files
+      "**/.DS_Store": false,
+      "**/Thumbs.db": false,
+      "**/*.bak": false,
+      "**/*.sav": false,
+      "**/*.backup": false,
+      "**/.*.swp": false,
+      "**/*~[0-9]*": false,
+      // Development Environment
+      "**/__pycache__": false,
+      "**/*.py[cod]": false,
+      "**/*$py.class": false,
+      "**/.editorconfig": false,
+      "**/.env": false,
+      "**/.idea": false,
+      "**/.ipynb_checkpoints": false,
+      "**/.mypy_cache": false,
+      "**/.prettierrc": false,
+      "**/.pytest_cache": false,
+      "**/.python-version": false,
+      "**/.ruff_cache": false,
+      "**/.ruby-lsp": false,
+      "**/.venv": false,
+      "**/.vscode": false,
+      "**/*.sublime-*": false,
+      "**/venv": false,
+      // Build and Distribution
+      "**/build": false,
+      "**/dist": false,
+      "**/*.egg-info": false,
+      "**/wheels": false,
+      "**/downloads": false,
+      // Project Files
+      "**/logs": false,
+      "**/scripts": false,
+      "**/tests": false,
+      "CHANGELOG.md": false,
+      "LICENSE.md": false,
+      "MANIFEST": false,
+      "requirements.txt": false,
+      // Documentation
+      "**/docs/_build": false,
+      "**/site": false,
+      // Testing and Coverage
+      "**/.coverage": false,
+      "**/.coverage.*": false,
+      "**/htmlcov": false,
+      "**/coverage.xml": false,
+      "**/*.cover": false,
+      // Databases
+      "**/dump.rdb": false,
+      // LaTeX
+      "**/*.aux": true,
+      "**/*.bbl": true,
+      "**/*.bcf": true,
+      "**/*.blg": true,
+      "**/*.fdb_latexmk": true,
+      "**/*.fls": true,
+      "**/*.lof": true,
+      "**/*.log": false,
+      "**/*.lot": true,
+      "**/*.out": true,
+      "**/*.synctex.gz*": true,
+      "**/*.toc": true,
+      "**/_minted*": true,
+    },
+    "explorerExclude.backup": {},
+    "workbench.colorCustomizations": {
+      "editor.lineHighlightBackground": "#1073cf2d",
+      "editor.lineHighlightBorder": "#9fced11f",
+    },
+  },
+  "extensions": {
+    // See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+    "recommendations": [
+      // Python Development
+      "ms-python.python", // Python Environments, Language, and More
+      "ms-python.vscode-pylance", // Python Language Server w/ Typing
+      "ms-python.debugpy", // VSCode Python Debugger
+      "charliermarsh.ruff", // Fast Python Linter & Formatter
+      "njpwerner.autodocstring", // Automatically generate Python docstrings
+      "rodolphebarbanneau.python-docstring-highlighter", // Highlight Python docstring syntax
+      "kevinrose.vsc-python-indent", // Correct indents for python
+      // Data Science & Notebooks
+      "ms-toolsai.jupyter", // Jupyter Notebooks in VSCode
+      "ms-toolsai.jupyter-renderers", // Jupyter Cell Output Renderer
+      "mechatroner.rainbow-csv", // Color-coded CSV Columns
+      "sbsnippets.pytorch-snippets", // Snippits for PyTorch
+      // Shell & Command Line
+      "mads-hartmann.bash-ide-vscode", // .*sh script language support
+      "timonwong.shellcheck", // .*sh script linting
+      "foxundermoon.shell-format", // .*sh script formatting
+      // Remote Development
+      "ms-vscode-remote.remote-containers", // Remote Connect to Docker
+      "ms-vscode-remote.remote-ssh", // Remote Connect via SSH
+      "ms-vscode-remote.remote-ssh-edit", // SSH Config File Editing
+      // Document Formats & Preview
+      "mathematic.vscode-pdf", // PDF Preview
+      "vitaliymaz.vscode-svg-previewer", // SVG Preview
+      "ctcuff.font-preview", // Font PReview
+      "james-yu.latex-workshop", // LaTeX File Renderer for Documents
+      "shd101wyy.markdown-preview-enhanced", // Improved Markdown Preview
+      // Code Formatting & Style
+      "esbenp.prettier-vscode", // Prettier general formatting tool
+      "mrmlnc.vscode-attrs-sorter", // HTML Attribute Sorter
+      "richie5um2.vscode-sort-json", // JSON Sorter
+      "2gua.rainbow-brackets", // Multi-colored brackets for readability
+      "aaron-bond.better-comments", // Comments w/ Styling
+      // Project Management & Navigation
+      "alefragnani.project-manager", // Manage VSCode Workspaces
+
+      "peterschmalfeldt.explorer-exclude", // Keep Explorer Clean by Hiding Files
+      "christian-kohler.path-intellisense", // Path Intellisense
+      "kisstkondoros.vscode-gutter-preview", // Image Preview
+      // Git & Version Control
+      "eamodio.gitlens", // View git diffs, edits, branches and more
+      // TODO: Add cookiecutter template types, include if web only
+      // API Development
+      "humao.rest-client", // Easily make HTTP queries for API testing
+      // Build Tools
+      "ms-vscode.makefile-tools", // Tools for Makefiles
+      "task.vscode-task", // Tools for Taskfiles
+      // Configuration Files
+      "dotenv.dotenv-vscode", // .env language support
+      "redhat.vscode-yaml", // .yaml language support
+      "redhat.vscode-xml", // .xml language support
+      // Output & Debugging
+      "ibm.output-colorizer", // Automatically color-code VSCode Output logs
+      "usernamehw.errorlens" // Highlight errors in-line
+    ],
+    // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+    "unwantedRecommendations": [
+      // Superceded by ruff
+      "ms-python.black-formatter",
+      "ms-python.isort",
+      "ms-python.pylint",
+      // Superceded by Pylance
+      "ms-pyright.pyright"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Main",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/{{ cookiecutter.module_name }}/main.py",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Debug Current File",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${file}",
+        "console": "integratedTerminal"
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "python-checks",
+        "type": "shell",
+        "command": "poetry",
+        "args": ["run", "poe", "check"],
+        "group": "build",
+        "detail": "Run all Python checks (format, lint, typecheck, test)",
+        "runOptions": {
+          "runOn": "folderOpen"
+        },
+        "presentation": {
+          "reveal": "silent",
+          "panel": "shared"
+        }
+      }
+    ]
+  }
+}
