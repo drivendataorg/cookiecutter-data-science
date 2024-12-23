@@ -75,7 +75,8 @@
 
 		// Output & Debugging
 		"ibm.output-colorizer", // Automatically color-code VSCode Output logs
-		"usernamehw.errorlens" // Highlight errors in-line
+		"usernamehw.errorlens",
+		"spmeesseman.vscode-taskexplorer" // Highlight errors in-line
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
 	"unwantedRecommendations": [

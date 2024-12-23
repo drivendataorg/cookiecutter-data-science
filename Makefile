@@ -61,6 +61,12 @@ uv-docs-serve:
 uv-docs-deploy:
 	cd docs && uv run mkdocs build && uv run mkdocs gh-deploy --clean
 
+###		 WELCOME SCREEN
+# This prints a welcome message saying to check out gotem documentaion for more information
+
+print-welcome:
+	cat "./welcome.txt"
+
 
 ###     TESTS
 

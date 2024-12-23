@@ -21,7 +21,8 @@ theme:
 nav:
   - 🏠 Home: index.md
   - 🛠️ Core Tools: core-tools.md
-  - ❓ Why ccds?: why.md
+  - 💻 VSCode & Cursor: vscode.md
+  - ❓ Why gotem?: why.md
   - 🗯️ Opinions: opinions.md
   - 📑 Using the template: using-the-template.md
   - ⚙️ All options: all-options.md
