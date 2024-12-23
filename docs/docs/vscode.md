@@ -1,12 +1,22 @@
 # VSCode & Cursor Workspace Configuration
 
-VSCode and Cursor are very
+VSCode and Cursor are very popular IDEs and GOTem treats them as equally important as the rest of the project configuration if you choose to take advantage of them. All files and settings mentioned here are located in `{{ cookiecutter.repo_name }}/.vscode`.
 
 
 ## 01 code-workspace
 
+There are two [code-workspace files](https://code.visualstudio.com/docs/editor/workspaces) available, one for a team configuration 
+<!-- (later this may become an "unnamed" workspace setup) -->
+and one for your personal workspace-level configuration. The team one is meant to be synced while each individual may have a personal one if they decide to use different settings. This way your team can share debug configurations, task setups, special settings, extension recommendations, and more.
+
+The workspace file, as opposed to a single-folder workspace, has the added benefit of [supporting multiple roots](https://code.visualstudio.com/docs/editor/workspaces#_what-is-the-benefit-of-multiroot-workspace-over-a-folder).
+<!-- TODO: Explain -->
+
+### 01.01 Workspace Project Manager
+
+To easily switch between your projects, it's recommended you download the [Project Manager VSCode Extension](https://marketplace.cursorapi.com/items?itemName=alefragnani.project-manager). At the top of your code-workspace file will be a json object you can copy + paste into your `projects.json` file managed by the extension.
+
 ```json
-// Team VSCode Workspace Configuration
 /*
 Add the object below to your projects.json file to add this project
 '~/Library/Application Support/Cursor/User/globalStorage/alefragnani.project-manager/projects.json'
@@ -18,8 +28,18 @@ Add the object below to your projects.json file to add this project
   ],
   "enabled": true
 },
-*/
+```
+
+![VSCode Projects](./vscode-projects.png)
+_An example of my project manager projects_
+
+
+## 02 Folders
+Here you can configure any additional folders you'd like to add to your workspace including remote folders, other repositories, etc.
+
+```json
 {
+  ...
   "folders": [
     {
       "name": "root",
@@ -31,6 +51,16 @@ Add the object below to your projects.json file to add this project
     // 	"path": "../{{ cookiecutter.module_name }}/"
     // }
   ],
+  ...
+}
+```
+
+## 03 Settings
+This is where your team can share specific vscode settings for consitency. For example: Path to your SSH config file, auto-formatting on save, and more. The bulk of the current existing settings are files that are okay to be ignored in the file explorer since you never directly edit them (ex: `.git` directory, build files, or cache files)
+
+```json
+{
+  ...
   "settings": {
     "remote.SSH.configFile": "${workspaceFolder}/secrets/ssh/config.ssh",
     
@@ -118,6 +148,21 @@ Add the object below to your projects.json file to add this project
       "editor.lineHighlightBorder": "#9fced11f",
     },
   },
+  ...
+}
+```
+
+## 04 Extensions
+
+Recommend/disrecommend extensions to your colleagues so they have a good experience. Some common, powerful, and popular extensions that fit the configuration of GOTem are included in this list below.
+
+A good example of using this would be discouraging the default Python formatters and linters and instead encouraging use of the more modern ruff which this project is designed with in mind. This keeps things more consistent and can visually highlight the same issues used for style checks using the settings your team configured.
+
+<!-- In the future these may be replaced -->
+
+```json
+{
+  ...
   "extensions": {
     // See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
     "recommendations": [
@@ -186,6 +231,21 @@ Add the object below to your projects.json file to add this project
       "ms-pyright.pyright"
     ]
   },
+  ...
+}
+```
+
+## 05 Debugger Profiles
+
+![VSCode Tests](./vscode-tests.png)
+
+<!-- Maybe show the python debugger -->
+
+The VSCode debugger is one of the most popular Python debuggers out there. Sharing debug configurations between colleagues can save a lot of time especially if you're debugging different subcomponents. Ex: (1) A python CLI tool with arguments (2) Your currently selected file (3) FastAPI or some other web app (4) A separate TypeScript app (5) A docker build (6) A shell script (7) Pytest Debugging.
+
+```json
+{
+  ...
   "launch": {
     "version": "0.2.0",
     "configurations": [
@@ -205,6 +265,23 @@ Add the object below to your projects.json file to add this project
       }
     ]
   },
+  ...
+}
+```
+
+## 06 Tasks
+
+![VSCode Tasks](./vscode-tasks.png)
+
+Tasks are a lesser known/used feature of VSCode. They are essentially a way of integrating task commands like those in the `Makefile` into VSCode so you can do things like run them with a keyboard shortcut (ex: build with Cmd+Shift+B), trigger when something else happens in the IDE (on file save, on workspace open, etc.), or pass the path to your currently focused python script as an argument to a Makefile command. They can also be a nice way to visually separate your integrated VSCode terminal into different tabs.
+
+These can be used to do stuff like (1) start watching pytests once the workspace opens, (2) rebuild documentation when a markdown file is updated (3) focus the `error.log` file automatically when your webapp crashes (4) publish your package to PyPi with Cmd+Shift+B.
+
+All of the default Makefile tasks have been embedded in tasks.json for further customization and a few have will run on certain actions.
+
+```json
+{
+  ...
   "tasks": {
     "version": "2.0.0",
     "tasks": [
@@ -225,5 +302,16 @@ Add the object below to your projects.json file to add this project
       }
     ]
   }
+  ...
 }
 ```
+
+## 07 .cursorrules (Cursor Only)
+
+<!-- TOOD: maybe make a cursorrules compiler that summarizes aspects of the project -->
+
+`.cursorrules` files define custom rules for Cursor AI to follow when generating code, allowing you to tailor its behavior to your specific needs and preferences.
+
+The `.cursorrules` file defined in this project adapts to your settings, and lists best practices as well as stylistic choices.
+
+You can find other templates for cursor rules files across the internet, a popular one being [this list](https://github.com/PatrickJS/awesome-cursorrules)

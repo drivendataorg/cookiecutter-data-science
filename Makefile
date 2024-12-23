@@ -65,7 +65,7 @@ uv-docs-deploy:
 # This prints a welcome message saying to check out gotem documentaion for more information
 
 print-welcome:
-	cat "./welcome.txt"
+	curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt || echo "Failed to fetch welcome message"
 
 
 ###     TESTS

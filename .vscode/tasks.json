@@ -16,6 +16,10 @@
                 "kind": "test",
                 "isDefault": true
             },
+            "icon": {
+                "id": "check-all",
+                "color": "terminal.ansiGreen"
+            },
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
@@ -26,6 +30,10 @@
             "type": "shell",
             "command": "make format",
             "group": "build",
+            "icon": {
+                "id": "symbol-ruler",
+                "color": "terminal.ansiBlue"
+            },
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
@@ -36,6 +44,10 @@
             "type": "shell",
             "command": "make test",
             "group": "test",
+            "icon": {
+                "id": "beaker",
+                "color": "terminal.ansiMagenta"
+            },
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
@@ -46,6 +58,10 @@
             "type": "shell",
             "command": "make test-fastest",
             "group": "test",
+            "icon": {
+                "id": "zap",
+                "color": "terminal.ansiYellow"
+            },
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
@@ -56,6 +72,10 @@
             "type": "shell",
             "command": "make test-debug-last",
             "group": "test",
+            "icon": {
+                "id": "bug",
+                "color": "terminal.ansiRed"
+            },
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
@@ -66,6 +86,10 @@
             "type": "shell",
             "command": "make docs-serve",
             "group": "none",
+            "icon": {
+                "id": "book",
+                "color": "terminal.ansiCyan"
+            },
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
@@ -76,11 +100,11 @@
         {
             "label": "Show Welcome",
             "type": "shell",
-            "command": "make print-welcome",
+            "command": "curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt",
             "group": "none",
             "icon": {
-                "color": "terminal.ansiYellow",
-                "id": "heart-filled"
+                "id": "heart-filled",
+                "color": "terminal.ansiYellow"
             },
             "runOptions": {
                 "runOn": "folderOpen"
