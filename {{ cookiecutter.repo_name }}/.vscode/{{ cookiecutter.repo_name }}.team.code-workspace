@@ -201,8 +201,8 @@ Add the object below to your projects.json file to add this project
     "version": "2.0.0",
     "tasks": [
       {
-        "label": "python-checks",
         "type": "shell",
+        "label": "python-checks",
         "command": "poetry",
         "args": ["run", "poe", "check"],
         "group": "build",
