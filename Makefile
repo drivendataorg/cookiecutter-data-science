@@ -1,5 +1,6 @@
 .PHONY: _prep create_environment requirements format lint docs docs-serve test \
-	test-fastest test-debug-fastest _clean_manual_test manual-test manual-test-debug
+	test-fastest test-debug-fastest _clean_manual_test manual-test manual-test-debug \
+	uv-docs, uv-docs-deploy, uv-docs-serve, build-all
 
 ## GLOBALS
 
@@ -68,6 +69,10 @@ uv-docs-serve:
 uv-docs-deploy:
 	cd docs && uv run mkdocs build && uv run mkdocs gh-deploy --clean
 
+###     PUBLISH ALL (Docs & Project)
+build-all:
+	uv build && uv deploy
+	cd docs && uv run mkdocs build && uv run mkdocs gh-deploy --clean
 
 ###     TESTS
 

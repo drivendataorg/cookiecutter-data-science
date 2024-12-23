@@ -12,8 +12,7 @@
         // ### MISC ###
         // ############
         {
-            // Show Welcome
-            "label": "Show Welcome",
+            "label": "💛 Show Welcome",
             "type": "shell",
             "command": "curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt",
             "group": "none",
@@ -36,13 +35,12 @@
         // ### DEV COMMANDS ###
         // ####################
         {
-            // Make lint
-            "label": "[Makefile] Lint Project",
+            "label": "✅ [Makefile] Lint Project",
             "type": "shell",
             "command": "make lint",
             "group": {
                 "kind": "test",
-                "isDefault": true
+                "isDefault": false
             },
             "icon": {
                 "id": "check-all",
@@ -54,8 +52,7 @@
             }
         },
         {
-            // Make format
-            "label": "[Makefile] Format Project",
+            "label": "📏 [Makefile] Format Project",
             "type": "shell",
             "command": "make format",
             "group": "build",
@@ -72,10 +69,9 @@
         // ### DOCS ###
         // ############
         {
-            // Make docs-serve
-            "label": "[Makefile] Serve Documentation",
+            "label": "📄 [Makefile] Serve Documentation Locally",
             "type": "shell",
-            "command": "make docs-serve",
+            "command": "make uv-docs-serve",
             "group": "none",
             "icon": {
                 "id": "book",
@@ -88,12 +84,27 @@
             "isBackground": true,
             "problemMatcher": []
         },
+        {
+            "label": "📕 [Makefile] Build & Deploy Docs",
+            "type": "shell",
+            "command": "make uv-docs-deploy",
+            "group": "none",
+            "icon": {
+                "id": "book",
+                "color": "terminal.ansiCyan"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "isBackground": false,
+            "problemMatcher": []
+        },
         // #############
         // ### TESTS ###
         // #############
         {
-            // Make test
-            "label": "[Makefile] Run Tests",
+            "label": "⚗️ [Makefile] Run Tests",
             "type": "shell",
             "command": "make test",
             "group": "test",
@@ -107,8 +118,7 @@
             }
         },
         {
-            // Make test
-            "label": "[Makefile] Run Quick Tests",
+            "label": "🧪 [Makefile] Run Quick Tests",
             "type": "shell",
             "command": "make test-fastest",
             "group": "test",
@@ -122,8 +132,7 @@
             }
         },
         {
-            // Make test-debug-last
-            "label": "[Makefile] Debug Last Failed Test",
+            "label": "🪲 [Makefile] Debug Last Failed Test",
             "type": "shell",
             "command": "make test-debug-last",
             "group": "test",
