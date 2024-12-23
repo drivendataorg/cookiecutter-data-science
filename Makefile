@@ -13,6 +13,13 @@ _prep:
 	rm -f **/*/.DS_store
 
 
+###		 WELCOME SCREEN
+# This prints a welcome message saying to check out gotem documentaion for more information
+
+print-welcome:
+	curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt || echo "Failed to fetch welcome message"
+
+
 ###     DEV COMMANDS
 
 ## Set up python interpreter environment
@@ -60,12 +67,6 @@ uv-docs-serve:
 
 uv-docs-deploy:
 	cd docs && uv run mkdocs build && uv run mkdocs gh-deploy --clean
-
-###		 WELCOME SCREEN
-# This prints a welcome message saying to check out gotem documentaion for more information
-
-print-welcome:
-	curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt || echo "Failed to fetch welcome message"
 
 
 ###     TESTS

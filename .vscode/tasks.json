@@ -8,96 +8,11 @@
     // Helpful for things like pytest watching
     "version": "2.0.0",
     "tasks": [
+        // ############
+        // ### MISC ###
+        // ############
         {
-            "label": "Lint Project",
-            "type": "shell",
-            "command": "make lint",
-            "group": {
-                "kind": "test",
-                "isDefault": true
-            },
-            "icon": {
-                "id": "check-all",
-                "color": "terminal.ansiGreen"
-            },
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
-            }
-        },
-        {
-            "label": "Format Code",
-            "type": "shell",
-            "command": "make format",
-            "group": "build",
-            "icon": {
-                "id": "symbol-ruler",
-                "color": "terminal.ansiBlue"
-            },
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
-            }
-        },
-        {
-            "label": "Run Tests",
-            "type": "shell",
-            "command": "make test",
-            "group": "test",
-            "icon": {
-                "id": "beaker",
-                "color": "terminal.ansiMagenta"
-            },
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
-            }
-        },
-        {
-            "label": "Quick Tests",
-            "type": "shell",
-            "command": "make test-fastest",
-            "group": "test",
-            "icon": {
-                "id": "zap",
-                "color": "terminal.ansiYellow"
-            },
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
-            }
-        },
-        {
-            "label": "Debug Last Failed Test",
-            "type": "shell",
-            "command": "make test-debug-last",
-            "group": "test",
-            "icon": {
-                "id": "bug",
-                "color": "terminal.ansiRed"
-            },
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
-            }
-        },
-        {
-            "label": "Serve Documentation",
-            "type": "shell",
-            "command": "make docs-serve",
-            "group": "none",
-            "icon": {
-                "id": "book",
-                "color": "terminal.ansiCyan"
-            },
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
-            },
-            "isBackground": true,
-            "problemMatcher": []
-        },
-        {
+            // Show Welcome
             "label": "Show Welcome",
             "type": "shell",
             "command": "curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt",
@@ -114,6 +29,112 @@
                 "panel": "dedicated"
             },
             "problemMatcher": []
-        }
+        },
+        // ################# MAKE COMMANDS LINKED BELOW #################
+        // 
+        // ####################
+        // ### DEV COMMANDS ###
+        // ####################
+        {
+            // Make lint
+            "label": "[Makefile] Lint Project",
+            "type": "shell",
+            "command": "make lint",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "icon": {
+                "id": "check-all",
+                "color": "terminal.ansiGreen"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            // Make format
+            "label": "[Makefile] Format Project",
+            "type": "shell",
+            "command": "make format",
+            "group": "build",
+            "icon": {
+                "id": "symbol-ruler",
+                "color": "terminal.ansiBlue"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        // ############
+        // ### DOCS ###
+        // ############
+        {
+            // Make docs-serve
+            "label": "[Makefile] Serve Documentation",
+            "type": "shell",
+            "command": "make docs-serve",
+            "group": "none",
+            "icon": {
+                "id": "book",
+                "color": "terminal.ansiCyan"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        // #############
+        // ### TESTS ###
+        // #############
+        {
+            // Make test
+            "label": "[Makefile] Run Tests",
+            "type": "shell",
+            "command": "make test",
+            "group": "test",
+            "icon": {
+                "id": "beaker",
+                "color": "terminal.ansiMagenta"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            // Make test
+            "label": "[Makefile] Run Quick Tests",
+            "type": "shell",
+            "command": "make test-fastest",
+            "group": "test",
+            "icon": {
+                "id": "zap",
+                "color": "terminal.ansiYellow"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            // Make test-debug-last
+            "label": "[Makefile] Debug Last Failed Test",
+            "type": "shell",
+            "command": "make test-debug-last",
+            "group": "test",
+            "icon": {
+                "id": "bug",
+                "color": "terminal.ansiRed"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
     ]
 }
