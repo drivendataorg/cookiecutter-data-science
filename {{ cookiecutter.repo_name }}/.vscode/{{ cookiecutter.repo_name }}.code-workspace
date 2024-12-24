@@ -25,7 +25,11 @@ Add the object below to your projects.json file to add this project
   ],
   "settings": {
     "remote.SSH.configFile": "${workspaceFolder}/secrets/ssh/config.ssh",
-    
+    "files.associations": {
+      "*.ssh": "ssh_config",
+      "*.env*": "dotenv",
+      "*.cursorrules": "markdown",
+    },
     // Excluded Files Won't Show in Sidebar
     "files.exclude": {
       // Option #02
