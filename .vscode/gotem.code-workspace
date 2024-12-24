@@ -1,8 +1,13 @@
 {
 	"folders": [
 		{
+			"name": "root",
 			"path": ".."
 		},
+		{
+			"name": "manual test",
+			"path": "../manual_test/project_name"
+		}
 	],
 	"settings": {
 		"workbench.colorCustomizations": {

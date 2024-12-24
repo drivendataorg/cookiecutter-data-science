@@ -88,15 +88,21 @@ test-debug-last: ## Debug last failed test with pdb
 _clean_manual_test:
 	rm -rf manual_test
 
+# manual-test: _prep _clean_manual_test ## Run manual tests
+# 	mkdir -p manual_test
+# 	cd manual_test && python -m gotem ..
+
 manual-test: _prep _clean_manual_test ## Run manual tests
 	mkdir -p manual_test
-	cd manual_test && python -m gotem ..
+	cd manual_test && uv run gotem ..
 
 manual-test-debug: _prep _clean_manual_test ## Run manual tests with debugger
 	mkdir -p manual_test
 	cd manual_test && python -m pdb ../ccds/__main__.py ..
 
 ###     HELP
+
+.DEFAULT_GOAL := help
 
 help:  ## Show this help message
 	@echo "\033[38;5;39m   ____  ___ _____              "

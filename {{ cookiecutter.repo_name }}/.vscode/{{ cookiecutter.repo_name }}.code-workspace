@@ -4,6 +4,7 @@ Add the object below to your projects.json file to add this project
 '~/Library/Application Support/Cursor/User/globalStorage/alefragnani.project-manager/projects.json'
 {
   "name": "🍪 {{ cookiecutter.repo_name }}",
+  {#- TODO: Render path automatically -#}
   "rootPath": "/Path/to/your/project/{{ cookiecutter.repo_name }}/.vscode/{{ cookiecutter.repo_name }}.code-workspace",
   "tags": [
     "🪿 gotem"
@@ -11,6 +12,7 @@ Add the object below to your projects.json file to add this project
   "enabled": true
 },
 */
+// {#- TODO: Copy team workspace here. Make sure header is not included #}
 {
   "folders": [
     {
@@ -134,23 +136,202 @@ Add the object below to your projects.json file to add this project
     ]
   },
   "tasks": {
+    // See https://gatlenculp.github.io/gatlens-opinionated-template/vscode/
+    // for instructions on how to use these.
+    // ~ COLOR CONFIG ~
+    // build = terminal.ansiBlue     (📏 Format, build-related tasks)
+    // docs  = terminal.ansiGreen    (📄 Documentation tasks)
+    // tests = terminal.ansiRed      (⚗️ Testing, debug, linting tasks)
+    // misc  = terminal.ansiYellow   (💛 Welcome, utility tasks)
     "version": "2.0.0",
     "tasks": [
+      // ####################
+      // ### DEV COMMANDS ###
+      // ####################
       {
-        "label": "python-checks",
+        "label": "[Makefile] Build Lint ✅",
+        "detail": "Run linting checks with flake8, isort, and black",
         "type": "shell",
-        "command": "poetry",
-        "args": ["run", "poe", "check"],
+        "command": "make lint",
+        "group": {
+          "kind": "test"
+        },
+        "icon": {
+          "id": "check",
+          "color": "terminal.ansiBlue"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "[Makefile] Build Format 📏",
+        "detail": "Format code using isort and black",
+        "type": "shell",
+        "command": "make format",
         "group": "build",
-        "detail": "Run all Python checks (format, lint, typecheck, test)",
-        "runOptions": {
-          "runOn": "folderOpen"
+        "icon": {
+          "id": "symbol-ruler",
+          "color": "terminal.ansiBlue"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "[Makefile] Build + Publish All 📦 (⇧ ⌘ B)",
+        "detail": "Run format, lint, publish package and docs",
+        "type": "shell",
+        "command": "make publish-all",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "icon": {
+          "id": "package",
+          "color": "terminal.ansiBlue"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        }
+      },
+      // ############
+      // ### DOCS ###
+      // ############
+      {
+        "label": "[Makefile] Docs Serve 📄",
+        "detail": "Serve documentation locally on port 8000",
+        "type": "shell",
+        "command": "make docs-serve",
+        "group": "none",
+        "icon": {
+          "id": "debug-rerun",
+          "color": "terminal.ansiGreen"
         },
         "presentation": {
           "reveal": "silent",
           "panel": "shared"
+        },
+        "runOptions": {
+          "runOn": "folderOpen",
+          "instanceLimit": 1
+        },
+        "isBackground": true,
+        "problemMatcher": []
+      },
+      {
+        "label": "[Makefile] Docs Publish 📕",
+        "detail": "Build and deploy documentation to GitHub Pages",
+        "type": "shell",
+        "command": "make docs-publish",
+        "group": "build",
+        "icon": {
+          "id": "book",
+          "color": "terminal.ansiGreen"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        },
+        "isBackground": false,
+        "problemMatcher": []
+      },
+      // #############
+      // ### TESTS ###
+      // #############
+      {
+        "label": "[Makefile] Test All ⚗️",
+        "detail": "Run all tests",
+        "type": "shell",
+        "command": "make test",
+        "group": {
+          "kind": "test",
+          "isDefault": true
+        },
+        "icon": {
+          "id": "beaker",
+          "color": "terminal.ansiRed"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
         }
-      }
-    ]
+      },
+      {
+        "label": "[Makefile] Test Quick ⚡️",
+        "detail": "Run tests with fail-fast option",
+        "type": "shell",
+        "command": "make test-fastest",
+        "group": "test",
+        "icon": {
+          "id": "zap",
+          "color": "terminal.ansiRed"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "[Makefile] Test Continuous 👀",
+        "detail": "Run tests in watch mode using pytest-watcher",
+        "type": "shell",
+        "command": "make test-continuous",
+        "group": "test",
+        "icon": {
+          "id": "debug-rerun",
+          "color": "terminal.ansiRed"
+        },
+        "runOptions": {
+          "runOn": "folderOpen",
+          "instanceLimit": 1
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "[Makefile] Test Debug 🪲",
+        "detail": "Debug last failed test with pdb",
+        "type": "shell",
+        "command": "make test-debug-last",
+        "group": "test",
+        "icon": {
+          "id": "bug",
+          "color": "terminal.ansiRed"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        }
+      },
+      // ##############
+      // ### VSCode ###
+      // ##############
+      {
+        "label": "[VSCode] Startup Welcome 💛",
+        "detail": "Print a Welcome screen",
+        "type": "shell",
+        "command": "make _welcome",
+        "group": "none",
+        "icon": {
+          "id": "heart-filled",
+          "color": "terminal.ansiYellow"
+        },
+        "runOptions": {
+          "runOn": "folderOpen",
+          "instanceLimit": 1
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated"
+        },
+        "problemMatcher": []
+      },
+    ],
   }
 }
