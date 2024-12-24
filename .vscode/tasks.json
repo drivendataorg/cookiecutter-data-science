@@ -176,10 +176,10 @@
         // ### VSCode ###
         // ##############
         {
-            "label": "[VSCode] Print Welcome 💛",
+            "label": "[Makefile] Misc Welcome 💛",
             "detail": "",
             "type": "shell",
-            "command": "curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt",
+            "command": "make _welcome",
             "group": "none",
             "icon": {
                 "id": "heart-filled",

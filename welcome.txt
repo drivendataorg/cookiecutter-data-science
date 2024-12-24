@@ -1,26 +1,28 @@
-[38;5;39m   ____  ___ _____              
+   ____  ___ _____              
   / ___|/ _ \_   _|__ _ __ ___  
  | |  _| | | || |/ _ \ '_ ` _ \ 
  | |_| | |_| || |  __/ | | | | |
-  \____|\___/ |_|\___|_| |_| |_|[0m
-                                
-[1m~ Gatlen's Opinionated Template v1.0.0 ~[0m
-Cutting-edge, opinionated, and ambitious project builder for power users and researchers.
+  \____|\___/ |_|\___|_| |_| |_|
 
-[38;5;222m🚀 Quick Start:[0m
+~ Gatlen's Opinionated Template v1.0.0 ~
+
+A cutting-edge, opinionated, and ambitious project builder 
+for power users and researchers.
+
+📦 Quick Start
   make init          # Initialize project
   make test         # Run tests
   make docs         # Generate documentation
 
-[38;5;156m⌨️  Keyboard Shortcuts:[0m
+⌨️  Keyboard Shortcuts
   Ctrl+Shift+B     # Build project
   Ctrl+Shift+T     # Run tests
   F5               # Start debugging
 
-[38;5;147m📚 Resources:[0m
-  • Documentation: https://gatlenculp.github.io/gatlens-opinionated-template/
-  • Issues: https://github.com/GatlenCulp/gatlens-opinionated-template/issues
-  • Wiki: https://github.com/GatlenCulp/gatlens-opinionated-template/wiki
+📚 Resources
+  • Docs:    https://gatlenculp.github.io/gatlens-opinionated-template/
+  • Issues:  https://github.com/GatlenCulp/gatlens-opinionated-template/issues
+  • Wiki:    https://github.com/GatlenCulp/gatlens-opinionated-template/wiki
 
-[38;5;245m💡 Tip: Use `make help` to see all available commands[0m
+💡 Tip: Use `make help` to see all available commands
 

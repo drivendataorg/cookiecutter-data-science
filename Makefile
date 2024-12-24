@@ -15,6 +15,9 @@ DOCS_PORT ?= 8000
 _prep: ## Clean up .DS_Store files
 	rm -f **/*/.DS_store
 
+_welcome: ## Print a Welcome screen
+	curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt
+
 ###     DEV COMMANDS
 
 create_environment: ## Create a new conda environment with Python $(PYTHON_VERSION)
@@ -90,4 +93,10 @@ manual-test-debug: _prep _clean_manual_test ## Run manual tests with debugger
 ###     HELP
 
 help:  ## Show this help message
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@echo "\033[38;5;39m   ____  ___ _____              "
+	@echo "  / ___|/ _ \_   _|__ _ __ ___  "
+	@echo " | |  _| | | || |/ _ \ '_ \` _ \ "
+	@echo " | |_| | |_| || |  __/ | | | | |"
+	@echo "  \____|\___/ |_|\___|_| |_| |_|\033[0m"
+	@echo "\n\033[1m~ Available Commands ~\033[0m\n"
+	@grep -E '^[a-zA-Z][a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[38;5;222m%-30s\033[0m %s\n", $$1, $$2}'
