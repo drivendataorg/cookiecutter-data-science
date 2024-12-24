@@ -25,7 +25,10 @@ create_environment: ## Create a new conda environment with Python $(PYTHON_VERSI
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
 
 publish: ## Build and publish package
-	rm -r dist && uv build && uv publish
+	rm -r dist || true && \
+	uv build && \
+	uv publish || \
+	echo "\nProject of current version may already exist. Have you tried increasing version number?"
 
 ## Install Python Dependencies (switched to uv)
 requirements: ## Install Python dependencies using uv
