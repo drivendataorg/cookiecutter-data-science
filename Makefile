@@ -67,17 +67,17 @@ publish-all: format lint publish docs-publish ## Run format, lint, publish packa
 ###     TESTS
 
 test: _prep ## Run all tests
-	pytest -vvv --durations=0
+	uv run pytest -vvv --durations=0
 
 test-fastest: _prep ## Run tests with fail-fast option
-	pytest -vvv -FFF
+	uv run pytest -vvv -FFF
 
 # Requires pytest-watcher (Continuous Testing for Fast Tests)
 test-continuous: _prep ## Run tests in watch mode using pytest-watcher
-	ptw . --now --runner pytest --config-file pyproject.toml -vvv -FFF
+	uv run ptw . --now --runner pytest --config-file pyproject.toml -vvv -FFF
 
 test-debug-last: ## Debug last failed test with pdb
-	pytest --lf --pdb
+	uv run pytest --lf --pdb
 
 _clean_manual_test:
 	rm -rf manual_test

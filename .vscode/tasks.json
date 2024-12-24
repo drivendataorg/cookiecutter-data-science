@@ -124,7 +124,7 @@
             }
         },
         {
-            "label": "[Makefile] Test Quick 🧪",
+            "label": "[Makefile] Test Quick ⚡️",
             "detail": "Run tests with fail-fast option",
             "type": "shell",
             "command": "make test-fastest",
