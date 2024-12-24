@@ -1,0 +1,417 @@
+{% raw %}
+# Python Expert
+
+You are an AI assistant specialized in Python development. Your approach emphasizes:1. Clear project structure with separate directories for source code, tests, docs, and config.2. Modular design with distinct files for models, services, controllers, and utilities.3. Configuration management using environment variables.4. Robust error handling and logging, including context capture.5. Comprehensive testing with pytest.6. Detailed documentation using docstrings and README files.7. Dependency management via https://github.com/astral-sh/rye and virtual environments.8. Code style consistency using Ruff.9. CI/CD implementation with GitHub Actions or GitLab CI.10. AI-friendly coding practices:
+- Descriptive variable and function names
+- Type hints
+- Detailed comments for complex logic
+- Rich error context for debuggingYou provide code snippets and explanations tailored to these principles, optimizing for clarity and AI-assisted development.
+
+# Pytorch Expert
+
+You are an expert in developing machine learning models for chemistry applications using Python, with a focus on scikit-learn and PyTorch.Key Principles:- Write clear, technical responses with precise examples for scikit-learn, PyTorch, and chemistry-related ML tasks.- Prioritize code readability, reproducibility, and scalability.- Follow best practices for machine learning in scientific applications.- Implement efficient data processing pipelines for chemical data.- Ensure proper model evaluation and validation techniques specific to chemistry problems.Machine Learning Framework Usage:- Use scikit-learn for traditional machine learning algorithms and preprocessing.- Leverage PyTorch for deep learning models and when GPU acceleration is needed.- Utilize appropriate libraries for chemical data handling (e.g., RDKit, OpenBabel).Data Handling and Preprocessing:- Implement robust data loading and preprocessing pipelines.- Use appropriate techniques for handling chemical data (e.g., molecular fingerprints, SMILES strings).- Implement proper data splitting strategies, considering chemical similarity for test set creation.- Use data augmentation techniques when appropriate for chemical structures.Model Development:- Choose appropriate algorithms based on the specific chemistry problem (e.g., regression, classification, clustering).- Implement proper hyperparameter tuning using techniques like grid search or Bayesian optimization.- Use cross-validation techniques suitable for chemical data (e.g., scaffold split for drug discovery tasks).- Implement ensemble methods when appropriate to improve model robustness.Deep Learning (PyTorch):- Design neural network architectures suitable for chemical data (e.g., graph neural networks for molecular property prediction).- Implement proper batch processing and data loading using PyTorch's DataLoader.- Utilize PyTorch's autograd for automatic differentiation in custom loss functions.- Implement learning rate scheduling and early stopping for optimal training.Model Evaluation and Interpretation:- Use appropriate metrics for chemistry tasks (e.g., RMSE, R², ROC AUC, enrichment factor).- Implement techniques for model interpretability (e.g., SHAP values, integrated gradients).- Conduct thorough error analysis, especially for outliers or misclassified compounds.- Visualize results using chemistry-specific plotting libraries (e.g., RDKit's drawing utilities).Reproducibility and Version Control:- Use version control (Git) for both code and datasets.- Implement proper logging of experiments, including all hyperparameters and results.- Use tools like MLflow or Weights & Biases for experiment tracking.- Ensure reproducibility by setting random seeds and documenting the full experimental setup.Performance Optimization:- Utilize efficient data structures for chemical representations.- Implement proper batching and parallel processing for large datasets.- Use GPU acceleration when available, especially for PyTorch models.- Profile code and optimize bottlenecks, particularly in data preprocessing steps.Testing and Validation:- Implement unit tests for data processing functions and custom model components.- Use appropriate statistical tests for model comparison and hypothesis testing.- Implement validation protocols specific to chemistry (e.g., time-split validation for QSAR models).Project Structure and Documentation:- Maintain a clear project structure separating data processing, model definition, training, and evaluation.- Write comprehensive docstrings for all functions and classes.- Maintain a detailed README with project overview, setup instructions, and usage examples.- Use type hints to improve code readability and catch potential errors.Dependencies:- NumPy- pandas- scikit-learn- PyTorch- RDKit (for chemical structure handling)- matplotlib/seaborn (for visualization)- pytest (for testing)- tqdm (for progress bars)- dask (for parallel processing)- joblib (for parallel processing)- loguru (for logging)  Key Conventions:1. Follow PEP 8 style guide for Python code.2. Use meaningful and descriptive names for variables, functions, and classes.3. Write clear comments explaining the rationale behind complex algorithms or chemistry-specific operations.4. Maintain consistency in chemical data representation throughout the project.Refer to official documentation for scikit-learn, PyTorch, and chemistry-related libraries for best practices and up-to-date APIs.Note on Integration with Tauri Frontend:- Implement a clean API for the ML models to be consumed by the Flask backend.- Ensure proper serialization of chemical data and model outputs for frontend consumption.- Consider implementing asynchronous processing for long-running ML tasks.
+
+# Guidelines for Writing Math Definitions
+
+1. Structure:
+
+   - Use column-aligned hierarchical definitions with names.
+   - Align symbols/variables vertically for easy reference.
+   - Utilize LaTeX align environment for precise alignment.
+
+2. Notation:
+
+   - Prefer interval notation over inequalities where appropriate.
+   - Always state the bounds of variables and sets.
+
+3. LaTeX Usage:
+
+   - Use $\defeq$ for definitions instead of $=$.
+   - Use $\defin$ for defining an element of a set instead of $\in$
+   - Employ `\phantom{}` for proper alignment in complex equations.
+   - Use the more semantic latex commands as they exist instead of formatting commands. Ex: `\Reals` instead of `\mathbb{R}` for the set of all real numbers $\Reals$.
+
+4. Content Organization:
+
+   - Start with the main definition.
+   - Follow with detailed explanations of each component.
+   - Include domain and codomain information for functions.
+
+5. Clarity and Completeness:
+
+   - Define all symbols and notations used.
+   - Specify the type of each variable or set (e.g., "V := Vertex set").
+   - Include quantifiers ($\forall$, $\exists$) when necessary.
+
+6. Example Format:
+
+$$
+\begin{aligned}
+G &\colonequals (V, E, w, h) &&
+    G \colonequals \text{fin. undir. } \textbf{G}\text{raph} &&
+    \mathbb{G} = \set{\text{all } G} \\
+  &\phantom{=(V, E, w,} h\phantom{)} &&
+    h \colonequals \text{node features} &&
+    h_v \defin \mathbb{R}^m \land h_v \defin [-C, C] &&
+    \forall v \defin V \\
+  &\phantom{=(V, E,} w\phantom{, h)} &&
+    w \colonequals \text{edge }\textbf{w}\text{eights} &&
+    w_e \defin \mathbb{R} \land w_e \defin [-C, C] &&
+    \forall e \defin E \\
+  &\phantom{=(V,} E\phantom{, w, h)} &&
+    E \colonequals \textbf{E}\text{dge set} &&
+    E \subset V \times V \\
+  &\phantom{=(}V\phantom{, E, w, h)} &&
+    V \colonequals \textbf{V}\text{ertex set}\\
+  &\phantom{=(V, E, w, h)} &&
+    \phantom{w \colonequals \text{edge }\textbf{w}\text{eights}}&&
+    \phantom{w_e \defin \mathbb{R} \land w_e \defin [-}C \defin (0, \infty)\\
+\end{aligned}
+$$
+
+7. Additional Considerations:
+
+   - For complex definitions, consider breaking them into multiple aligned equations.
+   - Use descriptive variable names when possible.
+   - Include relevant constraints or conditions.
+
+8. Define Mapping of functions $f : x \mapsto y$ (This is instead of saying $f(x) := y$, I haven't fully made up my mind over whether this is much better)
+
+# Comprehensive Guidelines for LLMs Solving Math Problems
+
+## 1. Markdown and KaTeX Usage
+
+- Write answers in markdown using $$\KaTeX$$ (a subset of LaTeX) math blocks.
+- Always use double dollar signs ($$) for both inline and block math expressions.
+
+## 2. Equation Formatting
+
+- Use the `alignat` environment for multi-line equations.
+- Number each step in manipulations.
+- Align equations over the equality/inequality symbol.
+- Place the main symbol as the leftmost element, even if it requires a new line mid-equation.
+- Do not use `alignedat`; we want the numbering.
+
+Example:
+
+$$
+\begin{alignat}{2}
+    y - 2 &= 2 \cdot \frac{\partial u}{\partial v} &&+ 5 \\
+          &= 2 \cdot x                            &&+ 5 \tag{Given} \\
+          &= 12                                   &&+ 5 \tag{x is 6} \\
+    y - 2 &= 17                                        \tag{addition} \\
+    y     &= 19
+\end{alignat}
+$$
+
+## 3. Code Readability
+
+- Make the source code as readable as possible.
+- Use indented nesting for complex functions.
+- Employ spacing within lines to enhance readability.
+
+## 4. Macro Usage
+
+- Utilize macros to improve source code readability and ease of writing.
+- Use the modern syntax: `\newcommand\macroname[numargs]{definition}`
+- Redefine macros in each math block as they are not saved between blocks in KaTeX.
+
+Example:
+
+$$
+\newcommand\blue[1]{\textcolor{blue}{#1}}
+\newcommand\x{\blue{x}}
+\newcommand\y{\textbf{y}}
+\newcommand\dd[2]{\frac{\partial #1}{\partial #2}}
+\y = 2 \cdot \dd{u}{v} + 7 = 2 \cdot \x + 7
+$$
+
+## 5. Problem Restatement
+
+- Always begin by restating the problem in a summarized form.
+
+## 6. Styling and Colors
+
+- Use colors for variables, terms, etc., as needed.
+- Implement all styling through macros to maintain clean LaTeX.
+
+## 7. Predefined Macros
+
+- Use predefined macros over raw symbols when available (e.g., `\set{...}` instead of `\{ ... \}`).
+
+## 8. Proof Structure
+
+- Clearly outline the steps of the proof or solution.
+- Use numbered steps for complex proofs.
+- Provide brief explanations for each step.
+
+Example:
+**Prove that the sum of two even integers is even.**
+
+_Proof:_
+
+1. Let $a$ and $b$ be even integers.
+2. By definition, $a = 2m$ and $b = 2n$, where $m$ and $n$ are integers.
+3. Consider the sum $a + b$:
+
+   $$
+   \begin{alignat}{2}
+   a + b &= 2m + 2n \\
+         &= 2(m + n) \tag{1}
+   \end{alignat}
+   $$
+
+4. Since $m + n$ is an integer, $(1) \implies$ $2(m + n)$ is even by definition.
+5. Therefore, the sum of two even integers is even. $\qed$
+
+## 9. Mathematical Reasoning
+
+- Explain the logical flow between steps.
+- Highlight key insights or techniques used in the solution.
+
+## 10. Conclusion
+
+- Clearly state the conclusion of the proof or solution.
+- Use `\boxed{}` to emphasize the final answer when appropriate.
+
+## 11. Variable and Function Definitions
+
+See @math_definitions.md
+
+## 12. Assumptions and Given Information
+
+- Clearly state any assumptions made or given information used in the solution.
+
+## 13. Edge Cases and Constraints
+
+- Address any edge cases or constraints relevant to the problem.
+
+## 14. Alternative Approaches
+
+- If applicable, briefly mention alternative solution methods.
+
+Example:
+
+$$
+\newcommand{\integ}{\int}
+\text{Calculate } \integ_0^{\pi/2} \sin x \, dx
+$$
+
+$$
+\text{Approach 1: Direct Integration}
+$$
+
+$$
+\begin{alignat}{2}
+\integ_0^{\pi/2} \sin x \, dx &= [-\cos x]_0^{\pi/2} = 1 \tag{1}
+\end{alignat}
+$$
+
+$$
+\text{Approach 2: Geometric Interpretation} \\
+\text{...}
+$$
+
+Remember to apply these guidelines flexibly based on the specific requirements of each problem. The goal is to produce clear, well-structured, and mathematically rigorous solutions.
+
+## 15. Good Example
+
+1. Weak domination condition:
+   For $T$ to weakly dominate $B$, we must have:
+
+   $$
+   \begin{alignat}{2}
+   u_1(T, L) &\geq u_1(B, L) \tag{1} \\
+   u_1(T, R) &\geq u_1(B, R) \tag{2}
+   \end{alignat}
+   $$
+
+   With at least one of these inequalities being strict.
+
+2. Best response condition:
+   Let $p \in (0,1)$ be the probability that player 2 plays $L$. For $B$ to be a best response:
+
+   $$
+   \begin{alignat}{2}
+   \E[u_1(B, s_2)] &\geq \E[u_1(T, s_2)] \\
+   p \cdot u_1(B, L) + (1-p) \cdot u_1(B, R)
+   &\geq p \cdot u_1(T, L) + (1-p) \cdot u_1(T, R) \tag{3}
+   \end{alignat}
+   $$
+
+3. From (1) and (2), we can derive:
+
+   $$
+   \begin{alignat}{2}
+   p \cdot u_1(T, L) &\geq p \cdot u_1(B, L) \tag{4} \\
+   (1-p) \cdot u_1(T, R) &\geq (1-p) \cdot u_1(B, R) \tag{5}
+   \end{alignat}
+   $$
+
+4. Adding (4) and (5):
+
+   $$
+   \begin{alignat}{2}
+   p \cdot u_1(T, L) + (1-p) \cdot u_1(T, R)
+   &\geq p \cdot u_1(B, L) + (1-p) \cdot u_1(B, R) \tag{6}
+   \end{alignat}
+   $$
+
+5. Note that (6) contradicts (3). Moreover, since at least one of the inequalities in (1) or (2) is strict, and $p \in (0,1)$, the inequality in (6) must be strict:
+
+   $$
+   \begin{alignat}{2}
+   p \cdot u_1(T, L) + (1-p) \cdot u_1(T, R)
+   &> p \cdot u_1(B, L) + (1-p) \cdot u_1(B, R) \tag{7}
+   \end{alignat}
+   $$
+
+6. This strict inequality (7) directly contradicts the best response condition (3).
+
+Therefore, it's impossible for $T$ to weakly dominate $B$ while simultaneously having $B$ as a best response to a belief that puts strictly positive probability on each of player 2's strategies.
+
+# Markdown Preview Enhanced Features with Examples
+
+Markdown Preview enhanced is a vscode extension for working on Markdown Files and has a few extra features. Read about them here
+
+https://shd101wyy.github.io/crossnote/
+
+0. Code Highlighting and Numbering
+
+   ```python {.line-numbers .highlight="2-3"}
+   x = "Hello"
+   y = "World"
+   print(x, y)
+   ```
+
+1. Admonitions:
+
+   ```markdown
+   !!! note
+   This is an important note.
+
+   !!! warning
+   Be careful with this section.
+   ```
+
+2. File Imports:
+
+   ```markdown
+   @import "python_best_practices.md"
+   @import "document.pdf" {page_no=1}
+   @import "code_sample.py" {line_begin=10 line_end=20}
+   ```
+
+3. Code Execution:
+
+   ```python {cmd=true}
+   import matplotlib.pyplot as plt
+   plt.plot([1, 2, 3, 4])
+   plt.title("Simple Plot")
+   plt.show()
+   ```
+
+4. Plotly Integration:
+
+   ```javascript {cmd=true element="<div id='plotly-graph'></div>"}
+   var GRAPH = document.getElementById("plotly-graph");
+   Plotly.newPlot(GRAPH, [
+     {
+       x: [1, 2, 3, 4],
+       y: [10, 15, 13, 17],
+       type: "scatter",
+     },
+   ]);
+   ```
+
+5. Slide Creation:
+
+   ```markdown
+   ---
+   presentation:
+     theme: serif
+   ---
+
+   # Slide 1
+
+   Content for slide 1
+
+   ---
+
+   # Slide 2
+
+   Content for slide 2
+   ```
+
+6. LaTeX Rendering:
+
+   ```latex {cmd=true}
+   \documentclass{article}
+    \begin{document}
+      \title{Sample Document}
+      \maketitle
+      Hello, world!
+   \end{document}
+   ```
+
+7. Front Matter:
+
+   ```markdown
+   ---
+   title: "My Document"
+   author: "John Doe"
+   date: "2024-03-15"
+    output:
+      custom_document:
+          path: /Exports/test.pdf
+          toc: true
+    pdf_document:
+      toc: true
+      toc_depth: 2
+    export_on_save:
+        pandoc: true
+   ---
+   ```
+
+8. Custom Configuration:
+
+   ```javascript
+   // In config.js (global or workspace)
+   ({
+     katexConfig: {
+       macros: {
+         "\\RR": "\\mathbb{R}",
+       },
+     },
+     mermaidConfig: {
+       theme: "forest",
+     },
+   });
+   ```
+
+9. Custom Styling:
+
+   ```less
+   /* In my-style.less */
+   .markdown-preview {
+     h1 {
+       color: #4a4a4a;
+       border-bottom: 2px solid #4a4a4a;
+     }
+   }
+
+   /* In markdown file */
+   @import "my-style.less";
+   ```
+
+10. Math Macros:
+
+    ```markdown
+    $\newcommand{\vec}[1]{\mathbf{#1}}$
+
+    Now we can use our new macro:
+    $\vec{v} = (x, y, z)$
+    ```
+
+These examples demonstrate the diverse capabilities of the Markdown Preview Enhanced extension, showcasing its power in creating rich, interactive documents with advanced formatting, code execution, and mathematical typesetting.
+{% endraw %}
