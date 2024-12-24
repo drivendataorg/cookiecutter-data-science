@@ -1,5 +1,9 @@
 version = 1
 requires-python = ">=3.8"
+resolution-markers = [
+    "python_full_version >= '3.9'",
+    "python_full_version < '3.9'",
+]
 
 [[package]]
 name = "arrow"
@@ -185,7 +189,7 @@ wheels = [
 
 [[package]]
 name = "gatlens-opinionated-template"
-version = "0.0.3"
+version = "0.0.4"
 source = { editable = "." }
 dependencies = [
     { name = "click" },

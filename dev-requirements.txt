@@ -19,3 +19,4 @@ twine
 virtualenvwrapper; sys_platform != 'win32'
 virtualenvwrapper-win; sys_platform == 'win32'
 uv
+pytest-watcher

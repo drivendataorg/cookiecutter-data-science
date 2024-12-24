@@ -7,7 +7,7 @@ name = "ccds"
 
 [project]
 name = "gatlens-opinionated-template"
-version = "0.0.3"
+version = "0.0.4"
 description = "A modern, opinionated full-stack CookieCutter project template that prioritizes developer experience and cutting-edge tools."
 authors = [
   { name = "Gatlen Culp", email = "GatlenCulp@gmail.com" },

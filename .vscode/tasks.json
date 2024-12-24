@@ -1,50 +1,27 @@
+// See https://gatlenculp.github.io/gatlens-opinionated-template/vscode/
+// for instructions on how to use these.
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    // Tasks file is approximately the same as the Makefile or Taskfile
-    // It just allows these to be run by vscode/cursor when a certain
-    // Action occurs in your IDE
-    // It's not neccessary but available if desired!
-    // Helpful for things like pytest watching
+    // ~ COLOR CONFIG ~
+    // build = terminal.ansiBlue     (📏 Format, build-related tasks)
+    // docs  = terminal.ansiGreen    (📄 Documentation tasks)
+    // tests = terminal.ansiRed      (⚗️ Testing, debug, linting tasks)
+    // misc  = terminal.ansiYellow   (💛 Welcome, utility tasks)
     "version": "2.0.0",
     "tasks": [
-        // ############
-        // ### MISC ###
-        // ############
-        {
-            "label": "💛 Show Welcome",
-            "type": "shell",
-            "command": "curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt",
-            "group": "none",
-            "icon": {
-                "id": "heart-filled",
-                "color": "terminal.ansiYellow"
-            },
-            "runOptions": {
-                "runOn": "folderOpen"
-            },
-            "presentation": {
-                "reveal": "always",
-                "panel": "dedicated"
-            },
-            "problemMatcher": []
-        },
-        // ################# MAKE COMMANDS LINKED BELOW #################
-        // 
         // ####################
         // ### DEV COMMANDS ###
         // ####################
         {
-            "label": "✅ [Makefile] Lint Project",
+            "label": "[Makefile] Build Lint ✅",
+            "detail": "",
             "type": "shell",
             "command": "make lint",
             "group": {
-                "kind": "test",
-                "isDefault": false
+                "kind": "test"
             },
             "icon": {
-                "id": "check-all",
-                "color": "terminal.ansiGreen"
+                "id": "check",
+                "color": "terminal.ansiBlue"
             },
             "presentation": {
                 "reveal": "always",
@@ -52,7 +29,8 @@
             }
         },
         {
-            "label": "📏 [Makefile] Format Project",
+            "label": "[Makefile] Build Format 📏",
+            "detail": "",
             "type": "shell",
             "command": "make format",
             "group": "build",
@@ -65,33 +43,57 @@
                 "panel": "shared"
             }
         },
-        // ############
-        // ### DOCS ###
-        // ############
         {
-            "label": "📄 [Makefile] Serve Documentation Locally",
+            "label": "[Makefile] Build + Publish All 📦 (⇧ ⌘ B)",
+            "detail": "",
             "type": "shell",
-            "command": "make uv-docs-serve",
-            "group": "none",
+            "command": "make publish-all",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "icon": {
-                "id": "book",
-                "color": "terminal.ansiCyan"
+                "id": "package",
+                "color": "terminal.ansiBlue"
             },
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
+            }
+        },
+        // ############
+        // ### DOCS ###
+        // ############
+        {
+            "label": "[Makefile] Docs Serve 📄",
+            "detail": "",
+            "type": "shell",
+            "command": "make docs-serve",
+            "group": "none",
+            "icon": {
+                "id": "debug-rerun",
+                "color": "terminal.ansiGreen"
+            },
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            },
+            "runOptions": {
+                "runOn": "folderOpen",
+                "instanceLimit": 1
             },
             "isBackground": true,
             "problemMatcher": []
         },
         {
-            "label": "📕 [Makefile] Build & Deploy Docs",
+            "label": "[Makefile] Docs Publish 📕",
+            "detail": "",
             "type": "shell",
-            "command": "make uv-docs-deploy",
-            "group": "none",
+            "command": "make docs-publish",
+            "group": "build",
             "icon": {
                 "id": "book",
-                "color": "terminal.ansiCyan"
+                "color": "terminal.ansiGreen"
             },
             "presentation": {
                 "reveal": "always",
@@ -104,13 +106,17 @@
         // ### TESTS ###
         // #############
         {
-            "label": "⚗️ [Makefile] Run Tests",
+            "label": "[Makefile] Test All ⚗️",
+            "detail": "",
             "type": "shell",
             "command": "make test",
-            "group": "test",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
             "icon": {
                 "id": "beaker",
-                "color": "terminal.ansiMagenta"
+                "color": "terminal.ansiRed"
             },
             "presentation": {
                 "reveal": "always",
@@ -118,13 +124,14 @@
             }
         },
         {
-            "label": "🧪 [Makefile] Run Quick Tests",
+            "label": "[Makefile] Test Quick 🧪",
+            "detail": "",
             "type": "shell",
             "command": "make test-fastest",
             "group": "test",
             "icon": {
                 "id": "zap",
-                "color": "terminal.ansiYellow"
+                "color": "terminal.ansiRed"
             },
             "presentation": {
                 "reveal": "always",
@@ -132,7 +139,27 @@
             }
         },
         {
-            "label": "🪲 [Makefile] Debug Last Failed Test",
+            "label": "[Makefile] Test Continuous 👀",
+            "detail": "",
+            "type": "shell",
+            "command": "make test-continuous",
+            "group": "test",
+            "icon": {
+                "id": "debug-rerun",
+                "color": "terminal.ansiRed"
+            },
+            "runOptions": {
+                "runOn": "folderOpen",
+                "instanceLimit": 1
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "[Makefile] Test Debug 🪲",
+            "detail": "",
             "type": "shell",
             "command": "make test-debug-last",
             "group": "test",
@@ -145,5 +172,27 @@
                 "panel": "shared"
             }
         },
-    ]
+        // ##############
+        // ### VSCode ###
+        // ##############
+        {
+            "label": "[VSCode] Print Welcome 💛",
+            "detail": "",
+            "type": "shell",
+            "command": "curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt",
+            "group": "none",
+            "icon": {
+                "id": "heart-filled",
+                "color": "terminal.ansiYellow"
+            },
+            "runOptions": {
+                "runOn": "folderOpen",
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "problemMatcher": []
+        },
+    ],
 }
