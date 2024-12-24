@@ -42,13 +42,52 @@ gotem = "ccds.__main__:main"
 "Source Code" = "https://github.com/GatlenCulp/gatlens-opinionated-template"
 "Documentation" = "https://gatlenculp.github.io/gatlens-opinionated-template/"
 
+[tool.ruff]
+cache-dir = ".cache/ruff"
+line-length = 100
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+# TODO: Different groups of linting styles depending on code use.
+select = ["ALL"]
+ignore = [] # Add ignores as needed
+
+
+[tool.ruff.lint.isort]
+known-first-party = ["{{ cookiecutter.module_name }}"]
+force-sort-within-sections = true
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"] # Allow unused imports in __init__.py
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 99
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
 [tool.pytest.ini_options]
 addopts = """
--vv
---color=no
+--tb=long
+--code-highlight=yes
 """
 
-# [[tool.uv.index]]
-# name = "gatlens-opinionated-template"
-# url = "https://test.pypi.org/simple/"
-# publish-url = "https://test.pypi.org/legacy/"
+testpaths = ["tests"]
+log_file = "./logs/pytest.log"
+
+
+[tool.pydoclint]
+style = "google"
+arg-type-hints-in-docstring = false
+check-return-types = true
+exclude = '\.venv'
+
+[tool.pyright]
+include = ["."]

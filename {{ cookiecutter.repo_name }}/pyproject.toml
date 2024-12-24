@@ -186,6 +186,7 @@ addopts = """
 --code-highlight=yes
 """
 
+testpaths = ["tests"]
 log_file = "./logs/pytest.log"
 
 

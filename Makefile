@@ -20,6 +20,10 @@ _welcome: ## Print a Welcome screen
 
 ###     DEV COMMANDS
 
+clean: _prep
+	find . -type f -name "*.py[co]" -delete
+	find . -type d -name "__pycache__" -delete
+
 create_environment: ## Create a new conda environment with Python $(PYTHON_VERSION) (Not really used)
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
