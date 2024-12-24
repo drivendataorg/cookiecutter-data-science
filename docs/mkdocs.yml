@@ -1,5 +1,5 @@
 site_name: Gatlen's Opinionated Template (GOTem)
-site_description: A modern, opinionated full-stack CookieCutter project template that prioritizes developer experience and cutting-edge tools. Built on (and synced with) the foundation of CookieCutter Data Science (CCDS) V2, this template incorporates carefully selected defaults, dependency stack, customizations, and contemporary best practices for Python development, research projects, and academic work.
+site_description: Cutting-edge, opinionated, and ambitious project builder for power users and researchers.
 site_url: https://gatlenculp.github.io/gatlens-opinionated-template/
 repo_url: https://github.com/GatlenCulp/gatlens-opinionated-template
 edit_uri: edit/master/docs/docs
@@ -19,15 +19,15 @@ theme:
     text: Work Sans
     code: Space Mono
 nav:
-  - 🏠 Home: index.md
-  - 🛠️ Core Tools: core-tools.md
-  - 💻 VSCode & Cursor: vscode.md
-  - ❓ Why gotem?: why.md
-  - 🗯️ Opinions: opinions.md
-  - 📑 Using the template: using-the-template.md
-  - ⚙️ All options: all-options.md
-  - ❤️ Contributing: contributing.md
-  - 🔗 Related projects: related.md
+  - 🏠 Home: index.md                       # Project overview, quickstart guide, and complete directory structure walkthrough
+  - 🛠️ Core Tools: core-tools.md            # Comprehensive breakdown of all core tools (IDE, Docker, AWS, etc.) and Python dependencies with explanations
+  - 💻 VSCode & Cursor: vscode.md           # Detailed guide to workspace configuration, debug profiles, recommended extensions, and AI integration
+  - ❓ Why gotem?: why.md                   # Discussion of code quality, project organization, and reproducibility benefits
+  - 🗯️ Opinions: opinions.md                # Core principles about data hygiene, notebooks, modeling, and environment management
+  - 📑 Using the template: using-the-template.md  # Step-by-step guide on how to use the template
+  - ⚙️ All options: all-options.md          # List of available command-line options and configuration choices
+  - ❤️ Contributing: contributing.md         # Guidelines for contributing to the project
+  - 🔗 Related projects: related.md         # References to similar R projects and acknowledgments of inspirational templates
 extra:
   analytics:
     provider: google

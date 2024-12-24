@@ -143,7 +143,7 @@ web = [  # Web development and scraping
 [tool.uv]
 default-groups = ["dev", "data", "nb"]
 
-# TODO
+
 # [project.urls]
 # Homepage = "https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/"
 # Repository = "https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}"

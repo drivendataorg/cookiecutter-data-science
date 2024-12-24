@@ -314,4 +314,9 @@ All of the default Makefile tasks have been embedded in tasks.json for further c
 
 The `.cursorrules` file defined in this project adapts to your settings, and lists best practices as well as stylistic choices.
 
-You can find other templates for cursor rules files across the internet, a popular one being [this list](https://github.com/PatrickJS/awesome-cursorrules)
+You can find other templates for cursor rules files across the internet, a popular one being [this list](https://github.com/PatrickJS/awesome-cursorrules).
+
+More info on the rules [here](https://medium.com/@ashinno43/what-are-cursor-rules-and-how-to-use-them-ec558468d139)
+
+To use this file you first need to enable it:
+1. 
