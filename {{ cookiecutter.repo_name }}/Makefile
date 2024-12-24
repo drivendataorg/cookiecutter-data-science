@@ -16,7 +16,7 @@ PYTHON_INTERPRETER = uv python
 # COMMANDS                                                                      #
 #################################################################################
 
-{%- if cookiecutter.dependency_file != 'none' %}
+{% if cookiecutter.dependency_file != 'none' %}
 ## Install Python Dependencies
 .PHONY: requirements
 requirements:
@@ -41,7 +41,6 @@ clean:
 .PHONY: lint
 lint:
 	ruff check --config pyproject.toml {{ cookiecutter.module_name }}
-	
 {#
 # TODO: Add prettier support
 # prettier --check {{ cookiecutter.module_name }}
@@ -49,7 +48,6 @@ lint:
 # TODO: Add pyright support	
 # pyright {{ cookiecutter.module_name }}
 #}
-
 ## Format source code with black
 .PHONY: format
 format:
@@ -81,9 +79,9 @@ sync_data_up:
 	{%- elif cookiecutter.dataset_storage.gcs -%}
 	gsutil -m rsync -r data/ gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/
 	{%- endif -%}
-{%- endif -%}
+{%- endif %}
 
-{%- if cookiecutter.environment_manager != 'none' %}
+{% if cookiecutter.environment_manager != 'none' %}
 ## Set up python interpreter environment
 .PHONY: create_environment
 create_environment:
@@ -105,7 +103,6 @@ create_environment:
 	@echo ">>> New virtualenv with uv created."
 	{%- endif %}
 {%- endif %}
-
 
 #################################################################################
 # PROJECT RULES                                                                 #
