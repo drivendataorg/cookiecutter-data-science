@@ -118,7 +118,6 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         str(OUT_DIR / "features"),
         str(OUT_DIR / "reports" / "figures"),
         "notebooks",
-        # "references",
         str(OUT_DIR / "reports"),
         config["module_name"],
     ]
@@ -134,7 +133,6 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         expected_dirs += ["docs/docs"]
 
     expected_dirs = [
-        #  (root / d).resolve().relative_to(root) for d in expected_dirs
         Path(d)
         for d in expected_dirs
     ]
@@ -163,7 +161,6 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         str(CCDS_ORIGINAL_DIR / "README.md"),
         "README.md",
         "pyproject.toml",
-        # "setup.cfg",
         ".gitignore",
         ".devcontainer/devcontainer.json",
         ".devcontainer/postCreateCommand.sh",
@@ -190,12 +187,8 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         "secrets/schema/ssh/example.config.ssh",
         "secrets/schema/ssh/example.something.key",
         "secrets/schema/ssh/example.something.pub",
-        # "references/.gitkeep",
         str(VSCODE_CONFIG_DIR / f"{config['repo_name']}.code-workspace"),
         str(VSCODE_CONFIG_DIR / f"{config['repo_name']}.team.code-workspace"),
-        # str(VSCODE_CONFIG_DIR / "launch.json"),
-        # str(VSCODE_CONFIG_DIR / "settings.json"),
-        # str(VSCODE_CONFIG_DIR / "tasks.json"),
         str(OUT_DIR / "reports" / ".gitkeep"),
         str(OUT_DIR / "features" / ".gitkeep"),
         str(OUT_DIR / "reports" / "figures" / ".gitkeep"),
