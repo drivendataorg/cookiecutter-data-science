@@ -13,7 +13,7 @@
         // ####################
         {
             "label": "[Makefile] Build Lint ✅",
-            "detail": "",
+            "detail": "Run linting checks with flake8, isort, and black",
             "type": "shell",
             "command": "make lint",
             "group": {
@@ -30,7 +30,7 @@
         },
         {
             "label": "[Makefile] Build Format 📏",
-            "detail": "",
+            "detail": "Format code using isort and black",
             "type": "shell",
             "command": "make format",
             "group": "build",
@@ -45,7 +45,7 @@
         },
         {
             "label": "[Makefile] Build + Publish All 📦 (⇧ ⌘ B)",
-            "detail": "",
+            "detail": "Run format, lint, publish package and docs",
             "type": "shell",
             "command": "make publish-all",
             "group": {
@@ -66,7 +66,7 @@
         // ############
         {
             "label": "[Makefile] Docs Serve 📄",
-            "detail": "",
+            "detail": "Serve documentation locally on port 8000",
             "type": "shell",
             "command": "make docs-serve",
             "group": "none",
@@ -87,7 +87,7 @@
         },
         {
             "label": "[Makefile] Docs Publish 📕",
-            "detail": "",
+            "detail": "Build and deploy documentation to GitHub Pages",
             "type": "shell",
             "command": "make docs-publish",
             "group": "build",
@@ -107,7 +107,7 @@
         // #############
         {
             "label": "[Makefile] Test All ⚗️",
-            "detail": "",
+            "detail": "Run all tests",
             "type": "shell",
             "command": "make test",
             "group": {
@@ -125,7 +125,7 @@
         },
         {
             "label": "[Makefile] Test Quick 🧪",
-            "detail": "",
+            "detail": "Run tests with fail-fast option",
             "type": "shell",
             "command": "make test-fastest",
             "group": "test",
@@ -140,7 +140,7 @@
         },
         {
             "label": "[Makefile] Test Continuous 👀",
-            "detail": "",
+            "detail": "Run tests in watch mode using pytest-watcher",
             "type": "shell",
             "command": "make test-continuous",
             "group": "test",
@@ -159,7 +159,7 @@
         },
         {
             "label": "[Makefile] Test Debug 🪲",
-            "detail": "",
+            "detail": "Debug last failed test with pdb",
             "type": "shell",
             "command": "make test-debug-last",
             "group": "test",
@@ -176,8 +176,8 @@
         // ### VSCode ###
         // ##############
         {
-            "label": "[Makefile] Misc Welcome 💛",
-            "detail": "",
+            "label": "[VSCode] Startup Welcome 💛",
+            "detail": "Print a Welcome screen",
             "type": "shell",
             "command": "make _welcome",
             "group": "none",
@@ -187,6 +187,7 @@
             },
             "runOptions": {
                 "runOn": "folderOpen",
+                "instanceLimit": 1
             },
             "presentation": {
                 "reveal": "always",

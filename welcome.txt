@@ -9,16 +9,6 @@
 A cutting-edge, opinionated, and ambitious project builder 
 for power users and researchers.
 
-📦 Quick Start
-  make init          # Initialize project
-  make test         # Run tests
-  make docs         # Generate documentation
-
-⌨️  Keyboard Shortcuts
-  Ctrl+Shift+B     # Build project
-  Ctrl+Shift+T     # Run tests
-  F5               # Start debugging
-
 📚 Resources
   • Docs:    https://gatlenculp.github.io/gatlens-opinionated-template/
   • Issues:  https://github.com/GatlenCulp/gatlens-opinionated-template/issues
