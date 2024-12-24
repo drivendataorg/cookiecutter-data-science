@@ -30,9 +30,12 @@ publish: ## Build and publish package
 	uv publish || \
 	echo "\nProject of current version may already exist. Have you tried increasing version number?"
 
-## Install Python Dependencies (switched to uv)
-requirements: ## Install Python dependencies using uv
-	uv pip install -r dev-requirements.txt
+# ## Install Python Dependencies (switched to uv)
+# requirements: ## Install Python dependencies using uv
+# 	uv pip install -r dev-requirements.txt
+
+requirements: ## Install Python dependencies
+	pip install -r dev-requirements.txt
 
 ## Format the code using isort and black
 format: ## Format code using isort and black
