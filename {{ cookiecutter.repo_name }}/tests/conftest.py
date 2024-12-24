@@ -1,4 +1,7 @@
-"""This file is automatically called by PyTest to configure fixtures and such."""
+"""Configure pytest fixtures and settings for all tests.
+
+This module contains shared fixtures that are automatically available to all test files.
+"""
 from pathlib import Path
 
 import pytest
