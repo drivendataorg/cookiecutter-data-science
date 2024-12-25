@@ -62,14 +62,14 @@ lint: ## Run linting checks with flake8, isort, and black
 # Switched to using uv
 docs-serve: ## Serve documentation locally on port $(DOCS_PORT)
 	cd docs && \
-	uv run mkdocs serve -a localhost:$(DOCS_PORT) || \
+	mkdocs serve -a localhost:$(DOCS_PORT) || \
 	echo "\n\nInstance found running on $(DOCS_PORT), try killing process and rerun."
 
 # Makes sure docs can be served prior to actually deploying
 docs-publish: ## Build and deploy documentation to GitHub Pages
 	cd docs && \
-	uv run mkdocs build && \
-	uv run mkdocs gh-deploy --clean
+	mkdocs build && \
+	mkdocs gh-deploy --clean
 
 ###     PUBLISH ALL (Docs & Project)
 publish-all: format lint publish docs-publish ## Run format, lint, publish package and docs
@@ -77,20 +77,20 @@ publish-all: format lint publish docs-publish ## Run format, lint, publish packa
 ###     TESTS
 
 test: _prep ## Run all tests (Use ARGS="..." for additional pytest arguments)
-	uv run pytest -vvv --durations=0 $(ARGS)
+	pytest -vvv --durations=0 $(ARGS)
 
 test-specific: _prep ## Run specific config (Usage: make test-config ENV=uv DEP=none DOCS=mkdocs)
-	uv run pytest -vvv -k "$(ENV)-$(DEP)-$(DOCS)" $(ARGS)
+	pytest -vvv -k "$(ENV)-$(DEP)-$(DOCS)" $(ARGS)
 
 test-fastest: _prep ## Run tests with fail-fast option
-	uv run pytest -vvv -FFF
+	pytest -vvv -FFF
 
 # Requires pytest-watcher (Continuous Testing for Fast Tests)
 test-continuous: _prep ## Run tests in watch mode using pytest-watcher
-	uv run ptw . --now --runner pytest --config-file pyproject.toml -vvv -FFF
+	ptw . --now --runner pytest --config-file pyproject.toml -vvv -FFF
 
 test-debug-last: ## Debug last failed test with pdb
-	uv run pytest --lf --pdb
+	pytest --lf --pdb
 
 test-gh-actions: lint ## Tests github actions with act if installed. Takes a while.
 	act --job tests-specific --input expression=pipenv-Pipfile --input os=ubuntu-latest
@@ -117,5 +117,6 @@ help:  ## Show this help message
 	@echo " | |  _| | | || |/ _ \ '_ \` _ \ "
 	@echo " | |_| | |_| || |  __/ | | | | |"
 	@echo "  \____|\___/ |_|\___|_| |_| |_|\033[0m"
+	@echo "\n(Make sure to activate virtual environment)\n"
 	@echo "\n\033[1m~ Available rules: ~\033[0m\n"
 	@grep -E '^[a-zA-Z][a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[38;5;222m%-30s\033[0m %s\n", $$1, $$2}'
