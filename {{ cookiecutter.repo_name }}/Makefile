@@ -55,7 +55,6 @@ create_environment: ## Set up python interpreter environment
 requirements: ## Install Python Dependencies
 	{%- if cookiecutter.environment_manager == 'uv' %}
 	uv sync
-	uv pip install -e .
 	{% elif "requirements.txt" == cookiecutter.dependency_file -%}
 	$(PYTHON_INTERPRETER) -m pip install -U pip
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt

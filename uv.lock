@@ -298,31 +298,6 @@ dependencies = [
     { name = "cookiecutter" },
 ]
 
-[package.optional-dependencies]
-dev = [
-    { name = "ansi2html" },
-    { name = "black" },
-    { name = "build" },
-    { name = "chardet" },
-    { name = "flake8" },
-    { name = "isort" },
-    { name = "mkdocs" },
-    { name = "mkdocs-gen-files" },
-    { name = "mkdocs-include-markdown-plugin" },
-    { name = "mkdocs-material" },
-    { name = "pexpect" },
-    { name = "pipenv" },
-    { name = "pre-commit" },
-    { name = "pytest" },
-    { name = "pytest-watcher" },
-    { name = "ruff" },
-    { name = "termynal" },
-    { name = "twine" },
-    { name = "uv" },
-    { name = "virtualenvwrapper", marker = "sys_platform != 'win32'" },
-    { name = "virtualenvwrapper-win", marker = "sys_platform == 'win32'" },
-]
-
 [package.dev-dependencies]
 dev = [
     { name = "ansi2html" },
@@ -351,29 +326,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ansi2html", marker = "extra == 'dev'" },
-    { name = "black", marker = "extra == 'dev'" },
-    { name = "build", marker = "extra == 'dev'" },
-    { name = "chardet", marker = "extra == 'dev'" },
-    { name = "click" },
-    { name = "cookiecutter" },
-    { name = "flake8", marker = "extra == 'dev'" },
-    { name = "isort", marker = "extra == 'dev'" },
-    { name = "mkdocs", marker = "extra == 'dev'" },
-    { name = "mkdocs-gen-files", marker = "extra == 'dev'" },
-    { name = "mkdocs-include-markdown-plugin", marker = "extra == 'dev'" },
-    { name = "mkdocs-material", marker = "extra == 'dev'" },
-    { name = "pexpect", marker = "extra == 'dev'" },
-    { name = "pipenv", marker = "extra == 'dev'" },
-    { name = "pre-commit", marker = "extra == 'dev'" },
-    { name = "pytest", marker = "extra == 'dev'" },
-    { name = "pytest-watcher", marker = "extra == 'dev'" },
-    { name = "ruff", marker = "extra == 'dev'" },
-    { name = "termynal", marker = "extra == 'dev'" },
-    { name = "twine", marker = "extra == 'dev'" },
-    { name = "uv", marker = "extra == 'dev'" },
-    { name = "virtualenvwrapper", marker = "sys_platform != 'win32' and extra == 'dev'" },
-    { name = "virtualenvwrapper-win", marker = "sys_platform == 'win32' and extra == 'dev'" },
+    { name = "click", specifier = ">=8.1.0" },
+    { name = "cookiecutter", specifier = ">=2.6.0" },
 ]
 
 [package.metadata.requires-dev]

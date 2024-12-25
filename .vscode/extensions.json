@@ -25,6 +25,7 @@
 		"ms-vscode-remote.remote-containers", // Remote Connect to Docker
 		"ms-vscode-remote.remote-ssh", // Remote Connect via SSH
 		"ms-vscode-remote.remote-ssh-edit", // SSH Config File Editing
+		"exiasr.hadolint", // Dockerfile linter
 
 		// Document Formats & Preview
 		"mathematic.vscode-pdf", // PDF Preview
@@ -77,7 +78,8 @@
 		// Output & Debugging
 		"ibm.output-colorizer", // Automatically color-code VSCode Output logs
 		"usernamehw.errorlens",
-		"spmeesseman.vscode-taskexplorer" // Highlight errors in-line
+		"spmeesseman.vscode-taskexplorer",
+		"ms-azuretools.vscode-docker" // Highlight errors in-line
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
 	"unwantedRecommendations": [

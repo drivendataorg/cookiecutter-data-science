@@ -32,32 +32,7 @@ classifiers = [
 # Using 3.10 to ensure compatability
 # requires-python = ">=3.8,<3.13"
 requires-python = ">=3.10,<3.11"
-dependencies = ["click", "cookiecutter"]
-
-[project.optional-dependencies]
-dev = [
-  "ansi2html",
-  "black",
-  "build",
-  "chardet",
-  "flake8",
-  "isort",
-  "mkdocs",
-  "mkdocs-material",
-  "mkdocs-gen-files",
-  "mkdocs-include-markdown-plugin",
-  "pexpect",
-  "pipenv",
-  "pre-commit",
-  "pytest",
-  "pytest-watcher",
-  "ruff",
-  "termynal",
-  "twine",
-  "virtualenvwrapper; sys_platform != 'win32'",
-  "virtualenvwrapper-win; sys_platform == 'win32'",
-  "uv",
-]
+dependencies = ["click>=8.1.0", "cookiecutter>=2.6.0"]
 
 [project.scripts]
 gotem = "ccds.__main__:main"
@@ -130,7 +105,7 @@ addopts = """
 --color=yes
 """
 
-testpaths = ["tests"]
+testpaths = ["./tests"]
 log_file = "./logs/pytest.log"
 
 
@@ -142,6 +117,7 @@ exclude = '\.venv'
 
 [tool.pyright]
 include = ["."]
+
 
 [tool.uv.sources]
 gatlens-opinionated-template = { workspace = true }

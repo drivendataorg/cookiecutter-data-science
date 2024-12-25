@@ -53,6 +53,8 @@ Add the object below to your projects.json file to add this project
       "ms-vscode-remote.remote-containers", // Remote Connect to Docker
       "ms-vscode-remote.remote-ssh", // Remote Connect via SSH
       "ms-vscode-remote.remote-ssh-edit", // SSH Config File Editing
+      "exiasr.hadolint", // Dockerfile linter
+      "ms-azuretools.vscode-docker", // Docker management
   
       // Document Formats & Preview
       "mathematic.vscode-pdf", // PDF Preview
