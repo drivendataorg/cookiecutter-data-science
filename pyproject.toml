@@ -29,7 +29,9 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-requires-python = ">=3.8,<3.13"
+# Using 3.10 to ensure compatability
+# requires-python = ">=3.8,<3.13"
+requires-python = ">=3.10,<3.11"
 dependencies = ["click", "cookiecutter"]
 
 [project.optional-dependencies]
@@ -63,6 +65,33 @@ gotem = "ccds.__main__:main"
 [project.urls]
 "Source Code" = "https://github.com/GatlenCulp/gatlens-opinionated-template"
 "Documentation" = "https://gatlenculp.github.io/gatlens-opinionated-template/"
+
+[dependency-groups]
+dev = [
+    "ansi2html>=1.9.2",
+    "black>=24.8.0",
+    "build>=1.2.2.post1",
+    "chardet>=5.2.0",
+    "flake8>=5.0.4",
+    "gatlens-opinionated-template",
+    "isort>=5.13.2",
+    "mkdocs>=1.6.1",
+    "mkdocs-gen-files>=0.5.0",
+    "mkdocs-include-markdown-plugin>=6.2.2",
+    "mkdocs-material>=9.5.49",
+    "pexpect>=4.9.0",
+    "pipenv>=2024.4.0",
+    "pre-commit>=3.5.0",
+    "pytest>=8.3.4",
+    "pytest-sugar>=1.0.0",
+    "pytest-watcher>=0.4.3",
+    "ruff>=0.8.4",
+    "termynal>=0.2.0",
+    "twine>=6.0.1",
+    "uv>=0.5.11",
+    "virtualenvwrapper>=6.1.1 ; sys_platform != 'win32'",
+    "virtualenvwrapper-win>=1.2.7 ; sys_platform == 'win32'",
+]
 
 [tool.ruff]
 cache-dir = ".cache/ruff"
@@ -114,3 +143,6 @@ exclude = '\.venv'
 
 [tool.pyright]
 include = ["."]
+
+[tool.uv.sources]
+gatlens-opinionated-template = { workspace = true }

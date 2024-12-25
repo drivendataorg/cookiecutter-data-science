@@ -31,7 +31,7 @@ dependencies = [
 ai-apps = [  # AI application development packages
     "ell-ai>=0.0.15",        # AI toolkit
     "langchain>=0.3.12",     # LLM application framework
-    "megaparse>=0.0.45",     # Advanced text parsing
+    # "megaparse>=0.0.45",     # Advanced text parsing (TODO: Requires Python 3.10+)
 ]
 ai-train = [  # Machine learning and model training packages
     "datasets>=3.1.0",           # Dataset handling
@@ -56,7 +56,7 @@ cli = [  # Command-line interface tools
     "typer>=0.15.1",            # CLI builder
 ]
 cloud = [  # Cloud infrastructure tools
-    "ansible>=11.1.0",          # Infrastructure automation
+    # "ansible>=11.1.0",         # Infrastructure automation (# TODO: Doesn't work for Python 3.10)
     "boto3>=1.35.81",          # AWS SDK
 ]
 config = [  # Configuration management
@@ -138,7 +138,7 @@ web = [  # Web development and scraping
     "requests>=2.32.3",        # HTTP client
     "scrapy>=2.12.0",          # Web scraping
     "uvicorn>=0.33.0",         # ASGI server
-    "zrok>=0.4.42",            # Tunnel service
+    # "zrok>=0.4.42",            # Tunnel service (# TODO: Requires 3.10+)
 ]
 
 [tool.uv]

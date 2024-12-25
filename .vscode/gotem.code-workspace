@@ -38,7 +38,7 @@
 			"**/.pytest_cache": true,
 			"**/docker": false,
 			"**/venv": false,
-			"**/.venv": true,
+			"**/.venv": false,
 			"**/tests": false,
 			"**/scripts": false,
 			"**/logs": false,
@@ -60,7 +60,7 @@
 			"**/*.synctex.gz*": false,
 			"**/.history": true,
 			"**/.ruff_cache": true,
-			"Icon": true,
+			"Icon": true
 		},
 		"explorerExclude.backup": {},
 		"autoHide.autoHideAuxiliaryBar": true,
