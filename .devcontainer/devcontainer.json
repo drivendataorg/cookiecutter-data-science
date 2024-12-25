@@ -9,9 +9,11 @@
     "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
   },
   "remoteEnv": {
-    "UV_FROZEN": "true",
+    // "UV_FROZEN": "true",
     "UV_PYTHON_PREFERENCE": "only-managed",
-    "UV_PROJECT_ENVIRONMENT": "${containerWorkspaceFolder}/.devcontainer/.venv"
+    "UV_PROJECT_ENVIRONMENT": "${containerWorkspaceFolder}/.devcontainer/.venv",
+    "VIRTUAL_ENV": "${containerWorkspaceFolder}/.devcontainer/.venv",
+    "PATH": "${containerWorkspaceFolder}/.devcontainer/.venv/bin:${env:PATH}"
   },
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/postCreateCommand.sh",
