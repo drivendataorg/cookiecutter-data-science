@@ -31,7 +31,11 @@ classifiers = [
 ]
 # Using 3.10 to ensure compatability
 requires-python = ">=3.10,<3.11"
-dependencies = ["click>=8.1.0", "cookiecutter>=2.6.0"]
+dependencies = [
+    "click>=8.1.0",
+    "cookiecutter>=2.6.0",
+    "ipykernel>=6.29.5",
+]
 
 [project.scripts]
 gotem = "ccds.__main__:main"
