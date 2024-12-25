@@ -1,4 +1,7 @@
 // Team VSCode Workspace Configuration
+// NOTE: `Dev Containers: Reopen in container does not work w/ workspace files`
+// Instead use `Dev Containers: Open folder in container` or run the task
+// Additionally, OrbStack is a good drop-in replacement for Docker.
 /*
 Add the object below to your projects.json file to add this project
 '~/Library/Application Support/Cursor/User/globalStorage/alefragnani.project-manager/projects.json'

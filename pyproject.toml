@@ -1,5 +1,5 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
+requires = ["flit_core >=3.2,<3.13"]
 build-backend = "flit_core.buildapi"
 
 [tool.flit.module]
@@ -29,10 +29,32 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-requires-python = ">=3.8"
-dependencies = [
-  "click",
-  "cookiecutter",
+requires-python = ">=3.8,<3.13"
+dependencies = ["click", "cookiecutter"]
+
+[project.optional-dependencies]
+dev = [
+  "ansi2html",
+  "black",
+  "build",
+  "chardet",
+  "flake8",
+  "isort",
+  "mkdocs",
+  "mkdocs-material",
+  "mkdocs-gen-files",
+  "mkdocs-include-markdown-plugin",
+  "pexpect",
+  "pipenv",
+  "pre-commit",
+  "pytest",
+  "pytest-watcher",
+  "ruff",
+  "termynal",
+  "twine",
+  "virtualenvwrapper; sys_platform != 'win32'",
+  "virtualenvwrapper-win; sys_platform == 'win32'",
+  "uv",
 ]
 
 [project.scripts]
@@ -50,7 +72,7 @@ extend-include = ["*.ipynb"]
 [tool.ruff.lint]
 # TODO: Different groups of linting styles depending on code use.
 select = ["ALL"]
-ignore = [] # Add ignores as needed
+ignore = []      # Add ignores as needed
 
 
 [tool.ruff.lint.isort]

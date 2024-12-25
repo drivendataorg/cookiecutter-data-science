@@ -7,13 +7,13 @@ from typing import Any
 
 from conftest import bake_project
 
-BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
+BASH_EXECUTABLE = os.getenv('BASH_EXECUTABLE', 'bash')
 
 
 # GATLEN'S ADDED BITS #
-CCDS_ORIGINAL_DIR = Path(".ccds-original")
-VSCODE_CONFIG_DIR = Path(".vscode")
-OUT_DIR = Path("out")
+CCDS_ORIGINAL_DIR = Path('.ccds-original')
+VSCODE_CONFIG_DIR = Path('.vscode')
+OUT_DIR = Path('out')
 
 
 def _decode_print_stdout_stderr(result: CompletedProcess) -> tuple[str, str]:
@@ -29,13 +29,13 @@ def _decode_print_stdout_stderr(result: CompletedProcess) -> tuple[str, str]:
     encoding = sys.stdout.encoding
 
     if encoding is None:
-        encoding = "utf-8"
+        encoding = 'utf-8'
 
-    print("\n======================= STDOUT ======================")
+    print('\n======================= STDOUT ======================')
     stdout = result.stdout.decode(encoding)
     print(stdout)
 
-    print("\n======================= STDERR ======================")
+    print('\n======================= STDERR ======================')
     stderr = result.stderr.decode(encoding)
     print(stderr)
 
@@ -52,13 +52,13 @@ def no_curlies(filepath: Path) -> bool:
     Returns:
         True if no template strings found, False otherwise
     """
-    data = filepath.open("r", encoding="utf-8").read()
+    data = filepath.open('r', encoding='utf-8').read()
 
     template_strings = [
-        "{{ ",
-        " }}",
-        "{%",
-        "%}",
+        '{{ ',
+        ' }}',
+        '{%',
+        '%}',
     ]
 
     template_strings_in_file = [s in data for s in template_strings]
@@ -73,7 +73,7 @@ def test_baking_configs(config: dict[str, Any], fast: int) -> None:
         config: Configuration dictionary
         fast: Integer controlling test speed/depth
     """
-    print("using config", json.dumps(config, indent=2))
+    print('using config', json.dumps(config, indent=2))
     with bake_project(config) as project_directory:
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
@@ -94,52 +94,49 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
     expected_dirs = [
         str(CCDS_ORIGINAL_DIR),
         str(VSCODE_CONFIG_DIR),
-        ".",
-        ".devcontainer",
-        ".github",
-        ".github/actions",
-        ".github/actions/setup-python-env",
-        ".github/ISSUE_TEMPLATE",
-        ".github/workflows",
-        "data",
-        "data/external",
-        "data/interim",
-        "data/processed",
-        "data/raw",
-        "docs",
-        "logs",
-        "secrets",
-        "secrets/schema",
-        "secrets/schema/ssh",
-        "docker",
-        "tests",
+        '.',
+        '.devcontainer',
+        '.github',
+        '.github/actions',
+        '.github/actions/setup-python-env',
+        '.github/ISSUE_TEMPLATE',
+        '.github/workflows',
+        'data',
+        'data/external',
+        'data/interim',
+        'data/processed',
+        'data/raw',
+        'docs',
+        'logs',
+        'secrets',
+        'secrets/schema',
+        'secrets/schema/ssh',
+        'docker',
+        'tests',
         str(OUT_DIR),
-        str(OUT_DIR / "models"),
-        str(OUT_DIR / "features"),
-        str(OUT_DIR / "reports" / "figures"),
-        "notebooks",
-        str(OUT_DIR / "reports"),
-        config["module_name"],
+        str(OUT_DIR / 'models'),
+        str(OUT_DIR / 'features'),
+        str(OUT_DIR / 'reports' / 'figures'),
+        'notebooks',
+        str(OUT_DIR / 'reports'),
+        config['module_name'],
     ]
 
-    ignore_dirs = [".git", ".venv", "__pycache__"]
+    ignore_dirs = ['.git', '.venv', '__pycache__']
 
-    if config["include_code_scaffold"] == "Yes":
+    if config['include_code_scaffold'] == 'Yes':
         expected_dirs += [
             f"{config['module_name']}/modeling",
         ]
 
-    if config["docs"] == "mkdocs":
-        expected_dirs += ["docs/docs"]
+    if config['docs'] == 'mkdocs':
+        expected_dirs += ['docs/docs']
 
-    expected_dirs = [
-        Path(d)
-        for d in expected_dirs
-    ]
+    expected_dirs = [Path(d) for d in expected_dirs]
 
     existing_dirs = [
         d.resolve().relative_to(root)
-        for d in root.glob("**")
+        for d in root.glob('**')
         if d.is_dir()
         and not any(
             ignore_dir in d.relative_to(root).parts for ignore_dir in ignore_dirs
@@ -157,54 +154,54 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         config: Configuration dictionary
     """
     expected_files = [
-        "Makefile",
-        str(CCDS_ORIGINAL_DIR / "README.md"),
-        "README.md",
-        "pyproject.toml",
-        ".gitignore",
-        ".devcontainer/devcontainer.json",
-        ".devcontainer/postCreateCommand.sh",
-        ".github/pull_request_template.md",
-        ".github/actions/setup-python-env/action.yml",
-        ".github/ISSUE_TEMPLATE/bug_report.md",
-        ".github/ISSUE_TEMPLATE/feature_request.md",
-        ".github/ISSUE_TEMPLATE/general_question.md",
-        ".github/workflows/main.yml",
-        ".github/workflows/on-release-main.yml",
-        ".gitattributes",
-        "logs/.gitkeep",
-        "data/external/.gitkeep",
-        "data/interim/.gitkeep",
-        "data/processed/.gitkeep",
+        'Makefile',
+        str(CCDS_ORIGINAL_DIR / 'README.md'),
+        'README.md',
+        'pyproject.toml',
+        '.gitignore',
+        '.devcontainer/devcontainer.json',
+        '.devcontainer/postCreateCommand.sh',
+        '.github/pull_request_template.md',
+        '.github/actions/setup-python-env/action.yml',
+        '.github/ISSUE_TEMPLATE/bug_report.md',
+        '.github/ISSUE_TEMPLATE/feature_request.md',
+        '.github/ISSUE_TEMPLATE/general_question.md',
+        '.github/workflows/main.yml',
+        '.github/workflows/on-release-main.yml',
+        '.gitattributes',
+        'logs/.gitkeep',
+        'data/external/.gitkeep',
+        'data/interim/.gitkeep',
+        'data/processed/.gitkeep',
         f"docker/{config['repo_name']}.Dockerfile",
-        "data/raw/.gitkeep",
-        "docs/.gitkeep",
-        "tests/conftest.py",
-        "tests/test_main.py",
-        "notebooks/01_name_example.ipynb",
-        "notebooks/README.md",
-        "secrets/schema/example.env",
-        "secrets/schema/ssh/example.config.ssh",
-        "secrets/schema/ssh/example.something.key",
-        "secrets/schema/ssh/example.something.pub",
+        'data/raw/.gitkeep',
+        'docs/.gitkeep',
+        'tests/conftest.py',
+        'tests/test_main.py',
+        'notebooks/01_name_example.ipynb',
+        'notebooks/README.md',
+        'secrets/schema/example.env',
+        'secrets/schema/ssh/example.config.ssh',
+        'secrets/schema/ssh/example.something.key',
+        'secrets/schema/ssh/example.something.pub',
         str(VSCODE_CONFIG_DIR / f"{config['repo_name']}.code-workspace"),
         str(VSCODE_CONFIG_DIR / f"{config['repo_name']}.team.code-workspace"),
-        str(OUT_DIR / "reports" / ".gitkeep"),
-        str(OUT_DIR / "features" / ".gitkeep"),
-        str(OUT_DIR / "reports" / "figures" / ".gitkeep"),
-        str(OUT_DIR / "models" / ".gitkeep"),
-        "Taskfile.yml",
-        ".cursorrules",
+        str(OUT_DIR / 'reports' / '.gitkeep'),
+        str(OUT_DIR / 'features' / '.gitkeep'),
+        str(OUT_DIR / 'reports' / 'figures' / '.gitkeep'),
+        str(OUT_DIR / 'models' / '.gitkeep'),
+        'Taskfile.yml',
+        '.cursorrules',
         f"{config['module_name']}/__init__.py",
     ]
 
-    ignore_dirs = [".git", ".venv", "__pycache__"]
+    ignore_dirs = ['.git', '.venv', '__pycache__']
 
     # conditional files
-    if not config["open_source_license"].startswith("No license"):
-        expected_files.append("LICENSE")
+    if not config['open_source_license'].startswith('No license'):
+        expected_files.append('LICENSE')
 
-    if config["include_code_scaffold"] == "Yes":
+    if config['include_code_scaffold'] == 'Yes':
         expected_files += [
             f"{config['module_name']}/config.py",
             f"{config['module_name']}/dataset.py",
@@ -215,21 +212,21 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
             f"{config['module_name']}/plots.py",
         ]
 
-    if config["docs"] == "mkdocs":
+    if config['docs'] == 'mkdocs':
         expected_files += [
-            "docs/mkdocs.yml",
-            "docs/README.md",
-            "docs/docs/index.md",
-            "docs/docs/getting-started.md",
+            'docs/mkdocs.yml',
+            'docs/README.md',
+            'docs/docs/index.md',
+            'docs/docs/getting-started.md',
         ]
 
-    expected_files.append(config["dependency_file"])
+    expected_files.append(config['dependency_file'])
 
     expected_files = [Path(f) for f in expected_files]
 
     existing_files = [
         f.relative_to(root)
-        for f in root.glob("**/*")
+        for f in root.glob('**/*')
         if f.is_file()
         and not any(
             ignore_dir in f.relative_to(root).parts for ignore_dir in ignore_dirs
@@ -239,7 +236,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
     assert sorted(existing_files) == sorted(expected_files)
 
     for f in existing_files:
-        if f.name != ".cursorrules":
+        if f.name != '.cursorrules':
             assert no_curlies(root / f)
 
 
@@ -262,15 +259,15 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
     """
     test_path = Path(__file__).parent
 
-    if config["environment_manager"] == "conda":
-        harness_path = test_path / "conda_harness.sh"
-    elif config["environment_manager"] == "virtualenv":
-        harness_path = test_path / "virtualenv_harness.sh"
-    elif config["environment_manager"] == "pipenv":
-        harness_path = test_path / "pipenv_harness.sh"
-    elif config["environment_manager"] == "uv":
-        harness_path = test_path / "uv_harness.sh"
-    elif config["environment_manager"] == "none":
+    if config['environment_manager'] == 'conda':
+        harness_path = test_path / 'conda_harness.sh'
+    elif config['environment_manager'] == 'virtualenv':
+        harness_path = test_path / 'virtualenv_harness.sh'
+    elif config['environment_manager'] == 'pipenv':
+        harness_path = test_path / 'pipenv_harness.sh'
+    elif config['environment_manager'] == 'uv':
+        harness_path = test_path / 'uv_harness.sh'
+    elif config['environment_manager'] == 'none':
         return True
     else:
         raise ValueError(
@@ -282,7 +279,7 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
             BASH_EXECUTABLE,
             str(harness_path),
             str(root.resolve()),
-            str(config["module_name"]),
+            str(config['module_name']),
         ],
         stderr=PIPE,
         stdout=PIPE,
@@ -291,8 +288,8 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
     stdout_output, _ = _decode_print_stdout_stderr(result)
 
     # Check that makefile help ran successfully
-    assert "Available rules:" in stdout_output
-    assert "clean                    Delete all compiled Python files" in stdout_output
+    assert 'Available rules:' in stdout_output
+    assert 'clean                    Delete all compiled Python files' in stdout_output
 
     assert result.returncode == 0
 
@@ -300,7 +297,7 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
 def lint(root):
     """Run the linters on the project."""
     result = run(
-        ["make", "lint"],
+        ['make', 'lint'],
         cwd=root,
         stderr=PIPE,
         stdout=PIPE,

@@ -28,9 +28,8 @@ _welcome: ## Print a Welcome screen
 #################################################################################
 
 {% if cookiecutter.environment_manager != 'none' -%}
-## Set up python interpreter environment
-.PHONY: create_environment
-create_environment:
+.PHONY: create-environment
+create-environment: ## Set up python interpreter environment
 	{%- if cookiecutter.environment_manager == 'conda' %}
 	{%- if cookiecutter.dependency_file != 'environment.yml' %}
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
@@ -51,9 +50,9 @@ create_environment:
 {%- endif %}
 
 {% if cookiecutter.dependency_file != 'none' or cookiecutter.environment_manager == 'uv' %}
-## Install Python Dependencies
+
 .PHONY: requirements
-requirements:
+requirements: ## Install Python Dependencies
 	{%- if cookiecutter.environment_manager == 'uv' %}
 	uv sync
 	{% elif "requirements.txt" == cookiecutter.dependency_file -%}
@@ -66,21 +65,21 @@ requirements:
 	{% endif %}
 {% endif %}
 
-###     PUBLISH ALL (Docs & Project)
+
 publish-all: format lint publish docs-publish ## Run format, lint, publish package and docs
 
 #################################################################################
 # CLEAN COMMANDS                                                                #
 #################################################################################
 
-## Delete all compiled Python files
+
 .PHONY: clean
-clean:
+clean: ## Delete all compiled Python files
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
-## Lint using flake8 and black (use `make format` to do formatting)
-.PHONY: lint
+
+.PHONY: lint ## Lint using ruff (use `make format` to do formatting)
 lint:
 	ruff check --config pyproject.toml {{ cookiecutter.module_name }}
 {#
@@ -90,8 +89,8 @@ lint:
 # TODO: Add pyright support	
 # pyright {{ cookiecutter.module_name }}
 #}
-## Format source code with black
-.PHONY: format
+
+.PHONY: format ## Format source code with black
 format:
 	ruff --config pyproject.toml {{ cookiecutter.module_name }}
 
@@ -116,9 +115,9 @@ docs-publish: ## Build and deploy documentation to GitHub Pages
 #################################################################################
 
 {%- if not cookiecutter.dataset_storage.none -%}
-## Download Data from storage system
+
 .PHONY: sync_data_down
-sync_data_down:
+sync_data_down: ## Download Data from storage system
 	{%- if cookiecutter.dataset_storage.s3 -%}
 	aws s3 sync s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data/ \
 		data/ {% if cookiecutter.dataset_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.dataset_storage.s3.aws_profile }}{% endif %}
@@ -129,9 +128,8 @@ sync_data_down:
 	gsutil -m rsync -r gs://{{ cookiecutter.dataset_storage.gcs.bucket }}/data/ data/
 	{%- endif -%}
 
-## Upload Data to storage system
 .PHONY: sync_data_up
-sync_data_up:
+sync_data_up: ## Upload Data to storage system
 	{%- if cookiecutter.dataset_storage.s3 -%}
 	aws s3 sync data/ \
 		s3://{{ cookiecutter.dataset_storage.s3.bucket }}/data {% if cookiecutter.dataset_storage.s3.aws_profile != 'default' %} --profile {{ cookiecutter.dataset_storage.s3.aws_profile }}{% endif %}
@@ -168,8 +166,8 @@ _clean_manual_test:
 #################################################################################
 
 {%- if cookiecutter.include_code_scaffold == 'Yes' %}
-## Make Dataset
-.PHONY: data
+
+.PHONY: data ## Make Dataset
 data: requirements
 	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/dataset.py
 {%- endif %}
@@ -199,4 +197,5 @@ help:  ## Show this help message
 	@echo " | |_| | |_| || |  __/ | | | | |"
 	@echo "  \____|\___/ |_|\___|_| |_| |_|\033[0m"
 	@echo "\n\033[1m~ Available Commands ~\033[0m\n"
+	@echo "For VSCode/Cursor, try: ⇧ ⌘ P, Tasks: Run Task\n"
 	@grep -E '^[a-zA-Z][a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[38;5;222m%-30s\033[0m %s\n", $$1, $$2}'

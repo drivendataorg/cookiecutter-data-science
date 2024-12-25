@@ -12,7 +12,9 @@ mkdocs-gen-files
 mkdocs-include-markdown-plugin
 pexpect
 pipenv
+pre-commit
 pytest
+pytest-watcher
 ruff
 termynal
 twine

@@ -2,7 +2,7 @@
 	"folders": [
 		{
 			"name": "root",
-			"path": ".."
+			"path": "..",
 		},
 		{
 			"name": "manual test",
@@ -11,7 +11,7 @@
 		{
 			"name": "cookiecutter",
 			"path": "/Users/gat/.config/cookiecutter"
-		}
+		},
 	],
 	"settings": {
 		"workbench.colorCustomizations": {
@@ -58,5 +58,25 @@
 		"explorerExclude.backup": {},
 		"autoHide.autoHideAuxiliaryBar": true,
 		"autoHide.autoHideSideBar": false,
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "build",
+				"type": "shell",
+				"command": "msbuild",
+				"args": [
+					"/property:GenerateFullPaths=true",
+					"/t:build",
+					"/consoleloggerparameters:NoSummary"
+				],
+				"group": "build",
+				"presentation": {
+					"reveal": "silent"
+				},
+				"problemMatcher": "$msCompile"
+			}
+		]
 	},
 }

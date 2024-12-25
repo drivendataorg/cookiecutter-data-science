@@ -1,4 +1,6 @@
 // Personal Workspace Configuration
+// NOTE: `Dev Containers: Reopen in container does not work w/ workspace files`
+// Instead use `Dev Containers: Open folder in container` or run the task
 /*
 Add the object below to your projects.json file to add this project
 '~/Library/Application Support/Cursor/User/globalStorage/alefragnani.project-manager/projects.json'
