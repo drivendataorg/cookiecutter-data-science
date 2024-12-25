@@ -76,8 +76,11 @@ publish-all: format lint publish docs-publish ## Run format, lint, publish packa
 
 ###     TESTS
 
-test: _prep ## Run all tests
-	uv run pytest -vvv --durations=0
+test: _prep ## Run all tests (Use ARGS="..." for additional pytest arguments)
+	uv run pytest -vvv --durations=0 $(ARGS)
+
+test-specific: _prep ## Run specific config (Usage: make test-config ENV=uv DEP=none DOCS=mkdocs)
+	uv run pytest -vvv -k "$(ENV)-$(DEP)-$(DOCS)" $(ARGS)
 
 test-fastest: _prep ## Run tests with fail-fast option
 	uv run pytest -vvv -FFF
@@ -88,6 +91,10 @@ test-continuous: _prep ## Run tests in watch mode using pytest-watcher
 
 test-debug-last: ## Debug last failed test with pdb
 	uv run pytest --lf --pdb
+
+# act -j tests --matrix os:ubuntu-latest --matrix python-version:3.10 to run a specific.
+test-gh-actions: lint ## Tests github actions with act if installed. Takes a while.
+	act --job tests
 
 _clean_manual_test:
 	rm -rf manual_test
