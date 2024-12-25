@@ -8,8 +8,13 @@
     "ghcr.io/dhoeric/features/act:1": {},
     "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
   },
+  "remoteEnv": {
+    "UV_FROZEN": "true",
+    "UV_PYTHON_PREFERENCE": "only-managed",
+    "UV_PROJECT_ENVIRONMENT": "${containerWorkspaceFolder}/.devcontainer/.venv"
+  },
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
+  "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/postCreateCommand.sh",
   // Configure tool-specific properties.
   "customizations": {
     "vscode": {
@@ -66,8 +71,9 @@
         ],
         "python.testing.unittestEnabled": false,
         "python.testing.pytestEnabled": true,
-        "python.defaultInterpreterPath": ".venv/bin/python",
-        "python.testing.pytestPath": ".venv/bin/pytest"
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.devcontainer/.venv/bin/python",
+        "python.testing.pytestPath": "${containerWorkspaceFolder}/.devcontainer/.venv/bin/pytest",
+        "python.terminal.activateEnvironment": true
       }
     }
   }

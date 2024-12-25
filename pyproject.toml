@@ -118,6 +118,5 @@ exclude = '\.venv'
 [tool.pyright]
 include = ["."]
 
-
 [tool.uv.sources]
 gatlens-opinionated-template = { workspace = true }
