@@ -8,25 +8,14 @@ This is a very small project. If you have large Pull Requests to make, I recomme
 
 It is recommended to use [UV](https://github.com/astral-sh/uv) for installations.
 
-Create virtual environment
+Create virtual environment and install dependencies
 ```bash
-uv venv
+uv sync --extra dev
 ```
-
-<!-- Install general requirements
-```bash
-    uv pip install -e .
-``` -->
-
-Install dev requirements
-```bash
-uv pip install -r dev-requirements.txt
-```
-
 ### Running the tests
 
 ```bash
-uv run pytest
+pytest
 ```
 
 _Note: Some of the configs require conda to be installed. MiniConda or MiniForge are lightly recommended._

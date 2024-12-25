@@ -69,6 +69,7 @@
 		"task.vscode-task", // Tools for Taskfiles
 
 		// Configuration Files
+		"tamasfe.even-better-toml", // .toml language support
 		"dotenv.dotenv-vscode", // .env language support
 		"redhat.vscode-yaml", // .yaml language support
 		"redhat.vscode-xml", // .xml language support

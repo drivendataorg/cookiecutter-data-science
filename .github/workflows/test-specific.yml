@@ -1,5 +1,3 @@
-# act --job tests-specific --input expression=pipenv-Pipfile --input os=ubuntu-latest
-
 name: test-specific
 
 on:

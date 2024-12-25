@@ -92,16 +92,12 @@ test-continuous: _prep ## Run tests in watch mode using pytest-watcher
 test-debug-last: ## Debug last failed test with pdb
 	uv run pytest --lf --pdb
 
-# act -j tests --matrix os:ubuntu-latest --matrix python-version:3.10 to run a specific.
 test-gh-actions: lint ## Tests github actions with act if installed. Takes a while.
-	act --job tests
+	act --job tests-specific --input expression=pipenv-Pipfile --input os=ubuntu-latest
 
 _clean_manual_test:
 	rm -rf manual_test
 
-# manual-test: _prep _clean_manual_test ## Run manual tests
-# 	mkdir -p manual_test
-# 	cd manual_test && python -m gotem ..
 
 manual-test: _prep _clean_manual_test ## Run manual tests
 	mkdir -p manual_test

@@ -49,6 +49,7 @@
         "aaron-bond.better-comments", // Comments w/ Styling
         // Project Management & Navigation
         "alefragnani.project-manager", // Manage VSCode Workspaces
+        
         /* Add the below to your projects.json file to add this project
 		'~/Library/Application Support/Cursor/User/globalStorage/alefragnani.project-manager/projects.json'
 		{
@@ -72,6 +73,7 @@
         "ms-vscode.makefile-tools", // Tools for Makefiles
         "task.vscode-task", // Tools for Taskfiles
         // Configuration Files
+        "tamasfe.even-better-toml", // .toml language support
         "dotenv.dotenv-vscode", // .env language support
         "redhat.vscode-yaml", // .yaml language support
         "redhat.vscode-xml", // .xml language support
@@ -81,7 +83,7 @@
         "spmeesseman.vscode-taskexplorer" // Highlight errors in-line
       ],
       "settings": {
-        "dotfiles.repository": "https://github.com/GatlenCulp/dotfiles.git",
+        // "dotfiles.repository": "https://github.com/GatlenCulp/dotfiles.git",
         "python.testing.pytestArgs": [
           "tests"
         ],
