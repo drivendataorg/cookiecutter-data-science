@@ -30,9 +30,13 @@
     ],
     "open_source_license": ["MIT", "No license file", "BSD-3-Clause"],
     "docs": ["mkdocs", "none"],
-    // frontend, backend, desktop, 
     "include_code_scaffold": [
         "No", "paper", "app", "ml", "data", "lib", "course"
     ],
-    "use_github": ["Yes", "No"]
+    "use_github": ["Yes", "No"],
+    "_copy_without_render": [
+        "*{{ cookiecutter.module_name }}/_backend/**",
+        "*{{ cookiecutter.module_name }}/_frontend/**",
+        "*{{ cookiecutter.module_name }}/_cli/**"
+    ]
 }

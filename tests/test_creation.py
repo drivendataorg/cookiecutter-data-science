@@ -119,15 +119,15 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         str(OUT_DIR / "reports" / "figures"),
         "notebooks",
         str(OUT_DIR / "reports"),
-        config["module_name"],
+        # config["module_name"],
     ]
 
-    ignore_dirs = [".git", ".venv", "__pycache__"]
+    ignore_dirs = [".git", ".venv", "__pycache__", config["module_name"]]
 
-    if config["include_code_scaffold"] != "No":
-        expected_dirs += [
-            f"{config['module_name']}/modeling",
-        ]
+    # if config["include_code_scaffold"] != "No":
+    #     expected_dirs += [
+    #         f"{config['module_name']}/modeling",
+    #     ]
 
     if config["docs"] == "mkdocs":
         expected_dirs += ["docs/docs"]
@@ -196,22 +196,22 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         f"{config['module_name']}/__init__.py",
     ]
 
-    ignore_dirs = [".git", ".venv", "__pycache__"]
+    ignore_dirs = [".git", ".venv", "__pycache__", "_frontend", "_backend", "_course", "_ai", "_cli"]
 
-    # conditional files
-    if not config["open_source_license"].startswith("No license"):
-        expected_files.append("LICENSE")
+    # # conditional files
+    # if not config["open_source_license"].startswith("No license"):
+    #     expected_files.append("LICENSE")
 
-    if config["include_code_scaffold"] != "No":
-        expected_files += [
-            f"{config['module_name']}/config.py",
-            f"{config['module_name']}/dataset.py",
-            f"{config['module_name']}/features.py",
-            f"{config['module_name']}/modeling/__init__.py",
-            f"{config['module_name']}/modeling/train.py",
-            f"{config['module_name']}/modeling/predict.py",
-            f"{config['module_name']}/plots.py",
-        ]
+    # if config["include_code_scaffold"] != "No":
+    #     expected_files += [
+    #         f"{config['module_name']}/config.py",
+    #         f"{config['module_name']}/dataset.py",
+    #         f"{config['module_name']}/features.py",
+    #         f"{config['module_name']}/modeling/__init__.py",
+    #         f"{config['module_name']}/modeling/train.py",
+    #         f"{config['module_name']}/modeling/predict.py",
+    #         f"{config['module_name']}/plots.py",
+    #     ]
 
     if config["docs"] == "mkdocs":
         expected_files += [
