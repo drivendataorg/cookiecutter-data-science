@@ -7,7 +7,7 @@ name = "ccds"
 
 [project]
 name = "gatlens-opinionated-template"
-version = "0.0.4"
+version = "0.0.5"
 description = "A modern, opinionated full-stack CookieCutter project template that prioritizes developer experience and cutting-edge tools."
 authors = [
   { name = "Gatlen Culp", email = "GatlenCulp@gmail.com" },
@@ -30,7 +30,6 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 # Using 3.10 to ensure compatability
-# requires-python = ">=3.8,<3.13"
 requires-python = ">=3.10,<3.11"
 dependencies = ["click>=8.1.0", "cookiecutter>=2.6.0"]
 
