@@ -1,0 +1,18 @@
+   ____  ___ _____              
+  / ___|/ _ \_   _|__ _ __ ___  
+ | |  _| | | || |/ _ \ '_ ` _ \ 
+ | |_| | |_| || |  __/ | | | | |
+  \____|\___/ |_|\___|_| |_| |_|
+
+~ Gatlen's Opinionated Template v1.0.0 ~
+
+A cutting-edge, opinionated, and ambitious project builder 
+for power users and researchers.
+
+📚 Resources
+  • Docs:    https://gatlenculp.github.io/gatlens-opinionated-template/
+  • Issues:  https://github.com/GatlenCulp/gatlens-opinionated-template/issues
+  • Wiki:    https://github.com/GatlenCulp/gatlens-opinionated-template/wiki
+
+💡 Tip: Use `make help` to see all available commands
+

@@ -1,9 +1,12 @@
+"""File to be run after template initialization by cookiecutter."""
+
+import os
 import shutil
+import subprocess
 from copy import copy
 from pathlib import Path
 
 from ccds.hook_utils.configure_gh import configure_github_repo
-from ccds.hook_utils.configure_venv import configure_uv_venv
 
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
@@ -101,6 +104,7 @@ configure_github_repo(
 
 # Install the virtual environment (uv only for now)
 # {% if cookiecutter.environment_manager == "uv" %}
-configure_uv_venv(directory=Path.cwd())
-
+os.chdir(Path.cwd())
+subprocess.run(["make", "create_environment"])
+subprocess.run(["make", "requirements"])
 # {% endif %}

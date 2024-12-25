@@ -1,3 +1,0 @@
-{
-  "remote.SSH.configFile": "${workspaceFolder}/secrets/ssh/config.ssh"
-}

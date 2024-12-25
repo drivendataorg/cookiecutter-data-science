@@ -1,25 +1,44 @@
 {
 	"folders": [
 		{
-			"path": ".."
+			"name": "root",
+			"path": "..",
+		},
+		{
+			"name": "manual test",
+			"path": "../manual_test/project_name"
+		},
+		{
+			"name": "cookiecutter",
+			"path": "/Users/gat/.config/cookiecutter"
 		},
 	],
 	"settings": {
 		"workbench.colorCustomizations": {
 			"editor.lineHighlightBackground": "#1073cf2d",
-			"editor.lineHighlightBorder": "#9fced11f"
+			"editor.lineHighlightBorder": "#9fced11f",
+			"statusBar.background": "#28632b",
+			"statusBar.foreground": "#ffffff",
+			"statusBarItem.hoverBackground": "#327e36",
+			"activityBar.background": "#012B63",
+			"titleBar.activeBackground": "#023D8A",
+			"titleBar.activeForeground": "#F6FAFF"
 		},
+		"search.exclude": {
+            "**/cookiecutter/cookiecutters/**": true  // This will exclude the cookiecutter folder from search
+        },
 		"files.exclude": {
-			"**/.git": false,
+			"**/.git": true,
 			"**/.svn": false,
 			"**/.hg": false,
 			"**/CVS": false,
-			"**/.DS_Store": false,
-			"**/Thumbs.db": false,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true,
 			"**/.ruby-lsp": false,
-			"**/.pytest_cache": false,
+			"**/.pytest_cache": true,
 			"**/docker": false,
 			"**/venv": false,
+			"**/.venv": false,
 			"**/tests": false,
 			"**/scripts": false,
 			"**/logs": false,
@@ -38,8 +57,37 @@
 			"**/*.fls": false,
 			"**/*.bbl": false,
 			"**/*.out": false,
-			"**/*.synctex.gz*": false
+			"**/*.synctex.gz*": false,
+			"**/.history": true,
+			"**/.ruff_cache": true,
+			"Icon": true
 		},
 		"explorerExclude.backup": {},
-	}
+		"autoHide.autoHideAuxiliaryBar": true,
+		"autoHide.autoHideSideBar": false,
+		"ruff.enable": true,
+		"ruff.organizeImports": true,
+		"ruff.fixAll": true,
+		"ruff.lint.run": "onSave",
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "build",
+				"type": "shell",
+				"command": "msbuild",
+				"args": [
+					"/property:GenerateFullPaths=true",
+					"/t:build",
+					"/consoleloggerparameters:NoSummary"
+				],
+				"group": "build",
+				"presentation": {
+					"reveal": "silent"
+				},
+				"problemMatcher": "$msCompile"
+			}
+		]
+	},
 }

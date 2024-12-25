@@ -164,6 +164,13 @@
         },
         "choices": [
             {
+                "choice": "none",
+                "help": {
+                    "description": "Create no dependency file, relying solely on `pyproject.toml`",
+                    "more_information": "[pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)"
+                } 
+            },
+            {
                 "choice": "requirements.txt",
                 "help": {
                     "description": "Most general, least feature-rich format for use with `pip`.",

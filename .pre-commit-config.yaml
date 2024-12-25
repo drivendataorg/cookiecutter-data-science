@@ -1,0 +1,13 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: check-symlinks
+      - id: check-yaml
+        args: ["--allow-multiple-documents"]
+      # - id: double-quote-string-fixer
+      - id: forbid-new-submodules
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.22.0
+    hooks:
+      - id: gitleaks

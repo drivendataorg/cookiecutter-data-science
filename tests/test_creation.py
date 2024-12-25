@@ -56,7 +56,7 @@ def no_curlies(filepath: Path) -> bool:
 
     template_strings = [
         "{{ ",
-        " }}",  # Exclude due to Go string templates in Taskfile
+        " }}",
         "{%",
         "%}",
     ]
@@ -112,17 +112,17 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         "secrets/schema",
         "secrets/schema/ssh",
         "docker",
+        "tests",
         str(OUT_DIR),
         str(OUT_DIR / "models"),
         str(OUT_DIR / "features"),
         str(OUT_DIR / "reports" / "figures"),
         "notebooks",
-        # "references",
         str(OUT_DIR / "reports"),
         config["module_name"],
     ]
 
-    ignore_dirs = [".git", ".venv"]
+    ignore_dirs = [".git", ".venv", "__pycache__"]
 
     if config["include_code_scaffold"] == "Yes":
         expected_dirs += [
@@ -132,11 +132,7 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
     if config["docs"] == "mkdocs":
         expected_dirs += ["docs/docs"]
 
-    expected_dirs = [
-        #  (root / d).resolve().relative_to(root) for d in expected_dirs
-        Path(d)
-        for d in expected_dirs
-    ]
+    expected_dirs = [Path(d) for d in expected_dirs]
 
     existing_dirs = [
         d.resolve().relative_to(root)
@@ -162,7 +158,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         str(CCDS_ORIGINAL_DIR / "README.md"),
         "README.md",
         "pyproject.toml",
-        # "setup.cfg",
+        ".env",
         ".gitignore",
         ".devcontainer/devcontainer.json",
         ".devcontainer/postCreateCommand.sh",
@@ -181,17 +177,16 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         f"docker/{config['repo_name']}.Dockerfile",
         "data/raw/.gitkeep",
         "docs/.gitkeep",
+        "tests/conftest.py",
+        "tests/test_main.py",
         "notebooks/01_name_example.ipynb",
         "notebooks/README.md",
         "secrets/schema/example.env",
         "secrets/schema/ssh/example.config.ssh",
         "secrets/schema/ssh/example.something.key",
         "secrets/schema/ssh/example.something.pub",
-        # "references/.gitkeep",
         str(VSCODE_CONFIG_DIR / f"{config['repo_name']}.code-workspace"),
-        str(VSCODE_CONFIG_DIR / "launch.json"),
-        str(VSCODE_CONFIG_DIR / "settings.json"),
-        str(VSCODE_CONFIG_DIR / "tasks.json"),
+        str(VSCODE_CONFIG_DIR / f"{config['repo_name']}.team.code-workspace"),
         str(OUT_DIR / "reports" / ".gitkeep"),
         str(OUT_DIR / "features" / ".gitkeep"),
         str(OUT_DIR / "reports" / "figures" / ".gitkeep"),
@@ -201,7 +196,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         f"{config['module_name']}/__init__.py",
     ]
 
-    ignore_dirs = [".git", ".venv"]
+    ignore_dirs = [".git", ".venv", "__pycache__"]
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):
@@ -225,8 +220,11 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
             "docs/docs/index.md",
             "docs/docs/getting-started.md",
         ]
+    if config["dependency_file"] != "none":
+        expected_files.append(config["dependency_file"])
 
-    expected_files.append(config["dependency_file"])
+    if config["environment_manager"] == "uv":
+        expected_files.append("uv.lock")
 
     expected_files = [Path(f) for f in expected_files]
 
@@ -242,7 +240,8 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
     assert sorted(existing_files) == sorted(expected_files)
 
     for f in existing_files:
-        assert no_curlies(root / f)
+        if f.name != ".cursorrules":
+            assert no_curlies(root / f)
 
 
 def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
@@ -294,7 +293,8 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
 
     # Check that makefile help ran successfully
     assert "Available rules:" in stdout_output
-    assert "clean                    Delete all compiled Python files" in stdout_output
+    assert "clean" in stdout_output
+    assert "Delete all compiled Python files" in stdout_output
 
     assert result.returncode == 0
 

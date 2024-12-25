@@ -1,5 +1,5 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
+requires = ["flit_core >=3.2,<3.13"]
 build-backend = "flit_core.buildapi"
 
 [tool.flit.module]
@@ -7,7 +7,7 @@ name = "ccds"
 
 [project]
 name = "gatlens-opinionated-template"
-version = "0.0.3"
+version = "0.0.5"
 description = "A modern, opinionated full-stack CookieCutter project template that prioritizes developer experience and cutting-edge tools."
 authors = [
   { name = "Gatlen Culp", email = "GatlenCulp@gmail.com" },
@@ -29,11 +29,9 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-requires-python = ">=3.8"
-dependencies = [
-  "click",
-  "cookiecutter",
-]
+# Using 3.10 to ensure compatability
+requires-python = ">=3.10,<3.11"
+dependencies = ["click>=8.1.0", "cookiecutter>=2.6.0"]
 
 [project.scripts]
 gotem = "ccds.__main__:main"
@@ -42,13 +40,82 @@ gotem = "ccds.__main__:main"
 "Source Code" = "https://github.com/GatlenCulp/gatlens-opinionated-template"
 "Documentation" = "https://gatlenculp.github.io/gatlens-opinionated-template/"
 
+[dependency-groups]
+dev = [
+    "ansi2html>=1.9.2",
+    "black>=24.8.0",
+    "build>=1.2.2.post1",
+    "chardet>=5.2.0",
+    "flake8>=5.0.4",
+    "isort>=5.13.2",
+    "mkdocs>=1.6.1",
+    "mkdocs-gen-files>=0.5.0",
+    "mkdocs-include-markdown-plugin>=6.2.2",
+    "mkdocs-material>=9.5.49",
+    "pexpect>=4.9.0",
+    "pipenv>=2024.4.0",
+    "pre-commit>=3.5.0",
+    "pytest>=8.3.4",
+    "pytest-sugar>=1.0.0",
+    "pytest-watcher>=0.4.3",
+    "ruff>=0.8.4",
+    "termynal>=0.2.0",
+    "twine>=6.0.1",
+    "uv>=0.5.11",
+    "virtualenvwrapper>=6.1.1 ; sys_platform != 'win32'",
+    "virtualenvwrapper-win>=1.2.7 ; sys_platform == 'win32'",
+]
+
+[tool.ruff]
+cache-dir = ".cache/ruff"
+line-length = 100
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+# TODO: Different groups of linting styles depending on code use.
+select = ["ALL"]
+ignore = []      # Add ignores as needed
+
+
+[tool.ruff.lint.isort]
+known-first-party = ["{{ cookiecutter.module_name }}"]
+force-sort-within-sections = true
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"] # Allow unused imports in __init__.py
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 99
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
 [tool.pytest.ini_options]
 addopts = """
--vv
---color=no
+--tb=long
+--code-highlight=yes
+--color=yes
 """
 
-# [[tool.uv.index]]
-# name = "gatlens-opinionated-template"
-# url = "https://test.pypi.org/simple/"
-# publish-url = "https://test.pypi.org/legacy/"
+testpaths = ["./tests"]
+log_file = "./logs/pytest.log"
+
+
+[tool.pydoclint]
+style = "google"
+arg-type-hints-in-docstring = false
+check-return-types = true
+exclude = '\.venv'
+
+[tool.pyright]
+include = ["."]
+
+[tool.uv.sources]
+gatlens-opinionated-template = { workspace = true }

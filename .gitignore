@@ -5,6 +5,7 @@ docs/docs/_partials/*/*.html
 
 # test cache
 manual_test/
+.history
 
 # other local dev info
 # .vscode/

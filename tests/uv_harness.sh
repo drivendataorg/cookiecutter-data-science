@@ -26,7 +26,8 @@ cd $1
 make
 
 # Create and activate virtual environment
-uv venv
+make create_environment
+
 
 # Check if running on Windows and use appropriate activate path
 if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* ]]; then
@@ -34,6 +35,8 @@ if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* ]]; then
 else
     VENV_PATH=".venv/bin/activate"
 fi
+
+make requirements
 
 # Verify venv exists before attempting to activate
 if [ ! -f "$VENV_PATH" ]; then
@@ -43,9 +46,6 @@ fi
 
 # Activate the virtual environment
 source "$VENV_PATH"
-
-# Install dependencies
-uv pip install -r requirements.txt
 
 # Test python executable path
 python -c "import sys; assert \"$PROJECT_NAME\" in sys.executable"

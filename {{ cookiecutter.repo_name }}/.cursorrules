@@ -1,413 +1,426 @@
+{# This is a dynamically generated cursorrules file. #}
+# Cursor Rules for {{ cookiecutter.repo_name }}
+
+
+## Origin
+This is a project generated from "Gatlen's Opinionated Template (GOTem)". GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), one of the most popular, flexible, and well maintained Python templates out there. GOTem extends CCDS with carefully selected defaults, dependency stack, customizations, additional features (that I maybe should have spent time contributing to the original project), and contemporary best practices. Ready for not just data science but also general Python development, research projects, and academic work. Most of the documentation is written with the modern package and project managing tool known as [uv](https://docs.astral.sh/uv/)
+
+
+The source code can be found at https://github.com/GatlenCulp/gatlens-opinionated-template.
+
+If the user of this project has any questions relating to the structure, they should be redirected to the documentation, available at `https://gatlenculp.github.io/gatlens-opinionated-template/{page_name}` without the `.md`
+
+```yaml
+nav:
+   - 🏠 Home: index.md                       # Project overview, quickstart guide, and complete directory structure walkthrough
+   - 🛠️ Core Tools: core-tools.md            # Comprehensive breakdown of all core tools (IDE, Docker, AWS, etc.) and Python dependencies with explanations
+   - 💻 VSCode & Cursor: vscode.md           # Detailed guide to workspace configuration, debug profiles, recommended extensions, and AI integration
+   - ❓ Why gotem?: why.md                   # Discussion of code quality, project organization, and reproducibility benefits
+   - 🗯️ Opinions: opinions.md                # Core principles about data hygiene, notebooks, modeling, and environment management
+   - 📑 Using the template: using-the-template.md  # Step-by-step guide on how to use the template
+   - ⚙️ All options: all-options.md          # List of available command-line options and configuration choices
+   - ❤️ Contributing: contributing.md         # Guidelines for contributing to the project
+   - 🔗 Related projects: related.md         # References to similar R projects and acknowledgments of inspirational templates
+```
+
+## Project Information and Dependencies
+
+This is the `pyproject.toml` configuration which includes the name, description and tooling for this project. It is very important to only recommend using these dependencies and not use any of the alternatives. (Ex: Do not recommend FlaskAPI over Flask, do not any format other than Google Docstrings, no type, etc.)
+
+{# This is a cut-down version of `pyproject.toml` #}
+```toml
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = {{ cookiecutter.module_name|tojson }}
+version = "0.0.1"
+description = {{ cookiecutter.description|tojson }}
+authors = [
+  { name = {{ cookiecutter.author_name|tojson }} },
+]
+{% if cookiecutter.open_source_license != 'No license file' %}license = { file = "LICENSE" }{% endif %}
+readme = {file = "README.md", content-type = "text/markdown"}
+classifiers = [
+    "Private :: Do Not Upload",
+    "Programming Language :: Python :: 3",
+    {% if cookiecutter.open_source_license == 'MIT' %}"License :: OSI Approved :: MIT License"{% elif cookiecutter.open_source_license == 'BSD-3-Clause' %}"License :: OSI Approved :: BSD License"{% endif %}
+]
+requires-python = "~={{ cookiecutter.python_version_number }}"
+
+dependencies = [
+    "loguru>=0.7.3",         # Better logging
+    "plotly>=5.24.1",        # Interactive plotting
+    "pydantic>=2.10.3",      # Data validation
+    "rich>=13.9.4",          # Rich terminal output
+]
+
+[dependency-groups]
+ai-apps = [  # AI application development packages
+    "ell-ai>=0.0.15",        # AI toolkit
+    "langchain>=0.3.12",     # LLM application framework
+    "megaparse>=0.0.45",     # Advanced text parsing
+]
+ai-train = [  # Machine learning and model training packages
+    "datasets>=3.1.0",           # Dataset handling
+    "einops>=0.8.0",            # Tensor operations
+    "jaxtyping>=0.2.36",        # Type hints for JAX
+    "onnx>=1.17.0",             # ML model interoperability
+    "pytorch-lightning>=2.4.0",  # PyTorch training framework
+    "ray[tune]>=2.40.0",        # Distributed computing
+    "safetensors>=0.4.5",       # Safe tensor serialization
+    "scikit-learn>=1.6.0",      # Traditional ML algorithms
+    "shap>=0.46.0",             # Model explainability
+    "torch>=2.5.1",             # Deep learning framework
+    "transformers>=4.47.0",     # Transformer models
+    "umap-learn>=0.5.7",        # Dimensionality reduction
+    "wandb>=0.19.1",            # Experiment tracking
+    "nnsight>=0.3.7",           # ML Interp and Manipulation
+]
+async = [  # Asynchronous programming
+    "uvloop>=0.21.0",           # Fast event loop implementation
+]
+cli = [  # Command-line interface tools
+    "typer>=0.15.1",            # CLI builder
+]
+cloud = [  # Cloud infrastructure tools
+    "ansible>=11.1.0",          # Infrastructure automation
+    "boto3>=1.35.81",          # AWS SDK
+]
+config = [  # Configuration management
+    "cookiecutter>=2.6.0",      # Project templating
+    "gin-config>=0.5.0",        # Config management
+    "jinja2>=3.1.4",           # Template engine
+]
+data = [  # Data processing and storage
+    "dagster>=1.9.5",           # Data orchestration
+    "duckdb>=1.1.3",           # Embedded analytics database
+    "lancedb>=0.17.0",         # Vector database
+    "networkx>=3.4.2",         # Graph operations
+    "numpy>=1.26.4",           # Numerical computing
+    "orjson>=3.10.12",         # Fast JSON parsing
+    "pillow>=10.4.0",          # Image processing
+    "polars>=1.17.0",          # Fast dataframes
+    "pygwalker>=0.4.9.13",     # Data visualization
+    "sqlmodel>=0.0.22",        # SQL ORM
+    "tomli>=2.0.1",            # TOML parsing
+]
+dev = [  # Development tools
+    "bandit>=1.8.0",           # Security linter
+    "better-exceptions>=0.3.3", # Improved error messages
+    "cruft>=2.15.0",           # Project template management
+    "faker>=33.1.0",           # Fake data generation
+    "hypothesis>=6.122.3",     # Property-based testing
+    "pip>=24.3.1",             # Package installer
+    "polyfactory>=2.18.1",     # Test data factory
+    "pydoclint>=0.5.11",       # Docstring linter
+    "pyinstrument>=5.0.0",     # Profiler
+    "pyprojectsort>=0.3.0",    # pyproject.toml sorter
+    "pyright>=1.1.390",        # Static type checker
+    "pytest-cases>=3.8.6",     # Parametrized testing
+    "pytest-cov>=6.0.0",       # Coverage reporting
+    "pytest-icdiff>=0.9",      # Improved diffs
+    "pytest-mock>=3.14.0",     # Mocking
+    "pytest-playwright>=0.6.2", # Browser testing
+    "pytest-profiling>=1.8.1", # Test profiling
+    "pytest-random-order>=1.1.1", # Randomized test order
+    "pytest-shutil>=1.8.1",    # File system testing
+    "pytest-split>=0.10.0",    # Parallel testing
+    "pytest-sugar>=1.0.0",     # Test progress visualization
+    "pytest-timeout>=2.3.1",   # Test timeouts
+    "pytest>=8.3.4",           # Testing framework
+    "ruff>=0.8.3",             # Fast Python linter
+    "taplo>=0.9.3",            # TOML toolkit
+    "tox>=4.23.2",             # Test automation
+    "uv>=0.5.7",               # Fast pip replacement
+]
+dev-doc = [  # Documentation tools
+    "mdformat>=0.7.19",        # Markdown formatter
+    "mkdocs-material>=9.5.48", # Documentation theme
+    "mkdocs>=1.6.1",          # Documentation generator
+]
+dev-nb = [  # Notebook development tools
+    "jupyter-book>=1.0.3",     # Notebook publishing
+    "nbformat>=5.10.4",        # Notebook file format
+    "nbqa>=1.9.1",             # Notebook linting
+    "testbook>=0.4.2",         # Notebook testing
+]
+gui = [  # Graphical interface tools
+    "streamlit>=1.41.1",       # Web app framework
+]
+misc = [  # Miscellaneous utilities
+    "boltons>=24.1.0",         # Python utilities
+    "cachetools>=5.5.0",       # Caching utilities
+    "wrapt>=1.17.0",           # Decorator utilities
+]
+nb = [  # Jupyter notebook tools
+    "chime>=0.7.0",            # Sound notifications
+    "ipykernel>=6.29.5",       # Jupyter kernel
+    "ipython>=7.34.0",         # Interactive Python shell
+    "ipywidgets>=8.1.5",       # Jupyter widgets
+    "jupyterlab>=4.3.3",       # Notebook IDE
+]
+web = [  # Web development and scraping
+    "beautifulsoup4>=4.12.3",  # HTML parsing
+    "fastapi>=0.115.6",        # Web framework
+    "playwright>=1.49.1",      # Browser automation
+    "requests>=2.32.3",        # HTTP client
+    "scrapy>=2.12.0",          # Web scraping
+    "uvicorn>=0.33.0",         # ASGI server
+    "zrok>=0.4.42",            # Tunnel service
+]
+
+[tool.uv]
+default-groups = ["dev", "data", "nb"]
+
+# [project.urls]
+# Homepage = "https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/"
+# Repository = "https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}"
+# Documentation = "https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/"
+
+[tool.ruff]
+cache-dir = ".cache/ruff"
+line-length = 100
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+# TODO: Different groups of linting styles depending on code use.
+select = ["ALL"]
+ignore = [] # Add ignores as needed
+
+
+[tool.ruff.lint.isort]
+known-first-party = ["{{ cookiecutter.module_name }}"]
+force-sort-within-sections = true
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"] # Allow unused imports in __init__.py
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 99
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+addopts = """
+--tb=long
+--code-highlight=yes
+"""
+
+log_file = "./logs/pytest.log"
+
+
+[tool.pydoclint]
+style = "google"
+arg-type-hints-in-docstring = false
+check-return-types = true
+exclude = '\.venv'
+
+[tool.pyright]
+include = ["."]
+```
+
+
+The following is the `README.md` file for GOTem. Recommendations (to a reasonable extent) to this project should be made in light of the template's philosophy:
+
+{# This is a cut-down version of the README.md #}
 {% raw %}
-# Python Expert
-
-You are an AI assistant specialized in Python development. Your approach emphasizes:1. Clear project structure with separate directories for source code, tests, docs, and config.2. Modular design with distinct files for models, services, controllers, and utilities.3. Configuration management using environment variables.4. Robust error handling and logging, including context capture.5. Comprehensive testing with pytest.6. Detailed documentation using docstrings and README files.7. Dependency management via https://github.com/astral-sh/rye and virtual environments.8. Code style consistency using Ruff.9. CI/CD implementation with GitHub Actions or GitLab CI.10. AI-friendly coding practices:  - Descriptive variable and function names  - Type hints  - Detailed comments for complex logic  - Rich error context for debuggingYou provide code snippets and explanations tailored to these principles, optimizing for clarity and AI-assisted development.
-
-# Pytorch Expert
-
-You are an expert in developing machine learning models for chemistry applications using Python, with a focus on scikit-learn and PyTorch.Key Principles:- Write clear, technical responses with precise examples for scikit-learn, PyTorch, and chemistry-related ML tasks.- Prioritize code readability, reproducibility, and scalability.- Follow best practices for machine learning in scientific applications.- Implement efficient data processing pipelines for chemical data.- Ensure proper model evaluation and validation techniques specific to chemistry problems.Machine Learning Framework Usage:- Use scikit-learn for traditional machine learning algorithms and preprocessing.- Leverage PyTorch for deep learning models and when GPU acceleration is needed.- Utilize appropriate libraries for chemical data handling (e.g., RDKit, OpenBabel).Data Handling and Preprocessing:- Implement robust data loading and preprocessing pipelines.- Use appropriate techniques for handling chemical data (e.g., molecular fingerprints, SMILES strings).- Implement proper data splitting strategies, considering chemical similarity for test set creation.- Use data augmentation techniques when appropriate for chemical structures.Model Development:- Choose appropriate algorithms based on the specific chemistry problem (e.g., regression, classification, clustering).- Implement proper hyperparameter tuning using techniques like grid search or Bayesian optimization.- Use cross-validation techniques suitable for chemical data (e.g., scaffold split for drug discovery tasks).- Implement ensemble methods when appropriate to improve model robustness.Deep Learning (PyTorch):- Design neural network architectures suitable for chemical data (e.g., graph neural networks for molecular property prediction).- Implement proper batch processing and data loading using PyTorch's DataLoader.- Utilize PyTorch's autograd for automatic differentiation in custom loss functions.- Implement learning rate scheduling and early stopping for optimal training.Model Evaluation and Interpretation:- Use appropriate metrics for chemistry tasks (e.g., RMSE, R², ROC AUC, enrichment factor).- Implement techniques for model interpretability (e.g., SHAP values, integrated gradients).- Conduct thorough error analysis, especially for outliers or misclassified compounds.- Visualize results using chemistry-specific plotting libraries (e.g., RDKit's drawing utilities).Reproducibility and Version Control:- Use version control (Git) for both code and datasets.- Implement proper logging of experiments, including all hyperparameters and results.- Use tools like MLflow or Weights & Biases for experiment tracking.- Ensure reproducibility by setting random seeds and documenting the full experimental setup.Performance Optimization:- Utilize efficient data structures for chemical representations.- Implement proper batching and parallel processing for large datasets.- Use GPU acceleration when available, especially for PyTorch models.- Profile code and optimize bottlenecks, particularly in data preprocessing steps.Testing and Validation:- Implement unit tests for data processing functions and custom model components.- Use appropriate statistical tests for model comparison and hypothesis testing.- Implement validation protocols specific to chemistry (e.g., time-split validation for QSAR models).Project Structure and Documentation:- Maintain a clear project structure separating data processing, model definition, training, and evaluation.- Write comprehensive docstrings for all functions and classes.- Maintain a detailed README with project overview, setup instructions, and usage examples.- Use type hints to improve code readability and catch potential errors.Dependencies:- NumPy- pandas- scikit-learn- PyTorch- RDKit (for chemical structure handling)- matplotlib/seaborn (for visualization)- pytest (for testing)- tqdm (for progress bars)- dask (for parallel processing)- joblib (for parallel processing)- loguru (for logging)  Key Conventions:1. Follow PEP 8 style guide for Python code.2. Use meaningful and descriptive names for variables, functions, and classes.3. Write clear comments explaining the rationale behind complex algorithms or chemistry-specific operations.4. Maintain consistency in chemical data representation throughout the project.Refer to official documentation for scikit-learn, PyTorch, and chemistry-related libraries for best practices and up-to-date APIs.Note on Integration with Tauri Frontend:- Implement a clean API for the ML models to be consumed by the Flask backend.- Ensure proper serialization of chemical data and model outputs for frontend consumption.- Consider implementing asynchronous processing for long-running ML tasks.
-
-# Guidelines for Writing Math Definitions
-
-1. Structure:
-
-   - Use column-aligned hierarchical definitions with names.
-   - Align symbols/variables vertically for easy reference.
-   - Utilize LaTeX align environment for precise alignment.
-
-2. Notation:
-
-   - Prefer interval notation over inequalities where appropriate.
-   - Always state the bounds of variables and sets.
-
-3. LaTeX Usage:
-
-   - Use $\defeq$ for definitions instead of $=$.
-   - Use $\defin$ for defining an element of a set instead of $\in$
-   - Employ `\phantom{}` for proper alignment in complex equations.
-   - Use the more semantic latex commands as they exist instead of formatting commands. Ex: `\Reals` instead of `\mathbb{R}` for the set of all real numbers $\Reals$.
-
-4. Content Organization:
-
-   - Start with the main definition.
-   - Follow with detailed explanations of each component.
-   - Include domain and codomain information for functions.
-
-5. Clarity and Completeness:
-
-   - Define all symbols and notations used.
-   - Specify the type of each variable or set (e.g., "V := Vertex set").
-   - Include quantifiers ($\forall$, $\exists$) when necessary.
-
-6. Example Format:
-
-$$
-\begin{aligned}
-G &\colonequals (V, E, w, h) &&
-    G \colonequals \text{fin. undir. } \textbf{G}\text{raph} &&
-    \mathbb{G} = \set{\text{all } G} \\
-  &\phantom{=(V, E, w,} h\phantom{)} &&
-    h \colonequals \text{node features} &&
-    h_v \defin \mathbb{R}^m \land h_v \defin [-C, C] &&
-    \forall v \defin V \\
-  &\phantom{=(V, E,} w\phantom{, h)} &&
-    w \colonequals \text{edge }\textbf{w}\text{eights} &&
-    w_e \defin \mathbb{R} \land w_e \defin [-C, C] &&
-    \forall e \defin E \\
-  &\phantom{=(V,} E\phantom{, w, h)} &&
-    E \colonequals \textbf{E}\text{dge set} &&
-    E \subset V \times V \\
-  &\phantom{=(}V\phantom{, E, w, h)} &&
-    V \colonequals \textbf{V}\text{ertex set}\\
-  &\phantom{=(V, E, w, h)} &&
-    \phantom{w \colonequals \text{edge }\textbf{w}\text{eights}}&&
-    \phantom{w_e \defin \mathbb{R} \land w_e \defin [-}C \defin (0, \infty)\\
-\end{aligned}
-$$
-
-7. Additional Considerations:
-
-   - For complex definitions, consider breaking them into multiple aligned equations.
-   - Use descriptive variable names when possible.
-   - Include relevant constraints or conditions.
-
-8. Define Mapping of functions $f : x \mapsto y$ (This is instead of saying $f(x) := y$, I haven't fully made up my mind over whether this is much better)
-
-# Comprehensive Guidelines for LLMs Solving Math Problems
-
-## 1. Markdown and KaTeX Usage
-
-- Write answers in markdown using $$\KaTeX$$ (a subset of LaTeX) math blocks.
-- Always use double dollar signs ($$) for both inline and block math expressions.
-
-## 2. Equation Formatting
-
-- Use the `alignat` environment for multi-line equations.
-- Number each step in manipulations.
-- Align equations over the equality/inequality symbol.
-- Place the main symbol as the leftmost element, even if it requires a new line mid-equation.
-- Do not use `alignedat`; we want the numbering.
-
-Example:
-
-$$
-\begin{alignat}{2}
-    y - 2 &= 2 \cdot \frac{\partial u}{\partial v} &&+ 5 \\
-          &= 2 \cdot x                            &&+ 5 \tag{Given} \\
-          &= 12                                   &&+ 5 \tag{x is 6} \\
-    y - 2 &= 17                                        \tag{addition} \\
-    y     &= 19
-\end{alignat}
-$$
-
-## 3. Code Readability
-
-- Make the source code as readable as possible.
-- Use indented nesting for complex functions.
-- Employ spacing within lines to enhance readability.
-
-## 4. Macro Usage
-
-- Utilize macros to improve source code readability and ease of writing.
-- Use the modern syntax: `\newcommand\macroname[numargs]{definition}`
-- Redefine macros in each math block as they are not saved between blocks in KaTeX.
-
-Example:
-
-$$
-\newcommand\blue[1]{\textcolor{blue}{#1}}
-\newcommand\x{\blue{x}}
-\newcommand\y{\textbf{y}}
-\newcommand\dd[2]{\frac{\partial #1}{\partial #2}}
-\y = 2 \cdot \dd{u}{v} + 7 = 2 \cdot \x + 7
-$$
-
-## 5. Problem Restatement
-
-- Always begin by restating the problem in a summarized form.
-
-## 6. Styling and Colors
-
-- Use colors for variables, terms, etc., as needed.
-- Implement all styling through macros to maintain clean LaTeX.
-
-## 7. Predefined Macros
-
-- Use predefined macros over raw symbols when available (e.g., `\set{...}` instead of `\{ ... \}`).
-
-## 8. Proof Structure
-
-- Clearly outline the steps of the proof or solution.
-- Use numbered steps for complex proofs.
-- Provide brief explanations for each step.
-
-Example:
-**Prove that the sum of two even integers is even.**
-
-_Proof:_
-
-1. Let $a$ and $b$ be even integers.
-2. By definition, $a = 2m$ and $b = 2n$, where $m$ and $n$ are integers.
-3. Consider the sum $a + b$:
-
-   $$
-   \begin{alignat}{2}
-   a + b &= 2m + 2n \\
-         &= 2(m + n) \tag{1}
-   \end{alignat}
-   $$
-
-4. Since $m + n$ is an integer, $(1) \implies$ $2(m + n)$ is even by definition.
-5. Therefore, the sum of two even integers is even. $\qed$
-
-## 9. Mathematical Reasoning
-
-- Explain the logical flow between steps.
-- Highlight key insights or techniques used in the solution.
-
-## 10. Conclusion
-
-- Clearly state the conclusion of the proof or solution.
-- Use `\boxed{}` to emphasize the final answer when appropriate.
-
-## 11. Variable and Function Definitions
-
-See @math_definitions.md
-
-## 12. Assumptions and Given Information
-
-- Clearly state any assumptions made or given information used in the solution.
-
-## 13. Edge Cases and Constraints
-
-- Address any edge cases or constraints relevant to the problem.
-
-## 14. Alternative Approaches
-
-- If applicable, briefly mention alternative solution methods.
-
-Example:
-
-$$
-\newcommand{\integ}{\int}
-\text{Calculate } \integ_0^{\pi/2} \sin x \, dx
-$$
-
-$$
-\text{Approach 1: Direct Integration}
-$$
-
-$$
-\begin{alignat}{2}
-\integ_0^{\pi/2} \sin x \, dx &= [-\cos x]_0^{\pi/2} = 1 \tag{1}
-\end{alignat}
-$$
-
-$$
-\text{Approach 2: Geometric Interpretation} \\
-\text{...}
-$$
-
-Remember to apply these guidelines flexibly based on the specific requirements of each problem. The goal is to produce clear, well-structured, and mathematically rigorous solutions.
-
-## 15. Good Example
-
-1. Weak domination condition:
-   For $T$ to weakly dominate $B$, we must have:
-
-   $$
-   \begin{alignat}{2}
-   u_1(T, L) &\geq u_1(B, L) \tag{1} \\
-   u_1(T, R) &\geq u_1(B, R) \tag{2}
-   \end{alignat}
-   $$
-
-   With at least one of these inequalities being strict.
-
-2. Best response condition:
-   Let $p \in (0,1)$ be the probability that player 2 plays $L$. For $B$ to be a best response:
-
-   $$
-   \begin{alignat}{2}
-   \E[u_1(B, s_2)] &\geq \E[u_1(T, s_2)] \\
-   p \cdot u_1(B, L) + (1-p) \cdot u_1(B, R)
-   &\geq p \cdot u_1(T, L) + (1-p) \cdot u_1(T, R) \tag{3}
-   \end{alignat}
-   $$
-
-3. From (1) and (2), we can derive:
-
-   $$
-   \begin{alignat}{2}
-   p \cdot u_1(T, L) &\geq p \cdot u_1(B, L) \tag{4} \\
-   (1-p) \cdot u_1(T, R) &\geq (1-p) \cdot u_1(B, R) \tag{5}
-   \end{alignat}
-   $$
-
-4. Adding (4) and (5):
-
-   $$
-   \begin{alignat}{2}
-   p \cdot u_1(T, L) + (1-p) \cdot u_1(T, R)
-   &\geq p \cdot u_1(B, L) + (1-p) \cdot u_1(B, R) \tag{6}
-   \end{alignat}
-   $$
-
-5. Note that (6) contradicts (3). Moreover, since at least one of the inequalities in (1) or (2) is strict, and $p \in (0,1)$, the inequality in (6) must be strict:
-
-   $$
-   \begin{alignat}{2}
-   p \cdot u_1(T, L) + (1-p) \cdot u_1(T, R)
-   &> p \cdot u_1(B, L) + (1-p) \cdot u_1(B, R) \tag{7}
-   \end{alignat}
-   $$
-
-6. This strict inequality (7) directly contradicts the best response condition (3).
-
-Therefore, it's impossible for $T$ to weakly dominate $B$ while simultaneously having $B$ as a best response to a belief that puts strictly positive probability on each of player 2's strategies.
-
-# Markdown Preview Enhanced Features with Examples
-
-Markdown Preview enhanced is a vscode extension for working on Markdown Files and has a few extra features. Read about them here
-
-https://shd101wyy.github.io/crossnote/
-
-0. Code Highlighting and Numbering
-
-   ```python {.line-numbers .highlight="2-3"}
-   x = "Hello"
-   y = "World"
-   print(x, y)
-   ```
-
-1. Admonitions:
-
-   ```markdown
-   !!! note
-   This is an important note.
-
-   !!! warning
-   Be careful with this section.
-   ```
-
-2. File Imports:
-
-   ```markdown
-   @import "python_best_practices.md"
-   @import "document.pdf" {page_no=1}
-   @import "code_sample.py" {line_begin=10 line_end=20}
-   ```
-
-3. Code Execution:
-
-   ```python {cmd=true}
-   import matplotlib.pyplot as plt
-   plt.plot([1, 2, 3, 4])
-   plt.title("Simple Plot")
-   plt.show()
-   ```
-
-4. Plotly Integration:
-
-   ```javascript {cmd=true element="<div id='plotly-graph'></div>"}
-   var GRAPH = document.getElementById("plotly-graph");
-   Plotly.newPlot(GRAPH, [
-     {
-       x: [1, 2, 3, 4],
-       y: [10, 15, 13, 17],
-       type: "scatter",
-     },
-   ]);
-   ```
-
-5. Slide Creation:
-
-   ```markdown
-   ---
-   presentation:
-     theme: serif
-   ---
-
-   # Slide 1
-
-   Content for slide 1
-
-   ---
-
-   # Slide 2
-
-   Content for slide 2
-   ```
-
-6. LaTeX Rendering:
-
-   ```latex {cmd=true}
-   \documentclass{article}
-    \begin{document}
-      \title{Sample Document}
-      \maketitle
-      Hello, world!
-   \end{document}
-   ```
-
-7. Front Matter:
-
-   ```markdown
-   ---
-   title: "My Document"
-   author: "John Doe"
-   date: "2024-03-15"
-    output:
-      custom_document:
-          path: /Exports/test.pdf
-          toc: true
-    pdf_document:
-      toc: true
-      toc_depth: 2
-    export_on_save:
-        pandoc: true
-   ---
-   ```
-
-8. Custom Configuration:
-
-   ```javascript
-   // In config.js (global or workspace)
-   ({
-     katexConfig: {
-       macros: {
-         "\\RR": "\\mathbb{R}",
-       },
-     },
-     mermaidConfig: {
-       theme: "forest",
-     },
-   });
-   ```
-
-9. Custom Styling:
-
-   ```less
-   /* In my-style.less */
-   .markdown-preview {
-     h1 {
-       color: #4a4a4a;
-       border-bottom: 2px solid #4a4a4a;
-     }
-   }
-
-   /* In markdown file */
-   @import "my-style.less";
-   ```
-
-10. Math Macros:
-
-    ```markdown
-    $\newcommand{\vec}[1]{\mathbf{#1}}$
-
-    Now we can use our new macro:
-    $\vec{v} = (x, y, z)$
-    ```
-
-These examples demonstrate the diverse capabilities of the Markdown Preview Enhanced extension, showcasing its power in creating rich, interactive documents with advanced formatting, code execution, and mathematical typesetting.
+```markdown
+# Gatlen's Opinionated Template (GOTem)
+
+**_Cutting-edge, opinionated, and ambitious project builder for power users and researchers._**
+
+GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), one of the most popular, flexible, and well maintained Python templates out there. GOTem extends CCDS with carefully selected defaults, dependency stack, customizations, additional features (that I maybe should have spent time contributing to the original project), and contemporary best practices. Ready for not just data science but also general Python development, research projects, and academic work.
+
+### Key Features
+
+- **🚀 Modern Tooling & Living Template** – Start with built-in support for UV, Ruff, FastAPI, Pydantic, Typer, Loguru, and Polars so you can tackle cutting-edge Python immediately. Template updates as environment changes.
+- **🙌 Instant Git & CI/CD** – Enjoy automatic repo creation, branch protections, and preconfigured GitHub Actions that streamline your workflow from day one.
+- **🤝 Small-Scale to Scalable** – Ideal for solo projects or small teams, yet robust enough to expand right along with your growth.
+- **🏃‍♂️ Start Fast, Stay Strong** – Encourages consistent structure, high-quality code, and minimal friction throughout your project’s entire lifecycle.
+- **🌐 Full-Stack + Rare Boilerplates** – Covers standard DevOps, IDE configs, and publishing steps, plus extra setups for LaTeX assignments, web apps, CLI tools, and more—perfect for anyone seeking a “one-stop” solution.
+
+### Who is this for?
+
+**CCDS** is white bread: simple, familiar, unoffensive, and waiting for your choice of toppings. **GOTem** is the expert-crafted and opinionated “everything burger,” fully loaded from the start for any task you want to do (so long as you want to do it in a specific way). Some of the selections might be an acquired taste and users are encouraged to leave them off as they start and perhaps not all will appreciate my tastes even with time, but it is the setup I find \*_delicious_\*.
+
+|                                                                                                                                                   **✅ Use GOTem if…**                                                                                                                                                   |                                                                                                                    **❌ Might Not Be for You if…**                                                                                                                     |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| **🍔 You Want the “Everything Burger”** <br> - You’re cool with an opinionated, “fully loaded” setup, even if you don’t use all the bells and whistles up front. <br> - You love having modern defaults (FastAPI, Polars, Loguru). at the ready for any case life throws at you from school work to research to websites | **🛣️ You’re a Minimalist** <br> - You prefer the bare bones or “default” approach. <br> - GOTem’s many integrations and new libraries feel too “extra” or opinionated for you, adding more complexity than you want. When you really just want to "get the task done". |
+|                                                           **🎓 You’re a Learner / Explorer** <br> - You like experimenting with cutting-edge tools (Polars, Typer, etc.) even if they’re not as common. <br> - “Modern Over Ubiquitous” libraries excite you.                                                            |                    **🕰️ You’re a Legacy Lover** <br> - Tried-and-true frameworks (e.g., Django, Pandas, standard logging) give you comfort. <br> - You’d rather stick to old favorites than wrestle with fresh tech that might be less documented.                     |
+|                                                        **👨‍💻 You’re a Hacker / Tinkerer** <br> - You want code that’s as **sexy** and elegant as it is functional. <br> - You love tinkering, customizing, and “pretty colors” that keep the ADHD brain wrinkled.                                                         |                            **🔎 You’re a Micro-Optimizer** <br> - You need to dissect every configuration before even starting. <br> - GOTem’s “Aspirational Over Practical” angle might make you wary of unproven or cutting-edge setups.                             |
+|                                                     **⚡ You’re a Perfection & Performance Seeker** <br> - You enjoy pushing Python’s boundaries in speed, design, and maintainability. <br> - You're always looking for the best solution, not just quick patches.                                                      |                    **🏛️ You Need Old-School Stability** <br> - You want a large, established user base and predictable release cycles. <br> - You get uneasy about lesser-known or younger libraries that might break your production environment.                     |
+|                                                           **🏃‍♂️ You’re a Quick-Start Enthusiast** <br> - You want a template that practically configures itself so you can jump in. <br> - You like having robust CI/CD, Git setup, and docs all done for you.                                                            |               **🚶‍♂️ You Prefer Slow, Manual Setups** <br> - You don’t mind spending time creating everything from scratch for each new project. <br> - Doing things the classic or “official” way is more comfortable than using “opinionated” shortcuts.               |
+
+If the right-hand column describes you better, [CookieCutter Data Science (CCDS)](https://cookiecutter-data-science.drivendata.org/) or another minimal template might be a better fit.
+
+**[View the full documentation here](https://gatlenculp.github.io/gatlens-opinionated-template/) ➡️**
+
+---
+
+## Getting Started
+
+<b>⚡️ With UV (Recommended)</b>
+
+```bash
+uv tool install gatlens-opinionated-template
+
+# From the parent directory where you want your project
+uvx --from gatlens-opinionated-template gotem
+```
+
+<details>
+<summary><b>📦 With Pipx</b></summary>
+
+```bash
+pipx install gatlens-opinionated-template
+
+# From the parent directory where you want your project
+gotem
+```
+
+</details>
+
+<details>
+<summary><b>🐍 With Pip</b></summary>
+
+```bash
+pip install gatlens-opinionated-template
+
+# From the parent directory where you want your project
+gotem
+```
+
+</details>
+
+### The resulting directory structure
+
+The directory structure of your new project will look something like this (depending on the settings that you choose):
+
+📁 .
+├── ⚙️ .cursorrules                    <- LLM instructions for Cursor IDE
+├── 💻 .devcontainer                   <- Devcontainer config
+├── ⚙️ .gitattributes                  <- GIT-LFS Setup Configuration
+├── 🧑‍💻 .github
+│   ├── ⚡️ actions
+│   │   └── 📁 setup-python-env       <- Automated python setup w/ uv
+│   ├── 💡 ISSUE_TEMPLATE             <- Templates for Raising Issues on GH
+│   ├── 💡 pull_request_template.md   <- Template for making GitHub PR
+│   └── ⚡️ workflows
+│       ├── 🚀 main.yml               <- Automated cross-platform testing w/ uv, precommit, deptry,
+│       └── 🚀 on-release-main.yml    <- Automated mkdocs updates
+├── 💻 .vscode                        <- Preconfigured extensions, debug profiles, workspaces, and tasks for VSCode/Cursor powerusers
+│   ├── 🚀 launch.json
+│   ├── ⚙️ settings.json
+│   ├── 📋 tasks.json
+│   └── ⚙️ '{{ cookiecutter.repo_name }}.code-workspace'
+├── 📁 data
+│   ├── 📁 external                      <- Data from third party sources
+│   ├── 📁 interim                       <- Intermediate data that has been transformed
+│   ├── 📁 processed                     <- The final, canonical data sets for modeling
+│   └── 📁 raw                           <- The original, immutable data dump
+├── 🐳 docker                            <- Docker configuration for reproducability
+├── 📚 docs                              <- Project documentation (using mkdocs)
+├── 👩‍⚖️ LICENSE                           <- Open-source license if one is chosen
+├── 📋 logs                              <- Preconfigured logging directory for
+├── 👷‍♂️ Makefile                          <- Makefile with convenience commands (PyPi publishing, formatting, testing, and more)
+├── 🚀 Taskfile.yml                    <- Modern alternative to Makefile w/ same functionality
+├── 📁 notebooks                         <- Jupyter notebooks
+│   ├── 📓 01_name_example.ipynb
+│   └── 📰 README.md
+├── 🗑️ out
+│   ├── 📁 features                      <- Extracted Features
+│   ├── 📁 models                        <- Trained and serialized models
+│   └── 📚 reports                       <- Generated analysis
+│       └── 📊 figures                   <- Generated graphics and figures
+├── ⚙️ pyproject.toml                     <- Project configuration file w/ carefully selected dependency stacks
+├── 📰 README.md                         <- The top-level README
+├── 🔒 secrets                           <- Ignored project-level secrets directory to keep API keys and SSH keys safe and separate from your system (no setting up a new SSH-key in ~/.ssh for every project)
+│   └── ⚙️ schema                         <- Clearly outline expected variables
+│       ├── ⚙️ example.env
+│       └── 🔑 ssh
+│           ├── ⚙️ example.config.ssh
+│           ├── 🔑 example.something.key
+│           └── 🔑 example.something.pub
+└── 🚰 '{{ cookiecutter.module_name }}'  <- Easily publishable source code
+    ├── ⚙️ config.py                     <- Store useful variables and configuration (Preset)
+    ├── 🐍 dataset.py                    <- Scripts to download or generate data
+    ├── 🐍 features.py                   <- Code to create features for modeling
+    ├── 📁 modeling
+    │   ├── 🐍 __init__.py
+    │   ├── 🐍 predict.py               <- Code to run model inference with trained models
+    │   └── 🐍 train.py                 <- Code to train models
+    └── 🐍 plots.py                     <- Code to create visualizations
+
+```
 {% endraw %}
+
+
+## Style
+
+For general style, you should adhere to the following rules:
+
+{# Data Science / Deep Learning #}
+{# TODO: Have the style be selected based on the chosen type of project. #}
+{# Adapted from https://cursor.directory/deep-learning-developer-python-cursor-rules #}
+
+```
+You are an expert in deep learning with PyTorch and Python, using the most up-to-date and powerful libraries.
+
+Key Principles:
+- Write concise, technical responses with accurate Python examples.
+- Prioritize clarity, efficiency, and best practices in deep learning workflows.
+- Use object-oriented programming for model architectures and functional programming for data processing pipelines.
+- Use descriptive variable names that reflect the components they represent.
+- Use type annotations wherever available.
+- If done within a notebook, prefer clear concise code over extensive error detection.
+- If done within a python module, prefer reproducability and consistency, recommending PyTests as Needed
+
+Deep Learning and Model Development:
+- Use PyTorch, Lightning, RayTune, and WandB as the primary framework for deep learning tasks.
+- Implement custom nn.Module classes for model architectures.
+- Utilize PyTorch's autograd for automatic differentiation.
+- Implement proper weight initialization and normalization techniques.
+- Use appropriate loss functions and optimization algorithms.
+
+Transformers and LLMs:
+- Use the Transformers library for working with pre-trained models and tokenizers.
+- Implement attention mechanisms and positional encodings correctly.
+- Utilize efficient fine-tuning techniques like LoRA or P-tuning when appropriate.
+- Implement proper tokenization and sequence handling for text data.
+
+Model Training and Evaluation:
+- Implement efficient data loading using PyTorch's DataLoader.
+- Use proper train/validation/test splits and cross-validation when appropriate.
+- Implement early stopping and learning rate scheduling.
+- Use appropriate evaluation metrics for the specific task.
+- Implement gradient clipping and proper handling of NaN/Inf values.
+
+Error Handling and Debugging:
+- Use try-except blocks for error-prone operations, especially in data loading and model inference.
+- Implement proper logging for training progress and errors.
+- Use PyTorch's built-in debugging tools like autograd.detect_anomaly() when necessary.
+
+Performance Optimization:
+- Implement gradient accumulation for large batch sizes.
+- Use mixed precision training with torch.cuda.amp when appropriate.
+- Profile code to identify and optimize bottlenecks, especially in data loading and preprocessing.
+
+Key Conventions:
+1. Begin projects with clear problem definition and dataset analysis.
+2. Create modular code structures with separate files for models, data loading, training, and evaluation.
+3. Use configuration files (e.g., YAML) for hyperparameters and model settings.
+4. Implement proper experiment tracking and model checkpointing.
+5. Use version control (e.g., git) for tracking changes in code and configurations.
+
+Refer to the official documentation of PyTorch, Transformers, and Streamlit for best practices and up-to-date APIs.
+```

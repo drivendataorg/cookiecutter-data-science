@@ -41,8 +41,13 @@ def config_generator(fast=False):
         [("pydata_packages", opt) for opt in cookiecutter_json["pydata_packages"]],
     )
 
-    def _is_valid(config):
+    def _is_valid(config) -> bool:
         config = dict(config)
+        # uv is the only one being supported w/o dep file (pyproject.toml only)
+        if (config["dependency_file"] == "none") and (
+            config["environment_manager"] != "uv"
+        ):
+            return False
         #  Pipfile + pipenv only valid combo for either
         if (config["environment_manager"] == "pipenv") ^ (
             config["dependency_file"] == "Pipfile"
@@ -83,7 +88,7 @@ def config_generator(fast=False):
 
 
 def pytest_addoption(parser):
-    """Pass -F/--fast multiple times to speed up tests
+    """Pass -F/--fast multiple times to speed up tests.
 
     default - execute makefile commands, all configs
 
