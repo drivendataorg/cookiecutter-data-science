@@ -30,8 +30,9 @@
     ],
     "open_source_license": ["MIT", "No license file", "BSD-3-Clause"],
     "docs": ["mkdocs", "none"],
+    // frontend, backend, desktop, 
     "include_code_scaffold": [
-        "No", "paper", "app", "ml", "data", "lib"
+        "No", "paper", "app", "ml", "data", "lib", "course"
     ],
     "use_github": ["Yes", "No"]
 }

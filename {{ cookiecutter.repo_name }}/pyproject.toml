@@ -140,7 +140,7 @@ web = [  # Web development and scraping
     "uvicorn>=0.33.0",         # ASGI server
     # "zrok>=0.4.42",            # Tunnel service (# TODO: Requires 3.10+)
 ]
-
+# ai, web, gui
 [tool.uv]
 default-groups = ["dev", "nb"]
 

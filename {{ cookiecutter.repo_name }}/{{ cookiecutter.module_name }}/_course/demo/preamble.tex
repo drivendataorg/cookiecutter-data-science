@@ -1,0 +1,458 @@
+% {% raw %}
+%----------------------------------------------------------------------------------------
+%  BASIC PACKAGES
+%----------------------------------------------------------------------------------------
+
+% Some of this taken from https://www.overleaf.com/project/672e6266139b14d8f1901e8f
+
+% Page layout and formatting
+\usepackage{fullpage}                                    % Sets margins to 1 inch
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry} % Custom page margins
+\usepackage{fancyhdr}                                    % Custom headers and footers
+\usepackage{lastpage}                                    % Reference last page number
+\usepackage{microtype}                                   % Improves typography and spacing
+\usepackage{etoolbox}                                    % Required for if statements
+\usepackage{booktabs}                                    % Required for better horizontal rules in tables
+\usepackage[utf8]{inputenc}                             % Required for inputting international characters
+
+%----------------------------------------------------------------------------------------
+%  MATH PACKAGES
+%----------------------------------------------------------------------------------------
+
+% Core math packages
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}      % Core AMS math packages
+\usepackage{mathrsfs}                                    % Math script fonts
+\usepackage{mathtools}                                   % Extensions to amsmath
+\usepackage{physics}                                     % Physics notation
+\usepackage{bm}                                         % Bold math symbols
+
+%----------------------------------------------------------------------------------------
+%  MATH COMMANDS - GENERAL
+%----------------------------------------------------------------------------------------
+
+% Basic notation
+\newcommand{\given}{\mathrel{\vert}}
+\newcommand{\lhs}[0]{\hspace{2em}&\hspace{-2em}}
+\newcommand{\trieq}[0]{\triangleq}
+\newcommand{\eqin}[1]{\overset{#1}{=}}
+\newcommand{\defeq}[0]{\overset{\mbox{\normalfont\tiny def}}{=}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\T}{^\mathsf{T}}
+\newcommand{\Sp}{\mathbb{S}}
+\mathchardef\mhyphen="2D
+
+% Custom operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\sign}{sign}
+\let\ab\allowbreak
+
+% Special functions
+\newcommand{\el}{\mathcal{L}}
+\newcommand{\out}{\mathrm{out}}
+\newcommand{\inn}{\mathrm{in}}
+
+%----------------------------------------------------------------------------------------
+%  MATH COMMANDS - VECTORS AND MATRICES
+%----------------------------------------------------------------------------------------
+
+% Vectors (lowercase)
+\def\vzero{{\bm{0}}}
+\def\vone{{\bm{1}}}
+\def\vmu{{\bm{\mu}}}
+\def\vtheta{{\bm{\theta}}}
+\def\va{{\mathbf{a}}}
+\def\vb{{\mathbf{b}}}
+\def\vc{{\mathbf{c}}}
+\def\vd{{\mathbf{d}}}
+\def\ve{{\mathbf{e}}}
+\def\vf{{\mathbf{f}}}
+\def\vg{{\mathbf{g}}}
+\def\vh{{\mathbf{h}}}
+\def\vi{{\mathbf{i}}}
+\def\vj{{\mathbf{j}}}
+\def\vk{{\mathbf{k}}}
+\def\vl{{\mathbf{l}}}
+\def\vm{{\mathbf{m}}}
+\def\vn{{\mathbf{n}}}
+\def\vo{{\mathbf{o}}}
+\def\vp{{\mathbf{p}}}
+\def\vq{{\mathbf{q}}}
+\def\vr{{\mathbf{r}}}
+\def\vs{{\mathbf{s}}}
+\def\vt{{\mathbf{t}}}
+\def\vu{{\mathbf{u}}}
+\def\vv{{\mathbf{v}}}
+\def\vw{{\mathbf{w}}}
+\def\vx{{\mathbf{x}}}
+\def\vy{{\mathbf{y}}}
+\def\vz{{\mathbf{z}}}
+
+% Matrices and tensors (uppercase)
+\def\mA{{\mathbf{A}}}
+\def\mB{{\mathbf{B}}}
+\def\mC{{\mathbf{C}}}
+\def\mD{{\mathbf{D}}}
+\def\mE{{\mathbf{E}}}
+\def\mF{{\mathbf{F}}}
+\def\mG{{\mathbf{G}}}
+\def\mH{{\mathbf{H}}}
+\def\mI{{\mathbf{I}}}
+\def\mJ{{\mathbf{J}}}
+\def\mK{{\mathbf{K}}}
+\def\mL{{\mathbf{L}}}
+\def\mM{{\mathbf{M}}}
+\def\mN{{\mathbf{N}}}
+\def\mO{{\mathbf{O}}}
+\def\mP{{\mathbf{P}}}
+\def\mQ{{\mathbf{Q}}}
+\def\mR{{\mathbf{R}}}
+\def\mS{{\mathbf{S}}}
+\def\mT{{\mathbf{T}}}
+\def\mU{{\mathbf{U}}}
+\def\mV{{\mathbf{V}}}
+\def\mW{{\mathbf{W}}}
+\def\mX{{\mathbf{X}}}
+\def\mY{{\mathbf{Y}}}
+\def\mZ{{\mathbf{Z}}}
+\def\mBeta{{\bm{\beta}}}
+\def\mPhi{{\bm{\Phi}}}
+\def\mLambda{{\bm{\Lambda}}}
+\def\mSigma{{\bm{\Sigma}}}
+
+%----------------------------------------------------------------------------------------
+%  MATH COMMANDS - PROBABILITY AND STATISTICS
+%----------------------------------------------------------------------------------------
+
+% Probability operators
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Ev}[1]{\mathbb{E} \left[ #1 \right]} % Expected Value
+\newcommand{\EvSub}[1]{\underset{#1}{\scalebox{1.475}{$\E$}}} % Expected value with subscript
+\newcommand{\EvSubst}[1]{\expsub{\scalebox{1.2}{\ensuremath{\substack{\mathstrut#1}}}}} % Expected value with stacked subscript
+
+\newcommand{\KL}[1][]{D_{\mathrm{KL}}[#1]} % Kullback-Leibler divergence
+\newcommand{\Var}[1][]{\mathrm{Var}[#1]} % Variance
+\newcommand{\standarderror}[1][]{\mathrm{SE}[#1]} % Standard error
+\newcommand{\Cov}[1][]{\mathrm{Cov}[#1]} % Covariance
+
+%----------------------------------------------------------------------------------------
+%  MATH COMMANDS - SETS AND SPACES
+%----------------------------------------------------------------------------------------
+
+% Number sets and spaces
+\newcommand{\Ls}{\mathcal{L}}
+\newcommand{\R}{\mathbb{R}}
+
+%----------------------------------------------------------------------------------------
+%  MATH COMMANDS - MACHINE LEARNING
+%----------------------------------------------------------------------------------------
+
+% Common ML functions
+\newcommand{\softmax}{\mathrm{softmax}}
+\newcommand{\sigmoid}{\sigma}
+\newcommand{\relu}{\mathrm{ReLU}}
+
+\usepackage{enumitem}                                    % Customized lists
+\usepackage{hyperref}                                    % Clickable links and references
+\usepackage{natbib}                                      % Bibliography management
+\usepackage{url}                                         % URL handling
+\usepackage[capitalize]{cleveref}                        % Smart cross-referencing
+\usepackage{listofitems}                                % For \readlist to create arrays
+
+%----------------------------------------------------------------------------------------
+%  GRAPHICS AND COLORS
+%----------------------------------------------------------------------------------------
+
+\usepackage[dvipsnames]{xcolor}                         % Extended color support
+\usepackage{graphicx}                                   % Include graphics
+\usepackage{listings}                                   % Code listings
+\usepackage{mdframed}                                   % Framed environments
+\usepackage{tikz}                                       % Drawing diagrams
+\usepackage[most]{tcolorbox}                           % Required for boxes that split across pages
+
+%----------------------------------------------------------------------------------------
+%  FONTS AND TYPOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\usepackage{inconsolata}                               % Monospace font for code
+\usepackage{xspace}                                    % Smart spacing
+\usepackage{soul}                                      % Underlining and highlighting
+\usepackage[T1]{fontenc}                              % Better font encoding
+\usepackage[sfdefault,lining]{FiraSans}
+% \usepackage[sfdefault,light]{roboto}                  % Use the Roboto font
+
+% Text abbreviation commands
+\newcommand*{\eg}{e.g.\@\xspace}
+\newcommand*{\ie}{i.e.\@\xspace}
+\newcommand*{\Eg}{E.g.\@\xspace}
+\newcommand*{\Ie}{I.e.\@\xspace}
+\newcommand*{\esp}{esp.\@\xspace}
+\newcommand*{\wrt}{\ifmmode \stext{w.r.t.} \else w.r.t.\@\xspace \fi}
+\newcommand*{\aever}{\ifmmode \stext{a.e.} \else a.e.\@\xspace \fi}
+\newcommand*{\asurely}{\ifmmode \stext{a.s.} \else a.s.\@\xspace \fi}
+\newcommand*{\wprob}{\ifmmode \stext{w.p.} \else w.p.\@\xspace \fi}
+\newcommand*{\etc}{%
+    \@ifnextchar{.}%
+    {etc}%
+    {etc.\@\xspace}%
+}
+
+%----------------------------------------------------------------------------------------
+%  CODE LISTINGS
+%----------------------------------------------------------------------------------------
+
+\usepackage{lstfiracode}                               % Fira Code font for listings
+\lstset{
+    language=Python,
+    style=FiraCodeStyle,
+    basicstyle=\small\ttfamily,
+    columns=fullflexible,
+    keepspaces=true,
+    breaklines=true,
+    breakatwhitespace=false,
+    showstringspaces=false,
+    upquote=true,
+    literate={*}{{\char42}}1
+    {-}{{\char45}}1
+    {~}{{\char126}}1
+}
+
+\lstdefinestyle{Python}{
+    language=Python,
+    style=FiraCodeStyle,
+    frame=lines,
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue},
+    stringstyle=\color{green},
+    commentstyle=\color{red}\ttfamily,
+    numbers=left,
+    numberstyle=\tiny,
+    numbersep=5pt,
+    upquote=true,
+    literate={*}{{\char42}}1
+    {-}{{\char45}}1
+    {~}{{\char126}}1
+}
+
+%----------------------------------------------------------------------------------------
+%  PAGE LAYOUT
+%----------------------------------------------------------------------------------------
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.1in}
+\setlist[enumerate]{parsep=5pt}
+\pagestyle{fancyplain}
+\graphicspath{{figs/}}
+
+\geometry{
+    paper=a4paper,
+    top=3cm,
+    bottom=3cm,
+    left=2.5cm,
+    right=2.5cm,
+    headheight=14pt,
+    footskip=1.4cm,
+    headsep=1.2cm,
+}
+
+%----------------------------------------------------------------------------------------
+%  HEADERS AND FOOTERS
+%----------------------------------------------------------------------------------------
+
+\pagestyle{fancy}
+
+\lhead{\small\assignmentClass\ifdef{\assignmentClassInstructor}{\ (\assignmentClassInstructor):}{}\ \assignmentTitle}
+\chead{}
+\rhead{\small\ifdef{\assignmentAuthorName}{\assignmentAuthorName}{\ifdef{\assignmentDueDate}{Due\ \assignmentDueDate}{}}}
+
+\lfoot{}
+\cfoot{\small Page\ \thepage\ of\ \pageref{LastPage}}
+\rfoot{}
+
+\renewcommand\headrulewidth{0.5pt}
+
+%----------------------------------------------------------------------------------------
+%  HYPERREF SETUP
+%----------------------------------------------------------------------------------------
+
+\hypersetup{%
+    colorlinks=true,
+    linkcolor=blue,
+    linkbordercolor={0 0 1},
+    citecolor=[rgb]{0,0.55,0.27}
+}
+
+%----------------------------------------------------------------------------------------
+%  SECTION STYLES
+%----------------------------------------------------------------------------------------
+
+\usepackage{titlesec}
+
+% Section format
+\titleformat
+{\section}
+[block]
+{\Large\bfseries}
+{\assignmentQuestionName~\thesection}
+{6pt}
+{}
+
+\titlespacing{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip}
+
+% Subsection format
+\titleformat
+{\subsection}
+[block]
+{\itshape}
+{(\alph{subsection})}
+{4pt}
+{}
+
+\titlespacing{\subsection}{0pt}{0.5\baselineskip}{0.5\baselineskip}
+\renewcommand\thesubsection{(\alph{subsection})}
+
+%----------------------------------------------------------------------------------------
+%  CUSTOM COMMANDS
+%----------------------------------------------------------------------------------------
+
+\newcommand{\fixme}[1]{{\color{red} \bf FIXME: #1}}
+\newcommand{\hint}[1]{{\color{black}\textbf{Hint}: \color{gray}#1}}
+\newcommand{\grader}[1]{{\color{blue}\textbf{Grader comments}: #1}}
+\newcommand{\hltexttt}[1]{\texttt{\hl{\,#1\,}}}
+
+%----------------------------------------------------------------------------------------
+%  QUESTION ENVIRONMENTS
+%----------------------------------------------------------------------------------------
+
+\newenvironment{question}{
+    \vspace{0.5\baselineskip}
+    \section{}
+    \lfoot{\small\itshape\assignmentQuestionName~\thesection~continued on next page\ldots}
+}{
+    \lfoot{}
+}
+
+\newenvironment{subquestion}[1]{
+    \subsection{#1}
+}{
+}
+
+\newcommand{\questiontext}[1]{
+    \textbf{#1}
+    \vspace{0.5\baselineskip}
+}
+
+\newcommand{\answer}[1]{
+    \begin{tcolorbox}[breakable, enhanced]
+        #1
+    \end{tcolorbox}
+}
+
+\newcommand{\answerbox}[1]{
+    \begin{tcolorbox}[breakable, enhanced]
+        \vphantom{L}\vspace{\numexpr #1-1\relax\baselineskip}
+    \end{tcolorbox}
+}
+
+\newenvironment{soln}[1][1]{
+    \begin{tcolorbox}[breakable, enhanced]
+        \vphantom{L}\vspace{\numexpr #1-1\relax\baselineskip}
+    }{
+    \end{tcolorbox}
+}
+
+% Command to print an assignment section title to split an assignment into major parts
+\newcommand{\assignmentSection}[1]{
+    {
+        \centering % Centre the section title
+        \vspace{2\baselineskip} % Whitespace before the entire section title
+
+        \rule{0.8\textwidth}{0.5pt} % Horizontal rule
+
+        \vspace{0.75\baselineskip} % Whitespace before the section title
+        {\LARGE \MakeUppercase{#1}} % Section title, forced to be uppercase
+
+        \rule{0.8\textwidth}{0.5pt} % Horizontal rule
+
+        \vspace{\baselineskip} % Whitespace after the entire section title
+    }
+}
+
+%----------------------------------------------------------------------------------------
+%  ADDITIONAL MATH COMMANDS
+%----------------------------------------------------------------------------------------
+
+% Additional operators and symbols
+\newcommand{\colonequals}{\,:=\,}   % Definition symbol
+\newcommand{\defin}{:\in}                       % Alternative definition symbol
+\newcommand{\set}[1]{\left\{#1\right\}}                % Set notation
+\newcommand{\QuackED}{\boxed{\text{🪿}}}               % Duck symbol
+\newcommand{\Reals}{\mathbb{R}}                        % Alternative reals notation
+\newcommand{\natnums}{\mathbb{N}}                      % Natural numbers
+
+% Sequence notation
+\newcommand{\seq}[2]{#1_1, \cdots, #1_{#2}}            % Sequence x_{1:n} -> x_1, ..., x_n
+\newcommand{\seqexcept}[2]{                             % Sequence except i
+    #1_1, \cdots, #1_{#2-1}, #1_{#2+1}, \cdots, #1_n
+}
+
+% Indexing commands
+\newcommand{\ind}[1]{^{(#1)}}                          % Superscript index (i)
+\newcommand{\indb}[1]{^{[#1]}}
+
+%----------------------------------------------------------------------------------------
+%  MATH COMMANDS - GAME THEORY
+%----------------------------------------------------------------------------------------
+
+% Game theory sets and spaces
+\newcommand{\NE}{\mathcal{NE}}                          % Nash Equilibrium
+\newcommand{\MNE}{\mathcal{MNE}}                        % Mixed Nash Equilibrium
+\newcommand{\BR}{\mathcal{BR}}                          % Best Response
+\newcommand{\Players}{\mathcal{N}}                      % Set of players
+\newcommand{\Hist}{\mathcal{H}}                         % Set of histories
+\newcommand{\Term}{\mathcal{Z}}                         % Set of terminal nodes
+\newcommand{\Info}{\mathcal{I}}                         % Information sets
+\newcommand{\Strat}{\mathcal{S}}                        % Strategy space
+\newcommand{\Actions}{\mathcal{A}}                      % Action space
+
+% Game theory utility and probability
+\newcommand{\util}{\tilde{u}}                           % Utility function
+\newcommand{\belief}{\beta}                             % Belief
+\newcommand{\mixed}{\sigma}                             % Mixed strategy
+\newcommand{\pure}{s}                                   % Pure strategy
+
+% Game theory subscripts
+\newcommand{\notplayer}[1]{_{-#1}}                      % Notation for all players except i
+\newcommand{\infoset}[2]{\Info_{#1}^{(#2)}}
+
+%----------------------------------------------------------------------------------------
+%  TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\author{
+    \textbf{\assignmentAuthorName}
+    \ifdef{\assignmentCollaborators}{
+        \\ \vspace{0.5em} \small{Collaborators: \assignmentCollaborators}
+    }{}
+    \ifdef{\assignmentResources}{
+        \\ \vspace{0.5em} \small{Resources Used: \assignmentResources}
+    }{}
+}
+\date{}
+
+\title{
+    \thispagestyle{empty}
+    \vspace{0.2\textheight}
+    \Huge{\textbf{\assignmentClass:\ \assignmentTitle}}\\[-4pt]
+    \ifdef{\assignmentDueDate}{{\small Due\ on\ \assignmentDueDate}\\}{}
+    \ifdef{\assignmentClassInstructor}{{\large \textit{\assignmentClassInstructor}}}{}
+    \vspace{0.32\textheight}
+}
+\newcommand{\assignmentQuestionName}{Question}
+\newcommand{\assignmentAuthorName}{
+
+    % {% endraw %}
+    {{ cookiecutter.author_full_name }}
+    % {% raw %}
+}
+% {% endraw %}

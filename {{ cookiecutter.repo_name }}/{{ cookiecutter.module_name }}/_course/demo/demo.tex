@@ -1,0 +1,226 @@
+% {% raw %}
+\documentclass[11pt,letterpaper]{article}
+\input{preamble}
+% Required
+\newcommand{\assignmentClass}{14.12} % Course/class
+\newcommand{\assignmentTitle}{PS01\ \#1} % Assignment title or name
+\newcommand{\assignmentCollaborators}{ChatGPT o1-preview}  % List of collaborators
+\newcommand{\assignmentResources}{None}      % List of resources used
+
+% Optional (comment lines to remove)
+\newcommand{\assignmentClassInstructor}{Ian Ball 10:00am} % Intructor name/time/description
+\newcommand{\assignmentDueDate}{Friday,\ November\ 15,\ 2024} % Due date
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%  TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\maketitle % Print the title page
+
+\thispagestyle{empty} % Suppress headers and footers on the title page
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%  DEMO PAGE
+%----------------------------------------------------------------------------------------
+
+\tikzstyle{mynode}=[thick,draw=blue,fill=blue!20,circle,minimum size=22]
+\begin{tikzpicture}[x=2.2cm,y=1.4cm]
+  \readlist\Nnod{4,5,5,5,3} % number of nodes per layer
+  % \Nnodlen = length of \Nnod (i.e. total number of layers)
+  % \Nnod[1] = element (number of nodes) at index 1
+  \foreachitem \N \in \Nnod{ % loop over layers
+    % \N     = current element in this iteration (i.e. number of nodes for this layer)
+    % \Ncnt  = index of current layer in this iteration
+    \foreach \i [evaluate={\x=\Ncnt; \y=\N/2-\i+0.5; \prev=int(\Ncnt-1);}] in {1,...,\N}{ % loop over nodes
+      \node[mynode] (N\Ncnt-\i) at (\x,\y) {};
+      \ifnum\Ncnt>1 % connect to previous layer
+      \foreach \j in {1,...,\Nnod[\prev]}{ % loop over nodes in previous layer
+        \draw[thick] (N\prev-\j) -- (N\Ncnt-\i); % connect arrows directly
+      }
+      \fi % else: nothing to connect first layer
+    }
+  }
+\end{tikzpicture}
+
+\cite{Goodfellow-et-al-2016}
+
+\begin{soln}
+  My answer to this problem is yes!
+
+  $s = (\seq{s}{n})$  % Expands to s = (s_1, ..., s_n)
+
+  $s_{-i} = (\seqexcept{s}{i})$  % Expands to s_{-i} = (s_1, ..., s_{i-1}, s_{i+1}, ..., s_n)
+
+  $s \ind{i}$ or $s \indb{i}$
+\end{soln}
+
+% A few columns: variable symbol (using phantom as needed), what it represents, properties of the variable, and misc
+\begin{align}
+  G \colonequals (V, E, w, h) \quad
+  G &\colonequals \text{fin. undir. } \textbf{G}\text{raph} \quad
+  &&\mathbb{G} = \set{\text{all } G}
+  \\
+  \phantom{G \colonequals (}V\phantom{, E, w, h)} \quad
+  V &\colonequals \textbf{V}\text{ertex set}
+  \\
+  \phantom{G \colonequals (V,} E\phantom{, w, h)} \quad
+  E &\colonequals \textbf{E}\text{dge set} \quad
+  &&E \subset V \times V
+  \\
+  \phantom{G \colonequals (V, E,} w\phantom{, h)} \quad
+  w &\colonequals \text{edge }\textbf{w}\text{eights} \quad
+  &&w_e \defin \mathbb{R} \land w_e \defin [-C, C] \quad 
+  &\forall e \defin E
+  \\
+  \phantom{G \colonequals (V, E, w,} h\phantom{)} \quad
+  h &\colonequals \text{node features} \quad
+  &&h_v \defin \mathbb{R}^m \land h_v \defin [-C, C] \quad
+  &\forall v \defin V
+  \\
+  \phantom{G \colonequals (V, E, w, h)} \quad
+  C &\defin (0, \infty)
+\end{align}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%  QUESTION 1
+%----------------------------------------------------------------------------------------
+
+\begin{question}
+
+  \questiontext{What is the airspeed velocity of an unladen swallow?}
+
+  \answer{While this question leaves out the crucial element of the geographic origin of the swallow, according to Jonathan Corum, an unladen European swallow maintains a cruising airspeed velocity of \textbf{11 metres per second}, or \textbf{24 miles an hour}. The velocity of the corresponding African swallows requires further research as kinematic data is severely lacking for these species.}
+
+\end{question}
+
+%----------------------------------------------------------------------------------------
+%  QUESTION 2
+%----------------------------------------------------------------------------------------
+
+\begin{question}
+
+  \questiontext{How much wood would a woodchuck chuck if a woodchuck could chuck wood?}
+
+  %--------------------------------------------
+
+  \begin{subquestion}{Suppose ``chuck" implies throwing.} % Subquestion within question
+
+    \answer{According to the Associated Press (1988), a New York Fish and Wildlife technician named Richard Thomas calculated the volume of dirt in a typical 25--30 foot (7.6--9.1 m) long woodchuck burrow and had determined that if the woodchuck had moved an equivalent volume of wood, it could move ``about \textbf{700 pounds (320 kg)} on a good day, with the wind at his back".}
+
+  \end{subquestion}
+
+  %--------------------------------------------
+
+  \begin{subquestion}{Suppose ``chuck" implies vomiting.} % Subquestion within question
+
+    \answer{A woodchuck can ingest 361.92 cm\textsuperscript{3} (22.09 cu in) of wood per day. Assuming immediate expulsion on ingestion with a 5\% retainment rate, a woodchuck could chuck \textbf{343.82 cm\textsuperscript{3}} of wood per day.}
+
+  \end{subquestion}
+
+  %--------------------------------------------
+
+\end{question}
+
+%----------------------------------------------------------------------------------------
+%  QUESTION 3
+%----------------------------------------------------------------------------------------
+
+\begin{question}
+
+  \questiontext{Identify the author of Equation \ref{eq:bayes} below and briefly describe it in English.}
+
+  \begin{equation}\label{eq:bayes}
+    \Pr(A|B) = \frac{\Pr(B|A)P(A)}{\Pr(B)}
+  \end{equation}
+
+  \answer{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor arcu luctus, imperdiet urna iaculis, mattis eros. Pellentesque iaculis odio vel nisl ullamcorper, nec faucibus ipsum molestie. Sed dictum nisl non aliquet porttitor. Etiam vulputate arcu dignissim, finibus sem et, viverra nisl. Aenean luctus congue massa, ut laoreet metus ornare in. Nunc fermentum nisi imperdiet lectus tincidunt vestibulum at ac elit. Nulla mattis nisl eu malesuada suscipit.}
+
+\end{question}
+
+%----------------------------------------------------------------------------------------
+
+\assignmentSection{Bonus Questions}
+
+%----------------------------------------------------------------------------------------
+%  QUESTION 4
+%----------------------------------------------------------------------------------------
+
+\begin{question}
+
+  \questiontext{The table below shows the nutritional consistencies of two sausage types. Explain their relative differences given what you know about daily adult nutritional recommendations.}
+
+  \begin{table}[h]
+    \centering % Centre the table
+    \begin{tabular}{l l l}
+      \toprule
+      \textit{Per 50g} & Pork & Soy \\
+      \midrule
+      Energy & 760kJ & 538kJ\\
+      Protein & 7.0g & 9.3g\\
+      Carbohydrate & 0.0g & 4.9g\\
+      Fat & 16.8g & 9.1g\\
+      Sodium & 0.4g & 0.4g\\
+      Fibre & 0.0g & 1.4g\\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+
+  \answer{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor arcu luctus, imperdiet urna iaculis, mattis eros. Pellentesque iaculis odio vel nisl ullamcorper, nec faucibus ipsum molestie. Sed dictum nisl non aliquet porttitor. Etiam vulputate arcu dignissim, finibus sem et, viverra nisl. Aenean luctus congue massa, ut laoreet metus ornare in. Nunc fermentum nisi imperdiet lectus tincidunt vestibulum at ac elit. Nulla mattis nisl eu malesuada suscipit.}
+
+\end{question}
+
+%----------------------------------------------------------------------------------------
+%  QUESTION 5
+%----------------------------------------------------------------------------------------
+
+\begin{question}
+
+  \begin{lstlisting}[
+    caption=Sample Code,
+    label=lst:luftballons,
+    language=Python,
+    frame=single,
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny]
+
+    def main():
+        print("Hello World")
+
+    if __name__ == "__main__":
+        main()
+
+    \end{lstlisting}
+
+    %--------------------------------------------
+
+    \begin{subquestion}{How many luftballons will be output by the Listing \ref{lst:luftballons} above?} % Subquestion within question
+
+      \answer{99 luftballons.}
+
+    \end{subquestion}
+
+    %--------------------------------------------
+
+    \begin{subquestion}{Identify the regular expression in Listing \ref{lst:luftballons} and explain how it relates to the anti-war sentiments found in the rest of the script.} % Subquestion within question
+
+      \answer{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor arcu luctus, imperdiet urna iaculis, mattis eros. Pellentesque iaculis odio vel nisl ullamcorper, nec faucibus ipsum molestie. Sed dictum nisl non aliquet porttitor. Etiam vulputate arcu dignissim, finibus sem et, viverra nisl. Aenean luctus congue massa, ut laoreet metus ornare in. Nunc fermentum nisi imperdiet lectus tincidunt vestibulum at ac elit. Nulla mattis nisl eu malesuada suscipit.}
+
+    \end{subquestion}
+
+    %--------------------------------------------
+
+  \end{question}
+
+  \newpage
+  \bibliographystyle{plainnat}
+  \bibliography{reference}
+
+  \end{document}
+% {% endraw %}

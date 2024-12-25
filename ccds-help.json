@@ -317,6 +317,13 @@
           "description": "Library/package structure",
           "more_information": "Basic package structure with examples and API documentation setup"
         }
+      },
+      {
+        "choice": "course",
+        "help": {
+          "description": "Library/package structure",
+          "more_information": "Basic package structure with examples and API documentation setup"
+        }
       }
     ]
   },
