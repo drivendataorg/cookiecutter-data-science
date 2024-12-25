@@ -165,7 +165,7 @@ _clean_manual_test:
 # PROJECT RULES                                                                 #
 #################################################################################
 
-{%- if cookiecutter.include_code_scaffold == 'Yes' %}
+{%- if cookiecutter.include_code_scaffold != 'No' %}
 
 .PHONY: data ## Make Dataset
 data: requirements

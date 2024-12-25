@@ -22,7 +22,7 @@ packages_to_install = copy(packages)
 packages_to_install += ["awscli"]
 # {% endif %} #
 
-# {% if cookiecutter.include_code_scaffold == "Yes" %}
+# {% if cookiecutter.include_code_scaffold != "No" %}
 packages_to_install += scaffold
 # {% endif %}
 

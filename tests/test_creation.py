@@ -124,7 +124,7 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
 
     ignore_dirs = [".git", ".venv", "__pycache__"]
 
-    if config["include_code_scaffold"] == "Yes":
+    if config["include_code_scaffold"] != "No":
         expected_dirs += [
             f"{config['module_name']}/modeling",
         ]
@@ -202,7 +202,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
     if not config["open_source_license"].startswith("No license"):
         expected_files.append("LICENSE")
 
-    if config["include_code_scaffold"] == "Yes":
+    if config["include_code_scaffold"] != "No":
         expected_files += [
             f"{config['module_name']}/config.py",
             f"{config['module_name']}/dataset.py",
