@@ -1,5 +1,5 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
+requires = ["flit_core >=3.2,<3.13"]
 build-backend = "flit_core.buildapi"
 
 [project]
@@ -23,6 +23,8 @@ dependencies = [
     "plotly>=5.24.1",        # Interactive plotting
     "pydantic>=2.10.3",      # Data validation
     "rich>=13.9.4",          # Rich terminal output
+    "numpy>=1.26.4",         # Numerical computing
+    "python-dotenv>=1.0.0"   # Load .env into environment vars
 ]
 
 [dependency-groups]
@@ -65,13 +67,12 @@ config = [  # Configuration management
 data = [  # Data processing and storage
     "dagster>=1.9.5",           # Data orchestration
     "duckdb>=1.1.3",           # Embedded analytics database
-    "lancedb>=0.17.0",         # Vector database
+    # "lancedb>=0.17.0",         # Vector database (TODO: Figure out install error)
     "networkx>=3.4.2",         # Graph operations
-    "numpy>=1.26.4",           # Numerical computing
     "orjson>=3.10.12",         # Fast JSON parsing
     "pillow>=10.4.0",          # Image processing
     "polars>=1.17.0",          # Fast dataframes
-    "pygwalker>=0.4.9.13",     # Data visualization
+    # "pygwalker>=0.4.9.13",     # Data visualization (TODO: Figure out install error)
     "sqlmodel>=0.0.22",        # SQL ORM
     "tomli>=2.0.1",            # TOML parsing
 ]
@@ -85,7 +86,7 @@ dev = [  # Development tools
     "polyfactory>=2.18.1",     # Test data factory
     "pydoclint>=0.5.11",       # Docstring linter
     "pyinstrument>=5.0.0",     # Profiler
-    "pyprojectsort>=0.3.0",    # pyproject.toml sorter
+    # "pyprojectsort>=0.3.0",    # pyproject.toml sorter (TODO: Find replacement)
     "pyright>=1.1.390",        # Static type checker
     "pytest-cases>=3.8.6",     # Parametrized testing
     "pytest-cov>=6.0.0",       # Coverage reporting
@@ -141,7 +142,7 @@ web = [  # Web development and scraping
 ]
 
 [tool.uv]
-default-groups = ["dev", "data", "nb"]
+default-groups = ["dev", "nb"]
 
 
 # [project.urls]

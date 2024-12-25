@@ -98,7 +98,7 @@ _clean_manual_test:
 
 manual-test: _prep _clean_manual_test ## Run manual tests
 	mkdir -p manual_test
-	cd manual_test && uv run gotem ..
+	cd manual_test && uv run gotem .. && cursor ./project_name
 
 manual-test-debug: _prep _clean_manual_test ## Run manual tests with debugger
 	mkdir -p manual_test
@@ -114,5 +114,5 @@ help:  ## Show this help message
 	@echo " | |  _| | | || |/ _ \ '_ \` _ \ "
 	@echo " | |_| | |_| || |  __/ | | | | |"
 	@echo "  \____|\___/ |_|\___|_| |_| |_|\033[0m"
-	@echo "\n\033[1m~ Available Commands ~\033[0m\n"
+	@echo "\n\033[1m~ Available rules: ~\033[0m\n"
 	@grep -E '^[a-zA-Z][a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[38;5;222m%-30s\033[0m %s\n", $$1, $$2}'

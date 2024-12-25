@@ -138,9 +138,7 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         d.resolve().relative_to(root)
         for d in root.glob('**')
         if d.is_dir()
-        and not any(
-            ignore_dir in d.relative_to(root).parts for ignore_dir in ignore_dirs
-        )
+        and not any(ignore_dir in d.relative_to(root).parts for ignore_dir in ignore_dirs)
     ]
 
     assert sorted(existing_dirs) == sorted(expected_dirs)
@@ -158,6 +156,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         str(CCDS_ORIGINAL_DIR / 'README.md'),
         'README.md',
         'pyproject.toml',
+        '.env',
         '.gitignore',
         '.devcontainer/devcontainer.json',
         '.devcontainer/postCreateCommand.sh',
@@ -219,8 +218,11 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
             'docs/docs/index.md',
             'docs/docs/getting-started.md',
         ]
+    if config['dependency_file'] != 'none':
+        expected_files.append(config['dependency_file'])
 
-    expected_files.append(config['dependency_file'])
+    if config['environment_manager'] == 'uv':
+        expected_files.append('uv.lock')
 
     expected_files = [Path(f) for f in expected_files]
 
@@ -228,9 +230,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         f.relative_to(root)
         for f in root.glob('**/*')
         if f.is_file()
-        and not any(
-            ignore_dir in f.relative_to(root).parts for ignore_dir in ignore_dirs
-        )
+        and not any(ignore_dir in f.relative_to(root).parts for ignore_dir in ignore_dirs)
     ]
 
     assert sorted(existing_files) == sorted(expected_files)
@@ -289,7 +289,8 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
 
     # Check that makefile help ran successfully
     assert 'Available rules:' in stdout_output
-    assert 'clean                    Delete all compiled Python files' in stdout_output
+    assert 'clean' in stdout_output
+    assert 'Delete all compiled Python files' in stdout_output
 
     assert result.returncode == 0
 

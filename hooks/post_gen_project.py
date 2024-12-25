@@ -1,9 +1,12 @@
-import shutil
+"""File to be run after template initialization by cookiecutter."""
+
 from copy import copy
+import os
 from pathlib import Path
+import shutil
+import subprocess
 
 from ccds.hook_utils.configure_gh import configure_github_repo
-from ccds.hook_utils.configure_venv import configure_uv_venv
 
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
@@ -16,7 +19,7 @@ from ccds.hook_utils.dependencies import basic, packages, scaffold, write_depend
 packages_to_install = copy(packages)
 
 # {% if cookiecutter.dataset_storage.s3 %}
-packages_to_install += ["awscli"]
+packages_to_install += ['awscli']
 # {% endif %} #
 
 # {% if cookiecutter.include_code_scaffold == "Yes" %}
@@ -29,57 +32,57 @@ packages_to_install += basic
 
 # track packages that are not available through conda
 pip_only_packages = [
-    "awscli",
-    "python-dotenv",
+    'awscli',
+    'python-dotenv',
 ]
 
 # Use the selected documentation package specified in the config,
 # or none if none selected
-docs_path = Path("docs")
+docs_path = Path('docs')
 # {% if cookiecutter.docs != "none" %}
-packages_to_install += ["{{ cookiecutter.docs }}"]
-pip_only_packages += ["{{ cookiecutter.docs }}"]
-docs_subpath = docs_path / "{{ cookiecutter.docs }}"
+packages_to_install += ['{{ cookiecutter.docs }}']
+pip_only_packages += ['{{ cookiecutter.docs }}']
+docs_subpath = docs_path / '{{ cookiecutter.docs }}'
 for obj in docs_subpath.iterdir():
     shutil.move(str(obj), str(docs_path))
 # {% endif %}
 
 # Remove all remaining docs templates
 for docs_template in docs_path.iterdir():
-    if docs_template.is_dir() and not docs_template.name == "docs":
+    if docs_template.is_dir() and not docs_template.name == 'docs':
         shutil.rmtree(docs_template)
 
 #
 #  POST-GENERATION FUNCTIONS
 #
 write_dependencies(
-    "{{ cookiecutter.dependency_file }}",
+    '{{ cookiecutter.dependency_file }}',
     packages_to_install,
     pip_only_packages,
-    repo_name="{{ cookiecutter.repo_name }}",
-    module_name="{{ cookiecutter.module_name }}",
-    python_version="{{ cookiecutter.python_version_number }}",
+    repo_name='{{ cookiecutter.repo_name }}',
+    module_name='{{ cookiecutter.module_name }}',
+    python_version='{{ cookiecutter.python_version_number }}',
 )
 
-write_custom_config("{{ cookiecutter.custom_config }}")
+write_custom_config('{{ cookiecutter.custom_config }}')
 
 # Remove LICENSE if "No license file"
-if "{{ cookiecutter.open_source_license }}" == "No license file":
-    Path("LICENSE").unlink()
+if '{{ cookiecutter.open_source_license }}' == 'No license file':
+    Path('LICENSE').unlink()
 
 # Make single quotes prettier
 # Jinja tojson escapes single-quotes with \u0027 since it's meant for HTML/JS
-pyproject_text = Path("pyproject.toml").read_text()
-Path("pyproject.toml").write_text(pyproject_text.replace(r"\u0027", "'"))
+pyproject_text = Path('pyproject.toml').read_text()
+Path('pyproject.toml').write_text(pyproject_text.replace(r'\u0027', "'"))
 
 # {% if cookiecutter.include_code_scaffold == "No" %}
 # remove everything except __init__.py so result is an empty package
-for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
+for generated_path in Path('{{ cookiecutter.module_name }}').iterdir():
     if generated_path.is_dir():
         shutil.rmtree(generated_path)
-    elif generated_path.name != "__init__.py":
+    elif generated_path.name != '__init__.py':
         generated_path.unlink()
-    elif generated_path.name == "__init__.py":
+    elif generated_path.name == '__init__.py':
         # remove any content in __init__.py since it won't be available
         generated_path.write_text(
             '"""{{ cookiecutter.module_name }}: {{ cookiecutter.project_short_description }}."""\n'
@@ -93,14 +96,15 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
 # {% if cookiecutter.use_github == "Yes" %}
 configure_github_repo(
     directory=Path.cwd(),
-    repo_name="{{ cookiecutter.repo_name }}",
-    protection_type="main_and_dev",
+    repo_name='{{ cookiecutter.repo_name }}',
+    protection_type='main_and_dev',
     no_github=False,
 )
 # {% endif %}
 
 # Install the virtual environment (uv only for now)
 # {% if cookiecutter.environment_manager == "uv" %}
-configure_uv_venv(directory=Path.cwd())
-
+os.chdir(Path.cwd())
+subprocess.run(['make', 'create_environment'])
+subprocess.run(['make', 'requirements'])
 # {% endif %}

@@ -99,6 +99,7 @@ indent-style = "space"
 addopts = """
 --tb=long
 --code-highlight=yes
+--color=yes
 """
 
 testpaths = ["tests"]

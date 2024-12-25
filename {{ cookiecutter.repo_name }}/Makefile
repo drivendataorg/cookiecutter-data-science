@@ -28,8 +28,8 @@ _welcome: ## Print a Welcome screen
 #################################################################################
 
 {% if cookiecutter.environment_manager != 'none' -%}
-.PHONY: create-environment
-create-environment: ## Set up python interpreter environment
+.PHONY: create_environment
+create_environment: ## Set up python interpreter environment
 	{%- if cookiecutter.environment_manager == 'conda' %}
 	{%- if cookiecutter.dependency_file != 'environment.yml' %}
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
@@ -55,12 +55,13 @@ create-environment: ## Set up python interpreter environment
 requirements: ## Install Python Dependencies
 	{%- if cookiecutter.environment_manager == 'uv' %}
 	uv sync
+	uv pip install -e .
 	{% elif "requirements.txt" == cookiecutter.dependency_file -%}
 	$(PYTHON_INTERPRETER) -m pip install -U pip
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 	{% elif "environment.yml" == cookiecutter.dependency_file -%}
 	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
-	{% elif "Pipfile" == cookiecutter.dependency_file -%}
+	{% elif "Pipfile" == cookiecutter.dependency_file %}
 	pipenv install
 	{% endif %}
 {% endif %}
@@ -196,6 +197,6 @@ help:  ## Show this help message
 	@echo " | |  _| | | || |/ _ \ '_ \` _ \ "
 	@echo " | |_| | |_| || |  __/ | | | | |"
 	@echo "  \____|\___/ |_|\___|_| |_| |_|\033[0m"
-	@echo "\n\033[1m~ Available Commands ~\033[0m\n"
+	@echo "\n\033[1m~ Available rules: ~\033[0m\n"
 	@echo "For VSCode/Cursor, try: ⇧ ⌘ P, Tasks: Run Task\n"
 	@grep -E '^[a-zA-Z][a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[38;5;222m%-30s\033[0m %s\n", $$1, $$2}'
