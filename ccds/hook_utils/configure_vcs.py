@@ -194,3 +194,31 @@ def _set_branch_protection(username: str, repo_name: str, branch: str) -> None:
         f"-f required_pull_request_reviews='{protection_data['required_pull_request_reviews']}' "
         f"-f restrictions={protection_data['restrictions']}"
     )
+
+
+def init_local_git_repo(directory: str | Path) -> bool:
+    """
+    Initialize a local git repository without any GitHub integration.
+    
+    Args:
+        directory: Directory where the repository will be created
+        
+    Returns:
+        bool: True if initialization was successful, False otherwise
+    """
+    try:
+        directory = Path(directory)
+        if not directory.is_dir():
+            raise ValueError(f"Directory '{directory}' does not exist.")
+            
+        os.chdir(directory)
+        
+        if not (directory / ".git").is_dir():
+            _run_git_command("init")
+            _run_git_command("add .")
+            _run_git_command("commit -m 'Initial commit'")
+            
+        return True
+    except Exception as e:
+        print(f"Error during repository initialization: {e}")
+        return False

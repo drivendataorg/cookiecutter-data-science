@@ -16,6 +16,9 @@ Icon?
 Icon
 Icon[\r]
 
+# ruff
+.ruff_cache/
+
 # vim
 *.swp
 *.swo

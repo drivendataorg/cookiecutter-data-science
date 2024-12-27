@@ -6,7 +6,7 @@ from pathlib import Path
 #   our workaround is to include these utility functions in the CCDS package
 from ccds.hook_utils.custom_config import write_custom_config
 from ccds.hook_utils.dependencies import basic, packages, scaffold, write_dependencies
-from ccds.hook_utils.configure_vcs import configure_github_repo
+from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_repo
 
 #
 #  TEMPLATIZED VARIABLES FILLED IN BY COOKIECUTTER
@@ -82,7 +82,11 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
         generated_path.write_text("")
 # {% endif %}
 
-# {% if cookiecutter.version_control == "git (github)" %}
+# {% if cookiecutter.version_control == "git (local)" %}
+init_local_git_repo(
+    directory=Path.cwd()
+)
+# {% elif cookiecutter.version_control == "git (github)" %}
 configure_github_repo(
     directory=Path.cwd(),
     repo_name="{{ cookiecutter.repo_name }}",

@@ -80,6 +80,19 @@ def verify_folders(root, config):
 
     if config["docs"] == "mkdocs":
         expected_dirs += ["docs/docs"]
+    
+    if config["version_control"] in ("git (local)", "git (github)"):
+        expected_dirs += [
+            ".git",
+            ".git/hooks",
+            ".git/info",
+            ".git/objects",
+            ".git/objects/info",
+            ".git/objects/pack",
+            ".git/refs",
+            ".git/refs/heads",
+            ".git/refs/tags"
+        ]
 
     expected_dirs = [
         #  (root / d).resolve().relative_to(root) for d in expected_dirs
@@ -137,6 +150,33 @@ def verify_files(root, config):
             "docs/README.md",
             "docs/docs/index.md",
             "docs/docs/getting-started.md",
+        ]
+        
+    if config["version_control"] in ("git (local)", "git (github)"):
+        expected_files += [
+            ".git/config",
+            ".git/description",
+            ".git/FETCH_HEAD",
+            ".git/HEAD",
+            ".git/hooks/applypatch-msg.sample",
+            ".git/hooks/commit-msg.sample",
+            ".git/hooks/fsmonitor-watchman.sample",
+            ".git/hooks/post-update.sample",
+            ".git/hooks/pre-applypatch.sample",
+            ".git/hooks/pre-commit.sample",
+            ".git/hooks/pre-merge-commit.sample",
+            ".git/hooks/pre-push.sample",
+            ".git/hooks/pre-rebase.sample",
+            ".git/hooks/pre-receive.sample",
+            ".git/hooks/prepare-commit-msg.sample",
+            ".git/hooks/push-to-checkout.sample",
+            ".git/hooks/sendemail-validate.sample",
+            ".git/hooks/update.sample",
+            ".git/info/exclude",
+            ".git/objects/info",
+            ".git/objects/pack",
+            ".git/refs/heads",
+            ".git/refs/tags"
         ]
 
     expected_files.append(config["dependency_file"])
