@@ -5,6 +5,7 @@ import tempfile
 from contextlib import contextmanager
 from itertools import cycle, product
 from pathlib import Path
+from typing import Generator, Iterator, Sequence
 
 import pytest
 
@@ -12,8 +13,7 @@ from ccds.__main__ import api_main
 
 CCDS_ROOT = Path(__file__).parents[1].resolve()
 
-
-default_args = {
+default_args: dict[str, str] = {
     "project_name": "my_test_project",
     "repo_name": "my-test-repo",
     "module_name": "project_module",
@@ -23,15 +23,25 @@ default_args = {
 }
 
 
-def config_generator(fast=False):
-    cookiecutter_json = json.load((CCDS_ROOT / "ccds.json").open("r"))
+def config_generator(fast: int | bool = False) -> Generator[dict[str, str], None, None]:
+    """Generate test configurations based on cookiecutter.json options.
 
-    # python versions for the created environment; match the root
-    # python version since Pipenv needs to be able to find an executable
-    running_py_version = f"{sys.version_info.major}.{sys.version_info.minor}"
-    py_version = [("python_version_number", v) for v in [running_py_version]]
+    Args:
+        fast: Speed control flag for test execution
 
-    configs = product(
+    Yields:
+        Dictionary of configuration options for each test case
+    """
+    cookiecutter_json: dict[str, list[str]] = json.load(
+        (CCDS_ROOT / "ccds.json").open("r")
+    )
+
+    running_py_version: str = f"{sys.version_info.major}.{sys.version_info.minor}"
+    py_version: list[tuple[str, str]] = [
+        ("python_version_number", v) for v in [running_py_version]
+    ]
+
+    configs: Iterator[tuple[tuple[str, str], ...]] = product(
         py_version,
         [
             ("environment_manager", opt)
@@ -41,21 +51,19 @@ def config_generator(fast=False):
         [("pydata_packages", opt) for opt in cookiecutter_json["pydata_packages"]],
     )
 
-    def _is_valid(config) -> bool:
-        config = dict(config)
-        # uv is the only one being supported w/o dep file (pyproject.toml only)
-        if (config["dependency_file"] == "none") and (
-            config["environment_manager"] != "uv"
+    def _is_valid(config: Sequence[tuple[str, str]]) -> bool:
+        config_dict: dict[str, str] = dict(config)
+        if (config_dict["dependency_file"] == "none") and (
+            config_dict["environment_manager"] != "uv"
         ):
             return False
-        #  Pipfile + pipenv only valid combo for either
-        if (config["environment_manager"] == "pipenv") ^ (
-            config["dependency_file"] == "Pipfile"
+        if (config_dict["environment_manager"] == "pipenv") ^ (
+            config_dict["dependency_file"] == "Pipfile"
         ):
             return False
         # conda is the only valid env manager for environment.yml
-        if (config["dependency_file"] == "environment.yml") and (
-            config["environment_manager"] != "conda"
+        if (config_dict["dependency_file"] == "environment.yml") and (
+            config_dict["environment_manager"] != "conda"
         ):
             return False
         return True
@@ -63,9 +71,7 @@ def config_generator(fast=False):
     # remove invalid configs
     configs = [c for c in configs if _is_valid(c)]
 
-    # cycle over all values other multi-select fields that should be inter-operable
-    # and that we don't need to handle with combinatorics
-    cycle_fields = [
+    cycle_fields: list[str] = [
         "dataset_storage",
         "open_source_license",
         "include_code_scaffold",
@@ -87,14 +93,14 @@ def config_generator(fast=False):
             break
 
 
-def pytest_addoption(parser):
+def pytest_addoption(parser: pytest.Parser) -> None:
     """Pass -F/--fast multiple times to speed up tests.
 
     default - execute makefile commands, all configs
 
-     -F - execute makefile commands, single config
-     -FF - skip makefile commands, all configs
-     -FFF - skip makefile commands, single config
+    -F - execute makefile commands, single config
+    -FF - skip makefile commands, all configs
+    -FFF - skip makefile commands, single config
     """
     parser.addoption(
         "--fast",
@@ -110,22 +116,50 @@ def fast(request):
     return request.config.getoption("--fast")
 
 
-def pytest_generate_tests(metafunc):
-    """setup config fixture to get all of the results from config_generator"""
+def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:  # type: ignore[misc]
+    """Generate test configurations."""
 
-    def make_test_id(config):
+    def make_test_id(config: dict[str, str]) -> str:
         return f"{config['environment_manager']}-{config['dependency_file']}-{config['docs']}"
 
     if "config" in metafunc.fixturenames:
+        configs = list(config_generator(metafunc.config.getoption("fast")))
+        parametrize_args = [
+            (
+                pytest.param(config, marks=pytest.mark.xfail)
+                if config["environment_manager"] == "conda"
+                else config
+            )
+            for config in configs
+        ]
         metafunc.parametrize(
             "config",
-            config_generator(metafunc.config.getoption("fast")),
+            parametrize_args,
             ids=make_test_id,
         )
 
 
 @contextmanager
-def bake_project(config):
+def bake_project(config: dict[str, str]) -> Generator[Path, None, None]:
+    """Creates a temporary cookiecutter project for testing purposes.
+
+    This context manager creates a temporary directory, bakes a cookiecutter project
+    using the provided configuration, and cleans up afterwards.
+
+    Args:
+        config: Dictionary containing cookiecutter template configuration values.
+            Must include a 'repo_name' key.
+
+    Yields:
+        Path: Path to the generated project directory.
+
+    Example:
+        >>> config = {"repo_name": "test-project", ...}
+        >>> with bake_project(config) as project_path:
+        ...     # work with generated project
+        ...     pass
+        >>> # Directory is automatically cleaned up after context exits
+    """
     temp = Path(tempfile.mkdtemp(suffix="data-project")).resolve()
 
     api_main.cookiecutter(

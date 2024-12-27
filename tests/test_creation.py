@@ -17,7 +17,7 @@ OUT_DIR = Path("out")
 
 
 def _decode_print_stdout_stderr(result: CompletedProcess) -> tuple[str, str]:
-    """Print command stdout and stderr to console to use when debugging failing tests
+    """Print command stdout and stderr to console to use when debugging failing tests.
     Normally hidden by pytest except in failure we want this displayed
 
     Args:
@@ -196,7 +196,16 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         f"{config['module_name']}/__init__.py",
     ]
 
-    ignore_dirs = [".git", ".venv", "__pycache__", "_frontend", "_backend", "_course", "_ai", "_cli"]
+    ignore_dirs = [
+        ".git",
+        ".venv",
+        "__pycache__",
+        "_frontend",
+        "_backend",
+        "_course",
+        "_ai",
+        "_cli",
+    ]
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):
