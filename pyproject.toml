@@ -59,6 +59,7 @@ dev = [
     "pexpect>=4.9.0",
     "pipenv>=2024.4.0",
     "pre-commit>=3.5.0",
+    "pytest-icdiff>=0.9",
     "pytest>=8.3.4",
     "pytest-sugar>=1.0.0",
     "pytest-watcher>=0.4.3",
@@ -106,6 +107,7 @@ addopts = """
 --tb=long
 --code-highlight=yes
 --color=yes
+-vv
 """
 
 testpaths = ["./tests"]

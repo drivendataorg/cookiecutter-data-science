@@ -66,7 +66,7 @@ docs-serve: ## Serve documentation locally on port $(DOCS_PORT)
 	echo "\n\nInstance found running on $(DOCS_PORT), try killing process and rerun."
 
 # Makes sure docs can be served prior to actually deploying
-docs-publish: ## Build and deploy documentation to GitHub Pages
+docs-publish: ## Build and deploy documentation to GitHub Pagesa
 	cd docs && \
 	mkdocs build && \
 	mkdocs gh-deploy --clean
@@ -101,7 +101,7 @@ _clean_manual_test:
 
 manual-test: _prep _clean_manual_test ## Run manual tests
 	mkdir -p manual_test
-	cd manual_test && uv run gotem .. && cursor ./project_name
+	cd manual_test && gotem .. && cursor ./project_name
 
 manual-test-debug: _prep _clean_manual_test ## Run manual tests with debugger
 	mkdir -p manual_test

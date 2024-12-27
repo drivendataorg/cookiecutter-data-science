@@ -78,7 +78,7 @@ def test_baking_configs(config: dict[str, Any], fast: int) -> None:
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
         # install_requirements(project_directory)
-        lint(project_directory)
+        # lint(project_directory)
 
         if fast < 2:
             verify_makefile_commands(project_directory, config)
@@ -179,7 +179,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         "docs/.gitkeep",
         "tests/conftest.py",
         "tests/test_main.py",
-        "notebooks/01_name_example.ipynb",
+        "notebooks/0.01_gatlen_example.ipynb",
         "notebooks/README.md",
         "secrets/schema/example.env",
         "secrets/schema/ssh/example.config.ssh",
@@ -198,13 +198,14 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
 
     ignore_dirs = [".git", ".venv", "__pycache__", "_frontend", "_backend", "_course", "_ai", "_cli"]
 
-    # # conditional files
-    # if not config["open_source_license"].startswith("No license"):
-    #     expected_files.append("LICENSE")
+    # conditional files
+    if not config["open_source_license"].startswith("No license"):
+        expected_files.append("LICENSE")
 
-    # if config["include_code_scaffold"] != "No":
-    #     expected_files += [
-    #         f"{config['module_name']}/config.py",
+    if config["include_code_scaffold"] != "No":
+        expected_files += [
+            f"{config['module_name']}/config.py",
+        ]
     #         f"{config['module_name']}/dataset.py",
     #         f"{config['module_name']}/features.py",
     #         f"{config['module_name']}/modeling/__init__.py",

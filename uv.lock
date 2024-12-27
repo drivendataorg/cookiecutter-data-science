@@ -380,6 +380,7 @@ dev = [
     { name = "pipenv" },
     { name = "pre-commit" },
     { name = "pytest" },
+    { name = "pytest-icdiff" },
     { name = "pytest-sugar" },
     { name = "pytest-watcher" },
     { name = "ruff" },
@@ -413,6 +414,7 @@ dev = [
     { name = "pipenv", specifier = ">=2024.4.0" },
     { name = "pre-commit", specifier = ">=3.5.0" },
     { name = "pytest", specifier = ">=8.3.4" },
+    { name = "pytest-icdiff", specifier = ">=0.9" },
     { name = "pytest-sugar", specifier = ">=1.0.0" },
     { name = "pytest-watcher", specifier = ">=0.4.3" },
     { name = "ruff", specifier = ">=0.8.4" },
@@ -433,6 +435,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/d9/29/d40217cbe2f6b1359e00c6c307bb3fc876ba74068cbab3dde77f03ca0dc4/ghp-import-2.1.0.tar.gz", hash = "sha256:9c535c4c61193c2df8871222567d7fd7e5014d835f97dc7b7439069e2413d343", size = 10943 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f7/ec/67fbef5d497f86283db54c22eec6f6140243aae73265799baaaa19cd17fb/ghp_import-2.1.0-py3-none-any.whl", hash = "sha256:8337dd7b50877f163d4c0289bc1f1c7f127550241988d568c1db512c4324a619", size = 11034 },
+]
+
+[[package]]
+name = "icdiff"
+version = "2.0.7"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/fa/e4/43341832be5f2bcae71eb3ef08a07aaef9b74f74fe0b3675f62bd12057fe/icdiff-2.0.7.tar.gz", hash = "sha256:f79a318891adbf59a45e3a7694f5e1f18c5407065264637072ac8363b759866f", size = 16394 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7c/2a/b3178baa75a3ec75a33588252296c82a1332d2b83cd01061539b74bde9dd/icdiff-2.0.7-py3-none-any.whl", hash = "sha256:f05d1b3623223dd1c70f7848da7d699de3d9a2550b902a8234d9026292fb5762", size = 17018 },
 ]
 
 [[package]]
@@ -976,6 +987,15 @@ wheels = [
 ]
 
 [[package]]
+name = "pprintpp"
+version = "0.4.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/06/1a/7737e7a0774da3c3824d654993cf57adc915cb04660212f03406334d8c0b/pprintpp-0.4.0.tar.gz", hash = "sha256:ea826108e2c7f49dc6d66c752973c3fc9749142a798d6b254e1e301cfdbc6403", size = 17995 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4e/d1/e4ed95fdd3ef13b78630280d9e9e240aeb65cc7c544ec57106149c3942fb/pprintpp-0.4.0-py2.py3-none-any.whl", hash = "sha256:b6b4dcdd0c0c0d75e4d7b2f21a9e933e5b2ce62b26e1a54537f9651ae5a5c01d", size = 16952 },
+]
+
+[[package]]
 name = "pre-commit"
 version = "3.5.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1109,6 +1129,20 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/05/35/30e0d83068951d90a01852cb1cef56e5d8a09d20c7f511634cc2f7e0372a/pytest-8.3.4.tar.gz", hash = "sha256:965370d062bce11e73868e0335abac31b4d3de0e82f4007408d242b4f8610761", size = 1445919 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/11/92/76a1c94d3afee238333bc0a42b82935dd8f9cf8ce9e336ff87ee14d9e1cf/pytest-8.3.4-py3-none-any.whl", hash = "sha256:50e16d954148559c9a74109af1eaf0c945ba2d8f30f0a3d3335edde19788b6f6", size = 343083 },
+]
+
+[[package]]
+name = "pytest-icdiff"
+version = "0.9"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "icdiff" },
+    { name = "pprintpp" },
+    { name = "pytest" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5a/0c/66e1e2590e98f4428e374a3b6448dc086a908d15b1e24b914539d13b7ac4/pytest-icdiff-0.9.tar.gz", hash = "sha256:13aede616202e57fcc882568b64589002ef85438046f012ac30a8d959dac8b75", size = 7110 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e2/e1/cafe1edf7a30be6fa1bbbf43f7af12b34682eadcf19eb6e9f7352062c422/pytest_icdiff-0.9-py3-none-any.whl", hash = "sha256:efee0da3bd1b24ef2d923751c5c547fbb8df0a46795553fba08ef57c3ca03d82", size = 4994 },
 ]
 
 [[package]]
