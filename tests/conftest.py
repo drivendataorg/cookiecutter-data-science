@@ -19,7 +19,7 @@ default_args = {
     "module_name": "project_module",
     "author_name": "DrivenData",
     "description": "A test project",
-    "version_control": "none"
+    "version_control": "git (local)"
 }
 
 

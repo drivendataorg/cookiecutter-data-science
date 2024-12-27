@@ -45,3 +45,4 @@ ccds = "ccds.__main__:main"
 
 [tool.pytest.ini_options]
 testpaths = "./tests"
+addopts = "-vv --color=yes"

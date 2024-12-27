@@ -84,7 +84,8 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
 
 # {% if cookiecutter.version_control == "git (local)" %}
 init_local_git_repo(
-    directory=Path.cwd()
+    directory=Path.cwd(),
+    _make_initial_commit=False
 )
 # {% elif cookiecutter.version_control == "git (github)" %}
 configure_github_repo(

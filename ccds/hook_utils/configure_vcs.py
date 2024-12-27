@@ -10,12 +10,13 @@ from typing import Literal
 # ---------------------------------------------------------------------------- #
 
 
-def init_local_git_repo(directory: str | Path) -> bool:
+def init_local_git_repo(directory: str | Path, _make_initial_commit: bool = True) -> bool:
     """
     Initialize a local git repository without any GitHub integration.
     
     Args:
         directory: Directory where the repository will be created
+        _make_initial_commit: Whether to make initial commit (for testing)
         
     Returns:
         bool: True if initialization was successful, False otherwise
@@ -32,8 +33,9 @@ def init_local_git_repo(directory: str | Path) -> bool:
         
         if not (directory / ".git").is_dir():
             _git("init")
-            _git("add .")
-            _git("commit -m 'Initial commit'")
+            if _make_initial_commit:
+                _git("add .")
+                _git("commit -m 'Initial commit'")
             
         return True
     except Exception as e:

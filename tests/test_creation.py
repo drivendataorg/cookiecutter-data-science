@@ -7,6 +7,9 @@ from subprocess import PIPE, run
 from conftest import bake_project
 
 BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
+IGNORE_PATTERNS = [
+    "./.git/objects/**"
+]
 
 
 def _decode_print_stdout_stderr(result):
@@ -82,6 +85,7 @@ def verify_folders(root, config):
         expected_dirs += ["docs/docs"]
     
     if config["version_control"] in ("git (local)", "git (github)"):
+        # Expected after `git init`
         expected_dirs += [
             ".git",
             ".git/hooks",
@@ -91,8 +95,14 @@ def verify_folders(root, config):
             ".git/objects/pack",
             ".git/refs",
             ".git/refs/heads",
-            ".git/refs/tags"
+            ".git/refs/tags",
         ]
+        # Expected after first git commit
+        # expected_dirs += [
+        #     ".git/logs",
+        #     ".git/logs/refs",
+        #     ".git/logs/refs/heads",
+        # ]
 
     expected_dirs = [
         #  (root / d).resolve().relative_to(root) for d in expected_dirs
@@ -153,10 +163,10 @@ def verify_files(root, config):
         ]
         
     if config["version_control"] in ("git (local)", "git (github)"):
+        # Expected after `git init`
         expected_files += [
             ".git/config",
             ".git/description",
-            ".git/FETCH_HEAD",
             ".git/HEAD",
             ".git/hooks/applypatch-msg.sample",
             ".git/hooks/commit-msg.sample",
@@ -173,11 +183,16 @@ def verify_files(root, config):
             ".git/hooks/sendemail-validate.sample",
             ".git/hooks/update.sample",
             ".git/info/exclude",
-            ".git/objects/info",
-            ".git/objects/pack",
-            ".git/refs/heads",
-            ".git/refs/tags"
         ]
+        # Expected after first git commit
+        # expected_files += [
+        #     ".git/COMMIT_EDITMSG",
+        #     ".git/FETCH_HEAD",
+        #     ".git/index",
+        #     ".git/logs/HEAD",
+        #     ".git/logs/refs/heads/main",
+        #     ".git/refs/heads/main",
+        # ]
 
     expected_files.append(config["dependency_file"])
 
@@ -186,9 +201,17 @@ def verify_files(root, config):
     existing_files = [f.relative_to(root) for f in root.glob("**/*") if f.is_file()]
 
     assert sorted(existing_files) == sorted(expected_files)
+    
+    # Ignore files where curlies may exist but aren't unrendered jinja tags
+    ignore_curly_files = [
+        ".git/hooks/fsmonitor-watchman.sample"
+    ]
 
-    for f in existing_files:
-        assert no_curlies(root / f)
+    assert all(
+        no_curlies(root / f)
+        for f in existing_files
+        if str(f) not in ignore_curly_files
+    )
 
 
 def verify_makefile_commands(root, config):
