@@ -28,5 +28,10 @@
     ],
     "open_source_license": ["No license file", "MIT", "BSD-3-Clause"],
     "docs": ["mkdocs", "none"],
-    "include_code_scaffold": ["Yes", "No"]
+    "include_code_scaffold": ["Yes", "No"],
+    "version_control": [
+        "none",
+        "git (local)",
+        "git (github)"
+    ]
 }

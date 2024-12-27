@@ -277,5 +277,35 @@
                 } 
             }
         ]
+    },
+    {
+        "field": "version_control",
+        "help": {
+            "description": "What kind of version control system (vcs) and repository host to use.",
+            "more_information": ""
+        },
+        "choices": [
+            {
+                "choice": "none",
+                "help": {
+                    "description": "No version control.",
+                    "more_information": ""
+                } 
+            },
+            {
+                "choice": "git (local)",
+                "help": {
+                    "description": "Initialize a git repository locally.",
+                    "more_information": ""
+                } 
+            },
+            {
+                "choice": "git (github)",
+                "help": {
+                    "description": "Initialize a git repository locally and upload to GitHub",
+                    "more_information": ""
+                } 
+            }
+        ]
     }
 ]
