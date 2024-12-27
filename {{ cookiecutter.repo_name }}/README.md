@@ -5,12 +5,13 @@
 {{cookiecutter.description}}
 
 ## Project Organization
+{#
 <!-- (Skipping common file descriptions to be concise) -->
 <!-- Created with eza --all --tree --icons --ignore-glob ".gitkeep" -->
 <!-- https://github.com/mightbesimon/vscode-emoji-icons -->
 <!-- TODO: In Github Actions actually have a simple test or something -->
 <!-- TODO: update main.yml to use what I now have setup -->
-<!-- So apparently main vs master is a thing -->
+#}
 ```
 📁 .
 ├── ⚙️ .cursorrules                    <- LLM instructions for Cursor IDE
