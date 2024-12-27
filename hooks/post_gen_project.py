@@ -22,7 +22,7 @@ packages_to_install = copy(packages)
 packages_to_install += ["awscli"]
 # {% endif %} #
 
-# {% if cookiecutter.include_code_scaffold == "Yes" %}
+# {% if cookiecutter.include_code_scaffold != "No" %}
 packages_to_install += scaffold
 # {% endif %}
 
@@ -87,6 +87,13 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
         generated_path.write_text(
             '"""{{ cookiecutter.module_name }}: {{ cookiecutter.project_short_description }}."""\n'
         )
+# {# TODO #}
+# {% elif cookiecutter.include_code_scaffold == "data" %}
+# {% elif cookiecutter.include_code_scaffold == "paper" %}
+# {% elif cookiecutter.include_code_scaffold == "app" %}
+# {% elif cookiecutter.include_code_scaffold == "ml" %}
+# {% elif cookiecutter.include_code_scaffold == "lib" %}
+# {% elif cookiecutter.include_code_scaffold == "course" %}
 # {% endif %}
 
 #

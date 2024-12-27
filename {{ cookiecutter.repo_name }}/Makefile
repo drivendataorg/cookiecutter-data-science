@@ -5,12 +5,6 @@
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_VERSION = {{ cookiecutter.python_version_number }}
 PYTHON_INTERPRETER = python
-{#-
-PYTHON_INTERPRETER = uv python
-{%- if cookiecutter.environment_manager == 'uv' %}
-{%- else %}
-{%- endif %}
-#}
 DOCS_PORT ?= 8000
 
 #################################################################################
@@ -52,8 +46,8 @@ create_environment: ## Set up python interpreter environment
 {% if cookiecutter.dependency_file != 'none' or cookiecutter.environment_manager == 'uv' %}
 
 .PHONY: requirements
-requirements: ## Install Python Dependencies
-	{%- if cookiecutter.environment_manager == 'uv' %}
+requirements: ## Install Python Dep
+	{% if cookiecutter.environment_manager == 'uv' %}
 	uv sync
 	{% elif "requirements.txt" == cookiecutter.dependency_file -%}
 	$(PYTHON_INTERPRETER) -m pip install -U pip
@@ -101,14 +95,14 @@ format:
 # Switched to using uv
 docs-serve: ## Serve documentation locally on port $(DOCS_PORT)
 	cd docs && \
-	uv run mkdocs serve -a localhost:$(DOCS_PORT) || \
+	mkdocs serve -a localhost:$(DOCS_PORT) || \
 	echo "\n\nInstance found running on $(DOCS_PORT), try killing process and rerun."
 
 # Makes sure docs can be served prior to actually deploying
 docs-publish: ## Build and deploy documentation to GitHub Pages
 	cd docs && \
-	uv run mkdocs build && \
-	uv run mkdocs gh-deploy --clean
+	mkdocs build && \
+	mkdocs gh-deploy --clean
 
 #################################################################################
 # DATA COMMANDS                                                                 #
@@ -146,17 +140,17 @@ sync_data_up: ## Upload Data to storage system
 #################################################################################
 
 test: _prep ## Run all tests
-	uv run pytest -vvv --durations=0
+	pytest -vvv --durations=0
 
 test-fastest: _prep ## Run tests with fail-fast option
-	uv run pytest -vvv -FFF
+	pytest -vvv -FFF
 
 # Requires pytest-watcher (Continuous Testing for Fast Tests)
 test-continuous: _prep ## Run tests in watch mode using pytest-watcher
-	uv run ptw . --now --runner pytest --config-file pyproject.toml -vvv -FFF
+	ptw . --now --runner pytest --config-file pyproject.toml -vvv -FFF
 
 test-debug-last: ## Debug last failed test with pdb
-	uv run pytest --lf --pdb
+	pytest --lf --pdb
 
 _clean_manual_test:
 	rm -rf manual_test
@@ -165,7 +159,7 @@ _clean_manual_test:
 # PROJECT RULES                                                                 #
 #################################################################################
 
-{%- if cookiecutter.include_code_scaffold == 'Yes' %}
+{%- if cookiecutter.include_code_scaffold != 'No' %}
 
 .PHONY: data ## Make Dataset
 data: requirements

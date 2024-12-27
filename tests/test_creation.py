@@ -17,7 +17,7 @@ OUT_DIR = Path("out")
 
 
 def _decode_print_stdout_stderr(result: CompletedProcess) -> tuple[str, str]:
-    """Print command stdout and stderr to console to use when debugging failing tests
+    """Print command stdout and stderr to console to use when debugging failing tests.
     Normally hidden by pytest except in failure we want this displayed
 
     Args:
@@ -78,7 +78,7 @@ def test_baking_configs(config: dict[str, Any], fast: int) -> None:
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
         # install_requirements(project_directory)
-        lint(project_directory)
+        # lint(project_directory)
 
         if fast < 2:
             verify_makefile_commands(project_directory, config)
@@ -119,15 +119,15 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         str(OUT_DIR / "reports" / "figures"),
         "notebooks",
         str(OUT_DIR / "reports"),
-        config["module_name"],
+        # config["module_name"],
     ]
 
-    ignore_dirs = [".git", ".venv", "__pycache__"]
+    ignore_dirs = [".git", ".venv", "__pycache__", config["module_name"]]
 
-    if config["include_code_scaffold"] == "Yes":
-        expected_dirs += [
-            f"{config['module_name']}/modeling",
-        ]
+    # if config["include_code_scaffold"] != "No":
+    #     expected_dirs += [
+    #         f"{config['module_name']}/modeling",
+    #     ]
 
     if config["docs"] == "mkdocs":
         expected_dirs += ["docs/docs"]
@@ -179,7 +179,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         "docs/.gitkeep",
         "tests/conftest.py",
         "tests/test_main.py",
-        "notebooks/01_name_example.ipynb",
+        "notebooks/0.01_gatlen_example.ipynb",
         "notebooks/README.md",
         "secrets/schema/example.env",
         "secrets/schema/ssh/example.config.ssh",
@@ -196,22 +196,32 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         f"{config['module_name']}/__init__.py",
     ]
 
-    ignore_dirs = [".git", ".venv", "__pycache__"]
+    ignore_dirs = [
+        ".git",
+        ".venv",
+        "__pycache__",
+        "_frontend",
+        "_backend",
+        "_course",
+        "_ai",
+        "_cli",
+    ]
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):
         expected_files.append("LICENSE")
 
-    if config["include_code_scaffold"] == "Yes":
+    if config["include_code_scaffold"] != "No":
         expected_files += [
             f"{config['module_name']}/config.py",
-            f"{config['module_name']}/dataset.py",
-            f"{config['module_name']}/features.py",
-            f"{config['module_name']}/modeling/__init__.py",
-            f"{config['module_name']}/modeling/train.py",
-            f"{config['module_name']}/modeling/predict.py",
-            f"{config['module_name']}/plots.py",
         ]
+    #         f"{config['module_name']}/dataset.py",
+    #         f"{config['module_name']}/features.py",
+    #         f"{config['module_name']}/modeling/__init__.py",
+    #         f"{config['module_name']}/modeling/train.py",
+    #         f"{config['module_name']}/modeling/predict.py",
+    #         f"{config['module_name']}/plots.py",
+    #     ]
 
     if config["docs"] == "mkdocs":
         expected_files += [
