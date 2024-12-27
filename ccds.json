@@ -31,7 +31,7 @@
     "include_code_scaffold": ["Yes", "No"],
     "version_control": [
         "none",
-        "git (local)",
-        "git (github)"
+        "git (github)",
+        "git (local)"
     ]
 }
