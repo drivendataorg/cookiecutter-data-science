@@ -10,14 +10,16 @@ from typing import Literal
 # ---------------------------------------------------------------------------- #
 
 
-def init_local_git_repo(directory: str | Path, _make_initial_commit: bool = True) -> bool:
+def init_local_git_repo(
+    directory: str | Path, _make_initial_commit: bool = True
+) -> bool:
     """
     Initialize a local git repository without any GitHub integration.
-    
+
     Args:
         directory: Directory where the repository will be created
         _make_initial_commit: Whether to make initial commit (for testing)
-        
+
     Returns:
         bool: True if initialization was successful, False otherwise
     """
@@ -28,23 +30,25 @@ def init_local_git_repo(directory: str | Path, _make_initial_commit: bool = True
         directory = Path(directory)
         if not directory.is_dir():
             raise ValueError(f"Directory '{directory}' does not exist.")
-            
+
         os.chdir(directory)
-        
+
         if not (directory / ".git").is_dir():
             _git("init")
             if _make_initial_commit:
                 _git("add .")
                 _git("commit -m 'Initial commit'")
-            
+
         return True
     except Exception as e:
         print(f"Error during repository initialization: {e}")
         return False
 
+
 def _git(command: str, **kwargs) -> subprocess.CompletedProcess:
     """Run a git command and return the result."""
     return subprocess.run(f"git {command}", shell=True, check=True, **kwargs)
+
 
 def _check_git_cli_installed() -> bool:
     """Check whether git cli is installed"""
@@ -54,9 +58,11 @@ def _check_git_cli_installed() -> bool:
     except subprocess.CalledProcessError:
         return False
 
+
 # ---------------------------------------------------------------------------- #
 #                                 Git + Github                                 #
 # ---------------------------------------------------------------------------- #
+
 
 def configure_github_repo(
     directory: str | Path,

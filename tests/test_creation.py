@@ -72,32 +72,38 @@ def verify_folders(root, config):
         "reports/figures",
         config["module_name"],
     }
+    ignored_dirs = set()
 
     if config["include_code_scaffold"] == "Yes":
         expected_dirs.add(f"{config['module_name']}/modeling")
 
     if config["docs"] == "mkdocs":
         expected_dirs.add("docs/docs")
-    
+
     if config["version_control"] in ("git (local)", "git (github)"):
         # Expected after `git init`
-        expected_dirs.update({
-            ".git",
-            ".git/hooks",
-            ".git/info",
-            ".git/objects",
-            ".git/objects/info",
-            ".git/objects/pack",
-            ".git/refs",
-            ".git/refs/heads",
-            ".git/refs/tags",
-        })
+        expected_dirs.update(
+            {
+                ".git",
+                ".git/hooks",
+                ".git/info",
+                ".git/objects",
+                ".git/refs",
+                ".git/refs/heads",
+                ".git/refs/tags",
+            }
+        )
         # Expected after initial git commit
-        # expected_dirs += [
-        #     ".git/logs",
-        #     ".git/logs/refs",
-        #     ".git/logs/refs/heads",
-        # ]
+        expected_dirs.update(
+            {
+                ".git/logs",
+                ".git/logs/refs",
+                ".git/logs/refs/heads",
+            }
+        )
+        ignored_dirs.update(
+            {d.relative_to(root) for d in root.glob(".git/objects/**/*") if d.is_dir()}
+        )
 
     expected_dirs = {Path(d) for d in expected_dirs}
 
@@ -105,7 +111,7 @@ def verify_folders(root, config):
         d.resolve().relative_to(root) for d in root.glob("**") if d.is_dir()
     }
 
-    assert sorted(existing_dirs) == sorted(expected_dirs)
+    assert sorted(existing_dirs - ignored_dirs) == sorted(expected_dirs)
 
 
 def verify_files(root, config):
@@ -130,88 +136,90 @@ def verify_files(root, config):
         f"{config['module_name']}/__init__.py",
     }
 
+    ignored_files = set()
+
     # conditional files
     if not config["open_source_license"].startswith("No license"):
         expected_files.add("LICENSE")
 
     if config["include_code_scaffold"] == "Yes":
-        expected_files.update({
-            f"{config['module_name']}/config.py",
-            f"{config['module_name']}/dataset.py",
-            f"{config['module_name']}/features.py",
-            f"{config['module_name']}/modeling/__init__.py",
-            f"{config['module_name']}/modeling/train.py",
-            f"{config['module_name']}/modeling/predict.py",
-            f"{config['module_name']}/plots.py",
-        })
+        expected_files.update(
+            {
+                f"{config['module_name']}/config.py",
+                f"{config['module_name']}/dataset.py",
+                f"{config['module_name']}/features.py",
+                f"{config['module_name']}/modeling/__init__.py",
+                f"{config['module_name']}/modeling/train.py",
+                f"{config['module_name']}/modeling/predict.py",
+                f"{config['module_name']}/plots.py",
+            }
+        )
 
     if config["docs"] == "mkdocs":
-        expected_files.update({
-            "docs/mkdocs.yml",
-            "docs/README.md",
-            "docs/docs/index.md",
-            "docs/docs/getting-started.md",
-        })
-        
-    if config["version_control"] in ("git (local)", "git (github)"):
-        # Expected after `git init`
-        expected_files.update({
-            ".git/config",
-            ".git/description",
-            ".git/HEAD",
-            ".git/hooks/applypatch-msg.sample",
-            ".git/hooks/commit-msg.sample",
-            ".git/hooks/fsmonitor-watchman.sample",
-            ".git/hooks/post-update.sample",
-            ".git/hooks/pre-applypatch.sample",
-            ".git/hooks/pre-commit.sample",
-            ".git/hooks/pre-merge-commit.sample",
-            ".git/hooks/pre-push.sample",
-            ".git/hooks/pre-rebase.sample",
-            ".git/hooks/pre-receive.sample",
-            ".git/hooks/prepare-commit-msg.sample",
-            ".git/hooks/push-to-checkout.sample",
-            ".git/hooks/sendemail-validate.sample",
-            ".git/hooks/update.sample",
-            ".git/info/exclude",
-        })
-        # Expected after initial git commit
-        # expected_files += [
-        #     ".git/COMMIT_EDITMSG",
-        #     ".git/FETCH_HEAD",
-        #     ".git/index",
-        #     ".git/logs/HEAD",
-        #     ".git/logs/refs/heads/main",
-        #     ".git/refs/heads/main",
-        # ]
+        expected_files.update(
+            {
+                "docs/mkdocs.yml",
+                "docs/README.md",
+                "docs/docs/index.md",
+                "docs/docs/getting-started.md",
+            }
+        )
 
     expected_files.add(config["dependency_file"])
-    
-    ignored_files = set()
-    
+
     if config["version_control"] in ("git (local)", "git (github)"):
-        ignored_files.update({
-            f.relative_to(root) 
-            for f in root.glob(".git/objects/*") 
-            if f.is_file()
-        })
+        # Expected after `git init`
+        expected_files.update(
+            {
+                ".git/config",
+                ".git/description",
+                ".git/HEAD",
+                ".git/hooks/applypatch-msg.sample",
+                ".git/hooks/commit-msg.sample",
+                ".git/hooks/fsmonitor-watchman.sample",
+                ".git/hooks/post-update.sample",
+                ".git/hooks/pre-applypatch.sample",
+                ".git/hooks/pre-commit.sample",
+                ".git/hooks/pre-merge-commit.sample",
+                ".git/hooks/pre-push.sample",
+                ".git/hooks/pre-rebase.sample",
+                ".git/hooks/pre-receive.sample",
+                ".git/hooks/prepare-commit-msg.sample",
+                ".git/hooks/push-to-checkout.sample",
+                ".git/hooks/sendemail-validate.sample",
+                ".git/hooks/update.sample",
+                ".git/info/exclude",
+            }
+        )
+        # Expected after initial git commit
+        expected_files.update(
+            {
+                ".git/COMMIT_EDITMSG",
+                ".git/index",
+                ".git/logs/HEAD",
+                ".git/logs/refs/heads/main",
+                ".git/refs/heads/main",
+            }
+        )
+        ignored_files.update(
+            {f.relative_to(root) for f in root.glob(".git/objects/**/*") if f.is_file()}
+        )
 
     expected_files = {Path(f) for f in expected_files}
 
     existing_files = {f.relative_to(root) for f in root.glob("**/*") if f.is_file()}
 
-    assert sorted(existing_files - ignored_files) == sorted(expected_files)
-    
+    checked_files = existing_files - ignored_files
+
+    assert sorted(checked_files) == sorted(expected_files)
+
     # Ignore files where curlies may exist but aren't unrendered jinja tags
     ignore_curly_files = {
-        ".git/hooks/fsmonitor-watchman.sample"
+        Path(".git/hooks/fsmonitor-watchman.sample"),
+        Path(".git/index"),
     }
 
-    assert all(
-        no_curlies(root / f)
-        for f in existing_files
-        if str(f) not in ignore_curly_files
-    )
+    assert all(no_curlies(root / f) for f in checked_files - ignore_curly_files)
 
 
 def verify_makefile_commands(root, config):
