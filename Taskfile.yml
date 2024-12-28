@@ -1,0 +1,10 @@
+version: '3'
+
+tasks:
+  clean:
+    desc: Delete all compiled Python files and test cache
+    cmds:
+      - find . -type f -name "*.py[co]" -delete
+      - find . -type d -name "__pycache__" -delete
+      - find . -type d -name ".pytest_cache" -delete  # <--- [NEW] Added to clean pytest cache directories
+      - find . -type f -name ".coverage" -delete      # <--- [NEW] Added to clean coverage files

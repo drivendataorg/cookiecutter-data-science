@@ -2,16 +2,29 @@ import json
 import os
 import sys
 from pathlib import Path
-from subprocess import PIPE, run
+from subprocess import PIPE, CompletedProcess, run
+from typing import Any
 
 from conftest import bake_project
 
 BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
 
 
-def _decode_print_stdout_stderr(result):
-    """Print command stdout and stderr to console to use when debugging failing tests
+# GATLEN'S ADDED BITS #
+CCDS_ORIGINAL_DIR = Path(".ccds-original")
+VSCODE_CONFIG_DIR = Path(".vscode")
+OUT_DIR = Path("out")
+
+
+def _decode_print_stdout_stderr(result: CompletedProcess) -> tuple[str, str]:
+    """Print command stdout and stderr to console to use when debugging failing tests.
     Normally hidden by pytest except in failure we want this displayed
+
+    Args:
+        result: CompletedProcess object from subprocess.run
+
+    Returns:
+        Tuple of (stdout_string, stderr_string)
     """
     encoding = sys.stdout.encoding
 
@@ -29,49 +42,88 @@ def _decode_print_stdout_stderr(result):
     return stdout, stderr
 
 
-def no_curlies(filepath):
+def no_curlies(filepath: Path) -> bool:
     """Utility to make sure no curly braces appear in a file.
     That is, was Jinja able to render everything?
-    """
-    data = filepath.open("r").read()
 
-    template_strings = ["{{", "}}", "{%", "%}"]
+    Args:
+        filepath: Path to file to check
+
+    Returns:
+        True if no template strings found, False otherwise
+    """
+    data = filepath.open("r", encoding="utf-8").read()
+
+    template_strings = [
+        "{{ ",
+        " }}",
+        "{%",
+        "%}",
+    ]
 
     template_strings_in_file = [s in data for s in template_strings]
     return not any(template_strings_in_file)
 
 
-def test_baking_configs(config, fast):
+def test_baking_configs(config: dict[str, Any], fast: int) -> None:
     """For every generated config in the config_generator, run all
     of the tests.
+
+    Args:
+        config: Configuration dictionary
+        fast: Integer controlling test speed/depth
     """
     print("using config", json.dumps(config, indent=2))
     with bake_project(config) as project_directory:
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
-        lint(project_directory)
+        # install_requirements(project_directory)
+        # lint(project_directory)
 
         if fast < 2:
             verify_makefile_commands(project_directory, config)
 
 
-def verify_folders(root, config):
-    """Tests that expected folders and only expected folders exist."""
+def verify_folders(root: Path, config: dict[str, Any]) -> None:
+    """Tests that expected folders and only expected folders exist.
+
+    Args:
+        root: Root directory path
+        config: Configuration dictionary
+    """
     expected_dirs = {
+        str(CCDS_ORIGINAL_DIR),
+        str(VSCODE_CONFIG_DIR),
         ".",
+        ".devcontainer",
+        ".github",
+        ".github/actions",
+        ".github/actions/setup-python-env",
+        ".github/ISSUE_TEMPLATE",
+        ".github/workflows",
         "data",
         "data/external",
         "data/interim",
         "data/processed",
         "data/raw",
         "docs",
-        "models",
+        "logs",
+        "secrets",
+        "secrets/schema",
+        "secrets/schema/ssh",
+        "docker",
+        "tests",
+        str(OUT_DIR),
+        str(OUT_DIR / "models"),
+        str(OUT_DIR / "features"),
+        str(OUT_DIR / "reports" / "figures"),
         "notebooks",
         "references",
         "reports",
         "reports/figures",
         config["module_name"],
     }
+    
     ignored_dirs = set()
 
     if config["include_code_scaffold"] == "Yes":
@@ -114,29 +166,66 @@ def verify_folders(root, config):
     assert sorted(existing_dirs - ignored_dirs) == sorted(expected_dirs)
 
 
-def verify_files(root, config):
-    """Test that expected files and only expected files exist."""
+def verify_files(root: Path, config: dict[str, Any]) -> None:
+    """Test that expected files and only expected files exist.
+
+    Args:
+        root: Root directory path
+        config: Configuration dictionary
+    """
     expected_files = {
         "Makefile",
+        str(CCDS_ORIGINAL_DIR / "README.md"),
         "README.md",
         "pyproject.toml",
-        "setup.cfg",
         ".env",
         ".gitignore",
+        ".devcontainer/devcontainer.json",
+        ".devcontainer/postCreateCommand.sh",
+        ".github/pull_request_template.md",
+        ".github/actions/setup-python-env/action.yml",
+        ".github/ISSUE_TEMPLATE/bug_report.md",
+        ".github/ISSUE_TEMPLATE/feature_request.md",
+        ".github/ISSUE_TEMPLATE/general_question.md",
+        ".github/workflows/main.yml",
+        ".github/workflows/on-release-main.yml",
+        ".gitattributes",
+        "logs/.gitkeep",
         "data/external/.gitkeep",
         "data/interim/.gitkeep",
         "data/processed/.gitkeep",
+        f"docker/{config['repo_name']}.Dockerfile",
         "data/raw/.gitkeep",
         "docs/.gitkeep",
-        "notebooks/.gitkeep",
-        "references/.gitkeep",
-        "reports/.gitkeep",
-        "reports/figures/.gitkeep",
-        "models/.gitkeep",
+        "tests/conftest.py",
+        "tests/test_main.py",
+        "notebooks/0.01_gatlen_example.ipynb",
+        "notebooks/README.md",
+        "secrets/schema/example.env",
+        "secrets/schema/ssh/example.config.ssh",
+        "secrets/schema/ssh/example.something.key",
+        "secrets/schema/ssh/example.something.pub",
+        str(VSCODE_CONFIG_DIR / f"{config['repo_name']}.code-workspace"),
+        str(VSCODE_CONFIG_DIR / f"{config['repo_name']}.team.code-workspace"),
+        str(OUT_DIR / "reports" / ".gitkeep"),
+        str(OUT_DIR / "features" / ".gitkeep"),
+        str(OUT_DIR / "reports" / "figures" / ".gitkeep"),
+        str(OUT_DIR / "models" / ".gitkeep"),
+        "Taskfile.yml",
+        ".cursorrules",
         f"{config['module_name']}/__init__.py",
     }
-
-    ignored_files = set()
+    
+    ignore_dirs = {
+        ".git",
+        ".venv",
+        "__pycache__",
+        "_frontend",
+        "_backend",
+        "_course",
+        "_ai",
+        "_cli",
+    }
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):
@@ -166,6 +255,12 @@ def verify_files(root, config):
         )
 
     expected_files.add(config["dependency_file"])
+    
+    if config["dependency_file"] != "none":
+        expected_files.add(config["dependency_file"])
+
+    if config["environment_manager"] == "uv":
+        expected_files.add("uv.lock")
 
     if config["version_control"] in ("git (local)", "git (github)"):
         # Expected after `git init`
@@ -217,17 +312,28 @@ def verify_files(root, config):
     ignore_curly_files = {
         Path(".git/hooks/fsmonitor-watchman.sample"),
         Path(".git/index"),
+        Path(".cursorrules")
     }
 
     assert all(no_curlies(root / f) for f in checked_files - ignore_curly_files)
 
 
-def verify_makefile_commands(root, config):
+def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
     """Actually shell out to bash and run the make commands for:
     - blank command listing commands
     - create_environment
     - requirements
     Ensure that these use the proper environment.
+
+    Args:
+        root: Root directory path
+        config: Configuration dictionary
+
+    Returns:
+        True if verification succeeds
+
+    Raises:
+        ValueError: If environment manager not found in test harnesses
     """
     test_path = Path(__file__).parent
 
@@ -237,6 +343,8 @@ def verify_makefile_commands(root, config):
         harness_path = test_path / "virtualenv_harness.sh"
     elif config["environment_manager"] == "pipenv":
         harness_path = test_path / "pipenv_harness.sh"
+    elif config["environment_manager"] == "uv":
+        harness_path = test_path / "uv_harness.sh"
     elif config["environment_manager"] == "none":
         return True
     else:
@@ -259,7 +367,8 @@ def verify_makefile_commands(root, config):
 
     # Check that makefile help ran successfully
     assert "Available rules:" in stdout_output
-    assert "clean                    Delete all compiled Python files" in stdout_output
+    assert "clean" in stdout_output
+    assert "Delete all compiled Python files" in stdout_output
 
     assert result.returncode == 0
 

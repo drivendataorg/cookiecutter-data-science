@@ -1,11 +1,12 @@
 /* Smooth scrolling for termynal replay */
 
 function scrollToBottomOfContainer(container, element) {
-    var positionToScroll = element.offsetTop + element.offsetHeight - container.offsetHeight;
-    container.scrollTo({
-        top: positionToScroll,
-        behavior: 'smooth'
-    });
+  var positionToScroll =
+    element.offsetTop + element.offsetHeight - container.offsetHeight;
+  container.scrollTo({
+    top: positionToScroll,
+    behavior: "smooth",
+  });
 }
 
 // Select the node that will be observed for mutations

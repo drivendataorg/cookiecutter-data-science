@@ -51,7 +51,7 @@ on its own.
 
 We often use Python for our data science projects. We use a virtual environment to manage the packages we use in our project. This is a way to keep the packages we use in our project separate from the packages we use in other projects. This is especially important when we are working on multiple projects at the same time.
 
-Cookicutter Data Science supports [a few options](opinions.md#build-from-the-environment-up) for Python virtual environment management, but no matter which you choose, you can create an environment with the following commands:
+Cookicutter Data Science supports [a few options](opinions.md#04-build-from-the-environment-up) for Python virtual environment management, but no matter which you choose, you can create an environment with the following commands:
 
 ```bash
 make create_environment
@@ -69,9 +69,9 @@ make requirements
 
 There's no universal advice for how to manage your data, but here are some recommendations for starting points depending on where the data comes from:
 
- - **Flat files (e.g., CSVs or spreadsheets) that are static** - Put these files into your `data/raw` folder and then run `make sync_data_up` to push the raw data to your cloud provider.
- - **Flat files that change and are extracted from somewhere** - Add a Python script to your source module in `data/make_dataset.py` that downloads the data and puts it in the `data/raw` folder. Then you can use this to get the latest and push it up to your cloud host as it changes (be careful not to [override your raw data](opinions.md/#data-analysis-is-a-directed-acyclic-graph)).
- - **Databases you connect to with credentials** - Store your credentials in `.env`. We recommend adding a `db.py` file or similar to your `data` module that connects to the database and pulls data. If your queries generally fit into memory, you can just have functions in the `db.py` to load data that you use in analysis. If not, you'll want to add a script like above to download the data to the `data/raw` folder.
+- **Flat files (e.g., CSVs or spreadsheets) that are static** - Put these files into your `data/raw` folder and then run `make sync_data_up` to push the raw data to your cloud provider.
+- **Flat files that change and are extracted from somewhere** - Add a Python script to your source module in `data/make_dataset.py` that downloads the data and puts it in the `data/raw` folder. Then you can use this to get the latest and push it up to your cloud host as it changes (be careful not to [override your raw data](opinions.md/#0101-data-analysis-is-a-directed-acyclic-graph)).
+- **Databases you connect to with credentials** - Store your credentials in `.env`. We recommend adding a `db.py` file or similar to your `data` module that connects to the database and pulls data. If your queries generally fit into memory, you can just have functions in the `db.py` to load data that you use in analysis. If not, you'll want to add a script like above to download the data to the `data/raw` folder.
 
 ## Check out a branch
 
@@ -93,12 +93,12 @@ Now you're ready to do some analysis! Make sure that your project-specific envir
 0.01-pjb-data-source-1.ipynb
 ```
 
- - `0.01` - Helps leep work in chronological order. The structure is `PHASE.NOTEBOOK`. `NOTEBOOK` is just the Nth notebook in that phase to be created. For phases of the project, we generally use a scheme like the following, but you are welcome to design your own conventions:
-    - `0` - Data exploration - often just for exploratory work
-    - `1` - Data cleaning and feature creation - often writes data to `data/processed` or `data/interim`
-    - `2` - Visualizations - often writes publication-ready viz to `reports`
-    - `3` - Modeling - training machine learning models
-    - `4` - Publication - Notebooks that get turned directly into reports
+- `0.01` - Helps leep work in chronological order. The structure is `PHASE.NOTEBOOK`. `NOTEBOOK` is just the Nth notebook in that phase to be created. For phases of the project, we generally use a scheme like the following, but you are welcome to design your own conventions:
+  - `0` - Data exploration - often just for exploratory work
+  - `1` - Data cleaning and feature creation - often writes data to `data/processed` or `data/interim`
+  - `2` - Visualizations - often writes publication-ready viz to `reports`
+  - `3` - Modeling - training machine learning models
+  - `4` - Publication - Notebooks that get turned directly into reports
 - `pjb` - Your initials; this is helpful for knowing who created the notebook and prevents collisions from people working in the same notebook.
 - `data-source-1` - A description of what the notebook covers
 
@@ -126,7 +126,6 @@ data = make_dataset()
 ```
 
 Now it should be easy to do any refactoring you need to do to make your code more modular and reusable.
-
 
 ## Make your code reviewable
 
@@ -160,18 +159,18 @@ There's no magic in the `Makefile`. We often add project-specific commands or up
 Unfortunately, GNU Make is not typically pre-installed on Windows. Here are a few different options for getting Make:
 
 - **Use a package manager.** You will need to install the package manager first if you don't already have it.
-    - [chocolatey](https://community.chocolatey.org/) ([entry for Make](https://community.chocolatey.org/packages/make))
-      ```bash
-      choco install make
-      ```
-    - [winget](https://winget.run/) ([entry for Make](https://winget.run/pkg/GnuWin32/Make))
-      ```bash
-      winget install -e --id GnuWin32.Make
-      ```
-    - [scoop](https://scoop.sh/) ([entry for Make](https://scoop.sh/#/apps?q=make&id=c43ff861c0f1713336e5304d85334a29ffb86317))
-      ```bash
-      scoop install main/make
-      ```
+  - [chocolatey](https://community.chocolatey.org/) ([entry for Make](https://community.chocolatey.org/packages/make))
+    ```bash
+    choco install make
+    ```
+  - [winget](https://winget.run/) ([entry for Make](https://winget.run/pkg/GnuWin32/Make))
+    ```bash
+    winget install -e --id GnuWin32.Make
+    ```
+  - [scoop](https://scoop.sh/) ([entry for Make](https://scoop.sh/#/apps?q=make&id=c43ff861c0f1713336e5304d85334a29ffb86317))
+    ```bash
+    scoop install main/make
+    ```
 - **Windows Subsystem for Linux**. WSL is a full, non-virtualized Linux environment inside Windows. You can use it to run all of your data science workflows on Ubuntu, and it will have Make included. See instructions for installing WSL [here](https://learn.microsoft.com/en-us/windows/wsl/install).
 - **Cygwin**. A Unix-like development environment that includes Make. See instructions about installing Cygwin [here](https://www.cygwin.com/install.html).
 - **MinGW**. A GNU development environment that runs on Windows and includes Make. See information about installing MinGW [here](https://www.mingw-w64.org/downloads/).

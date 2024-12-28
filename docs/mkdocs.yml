@@ -1,15 +1,15 @@
-site_name: Cookiecutter Data Science
-site_description: A project template and directory structure for Python data science projects.
-site_url: https://cookiecutter-data-science.drivendata.org
-repo_url: https://github.com/drivendataorg/cookiecutter-data-science
+site_name: Gatlen's Opinionated Template (GOTem)
+site_description: Cutting-edge, opinionated, and ambitious project builder for power users and researchers.
+site_url: https://gatlenculp.github.io/gatlens-opinionated-template/
+repo_url: https://github.com/GatlenCulp/gatlens-opinionated-template
 edit_uri: edit/master/docs/docs
-copyright: Project maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>.
-theme: 
+copyright: Upstream maintained by the friendly folks at <a target=_blanks href="https://www.drivendata.org">DrivenData</a>, fork maintained by <a target=_blanks href="https://gatlen.notion.site">Gatlen Culp</a>.
+theme:
   favicon: favicon.ico
   features:
     - navigation.instant
     - toc.integrate
-  logo: ccds.png
+  logo: gotem.png
   name: material
   custom_dir: overrides
   palette:
@@ -19,14 +19,15 @@ theme:
     text: Work Sans
     code: Space Mono
 nav:
-  - Home: index.md
-  - Why ccds?: why.md
-  - Opinions: opinions.md
-  - Using the template: using-the-template.md
-  - All options: all-options.md
-  - Contributing: contributing.md
-  - Related projects: related.md
-  - v1 Template: v1.md
+  - 🏠 Home: index.md                       # Project overview, quickstart guide, and complete directory structure walkthrough
+  - 🛠️ Core Tools: core-tools.md            # Comprehensive breakdown of all core tools (IDE, Docker, AWS, etc.) and Python dependencies with explanations
+  - 💻 VSCode & Cursor: vscode.md           # Detailed guide to workspace configuration, debug profiles, recommended extensions, and AI integration
+  - ❓ Why gotem?: why.md                   # Discussion of code quality, project organization, and reproducibility benefits
+  - 🗯️ Opinions: opinions.md                # Core principles about data hygiene, notebooks, modeling, and environment management
+  - 📑 Using the template: using-the-template.md  # Step-by-step guide on how to use the template
+  - ⚙️ All options: all-options.md          # List of available command-line options and configuration choices
+  - ❤️ Contributing: contributing.md         # Guidelines for contributing to the project
+  - 🔗 Related projects: related.md         # References to similar R projects and acknowledgments of inspirational templates
 extra:
   analytics:
     provider: google

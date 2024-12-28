@@ -5,10 +5,11 @@ docs/docs/_partials/*/*.html
 
 # test cache
 manual_test/
+.history
 
 # other local dev info
-.vscode/
 .history/
+# .vscode/
 
 # Mac OS-specific storage files
 .DS_Store
@@ -76,6 +77,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+.ruff_cache/
 cover/
 
 # Translations
@@ -143,7 +145,7 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
-# Environments
+# Environments and Secrets
 .env
 .venv
 env/

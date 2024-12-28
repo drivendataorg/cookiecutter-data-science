@@ -4,7 +4,7 @@
     "module_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
     "author_name": "Your name (or your organization/company/team)",
     "description": "A short description of the project.",
-    "python_version_number": "3.10",
+    "python_version_number": "3.12",
     "dataset_storage": [
         {"none": "none"},
         {"azure": {"container": "container-name"}},
@@ -12,10 +12,10 @@
         {"gcs": {"bucket": "bucket-name"}}
     ],
     "environment_manager": [
+        "none"
         "virtualenv",
         "conda",
         "pipenv",
-        "none"
     ],
     "dependency_file": [
         "requirements.txt",
@@ -28,11 +28,24 @@
     ],
     "open_source_license": ["No license file", "MIT", "BSD-3-Clause"],
     "docs": ["mkdocs", "none"],
-    "include_code_scaffold": ["Yes", "No"],
+    "include_code_scaffold": [
+      "data",
+      "No",
+      "paper",
+      "app",
+      "ml",
+      "lib",
+      "course"
+    ],
     "version_control": [
-        "none",
-        "git (local)",
-        "git (github private)",
-        "git (github public)"
+      "none",
+      "git (local)",
+      "git (github private)",
+      "git (github public)"
+  ],
+    "_copy_without_render": [
+      "*{{ cookiecutter.module_name }}/_backend/**",
+      "*{{ cookiecutter.module_name }}/_frontend/**",
+      "*{{ cookiecutter.module_name }}/_cli/**"
     ]
 }

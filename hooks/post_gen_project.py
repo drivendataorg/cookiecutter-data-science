@@ -1,4 +1,8 @@
+"""File to be run after template initialization by cookiecutter."""
+
+import os
 import shutil
+import subprocess
 from copy import copy
 from pathlib import Path
 
@@ -18,7 +22,7 @@ packages_to_install = copy(packages)
 packages_to_install += ["awscli"]
 # {% endif %} #
 
-# {% if cookiecutter.include_code_scaffold == "Yes" %}
+# {% if cookiecutter.include_code_scaffold != "No" %}
 packages_to_install += scaffold
 # {% endif %}
 
@@ -80,7 +84,36 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
         generated_path.unlink()
     elif generated_path.name == "__init__.py":
         # remove any content in __init__.py since it won't be available
-        generated_path.write_text("")
+        generated_path.write_text(
+            '"""{{ cookiecutter.module_name }}: {{ cookiecutter.project_short_description }}."""\n'
+        )
+# {# TODO #}
+# {% elif cookiecutter.include_code_scaffold == "data" %}
+# {% elif cookiecutter.include_code_scaffold == "paper" %}
+# {% elif cookiecutter.include_code_scaffold == "app" %}
+# {% elif cookiecutter.include_code_scaffold == "ml" %}
+# {% elif cookiecutter.include_code_scaffold == "lib" %}
+# {% elif cookiecutter.include_code_scaffold == "course" %}
+# {% endif %}
+
+#
+#  GATLEN'S UPLOAD TO GITHUB REPO CODE
+#
+
+# {% if cookiecutter.use_github == "Yes" %}
+configure_github_repo(
+    directory=Path.cwd(),
+    repo_name="{{ cookiecutter.repo_name }}",
+    protection_type="main_and_dev",
+    no_github=False,
+)
+# {% endif %}
+
+# Install the virtual environment (uv only for now)
+# {% if cookiecutter.environment_manager == "uv" %}
+os.chdir(Path.cwd())
+subprocess.run(["make", "create_environment"])
+subprocess.run(["make", "requirements"])
 # {% endif %}
 
 #
