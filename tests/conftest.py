@@ -39,7 +39,7 @@ def config_generator(fast=False):
         ],
         [("dependency_file", opt) for opt in cookiecutter_json["dependency_file"]],
         [("pydata_packages", opt) for opt in cookiecutter_json["pydata_packages"]],
-        [("version_control", opt) for opt in ("none", "git (local)")]
+        [("version_control", opt) for opt in ("none", "git (local)")],
         # TODO: Tests for "version_control": "git (github)"
     )
 
