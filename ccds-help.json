@@ -295,15 +295,22 @@
             {
                 "choice": "git (local)",
                 "help": {
-                    "description": "Initialize a git repository locally.",
-                    "more_information": ""
+                    "description": "Initialize project as a local git repository.",
+                    "more_information": "[Git CLI](https://git-scm.com/downloads) Required"
                 } 
             },
             {
-                "choice": "git (github)",
+                "choice": "git (github private)",
                 "help": {
-                    "description": "Initialize a git repository locally and upload to GitHub",
-                    "more_information": ""
+                    "description": "Initialize project and upload to GitHub as a **private** repo.",
+                    "more_information": "[Git CLI](https://git-scm.com/downloads) + [GitHub CLI](https://cli.github.com/) & [Auth](https://cli.github.com/manual/gh_auth_login) Required"
+                } 
+            },
+            {
+                "choice": "git (github public)",
+                "help": {
+                    "description": "Initialize project and upload to GitHub as a **public** repo.",
+                    "more_information": "[Git CLI](https://git-scm.com/downloads) + [GitHub CLI](https://cli.github.com/) & [Auth](https://cli.github.com/manual/gh_auth_login) Required"
                 } 
             }
         ]

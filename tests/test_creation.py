@@ -80,7 +80,7 @@ def verify_folders(root, config):
     if config["docs"] == "mkdocs":
         expected_dirs.add("docs/docs")
 
-    if config["version_control"] in ("git (local)", "git (github)"):
+    if config["version_control"] in ("git (local)", "git (github public)", "git (github private)"):
         # Expected after `git init`
         expected_dirs.update(
             {

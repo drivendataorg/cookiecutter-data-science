@@ -83,12 +83,22 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
         generated_path.write_text("")
 # {% endif %}
 
+#
+#  VERSION CONTROL
+#
+
 # {% if cookiecutter.version_control == "git (local)" %}
-init_local_git_repo(directory=Path.cwd(), _make_initial_commit=True)
-# {% elif cookiecutter.version_control == "git (github)" %}
+init_local_git_repo(directory=Path.cwd())
+# {% elif cookiecutter.version_control == "git (github private)" %}
 configure_github_repo(
     directory=Path.cwd(),
     repo_name="{{ cookiecutter.repo_name }}",
-    protection_type="main_and_dev",
+    visibility="private"
+)
+# {% elif cookiecutter.version_control == "git (github public)" %}
+configure_github_repo(
+    directory=Path.cwd(),
+    repo_name="{{ cookiecutter.repo_name }}",
+    visibility="public"
 )
 # {% endif %}

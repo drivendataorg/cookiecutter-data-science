@@ -32,6 +32,7 @@
     "version_control": [
         "none",
         "git (local)",
-        "git (github)"
+        "git (github private)",
+        "git (github public)"
     ]
 }

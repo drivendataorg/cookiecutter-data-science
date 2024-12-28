@@ -65,6 +65,7 @@ def _check_git_cli_installed() -> bool:
 def configure_github_repo(
     directory: str | Path,
     repo_name: str,
+    visibility: Literal["private", "public"] = "private"
 ) -> bool:
     """
     Configure a Git repository locally and optionally on GitHub with specified branch protections.
@@ -72,17 +73,21 @@ def configure_github_repo(
     Args:
         directory: Directory where the repository will be created or updated
         repo_name: Name of the repository
+        visibility: Whether to upload to github as a public or private repo
 
     Returns:
         bool: True if configuration was successful, False otherwise
     """
     try:
-        if not _check_gh_cli_installed_authenticated():
-            raise RuntimeError(
-                "gh CLI is required but not installed or not authenticated. "
-                "Try installing and running `gh auth login`."
-            )
-        
+        subprocess.run("gh --version", shell=True, check=True, capture_output=True)
+    except subprocess.CalledProcessError:
+        raise RuntimeError("GitHub CLI is not installed. Please install and try again.")
+    try:
+        subprocess.run("gh auth status", shell=True, check=True, capture_output=True)
+    except subprocess.CalledProcessError:
+        raise RuntimeError("GitHub CLI not authenticated. Please run `gh auth login` and try again.")
+    
+    try:
         # GitHub operations
         github_username = _gh("api user -q .login", capture_output=True, text=True).stdout.strip()
 
@@ -92,7 +97,7 @@ def configure_github_repo(
             if not init_local_git_repo(directory):
                 return False
             _gh(
-                f"repo create {repo_name} --private --source=. --remote=origin --push"
+                f"repo create {repo_name} --{visibility} --source=. --remote=origin --push"
             )
         else:
             remote_url = _get_gh_remote_url(github_username, repo_name)
@@ -119,16 +124,6 @@ def configure_github_repo(
 def _gh(command: str, **kwargs) -> subprocess.CompletedProcess:
     """Run a GitHub CLI command and return the result."""
     return subprocess.run(f"gh {command}", shell=True, check=True, **kwargs)
-
-
-def _check_gh_cli_installed_authenticated() -> bool:
-    """Check if gh CLI is installed and authenticated."""
-    try:
-        subprocess.run("gh --version", shell=True, check=True, capture_output=True)
-        subprocess.run("gh auth status", shell=True, check=True, capture_output=True)
-        return True
-    except subprocess.CalledProcessError:
-        return False
 
 def _get_gh_remote_url(github_username: str, repo_name: str) -> Literal["https", "ssh"]:
     """Returns whether the github protocol is https or ssh from user's config"""
