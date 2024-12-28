@@ -144,23 +144,6 @@ def _get_gh_remote_url(github_username: str, repo_name: str) -> Literal["https",
         # Default to https if not set
         return "https"
 
-def _tag_exists(tag: str) -> bool:
-    """Check if a git tag exists."""
-    try:
-        _git(f"rev-parse {tag}", capture_output=True)
-        return True
-    except subprocess.CalledProcessError:
-        return False
-
-
-def _branch_exists(branch: str) -> bool:
-    """Check if a git branch exists."""
-    try:
-        _git(f"rev-parse --verify {branch}", capture_output=True)
-        return True
-    except subprocess.CalledProcessError:
-        return False
-
 
 def _github_repo_exists(username: str, repo_name: str) -> bool:
     """Check if a GitHub repository exists."""
@@ -169,30 +152,3 @@ def _github_repo_exists(username: str, repo_name: str) -> bool:
         return True
     except subprocess.CalledProcessError:
         return False
-
-
-def _is_repo_public(username: str, repo_name: str) -> bool:
-    """Check if a GitHub repository is public."""
-    result = _gh(
-        f"api repos/{username}/{repo_name} -q .private", capture_output=True, text=True
-    )
-    return result.stdout.strip() == "false"
-
-
-def _set_branch_protection(username: str, repo_name: str, branch: str) -> None:
-    """Set branch protection rules. Only works with enterprise(?)."""
-    protection_data = {
-        "required_status_checks": {"strict": True, "contexts": []},
-        "enforce_admins": True,
-        "required_pull_request_reviews": {"required_approving_review_count": 1},
-        "restrictions": None,
-    }
-
-    _gh(
-        f"api repos/{username}/{repo_name}/branches/{branch}/protection "
-        "-X PUT -H 'Accept: application/vnd.github.v3+json' "
-        f"-f required_status_checks='{protection_data['required_status_checks']}' "
-        f"-f enforce_admins={protection_data['enforce_admins']} "
-        f"-f required_pull_request_reviews='{protection_data['required_pull_request_reviews']}' "
-        f"-f restrictions={protection_data['restrictions']}"
-    )
