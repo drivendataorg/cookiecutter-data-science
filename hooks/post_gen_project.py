@@ -90,6 +90,5 @@ configure_github_repo(
     directory=Path.cwd(),
     repo_name="{{ cookiecutter.repo_name }}",
     protection_type="main_and_dev",
-    no_github=False,
 )
 # {% endif %}

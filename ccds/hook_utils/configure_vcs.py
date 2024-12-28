@@ -3,8 +3,6 @@ import subprocess
 from pathlib import Path
 from typing import Literal
 
-# TODO: Refactor this entirely, maybe use github module or something.
-
 # ---------------------------------------------------------------------------- #
 #                                      Git                                     #
 # ---------------------------------------------------------------------------- #
@@ -68,7 +66,6 @@ def configure_github_repo(
     directory: str | Path,
     repo_name: str,
     protection_type: Literal["none", "main", "main_and_dev"],
-    no_github: bool = False,
 ) -> bool:
     """
     Configure a Git repository locally and optionally on GitHub with specified branch protections.
@@ -86,83 +83,70 @@ def configure_github_repo(
         bool: True if configuration was successful, False otherwise
     """
     try:
-        directory = Path(directory)
-
-        # Validate inputs
-        if not directory.is_dir():
-            raise ValueError(f"Directory '{directory}' does not exist.")
-
-        if not repo_name.replace("-", "").replace("_", "").isalnum():
-            raise ValueError(
-                "Invalid repository name. Use only letters, numbers, underscores, and hyphens."
+        if not _check_gh_cli_installed_authenticated():
+            raise RuntimeError(
+                "gh CLI is required but not installed or not authenticated. "
+                "Try installing and running `gh auth login`."
             )
-
-        # Check for gh CLI if needed
-        if not no_github:
-            if not _check_gh_cli_installed():
-                raise RuntimeError(
-                    "gh CLI is required but not installed or not authenticated. "
-                    "Use no_github=True to skip GitHub operations."
-                )
 
         # Initialize local repository
         if not init_local_git_repo(directory):
             return False
 
-        # Create dev branch if needed
-        if protection_type == "main_and_dev":
-            if not _branch_exists("dev"):
-                _git("branch dev")
+        # # Create dev branch if needed
+        # if protection_type == "main_and_dev":
+        #     if not _branch_exists("dev"):
+        #         _git("branch dev")
 
-        # Add semantic versioning tag if it doesn't exist
-        if not _tag_exists("v0.1.0"):
-            _git("tag -a v0.1.0 -m 'Initial version'")
+        # # Add semantic versioning tag if it doesn't exist
+        # if not _tag_exists("v0.1.0"):
+        #     _git("tag -a v0.1.0 -m 'Initial version'")
 
-        # Create dev branch if needed
-        if protection_type == "main_and_dev":
-            if not _branch_exists("dev"):
-                _git("branch dev")
+        # # Create dev branch if needed
+        # if protection_type == "main_and_dev":
+        #     if not _branch_exists("dev"):
+        #         _git("branch dev")
 
         # GitHub operations
-        if not no_github:
-            github_username = _get_github_username()
+        github_username = _gh("api user -q .login", capture_output=True, text=True).stdout.strip()
 
-            # Create or update GitHub repository
-            if not _github_repo_exists(github_username, repo_name):
-                _gh(
-                    f"repo create {repo_name} --private --source=. --remote=origin --push"
-                )
-            else:
-                remote_url = f"git@github.com:{github_username}/{repo_name}.git"
-                try:
-                    _git(f"remote set-url origin {remote_url}")
-                except subprocess.CalledProcessError:
-                    _git(f"remote add origin {remote_url}")
-
-            # Push branches and tags
-            _git("push -u origin main")
-            _git("push --tags")
-
-            if _branch_exists("dev"):
-                _git("push -u origin dev")
-
-            # Set branch protections if repository is public
-            is_public = _is_repo_public(github_username, repo_name)
-            if is_public:
-                if protection_type in ["main", "main_and_dev"]:
-                    _set_branch_protection(github_username, repo_name, "main")
-                if protection_type == "main_and_dev":
-                    _set_branch_protection(github_username, repo_name, "dev")
-                print("Branch protections set successfully.")
-            else:
-                print(
-                    "Warning: Branch protections can only be set for public repositories "
-                    "or with a GitHub Pro account."
-                )
-
-            print("Repository configuration complete on GitHub!")
+        # Create or update GitHub repository
+        if not _github_repo_exists(github_username, repo_name):
+            _gh(
+                f"repo create {repo_name} --private --source=. --remote=origin --push"
+            )
         else:
-            print("Local repository configuration complete!")
+            remote_url = _get_gh_remote_url(github_username, repo_name)
+            raise RuntimeError(f"Github repo already exists at {remote_url}")
+            # TODO: Prompt user if they would like to set existing repo as origin.
+            # remote_url = _get_gh_remote_url(github_username, repo_name)
+            # try:
+            #     _git(f"remote set-url origin {remote_url}")
+            # except subprocess.CalledProcessError:
+            #     _git(f"remote add origin {remote_url}")
+
+        # Push branches and tags
+        _git("push -u origin main")
+        # _git("push --tags")
+
+        # if _branch_exists("dev"):
+        #     _git("push -u origin dev")
+
+        # Set branch protections if repository is public
+        # is_public = _is_repo_public(github_username, repo_name)
+        # if is_public:
+        #     if protection_type in ["main", "main_and_dev"]:
+        #         _set_branch_protection(github_username, repo_name, "main")
+        #     if protection_type == "main_and_dev":
+        #         _set_branch_protection(github_username, repo_name, "dev")
+        #     print("Branch protections set successfully.")
+        # else:
+        #     print(
+        #         "Warning: Branch protections can only be set for public repositories "
+        #         "or with a GitHub Pro account."
+        #     )
+
+        print("Repository configuration complete on GitHub!")
 
         return True
 
@@ -176,7 +160,7 @@ def _gh(command: str, **kwargs) -> subprocess.CompletedProcess:
     return subprocess.run(f"gh {command}", shell=True, check=True, **kwargs)
 
 
-def _check_gh_cli_installed() -> bool:
+def _check_gh_cli_installed_authenticated() -> bool:
     """Check if gh CLI is installed and authenticated."""
     try:
         subprocess.run("gh --version", shell=True, check=True, capture_output=True)
@@ -185,6 +169,19 @@ def _check_gh_cli_installed() -> bool:
     except subprocess.CalledProcessError:
         return False
 
+def _get_gh_remote_url(github_username: str, repo_name: str) -> Literal["https", "ssh"]:
+    """Returns whether the github protocol is https or ssh from user's config"""
+    try:
+        protocol = _gh("config get git_protocol", capture_output=True, text=True).stdout.strip()
+        if protocol == "ssh":
+            return f"git@github.com:{github_username}/{repo_name}.git"
+        elif protocol == "https":
+            return f"https://github.com/{github_username}/{repo_name}"
+        else:
+            raise ValueError(f"Unexepected GitHub protocol {protocol}")
+    except subprocess.CalledProcessError:
+        # Default to https if not set
+        return "https"
 
 def _tag_exists(tag: str) -> bool:
     """Check if a git tag exists."""
@@ -202,12 +199,6 @@ def _branch_exists(branch: str) -> bool:
         return True
     except subprocess.CalledProcessError:
         return False
-
-
-def _get_github_username() -> str:
-    """Get the authenticated GitHub username."""
-    result = _gh("api user -q .login", capture_output=True, text=True)
-    return result.stdout.strip()
 
 
 def _github_repo_exists(username: str, repo_name: str) -> bool:
