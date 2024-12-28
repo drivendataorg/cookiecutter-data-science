@@ -54,15 +54,14 @@ def no_curlies(filepath: Path) -> bool:
     """
     data = filepath.open("r", encoding="utf-8").read()
 
-    template_strings = [
+    template_strings = {
         "{{ ",
         " }}",
         "{%",
         "%}",
-    ]
+    }
 
-    template_strings_in_file = [s in data for s in template_strings]
-    return not any(template_strings_in_file)
+    return not any(s in data for s in template_strings)
 
 
 def test_baking_configs(config: dict[str, Any], fast: int) -> None:
@@ -123,7 +122,7 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         "reports/figures",
         config["module_name"],
     }
-    
+
     ignored_dirs = set()
 
     if config["include_code_scaffold"] == "Yes":
@@ -132,7 +131,11 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
     if config["docs"] == "mkdocs":
         expected_dirs.add("docs/docs")
 
-    if config["version_control"] in ("git (local)", "git (github public)", "git (github private)"):
+    if config["version_control"] in (
+        "git (local)",
+        "git (github public)",
+        "git (github private)",
+    ):
         # Expected after `git init`
         expected_dirs.update(
             {
@@ -216,33 +219,30 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         f"{config['module_name']}/__init__.py",
     }
     
-    ignore_dirs = {
-        ".git",
-        ".venv",
-        "__pycache__",
-        "_frontend",
-        "_backend",
-        "_course",
-        "_ai",
-        "_cli",
-    }
+    ignored_files = set()
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):
         expected_files.add("LICENSE")
 
-    if config["include_code_scaffold"] == "Yes":
+    if config["include_code_scaffold"] != "No":
         expected_files.update(
             {
                 f"{config['module_name']}/config.py",
-                f"{config['module_name']}/dataset.py",
-                f"{config['module_name']}/features.py",
-                f"{config['module_name']}/modeling/__init__.py",
-                f"{config['module_name']}/modeling/train.py",
-                f"{config['module_name']}/modeling/predict.py",
-                f"{config['module_name']}/plots.py",
+                f"{config['module_name']}/_ai/dataset.py",
+                f"{config['module_name']}/_ai/features.py",
+                f"{config['module_name']}/_ai/modeling/__init__.py",
+                f"{config['module_name']}/_ai/modeling/train.py",
+                f"{config['module_name']}/_ai/modeling/predict.py",
+                f"{config['module_name']}/_ai/plots.py",
             }
         )
+        ignored_files.update({
+            {f.relative_to(root) for f in root.glob(f"{config['module_name']}/_frontend/**/*") if f.is_file()}
+            | {f.relative_to(root) for f in root.glob(f"{config['module_name']}/_backend/**/*") if f.is_file()}
+            | {f.relative_to(root) for f in root.glob(f"{config['module_name']}/_course/**/*") if f.is_file()}
+            | {f.relative_to(root) for f in root.glob(f"{config['module_name']}/_cli/**/*") if f.is_file()}
+        })
 
     if config["docs"] == "mkdocs":
         expected_files.update(
@@ -255,37 +255,35 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         )
 
     expected_files.add(config["dependency_file"])
-    
+
     if config["dependency_file"] != "none":
         expected_files.add(config["dependency_file"])
 
     if config["environment_manager"] == "uv":
         expected_files.add("uv.lock")
 
-    if config["version_control"] in ("git (local)", "git (github)"):
+    if config["version_control"] in ("git (local)", "git (github public)", "git (github private)"):
         # Expected after `git init`
-        expected_files.update(
-            {
-                ".git/config",
-                ".git/description",
-                ".git/HEAD",
-                ".git/hooks/applypatch-msg.sample",
-                ".git/hooks/commit-msg.sample",
-                ".git/hooks/fsmonitor-watchman.sample",
-                ".git/hooks/post-update.sample",
-                ".git/hooks/pre-applypatch.sample",
-                ".git/hooks/pre-commit.sample",
-                ".git/hooks/pre-merge-commit.sample",
-                ".git/hooks/pre-push.sample",
-                ".git/hooks/pre-rebase.sample",
-                ".git/hooks/pre-receive.sample",
-                ".git/hooks/prepare-commit-msg.sample",
-                ".git/hooks/push-to-checkout.sample",
-                ".git/hooks/sendemail-validate.sample",
-                ".git/hooks/update.sample",
-                ".git/info/exclude",
-            }
-        )
+        expected_files.update({
+            ".git/config",
+            ".git/description",
+            ".git/HEAD",
+            ".git/hooks/applypatch-msg.sample",
+            ".git/hooks/commit-msg.sample",
+            ".git/hooks/fsmonitor-watchman.sample",
+            ".git/hooks/post-update.sample",
+            ".git/hooks/pre-applypatch.sample",
+            ".git/hooks/pre-commit.sample",
+            ".git/hooks/pre-merge-commit.sample",
+            ".git/hooks/pre-push.sample",
+            ".git/hooks/pre-rebase.sample",
+            ".git/hooks/pre-receive.sample",
+            ".git/hooks/prepare-commit-msg.sample",
+            ".git/hooks/push-to-checkout.sample",
+            ".git/hooks/sendemail-validate.sample",
+            ".git/hooks/update.sample",
+            ".git/info/exclude",
+        })
         # Expected after initial git commit
         expected_files.update(
             {
@@ -312,7 +310,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
     ignore_curly_files = {
         Path(".git/hooks/fsmonitor-watchman.sample"),
         Path(".git/index"),
-        Path(".cursorrules")
+        Path(".cursorrules"),
     }
 
     assert all(no_curlies(root / f) for f in checked_files - ignore_curly_files)

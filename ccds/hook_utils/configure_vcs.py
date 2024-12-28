@@ -65,7 +65,7 @@ def _check_git_cli_installed() -> bool:
 def configure_github_repo(
     directory: str | Path,
     repo_name: str,
-    visibility: Literal["private", "public"] = "private"
+    visibility: Literal["private", "public"] = "private",
 ) -> bool:
     """
     Configure a Git repository locally and optionally on GitHub with specified branch protections.
@@ -85,11 +85,15 @@ def configure_github_repo(
     try:
         subprocess.run("gh auth status", shell=True, check=True, capture_output=True)
     except subprocess.CalledProcessError:
-        raise RuntimeError("GitHub CLI not authenticated. Please run `gh auth login` and try again.")
-    
+        raise RuntimeError(
+            "GitHub CLI not authenticated. Please run `gh auth login` and try again."
+        )
+
     try:
         # GitHub operations
-        github_username = _gh("api user -q .login", capture_output=True, text=True).stdout.strip()
+        github_username = _gh(
+            "api user -q .login", capture_output=True, text=True
+        ).stdout.strip()
 
         # Create or update GitHub repository
         if not _github_repo_exists(github_username, repo_name):
@@ -125,10 +129,13 @@ def _gh(command: str, **kwargs) -> subprocess.CompletedProcess:
     """Run a GitHub CLI command and return the result."""
     return subprocess.run(f"gh {command}", shell=True, check=True, **kwargs)
 
+
 def _get_gh_remote_url(github_username: str, repo_name: str) -> Literal["https", "ssh"]:
     """Returns whether the github protocol is https or ssh from user's config"""
     try:
-        protocol = _gh("config get git_protocol", capture_output=True, text=True).stdout.strip()
+        protocol = _gh(
+            "config get git_protocol", capture_output=True, text=True
+        ).stdout.strip()
         if protocol == "ssh":
             return f"git@github.com:{github_username}/{repo_name}.git"
         elif protocol == "https":
