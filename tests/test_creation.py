@@ -115,18 +115,26 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         str(OUT_DIR),
         str(OUT_DIR / "models"),
         str(OUT_DIR / "features"),
+        str(OUT_DIR / "reports"),
         str(OUT_DIR / "reports" / "figures"),
         "notebooks",
-        "references",
-        "reports",
-        "reports/figures",
         config["module_name"],
     }
 
     ignored_dirs = set()
 
-    if config["include_code_scaffold"] == "Yes":
-        expected_dirs.add(f"{config['module_name']}/modeling")
+    if config["include_code_scaffold"] != "No":
+        expected_dirs.add(f"{config['module_name']}/_ai")
+        expected_dirs.add(f"{config['module_name']}/_ai/modeling")
+        expected_dirs.add(f"{config['module_name']}/_frontend")
+        expected_dirs.add(f"{config['module_name']}/_backend")
+        expected_dirs.add(f"{config['module_name']}/_course")
+        ignored_dirs.update({
+            d.relative_to(root)
+            for subdir in ["_frontend", "_backend", "_course"]
+            for d in root.glob(f"{config['module_name']}/{subdir}/**/*")
+            if d.is_dir()
+        })
 
     if config["docs"] == "mkdocs":
         expected_dirs.add("docs/docs")
@@ -165,8 +173,10 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
     existing_dirs = {
         d.resolve().relative_to(root) for d in root.glob("**") if d.is_dir()
     }
+    
+    checked_dirs = existing_dirs - ignored_dirs
 
-    assert sorted(existing_dirs - ignored_dirs) == sorted(expected_dirs)
+    assert sorted(checked_dirs) == sorted(expected_dirs)
 
 
 def verify_files(root: Path, config: dict[str, Any]) -> None:
@@ -218,32 +228,31 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         ".cursorrules",
         f"{config['module_name']}/__init__.py",
     }
-    
+
     ignored_files = set()
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):
         expected_files.add("LICENSE")
 
-    if config["include_code_scaffold"] != "No":
-        expected_files.update(
-            {
-                f"{config['module_name']}/config.py",
-                f"{config['module_name']}/_ai/dataset.py",
-                f"{config['module_name']}/_ai/features.py",
-                f"{config['module_name']}/_ai/modeling/__init__.py",
-                f"{config['module_name']}/_ai/modeling/train.py",
-                f"{config['module_name']}/_ai/modeling/predict.py",
-                f"{config['module_name']}/_ai/plots.py",
-            }
-        )
-        ignored_files.update({
-            {f.relative_to(root) for f in root.glob(f"{config['module_name']}/_frontend/**/*") if f.is_file()}
-            | {f.relative_to(root) for f in root.glob(f"{config['module_name']}/_backend/**/*") if f.is_file()}
-            | {f.relative_to(root) for f in root.glob(f"{config['module_name']}/_course/**/*") if f.is_file()}
-            | {f.relative_to(root) for f in root.glob(f"{config['module_name']}/_cli/**/*") if f.is_file()}
+    if config["include_code_scaffold"] != "No":    
+        expected_files.update({
+            f"{config['module_name']}/_ai/dataset.py",
+            f"{config['module_name']}/_ai/plots.py",
+            f"{config['module_name']}/_ai/features.py",
+            f"{config['module_name']}/_ai/modeling/__init__.py",
+            f"{config['module_name']}/_ai/modeling/predict.py",
+            f"{config['module_name']}/_ai/modeling/train.py",
+            f"{config['module_name']}/config.py"
         })
-
+        # Create a set of all files to ignore using set union
+        ignored_files.update({
+            f.relative_to(root)
+            for subdir in ["_frontend", "_backend", "_course"]
+            for f in root.glob(f"{config['module_name']}/{subdir}/**/*")
+            if f.is_file()
+        })
+    
     if config["docs"] == "mkdocs":
         expected_files.update(
             {
@@ -262,28 +271,34 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
     if config["environment_manager"] == "uv":
         expected_files.add("uv.lock")
 
-    if config["version_control"] in ("git (local)", "git (github public)", "git (github private)"):
+    if config["version_control"] in (
+        "git (local)",
+        "git (github public)",
+        "git (github private)",
+    ):
         # Expected after `git init`
-        expected_files.update({
-            ".git/config",
-            ".git/description",
-            ".git/HEAD",
-            ".git/hooks/applypatch-msg.sample",
-            ".git/hooks/commit-msg.sample",
-            ".git/hooks/fsmonitor-watchman.sample",
-            ".git/hooks/post-update.sample",
-            ".git/hooks/pre-applypatch.sample",
-            ".git/hooks/pre-commit.sample",
-            ".git/hooks/pre-merge-commit.sample",
-            ".git/hooks/pre-push.sample",
-            ".git/hooks/pre-rebase.sample",
-            ".git/hooks/pre-receive.sample",
-            ".git/hooks/prepare-commit-msg.sample",
-            ".git/hooks/push-to-checkout.sample",
-            ".git/hooks/sendemail-validate.sample",
-            ".git/hooks/update.sample",
-            ".git/info/exclude",
-        })
+        expected_files.update(
+            {
+                ".git/config",
+                ".git/description",
+                ".git/HEAD",
+                ".git/hooks/applypatch-msg.sample",
+                ".git/hooks/commit-msg.sample",
+                ".git/hooks/fsmonitor-watchman.sample",
+                ".git/hooks/post-update.sample",
+                ".git/hooks/pre-applypatch.sample",
+                ".git/hooks/pre-commit.sample",
+                ".git/hooks/pre-merge-commit.sample",
+                ".git/hooks/pre-push.sample",
+                ".git/hooks/pre-rebase.sample",
+                ".git/hooks/pre-receive.sample",
+                ".git/hooks/prepare-commit-msg.sample",
+                ".git/hooks/push-to-checkout.sample",
+                ".git/hooks/sendemail-validate.sample",
+                ".git/hooks/update.sample",
+                ".git/info/exclude",
+            }
+        )
         # Expected after initial git commit
         expected_files.update(
             {

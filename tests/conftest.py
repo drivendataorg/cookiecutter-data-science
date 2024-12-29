@@ -19,7 +19,6 @@ default_args: dict[str, str] = {
     "module_name": "project_module",
     "author_name": "DrivenData",
     "description": "A test project",
-    "version_control": "git (local)",
 }
 
 
@@ -41,7 +40,7 @@ def config_generator(fast: int | bool = False) -> Generator[dict[str, str], None
         ("python_version_number", v) for v in [running_py_version]
     ]
 
-    configs: Iterator[tuple[tuple[str, str], ...]] = product(
+    configs = product(
         py_version,
         [
             ("environment_manager", opt)
@@ -122,7 +121,7 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:  # type: ignore[mi
     """Generate test configurations."""
 
     def make_test_id(config: dict[str, str]) -> str:
-        return f"{config['environment_manager']}-{config['dependency_file']}-{config['docs']}"
+        return f"{config['environment_manager']}-{config['dependency_file']}-{config['docs']}-{config['version_control']}"
 
     if "config" in metafunc.fixturenames:
         configs = list(config_generator(metafunc.config.getoption("fast")))
