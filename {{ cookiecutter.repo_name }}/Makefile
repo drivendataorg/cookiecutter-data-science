@@ -15,8 +15,13 @@ PYTHON_INTERPRETER = python
 .PHONY: requirements
 requirements:
 	{% if "requirements.txt" == cookiecutter.dependency_file -%}
+	{% if "uv" == cookiecutter.environment_manager -%}
+	uv pip install pip
+	uv pip install -r requirements.txt
+	{% else -%}
 	$(PYTHON_INTERPRETER) -m pip install -U pip
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+	{% endif -%}
 	{% elif "environment.yml" == cookiecutter.dependency_file -%}
 	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
 	{% elif "Pipfile" == cookiecutter.dependency_file -%}
@@ -90,6 +95,7 @@ create_environment:
 	@echo ">>> New pipenv created. Activate with:\npipenv shell"
 	{% elif cookiecutter.environment_manager == 'uv' -%}
 	uv venv
+	uv pip install pip
 	@echo ">>> New uv virtual environment created. Activate with:\nsource ./.venv/source/activate"
 	{% endif %}
 {% endif %}
