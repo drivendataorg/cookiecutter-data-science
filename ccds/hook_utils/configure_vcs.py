@@ -1,7 +1,7 @@
 import os
 import subprocess
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Union
 
 # ---------------------------------------------------------------------------- #
 #                                      Git                                     #
@@ -9,7 +9,7 @@ from typing import Literal
 
 
 def init_local_git_repo(
-    directory: str | Path, _make_initial_commit: bool = True
+    directory: Union[str, Path], _make_initial_commit: bool = True
 ) -> bool:
     """
     Initialize a local git repository without any GitHub integration.
@@ -63,7 +63,7 @@ def _check_git_cli_installed() -> bool:
 
 
 def configure_github_repo(
-    directory: str | Path,
+    directory: Union[str, Path],
     repo_name: str,
     visibility: Literal["private", "public"] = "private",
 ) -> bool:
