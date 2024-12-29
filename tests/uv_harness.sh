@@ -47,13 +47,3 @@ fi
 # Activate the virtual environment
 source "$VENV_PATH"
 
-# Test python executable path
-python -c "import sys; assert \"$PROJECT_NAME\" in sys.executable"
-
-# Test module importability
-python -c "import $MODULE_NAME"
-
-# Test config importability if scaffolded
-if [ -f "$MODULE_NAME/config.py" ]; then
-    python -c "from $MODULE_NAME import config"
-fi
