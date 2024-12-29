@@ -93,20 +93,18 @@ def verify_folders(root, config):
                 ".git/info",
                 ".git/objects",
                 ".git/refs",
-                ".git/refs/heads",
-                ".git/refs/tags",
             }
         )
         # Expected after initial git commit
-        expected_dirs.update(
-            {
-                ".git/logs",
-                ".git/logs/refs",
-                ".git/logs/refs/heads",
-            }
-        )
+        expected_dirs.update({".git/logs", ".git/logs/refs"})
+        git_patterns = [".git/objects/**/*", ".git/refs/**/*", ".git/logs/refs/**/*"]
         ignored_dirs.update(
-            {d.relative_to(root) for d in root.glob(".git/objects/**/*") if d.is_dir()}
+            {
+                d.relative_to(root)
+                for pattern in git_patterns
+                for d in root.glob(pattern)
+                if d.is_dir()
+            }
         )
 
     expected_dirs = {Path(d) for d in expected_dirs}
@@ -205,12 +203,16 @@ def verify_files(root, config):
                 ".git/COMMIT_EDITMSG",
                 ".git/index",
                 ".git/logs/HEAD",
-                ".git/logs/refs/heads/main",
-                ".git/refs/heads/main",
             }
         )
+        git_patterns = [".git/objects/**/*", ".git/refs/**/*", ".git/logs/refs/**/*"]
         ignored_files.update(
-            {f.relative_to(root) for f in root.glob(".git/objects/**/*") if f.is_file()}
+            {
+                f.relative_to(root)
+                for pattern in git_patterns
+                for f in root.glob(pattern)
+                if f.is_file()
+            }
         )
 
     expected_files = {Path(f) for f in expected_files}
