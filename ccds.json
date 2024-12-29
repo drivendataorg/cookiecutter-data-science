@@ -15,6 +15,7 @@
         "virtualenv",
         "conda",
         "pipenv",
+        "uv",
         "none"
     ],
     "dependency_file": [
