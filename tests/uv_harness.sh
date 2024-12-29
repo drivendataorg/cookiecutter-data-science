@@ -31,19 +31,11 @@ make create_environment
 
 # Check if running on Windows and use appropriate activate path
 if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* ]]; then
-    VENV_PATH=".venv/Scripts/activate"
+    source ".venv/Scripts/activate"
 else
-    VENV_PATH=".venv/bin/activate"
+    source ".venv/bin/activate"
 fi
 
 make requirements
 
-# Verify venv exists before attempting to activate
-if [ ! -f "$VENV_PATH" ]; then
-    echo "Virtual environment activation script not found at $VENV_PATH"
-    exit 1
-fi
-
-# Activate the virtual environment
-source "$VENV_PATH"
-
+run_tests $PROJECT_NAME $MODULE_NAME

@@ -90,6 +90,7 @@ create_environment:
 	@echo ">>> New pipenv created. Activate with:\npipenv shell"
 	{% elif cookiecutter.environment_manager == 'uv' -%}
 	uv venv
+	@echo ">>> New uv virtual environment created. Activate with:\nsource ./.venv/source/activate"
 	{% endif %}
 {% endif %}
 

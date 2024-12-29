@@ -57,4 +57,3 @@ fi
 make requirements
 
 run_tests $PROJECT_NAME $MODULE_NAME
-
