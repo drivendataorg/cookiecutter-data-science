@@ -129,12 +129,14 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         expected_dirs.add(f"{config['module_name']}/_frontend")
         expected_dirs.add(f"{config['module_name']}/_backend")
         expected_dirs.add(f"{config['module_name']}/_course")
-        ignored_dirs.update({
-            d.relative_to(root)
-            for subdir in ["_frontend", "_backend", "_course"]
-            for d in root.glob(f"{config['module_name']}/{subdir}/**/*")
-            if d.is_dir()
-        })
+        ignored_dirs.update(
+            {
+                d.relative_to(root)
+                for subdir in ["_frontend", "_backend", "_course"]
+                for d in root.glob(f"{config['module_name']}/{subdir}/**/*")
+                if d.is_dir()
+            }
+        )
 
     if config["docs"] == "mkdocs":
         expected_dirs.add("docs/docs")
@@ -173,7 +175,7 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
     existing_dirs = {
         d.resolve().relative_to(root) for d in root.glob("**") if d.is_dir()
     }
-    
+
     checked_dirs = existing_dirs - ignored_dirs
 
     assert sorted(checked_dirs) == sorted(expected_dirs)
@@ -235,24 +237,28 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
     if not config["open_source_license"].startswith("No license"):
         expected_files.add("LICENSE")
 
-    if config["include_code_scaffold"] != "No":    
-        expected_files.update({
-            f"{config['module_name']}/_ai/dataset.py",
-            f"{config['module_name']}/_ai/plots.py",
-            f"{config['module_name']}/_ai/features.py",
-            f"{config['module_name']}/_ai/modeling/__init__.py",
-            f"{config['module_name']}/_ai/modeling/predict.py",
-            f"{config['module_name']}/_ai/modeling/train.py",
-            f"{config['module_name']}/config.py"
-        })
+    if config["include_code_scaffold"] != "No":
+        expected_files.update(
+            {
+                f"{config['module_name']}/_ai/dataset.py",
+                f"{config['module_name']}/_ai/plots.py",
+                f"{config['module_name']}/_ai/features.py",
+                f"{config['module_name']}/_ai/modeling/__init__.py",
+                f"{config['module_name']}/_ai/modeling/predict.py",
+                f"{config['module_name']}/_ai/modeling/train.py",
+                f"{config['module_name']}/config.py",
+            }
+        )
         # Create a set of all files to ignore using set union
-        ignored_files.update({
-            f.relative_to(root)
-            for subdir in ["_frontend", "_backend", "_course"]
-            for f in root.glob(f"{config['module_name']}/{subdir}/**/*")
-            if f.is_file()
-        })
-    
+        ignored_files.update(
+            {
+                f.relative_to(root)
+                for subdir in ["_frontend", "_backend", "_course"]
+                for f in root.glob(f"{config['module_name']}/{subdir}/**/*")
+                if f.is_file()
+            }
+        )
+
     if config["docs"] == "mkdocs":
         expected_files.update(
             {
