@@ -121,7 +121,53 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:  # type: ignore[mi
     """Generate test configurations."""
 
     def make_test_id(config: dict[str, str]) -> str:
-        return f"{config['environment_manager']}-{config['dependency_file']}-{config['docs']}-{config['version_control']}"
+        # Map full names to shorter versions
+        abbreviations = {
+            'environment_manager': {
+                'none': 'no-env', 
+                'virtualenv': 'venv', 
+                'conda': 'con', 
+                'pipenv': 'penv'
+            },
+            'dependency_file': {
+                'requirements.txt': 'req.txt', 
+                'environment.yml': 'env.yml',
+                'Pipfile': 'pfile'
+            },
+            'docs': {'mkdocs': 'mkdocs', 'none': 'no-doc'},
+            'version_control': {
+                'none': 'no-vc', 
+                'git (local)': 'git',
+                'git (github private)': 'gh-prv',
+                'git (github public)': 'gh-pub'
+            },
+            'pydata_packages': {'none': 'no-pkg', 'basic': 'pkg'}
+        }
+        
+        # Define column widths
+        cols = [
+            ('env', 6),      # environment_manager
+            ('dep', 6),      # dependency_file
+            ('doc', 6),      # docs
+            ('vc', 6),       # version_control
+            ('pkg', 6),      # pydata_packages
+        ]
+        
+        # Format each component with fixed width
+        components = []
+        for (prefix, width), key in zip(cols, [
+            'environment_manager',
+            'dependency_file',
+            'docs',
+            'version_control',
+            'pydata_packages'
+        ]):
+            value = abbreviations[key][config[key]]
+            # Ensure exact width by padding or truncating
+            formatted = f"{value:<{width}}"[:width]
+            components.append(formatted)
+        
+        return " ".join(components)
 
     if "config" in metafunc.fixturenames:
         configs = list(config_generator(metafunc.config.getoption("fast")))
