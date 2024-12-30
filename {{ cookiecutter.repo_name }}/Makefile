@@ -94,9 +94,11 @@ create_environment:
 	pipenv --python $(PYTHON_VERSION)
 	@echo ">>> New pipenv created. Activate with:\npipenv shell"
 	{% elif cookiecutter.environment_manager == 'uv' -%}
-	uv venv
+	uv venv --python $(PYTHON_VERSION)
 	uv pip install pip
-	@echo ">>> New uv virtual environment created. Activate with:\nsource ./.venv/source/activate"
+	@echo ">>> New uv virtual environment created. Activate with:"
+	@echo ">>> Windows: .\\\\.venv\\\\Scripts\\\\activate"
+	@echo ">>> Unix/macOS: source ./.venv/bin/activate"
 	{% endif %}
 {% endif %}
 
