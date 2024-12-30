@@ -21,6 +21,7 @@ theme:
 nav:
   - 🏠 Home: index.md                       # Project overview, quickstart guide, and complete directory structure walkthrough
   - 🛠️ Core Tools: core-tools.md            # Comprehensive breakdown of all core tools (IDE, Docker, AWS, etc.) and Python dependencies with explanations
+  - 🪝 Pre-commit Hooks: precommit.md       
   - 💻 VSCode & Cursor: vscode.md           # Detailed guide to workspace configuration, debug profiles, recommended extensions, and AI integration
   - ❓ Why gotem?: why.md                   # Discussion of code quality, project organization, and reproducibility benefits
   - 🗯️ Opinions: opinions.md                # Core principles about data hygiene, notebooks, modeling, and environment management
