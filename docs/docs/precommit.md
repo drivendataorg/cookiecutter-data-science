@@ -49,15 +49,6 @@ I tried selecting hooks that do not duplicate what another tool already does. Fo
 
 ### 01 Security
 
-[Bandit](https://bandit.readthedocs.io/en/latest/) checks for common security issues in python code
-
-```yaml
-- repo: https://github.com/PyCQA/bandit
-    rev: 1.7.4
-    hooks:
-        - id: bandit
-```
-
 [GitLeaks](https://github.com/gitleaks/gitleaks) prevents passwords, api keys, or other secrets from entering your GitHub repo.
 
 ```yaml
@@ -137,7 +128,7 @@ Biome is meant to be a replacement for [ESLint](https://eslint.org/) (the most p
 
 **Python**
 
-[ruff](https://docs.astral.sh/ruff/) formatter and linter (Super fast Python linter and code formatter that is increasingly becoming the standard over Black, Flake8, isort, pyupgrade, and other tools.)
+[ruff](https://docs.astral.sh/ruff/) formatter and linter (Super fast Python linter and code formatter that is increasingly becoming the standard over Black, Flake8, isort, pyupgrade, pydocstyle, mccabe complexity, pydoclint, [Bandit](https://bandit.readthedocs.io/en/latest/), and more.) It's incredible. It's hasn't fully replaced everything, but it is close enough to make it the only element on this list.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -175,6 +166,21 @@ I'm playing with [mdformat](https://mdformat.readthedocs.io/en/stable/) for the 
   minimum_pre_commit_version: '1.0.0'
 ```
 
+**Jupyter Notebooks**
+
+[nbQA](https://nbqa.readthedocs.io/en/latest/index.html) is generally the go-to tool for notebook quality assurance. It allows you to use all the normal formatting tools with notebooks.
+
+Here I have the tools listed previously but now run on a Notebook:
+
+```yaml
+- repo: https://github.com/nbQA-dev/nbQA
+  rev: 1.9.1
+  hooks:
+    - id: nbqa-ruff-check
+    - id: nbqa-ruff-format
+    - id: nbqa-mypy
+```
+
 
 **YAML, HTML, Everything else not listed above**
 <!-- HTML Hint for linting? https://htmlhint.com/ -->
@@ -192,7 +198,8 @@ hooks:
     language: system
 ```
 
-<!-- TODO: Add others. -->
+If you're using [uv](https://docs.astral.sh/uv/), they [also have pre-commits](https://github.com/astral-sh/uv-pre-commit)
+
 <!-- CZ git https://cz-git.qbb.sh/cli/why -->
 
 ### 03 Project and Files
@@ -246,9 +253,11 @@ Alternatives to Commitizen (Commitlint)
 `no-commit-to-branch` - Protect specific branches from direct checkins.
 
 
-Some inspo from [this article](https://medium.com/marvelous-mlops/welcome-to-pre-commit-heaven-5b622bb8ebce)
-
-
 ### 05 Testing
 
 TODO: Finish implementing `tests/` boilerplate and include a precommit hook to run the fastest tests.
+
+<!-- Also maybe add profiling? -->
+
+
+Some inspo from [this article](https://medium.com/marvelous-mlops/welcome-to-pre-commit-heaven-5b622bb8ebce)

@@ -77,14 +77,12 @@ data = [  # Data processing and storage
     "tomli>=2.0.1",            # TOML parsing
 ]
 dev = [  # Development tools
-    "bandit>=1.8.0",           # Security linter
     "better-exceptions>=0.3.3", # Improved error messages
     "cruft>=2.15.0",           # Project template management
     "faker>=33.1.0",           # Fake data generation
     "hypothesis>=6.122.3",     # Property-based testing
     "pip>=24.3.1",             # Package installer
     "polyfactory>=2.18.1",     # Test data factory
-    "pydoclint>=0.5.11",       # Docstring linter
     "pyinstrument>=5.0.0",     # Profiler
     # "pyprojectsort>=0.3.0",    # pyproject.toml sorter (TODO: Find replacement)
     "pyright>=1.1.390",        # Static type checker
