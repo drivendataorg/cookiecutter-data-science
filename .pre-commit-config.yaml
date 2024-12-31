@@ -1,33 +1,42 @@
 repos:
-  # Standard Hooks
+  # ---------------------------------------------------------------------------- #
+  #                                Standard Hooks                                #
+  # ---------------------------------------------------------------------------- #
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+    rev: v5.0.0
     hooks:
       - id: check-symlinks
-      - id: check-yaml
-        args: ["--allow-multiple-documents"]
-      # - id: double-quote-string-fixer
       - id: forbid-new-submodules
-  # Linting & Formatting (Disabled)
-  # - repo: https://github.com/astral-sh/ruff-pre-commit
-  #   # Ruff version.
-  #   rev: v0.8.4
-  #   hooks:
-  #     # Run the linter.
-  #     - id: ruff
-  #       args: [ --fix ]
-  #     # Run the formatter.
-  #     - id: ruff-format
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-illegal-windows-names
+      - id: check-merge-conflict
+      - id: destroyed-symlinks
+      - id: no-commit-to-branch
+        args: [--branch, main, --branch, master]
+  # ---------------------------------------------------------------------------- #
+  #                        Linting & Formatting (Disabled)                       #
+  # ---------------------------------------------------------------------------- #
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      # Run the linter.
+      - id: ruff
+        args: [ --fix ]
+      # Run the formatter.
+      - id: ruff-format
   - repo: local
     hooks:
       - id: make-lint
-        name: make-lint
+        name: Run 'make lint'
         entry: make
         args: ["lint"]
         language: system
       
-  # Security
+  # ---------------------------------------------------------------------------- #
+  #                                   Security                                   #
+  # ---------------------------------------------------------------------------- #
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.22.0
+    rev: v8.22.1
     hooks:
       - id: gitleaks
