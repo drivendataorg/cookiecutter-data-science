@@ -1,5 +1,6 @@
 # Pre-commit Hooks Collection
 
+<!-- TODO: This https://www.notion.so/gatlen/Ruff-Styling-Config-and-Python-Packages-158803bca419800fa4abc97864e25a7b?pvs=4 -->
 
 ## What is pre-commit and why would I want to use it?
 ![pre-commit logo](https://avatars.githubusercontent.com/u/6943086?s=280&v=4)
@@ -39,6 +40,8 @@ The repository should already be configured with a `.pre-commit-config.yaml` fil
 ![Pre-commit Example](./pre-commit_example.png)
 
 Every time you change the config file, you will have to reinstall. Without installing, you can also test a new configuration with: `pre-commit run --all-files`
+
+Fun fact: `pre-commit autoupdate` will use the newest found versions of the precommits and insert a version if none was provided.
 
 ## Hooks
 
@@ -86,6 +89,53 @@ hooks:
     language: system
 ```
 
+**JS[X], TS[X], JSON[C], CSS, GraphQL**
+
+[Biome](https://biomejs.dev/internals/language-support/) is a super fast formatter/linter/LS (hEy gUys iTs in rUsT) for JS[X], TS[X], JSON[C], CSS, and GraphQL with more coming soon. I think it generally has some better defaults and errors than something like ESLint. There's also a [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=biomejs.biome) to use instead of ESLint
+
+```yaml
+repos:
+-   repo: https://github.com/biomejs/pre-commit
+    rev: "1.4.1"
+    hooks:
+    -   id: biome-ci
+        additional_dependencies: ["@biomejs/biome@1.4.1"]
+```
+
+**JSON, YAML, TOML**
+
+For [JSON Schema](https://json-schema.org/specification) (or YAML or TOML schema), [check-jsonschema](https://check-jsonschema.readthedocs.io/en/stable/precommit_usage.html) is helpful (despite having a confusing name). It also comes as a [CLI](https://check-jsonschema.readthedocs.io/en/stable/install.html). I've also included here a [TaskFile.yml](https://taskfile.dev/) checker.
+
+```yaml
+- repo: https://github.com/python-jsonschema/check-jsonschema
+  rev: 0.30.0
+  hooks:
+    - id: check-github-workflows
+      args: ["--verbose"]
+    - id: check-taskfile
+```
+
+While check-jsonschema supports TOML files, [validate-pyproject](https://validate-pyproject.readthedocs.io/en/stable/readme.html) has a pre-commit hook as well. An official TOML schema seems to be in the works and when that comes out I think pyproject.toml will be one of the first. Perhaps I will instead use , I could steal the [JSON Schema](https://validate-pyproject.readthedocs.io/en/stable/json-schemas.html) posted by the creator of the project or the one from [Schema Store](https://json.schemastore.org/pyproject.json)
+
+```yaml
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.23
+    hooks:
+        - id: validate-pyproject
+          # Optional extra validations from SchemaStore:
+          additional_dependencies: ["validate-pyproject-schema-store[all]"]
+```
+
+
+<details>
+<summary>
+Alternatives to Biome (ESLint & Prettier)
+</summary>
+Biome is meant to be a replacement for [ESLint](https://eslint.org/) (the most popular JavaScript Linter) and [Prettier](https://prettier.io/) (A code formatter with an insane number of supported files, notoriously slow). People seem quite excited about the project but it definitely doesn't have the wide scale adoption that Prettier and ESlint have and because of that -- a lack of plugins. Since this is a python-focused project template, the JS code won't be that advanced, and because it is speedy -- I've included it in this pre-commit. I'm also generally annoyed with the way Prettier does things. If you need those extensions, I wouldn't hesitate to use ESLint and Prettier.
+</details>
+
+
+**Python**
 
 [ruff](https://docs.astral.sh/ruff/) formatter and linter (Super fast Python linter and code formatter that is increasingly becoming the standard over Black, Flake8, isort, pyupgrade, and other tools.)
 
@@ -97,10 +147,10 @@ hooks:
     - id: ruff
     args: [ --fix ]
     # Run the formatter.
-    # - id: ruff-format
+    - id: ruff-format
 ```
 
-[MyPy]() for Python type checking. I would prefer to use the [faster and more featureful](https://github.com/microsoft/pyright/blob/main/docs/mypy-comparison.md) Microsoft [Pyright](https://microsoft.github.io/pyright/#/) since it is  but there's currently not a good existing pre-commit hook for this. 
+[MyPy](https://mypy-lang.org/) for Python type checking. I would prefer to use the [faster and more featureful](https://github.com/microsoft/pyright/blob/main/docs/mypy-comparison.md) Microsoft [Pyright](https://microsoft.github.io/pyright/#/) since it is  but there's currently not a good existing pre-commit hook for this. 
 _(Will likely either make my own, adapt their [Git hook](https://github.com/microsoft/pyright/blob/main/docs/ci-integration.md), or just call it locally)_
 
 ```yaml
@@ -111,10 +161,37 @@ _(Will likely either make my own, adapt their [Git hook](https://github.com/micr
 
 <!-- TODO: Add Pyright, no pre-existing hook available. [![Checked with pyright](https://microsoft.github.io/pyright/img/pyright_badge.svg)](https://microsoft.github.io/pyright/) -->
 
+**Markdown**
+
+I'm playing with [mdformat](https://mdformat.readthedocs.io/en/stable/) for the time being. I may switch back to using [Prettier](https://prettier.io/) but I'm still not super into it.
+
+```yaml
+- id: mdformat
+  name: mdformat
+  description: "CommonMark compliant Markdown formatter"
+  entry: mdformat
+  language: python
+  types: [markdown]
+  minimum_pre_commit_version: '1.0.0'
+```
 
 
+**YAML, HTML, Everything else not listed above**
+<!-- HTML Hint for linting? https://htmlhint.com/ -->
 
-<!-- TODO: Add prettier -->
+[Prettier](https://prettier.io/) is an opinionated code formatter that I'm honestly not a huge fan of. It takes quite a while to run and I've personally run into issues with it breaking things. BUT it is pretty standard. I might try swapping out Prettier with better but smaller-scoped linters, but this might be overkill and require too many downloads.
+
+<!-- TODO: Replace with prettier -->
+```yaml
+- repo: local
+hooks:
+    - id: make-lint
+    name: Run 'make lint'
+    entry: make
+    args: ["lint"]
+    language: system
+```
+
 <!-- TODO: Add others. -->
 <!-- CZ git https://cz-git.qbb.sh/cli/why -->
 
@@ -132,12 +209,11 @@ _(Will likely either make my own, adapt their [Git hook](https://github.com/micr
 
 ### 04 Git
 
-[commitizen](https://commitizen-tools.github.io/commitizen/) - Enforces the usage of the Commitizen commit message format for consistent and standardized commits.
+[commitizen](https://commitizen.github.io/cz-cli/) - Enforces the usage of the Commitizen commit message format for consistent and standardized commits. Can also autogenerate changelog :D
 
-_You should use the CLI too!_
+_You should use the CLI too! I recommend the [czg](https://cz-git.qbb.sh/) implementation bc it's slightly faster and a bit more featureful._
 
 `commitizen-branch` - Performs commit message validation. With the argument below it works specifically for branch pushes, but other options are available.
-
 
 ```yaml
 - repo: https://github.com/commitizen-tools/commitizen
@@ -152,11 +228,16 @@ _You should use the CLI too!_
 <summary>
 Alternatives to Commitizen (Commitlint)
 </summary>
-[commitlint](https://github.com/conventional-changelog/commitlint) is a similar project to commitizen. Many articles claim that the difference between the two are that commitizen is more of a tool to generate these fancy commits while commitlint is meant to lint the commits. However, considering `cz check` is a thing, I'm confused what the difference is. More work to be done. The tools can be used together. Seems like commitizen has better python support than commitlint. Projects equally popular.
+[commitlint](https://github.com/conventional-changelog/commitlint) is a similar project to commitizen. Many articles claim that the difference between the two are that commitizen is more of a tool to generate these fancy commits while commitlint is meant to lint the commits. However, considering `cz check` is a thing, I'm confused what the difference is. More work to be done. The tools can be used together. Seems like commitizen has better python support than commitlint. Projects equally popular. More research to be done on the differences!
 </details>
 
+<!-- TODO: Look into the differences above. Oop. -->
 
-<!-- TODO: Look at https://github.com/conventional-changelog/conventional-changelog -->
+<!-- TODO: Also look into running pre-commit before cz even pops up, it's annoying to write things and then have it fail the pre-commit and have to rewrite. -->
+
+<!-- TODO: Look at https://github.com/conventional-changelog/conventional-changelog but commitizen may already deal with that. -->
+
+<!-- TODO: Look into [gitmoji](https://gitmoji.dev/). I think it is just a standardization and commitizen could do that automatically potentially. -->
 
 `check-merge-conflict` - Check for files that contain merge conflict strings.
 
@@ -165,4 +246,9 @@ Alternatives to Commitizen (Commitlint)
 `no-commit-to-branch` - Protect specific branches from direct checkins.
 
 
-Some inspiraion from [this article](https://medium.com/marvelous-mlops/welcome-to-pre-commit-heaven-5b622bb8ebce)
+Some inspo from [this article](https://medium.com/marvelous-mlops/welcome-to-pre-commit-heaven-5b622bb8ebce)
+
+
+### 05 Testing
+
+TODO: Finish implementing `tests/` boilerplate and include a precommit hook to run the fastest tests.
