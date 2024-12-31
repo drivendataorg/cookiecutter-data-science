@@ -18,6 +18,8 @@ Pre-commit can be as nitpicky as you want it to be depending on quality-time tra
 5. Requiring commit messages to follow a standard (Like [Commitizen](https://commitizen-tools.github.io/commitizen/))
 6. More
 
+It's also nice because you can run a bunch of QA tools your research team doesn't care or know much about without them having to learn the tool.
+
 This page describes the collection of pre-commit hooks selected for this project.
 
 <details>
