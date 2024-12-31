@@ -67,57 +67,85 @@ pre-commit install
 
 ## Hooks
 
-I tried selecting hooks that do not duplicate what another tool already does. For example, for python linting I use ruff and only ruff rather than [the common out-of-the-box pre-commit hooks](https://github.com/pre-commit/pre-commit-hooks). Same for JSON, YAML, TOML, etc. Same for security features. I aim to have only the best tooling.
+This collection prioritizes best-in-class tools without redundancy. Rather than using multiple overlapping tools, we've selected the most effective option for each task. For example:
+- Python linting uses only Ruff instead of multiple separate linters
+- JSON/YAML/TOML validation uses specialized schema validators
+- Security scanning uses a single comprehensive tool
 
 ### 01 Security
 
-[GitLeaks](https://github.com/gitleaks/gitleaks) prevents passwords, api keys, or other secrets from entering your GitHub repo.
+[GitLeaks](https://github.com/gitleaks/gitleaks) is a fast, lightweight scanner that prevents secrets (passwords, API keys, tokens) from being committed to your repository.
 
 ```yaml
-  - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.22.0
-    hooks:
-      - id: gitleaks
+- repo: https://github.com/gitleaks/gitleaks
+  rev: v8.22.0
+  hooks:
+    - id: gitleaks
 ```
+
 <details>
 <summary>
 Alternatives to GitLeaks (TruffleHog)
 </summary>
-[TruffleHog](https://github.com/trufflesecurity/trufflehog) is an alternative to GitLeaks that is a bit more powerful, offering continuous scanning of a variety of platforms, not just files. And has a cute pig for their logo (crucial knowledge). However, it is a bit heavier and takes more time to set up. If you're handling particularly important information, I might recommend using it over GitLeaks.
+[TruffleHog](https://github.com/trufflesecurity/trufflehog) offers more comprehensive and continuous security scanning across a variety of platforms (not just files). However, it requires more setup time and resources than GitLeaks. Consider TruffleHog for expansive projects with strict security requirements.
 </details>
 
 
 <!-- TODO: Read this, https://kislyuk.github.io/argcomplete/ -->
 
-### 02 Formatting
+### 02 Code Quality & Formatting
 
-Local `make-lint` (commented out and using the remote hooks to avoid needing particular dependencies and to make the config more portable.)
-```yaml
-- repo: local
-hooks:
-    - id: make-lint
-    name: Run 'make lint'
-    entry: make
-    args: ["lint"]
-    language: system
-```
+This section covers tools for code formatting, linting, type checking, and schema validation across different languages and file types. Best-in-class tools were chosen, avoiding redundant functionality. I opted for remote hook downloads over local commands to make the file more portable and self-updating.
 
-**JS[X], TS[X], JSON[C], CSS, GraphQL**
-
-[Biome](https://biomejs.dev/internals/language-support/) is a super fast formatter/linter/LS (hEy gUys iTs in rUsT) for JS[X], TS[X], JSON[C], CSS, and GraphQL with more coming soon. I think it generally has some better defaults and errors than something like ESLint. There's also a [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=biomejs.biome) to use instead of ESLint
+#### Python Tools
+[Ruff](https://docs.astral.sh/ruff/) is a fast, comprehensive Python formatter and linter that replaces multiple traditional tools (Black, Flake8, isort, pyupgrade, bandit, pydoclint, mccabe complexity, and more.) While it's not yet at 100% parity with all these tools, its speed and broad coverage make it an excellent choice as our only Python linter/formatter:
 
 ```yaml
-repos:
--   repo: https://github.com/biomejs/pre-commit
-    rev: "1.4.1"
-    hooks:
-    -   id: biome-ci
-        additional_dependencies: ["@biomejs/biome@1.4.1"]
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.8.4
+  hooks:
+    - id: ruff
+      args: [ --fix ]
+    - id: ruff-format
 ```
 
-**JSON, YAML, TOML**
+[MyPy](https://mypy-lang.org/) handles Python type checking:
+```yaml
+- repo: https://github.com/pre-commit/mirrors-mypy
+  hooks:
+    - id: mypy
+```
 
-For [JSON Schema](https://json-schema.org/specification) (or YAML or TOML schema), [check-jsonschema](https://check-jsonschema.readthedocs.io/en/stable/precommit_usage.html) is helpful (despite having a confusing name). It also comes as a [CLI](https://check-jsonschema.readthedocs.io/en/stable/install.html). I've also included here a [TaskFile.yml](https://taskfile.dev/) checker.
+<details>
+<summary>
+Alternatives to MyPy (Pyright)
+</summary>
+Microsoft's [Pyright](https://microsoft.github.io/pyright/) is a [faster and more featureful](https://github.com/microsoft/pyright/blob/main/docs/mypy-comparison.md) alternative to MyPy. While it's the preferred choice for type checking, there isn't currently a maintained pre-commit hook available. Consider using Pyright through its [Git hook](https://github.com/microsoft/pyright/blob/main/docs/ci-integration.md) or as a local tool until a pre-commit hook is developed.
+</details>
+
+#### JavaScript & Web Tools
+[Biome](https://biomejs.dev/internals/language-support/) is a modern, fast formatter and linter for JS/TS ecosystems (JS[X], TS[X], JSON[C], CSS, GraphQL). It provides better defaults than ESLint and comes with a helpful [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=biomejs.biome):
+
+```yaml
+- repo: https://github.com/biomejs/pre-commit
+  rev: "1.4.1"
+  hooks:
+    - id: biome-ci
+    additional_dependencies: ["@biomejs/biome@1.4.1"]
+```
+
+<details>
+<summary>
+Alternatives to Biome (ESLint & Prettier)
+</summary>
+[ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) are more established alternatives with broader plugin ecosystems. While Prettier supports many file types, it can be notably slow, sometimes produces unexpected formatting, and sometimes breaks code (which I find annoying). Since this is primarily a Python-focused project template and Biome handles our JavaScript needs efficiently, we prefer it over the traditional ESLint/Prettier setup. Consider ESLint and Prettier if you need:
+- Their extensive plugin ecosystems
+- Support for specific JavaScript frameworks
+- Formatting of additional file types not covered by other tools
+</details>
+
+#### Configuration Validation
+[check-jsonschema](https://check-jsonschema.readthedocs.io/) validates various configuration files using [JSON Schema](https://json-schema.org/specification). It supports JSON, YAML, and TOML files, and includes specialized validators like the [TaskFile](https://taskfile.dev/) and [GitHub Actions](https://github.com/features/actions) checker.:
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
@@ -128,72 +156,31 @@ For [JSON Schema](https://json-schema.org/specification) (or YAML or TOML schema
     - id: check-taskfile
 ```
 
-While check-jsonschema supports TOML files, [validate-pyproject](https://validate-pyproject.readthedocs.io/en/stable/readme.html) has a pre-commit hook as well. An official TOML schema seems to be in the works and when that comes out I think pyproject.toml will be one of the first. Perhaps I will instead use , I could steal the [JSON Schema](https://validate-pyproject.readthedocs.io/en/stable/json-schemas.html) posted by the creator of the project or the one from [Schema Store](https://json.schemastore.org/pyproject.json)
+_Additional json schema available on the [Schema Store](https://json.schemastore.org/pyproject.json)_
 
+[validate-pyproject](https://validate-pyproject.readthedocs.io/) specifically handles pyproject.toml validation. In the future, I may have check-jsonschema do this as well.
 ```yaml
-  - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.23
-    hooks:
-        - id: validate-pyproject
-          # Optional extra validations from SchemaStore:
-          additional_dependencies: ["validate-pyproject-schema-store[all]"]
+- repo: https://github.com/abravalheri/validate-pyproject
+  rev: v0.23
+  hooks:
+    - id: validate-pyproject
+    additional_dependencies: ["validate-pyproject-schema-store[all]"]
 ```
 
-
-<details>
-<summary>
-Alternatives to Biome (ESLint & Prettier)
-</summary>
-Biome is meant to be a replacement for [ESLint](https://eslint.org/) (the most popular JavaScript Linter) and [Prettier](https://prettier.io/) (A code formatter with an insane number of supported files, notoriously slow). People seem quite excited about the project but it definitely doesn't have the wide scale adoption that Prettier and ESlint have and because of that -- a lack of plugins. Since this is a python-focused project template, the JS code won't be that advanced, and because it is speedy -- I've included it in this pre-commit. I'm also generally annoyed with the way Prettier does things. If you need those extensions, I wouldn't hesitate to use ESLint and Prettier.
-</details>
-
-
-**Python**
-
-[ruff](https://docs.astral.sh/ruff/) formatter and linter (Super fast Python linter and code formatter that is increasingly becoming the standard over Black, Flake8, isort, pyupgrade, pydocstyle, mccabe complexity, pydoclint, [Bandit](https://bandit.readthedocs.io/en/latest/), and more.) It's incredible. It's hasn't fully replaced everything, but it is close enough to make it the only element on this list.
-
+#### Documentation & Notebooks
+[mdformat](https://mdformat.readthedocs.io/) for Markdown formatting:
 ```yaml
-- repo: https://github.com/astral-sh/ruff-pre-commit
-rev: v0.8.4
-hooks:
-    # Run the linter.
-    - id: ruff
-    args: [ --fix ]
-    # Run the formatter.
-    - id: ruff-format
+- repo: https://github.com/hukkin/mdformat
+  rev: 0.7.21  # Use the ref you want to point at
+  hooks:
+  - id: mdformat
+    # Optionally add plugins
+    additional_dependencies:
+    - mdformat-gfm
+    - mdformat-black
 ```
 
-[MyPy](https://mypy-lang.org/) for Python type checking. I would prefer to use the [faster and more featureful](https://github.com/microsoft/pyright/blob/main/docs/mypy-comparison.md) Microsoft [Pyright](https://microsoft.github.io/pyright/#/) since it is  but there's currently not a good existing pre-commit hook for this. 
-_(Will likely either make my own, adapt their [Git hook](https://github.com/microsoft/pyright/blob/main/docs/ci-integration.md), or just call it locally)_
-
-```yaml
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    hooks:
-      - id: mypy
-```
-
-<!-- TODO: Add Pyright, no pre-existing hook available. [![Checked with pyright](https://microsoft.github.io/pyright/img/pyright_badge.svg)](https://microsoft.github.io/pyright/) -->
-
-**Markdown**
-
-I'm playing with [mdformat](https://mdformat.readthedocs.io/en/stable/) for the time being. I may switch back to using [Prettier](https://prettier.io/) but I'm still not super into it.
-
-```yaml
-- id: mdformat
-  name: mdformat
-  description: "CommonMark compliant Markdown formatter"
-  entry: mdformat
-  language: python
-  types: [markdown]
-  minimum_pre_commit_version: '1.0.0'
-```
-
-**Jupyter Notebooks**
-
-[nbQA](https://nbqa.readthedocs.io/en/latest/index.html) is generally the go-to tool for notebook quality assurance. It allows you to use all the normal formatting tools with notebooks.
-
-Here I have the tools listed previously but now run on a Notebook:
-
+[nbQA](https://nbqa.readthedocs.io/) for Jupyter notebook quality assurance, allowing us to use our standard Python tools on notebooks:
 ```yaml
 - repo: https://github.com/nbQA-dev/nbQA
   rev: 1.9.1
@@ -201,26 +188,58 @@ Here I have the tools listed previously but now run on a Notebook:
     - id: nbqa-ruff-check
     - id: nbqa-ruff-format
     - id: nbqa-mypy
+    - id: nbqa
+      entry: nbqa mdformat
+      name: Run 'mdformat' on a Jupyter Notebook
+      types: [jupyter]
 ```
 
+#### Additional File Types
+[Prettier](https://prettier.io/) handles formatting for various file types not covered by other tools (HTML, CSS, YAML, etc.). While it can be slow and sometimes produces unexpected formatting, it remains the standard for these file types:
 
-**YAML, HTML, Everything else not listed above**
-<!-- HTML Hint for linting? https://htmlhint.com/ -->
+```yaml
+- repo: https://github.com/pre-commit/mirrors-prettier
+  rev: v3.1.0
+  hooks:
+    - id: prettier
+      types_or: [yaml, markdown, html, css, scss, javascript, json]
+      # Exclude files handled by other formatters
+      exclude: |
+        (?x)^(
+            .*\.md$|
+            .*\.ipynb$|
+            .*\.py$|
+            .*\.tsx?$
+        )$
+      additional_dependencies:
+        - prettier@3.1.0
+```
 
-[Prettier](https://prettier.io/) is an opinionated code formatter that I'm honestly not a huge fan of. It takes quite a while to run and I've personally run into issues with it breaking things. BUT it is pretty standard. I might try swapping out Prettier with better but smaller-scoped linters, but this might be overkill and require too many downloads.
+<details>
+<summary>
+Future Improvements
+</summary>
+I might replace Prettier with more focused tools in the future (Perhaps [HTMLHint](https://htmlhint.com/) for HTML validation)
 
-<!-- TODO: Replace with prettier -->
+However, this would require managing multiple tools and dependencies, so I'm sticking with Prettier for now.
+</details>
+
+
+
+
+#### Local Tools
+For project-specific formatting needs:
 ```yaml
 - repo: local
-hooks:
+  hooks:
     - id: make-lint
-    name: Run 'make lint'
-    entry: make
-    args: ["lint"]
-    language: system
+      name: Run 'make lint'
+      entry: make
+      args: ["lint"]
+      language: system
 ```
 
-If you're using [uv](https://docs.astral.sh/uv/), they [also have pre-commits](https://github.com/astral-sh/uv-pre-commit)
+Note: If you're using [uv](https://docs.astral.sh/uv/), they [also have pre-commits](https://github.com/astral-sh/uv-pre-commit) available.
 
 <!-- CZ git https://cz-git.qbb.sh/cli/why -->
 
@@ -282,4 +301,3 @@ TODO: Finish implementing `tests/` boilerplate and include a precommit hook to r
 
 
 Some inspo from [this article](https://medium.com/marvelous-mlops/welcome-to-pre-commit-heaven-5b622bb8ebce)
-
