@@ -29,3 +29,15 @@ Alternatives (Husky)
 
 ## Install
 The repository should already be configured with a `.pre-commit-config.yaml` file and can be installed with `pre-commit install`. That's basically it, then whenever you commit you should see something like:
+
+![Pre-commit Example](./pre-commit_example.png)
+
+## Hooks
+
+### 01 Security
+
+
+### 02 Formatting
+
+
+### 03 Git
