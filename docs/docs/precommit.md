@@ -1,47 +1,69 @@
 # Pre-commit Hooks Collection
 
-<!-- TODO: This https://www.notion.so/gatlen/Ruff-Styling-Config-and-Python-Packages-158803bca419800fa4abc97864e25a7b?pvs=4 -->
-
-## What is pre-commit and why would I want to use it?
 ![pre-commit logo](https://avatars.githubusercontent.com/u/6943086?s=280&v=4)
 
-[Pre-commit](https://pre-commit.com/) is a framework for managing and maintaining multi-language pre-commit [Git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks), which are essentially pieces of code that are run right before you commit on your local machine and can even prevent you from committing if rules are not met. This is a feature of Git itself, and Pre-commit builds on it, simplifies it, and makes these hooks more reusable. (And despite its name, pre-commit can set up hooks at (any?) stage in the git pipeline, prior to commit tends to be the most common however.)
+## What are Git hooks?
+
+[Git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) are scripts that run automatically at some stage in the git-lifecycle. Most commonly, pre-commit hooks are used, running before a commit goes through. They act as a first line of defense for code quality by:
+- Catching formatting issues
+- Finding potential security risks
+- Validating configurations
+- Running quick tests
+- Enforcing team standards
 
 <!-- One might use a pre-push hook as a slightly more time-intensive pre-commit. -->
 
-![Git Hooks](https://d8it4huxumps7.cloudfront.net/uploads/images/652f8091f32cc_git_hooks_06.jpg?d=2000x2000)
+## Why use pre-commit?
 
-These are very easy to set up and there is a large ecosystem of ready-to-go hooks. They're a nice low-code way of maintaining quality and enforcing standards, especially on small, quickly moving projects. They tend to be fast and light-weight as opposed to CI/CD testing with something like [GitHub Actions](https://github.com/features/actions) which might take minutes. It's common to include these same pre-commit tests in GitHub Actions with [pre-commit ci](https://pre-commit.ci/) on top of the more expensive tests.
+[Pre-commit](https://pre-commit.com/) is a framework that makes these Git hooks:
+1. **Easy to share** - Hooks are defined in a single YAML file
+2. **Language-agnostic** - Works with Python, JavaScript, and more
+3. **Fast** - Only runs on staged files and are much quicker than CI/CD
+4. **Forgettable** - Team members don't need to memorize QA tools; hooks run automatically
+5. **Extendable** - Large ecosystem of ready-to-use hooks
 
-Pre-commit can be as nitpicky as you want it to be depending on quality-time tradeoff you're making on your project. But it can be helpful for a number of cases, of which might make sense to issue on a commit-level rather than a pull-request level:
-1. Linting/formatting code and data files (json, etc.)
-2. Re-building code or documentation.
+Pre-commit helps maintain code quality without slowing down development. While CI/CD pipelines might take minutes to run, pre-commit hooks provide instant feedback right when you commit.
+
+**Common Use Cases**
+
+Pre-commit can be as strict as you want depending on your project's quality-time tradeoff. Here are cases where commit-level checks make more sense than pull-request level:
+1. Linting/formatting code and data files
+2. Re-building code or documentation
 3. Making database migrations
 4. Preventing secrets or large files from being committed
 5. Requiring commit messages to follow a standard (Like [Commitizen](https://commitizen-tools.github.io/commitizen/))
-6. More
+6. Running fast tests
 
-It's also nice because you can run a bunch of QA tools your research team doesn't care or know much about without them having to learn the tool.
-
-Pre-commit, by default, only operates on STAGED files.
-
-This page describes the collection of pre-commit hooks selected for this project.
 
 <details>
 <summary>
 Alternatives (Husky)
 </summary>
-[Husky](https://typicode.github.io/husky/) is an alternative to pre-commit. My understanding of the differences is that it is mainly geared towards the NodeJS community while pre-commit is multi-language, a bit simpler, a bit more popular, and tends to be the go-to for the Python community, hency why I chose it.
+[Husky](https://typicode.github.io/husky/) is an alternative to pre-commit that's primarily designed for the NodeJS ecosystem. To my knowledge, while both tools handle Git hooks effectively, pre-commit offers broader multi-language support and has become standard in the Python community.
 </details>
 
-## Install
-The repository should already be configured with a `.pre-commit-config.yaml` file and can be installed with `pre-commit install`. That's basically it, then whenever you commit you should see something like:
+## Installation
 
+1. The repository comes with a `.pre-commit-config.yaml` file already configured
+2. Install the hooks with:
+```bash
+pre-commit install
+```
+
+You'll see hooks run automatically on every commit:
 ![Pre-commit Example](./pre-commit_example.png)
 
-Every time you change the config file, you will have to reinstall. Without installing, you can also test a new configuration with: `pre-commit run --all-files`
+**Useful Commands:**
+```bash
+# Test hooks without committing
+pre-commit run --all-files
 
-Fun fact: `pre-commit autoupdate` will use the newest found versions of the precommits and insert a version if none was provided.
+# Update hooks to their latest versions
+pre-commit autoupdate
+
+# Reinstall hooks (needed after config changes)
+pre-commit install
+```
 
 ## Hooks
 
@@ -237,7 +259,6 @@ Alternatives to Commitizen (Commitlint)
 </summary>
 [commitlint](https://github.com/conventional-changelog/commitlint) is a similar project to commitizen. Many articles claim that the difference between the two are that commitizen is more of a tool to generate these fancy commits while commitlint is meant to lint the commits. However, considering `cz check` is a thing, I'm confused what the difference is. More work to be done. The tools can be used together. Seems like commitizen has better python support than commitlint. Projects equally popular. More research to be done on the differences!
 </details>
-
 <!-- TODO: Look into the differences above. Oop. -->
 
 <!-- TODO: Also look into running pre-commit before cz even pops up, it's annoying to write things and then have it fail the pre-commit and have to rewrite. -->
@@ -261,3 +282,4 @@ TODO: Finish implementing `tests/` boilerplate and include a precommit hook to r
 
 
 Some inspo from [this article](https://medium.com/marvelous-mlops/welcome-to-pre-commit-heaven-5b622bb8ebce)
+
