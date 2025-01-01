@@ -245,31 +245,45 @@ Note: If you're using [uv](https://docs.astral.sh/uv/), they [also have pre-comm
 
 ### 03 Project and Files
 
-`check-added-large-files` - Prevent giant files from being committed.
+These hooks help maintain repository hygiene by preventing common file-related issues:
 
-`check-case-conflict` - Check for files with names that would conflict on a case-insensitive filesystem like MacOS HFS+ or Windows FAT.
+```yaml
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0
+  hooks:
+    - id: check-added-large-files
+      args: ['--maxkb=8000']
+    - id: check-case-conflict
+    - id: check-symlinks
+    - id: destroyed-symlinks
+    - id: check-executables-have-shebangs
+    - id: check-shebang-scripts-are-executable
+```
 
-`check-illegal-windows-names` - Check for files that cannot be created on Windows.
+- `check-added-large-files` - Prevents committing files larger than 8000KB
+- `check-case-conflict` - Prevents issues on case-insensitive filesystems (Windows/MacOS)
+- `check-symlinks` & `destroyed-symlinks` - Maintains symlink integrity
+- `check-executables-have-shebangs` - Ensures scripts are properly configured
+- `check-illegal-windows-names` - Check for files that cannot be created on 
+Windows.
 
-`check-symlinks` - Checks for symlinks which do not point to anything.
+### 04 Git Commit Quality
 
-`destroyed-symlinks` - Detects symlinks which are changed to regular files with a content of a path which that symlink was pointing to.
-
-### 04 Git
-
-[commitizen](https://commitizen.github.io/cz-cli/) - Enforces the usage of the Commitizen commit message format for consistent and standardized commits. Can also autogenerate changelog :D
-
-_You should use the CLI too! I recommend the [czg](https://cz-git.qbb.sh/) implementation bc it's slightly faster and a bit more featureful._
-
-`commitizen-branch` - Performs commit message validation. With the argument below it works specifically for branch pushes, but other options are available.
+#### Commit Message Standards
+[Commitizen](https://commitizen.github.io/cz-cli/) enforces standardized commit messages that enable automatic changelog generation and semantic versioning:
 
 ```yaml
 - repo: https://github.com/commitizen-tools/commitizen
-    rev: v2.35.0
-    hooks:
+  rev: v3.18.4
+  hooks:
     - id: commitizen
+      stages: [commit-msg]
     - id: commitizen-branch
-        stages: [push]
+      stages: [push]
+      args: [
+        "--rev-range", "origin/main..", 
+        "--strict"
+      ]
 ```
 
 <details>
@@ -282,18 +296,41 @@ Alternatives to Commitizen (Commitlint)
 
 <!-- TODO: Also look into running pre-commit before cz even pops up, it's annoying to write things and then have it fail the pre-commit and have to rewrite. -->
 
-<!-- TODO: Look at https://github.com/conventional-changelog/conventional-changelog but commitizen may already deal with that. -->
 
-<!-- TODO: Look into [gitmoji](https://gitmoji.dev/). I think it is just a standardization and commitizen could do that automatically potentially. -->
+For the best experience:
+1. Use `cz commit` instead of `git commit`
+2. Consider [czg](https://cz-git.qbb.sh/) for a better implementation of the `cz` cli
 
-`check-merge-conflict` - Check for files that contain merge conflict strings.
+#### Branch Protection
+```yaml
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0
+  hooks:
+    - id: check-merge-conflict
+    - id: no-commit-to-branch
+      args: ['--branch', 'main', '--branch', 'master']
+```
 
 `forbid-new-submodules` - Prevent addition of new git submodules. (I'm mixed on this one.)
-
-`no-commit-to-branch` - Protect specific branches from direct checkins.
-
+- `check-merge-conflict` - Prevents committing unresolved merge conflicts
+- `no-commit-to-branch` - Protects main branches from direct commits (GitHub branch protections are for enterprise members only (sad))
 
 ### 05 Testing
+```yaml
+- repo: local
+  hooks:
+    - id: fast-tests
+      name: Run Fast Tests
+      entry: pytest
+      language: system
+      types: [python]
+      args: [
+        "tests/unit",  # Only run unit tests
+        "-m", "not slow",  # Skip slow-marked tests
+        "--quiet"
+      ]
+      pass_filenames: false
+```
 
 TODO: Finish implementing `tests/` boilerplate and include a precommit hook to run the fastest tests.
 
