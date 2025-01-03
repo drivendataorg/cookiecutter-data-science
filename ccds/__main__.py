@@ -33,9 +33,11 @@ def default_ccds_main(f):
         f.params[1].default = (
             "https://github.com/drivendataorg/cookiecutter-data-science"
         )
-        # The fifth parameter is the "checkout" option in the cookiecutter cli
+        # Find the "checkout" option in the cookiecutter cli (currently the fifth)
         # Per #389, set this to the currently released version by default
-        f.params[4].default = __version__
+        param_names = [p.name for p in f.params]
+        checkout_index = param_names.index("checkout")
+        f.params[checkout_index].default = __version__
         return f(*args, **kwargs)
 
     return _main
