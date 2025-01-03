@@ -84,7 +84,7 @@ The directory structure of your new project will look something like this (depen
 
 ## Using unreleased changes
 
-By default, `ccds` will download the most recently _released_ version of the template. If there are any _unreleased_ changes to the template (or changes in a separate branch) that you want to incorporate, you can do so by checking out whatever branch you'd like to use (checkout `master` for the latest changes):
+By default, `ccds` will use the version of the template that corresponds to the installed version (e.g., if you have installed version 2.0.1, you'll use the 2.0.1 version of the template by default). If there are any _unreleased_ changes to the template (or changes in a separate branch) that you want to incorporate, you can do so by checking out whatever branch you'd like to use (checkout `master` for the latest changes):
 
 ```bash
 ccds -c master
