@@ -68,9 +68,7 @@
       ],
       "settings": {
         // "dotfiles.repository": "https://github.com/GatlenCulp/dotfiles.git",
-        "python.testing.pytestArgs": [
-          "tests"
-        ],
+        "python.testing.pytestArgs": ["tests"],
         "python.testing.unittestEnabled": false,
         "python.testing.pytestEnabled": true,
         "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.devcontainer/.venv/bin/python",

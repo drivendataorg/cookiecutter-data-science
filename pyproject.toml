@@ -50,6 +50,7 @@ dev = [
     "black>=24.8.0",
     "build>=1.2.2.post1",
     "chardet>=5.2.0",
+    "cz-conventional-gitmoji>=0.6.1",
     "flake8>=5.0.4",
     "isort>=5.13.2",
     "mkdocs>=1.6.1",
@@ -69,6 +70,7 @@ dev = [
     "uv>=0.5.11",
     "virtualenvwrapper>=6.1.1 ; sys_platform != 'win32'",
     "virtualenvwrapper-win>=1.2.7 ; sys_platform == 'win32'",
+    "commitizen>=4.1.0",
 ]
 
 [tool.ruff]

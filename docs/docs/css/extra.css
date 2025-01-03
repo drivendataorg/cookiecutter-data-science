@@ -13,13 +13,13 @@
 
 :root {
   /* Primary color - UV Purple theme */
-  --md-primary-fg-color: #A600FF;             /* Main UV purple */
-  --md-primary-fg-color--light: #C266FF;      /* Lighter purple */
-  --md-primary-fg-color--dark: #8000CC;       /* Darker purple */
+  --md-primary-fg-color: #a600ff; /* Main UV purple */
+  --md-primary-fg-color--light: #c266ff; /* Lighter purple */
+  --md-primary-fg-color--dark: #8000cc; /* Darker purple */
 
   /* Accent color - Complementary/matching colors */
-  --md-accent-fg-color: #A600FF;              /* Matching accent */
-  
+  --md-accent-fg-color: #a600ff; /* Matching accent */
+
   /* Footer colors - keeping your white/dark text scheme */
   --md-footer-bg-color: white;
   --md-footer-fg-color: #222;
@@ -53,7 +53,7 @@
 
 /* Update link color to match theme */
 .md-typeset a {
-  color: #8000CC;                             /* Darker purple for better readability */
+  color: #8000cc; /* Darker purple for better readability */
   word-break: break-word;
 }
 
@@ -77,15 +77,15 @@
 .md-typeset details.info,
 .md-typeset .admonition.note,
 .md-typeset details.note {
-  border-color: #A600FF;
+  border-color: #a600ff;
   /* border-color: #328f97; */
 }
 .md-typeset .info > .admonition-title,
 .md-typeset .info > summary,
 .md-typeset .note > .admonition-title,
 .md-typeset .note > summary {
-  background-color: #A600FF26;
-  border-color: #A600FF;
+  background-color: #a600ff26;
+  border-color: #a600ff;
   /* background-color: #328f9726;
   border-color: #328f97; */
 }
@@ -94,7 +94,7 @@
 .md-typeset .info > summary::before,
 .md-typeset .note > .admonition-title::before,
 .md-typeset .note > summary::before {
-  background-color: #A600FF;
+  background-color: #a600ff;
   /* background-color: #328f97; */
 }
 

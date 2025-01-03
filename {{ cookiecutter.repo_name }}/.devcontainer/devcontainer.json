@@ -83,9 +83,7 @@
       "settings": {
         // {#- This needs to be properly configured #}
         "dotfiles.repository": "https://github.com/GatlenCulp/dotfiles.git",
-        "python.testing.pytestArgs": [
-          "tests"
-        ],
+        "python.testing.pytestArgs": ["tests"],
         "python.testing.unittestEnabled": false,
         "python.testing.pytestEnabled": true,
         "python.defaultInterpreterPath": "/workspaces/{{ cookiecutter.repo_name }}/.venv/bin/python",
