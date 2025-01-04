@@ -21,24 +21,7 @@ repos:
     rev: v8.22.1
     hooks:
       - id: gitleaks
-
-  # --------------------------------- Standard --------------------------------- #
-
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
-    hooks:
-      - id: check-symlinks
-      - id: forbid-new-submodules
-      - id: check-added-large-files
-        args: ["--maxkb=8000"]
-      - id: check-case-conflict
-      - id: check-illegal-windows-names
-      - id: check-merge-conflict
-      - id: destroyed-symlinks
-      - id: no-commit-to-branch
-        args: [--branch, main, --branch, master]
-      - id: check-executables-have-shebangs
-      - id: check-shebang-scripts-are-executable
+        name: "[🔒 security] Detect hardcoded secrets"
 
   # --------------------------- Code Quality & Formatting --------------------------- #
 
@@ -46,22 +29,28 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.8.6
     hooks:
-      # Skip for now
-      # - id: ruff
-      #   args: [--fix]
       - id: ruff-format
-        args: ["--exclude=COM812,ISC001"]
+        name: "[🐍 python] Format with Ruff"
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.14.1 # Use the latest version
+    rev: "v1.14.1"
     hooks:
       - id: mypy
+        name: "[🐍 python] Check types"
+
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.23
+    hooks:
+      - id: validate-pyproject
+        name: "[🐍 python] Validate pyproject.toml"
+        additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   ### Javascript & Web Tools ###
   - repo: https://github.com/biomejs/pre-commit
     rev: "v0.6.1"
     hooks:
       - id: biome-ci
+        name: "[🟨 javascript] Lint and format with Biome"
         additional_dependencies: ["@biomejs/biome@1.9.4"]
 
   ### Data & Config Validation ###
@@ -69,20 +58,17 @@ repos:
     rev: 0.30.0
     hooks:
       - id: check-github-workflows
+        name: "[🐙 github-actions] Validate gh workflow files"
         args: ["--verbose"]
       - id: check-taskfile
-
-  - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.23
-    hooks:
-      - id: validate-pyproject
-        additional_dependencies: ["validate-pyproject-schema-store[all]"]
+        name: "[✅ taskfile] Validate Task configuration"
 
   ### Markdown ###
   - repo: https://github.com/hukkin/mdformat
     rev: 0.7.21
     hooks:
       - id: mdformat
+        name: "[📝 markdown] Format documentation"
         additional_dependencies:
           - mdformat-gfm
           - mdformat-ruff
@@ -94,9 +80,10 @@ repos:
     rev: 1.9.1
     hooks:
       - id: nbqa-mypy
+        name: "[📓 notebook] Type-check cells"
       - id: nbqa
         entry: nbqa mdformat
-        name: Run 'mdformat' on a Jupyter Notebook
+        name: "[📓 notebook] Format markdown cells"
         args: ["--nbqa-md"]
         types: [jupyter]
         additional_dependencies:
@@ -111,9 +98,38 @@ repos:
     rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
+        name: "[✨ misc] Format misc web files"
         types_or: [yaml, html, scss]
         additional_dependencies:
           - prettier@3.4.2
+
+  # --------------------------------- Standard --------------------------------- #
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # Filesystem Checks
+      - id: check-executables-have-shebangs
+        name: "[📁 filesystem/⚙️ exec] Verify shebang presence"
+      - id: check-shebang-scripts-are-executable
+        name: "[📁 filesystem/⚙️ exec] Verify script permissions"
+      - id: check-case-conflict
+        name: "[📁 filesystem/📝 names] Check case sensitivity"
+      - id: check-illegal-windows-names
+        name: "[📁 filesystem/📝 names] Validate Windows filenames"
+      - id: check-symlinks
+        name: "[📁 filesystem/🔗 symlink] Check symlink validity"
+      - id: destroyed-symlinks
+        name: "[📁 filesystem/🔗 symlink] Detect broken symlinks"
+      # Git checks
+      - id: check-added-large-files
+        name: "[🌳 git] Block large file commits"
+      - id: no-commit-to-branch
+        name: "[🌳 git] Protect main branches"
+      - id: check-merge-conflict
+        name: "[🌳 git] Detect conflict markers"
+      - id: forbid-new-submodules
+        name: "[🌳 git] Prevent submodule creation"
 
   # -------------------------------- Local Tools ------------------------------- #
 
@@ -135,6 +151,6 @@ repos:
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.1.0
     hooks:
-      # Test w/ pre-commit run commitizen --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
       - id: commitizen
+        name: "[🌳 git] Validate commit message"
         stages: [commit-msg]
