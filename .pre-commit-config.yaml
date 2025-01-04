@@ -125,8 +125,6 @@ repos:
         name: "📁 filesystem/🔗 symlink · Detect broken symlinks"
 
       # ------------------------------- 🌳 Git Tools ------------------------------- #
-      - id: check-added-large-files
-        name: "🌳 git · Block large file commits"
       - id: check-merge-conflict
         name: "🌳 git · Detect conflict markers"
       - id: forbid-new-submodules
@@ -134,6 +132,9 @@ repos:
       - id: no-commit-to-branch
         name: "🌳 git · Protect main branches"
         args: ["--branch", "main", "--branch", "master"]
+      - id: check-added-large-files
+        name: "🌳 git · Block large file commits"
+        args: ["--maxkb=1000"]
 
   # ------------------------------ 🛠️ Local Tools ----------------------------- #
 
