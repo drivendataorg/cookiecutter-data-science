@@ -1,3 +1,4 @@
+# ruff: noqa
 import json
 from pathlib import Path
 import re
@@ -62,6 +63,10 @@ def _ccds_help_to_lookups(help, prefix="", out=None):
 def build_help_table_rows(data, help_lookup, lookup_prefix=""):
     body_items = []
     for top_key, top_value in data.items():
+        # Skip internal keys that start with underscore
+        if top_key.startswith("_"):
+            continue
+
         # top value is string, so it is just user entry
         if isinstance(top_value, str):
             item_help = help_lookup[f"{lookup_prefix}{top_key}"]
