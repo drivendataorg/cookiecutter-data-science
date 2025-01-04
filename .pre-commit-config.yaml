@@ -12,10 +12,10 @@ default_install_hook_types:
   - commit-msg
 repos:
   # ---------------------------------------------------------------------------- #
-  #                               Pre-Commit Hooks                               #
+  #                              🔄 Pre-Commit Hooks                             #
   # ---------------------------------------------------------------------------- #
 
-  # --------------------------------- Security --------------------------------- #
+  # ----------------------------- 🔒 Security Tools ---------------------------- #
 
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.22.1
@@ -23,7 +23,7 @@ repos:
       - id: gitleaks
         name: "🔒 security · Detect hardcoded secrets"
 
-  # --------------------------- Code Quality & Formatting --------------------------- #
+  # --------------------------- 🔍 Code Quality Tools -------------------------- #
 
   ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -98,12 +98,12 @@ repos:
     rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
-        name: "✨ misc · Format misc web files"
+        name: "✨ misc-files · Format misc web files"
         types_or: [yaml, html, scss]
         additional_dependencies:
           - prettier@3.4.2
 
-  # --------------------------------- Standard --------------------------------- #
+  # ---------------------------- 📁 Filesystem Tools --------------------------- #
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
@@ -121,7 +121,8 @@ repos:
         name: "📁 filesystem/🔗 symlink · Check symlink validity"
       - id: destroyed-symlinks
         name: "📁 filesystem/🔗 symlink · Detect broken symlinks"
-      # Git checks
+
+      # ------------------------------- 🌳 Git Tools ------------------------------- #
       - id: check-added-large-files
         name: "🌳 git · Block large file commits"
       - id: no-commit-to-branch
@@ -131,7 +132,7 @@ repos:
       - id: forbid-new-submodules
         name: "🌳 git · Prevent submodule creation"
 
-  # -------------------------------- Local Tools ------------------------------- #
+  # ------------------------------ 🛠️ Local Tools ----------------------------- #
 
   # - repo: local
   #   hooks:
@@ -142,10 +143,9 @@ repos:
   #       language: system
 
   # ---------------------------------------------------------------------------- #
-  #                             Commit Message Hooks                             #
+  #                            📝 Commit Message Hooks                           #
   # ---------------------------------------------------------------------------- #
-  #
-  # ------------------------------ Commit Quality ------------------------------ #
+  # --------------------------- ✍️ Git Commit Quality -------------------------- #
 
   ### Commit Message Standards ###
   - repo: https://github.com/commitizen-tools/commitizen
