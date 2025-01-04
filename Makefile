@@ -116,6 +116,7 @@ pre-commit-test: ## Test hooks
 	pre-commit run --all-files
 	git add .pre-commit-config.yaml
 	pre-commit run commitizen --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
+	# pre-commit run commitlint --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
 
 pre-commit-update: ## Update, install, and test hooks w/ new config
 	pre-commit autoupdate

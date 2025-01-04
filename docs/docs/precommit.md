@@ -401,9 +401,14 @@ Alternatives to Commitizen (Commitlint)
 </summary>
 [commitlint](https://github.com/conventional-changelog/commitlint) is a similar project to commitizen. Many articles claim that the difference between the two are that commitizen is more of a tool to generate these fancy commits while commitlint is meant to lint the commits. However, considering `cz check` is a thing, I'm confused what the difference is. The tools can be used together. Seems like commitizen has better python support than commitlint. Projects equally popular. More research to be done on the differences!
 </details>
-<!-- TODO: Look into the differences above. Oop. -->
-
-<!-- TODO: Also look into running pre-commit before cz even pops up, it's annoying to write things and then have it fail the pre-commit and have to rewrite. -->
+<!-- 
+TODO: Look into the differences above. Oop. 
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: "v9.20.0"
+    hooks:
+      - id: commitlint
+        stages: [commit-msg]
+-->
 
 ## 05 🧪 Testing
 
@@ -558,8 +563,6 @@ repos:
         name: "📁 filesystem/🔗 symlink · Detect broken symlinks"
 
       # ------------------------------- 🌳 Git Tools ------------------------------- #
-      - id: check-added-large-files
-        name: "🌳 git · Block large file commits"
       - id: check-merge-conflict
         name: "🌳 git · Detect conflict markers"
       - id: forbid-new-submodules
@@ -567,6 +570,9 @@ repos:
       - id: no-commit-to-branch
         name: "🌳 git · Protect main branches"
         args: ["--branch", "main", "--branch", "master"]
+      - id: check-added-large-files
+        name: "🌳 git · Block large file commits"
+        args: ["--maxkb=1000"]
 
   # ------------------------------ 🛠️ Local Tools ----------------------------- #
 
