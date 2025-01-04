@@ -81,9 +81,10 @@ This collection prioritizes best-in-class tools without redundancy. Rather than 
 
 ```yaml
 - repo: https://github.com/gitleaks/gitleaks
-  rev: v8.22.0
+  rev: v8.22.1
   hooks:
     - id: gitleaks
+      name: "🔒 security · Detect hardcoded secrets"
 ```
 
 <details>
@@ -105,11 +106,23 @@ This section covers tools for code formatting, linting, type checking, and schem
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.8.4
+  rev: v0.8.6
   hooks:
-    - id: ruff
-      args: [ --fix ]
     - id: ruff-format
+      name: "🐍 python · Format with Ruff"
+
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: "v1.14.1"
+  hooks:
+    - id: mypy
+      name: "🐍 python · Check types"
+
+- repo: https://github.com/abravalheri/validate-pyproject
+  rev: v0.23
+  hooks:
+    - id: validate-pyproject
+      name: "🐍 python · Validate pyproject.toml"
+      additional_dependencies: ["validate-pyproject-schema-store[all]"]
 ```
 
 <details>
@@ -168,10 +181,11 @@ Microsoft's [Pyright](https://microsoft.github.io/pyright/) is a [faster and mor
 
 ```yaml
 - repo: https://github.com/biomejs/pre-commit
-  rev: "1.4.1"
+  rev: "v0.6.1"
   hooks:
     - id: biome-ci
-    additional_dependencies: ["@biomejs/biome@1.4.1"]
+      name: "🟨 javascript · Lint and format with Biome"
+      additional_dependencies: ["@biomejs/biome@1.9.4"]
 ```
 
 <details>
@@ -190,8 +204,10 @@ Alternatives to Biome (ESLint & Prettier)
   rev: 0.30.0
   hooks:
     - id: check-github-workflows
+      name: "🐙 github-actions · Validate gh workflow files"
       args: ["--verbose"]
     - id: check-taskfile
+      name: "✅ taskfile · Validate Task configuration"
 ```
 
 _Additional json schema available on the [Schema Store](https://json.schemastore.org/pyproject.json)_
@@ -203,23 +219,27 @@ _Additional json schema available on the [Schema Store](https://json.schemastore
   rev: v0.23
   hooks:
     - id: validate-pyproject
-    additional_dependencies: ["validate-pyproject-schema-store[all]"]
+      name: "🐍 python · Validate pyproject.toml"
+      additional_dependencies: ["validate-pyproject-schema-store[all]"]
 ```
 
 <!-- Possibly worth just building? -->
 
 #### Markdown
 
-[mdformat](https://mdformat.readthedocs.io/) for Markdown formatting:
+[mdformat](https://mdformat.readthedocs.io/) for Markdown formatting with additional plugins for GitHub-Flavored Markdown, Ruff-style code formatting, and frontmatter support:
 
 ```yaml
 - repo: https://github.com/hukkin/mdformat
   rev: 0.7.21
   hooks:
-  - id: mdformat
-    additional_dependencies:
-    - mdformat-gfm
-    - mdformat-black
+    - id: mdformat
+      name: "📝 markdown · Format documentation"
+      additional_dependencies:
+        - mdformat-gfm           # GitHub-Flavored Markdown support
+        - mdformat-ruff         # Python code formatting
+        - mdformat-frontmatter  # YAML frontmatter support
+        - ruff                  # Required for mdformat-ruff
 ```
 
 #### Notebooks
@@ -231,10 +251,18 @@ _Additional json schema available on the [Schema Store](https://json.schemastore
   rev: 1.9.1
   hooks:
     - id: nbqa-mypy
+      name: "📓 notebook · Type-check cells"
     - id: nbqa
       entry: nbqa mdformat
-      name: Run 'mdformat' on a Jupyter Notebook
+      name: "📓 notebook · Format markdown cells"
+      args: ["--nbqa-md"]
       types: [jupyter]
+      additional_dependencies:  # Same dependencies as mdformat
+        - mdformat
+        - mdformat-gfm
+        - mdformat-ruff
+        - mdformat-frontmatter
+        - ruff
 ```
 
 <details>
@@ -250,18 +278,11 @@ ruff supports notebooks by default
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-prettier
-  rev: v3.1.0
+  rev: v4.0.0-alpha.8
   hooks:
     - id: prettier
-      types_or: [yaml, html, css, scss]
-      # Exclude files handled by other formatters
-      exclude: |
-        (?x)^(
-            .*\.md$|
-            .*\.ipynb$|
-            .*\.py$|
-            .*\.tsx?$
-        )$
+      name: "✨ misc-files · Format misc web files"
+      types_or: [yaml, html, scss]
       additional_dependencies:
         - prettier@3.4.2
 ```
@@ -303,15 +324,20 @@ These hooks help maintain repository hygiene by preventing common file-related i
 
 ```yaml
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.5.0
+  rev: v5.0.0
   hooks:
-    - id: check-added-large-files
-      args: ['--maxkb=8000']
-    - id: check-case-conflict
-    - id: check-symlinks
-    - id: destroyed-symlinks
     - id: check-executables-have-shebangs
+      name: "📁 filesystem/⚙️ exec · Verify shebang presence"
     - id: check-shebang-scripts-are-executable
+      name: "📁 filesystem/⚙️ exec · Verify script permissions"
+    - id: check-case-conflict
+      name: "📁 filesystem/📝 names · Check case sensitivity"
+    - id: check-illegal-windows-names
+      name: "📁 filesystem/📝 names · Validate Windows filenames"
+    - id: check-symlinks
+      name: "📁 filesystem/🔗 symlink · Check symlink validity"
+    - id: destroyed-symlinks
+      name: "📁 filesystem/🔗 symlink · Detect broken symlinks"
 ```
 
 - `check-added-large-files` - Prevents committing files larger than 8000KB ([Git Large File Storage (LFS)](https://git-lfs.com/) or [Data Version Control (DVC)](https://dvc.org/) should instead be used)
@@ -329,23 +355,12 @@ These hooks help maintain repository hygiene by preventing common file-related i
 Additionally, I add [cz-conventional-gitmoji](https://github.com/ljnsn/cz-conventional-gitmoji), a third-party prompt template that combines the [gitmoji](https://gitmoji.dev/) and [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) standards. (More templates [here](https://commitizen-tools.github.io/commitizen/third-party-commitizen/))
 
 ```yaml
-- repo: https://github.com/ljnsn/cz-conventional-gitmoji
-    rev: 0.2.4
-    hooks:
-      - id: conventional-gitmoji
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v3.18.4
+  rev: v4.1.0
   hooks:
     - id: commitizen
+      name: "🌳 git · Validate commit message"
       stages: [commit-msg]
-      additional_dependencies: [cz-conventional-gitmoji]
-    - id: commitizen-branch
-      stages: [pre-push]
-      args: [
-        "--rev-range", "origin/main..", 
-        "--strict"
-      ]
-      additional_dependencies: [cz-conventional-gitmoji]
 ```
 
 <details>
@@ -361,17 +376,22 @@ Alternatives to Commitizen (Commitlint)
 For the best experience:
 
 1. Use `cz commit` instead of `git commit`
-1. Consider [czg](https://cz-git.qbb.sh/) for a better implementation of the `cz` cli
+1. Consider [czg](https://cz-git.qbb.sh/) for a better implementation of the `cz` cli (I'm personally a fan of the AI generated commits it has.)
 
 #### Branch Protection
 
 ```yaml
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.5.0
+  rev: v5.0.0
   hooks:
-    - id: forbid-new-submodules
+    - id: check-added-large-files
+      name: "🌳 git · Block large file commits"
     - id: check-merge-conflict
+      name: "🌳 git · Detect conflict markers"
+    - id: forbid-new-submodules
+      name: "🌳 git · Prevent submodule creation"
     - id: no-commit-to-branch
+      name: "🌳 git · Protect main branches"
       args: ['--branch', 'main', '--branch', 'master']
 ```
 

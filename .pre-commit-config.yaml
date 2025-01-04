@@ -29,6 +29,8 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.8.6
     hooks:
+      # - id: ruff
+      #   args: [ --fix ]
       - id: ruff-format
         name: "🐍 python · Format with Ruff"
 
@@ -125,12 +127,13 @@ repos:
       # ------------------------------- 🌳 Git Tools ------------------------------- #
       - id: check-added-large-files
         name: "🌳 git · Block large file commits"
-      - id: no-commit-to-branch
-        name: "🌳 git · Protect main branches"
       - id: check-merge-conflict
         name: "🌳 git · Detect conflict markers"
       - id: forbid-new-submodules
         name: "🌳 git · Prevent submodule creation"
+      - id: no-commit-to-branch
+        name: "🌳 git · Protect main branches"
+        args: ["--branch", "main", "--branch", "master"]
 
   # ------------------------------ 🛠️ Local Tools ----------------------------- #
 
@@ -146,6 +149,11 @@ repos:
   #                            📝 Commit Message Hooks                           #
   # ---------------------------------------------------------------------------- #
   # --------------------------- ✍️ Git Commit Quality -------------------------- #
+
+  # - repo: https://github.com/ljnsn/cz-conventional-gitmoji
+  #     rev: 0.2.4
+  #     hooks:
+  #       - id: conventional-gitmoji
 
   ### Commit Message Standards ###
   - repo: https://github.com/commitizen-tools/commitizen
