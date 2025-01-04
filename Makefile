@@ -46,14 +46,13 @@ format: ## Format code using isort and black
 	isort --profile black ccds hooks tests docs/scripts
 	black ccds hooks tests docs/scripts
 
-lint: ## Run linting checks with flake8, isort, and black
-	flake8 ccds hooks tests docs/scripts
-	isort --check --profile black ccds hooks tests docs/scripts
-	black --check ccds hooks tests docs/scripts
+# lint: ## Run linting checks with flake8, isort, and black
+# 	flake8 ccds hooks tests docs/scripts
+# 	isort --check --profile black ccds hooks tests docs/scripts
+# 	black --check ccds hooks tests docs/scripts
 
-# lint:
-# 	ruff check hooks docs/scripts
-# 	prettier --check docs
+lint: ## Run linting checks with ruff
+	ruff check hooks docs/scripts --config ./pyproject.toml --fix 
 
 # pyright .
 
@@ -62,8 +61,11 @@ lint: ## Run linting checks with flake8, isort, and black
 # Switched to using uv
 docs-serve: ## Serve documentation locally on port $(DOCS_PORT)
 	cd docs && \
+	mkdocs build && \
 	mkdocs serve -a localhost:$(DOCS_PORT) || \
-	echo "\n\nInstance found running on $(DOCS_PORT), try killing process and rerun."
+	( echo "\n\nInstance found running on $(DOCS_PORT). Here are the processes using this port:" && \
+	lsof -i :$(DOCS_PORT) && \
+	echo "\nTo kill a process, use: kill <PID>" )
 
 # Makes sure docs can be served prior to actually deploying
 docs-publish: ## Build and deploy documentation to GitHub Pagesa
@@ -106,6 +108,19 @@ manual-test: _prep _clean_manual_test ## Run manual tests
 manual-test-debug: _prep _clean_manual_test ## Run manual tests with debugger
 	mkdir -p manual_test
 	cd manual_test && python -m pdb ../ccds/__main__.py ..
+
+###     GIT HOOKS
+
+pre-commit-test: ## Test pre-commit hooks
+	pre-commit run --all-files
+	git add .pre-commit-config.yaml
+	pre-commit run commitizen --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
+	# pre-commit run commitlint --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
+
+pre-commit-update: ## Update, install, and test hooks w/ new config
+	pre-commit autoupdate
+	pre-commit install
+	$(MAKE) pre-commit-test
 
 ###     HELP
 

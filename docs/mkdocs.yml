@@ -19,15 +19,16 @@ theme:
     text: Work Sans
     code: Space Mono
 nav:
-  - 🏠 Home: index.md                       # Project overview, quickstart guide, and complete directory structure walkthrough
-  - 🛠️ Core Tools: core-tools.md            # Comprehensive breakdown of all core tools (IDE, Docker, AWS, etc.) and Python dependencies with explanations
-  - 💻 VSCode & Cursor: vscode.md           # Detailed guide to workspace configuration, debug profiles, recommended extensions, and AI integration
-  - ❓ Why gotem?: why.md                   # Discussion of code quality, project organization, and reproducibility benefits
-  - 🗯️ Opinions: opinions.md                # Core principles about data hygiene, notebooks, modeling, and environment management
-  - 📑 Using the template: using-the-template.md  # Step-by-step guide on how to use the template
-  - ⚙️ All options: all-options.md          # List of available command-line options and configuration choices
-  - ❤️ Contributing: contributing.md         # Guidelines for contributing to the project
-  - 🔗 Related projects: related.md         # References to similar R projects and acknowledgments of inspirational templates
+  - 🏠 Home: index.md # Project overview, quickstart guide, and complete directory structure walkthrough
+  - 🛠️ Core Tools: core-tools.md # Comprehensive breakdown of all core tools (IDE, Docker, AWS, etc.) and Python dependencies with explanations
+  - 🪝 Pre-commit Hooks: precommit.md
+  - 💻 VSCode & Cursor: vscode.md # Detailed guide to workspace configuration, debug profiles, recommended extensions, and AI integration
+  - ❓ Why gotem?: why.md # Discussion of code quality, project organization, and reproducibility benefits
+  - 🗯️ Opinions: opinions.md # Core principles about data hygiene, notebooks, modeling, and environment management
+  - 📑 Using the template: using-the-template.md # Step-by-step guide on how to use the template
+  - ⚙️ All options: all-options.md # List of available command-line options and configuration choices
+  - ❤️ Contributing: contributing.md # Guidelines for contributing to the project
+  - 🔗 Related projects: related.md # References to similar R projects and acknowledgments of inspirational templates
 extra:
   analytics:
     provider: google
@@ -48,6 +49,7 @@ markdown_extensions:
   - tables
   - toc:
       toc_depth: 2
+  - md_in_html
 plugins:
   - include-markdown
   - termynal:

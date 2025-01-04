@@ -1,82 +1,80 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-  "name": "gotem",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/python:1-3.10-bullseye",
-  "features": {
-    "ghcr.io/dhoeric/features/act:1": {},
-    "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
-  },
-  "remoteEnv": {
-    // "UV_FROZEN": "true",
-    "UV_PYTHON_PREFERENCE": "only-managed",
-    "UV_PROJECT_ENVIRONMENT": "${containerWorkspaceFolder}/.devcontainer/.venv",
-    "VIRTUAL_ENV": "${containerWorkspaceFolder}/.devcontainer/.venv",
-    "PATH": "${containerWorkspaceFolder}/.devcontainer/.venv/bin:${env:PATH}"
-  },
-  // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/postCreateCommand.sh",
-  // Configure tool-specific properties.
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "ms-python.python",
-        "ms-python.vscode-pylance",
-        "ms-python.debugpy",
-        "charliermarsh.ruff",
-        "njpwerner.autodocstring",
-        "rodolphebarbanneau.python-docstring-highlighter",
-        "kevinrose.vsc-python-indent",
-        "ms-toolsai.jupyter",
-        "ms-toolsai.jupyter-renderers",
-        "mechatroner.rainbow-csv",
-        "sbsnippets.pytorch-snippets",
-        "mads-hartmann.bash-ide-vscode",
-        "timonwong.shellcheck",
-        "foxundermoon.shell-format",
-        "ms-vscode-remote.remote-containers",
-        "ms-vscode-remote.remote-ssh",
-        "ms-vscode-remote.remote-ssh-edit",
-        "mathematic.vscode-pdf",
-        "vitaliymaz.vscode-svg-previewer",
-        "ctcuff.font-preview",
-        "james-yu.latex-workshop",
-        "shd101wyy.markdown-preview-enhanced",
-        "esbenp.prettier-vscode",
-        "mrmlnc.vscode-attrs-sorter",
-        "richie5um2.vscode-sort-json",
-        "2gua.rainbow-brackets",
-        "aaron-bond.better-comments",
-        "alefragnani.project-manager",
-        "peterschmalfeldt.explorer-exclude",
-        "christian-kohler.path-intellisense",
-        "kisstkondoros.vscode-gutter-preview",
-        "eamodio.gitlens",
-        "humao.rest-client",
-        "ms-vscode.makefile-tools",
-        "task.vscode-task",
-        "tamasfe.even-better-toml",
-        "dotenv.dotenv-vscode",
-        "redhat.vscode-yaml",
-        "redhat.vscode-xml",
-        "ibm.output-colorizer",
-        "usernamehw.errorlens",
-        "spmeesseman.vscode-taskexplorer",
-        "exiasr.hadolint",
-        "ms-azuretools.vscode-docker"
-      ],
-      "settings": {
-        // "dotfiles.repository": "https://github.com/GatlenCulp/dotfiles.git",
-        "python.testing.pytestArgs": [
-          "tests"
-        ],
-        "python.testing.unittestEnabled": false,
-        "python.testing.pytestEnabled": true,
-        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.devcontainer/.venv/bin/python",
-        "python.testing.pytestPath": "${containerWorkspaceFolder}/.devcontainer/.venv/bin/pytest",
-        "python.terminal.activateEnvironment": true
-      }
-    }
-  }
+	"name": "gotem",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/python:1-3.10-bullseye",
+	"features": {
+		"ghcr.io/dhoeric/features/act:1": {},
+		"ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
+	},
+	"remoteEnv": {
+		// "UV_FROZEN": "true",
+		"UV_PYTHON_PREFERENCE": "only-managed",
+		"UV_PROJECT_ENVIRONMENT": "${containerWorkspaceFolder}/.devcontainer/.venv",
+		"VIRTUAL_ENV": "${containerWorkspaceFolder}/.devcontainer/.venv",
+		"PATH": "${containerWorkspaceFolder}/.devcontainer/.venv/bin:${env:PATH}"
+	},
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/postCreateCommand.sh",
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.debugpy",
+				"charliermarsh.ruff",
+				"njpwerner.autodocstring",
+				"rodolphebarbanneau.python-docstring-highlighter",
+				"kevinrose.vsc-python-indent",
+				"ms-toolsai.jupyter",
+				"ms-toolsai.jupyter-renderers",
+				"mechatroner.rainbow-csv",
+				"sbsnippets.pytorch-snippets",
+				"mads-hartmann.bash-ide-vscode",
+				"timonwong.shellcheck",
+				"foxundermoon.shell-format",
+				"ms-vscode-remote.remote-containers",
+				"ms-vscode-remote.remote-ssh",
+				"ms-vscode-remote.remote-ssh-edit",
+				"mathematic.vscode-pdf",
+				"vitaliymaz.vscode-svg-previewer",
+				"ctcuff.font-preview",
+				"james-yu.latex-workshop",
+				"shd101wyy.markdown-preview-enhanced",
+				"esbenp.prettier-vscode",
+				"mrmlnc.vscode-attrs-sorter",
+				"richie5um2.vscode-sort-json",
+				"2gua.rainbow-brackets",
+				"aaron-bond.better-comments",
+				"alefragnani.project-manager",
+				"peterschmalfeldt.explorer-exclude",
+				"christian-kohler.path-intellisense",
+				"kisstkondoros.vscode-gutter-preview",
+				"eamodio.gitlens",
+				"humao.rest-client",
+				"ms-vscode.makefile-tools",
+				"task.vscode-task",
+				"tamasfe.even-better-toml",
+				"dotenv.dotenv-vscode",
+				"redhat.vscode-yaml",
+				"redhat.vscode-xml",
+				"ibm.output-colorizer",
+				"usernamehw.errorlens",
+				"spmeesseman.vscode-taskexplorer",
+				"exiasr.hadolint",
+				"ms-azuretools.vscode-docker"
+			],
+			"settings": {
+				// "dotfiles.repository": "https://github.com/GatlenCulp/dotfiles.git",
+				"python.testing.pytestArgs": ["tests"],
+				"python.testing.unittestEnabled": false,
+				"python.testing.pytestEnabled": true,
+				"python.defaultInterpreterPath": "${containerWorkspaceFolder}/.devcontainer/.venv/bin/python",
+				"python.testing.pytestPath": "${containerWorkspaceFolder}/.devcontainer/.venv/bin/pytest",
+				"python.terminal.activateEnvironment": true
+			}
+		}
+	}
 }

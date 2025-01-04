@@ -1,3 +1,4 @@
+# ruff: noqa
 import json
 import os
 import sys
@@ -132,18 +133,16 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
     if config["docs"] == "mkdocs":
         expected_dirs += ["docs/docs"]
 
-    expected_dirs = [Path(d) for d in expected_dirs]
+    expected_dir_paths = [Path(d) for d in expected_dirs]
 
     existing_dirs = [
         d.resolve().relative_to(root)
         for d in root.glob("**")
         if d.is_dir()
-        and not any(
-            ignore_dir in d.relative_to(root).parts for ignore_dir in ignore_dirs
-        )
+        and not any(ignore_dir in d.relative_to(root).parts for ignore_dir in ignore_dirs)
     ]
 
-    assert sorted(existing_dirs) == sorted(expected_dirs)
+    assert sorted(existing_dirs) == sorted(expected_dir_paths)
 
 
 def verify_files(root: Path, config: dict[str, Any]) -> None:
@@ -170,6 +169,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         ".github/workflows/main.yml",
         ".github/workflows/on-release-main.yml",
         ".gitattributes",
+        ".pre-commit-config.yaml",
         "logs/.gitkeep",
         "data/external/.gitkeep",
         "data/interim/.gitkeep",
@@ -215,13 +215,6 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         expected_files += [
             f"{config['module_name']}/config.py",
         ]
-    #         f"{config['module_name']}/dataset.py",
-    #         f"{config['module_name']}/features.py",
-    #         f"{config['module_name']}/modeling/__init__.py",
-    #         f"{config['module_name']}/modeling/train.py",
-    #         f"{config['module_name']}/modeling/predict.py",
-    #         f"{config['module_name']}/plots.py",
-    #     ]
 
     if config["docs"] == "mkdocs":
         expected_files += [
@@ -236,18 +229,16 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
     if config["environment_manager"] == "uv":
         expected_files.append("uv.lock")
 
-    expected_files = [Path(f) for f in expected_files]
+    expected_file_paths = [Path(f) for f in expected_files]
 
     existing_files = [
         f.relative_to(root)
         for f in root.glob("**/*")
         if f.is_file()
-        and not any(
-            ignore_dir in f.relative_to(root).parts for ignore_dir in ignore_dirs
-        )
+        and not any(ignore_dir in f.relative_to(root).parts for ignore_dir in ignore_dirs)
     ]
 
-    assert sorted(existing_files) == sorted(expected_files)
+    assert sorted(existing_files) == sorted(expected_file_paths)
 
     for f in existing_files:
         if f.name != ".cursorrules":
@@ -285,7 +276,7 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
         return True
     else:
         raise ValueError(
-            f"Environment manager '{config['environment_manager']}' not found in test harnesses."
+            f"Environment manager '{config['environment_manager']}' not found in test harnesses.",
         )
 
     result = run(
@@ -297,6 +288,7 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
         ],
         stderr=PIPE,
         stdout=PIPE,
+        check=False,
     )
 
     stdout_output, _ = _decode_print_stdout_stderr(result)
@@ -308,6 +300,8 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
 
     assert result.returncode == 0
 
+    return True
+
 
 def lint(root):
     """Run the linters on the project."""
@@ -316,6 +310,7 @@ def lint(root):
         cwd=root,
         stderr=PIPE,
         stdout=PIPE,
+        check=False,
     )
     _, _ = _decode_print_stdout_stderr(result)
 

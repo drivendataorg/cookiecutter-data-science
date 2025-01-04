@@ -166,23 +166,28 @@ data: requirements
 	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/dataset.py
 {%- endif %}
 
+
+{%- if cookiecutter.use_github == 'Yes' %}
+#################################################################################
+# PRE-COMMIT COMMANDS                                                           #
+#################################################################################
+
+pre-commit-test: ## Test hooks
+	pre-commit run --all-files
+	git add .pre-commit-config.yaml
+	pre-commit run commitizen --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
+
+pre-commit-update: ## Update, install, and test hooks w/ new config
+	pre-commit autoupdate
+	pre-commit install
+	$(MAKE) pre-commit-test
+{%- endif %}
+
 #################################################################################
 # Self Documenting Commands                                                     #
 #################################################################################
 
 .DEFAULT_GOAL := help
-
-# define PRINT_HELP_PYSCRIPT
-# import re, sys; \
-# lines = '\n'.join([line for line in sys.stdin]); \
-# matches = re.findall(r'\n## (.*)\n[\s\S]+?\n([a-zA-Z_-]+):', lines); \
-# print('Available rules:\n'); \
-# print('\n'.join(['{:25}{}'.format(*reversed(match)) for match in matches]))
-# endef
-# export PRINT_HELP_PYSCRIPT
-
-# help:
-# 	@$(PYTHON_INTERPRETER) -c "${PRINT_HELP_PYSCRIPT}" < $(MAKEFILE_LIST)
 
 help:  ## Show this help message
 	@echo "\033[38;5;39m   ____  ___ _____              "

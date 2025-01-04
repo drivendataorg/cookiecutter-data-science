@@ -16,39 +16,47 @@ I recommend installing gotem it with [uv](https://github.com/astral-sh/uv). GOTe
 
 === "With uv (recommended)"
 
-    ```bash
-    uv pip install gatlens-opinionated-template
+````
+```bash
+uv pip install gatlens-opinionated-template
 
-    # From the parent directory where you want your project
-    gotem
-    ```
+# From the parent directory where you want your project
+gotem
+```
+````
 
 === "With pipx"
 
-    ```bash
-    pipx install gatlens-opinionated-template
+````
+```bash
+pipx install gatlens-opinionated-template
 
-    # From the parent directory where you want your project
-    gotem
-    ```
+# From the parent directory where you want your project
+gotem
+```
+````
 
 === "With pip"
 
-    ```bash
-    pip install gatlens-opinionated-template
-    
-    # From the parent directory where you want your project
-    gotem
-    ```
+````
+```bash
+pip install gatlens-opinionated-template
+
+# From the parent directory where you want your project
+gotem
+```
+````
 
 === "With conda (coming soon!)"
 
-    ```bash
-    # conda install cookiecutter-data-science -c conda-forge
+````
+```bash
+# conda install cookiecutter-data-science -c conda-forge
 
-    # From the parent directory where you want your project
-    # ccds
-    ```
+# From the parent directory where you want your project
+# ccds
+```
+````
 
 ## Starting a new project
 
@@ -132,4 +140,3 @@ The directory structure of your new project will look something like this (depen
     │   └── 🐍 train.py                 <- Code to train models
     └── 🐍 plots.py                     <- Code to create visualizations
 ```
-

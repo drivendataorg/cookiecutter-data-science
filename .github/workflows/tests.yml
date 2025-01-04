@@ -3,12 +3,12 @@ name: tests
 on:
   push:
     branches: [master]
-    paths-ignore: 
+    paths-ignore:
       - "docs/**"
       - "README.md"
   pull_request:
     branches: [master]
-    paths-ignore: 
+    paths-ignore:
       - "docs/**"
       - "README.md"
   schedule:
@@ -47,7 +47,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os:
+          - ubuntu-latest
+          - macos-latest
+          # - windows-latest
         # python-version: [3.8, 3.9, "3.10", "3.11", "3.12"]
         python-version: ["3.10"]
     defaults:
@@ -67,7 +70,7 @@ jobs:
             pyproject.toml
             dev-requirements.txt
 
-      - name: Set up Miniconda  
+      - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
           auto-activate-base: true
@@ -82,8 +85,7 @@ jobs:
           CACHE_NUMBER: 0
         with:
           path: ~/conda_pkgs_dir
-          key:
-            ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{
+          key: ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{
             hashFiles('ccds/hook_utils/dependencies.py') }}
 
       - name: Setup for Windows

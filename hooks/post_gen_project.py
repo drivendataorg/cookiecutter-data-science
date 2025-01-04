@@ -1,10 +1,10 @@
-"""File to be run after template initialization by cookiecutter."""
+"""File to be run after template initialization by cookiecutter."""  # noqa: INP001
 
+from copy import copy
 import os
+from pathlib import Path
 import shutil
 import subprocess
-from copy import copy
-from pathlib import Path
 
 from ccds.hook_utils.configure_gh import configure_github_repo
 
@@ -49,7 +49,7 @@ for obj in docs_subpath.iterdir():
 
 # Remove all remaining docs templates
 for docs_template in docs_path.iterdir():
-    if docs_template.is_dir() and not docs_template.name == "docs":
+    if docs_template.is_dir() and docs_template.name != "docs":
         shutil.rmtree(docs_template)
 
 #
@@ -67,7 +67,7 @@ write_dependencies(
 write_custom_config("{{ cookiecutter.custom_config }}")
 
 # Remove LICENSE if "No license file"
-if "{{ cookiecutter.open_source_license }}" == "No license file":
+if "{{ cookiecutter.open_source_license }}" == "No license file":  # noqa: PLR0133
     Path("LICENSE").unlink()
 
 # Make single quotes prettier
@@ -85,9 +85,9 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
     elif generated_path.name == "__init__.py":
         # remove any content in __init__.py since it won't be available
         generated_path.write_text(
-            '"""{{ cookiecutter.module_name }}: {{ cookiecutter.project_short_description }}."""\n'
+            '"""{{ cookiecutter.module_name }}: {{ cookiecutter.project_short_description }}."""\n',
         )
-# {# TODO #}
+# {# TODO(Gatlen Culp): Fix below #}
 # {% elif cookiecutter.include_code_scaffold == "data" %}
 # {% elif cookiecutter.include_code_scaffold == "paper" %}
 # {% elif cookiecutter.include_code_scaffold == "app" %}
@@ -112,6 +112,6 @@ configure_github_repo(
 # Install the virtual environment (uv only for now)
 # {% if cookiecutter.environment_manager == "uv" %}
 os.chdir(Path.cwd())
-subprocess.run(["make", "create_environment"])
-subprocess.run(["make", "requirements"])
+subprocess.run(["make", "create_environment"], check=False)  # noqa: S603, S607
+subprocess.run(["make", "requirements"], check=False)  # noqa: S603, S607
 # {% endif %}

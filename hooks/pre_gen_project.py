@@ -1,3 +1,4 @@
+# noqa: INP001, D100
 # Functions here run before the project is generated.
 
 # For the use of these hooks, see

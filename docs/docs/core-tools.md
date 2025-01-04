@@ -6,22 +6,20 @@ This page explains the chosen tools and why they were chosen.
 
 ![VSCode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 
-
 - Primary IDE with full ecosystem support
 - Cursor fork provides enhanced AI integration
 - Includes pre-configured workspace settings and debug profiles
 - Supports remote development and notebook integration
 - Replaces traditional Jupyter environments
 
-
 <details>
 <summary><b>Explanation</b></summary>
 
 > While many IDEs exist, VS Code's hackability, extensive ecosystem, and remote capabilities make it ideal for modern development. Cursor extends this with AI features while maintaining full VS Code compatibility. The decision to use VS Code even for notebooks (over JupyterLab) allows for a consistent development experience with all settings and extensions available.
+
 </details>
 
 ## 02 Task Running · [Taskfile](https://taskfile.dev/) 🎯
-
 
 - Modern alternative to Make/Poetry scripts
 - Simple, cross-platform task runner
@@ -30,10 +28,10 @@ This page explains the chosen tools and why they were chosen.
 
 > Task was chosen over alternatives like Make, Poetry scripts, or Poe the Poet for its simplicity and cross-platform support. Its YAML syntax is immediately understandable, and it works seamlessly on Windows - a common pain point with Makefiles.
 
-
 ## 03 VCS · [Git](https://git-scm.com/) + [GitLFS](https://git-lfs.com/) + [GitHub](https://github.com/) 📚
 
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+
 - Industry standard version control
 - Extensive ecosystem and integrations
 - Built-in project management features
@@ -42,7 +40,6 @@ This page explains the chosen tools and why they were chosen.
 ## 04 CI/CD · [GitHub Actions](https://github.com/features/actions) 🔄
 
 ![GitHub Actions](https://img.shields.io/badge/Github%20Actions-282a2e?style=for-the-badge&logo=githubactions&logoColor=367cfe)
-
 
 - Integrated CI/CD solution
 - Simple configuration and maintenance
@@ -55,7 +52,6 @@ This page explains the chosen tools and why they were chosen.
 
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Kubernetes](https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white)
 
-
 - Standard containerization platform
 - Orbstack for MacOS (lighter Docker Desktop alternative)
 - VM support through Orbstack
@@ -64,6 +60,7 @@ This page explains the chosen tools and why they were chosen.
 > Docker remains the standard for containerization, but Docker Desktop can be resource-intensive. Orbstack provides a lightweight alternative for MacOS users while maintaining full Docker compatibility and adding convenient VM capabilities. Kubernetes is being explored but may not be the best setup for small development.
 
 **[Dev Containers](https://containers.dev/)** 📦
+
 - Standardized development environments
 - VS Code integration
 - *Note: Under evaluation*
@@ -73,6 +70,7 @@ This page explains the chosen tools and why they were chosen.
 ## 06 Cloud Services · [AWS](https://www.geeksforgeeks.org/aws-vs-google-cloud-platform-vs-azure/#) ☁️
 
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+
 - Mature cloud infrastructure platform
 - Comprehensive service ecosystem
 - Industry standard tooling
@@ -87,6 +85,7 @@ This page explains the chosen tools and why they were chosen.
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
 ### 07.00 Package Manager · [UV](https://github.com/astral-sh/uv) ⚡
+
 - Ultra-fast Rust-based Python package manager
 - Combines functionality of Poetry, virtualenv, and pipx (with dirt easy deployment to PyPi.)
 - Created by Astral (Ruff team)
@@ -100,6 +99,7 @@ This page explains the chosen tools and why they were chosen.
 ![Plotly](https://img.shields.io/badge/Plotly-%233F4F75.svg?style=for-the-badge&logo=plotly&logoColor=white) ![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=Pydantic&logoColor=white)
 
 Essential packages used across the project:
+
 ```toml
 dependencies = [
     "loguru>=0.7.3",         # Better logging with rich formatting and easy setup
@@ -110,7 +110,9 @@ dependencies = [
 ```
 
 ### 07.02 Application Development
+
 Tools for building AI-powered applications:
+
 ```toml
 ai-apps = [
     "ell-ai>=0.0.15",        # Unified AI toolkit for rapid development
@@ -124,6 +126,7 @@ ai-apps = [
 ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white) ![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white) ![WandB](https://img.shields.io/badge/Weights_&_Biases-FFBE00?style=for-the-badge&logo=WeightsAndBiases&logoColor=white)
 
 Packages for machine learning model development and research:
+
 ```toml
 ai-train = [
     "datasets>=3.1.0",           # Efficient dataset handling and processing
@@ -144,6 +147,7 @@ ai-train = [
 ```
 
 ### 07.04 Async Support
+
 ```toml
 async = [
     "uvloop>=0.21.0",           # High-performance event loop replacement
@@ -151,6 +155,7 @@ async = [
 ```
 
 ### 07.05 CLI Tools
+
 ```toml
 cli = [
     "typer>=0.15.1",            # Modern CLI builder with type hints
@@ -158,6 +163,7 @@ cli = [
 ```
 
 ### 07.06 Cloud Infrastructure
+
 ```toml
 cloud = [
     "ansible>=11.1.0",          # Infrastructure as code automation
@@ -166,6 +172,7 @@ cloud = [
 ```
 
 ### 07.07 Configuration Management
+
 ```toml
 config = [
     "cookiecutter>=2.6.0",      # Project template engine
@@ -243,6 +250,7 @@ dev-doc = [
 ```
 
 ### 07.11 Notebook Development
+
 ```toml
 dev-nb = [
     "jupyter-book>=1.0.3",     # Notebook documentation publishing
@@ -253,6 +261,7 @@ dev-nb = [
 ```
 
 ### 07.12 GUI Applications
+
 ```toml
 gui = [
     "streamlit>=1.41.1",       # Rapid web app development
@@ -260,7 +269,9 @@ gui = [
 ```
 
 ### 07.13 Notebook Environment
+
 ![Jupyter](https://img.shields.io/badge/Jupyter-F37626.svg?&style=for-the-badge&logo=Jupyter&logoColor=white)
+
 ```toml
 nb = [
     "chime>=0.7.0",            # Audio notifications
@@ -288,6 +299,7 @@ web = [
 ```
 
 ### 07.15 Utilities
+
 ```toml
 misc = [
     "boltons>=24.1.0",         # Python utility functions

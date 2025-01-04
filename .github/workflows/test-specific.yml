@@ -4,29 +4,29 @@ on:
   workflow_dispatch:
     inputs:
       expression:
-        description: 'Test expression to filter for'
+        description: "Test expression to filter for"
         required: true
         type: choice
         options:
-          - 'uv-none-mkdocs'
-          - 'uv-none-none'
-          - 'uv-requirements.txt-mkdocs'
-          - 'uv-requirements.txt-none'
-          - 'virtualenv-requirements.txt-mkdocs'
-          - 'virtualenv-requirements.txt-none'
-          - 'conda-requirements.txt-mkdocs'
-          - 'conda-requirements.txt-none'
-          - 'conda-environment.yml-mkdocs'
-          - 'conda-environment.yml-none'
-          - 'pipenv-Pipfile-mkdocs'
-          - 'pipenv-Pipfile-none'
-          - 'none-requirements.txt-mkdocs'
-          - 'none-requirements.txt-none'
+          - "uv-none-mkdocs"
+          - "uv-none-none"
+          - "uv-requirements.txt-mkdocs"
+          - "uv-requirements.txt-none"
+          - "virtualenv-requirements.txt-mkdocs"
+          - "virtualenv-requirements.txt-none"
+          - "conda-requirements.txt-mkdocs"
+          - "conda-requirements.txt-none"
+          - "conda-environment.yml-mkdocs"
+          - "conda-environment.yml-none"
+          - "pipenv-Pipfile-mkdocs"
+          - "pipenv-Pipfile-none"
+          - "none-requirements.txt-mkdocs"
+          - "none-requirements.txt-none"
       os:
-        description: 'Operating system to run on'
+        description: "Operating system to run on"
         required: true
         type: choice
-        default: 'ubuntu-latest'
+        default: "ubuntu-latest"
         options:
           - ubuntu-latest
           - macos-latest

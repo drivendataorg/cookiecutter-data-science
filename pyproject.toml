@@ -35,6 +35,7 @@ dependencies = [
     "click>=8.1.0",
     "cookiecutter>=2.6.0",
     "ipykernel>=6.29.5",
+    "mdformat-frontmatter>=2.0.8",
 ]
 
 [project.scripts]
@@ -50,6 +51,7 @@ dev = [
     "black>=24.8.0",
     "build>=1.2.2.post1",
     "chardet>=5.2.0",
+    "cz-conventional-gitmoji>=0.6.1",
     "flake8>=5.0.4",
     "isort>=5.13.2",
     "mkdocs>=1.6.1",
@@ -69,17 +71,36 @@ dev = [
     "uv>=0.5.11",
     "virtualenvwrapper>=6.1.1 ; sys_platform != 'win32'",
     "virtualenvwrapper-win>=1.2.7 ; sys_platform == 'win32'",
+    "commitizen>=4.1.0",
+    "nbqa>=1.9.1",
 ]
+
+# ---------------------------------------------------------------------------- #
+#                             ruff formatter/linter                            #
+# ---------------------------------------------------------------------------- #
+
+
+# ----------------------------- ruff global config ----------------------------- #
 
 [tool.ruff]
 cache-dir = ".cache/ruff"
 line-length = 100
 extend-include = ["*.ipynb"]
+# Doesn't work, this is a bug with ruff.
+# https://github.com/astral-sh/ruff/issues/9381
+# exclude = ["*/{{{{ cookiecutter.repo_name }}}}/*"]
+exclude = [
+  "*cookiecutter*",
+  "tests/test-linting/*"
+]
 
 [tool.ruff.lint]
 # TODO: Different groups of linting styles depending on code use.
 select = ["ALL"]
-ignore = []      # Add ignores as needed
+ignore = [
+  "FIX002", # Allow TODOs
+  "TD003" # Allow TODO to not have link to issue
+]
 
 
 [tool.ruff.lint.isort]
@@ -88,6 +109,18 @@ force-sort-within-sections = true
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"] # Allow unused imports in __init__.py
+
+"tests/**/*.py" = [
+    # at least this three should be fine in tests:
+    "S101", # asserts allowed in tests...
+    "ARG", # Unused function args -> fixtures nevertheless are functionally relevant...
+    "FBT", # Don't care about booleans as positional arguments in tests, e.g. via @pytest.mark.parametrize()
+    # The below are debateable
+    "PLR2004", # Magic value used in comparison, ...
+    "S311", # Standard pseudo-random generators are not suitable for cryptographic purposes
+    "ANN001", "ANN201", # Allow for non-typed functions
+    "RET503", # Allow for implicit ignores
+]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 10
@@ -102,6 +135,27 @@ convention = "google"
 quote-style = "double"
 indent-style = "space"
 
+# ---------------------------------------------------------------------------- #
+#                                   pydoclint                                  #
+# ---------------------------------------------------------------------------- #
+
+[tool.pydoclint]
+style = "google"
+arg-type-hints-in-docstring = false
+check-return-types = true
+exclude = '\.venv'
+
+# ---------------------------------------------------------------------------- #
+#                                    pyright                                   #
+# ---------------------------------------------------------------------------- #
+
+[tool.pyright]
+include = ["."]
+
+# ---------------------------------------------------------------------------- #
+#                                    pytest                                    #
+# ---------------------------------------------------------------------------- #
+
 [tool.pytest.ini_options]
 addopts = """
 --tb=long
@@ -113,15 +167,21 @@ addopts = """
 testpaths = ["./tests"]
 log_file = "./logs/pytest.log"
 
-
-[tool.pydoclint]
-style = "google"
-arg-type-hints-in-docstring = false
-check-return-types = true
-exclude = '\.venv'
-
-[tool.pyright]
-include = ["."]
+# ---------------------------------------------------------------------------- #
+#                                      uv                                      #
+# ---------------------------------------------------------------------------- #
 
 [tool.uv.sources]
 gatlens-opinionated-template = { workspace = true }
+
+# ---------------------------------------------------------------------------- #
+#                                  commitizen                                  #
+# ---------------------------------------------------------------------------- #
+
+[tool.commitizen]
+# name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "semver2"
+version_provider = "pep621"
+update_changelog_on_bump = true
+# TODO: Make this the default: czg ai -N=3 -M="gpt-4o"

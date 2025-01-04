@@ -277,9 +277,7 @@ def test_update_password_me_same_password_error(
     )
     assert r.status_code == 400
     updated_user = r.json()
-    assert (
-        updated_user["detail"] == "New password cannot be the same as the current one"
-    )
+    assert updated_user["detail"] == "New password cannot be the same as the current one"
 
 
 def test_register_user(client: TestClient, db: Session) -> None:
@@ -444,9 +442,7 @@ def test_delete_user_super_user(
     assert result is None
 
 
-def test_delete_user_not_found(
-    client: TestClient, superuser_token_headers: dict[str, str]
-) -> None:
+def test_delete_user_not_found(client: TestClient, superuser_token_headers: dict[str, str]) -> None:
     r = client.delete(
         f"{settings.API_V1_STR}/users/{uuid.uuid4()}",
         headers=superuser_token_headers,

@@ -10,6 +10,7 @@ mkdocs
 mkdocs-material
 mkdocs-gen-files
 mkdocs-include-markdown-plugin
+nbqa
 pexpect
 pipenv
 pre-commit
