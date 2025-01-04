@@ -21,7 +21,7 @@ repos:
     rev: v8.22.1
     hooks:
       - id: gitleaks
-        name: "[🔒 security] Detect hardcoded secrets"
+        name: "🔒 security · Detect hardcoded secrets"
 
   # --------------------------- Code Quality & Formatting --------------------------- #
 
@@ -30,19 +30,19 @@ repos:
     rev: v0.8.6
     hooks:
       - id: ruff-format
-        name: "[🐍 python] Format with Ruff"
+        name: "🐍 python · Format with Ruff"
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: "v1.14.1"
     hooks:
       - id: mypy
-        name: "[🐍 python] Check types"
+        name: "🐍 python · Check types"
 
   - repo: https://github.com/abravalheri/validate-pyproject
     rev: v0.23
     hooks:
       - id: validate-pyproject
-        name: "[🐍 python] Validate pyproject.toml"
+        name: "🐍 python · Validate pyproject.toml"
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   ### Javascript & Web Tools ###
@@ -50,7 +50,7 @@ repos:
     rev: "v0.6.1"
     hooks:
       - id: biome-ci
-        name: "[🟨 javascript] Lint and format with Biome"
+        name: "🟨 javascript · Lint and format with Biome"
         additional_dependencies: ["@biomejs/biome@1.9.4"]
 
   ### Data & Config Validation ###
@@ -58,17 +58,17 @@ repos:
     rev: 0.30.0
     hooks:
       - id: check-github-workflows
-        name: "[🐙 github-actions] Validate gh workflow files"
+        name: "🐙 github-actions · Validate gh workflow files"
         args: ["--verbose"]
       - id: check-taskfile
-        name: "[✅ taskfile] Validate Task configuration"
+        name: "✅ taskfile · Validate Task configuration"
 
   ### Markdown ###
   - repo: https://github.com/hukkin/mdformat
     rev: 0.7.21
     hooks:
       - id: mdformat
-        name: "[📝 markdown] Format documentation"
+        name: "📝 markdown · Format documentation"
         additional_dependencies:
           - mdformat-gfm
           - mdformat-ruff
@@ -80,10 +80,10 @@ repos:
     rev: 1.9.1
     hooks:
       - id: nbqa-mypy
-        name: "[📓 notebook] Type-check cells"
+        name: "📓 notebook · Type-check cells"
       - id: nbqa
         entry: nbqa mdformat
-        name: "[📓 notebook] Format markdown cells"
+        name: "📓 notebook · Format markdown cells"
         args: ["--nbqa-md"]
         types: [jupyter]
         additional_dependencies:
@@ -98,7 +98,7 @@ repos:
     rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
-        name: "[✨ misc] Format misc web files"
+        name: "✨ misc · Format misc web files"
         types_or: [yaml, html, scss]
         additional_dependencies:
           - prettier@3.4.2
@@ -110,26 +110,26 @@ repos:
     hooks:
       # Filesystem Checks
       - id: check-executables-have-shebangs
-        name: "[📁 filesystem/⚙️ exec] Verify shebang presence"
+        name: "📁 filesystem/⚙️ exec · Verify shebang presence"
       - id: check-shebang-scripts-are-executable
-        name: "[📁 filesystem/⚙️ exec] Verify script permissions"
+        name: "📁 filesystem/⚙️ exec · Verify script permissions"
       - id: check-case-conflict
-        name: "[📁 filesystem/📝 names] Check case sensitivity"
+        name: "📁 filesystem/📝 names · Check case sensitivity"
       - id: check-illegal-windows-names
-        name: "[📁 filesystem/📝 names] Validate Windows filenames"
+        name: "📁 filesystem/📝 names · Validate Windows filenames"
       - id: check-symlinks
-        name: "[📁 filesystem/🔗 symlink] Check symlink validity"
+        name: "📁 filesystem/🔗 symlink · Check symlink validity"
       - id: destroyed-symlinks
-        name: "[📁 filesystem/🔗 symlink] Detect broken symlinks"
+        name: "📁 filesystem/🔗 symlink · Detect broken symlinks"
       # Git checks
       - id: check-added-large-files
-        name: "[🌳 git] Block large file commits"
+        name: "🌳 git · Block large file commits"
       - id: no-commit-to-branch
-        name: "[🌳 git] Protect main branches"
+        name: "🌳 git · Protect main branches"
       - id: check-merge-conflict
-        name: "[🌳 git] Detect conflict markers"
+        name: "🌳 git · Detect conflict markers"
       - id: forbid-new-submodules
-        name: "[🌳 git] Prevent submodule creation"
+        name: "🌳 git · Prevent submodule creation"
 
   # -------------------------------- Local Tools ------------------------------- #
 
@@ -152,5 +152,5 @@ repos:
     rev: v4.1.0
     hooks:
       - id: commitizen
-        name: "[🌳 git] Validate commit message"
+        name: "🌳 git · Validate commit message"
         stages: [commit-msg]
