@@ -62,6 +62,7 @@ lint: ## Run linting checks with flake8, isort, and black
 # Switched to using uv
 docs-serve: ## Serve documentation locally on port $(DOCS_PORT)
 	cd docs && \
+	mkdocs build && \
 	mkdocs serve -a localhost:$(DOCS_PORT) || \
 	( echo "\n\nInstance found running on $(DOCS_PORT). Here are the processes using this port:" && \
 	lsof -i :$(DOCS_PORT) && \

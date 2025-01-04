@@ -1,10 +1,10 @@
 """File to be run after template initialization by cookiecutter."""
 
-from copy import copy
 import os
-from pathlib import Path
 import shutil
 import subprocess
+from copy import copy
+from pathlib import Path
 
 from ccds.hook_utils.configure_gh import configure_github_repo
 

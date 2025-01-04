@@ -1,11 +1,11 @@
-from collections.abc import Generator, Iterator, Sequence
-from contextlib import contextmanager
-from itertools import cycle, product
 import json
-from pathlib import Path
 import shutil
 import sys
 import tempfile
+from collections.abc import Generator, Iterator, Sequence
+from contextlib import contextmanager
+from itertools import cycle, product
+from pathlib import Path
 
 import pytest
 

@@ -1,7 +1,7 @@
 # ruff: noqa
 import json
-from pathlib import Path
 import re
+from pathlib import Path
 
 from ccds.hook_utils.dependencies import basic
 

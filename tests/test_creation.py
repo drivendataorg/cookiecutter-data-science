@@ -1,8 +1,8 @@
 import json
 import os
+import sys
 from pathlib import Path
 from subprocess import PIPE, CompletedProcess, run
-import sys
 from typing import Any
 
 from conftest import bake_project

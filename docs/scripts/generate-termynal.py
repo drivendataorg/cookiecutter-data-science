@@ -1,9 +1,9 @@
 # ruff: noqa
-from pathlib import Path
 import shutil
+from pathlib import Path
 
-from ansi2html import Ansi2HTMLConverter
 import pexpect
+from ansi2html import Ansi2HTMLConverter
 
 CCDS_ROOT = Path(__file__).parents[2].resolve()
 

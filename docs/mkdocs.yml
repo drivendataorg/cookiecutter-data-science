@@ -49,6 +49,7 @@ markdown_extensions:
   - tables
   - toc:
       toc_depth: 2
+  - md_in_html
 plugins:
   - include-markdown
   - termynal:

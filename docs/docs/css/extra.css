@@ -1,16 +1,3 @@
-/* :root {
-  --md-primary-fg-color: #328f97;
-  --md-primary-fg-color--light: #328f97;
-  --md-primary-fg-color--dark: #328f97;
-
-  --md-accent-fg-color: #328f97;
-
-  --md-footer-bg-color: white;
-  --md-footer-fg-color: #222;
-  --md-footer-fg-color--light: #222;
-  --md-footer-fg-color--lighter: #222;
-} */
-
 :root {
 	/* Primary color - UV Purple theme */
 	--md-primary-fg-color: #a600ff; /* Main UV purple */
