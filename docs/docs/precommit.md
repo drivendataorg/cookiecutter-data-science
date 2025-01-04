@@ -57,14 +57,14 @@ You'll see hooks run automatically on every commit:
 **Useful Commands:**
 
 ```bash
-# Test hooks without committing
-pre-commit run --all-files
-
 # Update hooks to their latest versions
 pre-commit autoupdate
 
 # Reinstall hooks (needed after config changes)
 pre-commit install
+
+# Test hooks without committing
+pre-commit run --all-files
 ```
 
 ## Hooks
@@ -197,14 +197,19 @@ _Additional json schema available on the [Schema Store](https://json.schemastore
 - repo: https://github.com/nbQA-dev/nbQA
   rev: 1.9.1
   hooks:
-    - id: nbqa-ruff-check
-    - id: nbqa-ruff-format
     - id: nbqa-mypy
     - id: nbqa
       entry: nbqa mdformat
       name: Run 'mdformat' on a Jupyter Notebook
       types: [jupyter]
 ```
+
+<details>
+<summary>
+ruff supports notebooks by default
+</summary>
+As of version x.x.x, [ruff has built-in support for Jupyter Notebooks](https://docs.astral.sh/ruff/configuration/#jupyter-notebook-discovery), so this has been excluded from nbQA. Although they do have `nbqa-ruff-format` and `nbqa-ruff-check` available as hooks, these appear to be redundant.
+</details>
 
 #### Additional File Types
 

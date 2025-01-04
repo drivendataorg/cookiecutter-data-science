@@ -71,9 +71,7 @@ repos:
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.9.1
     hooks:
-      - id: nbqa-ruff-check
-      # - id: nbqa-ruff-format
-      # - id: nbqa-mypy
+      - id: nbqa-mypy
       # - id: nbqa
       #   entry: nbqa mdformat
       #   name: Run 'mdformat' on a Jupyter Notebook
