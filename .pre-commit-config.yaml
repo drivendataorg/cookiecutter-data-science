@@ -135,4 +135,4 @@ repos:
       # Test w/ pre-commit
       - id: commitizen-branch
         stages: [pre-push]
-        args: ["--rev-range", "origin/master..", "--strict"]
+        args: ["--rev-range", "origin/master.."]
