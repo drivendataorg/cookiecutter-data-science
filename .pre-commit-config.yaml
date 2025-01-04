@@ -132,7 +132,7 @@ repos:
       # Test w/ pre-commit run commitizen --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
       - id: commitizen
         stages: [commit-msg]
-      # Test w/ pre-commit
-      - id: commitizen-branch
-        stages: [pre-push]
-        args: ["--rev-range", "origin/master.."]
+      # Too demanding(?)
+      # - id: commitizen-branch
+      #   stages: [pre-push]
+      #   args: ["--rev-range", "origin/master.."]
