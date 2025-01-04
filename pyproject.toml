@@ -184,3 +184,4 @@ tag_format = "v$version"
 version_scheme = "semver2"
 version_provider = "pep621"
 update_changelog_on_bump = true
+# TODO: Make this the default: czg ai -N=3 -M="gpt-4o"

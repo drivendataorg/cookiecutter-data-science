@@ -169,6 +169,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         ".github/workflows/main.yml",
         ".github/workflows/on-release-main.yml",
         ".gitattributes",
+        ".pre-commit-config.yaml",
         "logs/.gitkeep",
         "data/external/.gitkeep",
         "data/interim/.gitkeep",

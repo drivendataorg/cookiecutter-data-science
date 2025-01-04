@@ -167,6 +167,7 @@ data: requirements
 {%- endif %}
 
 
+{%- if cookiecutter.use_github == 'Yes' %}
 #################################################################################
 # PRE-COMMIT COMMANDS                                                           #
 #################################################################################
@@ -180,6 +181,7 @@ pre-commit-update: ## Update, install, and test hooks w/ new config
 	pre-commit autoupdate
 	pre-commit install
 	$(MAKE) pre-commit-test
+{%- endif %}
 
 #################################################################################
 # Self Documenting Commands                                                     #
