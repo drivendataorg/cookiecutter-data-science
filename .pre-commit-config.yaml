@@ -47,18 +47,18 @@ repos:
       - id: biome-ci
         additional_dependencies: ["@biomejs/biome@1.9.4"]
 
-  # - repo: https://github.com/python-jsonschema/check-jsonschema
-  #   rev: 0.30.0
-  #   hooks:
-  #     - id: check-github-workflows
-  #       args: ["--verbose"]
-  #     - id: check-taskfile
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.30.0
+    hooks:
+      - id: check-github-workflows
+        args: ["--verbose"]
+      - id: check-taskfile
 
-  # - repo: https://github.com/abravalheri/validate-pyproject
-  #   rev: v0.23
-  #   hooks:
-  #     - id: validate-pyproject
-  #       additional_dependencies: ["validate-pyproject-schema-store[all]"]
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.23
+    hooks:
+      - id: validate-pyproject
+        additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   # - repo: https://github.com/hukkin/mdformat
   #   rev: 0.7.21
