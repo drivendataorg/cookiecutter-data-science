@@ -7,13 +7,6 @@
 		"defaultBranch": "master"
 	},
 	"files": {
-		"ignore": [
-			"{{ cookiecutter.repo_name }}/**/*",
-			"docs/site/**/*",
-			".history/**/*",
-			"*cache*/**/*",
-			"*venv*/**/*"
-		],
 		"ignoreUnknown": true
 	},
 	"linter": {

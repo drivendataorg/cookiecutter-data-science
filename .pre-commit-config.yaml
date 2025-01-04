@@ -1,7 +1,10 @@
 exclude: |
   (?x)^(
       .*\{\{.*\}\}.*|    # Exclude any files with cookiecutter variables
-      root/\{\{.*\}\}/    # Exclude the root template directory
+      docs/site/.*|       # Exclude mkdocs compiled files
+      \.history/.*|       # Exclude history files
+      .*cache.*/.*|       # Exclude cache directories
+      .*venv.*/.*|        # Exclude virtual environment directories
   )$
 fail_fast: true
 repos:
@@ -25,8 +28,11 @@ repos:
       - id: check-shebang-scripts-are-executable
 
   # ---------------------------------------------------------------------------- #
-  #                           Linting & Formatting                                 #
+  #                           Linting & Formatting                               #
   # ---------------------------------------------------------------------------- #
+
+  # ---------------------------------- python ---------------------------------- #
+
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.8.6
     hooks:
@@ -86,20 +92,13 @@ repos:
           - mdformat-frontmatter
           - ruff
 
-  # - repo: https://github.com/pre-commit/mirrors-prettier
-  #   rev: v4.0.0-alpha.8
-  #   hooks:
-  #     - id: prettier
-  #       types_or: [yaml, markdown, html, css, scss, javascript, json]
-  #       exclude: |
-  #         (?x)^(
-  #             .*\.md$|
-  #             .*\.ipynb$|
-  #             .*\.py$|
-  #             .*\.tsx?$
-  #         )$
-  #       additional_dependencies:
-  #         - prettier@3.1.0
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        types_or: [yaml, html, scss]
+        additional_dependencies:
+          - prettier@3.4.2
 
   # ---------------------------------------------------------------------------- #
   #                              Commit Quality                                    #

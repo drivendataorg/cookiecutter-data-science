@@ -246,14 +246,14 @@ ruff supports notebooks by default
 
 #### Additional File Types
 
-[Prettier](https://prettier.io/) handles formatting for various file types not covered by other tools (HTML, CSS, YAML, etc.). While it can be slow and sometimes produces unexpected formatting, it remains the standard for these file types:
+[Prettier](https://prettier.io/) handles formatting for various file types not covered by other tools (HTML, CSS, YAML, etc.). While it can be slow and sometimes produces code-breaking formatting, it remains the standard for these file types:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-prettier
   rev: v3.1.0
   hooks:
     - id: prettier
-      types_or: [yaml, markdown, html, css, scss, javascript, json]
+      types_or: [yaml, html, css, scss]
       # Exclude files handled by other formatters
       exclude: |
         (?x)^(
@@ -263,16 +263,19 @@ ruff supports notebooks by default
             .*\.tsx?$
         )$
       additional_dependencies:
-        - prettier@3.1.0
+        - prettier@3.4.2
 ```
 
 <details>
 <summary>
 Future Improvements
 </summary>
+
 I might replace Prettier with more focused tools in the future (Perhaps [HTMLHint](https://htmlhint.com/) for HTML validation but it's hardly a linter.)
 
 However, this would require managing multiple tools and dependencies, so I'm sticking with Prettier for now.
+
+_My disatisfaction with prettier is humorously shared by pre-commit, as they [themselves no longer support the prettier hook](https://github.com/pre-commit/mirrors-prettier#archived) because "prettier made some changes that breaks plugins entirely"_
 
 </details>
 
