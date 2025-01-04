@@ -115,6 +115,7 @@ pre-commit-update: ## Update, install, and test hooks w/ new config
 	pre-commit autoupdate
 	pre-commit install
 	pre-commit run --all-files
+	pre-commit run commitizen --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
 
 ###     HELP
 

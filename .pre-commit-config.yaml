@@ -10,12 +10,18 @@ fail_fast: true
 default_install_hook_types:
   - pre-commit
   - commit-msg
-  - pre-push
 repos:
   # ---------------------------------------------------------------------------- #
   #                               Pre-Commit Hooks                               #
   # ---------------------------------------------------------------------------- #
-  #
+
+  # --------------------------------- Security --------------------------------- #
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.22.1
+    hooks:
+      - id: gitleaks
+
   # --------------------------------- Standard --------------------------------- #
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -34,8 +40,9 @@ repos:
       - id: check-executables-have-shebangs
       - id: check-shebang-scripts-are-executable
 
-  # --------------------------- Linting & Formatting --------------------------- #
+  # --------------------------- Code Quality & Formatting --------------------------- #
 
+  ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.8.6
     hooks:
@@ -50,12 +57,14 @@ repos:
     hooks:
       - id: mypy
 
+  ### Javascript & Web Tools ###
   - repo: https://github.com/biomejs/pre-commit
     rev: "v0.6.1"
     hooks:
       - id: biome-ci
         additional_dependencies: ["@biomejs/biome@1.9.4"]
 
+  ### Data & Config Validation ###
   - repo: https://github.com/python-jsonschema/check-jsonschema
     rev: 0.30.0
     hooks:
@@ -69,6 +78,7 @@ repos:
       - id: validate-pyproject
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
+  ### Markdown ###
   - repo: https://github.com/hukkin/mdformat
     rev: 0.7.21
     hooks:
@@ -79,6 +89,7 @@ repos:
           - mdformat-frontmatter
           - ruff
 
+  ### Notebooks ###
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.9.1
     hooks:
@@ -95,6 +106,7 @@ repos:
           - mdformat-frontmatter
           - ruff
 
+  ### Additional File Types ###
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v4.0.0-alpha.8
     hooks:
@@ -102,13 +114,6 @@ repos:
         types_or: [yaml, html, scss]
         additional_dependencies:
           - prettier@3.4.2
-
-  # --------------------------------- Security --------------------------------- #
-
-  - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.22.1
-    hooks:
-      - id: gitleaks
 
   # -------------------------------- Local Tools ------------------------------- #
 
@@ -125,13 +130,11 @@ repos:
   # ---------------------------------------------------------------------------- #
   #
   # ------------------------------ Commit Quality ------------------------------ #
+
+  ### Commit Message Standards ###
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.1.0
     hooks:
       # Test w/ pre-commit run commitizen --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
       - id: commitizen
         stages: [commit-msg]
-      # Too demanding(?)
-      # - id: commitizen-branch
-      #   stages: [pre-push]
-      #   args: ["--rev-range", "origin/master.."]
