@@ -28,7 +28,7 @@ repos:
   #                           Linting & Formatting                                 #
   # ---------------------------------------------------------------------------- #
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.8.5
+    rev: v0.8.6
     hooks:
       # Skip for now
       # - id: ruff
@@ -68,16 +68,16 @@ repos:
           - mdformat-gfm
           - mdformat-black
 
-  # - repo: https://github.com/nbQA-dev/nbQA
-  #   rev: 1.9.1
-  #   hooks:
-  #     - id: nbqa-ruff-check
-  #     - id: nbqa-ruff-format
-  #     - id: nbqa-mypy
-  #     - id: nbqa
-  #       entry: nbqa mdformat
-  #       name: Run 'mdformat' on a Jupyter Notebook
-  #       types: [jupyter]
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.9.1
+    hooks:
+      - id: nbqa-ruff-check
+      # - id: nbqa-ruff-format
+      # - id: nbqa-mypy
+      # - id: nbqa
+      #   entry: nbqa mdformat
+      #   name: Run 'mdformat' on a Jupyter Notebook
+      #   types: [jupyter]
 
   # - repo: https://github.com/pre-commit/mirrors-prettier
   #   rev: v4.0.0-alpha.8

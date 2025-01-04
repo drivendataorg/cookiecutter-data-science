@@ -109,6 +109,13 @@ manual-test-debug: _prep _clean_manual_test ## Run manual tests with debugger
 	mkdir -p manual_test
 	cd manual_test && python -m pdb ../ccds/__main__.py ..
 
+###     GIT HOOKS
+
+pre-commit-update: ## Update, install, and test hooks w/ new config
+	pre-commit autoupdate
+	pre-commit install --install-hooks
+	pre-commit run --all-files
+
 ###     HELP
 
 .DEFAULT_GOAL := help
