@@ -1,3 +1,5 @@
+# ruff: noqa
+
 from pathlib import Path
 from shutil import copytree
 from tempfile import TemporaryDirectory

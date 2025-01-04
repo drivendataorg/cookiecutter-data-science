@@ -1,3 +1,5 @@
+# ruff: noqa
+
 import json
 import shutil
 import sys

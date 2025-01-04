@@ -86,11 +86,21 @@ dev = [
 cache-dir = ".cache/ruff"
 line-length = 100
 extend-include = ["*.ipynb"]
+# Doesn't work, this is a bug with ruff.
+# https://github.com/astral-sh/ruff/issues/9381
+# exclude = ["*/{{{{ cookiecutter.repo_name }}}}/*"]
+exclude = [
+  "*cookiecutter*",
+  "tests/test-linting/*"
+]
 
 [tool.ruff.lint]
 # TODO: Different groups of linting styles depending on code use.
 select = ["ALL"]
-ignore = []      # Add ignores as needed
+ignore = [
+  "FIX002", # Allow TODOs
+  "TD003" # Allow TODO to not have link to issue
+]
 
 
 [tool.ruff.lint.isort]
@@ -109,7 +119,7 @@ force-sort-within-sections = true
     "PLR2004", # Magic value used in comparison, ...
     "S311", # Standard pseudo-random generators are not suitable for cryptographic purposes
     "ANN001", "ANN201", # Allow for non-typed functions
-    "RET503", # Allow for implicit ignores   
+    "RET503", # Allow for implicit ignores
 ]
 
 [tool.ruff.lint.mccabe]

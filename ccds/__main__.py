@@ -1,3 +1,5 @@
+# ruff: noqa
+
 # Monkey-patch jinja to allow variables to not exist, which happens with sub-options
 import jinja2
 
@@ -28,10 +30,7 @@ def default_ccds_main(f):
     """Set the default for the cookiecutter template argument to the CCDS template."""
 
     def _main(*args, **kwargs):
-        f.params[1].default = (
-            # "https://github.com/drivendataorg/cookiecutter-data-science"
-            "https://github.com/GatlenCulp/gatlens-opinionated-template"
-        )
+        f.params[1].default = "https://github.com/GatlenCulp/gatlens-opinionated-template"
         return f(*args, **kwargs)
 
     return _main

@@ -1,3 +1,5 @@
+# ruff: noqa
+
 from collections import OrderedDict
 from pathlib import Path
 

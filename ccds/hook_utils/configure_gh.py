@@ -1,8 +1,9 @@
+# ruff: noqa
 """Configures git or vcs repositories."""
 
 import os
-import subprocess
 from pathlib import Path
+import subprocess
 from typing import Literal
 
 

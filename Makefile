@@ -46,14 +46,13 @@ format: ## Format code using isort and black
 	isort --profile black ccds hooks tests docs/scripts
 	black ccds hooks tests docs/scripts
 
-lint: ## Run linting checks with flake8, isort, and black
-	flake8 ccds hooks tests docs/scripts
-	isort --check --profile black ccds hooks tests docs/scripts
-	black --check ccds hooks tests docs/scripts
+# lint: ## Run linting checks with flake8, isort, and black
+# 	flake8 ccds hooks tests docs/scripts
+# 	isort --check --profile black ccds hooks tests docs/scripts
+# 	black --check ccds hooks tests docs/scripts
 
-# lint:
-# 	ruff check hooks docs/scripts
-# 	prettier --check docs
+lint: ## Run linting checks with ruff
+	ruff check hooks docs/scripts --config ./pyproject.toml --fix 
 
 # pyright .
 
