@@ -61,7 +61,7 @@ Don't write code to do the same task in multiple notebooks. If it's a data prepr
 
 We make it easy to refactor notebook code because the ccds template makes your project a Python package by default and installs it locally in the requirements file of your chosen environment manager. This enables you to import your project's source code and use it in notebooks with a cell like the following:
 
-```python
+```ipynb
 # OPTIONAL: Load the "autoreload" extension so that code can change
 %load_ext autoreload
 

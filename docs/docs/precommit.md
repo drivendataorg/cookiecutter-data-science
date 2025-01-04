@@ -112,6 +112,39 @@ This section covers tools for code formatting, linting, type checking, and schem
     - id: ruff-format
 ```
 
+<details>
+<summary>
+Alternatives to Ruff (Too Many to Name)
+</summary>
+
+![ruff](https://user-images.githubusercontent.com/1309177/232603514-c95e9b0f-6b31-43de-9a80-9e844173fd6a.svg#only-dark)
+
+Before Ruff, a typical Python project might use several separate tools:
+
+- [Black](https://black.readthedocs.io/) for code formatting
+- [isort](https://pycqa.github.io/isort/) for import sorting
+- [Flake8](https://flake8.pycqa.org/) for style enforcement
+- [Pylint](https://pylint.readthedocs.io/) for code analysis
+- [Bandit](https://bandit.readthedocs.io/) for security checks
+- [pyupgrade](https://github.com/asottile/pyupgrade) for modernizing syntax
+- [pydocstyle](https://www.pydocstyle.org/) for docstring checking
+- [Many more... 😵‍💫](https://docs.astral.sh/ruff/faq/#which-tools-does-ruff-replace)
+
+While these tools are battle-tested and highly configurable, using Ruff provides several advantages:
+
+1. **Speed**: Ruff is 10-100x faster as it's written in Rust
+1. **Simplicity**: Single configuration file and consistent interface
+1. **Active Development**: Rapidly adding features and reaching feature parity
+1. **Modern Defaults**: Better handling of new Python features
+
+Consider using individual tools if you need specific features not yet supported by Ruff or have complex existing configurations you need to maintain.
+
+</details>
+
+<br/>
+
+While Ruff does many things, type checking it does not... [yet](https://github.com/astral-sh/ruff/issues/3893).
+
 [MyPy](https://mypy-lang.org/) handles Python type checking:
 
 ```yaml
@@ -208,7 +241,7 @@ _Additional json schema available on the [Schema Store](https://json.schemastore
 <summary>
 ruff supports notebooks by default
 </summary>
-As of version x.x.x, [ruff has built-in support for Jupyter Notebooks](https://docs.astral.sh/ruff/configuration/#jupyter-notebook-discovery), so this has been excluded from nbQA. Although they do have `nbqa-ruff-format` and `nbqa-ruff-check` available as hooks, these appear to be redundant.
+[Ruff has built-in support for Jupyter Notebooks](https://docs.astral.sh/ruff/configuration/#jupyter-notebook-discovery), so this has been excluded from nbQA since it would be redundant. nbQA has `nbqa-ruff-format` and `nbqa-ruff-check` hooks, but these appear to be redundant.
 </details>
 
 #### Additional File Types

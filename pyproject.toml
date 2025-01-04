@@ -72,6 +72,7 @@ dev = [
     "virtualenvwrapper>=6.1.1 ; sys_platform != 'win32'",
     "virtualenvwrapper-win>=1.2.7 ; sys_platform == 'win32'",
     "commitizen>=4.1.0",
+    "nbqa>=1.9.1",
 ]
 
 # ---------------------------------------------------------------------------- #

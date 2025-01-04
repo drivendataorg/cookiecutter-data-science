@@ -66,16 +66,25 @@ repos:
       - id: mdformat
         additional_dependencies:
           - mdformat-gfm
-          - mdformat-black
+          - mdformat-ruff
+          - mdformat-frontmatter
+          - ruff
 
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.9.1
     hooks:
       - id: nbqa-mypy
-      # - id: nbqa
-      #   entry: nbqa mdformat
-      #   name: Run 'mdformat' on a Jupyter Notebook
-      #   types: [jupyter]
+      - id: nbqa
+        entry: nbqa mdformat
+        name: Run 'mdformat' on a Jupyter Notebook
+        args: ["--nbqa-md"]
+        types: [jupyter]
+        additional_dependencies:
+          - mdformat
+          - mdformat-gfm
+          - mdformat-ruff
+          - mdformat-frontmatter
+          - ruff
 
   # - repo: https://github.com/pre-commit/mirrors-prettier
   #   rev: v4.0.0-alpha.8
