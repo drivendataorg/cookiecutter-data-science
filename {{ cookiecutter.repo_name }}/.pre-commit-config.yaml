@@ -1,0 +1,165 @@
+exclude: |
+  (?x)^(
+      .*\{\{.*\}\}.*|    # Exclude any files with cookiecutter variables
+      docs/site/.*|       # Exclude mkdocs compiled files
+      \.history/.*|       # Exclude history files
+      .*cache.*/.*|       # Exclude cache directories
+      .*venv.*/.*|        # Exclude virtual environment directories
+  )$
+fail_fast: true
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+repos:
+  # ---------------------------------------------------------------------------- #
+  #                              🔄 Pre-Commit Hooks                             #
+  # ---------------------------------------------------------------------------- #
+
+  # ----------------------------- 🔒 Security Tools ---------------------------- #
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.22.1
+    hooks:
+      - id: gitleaks
+        name: "🔒 security · Detect hardcoded secrets"
+
+  # --------------------------- 🔍 Code Quality Tools -------------------------- #
+
+  ### Python Tools ###
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.6
+    hooks:
+      # - id: ruff
+      #   args: [ --fix ]
+      - id: ruff-format
+        name: "🐍 python · Format with Ruff"
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: "v1.14.1"
+    hooks:
+      - id: mypy
+        name: "🐍 python · Check types"
+
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.23
+    hooks:
+      - id: validate-pyproject
+        name: "🐍 python · Validate pyproject.toml"
+        additional_dependencies: ["validate-pyproject-schema-store[all]"]
+
+  ### Javascript & Web Tools ###
+  - repo: https://github.com/biomejs/pre-commit
+    rev: "v0.6.1"
+    hooks:
+      - id: biome-ci
+        name: "🟨 javascript · Lint and format with Biome"
+        additional_dependencies: ["@biomejs/biome@1.9.4"]
+
+  ### Data & Config Validation ###
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.30.0
+    hooks:
+      - id: check-github-workflows
+        name: "🐙 github-actions · Validate gh workflow files"
+        args: ["--verbose"]
+      - id: check-taskfile
+        name: "✅ taskfile · Validate Task configuration"
+
+  ### Markdown ###
+  - repo: https://github.com/hukkin/mdformat
+    rev: 0.7.21
+    hooks:
+      - id: mdformat
+        name: "📝 markdown · Format documentation"
+        additional_dependencies:
+          - mdformat-gfm
+          - mdformat-ruff
+          - mdformat-frontmatter
+          - ruff
+
+  ### Notebooks ###
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.9.1
+    hooks:
+      - id: nbqa-mypy
+        name: "📓 notebook · Type-check cells"
+      - id: nbqa
+        entry: nbqa mdformat
+        name: "📓 notebook · Format markdown cells"
+        args: ["--nbqa-md"]
+        types: [jupyter]
+        additional_dependencies:
+          - mdformat
+          - mdformat-gfm
+          - mdformat-ruff
+          - mdformat-frontmatter
+          - ruff
+
+  ### Additional File Types ###
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        name: "✨ misc-files · Format misc web files"
+        types_or: [yaml, html, scss]
+        additional_dependencies:
+          - prettier@3.4.2
+
+  # ---------------------------- 📁 Filesystem Tools --------------------------- #
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # Filesystem Checks
+      - id: check-executables-have-shebangs
+        name: "📁 filesystem/⚙️ exec · Verify shebang presence"
+      - id: check-shebang-scripts-are-executable
+        name: "📁 filesystem/⚙️ exec · Verify script permissions"
+      - id: check-case-conflict
+        name: "📁 filesystem/📝 names · Check case sensitivity"
+      - id: check-illegal-windows-names
+        name: "📁 filesystem/📝 names · Validate Windows filenames"
+      - id: check-symlinks
+        name: "📁 filesystem/🔗 symlink · Check symlink validity"
+      - id: destroyed-symlinks
+        name: "📁 filesystem/🔗 symlink · Detect broken symlinks"
+
+      # ------------------------------- 🌳 Git Tools ------------------------------- #
+      - id: check-merge-conflict
+        name: "🌳 git · Detect conflict markers"
+      - id: forbid-new-submodules
+        name: "🌳 git · Prevent submodule creation"
+      - id: no-commit-to-branch
+        name: "🌳 git · Protect main branches"
+        args: ["--branch", "main", "--branch", "master"]
+      - id: check-added-large-files
+        name: "🌳 git · Block large file commits"
+        args: ["--maxkb=1000"]
+
+  # ------------------------------ 🛠️ Local Tools ----------------------------- #
+
+  # - repo: local
+  #   hooks:
+  #     - id: make-lint
+  #       name: Run 'make lint'
+  #       entry: make
+  #       args: ["lint"]
+  #       language: system
+
+  # ---------------------------------------------------------------------------- #
+  #                            📝 Commit Message Hooks                           #
+  # ---------------------------------------------------------------------------- #
+  # --------------------------- ✍️ Git Commit Quality -------------------------- #
+
+  # - repo: https://github.com/ljnsn/cz-conventional-gitmoji
+  #     rev: 0.2.4
+  #     hooks:
+  #       - id: conventional-gitmoji
+
+  ### Commit Message Standards ###
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.1.0
+    hooks:
+      - id: commitizen
+        name: "🌳 git · Validate commit message"
+        stages: [commit-msg]
