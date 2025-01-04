@@ -75,7 +75,7 @@ This collection prioritizes best-in-class tools without redundancy. Rather than 
 - JSON/YAML/TOML validation uses specialized schema validators
 - Security scanning uses a single comprehensive tool
 
-### 01 Security
+### 01 🔒 Security
 
 [GitLeaks](https://github.com/gitleaks/gitleaks) is a fast, lightweight scanner that prevents secrets (passwords, API keys, tokens) from being committed to your repository.
 
@@ -96,11 +96,11 @@ Alternatives to GitLeaks (TruffleHog)
 
 <!-- TODO: Read this, https://kislyuk.github.io/argcomplete/ -->
 
-### 02 Code Quality & Formatting
+### 02 🔍 Code Quality
 
 This section covers tools for code formatting, linting, type checking, and schema validation across different languages and file types. Best-in-class tools were chosen, avoiding redundant functionality. I opted for remote hook downloads over local commands to make the file more portable and self-updating.
 
-#### Python Tools
+#### 🐍 python
 
 [Ruff](https://docs.astral.sh/ruff/) is a fast, comprehensive Python formatter and linter that replaces multiple traditional tools (Black, Flake8, isort, pyupgrade, bandit, pydoclint, mccabe complexity, and more.) While it's not yet at 100% parity with all these tools, its speed and broad coverage make it an excellent choice as this project's only Python linter/formatter:
 
@@ -175,7 +175,7 @@ Microsoft's [Pyright](https://microsoft.github.io/pyright/) is a [faster and mor
 
 <!-- TODO: Add vulture https://github.com/jendrikseipp/vulture -->
 
-#### JavaScript & Web Tools
+#### 🟨 JavaScript & Web Tools
 
 [Biome](https://biomejs.dev/internals/language-support/) is a modern, fast formatter and linter for JS/TS ecosystems (JS[X], TS[X], JSON[C], CSS, GraphQL). It provides better defaults than ESLint and comes with a helpful [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=biomejs.biome):
 
@@ -195,7 +195,7 @@ Alternatives to Biome (ESLint & Prettier)
 [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) are more established alternatives with broader plugin ecosystems. While Prettier supports many file types, it can be notably slow, sometimes produces unexpected formatting, and sometimes breaks code (which I find annoying). Since this is primarily a Python-focused project template and Biome handles our JavaScript needs efficiently, we prefer it over the traditional ESLint/Prettier setup. Consider ESLint and Prettier if you need plugins, support for specific JS frameworks, or formatting for languages unsupported elsewhere. (More linters [here](https://github.com/caramelomartins/awesome-linters) as well)
 </details>
 
-#### Data & Config Validation
+#### ✅ Data & Config Validation
 
 [check-jsonschema](https://check-jsonschema.readthedocs.io/) validates various configuration files using [JSON Schema](https://json-schema.org/specification). It supports JSON, YAML, and TOML files, and includes specialized validators like the [TaskFile](https://taskfile.dev/) and [GitHub Actions](https://github.com/features/actions) checker:
 
@@ -225,7 +225,7 @@ _Additional json schema available on the [Schema Store](https://json.schemastore
 
 <!-- Possibly worth just building? -->
 
-#### Markdown
+#### 📝 Markdown
 
 [mdformat](https://mdformat.readthedocs.io/) for Markdown formatting with additional plugins for GitHub-Flavored Markdown, Ruff-style code formatting, and frontmatter support:
 
@@ -242,7 +242,7 @@ _Additional json schema available on the [Schema Store](https://json.schemastore
         - ruff                  # Required for mdformat-ruff
 ```
 
-#### Notebooks
+#### 📓 Notebooks
 
 [nbQA](https://nbqa.readthedocs.io/) for Jupyter notebook quality assurance, allowing us to use our standard Python tools on notebooks:
 
@@ -272,7 +272,7 @@ ruff supports notebooks by default
 [Ruff has built-in support for Jupyter Notebooks](https://docs.astral.sh/ruff/configuration/#jupyter-notebook-discovery), so this has been excluded from nbQA since it would be redundant. nbQA has `nbqa-ruff-format` and `nbqa-ruff-check` hooks, but these appear to be redundant.
 </details>
 
-#### Additional File Types
+#### ✨ Additional File Types
 
 [Prettier](https://prettier.io/) handles formatting for various file types not covered by other tools (HTML, CSS, YAML, etc.). While it can be slow and sometimes produces code-breaking formatting, it remains the standard for these file types:
 
@@ -300,7 +300,7 @@ _My disatisfaction with prettier is humorously shared by pre-commit, as they [th
 
 </details>
 
-#### Local Tools
+#### 🛠️ Local Tools
 
 For using tools without hooks, you can also run a local command:
 
@@ -318,7 +318,7 @@ Note: If you're using [uv](https://docs.astral.sh/uv/), they [also have pre-comm
 
 <!-- CZ git https://cz-git.qbb.sh/cli/why -->
 
-### 03 Project and Files
+### 03 📁 Filesystem
 
 These hooks help maintain repository hygiene by preventing common file-related issues:
 
@@ -338,6 +338,7 @@ These hooks help maintain repository hygiene by preventing common file-related i
       name: "📁 filesystem/🔗 symlink · Check symlink validity"
     - id: destroyed-symlinks
       name: "📁 filesystem/🔗 symlink · Detect broken symlinks"
+    # ... More Below ...
 ```
 
 - `check-added-large-files` - Prevents committing files larger than 8000KB ([Git Large File Storage (LFS)](https://git-lfs.com/) or [Data Version Control (DVC)](https://dvc.org/) should instead be used)
@@ -346,9 +347,36 @@ These hooks help maintain repository hygiene by preventing common file-related i
 - `check-executables-have-shebangs` - Ensures scripts are properly configured
 - `check-illegal-windows-names` - Check for files that cannot be created on Windows.
 
-### 04 Git Commit Quality
+### 04 🌳 Git Quality
 
-#### Commit Message Standards
+#### Branch Protection
+
+```yaml
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v5.0.0
+  hooks:
+    # ... More Above ...
+    - id: check-added-large-files
+      name: "🌳 git · Block large file commits"
+    - id: check-merge-conflict
+      name: "🌳 git · Detect conflict markers"
+    - id: forbid-new-submodules
+      name: "🌳 git · Prevent submodule creation"
+    - id: no-commit-to-branch
+      name: "🌳 git · Protect main branches"
+      args: ['--branch', 'main', '--branch', 'master']
+```
+
+- `forbid-new-submodules` - Prevent addition of new git submodules. (I'm mixed on this one since I think this is a confusing paradigm but don't know of better alternatives.)
+- `check-merge-conflict` - Prevents committing unresolved merge conflicts
+- `no-commit-to-branch` - Protects main branches from direct commits (GitHub branch protections are for enterprise members only (sad))
+
+For the best experience:
+
+1. Use `cz commit` instead of `git commit`
+1. Consider [czg](https://cz-git.qbb.sh/) for a better implementation of the `cz` cli (I'm personally a fan of the AI generated commits it has.)
+
+#### 🗒️ Commit Message Standards
 
 [Commitizen](https://commitizen.github.io/cz-cli/) enforces standardized commit messages that enable automatic changelog generation and semantic versioning
 
@@ -372,32 +400,6 @@ Alternatives to Commitizen (Commitlint)
 <!-- TODO: Look into the differences above. Oop. -->
 
 <!-- TODO: Also look into running pre-commit before cz even pops up, it's annoying to write things and then have it fail the pre-commit and have to rewrite. -->
-
-For the best experience:
-
-1. Use `cz commit` instead of `git commit`
-1. Consider [czg](https://cz-git.qbb.sh/) for a better implementation of the `cz` cli (I'm personally a fan of the AI generated commits it has.)
-
-#### Branch Protection
-
-```yaml
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v5.0.0
-  hooks:
-    - id: check-added-large-files
-      name: "🌳 git · Block large file commits"
-    - id: check-merge-conflict
-      name: "🌳 git · Detect conflict markers"
-    - id: forbid-new-submodules
-      name: "🌳 git · Prevent submodule creation"
-    - id: no-commit-to-branch
-      name: "🌳 git · Protect main branches"
-      args: ['--branch', 'main', '--branch', 'master']
-```
-
-- `forbid-new-submodules` - Prevent addition of new git submodules. (I'm mixed on this one since I think this is a confusing paradigm but don't know of better alternatives.)
-- `check-merge-conflict` - Prevents committing unresolved merge conflicts
-- `no-commit-to-branch` - Protects main branches from direct commits (GitHub branch protections are for enterprise members only (sad))
 
 ### 05 Testing
 
