@@ -46,7 +46,7 @@ If the right-hand column describes you better, [CookieCutter Data Science (CCDS)
 
 **[View the full documentation here](https://gatlenculp.github.io/gatlens-opinionated-template/) ➡️**
 
----
+______________________________________________________________________
 
 ## Getting Started
 

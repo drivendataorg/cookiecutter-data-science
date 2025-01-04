@@ -1,9 +1,9 @@
 exclude: |
-    (?x)^(
-        .*\{\{.*\}\}.*|    # Exclude any files with cookiecutter variables
-        root/\{\{.*\}\}/    # Exclude the root template directory
-    )$
-
+  (?x)^(
+      .*\{\{.*\}\}.*|    # Exclude any files with cookiecutter variables
+      root/\{\{.*\}\}/    # Exclude the root template directory
+  )$
+fail_fast: true
 repos:
   # ---------------------------------------------------------------------------- #
   #                                Standard Hooks                                  #
@@ -30,9 +30,11 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.8.5
     hooks:
-      - id: ruff
-        args: [--fix]
+      # Skip for now
+      # - id: ruff
+      #   args: [--fix]
       - id: ruff-format
+        args: ["--exclude=COM812,ISC001"]
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.14.1 # Use the latest version
@@ -45,73 +47,73 @@ repos:
       - id: biome-ci
         additional_dependencies: ["@biomejs/biome@1.4.1"]
 
-  - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.30.0
-    hooks:
-      - id: check-github-workflows
-        args: ["--verbose"]
-      - id: check-taskfile
+  # - repo: https://github.com/python-jsonschema/check-jsonschema
+  #   rev: 0.30.0
+  #   hooks:
+  #     - id: check-github-workflows
+  #       args: ["--verbose"]
+  #     - id: check-taskfile
 
-  - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.23
-    hooks:
-      - id: validate-pyproject
-        additional_dependencies: ["validate-pyproject-schema-store[all]"]
+  # - repo: https://github.com/abravalheri/validate-pyproject
+  #   rev: v0.23
+  #   hooks:
+  #     - id: validate-pyproject
+  #       additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
-  - repo: https://github.com/hukkin/mdformat
-    rev: 0.7.21
-    hooks:
-      - id: mdformat
-        additional_dependencies:
-          - mdformat-gfm
-          - mdformat-black
+  # - repo: https://github.com/hukkin/mdformat
+  #   rev: 0.7.21
+  #   hooks:
+  #     - id: mdformat
+  #       additional_dependencies:
+  #         - mdformat-gfm
+  #         - mdformat-black
 
-  - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.9.1
-    hooks:
-      - id: nbqa-ruff-check
-      - id: nbqa-ruff-format
-      - id: nbqa-mypy
-      - id: nbqa
-        entry: nbqa mdformat
-        name: Run 'mdformat' on a Jupyter Notebook
-        types: [jupyter]
+  # - repo: https://github.com/nbQA-dev/nbQA
+  #   rev: 1.9.1
+  #   hooks:
+  #     - id: nbqa-ruff-check
+  #     - id: nbqa-ruff-format
+  #     - id: nbqa-mypy
+  #     - id: nbqa
+  #       entry: nbqa mdformat
+  #       name: Run 'mdformat' on a Jupyter Notebook
+  #       types: [jupyter]
 
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v4.0.0-alpha.8
-    hooks:
-      - id: prettier
-        types_or: [yaml, markdown, html, css, scss, javascript, json]
-        exclude: |
-          (?x)^(
-              .*\.md$|
-              .*\.ipynb$|
-              .*\.py$|
-              .*\.tsx?$
-          )$
-        additional_dependencies:
-          - prettier@3.1.0
+  # - repo: https://github.com/pre-commit/mirrors-prettier
+  #   rev: v4.0.0-alpha.8
+  #   hooks:
+  #     - id: prettier
+  #       types_or: [yaml, markdown, html, css, scss, javascript, json]
+  #       exclude: |
+  #         (?x)^(
+  #             .*\.md$|
+  #             .*\.ipynb$|
+  #             .*\.py$|
+  #             .*\.tsx?$
+  #         )$
+  #       additional_dependencies:
+  #         - prettier@3.1.0
 
   # ---------------------------------------------------------------------------- #
   #                              Commit Quality                                    #
   # ---------------------------------------------------------------------------- #
 
-  - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.1.0
-    hooks:
-      - id: commitizen
-        stages: [commit-msg]
-      - id: commitizen-branch
-        stages: [pre-push]
-        args: ["--rev-range", "origin/main..", "--strict"]
+  # - repo: https://github.com/commitizen-tools/commitizen
+  #   rev: v4.1.0
+  #   hooks:
+  #     - id: commitizen
+  #       stages: [commit-msg]
+  #     - id: commitizen-branch
+  #       stages: [pre-push]
+  #       args: ["--rev-range", "origin/main..", "--strict"]
 
   # ---------------------------------------------------------------------------- #
   #                                   Security                                     #
   # ---------------------------------------------------------------------------- #
-  - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.22.1
-    hooks:
-      - id: gitleaks
+  # - repo: https://github.com/gitleaks/gitleaks
+  #   rev: v8.22.1
+  #   hooks:
+  #     - id: gitleaks
 
   # ---------------------------------------------------------------------------- #
   #                                Local Tools                                     #

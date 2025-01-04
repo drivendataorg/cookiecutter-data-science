@@ -1,11 +1,11 @@
+from collections.abc import Generator, Iterator, Sequence
+from contextlib import contextmanager
+from itertools import cycle, product
 import json
+from pathlib import Path
 import shutil
 import sys
 import tempfile
-from contextlib import contextmanager
-from itertools import cycle, product
-from pathlib import Path
-from typing import Generator, Iterator, Sequence
 
 import pytest
 
@@ -33,25 +33,22 @@ def config_generator(fast: int | bool = False) -> Generator[dict[str, str], None
         Dictionary of configuration options for each test case
     """
     cookiecutter_json: dict[str, list[str]] = json.load(
-        (CCDS_ROOT / "ccds.json").open("r")
+        (CCDS_ROOT / "ccds.json").open("r"),
     )
 
     running_py_version: str = f"{sys.version_info.major}.{sys.version_info.minor}"
-    py_version: list[tuple[str, str]] = [
-        ("python_version_number", v) for v in [running_py_version]
-    ]
+    py_version: list[tuple[str, str]] = [("python_version_number", v) for v in [running_py_version]]
 
-    configs: Iterator[tuple[tuple[str, str], ...]] = product(
-        py_version,
-        [
-            ("environment_manager", opt)
-            for opt in cookiecutter_json["environment_manager"]
-        ],
-        [("dependency_file", opt) for opt in cookiecutter_json["dependency_file"]],
-        [("pydata_packages", opt) for opt in cookiecutter_json["pydata_packages"]],
+    filtered_configs = list(
+        product(
+            py_version,
+            [("environment_manager", opt) for opt in cookiecutter_json["environment_manager"]],
+            [("dependency_file", opt) for opt in cookiecutter_json["dependency_file"]],
+            [("pydata_packages", opt) for opt in cookiecutter_json["pydata_packages"]],
+        )
     )
 
-    def _is_valid(config: Sequence[tuple[str, str]]) -> bool:
+    def _is_valid(config) -> bool:
         config_dict: dict[str, str] = dict(config)
         if (config_dict["dependency_file"] == "none") and (
             config_dict["environment_manager"] != "uv"
@@ -69,7 +66,7 @@ def config_generator(fast: int | bool = False) -> Generator[dict[str, str], None
         return True
 
     # remove invalid configs
-    configs = [c for c in configs if _is_valid(c)]
+    filtered_configs = [c for c in filtered_configs if _is_valid(c)]
 
     cycle_fields: list[str] = [
         "dataset_storage",
@@ -79,7 +76,7 @@ def config_generator(fast: int | bool = False) -> Generator[dict[str, str], None
     ]
     cyclers = {k: cycle(cookiecutter_json[k]) for k in cycle_fields}
 
-    for ind, c in enumerate(configs):
+    for ind, c in enumerate(filtered_configs):
         config = dict(c)
         config.update(default_args)
         # Alternate including the code scaffold

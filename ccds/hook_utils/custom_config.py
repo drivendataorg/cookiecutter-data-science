@@ -30,9 +30,7 @@ def write_custom_config(user_input_config):
         tmp_zip = test_path
 
     # check if user passed a url to a zip
-    elif user_input_config.startswith("http") and (
-        user_input_config.split(".")[-1] in ["zip"]
-    ):
+    elif user_input_config.startswith("http") and (user_input_config.split(".")[-1] in ["zip"]):
         tmp_zip, _ = urlretrieve(user_input_config)
 
     # assume it is a VCS uri and try to clone

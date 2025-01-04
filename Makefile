@@ -63,7 +63,9 @@ lint: ## Run linting checks with flake8, isort, and black
 docs-serve: ## Serve documentation locally on port $(DOCS_PORT)
 	cd docs && \
 	mkdocs serve -a localhost:$(DOCS_PORT) || \
-	echo "\n\nInstance found running on $(DOCS_PORT), try killing process and rerun."
+	( echo "\n\nInstance found running on $(DOCS_PORT). Here are the processes using this port:" && \
+	lsof -i :$(DOCS_PORT) && \
+	echo "\nTo kill a process, use: kill <PID>" )
 
 # Makes sure docs can be served prior to actually deploying
 docs-publish: ## Build and deploy documentation to GitHub Pagesa

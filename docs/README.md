@@ -1,20 +1,27 @@
-Generating the docs
-----------
+## Generating the docs
 
 Install development requirements:
 
-    pip install -r dev-requirements.txt
+```
+pip install -r dev-requirements.txt
+```
 
 Change directories into the docs folder:
 
-    cd docs
+```
+cd docs
+```
 
 Use [mkdocs](https://www.mkdocs.org/) structure to update the documentation. Test locally with:
 
-    uv run mkdocs serve
+```
+uv run mkdocs serve
+```
 
 Once the docs look good, publish to `gh-pages` branch with:
 
-    uv run mkdocs gh-deploy --clean
+```
+uv run mkdocs gh-deploy --clean
+```
 
-** Note **: Never edit the generated site by hand because using `gh-deploy` blows away the `gh-pages` branch and you'll lose your edits.
+\*\* Note \*\*: Never edit the generated site by hand because using `gh-deploy` blows away the `gh-pages` branch and you'll lose your edits.

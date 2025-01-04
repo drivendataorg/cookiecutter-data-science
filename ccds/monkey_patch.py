@@ -26,9 +26,7 @@ def _prompt_choice_and_subitems(cookiecutter_dict, env, key, options, no_input):
     else:
         selected = read_user_choice(key, rendered_options)
 
-    selected_item = [
-        list(c.values())[0] for c in options if list(c.keys())[0] == selected
-    ][0]
+    selected_item = [list(c.values())[0] for c in options if list(c.keys())[0] == selected][0]
 
     result[selected] = {}
 
@@ -44,7 +42,11 @@ def _prompt_choice_and_subitems(cookiecutter_dict, env, key, options, no_input):
             result[selected][subkey] = val
     elif isinstance(selected_item, list):
         val = prompt_choice_for_config(
-            cookiecutter_dict, env, selected, selected_item, no_input
+            cookiecutter_dict,
+            env,
+            selected,
+            selected_item,
+            no_input,
         )
         result[selected] = val
     elif isinstance(selected_item, str):
@@ -54,8 +56,7 @@ def _prompt_choice_and_subitems(cookiecutter_dict, env, key, options, no_input):
 
 
 def prompt_for_config(context, no_input=False):
-    """
-    Prompts the user to enter new config, using context as a source for the
+    """Prompts the user to enter new config, using context as a source for the
     field names and sample values.
     :param no_input: Prompt the user at command line for manual configuration?
     """
@@ -74,13 +75,21 @@ def prompt_for_config(context, no_input=False):
             if isinstance(raw, list):
                 if isinstance(raw[0], dict):
                     val = _prompt_choice_and_subitems(
-                        cookiecutter_dict, env, key, raw, no_input
+                        cookiecutter_dict,
+                        env,
+                        key,
+                        raw,
+                        no_input,
                     )
                     cookiecutter_dict[key] = val
                 else:
                     # We are dealing with a choice variable
                     val = prompt_choice_for_config(
-                        cookiecutter_dict, env, key, raw, no_input
+                        cookiecutter_dict,
+                        env,
+                        key,
+                        raw,
+                        no_input,
                     )
                     cookiecutter_dict[key] = val
             elif not isinstance(raw, dict):
@@ -92,7 +101,7 @@ def prompt_for_config(context, no_input=False):
 
                 cookiecutter_dict[key] = val
         except UndefinedError as err:
-            msg = "Unable to render variable '{}'".format(key)
+            msg = f"Unable to render variable '{key}'"
             raise UndefinedVariableInTemplate(msg, err, context)
 
     # Second pass; handle the dictionaries.
@@ -104,12 +113,13 @@ def prompt_for_config(context, no_input=False):
 
                 if not no_input:
                     val = read_user_dict(  # noqa: F821 referencable in patched context
-                        key, val
+                        key,
+                        val,
                     )
 
                 cookiecutter_dict[key] = val
         except UndefinedError as err:
-            msg = "Unable to render variable '{}'".format(key)
+            msg = f"Unable to render variable '{key}'"
             raise UndefinedVariableInTemplate(msg, err, context)
 
     return cookiecutter_dict

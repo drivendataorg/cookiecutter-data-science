@@ -9,12 +9,12 @@ Project structure and reproducibility is talked about more in the R research com
 
 Finally, a huge thanks to the [Cookiecutter](https://cookiecutter.readthedocs.org/en/latest/) project ([github](https://github.com/audreyr/cookiecutter)), which is helping us all spend less time thinking about and writing boilerplate and more time getting things done.
 
-
 ## Inspirations & Acknowledgments 🙏
 
 This project builds upon the excellent work of several established templates and projects, in some cases borrowing and adapting individual files:
 
 **[cookiecutter-data-science](https://github.com/drivendataorg/cookiecutter-data-science)** 📊
+
 - The original inspiration for this template
 - Established many best practices for data science project organization
 - Created by DrivenData, widely adopted in the data science community
