@@ -45,7 +45,7 @@ repos:
     rev: "v0.6.1"
     hooks:
       - id: biome-ci
-        additional_dependencies: ["@biomejs/biome@1.4.1"]
+        additional_dependencies: ["@biomejs/biome@1.9.4"]
 
   # - repo: https://github.com/python-jsonschema/check-jsonschema
   #   rev: 0.30.0
