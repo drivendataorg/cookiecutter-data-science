@@ -3,7 +3,7 @@
 import os
 import subprocess
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Union
 
 # ---------------------------------------------------------------------------- #
 #                                      Git                                     #
@@ -63,7 +63,7 @@ def _check_git_cli_installed() -> bool:
 
 
 def configure_github_repo(
-    directory: str | Path,
+    directory: Union[str, Path],
     repo_name: str,
     visibility: Literal["private", "public"] = "private",
 ) -> bool:

@@ -21,6 +21,7 @@ default_args: dict[str, str] = {
     "module_name": "project_module",
     "author_name": "DrivenData",
     "description": "A test project",
+    "version_control": "git (local)",
 }
 
 
