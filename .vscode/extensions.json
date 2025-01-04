@@ -87,7 +87,7 @@
 		"ms-python.black-formatter",
 		"ms-python.isort",
 		"ms-python.pylint",
-		
+
 		// Superceded by Pylance
 		"ms-pyright.pyright"
 	]

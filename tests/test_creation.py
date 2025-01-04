@@ -1,3 +1,5 @@
+# mypy: ignore-errors
+# ruff: noqa
 import json
 import os
 import sys
@@ -172,9 +174,7 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
 
     expected_dirs = {Path(d) for d in expected_dirs}
 
-    existing_dirs = {
-        d.resolve().relative_to(root) for d in root.glob("**") if d.is_dir()
-    }
+    existing_dirs = {d.resolve().relative_to(root) for d in root.glob("**") if d.is_dir()}
 
     checked_dirs = existing_dirs - ignored_dirs
 
@@ -205,6 +205,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         ".github/workflows/main.yml",
         ".github/workflows/on-release-main.yml",
         ".gitattributes",
+        ".pre-commit-config.yaml",
         "logs/.gitkeep",
         "data/external/.gitkeep",
         "data/interim/.gitkeep",
@@ -368,7 +369,7 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
         return True
     else:
         raise ValueError(
-            f"Environment manager '{config['environment_manager']}' not found in test harnesses."
+            f"Environment manager '{config['environment_manager']}' not found in test harnesses.",
         )
 
     result = run(
@@ -380,6 +381,7 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
         ],
         stderr=PIPE,
         stdout=PIPE,
+        check=False,
     )
 
     stdout_output, _ = _decode_print_stdout_stderr(result)
@@ -391,6 +393,8 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
 
     assert result.returncode == 0
 
+    return True
+
 
 def lint(root):
     """Run the linters on the project."""
@@ -399,6 +403,7 @@ def lint(root):
         cwd=root,
         stderr=PIPE,
         stdout=PIPE,
+        check=False,
     )
     _, _ = _decode_print_stdout_stderr(result)
 

@@ -1,3 +1,4 @@
+# ruff: noqa
 import json
 import re
 from pathlib import Path
@@ -19,7 +20,7 @@ def _table_header():
                 "Sub-field",
                 "Description",
                 "More information",
-            )
+            ),
         ),
         _table_row(["---"] * 4),
     ]
@@ -62,6 +63,10 @@ def _ccds_help_to_lookups(help, prefix="", out=None):
 def build_help_table_rows(data, help_lookup, lookup_prefix=""):
     body_items = []
     for top_key, top_value in data.items():
+        # Skip internal keys that start with underscore
+        if top_key.startswith("_"):
+            continue
+
         # top value is string, so it is just user entry
         if isinstance(top_value, str):
             item_help = help_lookup[f"{lookup_prefix}{top_key}"]
@@ -81,9 +86,7 @@ def build_help_table_rows(data, help_lookup, lookup_prefix=""):
             choices_help = help_lookup[f"{lookup_prefix}{top_key}"]
 
             default = (
-                list(top_value[0].keys())[0]
-                if isinstance(top_value[0], dict)
-                else top_value[0]
+                list(top_value[0].keys())[0] if isinstance(top_value[0], dict) else top_value[0]
             )
 
             section = _new_section(
@@ -109,8 +112,8 @@ def build_help_table_rows(data, help_lookup, lookup_prefix=""):
                                 "",
                                 item_help["description"],
                                 more_info,
-                            )
-                        )
+                            ),
+                        ),
                     )
                 elif isinstance(choice, dict):
                     choice_key = list(choice.keys())[0]
@@ -122,8 +125,8 @@ def build_help_table_rows(data, help_lookup, lookup_prefix=""):
                                 "",
                                 item_help["description"],
                                 item_help["more_information"],
-                            )
-                        )
+                            ),
+                        ),
                     )
 
                     # subfields
@@ -139,8 +142,8 @@ def build_help_table_rows(data, help_lookup, lookup_prefix=""):
                                         subfield_key,
                                         subfield_help["description"],
                                         subfield_help["more_information"],
-                                    )
-                                )
+                                    ),
+                                ),
                             )
 
         body_items += section + [""]
@@ -173,7 +176,8 @@ else:
         options_file = f.read()
 
     options_file = options_file.replace(
-        "<!-- configuration-table.py output -->", render_options_table()
+        "<!-- configuration-table.py output -->",
+        render_options_table(),
     )
 
     with mkdocs_gen_files.open("all-options.md", "w") as f:

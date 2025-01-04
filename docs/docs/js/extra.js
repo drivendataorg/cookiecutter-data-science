@@ -1,12 +1,12 @@
 /* Smooth scrolling for termynal replay */
 
 function scrollToBottomOfContainer(container, element) {
-  var positionToScroll =
-    element.offsetTop + element.offsetHeight - container.offsetHeight;
-  container.scrollTo({
-    top: positionToScroll,
-    behavior: "smooth",
-  });
+	const positionToScroll =
+		element.offsetTop + element.offsetHeight - container.offsetHeight;
+	container.scrollTo({
+		top: positionToScroll,
+		behavior: "smooth",
+	});
 }
 
 // Select the node that will be observed for mutations
@@ -17,9 +17,9 @@ const config = { attributes: false, childList: true, subtree: false };
 
 // Callback function to execute when mutations are observed
 const callback = (mutationList, observer) => {
-  for (const mutation of mutationList) {
-    scrollToBottomOfContainer(targetNode, mutation.target);
-  }
+	for (const mutation of mutationList) {
+		scrollToBottomOfContainer(targetNode, mutation.target);
+	}
 };
 
 // Create an observer instance linked to the callback function

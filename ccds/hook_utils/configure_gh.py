@@ -1,9 +1,10 @@
-import os
-import subprocess
-from pathlib import Path
-from typing import Literal
+# ruff: noqa
+"""Configures git or vcs repositories."""
 
-# TODO: Refactor this entirely, maybe use github module or something.
+import os
+from pathlib import Path
+import subprocess
+from typing import Literal
 
 
 def configure_github_repo(
@@ -12,8 +13,7 @@ def configure_github_repo(
     protection_type: Literal["none", "main", "main_and_dev"],
     no_github: bool = False,
 ) -> bool:
-    """
-    Configure a Git repository locally and optionally on GitHub with specified branch protections.
+    """Configure a Git repository locally and optionally on GitHub with specified branch protections.
 
     Args:
         directory: Directory where the repository will be created or updated
@@ -36,7 +36,7 @@ def configure_github_repo(
 
         if not repo_name.replace("-", "").replace("_", "").isalnum():
             raise ValueError(
-                "Invalid repository name. Use only letters, numbers, underscores, and hyphens."
+                "Invalid repository name. Use only letters, numbers, underscores, and hyphens.",
             )
 
         # Check for gh CLI if needed
@@ -44,7 +44,7 @@ def configure_github_repo(
             if not _check_gh_cli():
                 raise RuntimeError(
                     "gh CLI is required but not installed or not authenticated. "
-                    "Use no_github=True to skip GitHub operations."
+                    "Use no_github=True to skip GitHub operations.",
                 )
 
         # Change to specified directory
@@ -75,7 +75,7 @@ def configure_github_repo(
             # Create or update GitHub repository
             if not _github_repo_exists(github_username, repo_name):
                 _run_gh_command(
-                    f"repo create {repo_name} --private --source=. --remote=origin --push"
+                    f"repo create {repo_name} --private --source=. --remote=origin --push",
                 )
             else:
                 remote_url = f"git@github.com:{github_username}/{repo_name}.git"
@@ -102,7 +102,7 @@ def configure_github_repo(
             else:
                 print(
                     "Warning: Branch protections can only be set for public repositories "
-                    "or with a GitHub Pro account."
+                    "or with a GitHub Pro account.",
                 )
 
             print("Repository configuration complete on GitHub!")
@@ -172,7 +172,9 @@ def _github_repo_exists(username: str, repo_name: str) -> bool:
 def _is_repo_public(username: str, repo_name: str) -> bool:
     """Check if a GitHub repository is public."""
     result = _run_gh_command(
-        f"api repos/{username}/{repo_name} -q .private", capture_output=True, text=True
+        f"api repos/{username}/{repo_name} -q .private",
+        capture_output=True,
+        text=True,
     )
     return result.stdout.strip() == "false"
 
@@ -192,5 +194,5 @@ def _set_branch_protection(username: str, repo_name: str, branch: str) -> None:
         f"-f required_status_checks='{protection_data['required_status_checks']}' "
         f"-f enforce_admins={protection_data['enforce_admins']} "
         f"-f required_pull_request_reviews='{protection_data['required_pull_request_reviews']}' "
-        f"-f restrictions={protection_data['restrictions']}"
+        f"-f restrictions={protection_data['restrictions']}",
     )

@@ -2,14 +2,16 @@
 
 VSCode and Cursor are very popular IDEs and GOTem treats them as equally important as the rest of the project configuration if you choose to take advantage of them. All files and settings mentioned here are located in `{{ cookiecutter.repo_name }}/.vscode`.
 
-
 ## 01 code-workspace
 
-There are two [code-workspace files](https://code.visualstudio.com/docs/editor/workspaces) available, one for a team configuration 
+There are two [code-workspace files](https://code.visualstudio.com/docs/editor/workspaces) available, one for a team configuration
+
 <!-- (later this may become an "unnamed" workspace setup) -->
+
 and one for your personal workspace-level configuration. The team one is meant to be synced while each individual may have a personal one if they decide to use different settings. This way your team can share debug configurations, task setups, special settings, extension recommendations, and more.
 
 The workspace file, as opposed to a single-folder workspace, has the added benefit of [supporting multiple roots](https://code.visualstudio.com/docs/editor/workspaces#_what-is-the-benefit-of-multiroot-workspace-over-a-folder).
+
 <!-- TODO: Explain -->
 
 ### 01.01 Workspace Project Manager
@@ -33,8 +35,8 @@ Add the object below to your projects.json file to add this project
 ![VSCode Projects](./vscode-projects.png)
 _An example of my project manager projects_
 
-
 ## 02 Folders
+
 Here you can configure any additional folders you'd like to add to your workspace including remote folders, other repositories, etc.
 
 ```json
@@ -56,6 +58,7 @@ Here you can configure any additional folders you'd like to add to your workspac
 ```
 
 ## 03 Settings
+
 This is where your team can share specific vscode settings for consitency. For example: Path to your SSH config file, auto-formatting on save, and more. The bulk of the current existing settings are files that are okay to be ignored in the file explorer since you never directly edit them (ex: `.git` directory, build files, or cache files)
 
 ```json
@@ -319,4 +322,4 @@ You can find other templates for cursor rules files across the internet, a popul
 More info on the rules [here](https://medium.com/@ashinno43/what-are-cursor-rules-and-how-to-use-them-ec558468d139)
 
 To use this file you first need to enable it:
-1. 
+1\.

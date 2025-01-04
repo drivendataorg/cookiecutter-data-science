@@ -2,7 +2,7 @@
 	"folders": [
 		{
 			"name": "root",
-			"path": "..",
+			"path": ".."
 		},
 		{
 			"name": "manual test",
@@ -11,7 +11,7 @@
 		{
 			"name": "cookiecutter",
 			"path": "/Users/gat/.config/cookiecutter"
-		},
+		}
 	],
 	"settings": {
 		"workbench.colorCustomizations": {
@@ -25,10 +25,10 @@
 			"titleBar.activeForeground": "#F6FAFF"
 		},
 		"search.exclude": {
-            "**/cookiecutter/cookiecutters/**": true  // This will exclude the cookiecutter folder from search
-        },
+			"**/cookiecutter/cookiecutters/**": true // This will exclude the cookiecutter folder from search
+		},
 		"files.exclude": {
-			"**/.git": true,
+			"**/.git": false,
 			"**/.svn": false,
 			"**/.hg": false,
 			"**/CVS": false,
@@ -68,7 +68,7 @@
 		"ruff.enable": true,
 		"ruff.organizeImports": true,
 		"ruff.fixAll": true,
-		"ruff.lint.run": "onSave",
+		"ruff.lint.run": "onSave"
 	},
 	"tasks": {
 		"version": "2.0.0",
@@ -89,5 +89,5 @@
 				"problemMatcher": "$msCompile"
 			}
 		]
-	},
+	}
 }

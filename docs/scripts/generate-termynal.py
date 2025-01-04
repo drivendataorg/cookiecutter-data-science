@@ -1,3 +1,4 @@
+# ruff: noqa
 import shutil
 from pathlib import Path
 
@@ -82,7 +83,7 @@ def render_termynal():
 
     conv = Ansi2HTMLConverter(inline=True)
     html_lines = [
-        '<div id="termynal" data-termynal class="termy" data-ty-macos data-ty-lineDelay="100" data-ty-typeDelay="50" title="Cookiecutter Data Science">'
+        '<div id="termynal" data-termynal class="termy" data-ty-macos data-ty-lineDelay="100" data-ty-typeDelay="50" title="Cookiecutter Data Science">',
     ]
     result_collector = []
 
@@ -91,7 +92,7 @@ def render_termynal():
         if result.startswith("$"):
             result = conv.convert(result.strip("$"), full=False)
             html_lines.append(
-                f'<span data-ty="input" data-ty-prompt="$">{result}</span>'
+                f'<span data-ty="input" data-ty-prompt="$">{result}</span>',
             )
 
         # style inline cookiecutter user inputs
@@ -99,7 +100,8 @@ def render_termynal():
             # treat all the options that were output as a single block
             if len(result_collector) > 1:
                 prev_results = conv.convert(
-                    "\n".join(result_collector[:-1]), full=False
+                    "\n".join(result_collector[:-1]),
+                    full=False,
                 )
                 html_lines.append(f"<span data-ty>{prev_results}</span>")
 
@@ -119,7 +121,9 @@ def render_termynal():
             try:
                 _, user_input = next(script)
             except StopIteration:
-                user_input = "STOP ITER"  # never true so we just capture the remaining rows after the script
+                user_input = (
+                    "STOP ITER"  # never true so we just capture the remaining rows after the script
+                )
 
         # collect all the other lines for a single output
         else:
@@ -130,7 +134,8 @@ def render_termynal():
 
     # replace local directory in ccds call with URL so it can be used for documentation
     output = output.replace(
-        str(CCDS_ROOT), "https://github.com/drivendataorg/cookiecutter-data-science"
+        str(CCDS_ROOT),
+        "https://github.com/drivendataorg/cookiecutter-data-science",
     )
     return output
 
