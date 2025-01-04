@@ -111,7 +111,7 @@ manual-test-debug: _prep _clean_manual_test ## Run manual tests with debugger
 
 ###     GIT HOOKS
 
-pre-commit-test: ## Test hooks
+pre-commit-test: ## Test pre-commit hooks
 	pre-commit run --all-files
 	git add .pre-commit-config.yaml
 	pre-commit run commitizen --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
