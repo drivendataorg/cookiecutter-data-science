@@ -60,13 +60,13 @@ repos:
       - id: validate-pyproject
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
-  # - repo: https://github.com/hukkin/mdformat
-  #   rev: 0.7.21
-  #   hooks:
-  #     - id: mdformat
-  #       additional_dependencies:
-  #         - mdformat-gfm
-  #         - mdformat-black
+  - repo: https://github.com/hukkin/mdformat
+    rev: 0.7.21
+    hooks:
+      - id: mdformat
+        additional_dependencies:
+          - mdformat-gfm
+          - mdformat-black
 
   # - repo: https://github.com/nbQA-dev/nbQA
   #   rev: 1.9.1
