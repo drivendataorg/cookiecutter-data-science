@@ -7,9 +7,13 @@ exclude: |
       .*venv.*/.*|        # Exclude virtual environment directories
   )$
 fail_fast: true
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+  - pre-push
 repos:
   # ---------------------------------------------------------------------------- #
-  #                                Standard Hooks                                  #
+  #                                Standard Hooks                                #
   # ---------------------------------------------------------------------------- #
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
@@ -101,20 +105,7 @@ repos:
           - prettier@3.4.2
 
   # ---------------------------------------------------------------------------- #
-  #                              Commit Quality                                    #
-  # ---------------------------------------------------------------------------- #
-
-  - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.1.0
-    hooks:
-      - id: commitizen
-        stages: [commit-msg]
-      - id: commitizen-branch
-        stages: [pre-push]
-        args: ["--rev-range", "origin/main..", "--strict"]
-
-  # ---------------------------------------------------------------------------- #
-  #                                   Security                                     #
+  #                                   Security                                   #
   # ---------------------------------------------------------------------------- #
   # - repo: https://github.com/gitleaks/gitleaks
   #   rev: v8.22.1
@@ -122,7 +113,7 @@ repos:
   #     - id: gitleaks
 
   # ---------------------------------------------------------------------------- #
-  #                                Local Tools                                     #
+  #                                Local Tools                                   #
   # ---------------------------------------------------------------------------- #
   # - repo: local
   #   hooks:
@@ -131,3 +122,17 @@ repos:
   #       entry: make
   #       args: ["lint"]
   #       language: system
+
+  # ---------------------------------------------------------------------------- #
+  #                              Commit Quality                                  #
+  # ---------------------------------------------------------------------------- #
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.1.0
+    hooks:
+      # Test w/ pre-commit run commitizen --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
+      - id: commitizen
+        stages: [commit-msg]
+      # Test w/ pre-commit
+      - id: commitizen-branch
+        stages: [pre-push]
+        args: ["--rev-range", "origin/master..", "--strict"]

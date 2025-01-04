@@ -169,7 +169,7 @@ gatlens-opinionated-template = { workspace = true }
 # ---------------------------------------------------------------------------- #
 
 [tool.commitizen]
-name = "cz_conventional_commits"
+# name = "cz_conventional_commits"
 tag_format = "v$version"
 version_scheme = "semver2"
 version_provider = "pep621"

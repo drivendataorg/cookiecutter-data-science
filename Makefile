@@ -113,7 +113,7 @@ manual-test-debug: _prep _clean_manual_test ## Run manual tests with debugger
 
 pre-commit-update: ## Update, install, and test hooks w/ new config
 	pre-commit autoupdate
-	pre-commit install --install-hooks
+	pre-commit install
 	pre-commit run --all-files
 
 ###     HELP

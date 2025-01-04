@@ -28,7 +28,7 @@
 			"**/cookiecutter/cookiecutters/**": true // This will exclude the cookiecutter folder from search
 		},
 		"files.exclude": {
-			"**/.git": true,
+			"**/.git": false,
 			"**/.svn": false,
 			"**/.hg": false,
 			"**/CVS": false,
