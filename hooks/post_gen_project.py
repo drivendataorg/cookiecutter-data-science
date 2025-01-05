@@ -6,7 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from ccds.hook_utils.configure_gh import configure_github_repo
+from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_repo
 
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
@@ -100,18 +100,25 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
 #  GATLEN'S UPLOAD TO GITHUB REPO CODE
 #
 
-# {% if cookiecutter.use_github == "Yes" %}
-configure_github_repo(
-    directory=Path.cwd(),
-    repo_name="{{ cookiecutter.repo_name }}",
-    protection_type="main_and_dev",
-    no_github=False,
-)
-# {% endif %}
-
 # Install the virtual environment (uv only for now)
 # {% if cookiecutter.environment_manager == "uv" %}
 os.chdir(Path.cwd())
 subprocess.run(["make", "create_environment"], check=False)  # noqa: S603, S607
 subprocess.run(["make", "requirements"], check=False)  # noqa: S603, S607
+# {% endif %}
+
+#
+#  VERSION CONTROL
+#
+
+# {% if cookiecutter.version_control == "git (local)" %}
+init_local_git_repo(directory=Path.cwd())
+# {% elif cookiecutter.version_control == "git (github private)" %}
+configure_github_repo(
+    directory=Path.cwd(), repo_name="{{ cookiecutter.repo_name }}", visibility="private"
+)
+# {% elif cookiecutter.version_control == "git (github public)" %}
+configure_github_repo(
+    directory=Path.cwd(), repo_name="{{ cookiecutter.repo_name }}", visibility="public"
+)
 # {% endif %}

@@ -328,24 +328,75 @@
 		]
 	},
 	{
-		"field": "use_github",
+		"field": "version_control",
 		"help": {
-			"description": "Use your stored GitHub credentials to upload to your project as a private repo.",
+			"description": "What kind of version control system (vcs) and repository host to use.",
 			"more_information": ""
 		},
 		"choices": [
 			{
-				"choice": "Yes",
+				"choice": "none",
 				"help": {
-					"description": "Git instantiated into repo and uploaded to GitHub",
+					"description": "No version control.",
 					"more_information": ""
 				}
 			},
 			{
-				"choice": "No",
+				"choice": "git (local)",
 				"help": {
-					"description": "No VCS/Git instantiation.",
-					"more_information": ""
+					"description": "Initialize project as a local git repository.",
+					"more_information": "[Git CLI](https://git-scm.com/downloads) Required"
+				}
+			},
+			{
+				"choice": "git (github private)",
+				"help": {
+					"description": "Initialize project and upload to GitHub as a **private** repo.",
+					"more_information": "[Git CLI](https://git-scm.com/downloads) + [GitHub CLI](https://cli.github.com/) & [Auth](https://cli.github.com/manual/gh_auth_login) Required"
+				}
+			},
+			{
+				"choice": "git (github public)",
+				"help": {
+					"description": "Initialize project and upload to GitHub as a **public** repo.",
+					"more_information": "[Git CLI](https://git-scm.com/downloads) + [GitHub CLI](https://cli.github.com/) & [Auth](https://cli.github.com/manual/gh_auth_login) Required"
+				}
+			}
+		]
+	},
+	{
+		"field": "dependency_file",
+		"help": {
+			"description": "Where to track project-specific dependencies; often paired with specific environment manager.",
+			"more_information": ""
+		},
+		"choices": [
+			{
+				"choice": "none",
+				"help": {
+					"description": "Create no dependency file, relying solely on `pyproject.toml`",
+					"more_information": "[pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)"
+				}
+			},
+			{
+				"choice": "requirements.txt",
+				"help": {
+					"description": "Most general, least feature-rich format for use with `pip`.",
+					"more_information": "[pip docs](https://pip.pypa.io/en/stable/reference/requirements-file-format/)"
+				}
+			},
+			{
+				"choice": "environment.yml",
+				"help": {
+					"description": "Format used by `conda`.",
+					"more_information": "[Docs](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#sharing-an-environment)"
+				}
+			},
+			{
+				"choice": "Pipfile",
+				"help": {
+					"description": "Format used by Pipenv",
+					"more_information": "[Docs](https://pipenv.pypa.io/en/latest/pipfile.html)"
 				}
 			}
 		]

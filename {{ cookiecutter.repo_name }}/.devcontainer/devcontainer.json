@@ -1,55 +1,55 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-  "name": "{{ cookiecutter.repo_name }}",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
-  "features": {
-    "ghcr.io/dhoeric/features/act:1": {},
-    "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
-  },
-  // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
-  // Configure tool-specific properties.
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        // Python Development
-        "ms-python.python", // Python Environments, Language, and More
-        "ms-python.vscode-pylance", // Python Language Server w/ Typing
-        "ms-python.debugpy", // VSCode Python Debugger
-        "charliermarsh.ruff", // Fast Python Linter & Formatter
-        "njpwerner.autodocstring", // Automatically generate Python docstrings
-        "rodolphebarbanneau.python-docstring-highlighter", // Highlight Python docstring syntax
-        "kevinrose.vsc-python-indent", // Correct indents for python
-        // Data Science & Notebooks
-        "ms-toolsai.jupyter", // Jupyter Notebooks in VSCode
-        "ms-toolsai.jupyter-renderers", // Jupyter Cell Output Renderer
-        "mechatroner.rainbow-csv", // Color-coded CSV Columns
-        "sbsnippets.pytorch-snippets", // Snippits for PyTorch
-        // Shell & Command Line
-        "mads-hartmann.bash-ide-vscode", // .*sh script language support
-        "timonwong.shellcheck", // .*sh script linting
-        "foxundermoon.shell-format", // .*sh script formatting
-        // Remote Development
-        "ms-vscode-remote.remote-containers", // Remote Connect to Docker
-        "ms-vscode-remote.remote-ssh", // Remote Connect via SSH
-        "ms-vscode-remote.remote-ssh-edit", // SSH Config File Editing
-        // Document Formats & Preview
-        "mathematic.vscode-pdf", // PDF Preview
-        "vitaliymaz.vscode-svg-previewer", // SVG Preview
-        "ctcuff.font-preview", // Font PReview
-        "james-yu.latex-workshop", // LaTeX File Renderer for Documents
-        "shd101wyy.markdown-preview-enhanced", // Improved Markdown Preview
-        // Code Formatting & Style
-        "esbenp.prettier-vscode", // Prettier general formatting tool
-        "mrmlnc.vscode-attrs-sorter", // HTML Attribute Sorter
-        "richie5um2.vscode-sort-json", // JSON Sorter
-        "2gua.rainbow-brackets", // Multi-colored brackets for readability
-        "aaron-bond.better-comments", // Comments w/ Styling
-        // Project Management & Navigation
-        "alefragnani.project-manager", // Manage VSCode Workspaces
-        /* Add the below to your projects.json file to add this project
+	"name": "{{ cookiecutter.repo_name }}",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
+	"features": {
+		"ghcr.io/dhoeric/features/act:1": {},
+		"ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
+	},
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "./.devcontainer/postCreateCommand.sh",
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				// Python Development
+				"ms-python.python", // Python Environments, Language, and More
+				"ms-python.vscode-pylance", // Python Language Server w/ Typing
+				"ms-python.debugpy", // VSCode Python Debugger
+				"charliermarsh.ruff", // Fast Python Linter & Formatter
+				"njpwerner.autodocstring", // Automatically generate Python docstrings
+				"rodolphebarbanneau.python-docstring-highlighter", // Highlight Python docstring syntax
+				"kevinrose.vsc-python-indent", // Correct indents for python
+				// Data Science & Notebooks
+				"ms-toolsai.jupyter", // Jupyter Notebooks in VSCode
+				"ms-toolsai.jupyter-renderers", // Jupyter Cell Output Renderer
+				"mechatroner.rainbow-csv", // Color-coded CSV Columns
+				"sbsnippets.pytorch-snippets", // Snippits for PyTorch
+				// Shell & Command Line
+				"mads-hartmann.bash-ide-vscode", // .*sh script language support
+				"timonwong.shellcheck", // .*sh script linting
+				"foxundermoon.shell-format", // .*sh script formatting
+				// Remote Development
+				"ms-vscode-remote.remote-containers", // Remote Connect to Docker
+				"ms-vscode-remote.remote-ssh", // Remote Connect via SSH
+				"ms-vscode-remote.remote-ssh-edit", // SSH Config File Editing
+				// Document Formats & Preview
+				"mathematic.vscode-pdf", // PDF Preview
+				"vitaliymaz.vscode-svg-previewer", // SVG Preview
+				"ctcuff.font-preview", // Font PReview
+				"james-yu.latex-workshop", // LaTeX File Renderer for Documents
+				"shd101wyy.markdown-preview-enhanced", // Improved Markdown Preview
+				// Code Formatting & Style
+				"esbenp.prettier-vscode", // Prettier general formatting tool
+				"mrmlnc.vscode-attrs-sorter", // HTML Attribute Sorter
+				"richie5um2.vscode-sort-json", // JSON Sorter
+				"2gua.rainbow-brackets", // Multi-colored brackets for readability
+				"aaron-bond.better-comments", // Comments w/ Styling
+				// Project Management & Navigation
+				"alefragnani.project-manager", // Manage VSCode Workspaces
+				/* Add the below to your projects.json file to add this project
 		'~/Library/Application Support/Cursor/User/globalStorage/alefragnani.project-manager/projects.json'
 		{
 			"name": "🍪 {{ cookiecutter.repo_name }}",
@@ -60,35 +60,35 @@
 			"enabled": true
 		},
 		*/
-        "peterschmalfeldt.explorer-exclude", // Keep Explorer Clean by Hiding Files
-        "christian-kohler.path-intellisense", // Path Intellisense
-        "kisstkondoros.vscode-gutter-preview", // Image Preview
-        // Git & Version Control
-        "eamodio.gitlens", // View git diffs, edits, branches and more
-        // TODO: Add cookiecutter template types, include if web only
-        // API Development
-        "humao.rest-client", // Easily make HTTP queries for API testing
-        // Build Tools
-        "ms-vscode.makefile-tools", // Tools for Makefiles
-        "task.vscode-task", // Tools for Taskfiles
-        // Configuration Files
-        "dotenv.dotenv-vscode", // .env language support
-        "redhat.vscode-yaml", // .yaml language support
-        "redhat.vscode-xml", // .xml language support
-        // Output & Debugging
-        "ibm.output-colorizer", // Automatically color-code VSCode Output logs
-        "usernamehw.errorlens",
-        "spmeesseman.vscode-taskexplorer" // Highlight errors in-line
-      ],
-      "settings": {
-        // {#- This needs to be properly configured #}
-        "dotfiles.repository": "https://github.com/GatlenCulp/dotfiles.git",
-        "python.testing.pytestArgs": ["tests"],
-        "python.testing.unittestEnabled": false,
-        "python.testing.pytestEnabled": true,
-        "python.defaultInterpreterPath": "/workspaces/{{ cookiecutter.repo_name }}/.venv/bin/python",
-        "python.testing.pytestPath": "/workspaces/{{ cookiecutter.repo_name }}/.venv/bin/pytest"
-      }
-    }
-  }
+				"peterschmalfeldt.explorer-exclude", // Keep Explorer Clean by Hiding Files
+				"christian-kohler.path-intellisense", // Path Intellisense
+				"kisstkondoros.vscode-gutter-preview", // Image Preview
+				// Git & Version Control
+				"eamodio.gitlens", // View git diffs, edits, branches and more
+				// TODO: Add cookiecutter template types, include if web only
+				// API Development
+				"humao.rest-client", // Easily make HTTP queries for API testing
+				// Build Tools
+				"ms-vscode.makefile-tools", // Tools for Makefiles
+				"task.vscode-task", // Tools for Taskfiles
+				// Configuration Files
+				"dotenv.dotenv-vscode", // .env language support
+				"redhat.vscode-yaml", // .yaml language support
+				"redhat.vscode-xml", // .xml language support
+				// Output & Debugging
+				"ibm.output-colorizer", // Automatically color-code VSCode Output logs
+				"usernamehw.errorlens",
+				"spmeesseman.vscode-taskexplorer" // Highlight errors in-line
+			],
+			"settings": {
+				// {#- This needs to be properly configured #}
+				"dotfiles.repository": "https://github.com/GatlenCulp/dotfiles.git",
+				"python.testing.pytestArgs": ["tests"],
+				"python.testing.unittestEnabled": false,
+				"python.testing.pytestEnabled": true,
+				"python.defaultInterpreterPath": "/workspaces/{{ cookiecutter.repo_name }}/.venv/bin/python",
+				"python.testing.pytestPath": "/workspaces/{{ cookiecutter.repo_name }}/.venv/bin/pytest"
+			}
+		}
+	}
 }

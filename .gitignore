@@ -8,6 +8,7 @@ manual_test/
 .history
 
 # other local dev info
+.history/
 # .vscode/
 
 # Mac OS-specific storage files
@@ -15,6 +16,9 @@ manual_test/
 Icon?
 Icon
 Icon[\r]
+
+# ruff
+.ruff_cache/
 
 # vim
 *.swp
