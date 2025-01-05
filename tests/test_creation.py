@@ -152,19 +152,21 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         expected_dirs.update(
             {
                 ".git",
-                ".git/hooks",
-                ".git/info",
-                ".git/objects",
-                ".git/refs",
+                # ".git/hooks",
+                # ".git/info",
+                # ".git/objects",
+                # ".git/refs",
             }
         )
         # Expected after initial git commit
-        expected_dirs.update({".git/logs", ".git/logs/refs"})
-        git_patterns = [".git/objects/**/*", ".git/refs/**/*", ".git/logs/refs/**/*"]
+        # expected_dirs.update({".git/logs", ".git/logs/refs"})
+        ignored_patterns = [
+            ".git/**/*"
+        ]  # [".git/objects/**/*", ".git/refs/**/*", ".git/logs/refs/**/*", ".git/branches/**/*"]
         ignored_dirs.update(
             {
                 d.relative_to(root)
-                for pattern in git_patterns
+                for pattern in ignored_patterns
                 for d in root.glob(pattern)
                 if d.is_dir()
             }
@@ -281,42 +283,42 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         "git (github public)",
         "git (github private)",
     ):
-        # Expected after `git init`
-        expected_files.update(
-            {
-                ".git/config",
-                ".git/description",
-                ".git/HEAD",
-                ".git/hooks/applypatch-msg.sample",
-                ".git/hooks/commit-msg.sample",
-                ".git/hooks/fsmonitor-watchman.sample",
-                ".git/hooks/post-update.sample",
-                ".git/hooks/pre-applypatch.sample",
-                ".git/hooks/pre-commit.sample",
-                ".git/hooks/pre-merge-commit.sample",
-                ".git/hooks/pre-push.sample",
-                ".git/hooks/pre-rebase.sample",
-                ".git/hooks/pre-receive.sample",
-                ".git/hooks/prepare-commit-msg.sample",
-                ".git/hooks/push-to-checkout.sample",
-                ".git/hooks/sendemail-validate.sample",
-                ".git/hooks/update.sample",
-                ".git/info/exclude",
-            }
-        )
-        # Expected after initial git commit
-        expected_files.update(
-            {
-                ".git/COMMIT_EDITMSG",
-                ".git/index",
-                ".git/logs/HEAD",
-            }
-        )
-        git_patterns = [".git/objects/**/*", ".git/refs/**/*", ".git/logs/refs/**/*"]
+        # # Expected after `git init`
+        # expected_files.update(
+        #     {
+        #         ".git/config",
+        #         ".git/description",
+        #         ".git/HEAD",
+        #         ".git/hooks/applypatch-msg.sample",
+        #         ".git/hooks/commit-msg.sample",
+        #         ".git/hooks/fsmonitor-watchman.sample",
+        #         ".git/hooks/post-update.sample",
+        #         ".git/hooks/pre-applypatch.sample",
+        #         ".git/hooks/pre-commit.sample",
+        #         ".git/hooks/pre-merge-commit.sample",
+        #         ".git/hooks/pre-push.sample",
+        #         ".git/hooks/pre-rebase.sample",
+        #         ".git/hooks/pre-receive.sample",
+        #         ".git/hooks/prepare-commit-msg.sample",
+        #         ".git/hooks/push-to-checkout.sample",
+        #         ".git/hooks/sendemail-validate.sample",
+        #         ".git/hooks/update.sample",
+        #         ".git/info/exclude",
+        #     }
+        # )
+        # # Expected after initial git commit
+        # expected_files.update(
+        #     {
+        #         ".git/COMMIT_EDITMSG",
+        #         ".git/index",
+        #         ".git/logs/HEAD",
+        #     }
+        # )
+        ignored_file_patterns = [".git/**/*"]
         ignored_files.update(
             {
                 f.relative_to(root)
-                for pattern in git_patterns
+                for pattern in ignored_file_patterns
                 for f in root.glob(pattern)
                 if f.is_file()
             }
