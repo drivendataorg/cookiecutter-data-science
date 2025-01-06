@@ -95,6 +95,15 @@ repos:
           - mdformat-frontmatter
           - ruff
 
+  ### PNG Images ###
+  - repo: https://github.com/shssoichiro/oxipng
+    name:
+    rev: v9.1.3
+    hooks:
+      - id: oxipng
+        name: "🖼️ images · Optimize PNG files"
+        args: ["-o", "4", "--strip", "safe", "--alpha"]
+
   ### Additional File Types ###
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v4.0.0-alpha.8
