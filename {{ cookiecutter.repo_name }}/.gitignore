@@ -1,19 +1,24 @@
-# Environments and Secrets
-.venv
-venv/
+# generated docs items
+docs/site/
+docs/docs/_partials/termynal.md
+docs/docs/_partials/*/*.html
 
-# Ignore everything in secrets directory
-secrets/*
+# test cache
+manual_test/
+.history
 
-# But don't ignore the schema directory
-!secrets/schema/
-!secrets/schema/**
-
-# Data
-/data/
+# other local dev info
+.history/
+# .vscode/
 
 # Mac OS-specific storage files
 .DS_Store
+Icon?
+Icon
+Icon[\r]
+
+# ruff
+.ruff_cache/
 
 # vim
 *.swp
@@ -72,6 +77,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+.ruff_cache/
 cover/
 
 # Translations
@@ -90,9 +96,6 @@ instance/
 
 # Scrapy stuff:
 .scrapy
-
-# MkDocs documentation
-docs/site/
 
 # PyBuilder
 .pybuilder/
@@ -142,7 +145,7 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
-# Environments
+# Environments and Secrets
 .env
 .venv
 env/
