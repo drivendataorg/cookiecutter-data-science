@@ -42,9 +42,12 @@ requirements: ## Install Python dependencies
 	pip install -r dev-requirements.txt
 
 ## Format the code using isort and black
+# format: ## Format code using isort and black
+# 	isort --profile black ccds hooks tests docs/scripts
+# 	black ccds hooks tests docs/scripts
+
 format: ## Format code using isort and black
-	isort --profile black ccds hooks tests docs/scripts
-	black ccds hooks tests docs/scripts
+	ruff format hooks docs/scripts
 
 # lint: ## Run linting checks with flake8, isort, and black
 # 	flake8 ccds hooks tests docs/scripts

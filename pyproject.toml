@@ -7,7 +7,7 @@ name = "ccds"
 
 [project]
 name = "gatlens-opinionated-template"
-version = "0.0.6"
+version = "0.0.7"
 description = "A modern, opinionated full-stack CookieCutter project template that prioritizes developer experience and cutting-edge tools."
 authors = [
   { name = "Gatlen Culp", email = "GatlenCulp@gmail.com" },
@@ -30,12 +30,11 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 # Using 3.10 to ensure compatability
-requires-python = ">=3.10,<3.11"
+requires-python = ">=3.10,<4"
 dependencies = [
     "click>=8.1.0",
     "cookiecutter>=2.6.0",
     "ipykernel>=6.29.5",
-    "mdformat-frontmatter>=2.0.8",
 ]
 
 [project.scripts]
@@ -54,10 +53,12 @@ dev = [
     "cz-conventional-gitmoji>=0.6.1",
     "flake8>=5.0.4",
     "isort>=5.13.2",
+    "mdformat-frontmatter>=2.0.8",
     "mkdocs>=1.6.1",
     "mkdocs-gen-files>=0.5.0",
     "mkdocs-include-markdown-plugin>=6.2.2",
     "mkdocs-material>=9.5.49",
+    "mypy>=1.14.1",
     "pexpect>=4.9.0",
     "pipenv>=2024.4.0",
     "pre-commit>=3.5.0",
@@ -73,6 +74,10 @@ dev = [
     "virtualenvwrapper-win>=1.2.7 ; sys_platform == 'win32'",
     "commitizen>=4.1.0",
     "nbqa>=1.9.1",
+    "validate-pyproject>=0.23",
+    "mdformat>=0.7.21",
+    "mdformat-gfm>=0.4.1",
+    "mdformat-ruff>=0.1.3",
 ]
 
 # ---------------------------------------------------------------------------- #
