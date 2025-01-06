@@ -115,10 +115,14 @@ subprocess.run(["make", "requirements"], check=False)  # noqa: S603, S607
 init_local_git_repo(directory=Path.cwd())
 # {% elif cookiecutter.version_control == "git (github private)" %}
 configure_github_repo(
-    directory=Path.cwd(), repo_name="{{ cookiecutter.repo_name }}", visibility="private"
+    directory=Path.cwd(),
+    repo_name="{{ cookiecutter.repo_name }}",
+    visibility="private",
 )
 # {% elif cookiecutter.version_control == "git (github public)" %}
 configure_github_repo(
-    directory=Path.cwd(), repo_name="{{ cookiecutter.repo_name }}", visibility="public"
+    directory=Path.cwd(),
+    repo_name="{{ cookiecutter.repo_name }}",
+    visibility="public",
 )
 # {% endif %}
