@@ -83,6 +83,7 @@ repos:
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.9.1
     hooks:
+      # STRICT
       - id: nbqa-mypy
         name: "📓 notebook · Type-check cells"
       - id: nbqa
