@@ -11,9 +11,9 @@
 		{ "s3": { "bucket": "bucket-name", "aws_profile": "default" } },
 		{ "gcs": { "bucket": "bucket-name" } }
 	],
-	"environment_manager": ["none", "virtualenv", "conda", "pipenv"],
+	"environment_manager": ["uv", "none", "virtualenv", "conda", "pipenv"],
 	"dependency_file": ["requirements.txt", "environment.yml", "Pipfile"],
-	"pydata_packages": ["none", "basic"],
+	"pydata_packages": ["basic", "none"],
 	"open_source_license": ["No license file", "MIT", "BSD-3-Clause"],
 	"docs": ["mkdocs", "none"],
 	"include_code_scaffold": [
@@ -26,8 +26,8 @@
 		"course"
 	],
 	"version_control": [
-		"none",
 		"git (local)",
+		"none",
 		"git (github private)",
 		"git (github public)"
 	],

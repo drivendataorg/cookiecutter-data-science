@@ -125,6 +125,10 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
 
     ignored_dirs = set()
 
+    if config["environment_manager"] == "uv":
+        expected_dirs.add(".venv")
+        ignored_dirs.update({d.relative_to(root) for d in root.glob(".venv/**/*") if d.is_dir()})
+
     if config["include_code_scaffold"] != "No":
         expected_dirs.add(f"{config['module_name']}/_ai")
         expected_dirs.add(f"{config['module_name']}/_ai/modeling")
@@ -277,6 +281,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
 
     if config["environment_manager"] == "uv":
         expected_files.add("uv.lock")
+        ignored_files.update({f.relative_to(root) for f in root.glob(f".venv/**/*") if f.is_file()})
 
     if config["version_control"] in (
         "git (local)",

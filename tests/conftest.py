@@ -127,6 +127,7 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:  # type: ignore[mi
                 "virtualenv": "venv",
                 "conda": "con",
                 "pipenv": "penv",
+                "uv": "uv",
             },
             "dependency_file": {
                 "requirements.txt": "req.txt",
