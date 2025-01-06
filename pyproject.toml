@@ -7,7 +7,7 @@ name = "ccds"
 
 [project]
 name = "gatlens-opinionated-template"
-version = "0.0.7"
+version = "0.0.8"
 description = "A modern, opinionated full-stack CookieCutter project template that prioritizes developer experience and cutting-edge tools."
 authors = [
   { name = "Gatlen Culp", email = "GatlenCulp@gmail.com" },
@@ -34,7 +34,6 @@ requires-python = ">=3.10,<4"
 dependencies = [
     "click>=8.1.0",
     "cookiecutter>=2.6.0",
-    "ipykernel>=6.29.5",
 ]
 
 [project.scripts]
@@ -52,6 +51,7 @@ dev = [
     "chardet>=5.2.0",
     "cz-conventional-gitmoji>=0.6.1",
     "flake8>=5.0.4",
+    "ipykernel>=6.29.5",
     "isort>=5.13.2",
     "mdformat-frontmatter>=2.0.8",
     "mkdocs>=1.6.1",

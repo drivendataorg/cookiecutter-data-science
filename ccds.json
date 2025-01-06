@@ -14,7 +14,7 @@
 	"environment_manager": ["uv", "none", "virtualenv", "conda", "pipenv"],
 	"dependency_file": ["requirements.txt", "environment.yml", "Pipfile"],
 	"pydata_packages": ["basic", "none"],
-	"open_source_license": ["No license file", "MIT", "BSD-3-Clause"],
+	"open_source_license": ["MIT", "No license file", "BSD-3-Clause"],
 	"docs": ["mkdocs", "none"],
 	"include_code_scaffold": [
 		"data",

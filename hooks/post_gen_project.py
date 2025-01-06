@@ -126,3 +126,8 @@ configure_github_repo(
     visibility="public",
 )
 # {% endif %}
+
+# {% if cookiecutter.environment_manager == "uv" %}
+os.chdir(Path.cwd())
+subprocess.run(["pre-commit", "install"], check=False)  # noqa: S603, S607
+# {% endif %}
