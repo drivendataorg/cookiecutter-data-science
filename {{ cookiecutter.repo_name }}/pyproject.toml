@@ -159,7 +159,6 @@ default-groups = [
 [tool.ruff]
 cache-dir = ".cache/ruff"
 line-length = 100
-extend-include = ["*.ipynb"]
 
 [tool.ruff.lint]
 # TODO: Different groups of linting styles depending on code use.

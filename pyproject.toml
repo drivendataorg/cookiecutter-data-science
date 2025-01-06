@@ -90,7 +90,6 @@ dev = [
 [tool.ruff]
 cache-dir = ".cache/ruff"
 line-length = 100
-extend-include = ["*.ipynb"]
 # Doesn't work, this is a bug with ruff.
 # https://github.com/astral-sh/ruff/issues/9381
 # exclude = ["*/{{{{ cookiecutter.repo_name }}}}/*"]

@@ -51,8 +51,8 @@ repos:
   - repo: https://github.com/biomejs/pre-commit
     rev: "v0.6.1"
     hooks:
-      - id: biome-ci
-        name: "🟨 javascript · Lint and format with Biome"
+      - id: biome-check
+        name: "🟨 javascript · Lint, format, and safe fixes with Biome"
         additional_dependencies: ["@biomejs/biome@1.9.4"]
 
   ### Data & Config Validation ###

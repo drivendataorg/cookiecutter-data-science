@@ -13,7 +13,6 @@ BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
 
 
 # GATLEN'S ADDED BITS #
-CCDS_ORIGINAL_DIR = Path(".ccds-original")
 VSCODE_CONFIG_DIR = Path(".vscode")
 OUT_DIR = Path("out")
 
@@ -93,7 +92,6 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         config: Configuration dictionary
     """
     expected_dirs = {
-        str(CCDS_ORIGINAL_DIR),
         str(VSCODE_CONFIG_DIR),
         ".",
         ".devcontainer",
@@ -194,7 +192,6 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
     """
     expected_files = {
         "Makefile",
-        str(CCDS_ORIGINAL_DIR / "README.md"),
         "README.md",
         "pyproject.toml",
         ".env",

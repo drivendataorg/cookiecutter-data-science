@@ -29,11 +29,13 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.8.6
     hooks:
+      # STRICT
       # - id: ruff
       #   args: [ --fix ]
       - id: ruff-format
         name: "🐍 python · Format with Ruff"
 
+  # STRICT
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: "v1.14.1"
     hooks:
@@ -51,8 +53,8 @@ repos:
   - repo: https://github.com/biomejs/pre-commit
     rev: "v0.6.1"
     hooks:
-      - id: biome-ci
-        name: "🟨 javascript · Lint and format with Biome"
+      - id: biome-check
+        name: "🟨 javascript · Lint, format, and safe fixes"
         additional_dependencies: ["@biomejs/biome@1.9.4"]
 
   ### Data & Config Validation ###
