@@ -112,19 +112,6 @@ This section covers tools for code formatting, linting, type checking, and schem
   hooks:
     - id: ruff-format
       name: "🐍 python · Format with Ruff"
-
-- repo: https://github.com/pre-commit/mirrors-mypy
-  rev: "v1.14.1"
-  hooks:
-    - id: mypy
-      name: "🐍 python · Check types"
-
-- repo: https://github.com/abravalheri/validate-pyproject
-  rev: v0.23
-  hooks:
-    - id: validate-pyproject
-      name: "🐍 python · Validate pyproject.toml"
-      additional_dependencies: ["validate-pyproject-schema-store[all]"]
 ```
 
 <details markdown="1">
@@ -160,20 +147,26 @@ Consider using individual tools if you need specific features not yet supported 
 
 While Ruff does many things, type checking it does not... [yet](https://github.com/astral-sh/ruff/issues/3893).
 
-[MyPy](https://mypy-lang.org/) handles Python type checking:
+Microsoft's [Pyright](https://microsoft.github.io/pyright/) handles Python type checking:
 
 ```yaml
-- repo: https://github.com/pre-commit/mirrors-mypy
-  hooks:
-    - id: mypy
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.391
+    hooks:
+      - id: pyright
+        name: "🐍 python · Check types"
 ```
+
+_Note: Community supported pre-commit hook, endorsed by microsoft_
 
 <details markdown="1">
 <summary>
-Alternatives to MyPy (Pyright)
+Alternatives to Pyright (MyPy)
 </summary>
-Microsoft's [Pyright](https://microsoft.github.io/pyright/) is a [faster and more featureful](https://github.com/microsoft/pyright/blob/main/docs/mypy-comparison.md) alternative to MyPy. While it's the preferred choice for type checking, there isn't currently a maintained pre-commit hook available. Consider using Pyright through its [Git hook](https://github.com/microsoft/pyright/blob/main/docs/ci-integration.md) or as a local tool until a pre-commit hook is developed.
+Microsoft's [Pyright](https://microsoft.github.io/pyright/) is a [faster and more featureful](https://github.com/microsoft/pyright/blob/main/docs/mypy-comparison.md) alternative to [MyPy](https://mypy-lang.org/), but MyPy is the original type checker.
 </details>
+
+<br/>
 
 <!-- TODO: Add vulture https://github.com/jendrikseipp/vulture -->
 
