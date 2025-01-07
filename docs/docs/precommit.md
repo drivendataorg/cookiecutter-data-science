@@ -610,3 +610,21 @@ With each commit looking a bit like this:
 ### Inspiration
 
 Some inspo from [this article](https://medium.com/marvelous-mlops/welcome-to-pre-commit-heaven-5b622bb8ebce)
+
+______________________________________________________________________
+
+### Rationele behind QA settings
+
+Preferred docstring style = google
+
+**Format: [Google](https://google.github.io/styleguide/pyguide.html)**
+
+- **Motivations**:
+  - Common style for docstrings
+  - Most writeable out of alternatives
+  - I often write a single line for simplicity
+- **Limitations**:
+  - None
+- **Alternatives**:
+  - [Numpy](https://numpydoc.readthedocs.io/en/latest/format.html): less writeable
+  - [Sphinx](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html): baroque style

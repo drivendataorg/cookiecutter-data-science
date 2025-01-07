@@ -249,6 +249,17 @@ dev-doc = [
 ]
 ```
 
+**Hosting: [GitHub Pages](https://pages.github.com/)**
+
+- **Motivations**:
+  - Easy to setup
+  - Free and simple
+  - Integrated with GitHub
+- **Limitations**:
+  - Only support static content
+- **Alternatives**:
+  - [ReadTheDocs](https://about.readthedocs.com/?ref=readthedocs.com): provide more features
+
 ### 07.11 Notebook Development
 
 ```toml
