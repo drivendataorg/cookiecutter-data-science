@@ -1,8 +1,16 @@
 # {{cookiecutter.project_name}}
 
-![Uses the Cookiecutter Data Science project template, GOTem style](https://img.shields.io/badge/CCDS_GOTem-Project%20Instance-328F97?logo=cookiecutter)
+![Uses the Cookiecutter Data Science project template, GOTem style](https://img.shields.io/badge/GOTem-Project%20Instance-328F97?logo=cookiecutter)
 
-{{cookiecutter.description}}
+<!-- ![PyPI - Version](https://img.shields.io/pypi/v/gatlens-opinionated-template?style=flat) -->
+
+<!-- [![tests](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml/badge.svg)](https://github.com/GatlenCulp/gatlens-opinionated-template/actions/workflows/tests.yml)  -->
+
+<!-- ![GitHub stars](https://img.shields.io/github/stars/gatlenculp/homebrew-vivaria?style=social) -->
+
+{% if cookiecutter.environment_manager == "uv" %}
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+{% endif %}
 
 ## Project Organization
 {#
@@ -12,6 +20,7 @@
 <!-- TODO: In Github Actions actually have a simple test or something -->
 <!-- TODO: update main.yml to use what I now have setup -->
 #}
+
 ```
 📁 .
 ├── ⚙️ .cursorrules                    <- LLM instructions for Cursor IDE
