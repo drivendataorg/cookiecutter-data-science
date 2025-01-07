@@ -94,6 +94,15 @@ repos:
   #     - id: markdownlint
   #       name: "📝 markdown · Lint markdown"
 
+  ### Shell ###
+
+  # STRICT
+  # - repo: https://github.com/shellcheck-py/shellcheck-py
+  #   rev: v0.10.0.1
+  #   hooks:
+  #     - id: shellcheck
+  #       name: "🐚 shell · Lint shell scripts"
+
   ### Notebooks ###
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.9.1
