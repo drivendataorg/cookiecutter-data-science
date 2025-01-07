@@ -264,6 +264,16 @@ They also have a [VSCode plugin](https://marketplace.visualstudio.com/items?item
         name: "🐚 shell · Lint shell scripts"
 ```
 
+[bashate](https://github.com/openstack/bashate) checks your shell script code style.
+
+```yaml
+  - repo: https://github.com/openstack/bashate
+    rev: 2.1.1
+    hooks:
+      - id: bashate
+        name: "🐚 shell · Check shell script code style"
+```
+
 ### 📓 Notebooks
 
 [nbQA](https://nbqa.readthedocs.io/) for Jupyter notebook quality assurance, allowing us to use our standard Python tools on notebooks:

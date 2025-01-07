@@ -103,6 +103,13 @@ repos:
   #     - id: shellcheck
   #       name: "🐚 shell · Lint shell scripts"
 
+  # STRICT
+  # - repo: https://github.com/openstack/bashate
+  #   rev: 2.1.1
+  #   hooks:
+  #     - id: bashate
+  #       name: "🐚 shell · Check shell script code style"
+
   ### Notebooks ###
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.9.1
