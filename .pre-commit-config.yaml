@@ -37,11 +37,13 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.8.6
     hooks:
+      # STRICT
       # - id: ruff
       #   args: [ --fix ]
       - id: ruff-format
         name: "🐍 python · Format with Ruff"
 
+  # STRICT
   - repo: https://github.com/RobertCraigie/pyright-python
     rev: v1.1.391
     hooks:
@@ -78,19 +80,27 @@ repos:
     rev: 0.7.21
     hooks:
       - id: mdformat
-        name: "📝 markdown · Format documentation"
+        name: "📝 markdown · Format markdown"
         additional_dependencies:
           - mdformat-gfm
           - mdformat-ruff
           - mdformat-frontmatter
           - ruff
 
+  # STRICT
+  # - repo: https://github.com/markdownlint/markdownlint
+  #   rev: v0.12.0
+  #   hooks:
+  #     - id: markdownlint
+  #       name: "📝 markdown · Lint markdown"
+
   ### Notebooks ###
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.9.1
     hooks:
-      - id: nbqa-mypy
-        name: "📓 notebook · Type-check cells"
+      # STRICT
+      # - id: nbqa-mypy
+      #   name: "📓 notebook · Type-check cells"
       - id: nbqa
         entry: nbqa mdformat
         name: "📓 notebook · Format markdown cells"

@@ -233,12 +233,23 @@ _Additional json schema available on the [Schema Store](https://json.schemastore
   rev: 0.7.21
   hooks:
     - id: mdformat
-      name: "📝 markdown · Format documentation"
+      name: "📝 markdown · Format markdown"
       additional_dependencies:
-        - mdformat-gfm           # GitHub-Flavored Markdown support
+        - mdformat-gfm          # GitHub-Flavored Markdown support
         - mdformat-ruff         # Python code formatting
         - mdformat-frontmatter  # YAML frontmatter support
         - ruff                  # Required for mdformat-ruff
+```
+
+[Markdownlint](https://github.com/markdownlint/markdownlint/tree/main) for Markdown linting.
+They also have a [VSCode plugin](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) that will display any issues in-editor.
+
+```yaml
+- repo: https://github.com/markdownlint/markdownlint
+    rev: v0.12.0
+    hooks:
+      - id: markdownlint
+        name: "📝 markdown · Lint markdown"
 ```
 
 ### 📓 Notebooks
