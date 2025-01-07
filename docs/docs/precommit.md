@@ -617,7 +617,7 @@ ______________________________________________________________________
 
 Preferred docstring style = google
 
-**Format: [Google](https://google.github.io/styleguide/pyguide.html)**
+**Format: [Google](https://google.github.io/styleguide/pyguide.html)**
 
 - **Motivations**:
   - Common style for docstrings
@@ -628,3 +628,7 @@ Preferred docstring style = google
 - **Alternatives**:
   - [Numpy](https://numpydoc.readthedocs.io/en/latest/format.html): less writeable
   - [Sphinx](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html): baroque style
+
+______________________________________________________________________
+
+Additional wonderful pre-commit hooks can be found [here](https://pre-commit.com/hooks.html)

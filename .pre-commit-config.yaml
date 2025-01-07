@@ -36,10 +36,10 @@ repos:
       - id: ruff-format
         name: "🐍 python · Format with Ruff"
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.14.1"
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.391
     hooks:
-      - id: mypy
+      - id: pyright
         name: "🐍 python · Check types"
 
   - repo: https://github.com/abravalheri/validate-pyproject

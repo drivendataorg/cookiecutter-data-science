@@ -1,3 +1,4 @@
+# type: ignore
 # ruff: noqa
 
 # Monkey-patch jinja to allow variables to not exist, which happens with sub-options

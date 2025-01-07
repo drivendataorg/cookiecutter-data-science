@@ -1,3 +1,4 @@
+# type: ignore
 # ruff: noqa
 import json
 import re
