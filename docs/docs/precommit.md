@@ -274,6 +274,18 @@ They also have a [VSCode plugin](https://marketplace.visualstudio.com/items?item
         name: "🐚 shell · Check shell script code style"
 ```
 
+### 🐮 Makefile
+
+[Checkmake](https://github.com/mrtazz/checkmake) for linting Makefile.
+
+```yaml
+  - repo: https://github.com/mrtazz/checkmake.git
+    rev: 0.2.2
+    hooks:
+      - id: checkmake
+        name: "🐮 Makefile · Lint Makefile"
+```
+
 ### 📊 SQL Code
 
 [SQLFluff](https://docs.sqlfluff.com/en/stable/production/pre_commit.html) can be used to lint and attempt to auto-fix any of your `*.sql` files automatically.
@@ -677,3 +689,5 @@ Preferred docstring style = google
 ______________________________________________________________________
 
 Additional wonderful pre-commit hooks can be found [here](https://pre-commit.com/hooks.html)
+
+Note: I went a bit overboard with cherry picking my favorite formatters and linters and stuff. Considering the security concerns of having so many projects this might not be wise. This may also lead to maintaining more hooks than is worthwhile. It's on my todo list to look at ensemble linters and formatters. Such as [Megalinter](https://github.com/oxsecurity/megalinter/tree/main) and [Superlinter](https://github.com/super-linter/super-linter)
