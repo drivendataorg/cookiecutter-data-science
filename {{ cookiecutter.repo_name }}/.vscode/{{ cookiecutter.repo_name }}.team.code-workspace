@@ -206,6 +206,11 @@ Add the object below to your projects.json file to add this project
 			"**/_minted*": true
 		},
 		"explorerExclude.backup": {},
+		// {% if cookiecutter.environment_manager == "uv" %}"python.defaultInterpreterPath": ".venv/bin/python",{% endif %}
+		"python.testing.pytestEnabled": true,
+		"python.testing.pytestArgs": [
+			"tests"
+		],
 		"workbench.colorCustomizations": {
 			"editor.lineHighlightBackground": "#1073cf2d",
 			"editor.lineHighlightBorder": "#9fced11f"

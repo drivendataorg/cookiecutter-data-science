@@ -68,7 +68,11 @@
 		"ruff.enable": true,
 		"ruff.organizeImports": true,
 		"ruff.fixAll": true,
-		"ruff.lint.run": "onSave"
+		"ruff.lint.run": "onSave",
+		"python.testing.pytestEnabled": true,
+		"python.testing.pytestArgs": [
+			"tests"
+		],
 	},
 	"tasks": {
 		"version": "2.0.0",
