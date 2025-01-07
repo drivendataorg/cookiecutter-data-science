@@ -252,6 +252,18 @@ They also have a [VSCode plugin](https://marketplace.visualstudio.com/items?item
         name: "📝 markdown · Lint markdown"
 ```
 
+### 🐚 Shell
+
+[shellcheck](https://www.shellcheck.net/) lints your shell scripts.
+
+```yaml
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        name: "🐚 shell · Lint shell scripts"
+```
+
 ### 📓 Notebooks
 
 [nbQA](https://nbqa.readthedocs.io/) for Jupyter notebook quality assurance, allowing us to use our standard Python tools on notebooks:
