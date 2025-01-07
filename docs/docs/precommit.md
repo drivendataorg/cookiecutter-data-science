@@ -274,6 +274,21 @@ They also have a [VSCode plugin](https://marketplace.visualstudio.com/items?item
         name: "🐚 shell · Check shell script code style"
 ```
 
+### 📊 SQL Code
+
+[SQLFluff](https://docs.sqlfluff.com/en/stable/production/pre_commit.html) can be used to lint and attempt to auto-fix any of your `*.sql` files automatically.
+
+```yaml
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 3.3.0
+    hooks:
+      - id: sqlfluff-fix
+        name: "📊 SQL · Attempts to fix rule violations."
+      # STRICT
+      - id: sqlfluff-lint
+        name: "📊 SQL · Lint SQL code files"
+```
+
 ### 📓 Notebooks
 
 [nbQA](https://nbqa.readthedocs.io/) for Jupyter notebook quality assurance, allowing us to use our standard Python tools on notebooks:

@@ -110,6 +110,24 @@ repos:
   #     - id: bashate
   #       name: "🐚 shell · Check shell script code style"
 
+  ### Makefile ###
+  - repo: https://github.com/mrtazz/checkmake.git
+    rev: 0.2.2
+    hooks:
+      - id: checkmake
+        name: "🐮 Makefile · Lint Makefile"
+
+  ### SQL ###
+
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 3.3.0
+    hooks:
+      - id: sqlfluff-fix
+        name: "📊 SQL · Attempts to fix rule violations."
+      # STRICT
+      - id: sqlfluff-lint
+        name: "📊 SQL · Lint SQL code files"
+
   ### Notebooks ###
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.9.1
