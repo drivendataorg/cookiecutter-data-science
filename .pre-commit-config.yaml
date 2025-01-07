@@ -17,6 +17,12 @@ repos:
   #                              🔄 Pre-Commit Hooks                             #
   # ---------------------------------------------------------------------------- #
 
+  - repo: https://github.com/mxr/sync-pre-commit-deps
+    rev: v0.0.2
+    hooks:
+      - id: sync-pre-commit-deps
+        name: "🪝 pre-commit · Sync hook dependencies based on other hooks"
+
   # ----------------------------- 🔒 Security Tools ---------------------------- #
 
   - repo: https://github.com/gitleaks/gitleaks

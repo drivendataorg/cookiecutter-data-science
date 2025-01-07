@@ -77,6 +77,8 @@ This collection prioritizes best-in-class tools without redundancy. Rather than 
 - JSON/YAML/TOML validation uses specialized schema validators
 - Security scanning uses a single comprehensive tool
 
+<!-- TODO: List pre-commit dependency updater. -->
+
 ## 01 🔒 Security
 
 [GitLeaks](https://github.com/gitleaks/gitleaks) is a fast, lightweight scanner that prevents secrets (passwords, API keys, tokens) from being committed to your repository.
@@ -97,6 +99,8 @@ Alternatives to GitLeaks (TruffleHog)
 </details>
 
 <!-- TODO: Read this, https://kislyuk.github.io/argcomplete/ -->
+
+<!-- TODO: Note that Pre-Commit hooks can result in a security hazard. -->
 
 ## 02 🔍 Code Quality
 
