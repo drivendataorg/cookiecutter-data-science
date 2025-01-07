@@ -691,3 +691,17 @@ ______________________________________________________________________
 Additional wonderful pre-commit hooks can be found [here](https://pre-commit.com/hooks.html)
 
 Note: I went a bit overboard with cherry picking my favorite formatters and linters and stuff. Considering the security concerns of having so many projects this might not be wise. This may also lead to maintaining more hooks than is worthwhile. It's on my todo list to look at ensemble linters and formatters. Such as [Megalinter](https://github.com/oxsecurity/megalinter/tree/main) and [Superlinter](https://github.com/super-linter/super-linter)
+
+Other hooks to consider:
+
+- [buildbuf](https://github.com/bufbuild/buf) - Protobuf Linter
+- [Clang](https://github.com/pre-commit/mirrors-clang-format) - C++ liner
+- [gitlint](https://github.com/jorisroovers/gitlint) - Alternative to commitlint, may actually be preferred.
+- [typos](https://github.com/crate-ci/typos) or [codespell](https://github.com/codespell-project/codespell) - Finds common misspellings in code and documentation. Someone online preferred Typos over codespell because:
+
+> - Typos corrected more typos (at least on my code bases). This was surprising considering codespell's corrections list is at least 10 times larger than Typos's.
+> - Typos has Vscode support.
+
+- [yamllint](https://github.com/adrienverge/yamllint)
+- [yamlfmt](https://github.com/google/yamlfmt)
+- [actionlint](https://github.com/rhysd/actionlint) - Lints github action files, may be a better checker than the currently selected one.
