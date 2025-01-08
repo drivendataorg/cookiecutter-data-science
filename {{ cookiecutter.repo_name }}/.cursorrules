@@ -424,3 +424,9 @@ Key Conventions:
 
 Refer to the official documentation of PyTorch, Transformers, and Streamlit for best practices and up-to-date APIs.
 ```
+
+### Additional Styling Notes
+1. Add typing wherever possible
+2. Add trailing commas (COM812)
+3. Avoid generic variable name df for dataframes (PD901)
+4. Prefer `Path.open()` over `open()` (PTH123)
