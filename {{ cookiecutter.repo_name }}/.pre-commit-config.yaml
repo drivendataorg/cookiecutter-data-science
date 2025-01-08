@@ -44,6 +44,7 @@ repos:
         entry: flake8
         language: python
         types: [python]
+        args: ['--config', '.flake8']
       - id: mypy
         name: mypy
         entry: mypy

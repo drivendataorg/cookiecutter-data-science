@@ -44,7 +44,8 @@ The directory structure of your new project looks like this:
 |                             and a short `-` delimited description, e.g.
 │                             `1.0-initial-data-exploration`.
 │
-├── experimental_scripts   <- Experimental scripts, something one wouldn't want to do in a notebook
+├── experiments            <- Scripts for running experiments, data processing, etc. - generally something one wouldn't want to do in a notebook.
+|
 │
 ├── reports                <- Generated analysis as HTML, PDF, LaTeX, etc.
 │   └── figures            <- Generated graphics and figures to be used in reporting
