@@ -1,3 +1,4 @@
+# Documentation Here: https://github.com/GatlenCulp/gatlens-opinionated-template
 exclude: |
   (?x)^(
       .*\{\{.*\}\}.*|    # Exclude any files with cookiecutter variables
@@ -17,12 +18,6 @@ repos:
   #                              🔄 Pre-Commit Hooks                             #
   # ---------------------------------------------------------------------------- #
 
-  - repo: https://github.com/mxr/sync-pre-commit-deps
-    rev: v0.0.2
-    hooks:
-      - id: sync-pre-commit-deps
-        name: "🪝 pre-commit · Sync hook dependencies based on other hooks"
-
   # ----------------------------- 🔒 Security Tools ---------------------------- #
 
   - repo: https://github.com/gitleaks/gitleaks
@@ -35,13 +30,13 @@ repos:
 
   ### Python Tools ###
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.8.6
+    rev: v0.9.1
     hooks:
+      - id: ruff-format
+        name: "🐍 python · Format with Ruff"
       # STRICT
       # - id: ruff
       #   args: [ --fix ]
-      - id: ruff-format
-        name: "🐍 python · Format with Ruff"
 
   # STRICT
   - repo: https://github.com/RobertCraigie/pyright-python
@@ -67,7 +62,7 @@ repos:
 
   ### Data & Config Validation ###
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.30.0
+    rev: 0.31.0
     hooks:
       - id: check-github-workflows
         name: "🐙 github-actions · Validate gh workflow files"

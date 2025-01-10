@@ -2,7 +2,7 @@
 
 ![pre-commit logo](https://avatars.githubusercontent.com/u/6943086?s=280&v=4)
 
-This page explains what pre-commit hooks are, why they are used, and the specific selection I have decided to make for GOTem to keep your projects pristine with every commit.
+This page explains what pre-commit hooks are, why they are used, and the specific selection I have decided to make for GOTem to keep your projects pristine with every commit. The source config file can be found [here](https://github.com/GatlenCulp/gatlens-opinionated-template/blob/master/.pre-commit-config.yaml).
 
 ![Pre-commit Final Result](./pre-commit-final-result.png)
 _The final result._
@@ -71,7 +71,7 @@ pre-commit run --all-files
 <summary>
 Note on security with `pre-commit autoupdate`
 </summary>
-`pre-commit autoupdate` will bump all of your hook versions to the latest release. Although helpful, use with caution around untrusted hooks since security vulnerabilities or malware can be introduced between versions. This is mostly a non-issue but worth mentioning.
+`pre-commit autoupdate` will bump all of your hook versions to the latest release. Although helpful, use with caution around untrusted hooks since security vulnerabilities or malware can be introduced between versions. This is mostly a non-issue which applies to basically all software but worth mentioning.
 </details>
 
 ______________________________________________________________________
@@ -84,7 +84,7 @@ This collection prioritizes best-in-class tools without redundancy. Rather than 
 - JSON/YAML/TOML validation uses specialized schema validators
 - Security scanning uses a single comprehensive tool
 
-<!-- TODO: List pre-commit dependency updater. -->
+All labeled with `# STRICT` are strict hooks that disabled and not recommended for every project. (Ex: Code style linters are typically desired for production-grade software but not research.)
 
 ## 01 🔒 Security
 
@@ -112,15 +112,13 @@ Alternatives to GitLeaks (TruffleHog)
 
 <!-- TODO: Read this, https://kislyuk.github.io/argcomplete/ -->
 
-<!-- TODO: Note that Pre-Commit hooks can result in a security hazard. -->
-
 ## 02 🔍 Code Quality
 
 This section covers tools for code formatting, linting, type checking, and schema validation across different languages and file types. Best-in-class tools were chosen, avoiding redundant functionality. I opted for remote hook downloads over local commands to make the file more portable and self-updating.
 
 ### 🐍 python
 
-[Ruff](https://docs.astral.sh/ruff/) is a fast, comprehensive Python formatter and linter that replaces multiple traditional tools (Black, Flake8, isort, pyupgrade, bandit, pydoclint, mccabe complexity, and more.) While it's not yet at 100% parity with all these tools, its speed and broad coverage make it an excellent choice as this project's only Python linter/formatter:
+[Ruff](https://docs.astral.sh/ruff/) is a fast, comprehensive Python formatter and linter that replaces multiple traditional tools (Black, Flake8, isort, pyupgrade, bandit, pydoclint, mccabe complexity, and more.) While it's not yet at 100% parity with all these tools, its speed and broad coverage make it an excellent choice as the only Python linter/formatter:
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -128,6 +126,9 @@ This section covers tools for code formatting, linting, type checking, and schem
   hooks:
     - id: ruff-format
       name: "🐍 python · Format with Ruff"
+    # STRICT
+    # - id: ruff
+    #   args: [ --fix ]
 ```
 
 <details markdown="1">
@@ -736,26 +737,6 @@ repos:
 
 Some inspo from [this article](https://medium.com/marvelous-mlops/welcome-to-pre-commit-heaven-5b622bb8ebce)
 
-______________________________________________________________________
-
-### Rationele behind QA settings
-
-Preferred docstring style = google
-
-**Format: [Google](https://google.github.io/styleguide/pyguide.html)**
-
-- **Motivations**:
-  - Common style for docstrings
-  - Most writeable out of alternatives
-  - I often write a single line for simplicity
-- **Limitations**:
-  - None
-- **Alternatives**:
-  - [Numpy](https://numpydoc.readthedocs.io/en/latest/format.html): less writeable
-  - [Sphinx](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html): baroque style
-
-______________________________________________________________________
-
 Additional wonderful pre-commit hooks can be found [here](https://pre-commit.com/hooks.html)
 
 Note: I went a bit overboard with cherry picking my favorite formatters and linters and stuff. Considering the security concerns of having so many projects this might not be wise. This may also lead to maintaining more hooks than is worthwhile. It's on my todo list to look at ensemble linters and formatters. Such as [Megalinter](https://github.com/oxsecurity/megalinter/tree/main) and [Superlinter](https://github.com/super-linter/super-linter)
@@ -785,4 +766,12 @@ Other hooks to consider:
     - id: oxipng
       name: "🖼️ images · Optimize PNG files"
       args: ["-o", "4", "--strip", "safe", "--alpha"]
+```
+
+```
+  - repo: https://github.com/mxr/sync-pre-commit-deps
+    rev: v0.0.2
+    hooks:
+      - id: sync-pre-commit-deps
+        name: "🪝 pre-commit · Sync hook dependencies based on other hooks"
 ```
