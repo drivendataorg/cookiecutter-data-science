@@ -2,6 +2,11 @@
 
 ![pre-commit logo](https://avatars.githubusercontent.com/u/6943086?s=280&v=4)
 
+This page explains what pre-commit hooks are, why they are used, and the specific selection I have decided to make for GOTem to keep your projects pristine with every commit.
+
+![Pre-commit Final Result](./pre-commit-final-result.png)
+_The final result._
+
 ## What are Git hooks?
 
 [Git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) are scripts that run automatically at some stage in the git-lifecycle. Most commonly, pre-commit hooks are used, running before a commit goes through. They act as a first line of defense for code quality by:
@@ -44,8 +49,9 @@ Alternatives (Husky)
 
 ## Installation
 
-1. The repository comes with a `.pre-commit-config.yaml` file already configured
-1. Install the hooks with:
+Projects generated with GOTem come with the `.pre-commit-config.yaml` file already configured as described below. If you would like to create your own, you can follow the instructions [here](https://pre-commit.com/#2-add-a-pre-commit-configuration).
+
+Install the hooks with:
 
 ```bash
 pre-commit install
@@ -57,15 +63,16 @@ You'll see hooks run automatically on every commit:
 **Useful Commands:**
 
 ```bash
-# Update hooks to their latest versions
-pre-commit autoupdate
-
-# Reinstall hooks (needed after config changes)
-pre-commit install
-
 # Test hooks without committing
 pre-commit run --all-files
 ```
+
+<details markdown="1">
+<summary>
+Note on security with `pre-commit autoupdate`
+</summary>
+`pre-commit autoupdate` will bump all of your hook versions to the latest release. Although helpful, use with caution around untrusted hooks since security vulnerabilities or malware can be introduced between versions. This is mostly a non-issue but worth mentioning.
+</details>
 
 ______________________________________________________________________
 
@@ -90,6 +97,11 @@ This collection prioritizes best-in-class tools without redundancy. Rather than 
     - id: gitleaks
       name: "🔒 security · Detect hardcoded secrets"
 ```
+
+<!--
+TODO: Create a profanity check 
+https://blog.nashtechglobal.com/profanity-check-source-code-with-gitleaks-why-not/ 
+-->
 
 <details markdown="1">
 <summary>
@@ -154,11 +166,11 @@ While Ruff does many things, type checking it does not... [yet](https://github.c
 Microsoft's [Pyright](https://microsoft.github.io/pyright/) handles Python type checking:
 
 ```yaml
-  - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.391
-    hooks:
-      - id: pyright
-        name: "🐍 python · Check types"
+- repo: https://github.com/RobertCraigie/pyright-python
+  rev: v1.1.391
+  hooks:
+    - id: pyright
+      name: "🐍 python · Check types"
 ```
 
 _Note: Community supported pre-commit hook, endorsed by microsoft_
@@ -182,8 +194,8 @@ Microsoft's [Pyright](https://microsoft.github.io/pyright/) is a [faster and mor
 - repo: https://github.com/biomejs/pre-commit
   rev: "v0.6.1"
   hooks:
-    - id: biome-ci
-      name: "🟨 javascript · Lint and format with Biome"
+    - id: biome-check
+      name: "🟨 javascript · Lint, format, and safe fixes with Biome"
       additional_dependencies: ["@biomejs/biome@1.9.4"]
 ```
 
@@ -502,6 +514,8 @@ exclude: |
       .*venv.*/.*|        # Exclude virtual environment directories
   )$
 fail_fast: true
+default_language_version:
+  python: python3.12
 default_install_hook_types:
   - pre-commit
   - commit-msg
@@ -509,6 +523,12 @@ repos:
   # ---------------------------------------------------------------------------- #
   #                              🔄 Pre-Commit Hooks                             #
   # ---------------------------------------------------------------------------- #
+
+  - repo: https://github.com/mxr/sync-pre-commit-deps
+    rev: v0.0.2
+    hooks:
+      - id: sync-pre-commit-deps
+        name: "🪝 pre-commit · Sync hook dependencies based on other hooks"
 
   # ----------------------------- 🔒 Security Tools ---------------------------- #
 
@@ -524,15 +544,17 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.8.6
     hooks:
+      # STRICT
       # - id: ruff
       #   args: [ --fix ]
       - id: ruff-format
         name: "🐍 python · Format with Ruff"
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.14.1"
+  # STRICT
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.391
     hooks:
-      - id: mypy
+      - id: pyright
         name: "🐍 python · Check types"
 
   - repo: https://github.com/abravalheri/validate-pyproject
@@ -546,8 +568,8 @@ repos:
   - repo: https://github.com/biomejs/pre-commit
     rev: "v0.6.1"
     hooks:
-      - id: biome-ci
-        name: "🟨 javascript · Lint and format with Biome"
+      - id: biome-check
+        name: "🟨 javascript · Lint, format, and safe fixes with Biome"
         additional_dependencies: ["@biomejs/biome@1.9.4"]
 
   ### Data & Config Validation ###
@@ -565,19 +587,61 @@ repos:
     rev: 0.7.21
     hooks:
       - id: mdformat
-        name: "📝 markdown · Format documentation"
+        name: "📝 markdown · Format markdown"
         additional_dependencies:
           - mdformat-gfm
           - mdformat-ruff
           - mdformat-frontmatter
           - ruff
 
+  # STRICT
+  # - repo: https://github.com/markdownlint/markdownlint
+  #   rev: v0.12.0
+  #   hooks:
+  #     - id: markdownlint
+  #       name: "📝 markdown · Lint markdown"
+
+  ### Shell ###
+
+  # STRICT
+  # - repo: https://github.com/shellcheck-py/shellcheck-py
+  #   rev: v0.10.0.1
+  #   hooks:
+  #     - id: shellcheck
+  #       name: "🐚 shell · Lint shell scripts"
+
+  # STRICT
+  # - repo: https://github.com/openstack/bashate
+  #   rev: 2.1.1
+  #   hooks:
+  #     - id: bashate
+  #       name: "🐚 shell · Check shell script code style"
+
+  ### Makefile ###
+  - repo: https://github.com/mrtazz/checkmake.git
+    rev: 0.2.2
+    hooks:
+      - id: checkmake
+        name: "🐮 Makefile · Lint Makefile"
+
+  ### SQL ###
+
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 3.3.0
+    hooks:
+      - id: sqlfluff-fix
+        name: "📊 SQL · Attempts to fix rule violations."
+      # STRICT
+      - id: sqlfluff-lint
+        name: "📊 SQL · Lint SQL code files"
+
   ### Notebooks ###
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.9.1
     hooks:
-      - id: nbqa-mypy
-        name: "📓 notebook · Type-check cells"
+      # STRICT
+      # - id: nbqa-mypy
+      #   name: "📓 notebook · Type-check cells"
       - id: nbqa
         entry: nbqa mdformat
         name: "📓 notebook · Format markdown cells"
@@ -589,6 +653,14 @@ repos:
           - mdformat-ruff
           - mdformat-frontmatter
           - ruff
+
+  ### PNG Images ###
+  - repo: https://github.com/shssoichiro/oxipng
+    rev: v9.1.3
+    hooks:
+      - id: oxipng
+        name: "🖼️ images · Optimize PNG files"
+        args: ["-o", "4", "--strip", "safe", "--alpha"]
 
   ### Additional File Types ###
   - repo: https://github.com/pre-commit/mirrors-prettier
@@ -660,10 +732,6 @@ repos:
         stages: [commit-msg]
 ```
 
-With each commit looking a bit like this:
-
-![Pre-commit Final Result](./pre-commit-final-result.png)
-
 ### Inspiration
 
 Some inspo from [this article](https://medium.com/marvelous-mlops/welcome-to-pre-commit-heaven-5b622bb8ebce)
@@ -705,3 +773,16 @@ Other hooks to consider:
 - [yamllint](https://github.com/adrienverge/yamllint)
 - [yamlfmt](https://github.com/google/yamlfmt)
 - [actionlint](https://github.com/rhysd/actionlint) - Lints github action files, may be a better checker than the currently selected one.
+
+### 🖼️ Image Optimization
+
+[oxipng](https://github.com/shssoichiro/oxipng) optimizes PNG files for size while preserving quality:
+
+```yaml
+- repo: https://github.com/shssoichiro/oxipng
+  rev: v9.1.3
+  hooks:
+    - id: oxipng
+      name: "🖼️ images · Optimize PNG files"
+      args: ["-o", "4", "--strip", "safe", "--alpha"]
+```
