@@ -84,7 +84,7 @@ This collection prioritizes best-in-class tools without redundancy. Rather than 
 - JSON/YAML/TOML validation uses specialized schema validators
 - Security scanning uses a single comprehensive tool
 
-All labeled with `# STRICT` are strict hooks that disabled and not recommended for every project. (Ex: Code style linters are typically desired for production-grade software but not research.)
+All hooks labeled with `# STRICT` are commented out by default and not recommended for every project. (Ex: Code style linters are typically desired for production-grade software but not research.)
 
 ## 01 🔒 Security
 
@@ -118,11 +118,11 @@ This section covers tools for code formatting, linting, type checking, and schem
 
 ### 🐍 python
 
-[Ruff](https://docs.astral.sh/ruff/) is a fast, comprehensive Python formatter and linter that replaces multiple traditional tools (Black, Flake8, isort, pyupgrade, bandit, pydoclint, mccabe complexity, and more.) While it's not yet at 100% parity with all these tools, its speed and broad coverage make it an excellent choice as the only Python linter/formatter:
+**[Ruff](https://docs.astral.sh/ruff/)** is a fast, comprehensive Python formatter and linter that replaces multiple traditional tools (Black, Flake8, isort, pyupgrade, bandit, pydoclint, mccabe complexity, and more.) While it's not yet at 100% parity with all these tools, its speed and broad coverage make it an excellent choice as the only Python linter/formatter.:
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.8.6
+  rev: v0.9.1
   hooks:
     - id: ruff-format
       name: "🐍 python · Format with Ruff"
@@ -130,6 +130,8 @@ This section covers tools for code formatting, linting, type checking, and schem
     # - id: ruff
     #   args: [ --fix ]
 ```
+
+Ruff VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff)
 
 <details markdown="1">
 <summary>
@@ -164,9 +166,10 @@ Consider using individual tools if you need specific features not yet supported 
 
 While Ruff does many things, type checking it does not... [yet](https://github.com/astral-sh/ruff/issues/3893).
 
-Microsoft's [Pyright](https://microsoft.github.io/pyright/) handles Python type checking:
+**[Microsoft's Pyright](https://microsoft.github.io/pyright/)** handles Python type checking:
 
 ```yaml
+# STRICT
 - repo: https://github.com/RobertCraigie/pyright-python
   rev: v1.1.391
   hooks:
@@ -174,7 +177,9 @@ Microsoft's [Pyright](https://microsoft.github.io/pyright/) handles Python type 
       name: "🐍 python · Check types"
 ```
 
-_Note: Community supported pre-commit hook, endorsed by microsoft_
+_Note: This is a community supported pre-commit hook, endorsed by microsoft_
+
+Pyright VSCode Extension [here](https://marketplace.visualstudio.com/items?itemName=ms-pyright.pyright), but [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance), the default extension for Python on VSCode, has it built-in.
 
 <details markdown="1">
 <summary>
@@ -185,46 +190,7 @@ Microsoft's [Pyright](https://microsoft.github.io/pyright/) is a [faster and mor
 
 <br/>
 
-<!-- TODO: Add vulture https://github.com/jendrikseipp/vulture -->
-
-### 🟨 JavaScript & Web Tools
-
-[Biome](https://biomejs.dev/internals/language-support/) is a modern, fast formatter and linter for JS/TS ecosystems (JS[X], TS[X], JSON[C], CSS, GraphQL). It provides better defaults than ESLint and comes with a helpful [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=biomejs.biome):
-
-```yaml
-- repo: https://github.com/biomejs/pre-commit
-  rev: "v0.6.1"
-  hooks:
-    - id: biome-check
-      name: "🟨 javascript · Lint, format, and safe fixes with Biome"
-      additional_dependencies: ["@biomejs/biome@1.9.4"]
-```
-
-<details markdown="1">
-<summary>
-Alternatives to Biome (ESLint & Prettier)
-</summary>
-[ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) are more established alternatives with broader plugin ecosystems. While Prettier supports many file types, it can be notably slow, sometimes produces unexpected formatting, and sometimes breaks code (which I find annoying). Since this is primarily a Python-focused project template and Biome handles our JavaScript needs efficiently, we prefer it over the traditional ESLint/Prettier setup. Consider ESLint and Prettier if you need plugins, support for specific JS frameworks, or formatting for languages unsupported elsewhere. (More linters [here](https://github.com/caramelomartins/awesome-linters) as well)
-</details>
-
-### ✅ Data & Config Validation
-
-[check-jsonschema](https://check-jsonschema.readthedocs.io/) validates various configuration files using [JSON Schema](https://json-schema.org/specification). It supports JSON, YAML, and TOML files, and includes specialized validators like the [TaskFile](https://taskfile.dev/) and [GitHub Actions](https://github.com/features/actions) checker:
-
-```yaml
-- repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.30.0
-  hooks:
-    - id: check-github-workflows
-      name: "🐙 github-actions · Validate gh workflow files"
-      args: ["--verbose"]
-    - id: check-taskfile
-      name: "✅ taskfile · Validate Task configuration"
-```
-
-_Additional json schema available on the [Schema Store](https://json.schemastore.org/pyproject.json)_
-
-[validate-pyproject](https://validate-pyproject.readthedocs.io/) specifically handles pyproject.toml validation. In the future, I may have check-jsonschema do this as well.
+**[validate-pyproject](https://validate-pyproject.readthedocs.io/)** specifically handles pyproject.toml validation. In the future, I may have check-jsonschema do this as well.
 
 ```yaml
 - repo: https://github.com/abravalheri/validate-pyproject
@@ -235,11 +201,54 @@ _Additional json schema available on the [Schema Store](https://json.schemastore
       additional_dependencies: ["validate-pyproject-schema-store[all]"]
 ```
 
-<!-- Possibly worth just building? -->
+<!-- TODO: Python unused code detector: Add vulture https://github.com/jendrikseipp/vulture
+or deadcode https://github.com/albertas/deadcode
+ -->
+
+### 🟨 JavaScript & Web Tools
+
+**[Biome](https://biomejs.dev/internals/language-support/)** is a modern, fast formatter and linter for JS/TS ecosystems (JS[X], TS[X], JSON[C], CSS, GraphQL). It provides better defaults than ESLint:
+
+```yaml
+- repo: https://github.com/biomejs/pre-commit
+  rev: "v0.6.1"
+  hooks:
+    - id: biome-check
+      name: "🟨 javascript · Lint, format, and safe fixes with Biome"
+      additional_dependencies: ["@biomejs/biome@1.9.4"]
+```
+
+Biome VSCode Extension [here](https://marketplace.visualstudio.com/items?itemName=biomejs.biome)
+
+<details markdown="1">
+<summary>
+Alternatives to Biome (ESLint & Prettier)
+</summary>
+[ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) are more established alternatives with broader plugin ecosystems. While Prettier supports many file types, it can be notably slow, sometimes produces unexpected formatting, and sometimes breaks code (which I find annoying). Since this is primarily a Python-focused project template and Biome handles our JavaScript needs efficiently, we prefer it over the traditional ESLint/Prettier setup. Consider ESLint and Prettier if you need plugins, support for specific JS frameworks, or formatting for languages unsupported elsewhere. (More linters [here](https://github.com/caramelomartins/awesome-linters) as well)
+</details>
+
+### ✅ Data & Config Validation
+
+**[check-jsonschema](https://check-jsonschema.readthedocs.io/)** validates various configuration files using [JSON Schema](https://json-schema.org/specification). It supports JSON, YAML, and TOML files, and includes specialized validators like the [TaskFile](https://taskfile.dev/) and [GitHub Actions](https://github.com/features/actions) checker:
+
+```yaml
+- repo: https://github.com/python-jsonschema/check-jsonschema
+  rev: 0.31.0
+  hooks:
+    - id: check-github-workflows
+      name: "🐙 github-actions · Validate gh workflow files"
+      args: ["--verbose"]
+    - id: check-taskfile
+      name: "✅ taskfile · Validate Task configuration"
+```
+
+_Additional json schema available on [Schema Store](https://json.schemastore.org/pyproject.json)_
+
+VSCode [automatically provides intellisense and validation for JSON files with schema](https://code.visualstudio.com/docs/languages/json#_intellisense-and-validation). The [GitHub Actions Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions) provides action YAML file intellisense and validation. (This does not cover YAML, TOML, or taskfiles)
 
 ### 📝 Markdown
 
-[mdformat](https://mdformat.readthedocs.io/) for Markdown formatting with additional plugins for GitHub-Flavored Markdown, Ruff-style code formatting, and frontmatter support:
+**[mdformat](https://mdformat.readthedocs.io/)** for Markdown formatting with additional plugins for GitHub-Flavored Markdown, Ruff-style code formatting, and frontmatter support:
 
 ```yaml
 - repo: https://github.com/hukkin/mdformat
@@ -254,8 +263,7 @@ _Additional json schema available on the [Schema Store](https://json.schemastore
         - ruff                  # Required for mdformat-ruff
 ```
 
-[Markdownlint](https://github.com/markdownlint/markdownlint/tree/main) for Markdown linting.
-They also have a [VSCode plugin](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) that will display any issues in-editor.
+**[Markdownlint](https://github.com/markdownlint/markdownlint/tree/main)** for Markdown linting.
 
 ```yaml
 - repo: https://github.com/markdownlint/markdownlint
@@ -265,76 +273,84 @@ They also have a [VSCode plugin](https://marketplace.visualstudio.com/items?item
         name: "📝 markdown · Lint markdown"
 ```
 
+Markdownlint VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
+
 ### 🐚 Shell
 
-[shellcheck](https://www.shellcheck.net/) lints your shell scripts.
+**[ShellCheck](https://www.shellcheck.net/)** lints your shell scripts.
 
 ```yaml
-  - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.10.0.1
-    hooks:
-      - id: shellcheck
-        name: "🐚 shell · Lint shell scripts"
+# STRICT
+- repo: https://github.com/shellcheck-py/shellcheck-py
+  rev: v0.10.0.1
+  hooks:
+    - id: shellcheck
+      name: "🐚 shell · Lint shell scripts"
 ```
 
-[bashate](https://github.com/openstack/bashate) checks your shell script code style.
+ShellCheck VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
+
+**[bashate](https://github.com/openstack/bashate)** checks your shell script code style.
 
 ```yaml
-  - repo: https://github.com/openstack/bashate
-    rev: 2.1.1
-    hooks:
-      - id: bashate
-        name: "🐚 shell · Check shell script code style"
+# STRICT
+- repo: https://github.com/openstack/bashate
+  rev: 2.1.1
+  hooks:
+    - id: bashate
+      name: "🐚 shell · Check shell script code style"
 ```
 
 ### 🐮 Makefile
 
-[Checkmake](https://github.com/mrtazz/checkmake) for linting Makefile.
+**[Checkmake](https://github.com/mrtazz/checkmake)** for linting your Makefile.
 
 ```yaml
-  - repo: https://github.com/mrtazz/checkmake.git
-    rev: 0.2.2
-    hooks:
-      - id: checkmake
-        name: "🐮 Makefile · Lint Makefile"
+- repo: https://github.com/mrtazz/checkmake.git
+  rev: 0.2.2
+  hooks:
+    - id: checkmake
+      name: "🐮 Makefile · Lint Makefile"
 ```
 
 ### 📊 SQL Code
 
-[SQLFluff](https://docs.sqlfluff.com/en/stable/production/pre_commit.html) can be used to lint and attempt to auto-fix any of your `*.sql` files automatically.
+**[SQLFluff](https://docs.sqlfluff.com/en/stable/production/pre_commit.html)** can be used to lint and attempt to auto-fix any of your `*.sql` files automatically.
 
 ```yaml
-  - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 3.3.0
-    hooks:
-      - id: sqlfluff-fix
-        name: "📊 SQL · Attempts to fix rule violations."
-      # STRICT
-      - id: sqlfluff-lint
-        name: "📊 SQL · Lint SQL code files"
+- repo: https://github.com/sqlfluff/sqlfluff
+  rev: 3.3.0
+  hooks:
+    - id: sqlfluff-fix
+      name: "📊 SQL · Attempts to fix rule violations."
+    # STRICT
+    - id: sqlfluff-lint
+      name: "📊 SQL · Lint SQL code files"
 ```
 
 ### 📓 Notebooks
 
-[nbQA](https://nbqa.readthedocs.io/) for Jupyter notebook quality assurance, allowing us to use our standard Python tools on notebooks:
+**[nbQA](https://nbqa.readthedocs.io/)** for Jupyter notebook quality assurance, allowing us to use our standard Python tools on notebooks:
 
 ```yaml
 - repo: https://github.com/nbQA-dev/nbQA
   rev: 1.9.1
   hooks:
-    - id: nbqa-mypy
-      name: "📓 notebook · Type-check cells"
     - id: nbqa
       entry: nbqa mdformat
       name: "📓 notebook · Format markdown cells"
       args: ["--nbqa-md"]
       types: [jupyter]
-      additional_dependencies:  # Same dependencies as mdformat
+      additional_dependencies:
         - mdformat
         - mdformat-gfm
         - mdformat-ruff
         - mdformat-frontmatter
         - ruff
+    # STRICT
+    # TODO: Convert to pyright
+    - id: nbqa-mypy
+      name: "📓 notebook · Type-check cells"
 ```
 
 <details markdown="1">
@@ -344,9 +360,22 @@ ruff supports notebooks by default
 [Ruff has built-in support for Jupyter Notebooks](https://docs.astral.sh/ruff/configuration/#jupyter-notebook-discovery), so this has been excluded from nbQA since it would be redundant. nbQA has `nbqa-ruff-format` and `nbqa-ruff-check` hooks, but these appear to be redundant.
 </details>
 
+### 🖼️ Image Optimization
+
+**[oxipng](https://github.com/shssoichiro/oxipng)** is a PNG optimizer written in Rust with lossy and lossless options. (The selection of arguments below are slightly lossy):
+
+```yaml
+- repo: https://github.com/shssoichiro/oxipng
+  rev: v9.1.3
+  hooks:
+    - id: oxipng
+      name: "🖼️ images · Optimize PNG files"
+      args: ["-o", "4", "--strip", "safe", "--alpha"]
+```
+
 ### ✨ Additional File Types
 
-[Prettier](https://prettier.io/) handles formatting for various file types not covered by other tools (HTML, CSS, YAML, etc.). While it can be slow and sometimes produces code-breaking formatting, it remains the standard for these file types:
+**[Prettier](https://prettier.io/) (HTML, YAML, CSS)** handles formatting for various file types not covered by other tools. While it can be slow, sometimes produces code-breaking formatting, and I personally dislike it - it remains the standard for these file types:
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-prettier
@@ -358,6 +387,8 @@ ruff supports notebooks by default
       additional_dependencies:
         - prettier@3.4.2
 ```
+
+VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
 <details markdown="1">
 <summary>
@@ -755,19 +786,6 @@ Other hooks to consider:
 - [yamlfmt](https://github.com/google/yamlfmt)
 - [actionlint](https://github.com/rhysd/actionlint) - Lints github action files, may be a better checker than the currently selected one.
 
-### 🖼️ Image Optimization
-
-[oxipng](https://github.com/shssoichiro/oxipng) optimizes PNG files for size while preserving quality:
-
-```yaml
-- repo: https://github.com/shssoichiro/oxipng
-  rev: v9.1.3
-  hooks:
-    - id: oxipng
-      name: "🖼️ images · Optimize PNG files"
-      args: ["-o", "4", "--strip", "safe", "--alpha"]
-```
-
 ```
   - repo: https://github.com/mxr/sync-pre-commit-deps
     rev: v0.0.2
@@ -775,3 +793,5 @@ Other hooks to consider:
       - id: sync-pre-commit-deps
         name: "🪝 pre-commit · Sync hook dependencies based on other hooks"
 ```
+
+<!-- TODO: File optimization for other images -->

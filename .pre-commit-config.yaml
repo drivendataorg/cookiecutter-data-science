@@ -1,7 +1,6 @@
-# Documentation Here: https://github.com/GatlenCulp/gatlens-opinionated-template
 exclude: |
   (?x)^(
-      .*\{\{.*\}\}.*|    # Exclude any files with cookiecutter variables
+      .*\{\{.*\}\}.*|     # Exclude any files with cookiecutter variables
       docs/site/.*|       # Exclude mkdocs compiled files
       \.history/.*|       # Exclude history files
       .*cache.*/.*|       # Exclude cache directories
@@ -14,6 +13,9 @@ default_install_hook_types:
   - pre-commit
   - commit-msg
 repos:
+  # Documentation Here:
+  # https://github.com/GatlenCulp/gatlens-opinionated-template
+  #
   # ---------------------------------------------------------------------------- #
   #                              🔄 Pre-Commit Hooks                             #
   # ---------------------------------------------------------------------------- #
@@ -35,8 +37,8 @@ repos:
       - id: ruff-format
         name: "🐍 python · Format with Ruff"
       # STRICT
-      # - id: ruff
-      #   args: [ --fix ]
+      - id: ruff
+        args: [--fix]
 
   # STRICT
   - repo: https://github.com/RobertCraigie/pyright-python
@@ -92,18 +94,18 @@ repos:
   ### Shell ###
 
   # STRICT
-  # - repo: https://github.com/shellcheck-py/shellcheck-py
-  #   rev: v0.10.0.1
-  #   hooks:
-  #     - id: shellcheck
-  #       name: "🐚 shell · Lint shell scripts"
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        name: "🐚 shell · Lint shell scripts"
 
   # STRICT
-  # - repo: https://github.com/openstack/bashate
-  #   rev: 2.1.1
-  #   hooks:
-  #     - id: bashate
-  #       name: "🐚 shell · Check shell script code style"
+  - repo: https://github.com/openstack/bashate
+    rev: 2.1.1
+    hooks:
+      - id: bashate
+        name: "🐚 shell · Check shell script code style"
 
   ### Makefile ###
   - repo: https://github.com/mrtazz/checkmake.git
@@ -127,9 +129,6 @@ repos:
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.9.1
     hooks:
-      # STRICT
-      # - id: nbqa-mypy
-      #   name: "📓 notebook · Type-check cells"
       - id: nbqa
         entry: nbqa mdformat
         name: "📓 notebook · Format markdown cells"
@@ -141,6 +140,10 @@ repos:
           - mdformat-ruff
           - mdformat-frontmatter
           - ruff
+      # STRICT
+      # TODO: Convert to pyright
+      - id: nbqa-mypy
+        name: "📓 notebook · Type-check cells"
 
   ### PNG Images ###
   - repo: https://github.com/shssoichiro/oxipng
@@ -193,6 +196,8 @@ repos:
 
   # ------------------------------ 🛠️ Local Tools ----------------------------- #
 
+  # ADD LOCAL TOOLS HERE.
+  # EXAMPLE:
   # - repo: local
   #   hooks:
   #     - id: make-lint
@@ -206,6 +211,7 @@ repos:
   # ---------------------------------------------------------------------------- #
   # --------------------------- ✍️ Git Commit Quality -------------------------- #
 
+  # WORK IN PROGRESS
   # - repo: https://github.com/ljnsn/cz-conventional-gitmoji
   #     rev: 0.2.4
   #     hooks:
