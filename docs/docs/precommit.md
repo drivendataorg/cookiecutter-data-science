@@ -461,7 +461,7 @@ Accompanying Improved Git Commit Interface
 
 Commitizen comes with a built-in and customizable CLI that will walk you through making one of these standard commits. If you're using GOTem, this is preinstalled and you can run `cz commit` instead of `git commit`
 
-Instead of commitizen, I recommend using [`czg`](https://cz-git.qbb.sh/) (a successor to cz-git) for a better implementation of the `cz` cli (I'm personally a fan of the AI-generated commits it has.)
+_As an alternative to commitizen, there is also [`czg`](https://cz-git.qbb.sh/) (`cz-git` improved) which has a great implementation of AI-generated commits. However, it's [extremely painful to configure outside of non-javascript projects](https://github.com/Zhengqbbb/cz-git/issues/213) whereas [commitizen is more mature in this area.](https://commitizen-tools.github.io/commitizen/customization/)_
 
 ![czg interface](https://user-images.githubusercontent.com/40693636/175753060-cf4f5e48-100d-430a-93e9-31b17f42802f.gif)
 
@@ -471,27 +471,34 @@ Instead of commitizen, I recommend using [`czg`](https://cz-git.qbb.sh/) (a succ
 <summary>
 Alternatives to Commitizen (Commitlint)
 </summary>
+
 [commitlint](https://github.com/conventional-changelog/commitlint) is a similar project to commitizen. Many articles claim that the difference between the two are that commitizen is more of a tool to generate these fancy commits while commitlint is meant to lint the commits. However, considering `cz check` is a thing, I'm confused what the difference is. The tools can be used together. Seems like commitizen has better python support than commitlint. Projects equally popular. More research to be done on the differences!
+
 </details>
 
-<!-- Note: commit-msg hooks are not installed by default -->
+_pre-commit only installs hooks in the "pre-commit" stage by default. This hook operates on the commit-msg stage, and thus you need to include this stage in the hooks installed by default._
 
 ```yaml
-- repo: https://github.com/commitizen-tools/commitizen
-  rev: v4.1.0
-  hooks:
-    - id: commitizen
-      name: "🌳 git · Validate commit message"
-      stages: [commit-msg]
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+repos:
+# ... other hooks ...
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.1.0
+    hooks:
+      - id: commitizen
+        name: "🌳 git · Validate commit message"
+        stages: [commit-msg]
 ```
 
 ## 05 🧪 Fast Tests (Local)
 
 While extensive tests may be too time consuming for a pre-commit hook, it can be helpful to run fast local tests to detect unexpected failures in your code before you are 10 commits in and unsure which one broke your code.
 
-The example below uses `pytest`. The first hook checks that the tests don't contain any syntax errors and can be successfully collected. This should Always pass.
+The example below uses `pytest`. The first hook checks that the tests don't contain any syntax errors and can be successfully collected. This should always pass.
 
-The second hook runs all pytests marked as
+The second hook runs all fast pytests using my custom pytest option which leverages the pytest-timeout feature you can read about [here](./pytest-customization.md)
 
 ```yaml
 - repo: local

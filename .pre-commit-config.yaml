@@ -13,8 +13,9 @@ default_install_hook_types:
   - pre-commit
   - commit-msg
 repos:
+  #
   # Documentation Here:
-  # https://github.com/GatlenCulp/gatlens-opinionated-template
+  # https://gatlenculp.github.io/gatlens-opinionated-template/precommit/
   #
   # ---------------------------------------------------------------------------- #
   #                              🔄 Pre-Commit Hooks                             #
@@ -220,4 +221,12 @@ repos:
         language: system
         types: [python]
         args: ["--collect-only"]
+        pass_filenames: false
+      # STRICT
+      - id: pytest-fast
+        name: 🧪 test · Running fast tests
+        entry: ./.venv/bin/pytest tests
+        language: system
+        types: [python]
+        args: ["--max-timeout=3"]
         pass_filenames: false

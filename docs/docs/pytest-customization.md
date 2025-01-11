@@ -76,9 +76,10 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
     """Filter test items based on their timeout marker value.
 
     This pytest hook modifies the test collection by removing tests whose timeout
-    value exceeds the maximum specified timeout. The maximum timeout can be set
-    using the --max-timeout command line option. If --max-timeout is not provided,
-    all tests will run regardless of their timeout value.
+    value exceeds the maximum specified timeout, as well as tests without any
+    timeout marker. The maximum timeout can be set using the --max-timeout command
+    line option. If --max-timeout is not provided, all tests will run regardless
+    of their timeout value.
 
     Args:
         config: The pytest configuration object containing test session information
@@ -86,23 +87,25 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
 
     Note:
         Tests are marked with @pytest.mark.timeout(value) decorator. If a test's
-        timeout value is greater than max_timeout, it will be deselected.
+        timeout value is greater than max_timeout or if it has no timeout marker,
+        it will be deselected.
     """
     max_timeout = config.getoption("--max-timeout")
     if max_timeout is None:
         return
 
     all_items = set(items)
-    slow_tests = {
+    deselected_tests = {
         item
         for item in items
-        if item.get_closest_marker("timeout")
-        and item.get_closest_marker("timeout").args[0] > max_timeout
+        if not item.get_closest_marker("timeout")  # Remove tests without timeout marker
+        or item.get_closest_marker("timeout").args[0]
+        > max_timeout  # Remove tests exceeding max_timeout
     }
 
-    if slow_tests:
-        config.hook.pytest_deselected(items=list(slow_tests))
-        items[:] = list(all_items - slow_tests)
+    if deselected_tests:
+        config.hook.pytest_deselected(items=list(deselected_tests))
+        items[:] = list(all_items - deselected_tests)
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
