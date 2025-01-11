@@ -155,8 +155,8 @@ Consider using individual tools if you need specific features not yet supported 
     - id: ruff-format
       name: "🐍 python · Format with Ruff"
     # STRICT
-    # - id: ruff
-    #   args: [ --fix ]
+    - id: ruff
+      args: [ --fix ]
 ```
 
 <br/>
@@ -360,7 +360,11 @@ ruff supports notebooks by default
   hooks:
     - id: oxipng
       name: "🖼️ images · Optimize PNG files"
-      args: ["-o", "4", "--strip", "safe", "--alpha"]
+      args: [
+        "-o", "4",
+        "--strip", "safe",
+        "--alpha"
+      ]
 ```
 
 ### ✨ Additional File Types
@@ -459,7 +463,7 @@ _My disatisfaction with prettier is humorously shared by pre-commit, as they [th
 Accompanying Improved Git Commit Interface
 </summary>
 
-Commitizen comes with a built-in and customizable CLI that will walk you through making one of these standard commits. If you're using GOTem, this is preinstalled and you can run `cz commit` instead of `git commit`
+Commitizen comes with a built-in and customizable CLI that will walk you through making one of these standard commits. If you're using GOTem, this is preinstalled and you can run `cz commit` instead of `git commit`.
 
 _As an alternative to commitizen, there is also [`czg`](https://cz-git.qbb.sh/) (`cz-git` improved) which has a great implementation of AI-generated commits. However, it's [extremely painful to configure outside of non-javascript projects](https://github.com/Zhengqbbb/cz-git/issues/213) whereas [commitizen is more mature in this area.](https://commitizen-tools.github.io/commitizen/customization/)_
 
@@ -476,7 +480,43 @@ Alternatives to Commitizen (Commitlint)
 
 </details>
 
-_pre-commit only installs hooks in the "pre-commit" stage by default. This hook operates on the commit-msg stage, and thus you need to include this stage in the hooks installed by default._
+- Pre-commit only installs hooks in the `pre-commit` git stage by default. This hook operates on the `commit-msg` stage, and thus you need to include this stage in `default_install_hook_types` as done below.
+
+- **[cz-conventional-gitmoji](https://github.com/ljnsn/cz-conventional-gitmoji)** is [a commitizen preset](https://commitizen-tools.github.io/commitizen/third-party-commitizen/) combining [gitmoji](https://gitmoji.dev/) and [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/).
+
+<details markdown="1">
+<summary>
+Click to learn how to remove **cz-conventional-gitmoji**
+</summary>
+
+Remove the name line from `pyproject.toml` which sets `cz_gitmoji` as the default for commitizen (confusingly, this is the name for cz-conventional-gitmoji)
+
+```toml
+# pyproject.toml
+[tool.commitizen]
+name = "cz_gitmoji"
+```
+
+And remove it as dependency from your hooks:
+
+```yaml
+# .pre-commit-config.yaml
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+repos:
+# ... other hooks ...
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.1.0
+    hooks:
+      - id: commitizen
+        name: "🌳 git · Validate commit message"
+        stages: [commit-msg]
+        # DELETE LINE BELOW
+        additional_dependencies: [cz-conventional-gitmoji]
+```
+
+</details>
 
 ```yaml
 default_install_hook_types:
@@ -490,6 +530,7 @@ repos:
       - id: commitizen
         name: "🌳 git · Validate commit message"
         stages: [commit-msg]
+        additional_dependencies: [cz-conventional-gitmoji]
 ```
 
 ## 05 🧪 Fast Tests (Local)
@@ -498,23 +539,26 @@ While extensive tests may be too time consuming for a pre-commit hook, it can be
 
 The example below uses `pytest`. The first hook checks that the tests don't contain any syntax errors and can be successfully collected. This should always pass.
 
-The second hook runs all fast pytests using my custom pytest option which leverages the pytest-timeout feature you can read about [here](./pytest-customization.md)
+The second hook runs all fast pytests using my custom pytest option which leverages the pytest-timeout feature you can read about [here](https://gatlenculp.github.io/gatlens-opinionated-template/pytest-customization/)
 
 ```yaml
 - repo: local
   hooks:
-    - id: fast-tests
-      name: Run Fast Tests
-      entry: pytest
+    - id: pytest-collect
+      name: 🧪 test · Validate test formatting
+      entry: ./.venv/bin/pytest tests
       language: system
       types: [python]
-      args: [
-        "tests",
-        "-m", "not slow",  # Skip slow-marked tests
-        "--quiet"
-      ]
+      args: ["--collect-only"]
       pass_filenames: false
-      always_run: true
+    # STRICT
+    - id: pytest-fast
+      name: 🧪 test · Run fast tests
+      entry: ./.venv/bin/pytest tests
+      language: system
+      types: [python]
+      args: ["--max-timeout=3"]
+      pass_filenames: false
 ```
 
 <!-- Also maybe add profiling? -->
@@ -532,6 +576,8 @@ This is by no means an exhaustive list of great hooks. Your encouraged to pick-a
       args: ["lint"]
       language: system
 ```
+
+Check below for even more wonderful pre-commit hooks!
 
 <details markdown="1">
 
@@ -769,27 +815,27 @@ repos:
 
 </details>
 
-### Inspiration
+### Other hooks to consider
 
-Some inspo from [this article](https://medium.com/marvelous-mlops/welcome-to-pre-commit-heaven-5b622bb8ebce)
+Here are some other hooks I haven't added but would consider adding!
 
-Additional wonderful pre-commit hooks can be found [here](https://pre-commit.com/hooks.html)
-
-Note: I went a bit overboard with cherry picking my favorite formatters and linters and stuff. Considering the security concerns of having so many projects this might not be wise. This may also lead to maintaining more hooks than is worthwhile. It's on my todo list to look at ensemble linters and formatters. Such as [Megalinter](https://github.com/oxsecurity/megalinter/tree/main) and [Superlinter](https://github.com/super-linter/super-linter)
-
-Other hooks to consider:
+**Individual Hooks**
 
 - [buildbuf](https://github.com/bufbuild/buf) - Protobuf Linter
-- [Clang](https://github.com/pre-commit/mirrors-clang-format) - C++ liner
+- [Clang](https://github.com/pre-commit/mirrors-clang-format) - C++ linter
 - [gitlint](https://github.com/jorisroovers/gitlint) - Alternative to commitlint, may actually be preferred.
-- [typos](https://github.com/crate-ci/typos) or [codespell](https://github.com/codespell-project/codespell) - Finds common misspellings in code and documentation. Someone online preferred Typos over codespell because:
-
-> - Typos corrected more typos (at least on my code bases). This was surprising considering codespell's corrections list is at least 10 times larger than Typos's.
-> - Typos has Vscode support.
-
-- [yamllint](https://github.com/adrienverge/yamllint)
-- [yamlfmt](https://github.com/google/yamlfmt)
+- [typos](https://github.com/crate-ci/typos) or [codespell](https://github.com/codespell-project/codespell) - Finds common misspellings in code and documentation. One blog post preferred Typos over codespell because it found more typos (and apparently has VSCode support?)
+- [yamllint](https://github.com/adrienverge/yamllint) - YAML linter
+- [yamlfmt](https://github.com/google/yamlfmt) - YAML formatter by Google
 - [actionlint](https://github.com/rhysd/actionlint) - Lints github action files, may be a better checker than the currently selected one.
+- [uv pre-commits](https://github.com/astral-sh/uv-pre-commit) - A collection of pre-commits for [uv](https://docs.astral.sh/uv/) by Astral
+- [Vulture](https://github.com/jendrikseipp/vulture) or [Deadcode](https://github.com/albertas/deadcode) - Detect unused code in Python
+- [sync-pre-commit-deps](https://github.com/mxr/sync-pre-commit-deps) - Sync pre-commit hook dependencies based on other installed hooks (to avoid installing multiple versions I assume).
+
+<details markdown="1">
+<summary>
+sync-pre-commit-deps hook here
+</summary>
 
 ```yaml
   - repo: https://github.com/mxr/sync-pre-commit-deps
@@ -799,36 +845,31 @@ Other hooks to consider:
         name: "🪝 pre-commit · Sync hook dependencies based on other hooks"
 ```
 
-Note: If you're using [uv](https://docs.astral.sh/uv/), they [also have pre-commits](https://github.com/astral-sh/uv-pre-commit) available.
+</details>
 
-<!-- TODO: File optimization for other images -->
+<br/>
 
-<!-- TODO: Python unused code detector: Add vulture https://github.com/jendrikseipp/vulture
-or deadcode https://github.com/albertas/deadcode
- -->
+**Hook lists**
 
-<!--
-TODO: Create a profanity check, possibly with gitleaks
-https://blog.nashtechglobal.com/profanity-check-source-code-with-gitleaks-why-not/ 
--->
+- [featured hooks](https://pre-commit.com/hooks.html) by the pre-commit team
+- [first-party hooks](https://github.com/pre-commit/pre-commit-hooks) by the pre-commit team (some used in this guide).
+- [Megalinter's Supported Linters](https://megalinter.io/latest/supported-linters/) - Not all of these may provide pre-commits but regardless it's a great collection of QA tools!
+- (More but you'll have to find them yourself :P)
+
+<br/>
+
+**What's Missing?**
+
+- File optimizers for more than just PNGs (JPG, GIF, etc.)
+- Profanity checker (You'll be surprised with the amount of profanity on repos you're about to make public). This can [possibly be done with GitLeaks](https://blog.nashtechglobal.com/profanity-check-source-code-with-gitleaks-why-not/)
+- ... This list could go on and on ...
+
+**Ensemble Hooks (Linters, Formatters, etc.)**
+
+I went a bit overboard with cherry picking my favorite formatters, linters, etc. This may lead to maintaining more hooks than is worthwhile. It's on my todo list to look at ensemble linters and formatters such as [Megalinter](https://github.com/oxsecurity/megalinter/tree/main) and [Superlinter](https://github.com/super-linter/super-linter) which would GREATLY reduce the amount of overhead for code QA and provide support to languages without hunting down mutliple hooks for each of them. These also have the added benefit of better integration to other CI/CD tools, pre-built container images, and security scanning.
+
+> 🦙 MegaLinter analyzes 50 languages, 22 formats, 21 tooling formats, excessive copy-pastes, spelling mistakes and security issues in your repository sources with a GitHub Action, other CI tools or locally.
+
+I'm slightly concerned that these ensemble linters might be an additional annoying piece of software to learn and configure that sets off small teams from using them entirely. Additionally, this software may not support your favorite linters - some of which mentioned in this guide include Biomejs and mdformat. I'm sure the list of available tools is extendable although I'm unsure how much effort is needed to do so.
 
 <!-- TODO: Read this, https://kislyuk.github.io/argcomplete/ -->
-
-<!-- 
-TODO: Look into the differences above. Oop. 
-  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: "v9.20.0"
-    hooks:
-      - id: commitlint
-        stages: [commit-msg]
--->
-
-**[cz-conventional-gitmoji](https://github.com/ljnsn/cz-conventional-gitmoji)** is a third-party prompt template that combines the [gitmoji](https://gitmoji.dev/) and [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) standards. (More templates [here](https://commitizen-tools.github.io/commitizen/third-party-commitizen/)). I haven't yet gotten this to work, but would be using it on my project otherwise.
-
-```yaml
-  # WORK IN PROGRESS
-  # - repo: https://github.com/ljnsn/cz-conventional-gitmoji
-  #     rev: 0.2.4
-  #     hooks:
-  #       - id: conventional-gitmoji
-```

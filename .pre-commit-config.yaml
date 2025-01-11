@@ -224,7 +224,7 @@ repos:
         pass_filenames: false
       # STRICT
       - id: pytest-fast
-        name: 🧪 test · Running fast tests
+        name: 🧪 test · Run fast tests
         entry: ./.venv/bin/pytest tests
         language: system
         types: [python]
