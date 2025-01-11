@@ -1,4 +1,14 @@
-# Pre-commit Hooks Collection
+# Effortless Code Quality: The Ultimate Pre-Commit Hooks Guide for 2025
+
+## Background
+
+I've been tinkering with app development since middle school, but it wasn't until the latter half of my undergrad that I got my first taste of professional software engineering which was a whirlwind of new concepts—CI/CD, unit testing, packaging, dependency management, linting, formatting, schemas, databases, remote machines, cloud infrastructure, Git branches beyond `main`, etc.
+
+This flood of information, combined with my growing obsession with systems design (and mounting frustration with outdated tools and sloppy code), sparked a deep dive into modern development practices. I channeled this energy into creating [GOTem](https://gatlenculp.github.io/gatlens-opinionated-template/) (Gatlen's Opinionated Template), a project template that weaves together what I consider the best practices and most robust tooling available. It's a bit overkill, but building GOTem served two purposes: helping me learn these tools through hands-on experience, and creating a foundation for future work that embodies the practices I was discovering. It's a relaxing side project alongside my normal responsibilities that I hope will bring a unique perspective to the AI Safety research space—at least until these skills are automated away. (✖﹏✖)
+
+During this journey, I fell in love with [pre-commit](https://pre-commit.com/) hooks — simplicity, power, and a wonderful "set-it-and-forget-it" quality. Unlike heavier solutions like [GitHub Actions](https://github.com/features/actions), pre-commit hooks integrate seamlessly into daily development while remaining lightweight. They're particularly valuable for research teams who need quality assurance but don't want to wrestle with complex CI/CD setups—you can make them as strict or lenient as your workflow demands.
+
+What follows is my carefully curated collection of pre-commit hooks, primarily (but not exclusively) focused on Python development. While my original documentation includes detailed explanations of alternatives and other information, Medium's format limitations mean I've had to summarize this content. For the complete rationale behind these choices, check out [GOTem's Pre-Commit documentation](https://gatlenculp.github.io/gatlens-opinionated-template/precommit/).
 
 ![pre-commit logo](https://avatars.githubusercontent.com/u/6943086?s=280&v=4)
 
@@ -40,12 +50,7 @@ Pre-commit can be as strict as you want depending on your project's quality-time
 1. Requiring commit messages to follow a standard (Like [Commitizen](https://commitizen-tools.github.io/commitizen/))
 1. Running fast tests
 
-<details markdown="1">
-<summary>
-Alternatives (Husky)
-</summary>
-[Husky](https://typicode.github.io/husky/) is an alternative to pre-commit that's primarily designed for the NodeJS ecosystem. To my knowledge, while both tools handle Git hooks effectively, pre-commit offers broader multi-language support and has become standard in the Python community.
-</details>
+> **Note**: Husky is a NodeJS-focused alternative to pre-commit, but has less multi-language support.
 
 ## Installation
 
@@ -70,12 +75,7 @@ pre-commit run --all-files
 git commit --no-verify
 ```
 
-<details markdown="1">
-<summary>
-Note on security with `pre-commit autoupdate`
-</summary>
-`pre-commit autoupdate` will bump all of your hook versions to the latest release. Although helpful, use with caution around untrusted hooks since security vulnerabilities or malware can be introduced between versions. This is mostly a non-issue which applies to basically all software but worth mentioning.
-</details>
+> **Note**: Use caution with `pre-commit autoupdate` on untrusted hooks due to potential security risks.
 
 ______________________________________________________________________
 
@@ -93,12 +93,7 @@ All hooks labeled with `# STRICT` are commented out by default and not recommend
 
 **[GitLeaks](https://github.com/gitleaks/gitleaks)** is a fast, lightweight scanner that prevents secrets (passwords, API keys, tokens) from being committed to your repository.
 
-<details markdown="1">
-<summary>
-Alternatives to GitLeaks (TruffleHog)
-</summary>
-[TruffleHog](https://github.com/trufflesecurity/trufflehog) offers more comprehensive and continuous security scanning across a variety of platforms (not just files). However, it requires more setup time and resources than GitLeaks. Consider TruffleHog for expansive projects with strict security requirements.
-</details>
+> **Note**: TruffleHog is a more comprehensive but complex alternative to GitLeaks.
 
 ```yaml
 - repo: https://github.com/gitleaks/gitleaks
@@ -119,34 +114,7 @@ This section covers tools for code formatting, linting, type checking, and schem
 - [VSCode extension](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff)
 - While Ruff does many things, type checking it does not... [yet](https://github.com/astral-sh/ruff/issues/3893).
 
-<details markdown="1">
-<summary>
-Alternatives to Ruff (Too Many to Name)
-</summary>
-
-![ruff](https://user-images.githubusercontent.com/1309177/232603514-c95e9b0f-6b31-43de-9a80-9e844173fd6a.svg#only-dark)
-
-Before Ruff, a typical Python project might use several separate tools:
-
-- [Black](https://black.readthedocs.io/) for code formatting
-- [isort](https://pycqa.github.io/isort/) for import sorting
-- [Flake8](https://flake8.pycqa.org/) for style enforcement
-- [Pylint](https://pylint.readthedocs.io/) for code analysis
-- [Bandit](https://bandit.readthedocs.io/) for security checks
-- [pyupgrade](https://github.com/asottile/pyupgrade) for modernizing syntax
-- [pydocstyle](https://www.pydocstyle.org/) for docstring checking
-- [Many more... 😵‍💫](https://docs.astral.sh/ruff/faq/#which-tools-does-ruff-replace)
-
-While these tools are battle-tested and highly configurable, using Ruff provides several advantages:
-
-1. **Speed**: Ruff is 10-100x faster as it's written in Rust
-1. **Simplicity**: Single configuration file and consistent interface
-1. **Active Development**: Rapidly adding features and reaching feature parity
-1. **Modern Defaults**: Better handling of new Python features
-
-Consider using individual tools if you need specific features not yet supported by Ruff or have complex existing configurations you need to maintain.
-
-</details>
+> **Note**: Before Ruff, projects used multiple tools like Black, isort, Flake8, etc. Ruff consolidates these with better speed and modern defaults.
 
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -166,12 +134,7 @@ Consider using individual tools if you need specific features not yet supported 
 - [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=ms-pyright.pyright), but [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance), the default extension for Python, has it built-in.
 - _This is a community supported pre-commit hook, endorsed by microsoft_
 
-<details markdown="1">
-<summary>
-Alternatives to Pyright (MyPy)
-</summary>
-Microsoft's [Pyright](https://microsoft.github.io/pyright/) is a [faster and more featureful](https://github.com/microsoft/pyright/blob/main/docs/mypy-comparison.md) alternative to [MyPy](https://mypy-lang.org/), but MyPy is the original type checker.
-</details>
+> **Note**: MyPy is the original type checker, but Pyright offers better speed and features.
 
 ```yaml
 # STRICT
@@ -201,12 +164,7 @@ Microsoft's [Pyright](https://microsoft.github.io/pyright/) is a [faster and mor
 
 - [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=biomejs.biome)
 
-<details markdown="1">
-<summary>
-Alternatives to Biome (ESLint & Prettier)
-</summary>
-[ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) are more established alternatives with broader plugin ecosystems. While Prettier supports many file types, it can be notably slow, sometimes produces unexpected formatting, and sometimes breaks code (which I find annoying). Since this is primarily a Python-focused project template and Biome handles our JavaScript needs efficiently, we prefer it over the traditional ESLint/Prettier setup. Consider ESLint and Prettier if you need plugins, support for specific JS frameworks, or formatting for languages unsupported elsewhere. (More linters [here](https://github.com/caramelomartins/awesome-linters) as well)
-</details>
+> **Note**: ESLint/Prettier are more established but slower; use them if you need specific plugins or framework support.
 
 ```yaml
 - repo: https://github.com/biomejs/pre-commit
@@ -322,12 +280,7 @@ Alternatives to Biome (ESLint & Prettier)
 
 **[nbQA](https://nbqa.readthedocs.io/)** for Jupyter notebook quality assurance, allowing us to use our standard Python tools on notebooks.
 
-<details markdown="1">
-<summary>
-ruff supports notebooks by default
-</summary>
-[Ruff has built-in support for Jupyter Notebooks](https://docs.astral.sh/ruff/configuration/#jupyter-notebook-discovery), so this has been excluded from nbQA since it would be redundant. nbQA has `nbqa-ruff-format` and `nbqa-ruff-check` hooks, but these appear to be redundant.
-</details>
+> **Note**: Ruff has [native Jupyter Notebook support](https://docs.astral.sh/ruff/configuration/#jupyter-notebook-discovery), making some nbQA features redundant.
 
 ```yaml
 - repo: https://github.com/nbQA-dev/nbQA
@@ -373,18 +326,7 @@ ruff supports notebooks by default
 
 - [VSCode extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-<details markdown="1">
-<summary>
-Future Improvements
-</summary>
-
-I might replace Prettier with more focused tools in the future (Perhaps [HTMLHint](https://htmlhint.com/) for HTML validation but it's hardly a linter.)
-
-However, this would require managing multiple tools and dependencies, so I'm sticking with Prettier for now.
-
-_My disatisfaction with prettier is humorously shared by pre-commit, as they [themselves no longer support the prettier hook](https://github.com/pre-commit/mirrors-prettier#archived) because "prettier made some changes that breaks plugins entirely"_
-
-</details>
+> **Note**: Future plans include replacing Prettier with more focused tools for specific file types.
 
 ```yaml
 - repo: https://github.com/pre-commit/mirrors-prettier
@@ -458,65 +400,7 @@ _My disatisfaction with prettier is humorously shared by pre-commit, as they [th
 
 **[Commitizen](https://commitizen.github.io/cz-cli/)** enforces high-quality standardized commit messages that enable automatic changelog generation and semantic versioning
 
-<details markdown="1">
-<summary>
-Accompanying Improved Git Commit Interface
-</summary>
-
-Commitizen comes with a built-in and customizable CLI that will walk you through making one of these standard commits. If you're using GOTem, this is preinstalled and you can run `cz commit` instead of `git commit`.
-
-_As an alternative to commitizen, there is also [`czg`](https://cz-git.qbb.sh/) (`cz-git` improved) which has a great implementation of AI-generated commits. However, it's [extremely painful to configure outside of non-javascript projects](https://github.com/Zhengqbbb/cz-git/issues/213) whereas [commitizen is more mature in this area.](https://commitizen-tools.github.io/commitizen/customization/)_
-
-![czg interface](https://user-images.githubusercontent.com/40693636/175753060-cf4f5e48-100d-430a-93e9-31b17f42802f.gif)
-
-</details>
-
-<details markdown="1">
-<summary>
-Alternatives to Commitizen (Commitlint)
-</summary>
-
-[commitlint](https://github.com/conventional-changelog/commitlint) is a similar project to commitizen. Many articles claim that the difference between the two are that commitizen is more of a tool to generate these fancy commits while commitlint is meant to lint the commits. However, considering `cz check` is a thing, I'm confused what the difference is. The tools can be used together. Seems like commitizen has better python support than commitlint. Projects equally popular. More research to be done on the differences!
-
-</details>
-
-- Pre-commit only installs hooks in the `pre-commit` git stage by default. This hook operates on the `commit-msg` stage, and thus you need to include this stage in `default_install_hook_types` as done below.
-
-- **[cz-conventional-gitmoji](https://github.com/ljnsn/cz-conventional-gitmoji)** is [a commitizen preset](https://commitizen-tools.github.io/commitizen/third-party-commitizen/) combining [gitmoji](https://gitmoji.dev/) and [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/).
-
-<details markdown="1">
-<summary>
-Click to learn how to remove **cz-conventional-gitmoji**
-</summary>
-
-Remove the name line from `pyproject.toml` which sets `cz_gitmoji` as the default for commitizen (confusingly, this is the name for cz-conventional-gitmoji)
-
-```toml
-# pyproject.toml
-[tool.commitizen]
-name = "cz_gitmoji"
-```
-
-And remove it as dependency from your hooks:
-
-```yaml
-# .pre-commit-config.yaml
-default_install_hook_types:
-  - pre-commit
-  - commit-msg
-repos:
-# ... other hooks ...
-  - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.1.0
-    hooks:
-      - id: commitizen
-        name: "🌳 git · Validate commit message"
-        stages: [commit-msg]
-        # DELETE LINE BELOW
-        additional_dependencies: [cz-conventional-gitmoji]
-```
-
-</details>
+> **Note**: Commitizen provides a CLI interface for standardized commits, with alternatives like czg for AI-generated commits.
 
 ```yaml
 default_install_hook_types:
@@ -577,13 +461,7 @@ This is by no means an exhaustive list of great hooks. Your encouraged to pick-a
       language: system
 ```
 
-Check below for even more wonderful pre-commit hooks!
-
-<details markdown="1">
-
-<summary>
-View final `.pre-commit-config.yaml` file
-</summary>
+**final `.pre-commit-config.yaml` file**
 
 ```yaml
 exclude: |
@@ -820,8 +698,6 @@ repos:
         pass_filenames: false
 ```
 
-</details>
-
 ### Other hooks to consider
 
 Here are some other hooks I haven't added but would consider adding!
@@ -838,21 +714,6 @@ Here are some other hooks I haven't added but would consider adding!
 - [uv pre-commits](https://github.com/astral-sh/uv-pre-commit) - A collection of pre-commits for [uv](https://docs.astral.sh/uv/) by Astral
 - [Vulture](https://github.com/jendrikseipp/vulture) or [Deadcode](https://github.com/albertas/deadcode) - Detect unused code in Python
 - [sync-pre-commit-deps](https://github.com/mxr/sync-pre-commit-deps) - Sync pre-commit hook dependencies based on other installed hooks (to avoid installing multiple versions I assume).
-
-<details markdown="1">
-<summary>
-sync-pre-commit-deps hook here
-</summary>
-
-```yaml
-  - repo: https://github.com/mxr/sync-pre-commit-deps
-    rev: v0.0.2
-    hooks:
-      - id: sync-pre-commit-deps
-        name: "🪝 pre-commit · Sync hook dependencies based on other hooks"
-```
-
-</details>
 
 <br/>
 
