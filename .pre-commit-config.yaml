@@ -37,15 +37,15 @@ repos:
       - id: ruff-format
         name: "🐍 python · Format with Ruff"
       # STRICT
-      - id: ruff
-        args: [--fix]
+      # - id: ruff
+      #   args: [--fix]
 
   # STRICT
-  - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.391
-    hooks:
-      - id: pyright
-        name: "🐍 python · Check types"
+  # - repo: https://github.com/RobertCraigie/pyright-python
+  #   rev: v1.1.391
+  #   hooks:
+  #     - id: pyright
+  #       name: "🐍 python · Check types"
 
   - repo: https://github.com/abravalheri/validate-pyproject
     rev: v0.23
@@ -94,18 +94,18 @@ repos:
   ### Shell ###
 
   # STRICT
-  - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.10.0.1
-    hooks:
-      - id: shellcheck
-        name: "🐚 shell · Lint shell scripts"
+  # - repo: https://github.com/shellcheck-py/shellcheck-py
+  #   rev: v0.10.0.1
+  #   hooks:
+  #     - id: shellcheck
+  #       name: "🐚 shell · Lint shell scripts"
 
   # STRICT
-  - repo: https://github.com/openstack/bashate
-    rev: 2.1.1
-    hooks:
-      - id: bashate
-        name: "🐚 shell · Check shell script code style"
+  # - repo: https://github.com/openstack/bashate
+  #   rev: 2.1.1
+  #   hooks:
+  #     - id: bashate
+  #       name: "🐚 shell · Check shell script code style"
 
   ### Makefile ###
   - repo: https://github.com/mrtazz/checkmake.git
@@ -122,8 +122,8 @@ repos:
       - id: sqlfluff-fix
         name: "📊 SQL · Attempts to fix rule violations."
       # STRICT
-      - id: sqlfluff-lint
-        name: "📊 SQL · Lint SQL code files"
+      # - id: sqlfluff-lint
+      #   name: "📊 SQL · Lint SQL code files"
 
   ### Notebooks ###
   - repo: https://github.com/nbQA-dev/nbQA
@@ -181,7 +181,6 @@ repos:
         name: "📁 filesystem/🔗 symlink · Check symlink validity"
       - id: destroyed-symlinks
         name: "📁 filesystem/🔗 symlink · Detect broken symlinks"
-
       # ------------------------------- 🌳 Git Tools ------------------------------- #
       - id: check-merge-conflict
         name: "🌳 git · Detect conflict markers"
@@ -192,30 +191,13 @@ repos:
         args: ["--branch", "main", "--branch", "master"]
       - id: check-added-large-files
         name: "🌳 git · Block large file commits"
-        args: ["--maxkb=1000"]
-
-  # ------------------------------ 🛠️ Local Tools ----------------------------- #
-
-  # ADD LOCAL TOOLS HERE.
-  # EXAMPLE:
-  # - repo: local
-  #   hooks:
-  #     - id: make-lint
-  #       name: Run 'make lint'
-  #       entry: make
-  #       args: ["lint"]
-  #       language: system
+        args: ["--maxkb=5000"]
 
   # ---------------------------------------------------------------------------- #
   #                            📝 Commit Message Hooks                           #
   # ---------------------------------------------------------------------------- #
+  #
   # --------------------------- ✍️ Git Commit Quality -------------------------- #
-
-  # WORK IN PROGRESS
-  # - repo: https://github.com/ljnsn/cz-conventional-gitmoji
-  #     rev: 0.2.4
-  #     hooks:
-  #       - id: conventional-gitmoji
 
   ### Commit Message Standards ###
   - repo: https://github.com/commitizen-tools/commitizen
@@ -224,3 +206,17 @@ repos:
       - id: commitizen
         name: "🌳 git · Validate commit message"
         stages: [commit-msg]
+
+  # ---------------------------------------------------------------------------- #
+  #                             🧪 Fast Tests (Local)                            #
+  # ---------------------------------------------------------------------------- #
+
+  - repo: local
+    hooks:
+      - id: pytest-collect
+        name: 🧪 test · Validate test formatting
+        entry: ./.venv/bin/pytest tests
+        language: system
+        types: [python]
+        args: ["--collect-only"]
+        pass_filenames: false

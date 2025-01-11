@@ -1,14 +1,13 @@
 # type: ignore
 # ruff: noqa
-
+from collections.abc import Generator
+from contextlib import contextmanager
+from itertools import cycle, product
 import json
+from pathlib import Path
 import shutil
 import sys
 import tempfile
-from collections.abc import Generator, Iterator, Sequence
-from contextlib import contextmanager
-from itertools import cycle, product
-from pathlib import Path
 
 import pytest
 
@@ -23,6 +22,80 @@ default_args: dict[str, str] = {
     "author_name": "DrivenData",
     "description": "A test project",
 }
+
+### GATLEN'S TEST ###
+
+
+def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
+    """Filter test items based on their timeout marker value.
+
+    This pytest hook modifies the test collection by removing tests whose timeout
+    value exceeds the maximum specified timeout. The maximum timeout can be set
+    using the --max-timeout command line option. If --max-timeout is not provided,
+    all tests will run regardless of their timeout value.
+
+    Args:
+        config: The pytest configuration object containing test session information
+        items: List of collected test items to be filtered
+
+    Note:
+        Tests are marked with @pytest.mark.timeout(value) decorator. If a test's
+        timeout value is greater than max_timeout, it will be deselected.
+    """
+    max_timeout = config.getoption("--max-timeout")
+    if max_timeout is None:
+        return
+
+    all_items = set(items)
+    slow_tests = {
+        item
+        for item in items
+        if item.get_closest_marker("timeout")
+        and item.get_closest_marker("timeout").args[0] > max_timeout
+    }
+
+    if slow_tests:
+        config.hook.pytest_deselected(items=list(slow_tests))
+        items[:] = list(all_items - slow_tests)
+
+
+def pytest_addoption(parser: pytest.Parser) -> None:
+    """Add custom command line options to pytest.
+
+    This function registers two custom command line options:
+    - --max-timeout: Set maximum allowed timeout for tests (default: None, run all tests)
+    - --fast (-F): Control test execution speed by skipping certain validations
+
+    Args:
+        parser: The pytest command line parser to which options will be added
+
+    Example:
+        Run tests with a maximum timeout of 10 seconds:
+        pytest --max-timeout=10
+
+        Run all tests regardless of timeout:
+        pytest  # without --max-timeout option
+
+        Run tests in fast mode:
+        pytest --fast or pytest -F
+    """
+    parser.addoption(
+        "--max-timeout",
+        action="store",
+        default=None,
+        type=int,
+        help="Only run tests with timeout less than this value. If not provided, run all tests.",
+    )
+    parser.addoption(
+        "--fast",
+        "-F",
+        action="count",
+        default=0,
+        help="Speed up tests by skipping configs and/or Makefile validation",
+    )
+
+
+### GATLEN'S TEST ###
 
 
 def config_generator(fast: int | bool = False) -> Generator[dict[str, str], None, None]:
@@ -49,7 +122,7 @@ def config_generator(fast: int | bool = False) -> Generator[dict[str, str], None
             [("pydata_packages", opt) for opt in cookiecutter_json["pydata_packages"]],
             [("version_control", opt) for opt in ("none", "git (local)")],
             # TODO: Tests for "version_control": "git (github)"
-        )
+        ),
     )
 
     def _is_valid(config) -> bool:
@@ -92,24 +165,6 @@ def config_generator(fast: int | bool = False) -> Generator[dict[str, str], None
         # just do a single config if fast passed once or three times
         if fast == 1 or fast >= 3:
             break
-
-
-def pytest_addoption(parser: pytest.Parser) -> None:
-    """Pass -F/--fast multiple times to speed up tests.
-
-    default - execute makefile commands, all configs
-
-    -F - execute makefile commands, single config
-    -FF - skip makefile commands, all configs
-    -FFF - skip makefile commands, single config
-    """
-    parser.addoption(
-        "--fast",
-        "-F",
-        action="count",
-        default=0,
-        help="Speed up tests by skipping configs and/or Makefile validation",
-    )
 
 
 @pytest.fixture
@@ -165,6 +220,7 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:  # type: ignore[mi
                 "version_control",
                 "pydata_packages",
             ],
+            strict=False,
         ):
             value = abbreviations[key][config[key]]
             # Ensure exact width by padding or truncating

@@ -65,6 +65,9 @@ You'll see hooks run automatically on every commit:
 ```bash
 # Test hooks without committing
 pre-commit run --all-files
+
+# Commit without running hooks
+git commit --no-verify
 ```
 
 <details markdown="1">
@@ -88,7 +91,14 @@ All hooks labeled with `# STRICT` are commented out by default and not recommend
 
 ## 01 🔒 Security
 
-[GitLeaks](https://github.com/gitleaks/gitleaks) is a fast, lightweight scanner that prevents secrets (passwords, API keys, tokens) from being committed to your repository.
+**[GitLeaks](https://github.com/gitleaks/gitleaks)** is a fast, lightweight scanner that prevents secrets (passwords, API keys, tokens) from being committed to your repository.
+
+<details markdown="1">
+<summary>
+Alternatives to GitLeaks (TruffleHog)
+</summary>
+[TruffleHog](https://github.com/trufflesecurity/trufflehog) offers more comprehensive and continuous security scanning across a variety of platforms (not just files). However, it requires more setup time and resources than GitLeaks. Consider TruffleHog for expansive projects with strict security requirements.
+</details>
 
 ```yaml
 - repo: https://github.com/gitleaks/gitleaks
@@ -98,40 +108,16 @@ All hooks labeled with `# STRICT` are commented out by default and not recommend
       name: "🔒 security · Detect hardcoded secrets"
 ```
 
-<!--
-TODO: Create a profanity check 
-https://blog.nashtechglobal.com/profanity-check-source-code-with-gitleaks-why-not/ 
--->
-
-<details markdown="1">
-<summary>
-Alternatives to GitLeaks (TruffleHog)
-</summary>
-[TruffleHog](https://github.com/trufflesecurity/trufflehog) offers more comprehensive and continuous security scanning across a variety of platforms (not just files). However, it requires more setup time and resources than GitLeaks. Consider TruffleHog for expansive projects with strict security requirements.
-</details>
-
-<!-- TODO: Read this, https://kislyuk.github.io/argcomplete/ -->
-
 ## 02 🔍 Code Quality
 
 This section covers tools for code formatting, linting, type checking, and schema validation across different languages and file types. Best-in-class tools were chosen, avoiding redundant functionality. I opted for remote hook downloads over local commands to make the file more portable and self-updating.
 
 ### 🐍 python
 
-**[Ruff](https://docs.astral.sh/ruff/)** is a fast, comprehensive Python formatter and linter that replaces multiple traditional tools (Black, Flake8, isort, pyupgrade, bandit, pydoclint, mccabe complexity, and more.) While it's not yet at 100% parity with all these tools, its speed and broad coverage make it an excellent choice as the only Python linter/formatter.:
+**[Ruff](https://docs.astral.sh/ruff/)** is a fast, comprehensive Python formatter and linter that replaces multiple traditional tools (Black, Flake8, isort, pyupgrade, bandit, pydoclint, mccabe complexity, and more.) While it's not yet at 100% parity with all these tools, its speed and broad coverage make it an excellent choice as the only Python linter/formatter:
 
-```yaml
-- repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.9.1
-  hooks:
-    - id: ruff-format
-      name: "🐍 python · Format with Ruff"
-    # STRICT
-    # - id: ruff
-    #   args: [ --fix ]
-```
-
-Ruff VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff)
+- [VSCode extension](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff)
+- While Ruff does many things, type checking it does not... [yet](https://github.com/astral-sh/ruff/issues/3893).
 
 <details markdown="1">
 <summary>
@@ -162,11 +148,30 @@ Consider using individual tools if you need specific features not yet supported 
 
 </details>
 
+```yaml
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.9.1
+  hooks:
+    - id: ruff-format
+      name: "🐍 python · Format with Ruff"
+    # STRICT
+    # - id: ruff
+    #   args: [ --fix ]
+```
+
 <br/>
 
-While Ruff does many things, type checking it does not... [yet](https://github.com/astral-sh/ruff/issues/3893).
-
 **[Microsoft's Pyright](https://microsoft.github.io/pyright/)** handles Python type checking:
+
+- [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=ms-pyright.pyright), but [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance), the default extension for Python, has it built-in.
+- _This is a community supported pre-commit hook, endorsed by microsoft_
+
+<details markdown="1">
+<summary>
+Alternatives to Pyright (MyPy)
+</summary>
+Microsoft's [Pyright](https://microsoft.github.io/pyright/) is a [faster and more featureful](https://github.com/microsoft/pyright/blob/main/docs/mypy-comparison.md) alternative to [MyPy](https://mypy-lang.org/), but MyPy is the original type checker.
+</details>
 
 ```yaml
 # STRICT
@@ -176,17 +181,6 @@ While Ruff does many things, type checking it does not... [yet](https://github.c
     - id: pyright
       name: "🐍 python · Check types"
 ```
-
-_Note: This is a community supported pre-commit hook, endorsed by microsoft_
-
-Pyright VSCode Extension [here](https://marketplace.visualstudio.com/items?itemName=ms-pyright.pyright), but [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance), the default extension for Python on VSCode, has it built-in.
-
-<details markdown="1">
-<summary>
-Alternatives to Pyright (MyPy)
-</summary>
-Microsoft's [Pyright](https://microsoft.github.io/pyright/) is a [faster and more featureful](https://github.com/microsoft/pyright/blob/main/docs/mypy-comparison.md) alternative to [MyPy](https://mypy-lang.org/), but MyPy is the original type checker.
-</details>
 
 <br/>
 
@@ -201,13 +195,18 @@ Microsoft's [Pyright](https://microsoft.github.io/pyright/) is a [faster and mor
       additional_dependencies: ["validate-pyproject-schema-store[all]"]
 ```
 
-<!-- TODO: Python unused code detector: Add vulture https://github.com/jendrikseipp/vulture
-or deadcode https://github.com/albertas/deadcode
- -->
-
 ### 🟨 JavaScript & Web Tools
 
-**[Biome](https://biomejs.dev/internals/language-support/)** is a modern, fast formatter and linter for JS/TS ecosystems (JS[X], TS[X], JSON[C], CSS, GraphQL). It provides better defaults than ESLint:
+**[Biome](https://biomejs.dev/internals/language-support/)** is a modern, fast formatter and linter for JS/TS ecosystems (JS[X], TS[X], JSON[C], CSS, GraphQL). It provides better defaults than ESLint.
+
+- [VSCode Extension](https://marketplace.visualstudio.com/items?itemName=biomejs.biome)
+
+<details markdown="1">
+<summary>
+Alternatives to Biome (ESLint & Prettier)
+</summary>
+[ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) are more established alternatives with broader plugin ecosystems. While Prettier supports many file types, it can be notably slow, sometimes produces unexpected formatting, and sometimes breaks code (which I find annoying). Since this is primarily a Python-focused project template and Biome handles our JavaScript needs efficiently, we prefer it over the traditional ESLint/Prettier setup. Consider ESLint and Prettier if you need plugins, support for specific JS frameworks, or formatting for languages unsupported elsewhere. (More linters [here](https://github.com/caramelomartins/awesome-linters) as well)
+</details>
 
 ```yaml
 - repo: https://github.com/biomejs/pre-commit
@@ -218,18 +217,13 @@ or deadcode https://github.com/albertas/deadcode
       additional_dependencies: ["@biomejs/biome@1.9.4"]
 ```
 
-Biome VSCode Extension [here](https://marketplace.visualstudio.com/items?itemName=biomejs.biome)
-
-<details markdown="1">
-<summary>
-Alternatives to Biome (ESLint & Prettier)
-</summary>
-[ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) are more established alternatives with broader plugin ecosystems. While Prettier supports many file types, it can be notably slow, sometimes produces unexpected formatting, and sometimes breaks code (which I find annoying). Since this is primarily a Python-focused project template and Biome handles our JavaScript needs efficiently, we prefer it over the traditional ESLint/Prettier setup. Consider ESLint and Prettier if you need plugins, support for specific JS frameworks, or formatting for languages unsupported elsewhere. (More linters [here](https://github.com/caramelomartins/awesome-linters) as well)
-</details>
-
 ### ✅ Data & Config Validation
 
-**[check-jsonschema](https://check-jsonschema.readthedocs.io/)** validates various configuration files using [JSON Schema](https://json-schema.org/specification). It supports JSON, YAML, and TOML files, and includes specialized validators like the [TaskFile](https://taskfile.dev/) and [GitHub Actions](https://github.com/features/actions) checker:
+**[check-jsonschema](https://check-jsonschema.readthedocs.io/)** validates various configuration files using [JSON Schema](https://json-schema.org/specification). It supports JSON, YAML, and TOML files, and includes specialized validators like the [TaskFile](https://taskfile.dev/) and [GitHub Actions](https://github.com/features/actions) checker.
+
+- Additional JSON schema available on [Schema Store](https://json.schemastore.org/pyproject.json)
+- VSCode [automatically provides intellisense and validation for JSON files with schema](https://code.visualstudio.com/docs/languages/json#_intellisense-and-validation)
+- [GitHub Actions VSCode Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions) provides action YAML file intellisense and validation.
 
 ```yaml
 - repo: https://github.com/python-jsonschema/check-jsonschema
@@ -241,10 +235,6 @@ Alternatives to Biome (ESLint & Prettier)
     - id: check-taskfile
       name: "✅ taskfile · Validate Task configuration"
 ```
-
-_Additional json schema available on [Schema Store](https://json.schemastore.org/pyproject.json)_
-
-VSCode [automatically provides intellisense and validation for JSON files with schema](https://code.visualstudio.com/docs/languages/json#_intellisense-and-validation). The [GitHub Actions Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions) provides action YAML file intellisense and validation. (This does not cover YAML, TOML, or taskfiles)
 
 ### 📝 Markdown
 
@@ -265,6 +255,8 @@ VSCode [automatically provides intellisense and validation for JSON files with s
 
 **[Markdownlint](https://github.com/markdownlint/markdownlint/tree/main)** for Markdown linting.
 
+- [VSCode extension](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
+
 ```yaml
 - repo: https://github.com/markdownlint/markdownlint
     rev: v0.12.0
@@ -273,11 +265,11 @@ VSCode [automatically provides intellisense and validation for JSON files with s
         name: "📝 markdown · Lint markdown"
 ```
 
-Markdownlint VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
-
 ### 🐚 Shell
 
 **[ShellCheck](https://www.shellcheck.net/)** lints your shell scripts.
+
+- [VSCode extension](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
 
 ```yaml
 # STRICT
@@ -287,8 +279,6 @@ Markdownlint VSCode extension [here](https://marketplace.visualstudio.com/items?
     - id: shellcheck
       name: "🐚 shell · Lint shell scripts"
 ```
-
-ShellCheck VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
 
 **[bashate](https://github.com/openstack/bashate)** checks your shell script code style.
 
@@ -330,7 +320,14 @@ ShellCheck VSCode extension [here](https://marketplace.visualstudio.com/items?it
 
 ### 📓 Notebooks
 
-**[nbQA](https://nbqa.readthedocs.io/)** for Jupyter notebook quality assurance, allowing us to use our standard Python tools on notebooks:
+**[nbQA](https://nbqa.readthedocs.io/)** for Jupyter notebook quality assurance, allowing us to use our standard Python tools on notebooks.
+
+<details markdown="1">
+<summary>
+ruff supports notebooks by default
+</summary>
+[Ruff has built-in support for Jupyter Notebooks](https://docs.astral.sh/ruff/configuration/#jupyter-notebook-discovery), so this has been excluded from nbQA since it would be redundant. nbQA has `nbqa-ruff-format` and `nbqa-ruff-check` hooks, but these appear to be redundant.
+</details>
 
 ```yaml
 - repo: https://github.com/nbQA-dev/nbQA
@@ -353,13 +350,6 @@ ShellCheck VSCode extension [here](https://marketplace.visualstudio.com/items?it
       name: "📓 notebook · Type-check cells"
 ```
 
-<details markdown="1">
-<summary>
-ruff supports notebooks by default
-</summary>
-[Ruff has built-in support for Jupyter Notebooks](https://docs.astral.sh/ruff/configuration/#jupyter-notebook-discovery), so this has been excluded from nbQA since it would be redundant. nbQA has `nbqa-ruff-format` and `nbqa-ruff-check` hooks, but these appear to be redundant.
-</details>
-
 ### 🖼️ Image Optimization
 
 **[oxipng](https://github.com/shssoichiro/oxipng)** is a PNG optimizer written in Rust with lossy and lossless options. (The selection of arguments below are slightly lossy):
@@ -375,20 +365,9 @@ ruff supports notebooks by default
 
 ### ✨ Additional File Types
 
-**[Prettier](https://prettier.io/) (HTML, YAML, CSS)** handles formatting for various file types not covered by other tools. While it can be slow, sometimes produces code-breaking formatting, and I personally dislike it - it remains the standard for these file types:
+**[Prettier](https://prettier.io/) (HTML, YAML, CSS)** handles formatting for various file types not covered by other tools. While it can be slow, sometimes produces code-breaking formatting, and I personally dislike it - it remains the standard for these file types.
 
-```yaml
-- repo: https://github.com/pre-commit/mirrors-prettier
-  rev: v4.0.0-alpha.8
-  hooks:
-    - id: prettier
-      name: "✨ misc-files · Format misc web files"
-      types_or: [yaml, html, scss]
-      additional_dependencies:
-        - prettier@3.4.2
-```
-
-VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [VSCode extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
 <details markdown="1">
 <summary>
@@ -403,27 +382,25 @@ _My disatisfaction with prettier is humorously shared by pre-commit, as they [th
 
 </details>
 
-### 🛠️ Local Tools
-
-For using tools without hooks, you can also run a local command:
-
 ```yaml
-- repo: local
+- repo: https://github.com/pre-commit/mirrors-prettier
+  rev: v4.0.0-alpha.8
   hooks:
-    - id: make-lint
-      name: Run 'make lint'
-      entry: make
-      args: ["lint"]
-      language: system
+    - id: prettier
+      name: "✨ misc-files · Format misc web files"
+      types_or: [yaml, html, scss]
+      additional_dependencies:
+        - prettier@3.4.2
 ```
-
-Note: If you're using [uv](https://docs.astral.sh/uv/), they [also have pre-commits](https://github.com/astral-sh/uv-pre-commit) available.
-
-<!-- CZ git https://cz-git.qbb.sh/cli/why -->
 
 ## 03 📁 Filesystem
 
-These hooks help maintain repository hygiene by preventing common file-related issues:
+**[Pre-commit hooks](https://github.com/pre-commit/pre-commit-hooks)** are collection of hooks managed by the pre-commit team. These hooks help maintain repository hygiene by preventing common file-related issues:
+
+- `check-case-conflict` - Prevents issues on case-insensitive filesystems (Windows/MacOS)
+- `check-symlinks` & `destroyed-symlinks` - Maintains symlink integrity
+- `check-executables-have-shebangs` - Ensures scripts are properly configured
+- `check-illegal-windows-names` - Check for files that cannot be created on Windows.
 
 ```yaml
 - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -444,15 +421,16 @@ These hooks help maintain repository hygiene by preventing common file-related i
     # ... More Below ...
 ```
 
-- `check-added-large-files` - Prevents committing files larger than 8000KB ([Git Large File Storage (LFS)](https://git-lfs.com/) or [Data Version Control (DVC)](https://dvc.org/) should instead be used)
-- `check-case-conflict` - Prevents issues on case-insensitive filesystems (Windows/MacOS)
-- `check-symlinks` & `destroyed-symlinks` - Maintains symlink integrity
-- `check-executables-have-shebangs` - Ensures scripts are properly configured
-- `check-illegal-windows-names` - Check for files that cannot be created on Windows.
-
 ## 04 🌳 Git Quality
 
-### Branch Protection
+### 🪵 Repo Constraints
+
+**[Pre-commit hooks](https://github.com/pre-commit/pre-commit-hooks)** again, this time for branch protection restricting unwanted actions.
+
+- `forbid-new-submodules` - Prevent addition of new git submodules (repo-in-a-repo). (Imo, Git submodules are a perfectly find practice, but
+- `check-merge-conflict` - Prevents committing unresolved merge conflicts
+- `no-commit-to-branch` - Protects main branches from direct commits (GitHub branch protections are for enterprise members only (sad))
+- `check-added-large-files` - Prevents committing files larger than 5000KB ([Git Large File Storage (LFS)](https://git-lfs.com/) or [Data Version Control (DVC)](https://dvc.org/) should instead be used)
 
 ```yaml
 - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -468,24 +446,35 @@ These hooks help maintain repository hygiene by preventing common file-related i
       args: ["--branch", "main", "--branch", "master"]
     - id: check-added-large-files
       name: "🌳 git · Block large file commits"
-      args: ['--maxkb=1000']
+      args: ['--maxkb=5000']
       
 ```
 
-- `forbid-new-submodules` - Prevent addition of new git submodules. (I'm mixed on this one since I think this is a confusing paradigm but don't know of better alternatives.)
-- `check-merge-conflict` - Prevents committing unresolved merge conflicts
-- `no-commit-to-branch` - Protects main branches from direct commits (GitHub branch protections are for enterprise members only (sad))
-
-For the best experience:
-
-1. Use `cz commit` instead of `git commit`
-1. Consider [czg](https://cz-git.qbb.sh/) for a better implementation of the `cz` cli (I'm personally a fan of the AI generated commits it has.)
-
 ### 🗒️ Commit Message Standards
 
-[Commitizen](https://commitizen.github.io/cz-cli/) enforces standardized commit messages that enable automatic changelog generation and semantic versioning
+**[Commitizen](https://commitizen.github.io/cz-cli/)** enforces high-quality standardized commit messages that enable automatic changelog generation and semantic versioning
 
-Additionally, I add [cz-conventional-gitmoji](https://github.com/ljnsn/cz-conventional-gitmoji), a third-party prompt template that combines the [gitmoji](https://gitmoji.dev/) and [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) standards. (More templates [here](https://commitizen-tools.github.io/commitizen/third-party-commitizen/))
+<details markdown="1">
+<summary>
+Accompanying Improved Git Commit Interface
+</summary>
+
+Commitizen comes with a built-in and customizable CLI that will walk you through making one of these standard commits. If you're using GOTem, this is preinstalled and you can run `cz commit` instead of `git commit`
+
+Instead of commitizen, I recommend using [`czg`](https://cz-git.qbb.sh/) (a successor to cz-git) for a better implementation of the `cz` cli (I'm personally a fan of the AI-generated commits it has.)
+
+![czg interface](https://user-images.githubusercontent.com/40693636/175753060-cf4f5e48-100d-430a-93e9-31b17f42802f.gif)
+
+</details>
+
+<details markdown="1">
+<summary>
+Alternatives to Commitizen (Commitlint)
+</summary>
+[commitlint](https://github.com/conventional-changelog/commitlint) is a similar project to commitizen. Many articles claim that the difference between the two are that commitizen is more of a tool to generate these fancy commits while commitlint is meant to lint the commits. However, considering `cz check` is a thing, I'm confused what the difference is. The tools can be used together. Seems like commitizen has better python support than commitlint. Projects equally popular. More research to be done on the differences!
+</details>
+
+<!-- Note: commit-msg hooks are not installed by default -->
 
 ```yaml
 - repo: https://github.com/commitizen-tools/commitizen
@@ -496,45 +485,52 @@ Additionally, I add [cz-conventional-gitmoji](https://github.com/ljnsn/cz-conven
       stages: [commit-msg]
 ```
 
-<details markdown="1">
-<summary>
-Alternatives to Commitizen (Commitlint)
-</summary>
-[commitlint](https://github.com/conventional-changelog/commitlint) is a similar project to commitizen. Many articles claim that the difference between the two are that commitizen is more of a tool to generate these fancy commits while commitlint is meant to lint the commits. However, considering `cz check` is a thing, I'm confused what the difference is. The tools can be used together. Seems like commitizen has better python support than commitlint. Projects equally popular. More research to be done on the differences!
-</details>
-<!-- 
-TODO: Look into the differences above. Oop. 
-  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: "v9.20.0"
-    hooks:
-      - id: commitlint
-        stages: [commit-msg]
--->
+## 05 🧪 Fast Tests (Local)
 
-## 05 🧪 Testing
+While extensive tests may be too time consuming for a pre-commit hook, it can be helpful to run fast local tests to detect unexpected failures in your code before you are 10 commits in and unsure which one broke your code.
+
+The example below uses `pytest`. The first hook checks that the tests don't contain any syntax errors and can be successfully collected. This should Always pass.
+
+The second hook runs all pytests marked as
 
 ```yaml
-# TODO After completing `tests/`
-# - repo: local
-#   hooks:
-#     - id: fast-tests
-#       name: Run Fast Tests
-#       entry: pytest
-#       language: system
-#       types: [python]
-#       args: [
-#         "tests/unit",  # Only run unit tests
-#         "-m", "not slow",  # Skip slow-marked tests
-#         "--quiet"
-#       ]
-#       pass_filenames: false
+- repo: local
+  hooks:
+    - id: fast-tests
+      name: Run Fast Tests
+      entry: pytest
+      language: system
+      types: [python]
+      args: [
+        "tests",
+        "-m", "not slow",  # Skip slow-marked tests
+        "--quiet"
+      ]
+      pass_filenames: false
+      always_run: true
 ```
 
 <!-- Also maybe add profiling? -->
 
 ## Conclusion
 
-Putting all these together, we have the overall `.pre-commit-config.yaml` file:
+This is by no means an exhaustive list of great hooks. Your encouraged to pick-and-choose as desired. Hooks don't exist for all tools, so if you want to run those you can always use a local hook:
+
+```yaml
+- repo: local
+  hooks:
+    - id: make-lint
+      name: Run 'make lint'
+      entry: make
+      args: ["lint"]
+      language: system
+```
+
+<details markdown="1">
+
+<summary>
+View final `.pre-commit-config.yaml` file
+</summary>
 
 ```yaml
 exclude: |
@@ -764,6 +760,8 @@ repos:
         stages: [commit-msg]
 ```
 
+</details>
+
 ### Inspiration
 
 Some inspo from [this article](https://medium.com/marvelous-mlops/welcome-to-pre-commit-heaven-5b622bb8ebce)
@@ -786,7 +784,7 @@ Other hooks to consider:
 - [yamlfmt](https://github.com/google/yamlfmt)
 - [actionlint](https://github.com/rhysd/actionlint) - Lints github action files, may be a better checker than the currently selected one.
 
-```
+```yaml
   - repo: https://github.com/mxr/sync-pre-commit-deps
     rev: v0.0.2
     hooks:
@@ -794,4 +792,36 @@ Other hooks to consider:
         name: "🪝 pre-commit · Sync hook dependencies based on other hooks"
 ```
 
+Note: If you're using [uv](https://docs.astral.sh/uv/), they [also have pre-commits](https://github.com/astral-sh/uv-pre-commit) available.
+
 <!-- TODO: File optimization for other images -->
+
+<!-- TODO: Python unused code detector: Add vulture https://github.com/jendrikseipp/vulture
+or deadcode https://github.com/albertas/deadcode
+ -->
+
+<!--
+TODO: Create a profanity check, possibly with gitleaks
+https://blog.nashtechglobal.com/profanity-check-source-code-with-gitleaks-why-not/ 
+-->
+
+<!-- TODO: Read this, https://kislyuk.github.io/argcomplete/ -->
+
+<!-- 
+TODO: Look into the differences above. Oop. 
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: "v9.20.0"
+    hooks:
+      - id: commitlint
+        stages: [commit-msg]
+-->
+
+**[cz-conventional-gitmoji](https://github.com/ljnsn/cz-conventional-gitmoji)** is a third-party prompt template that combines the [gitmoji](https://gitmoji.dev/) and [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) standards. (More templates [here](https://commitizen-tools.github.io/commitizen/third-party-commitizen/)). I haven't yet gotten this to work, but would be using it on my project otherwise.
+
+```yaml
+  # WORK IN PROGRESS
+  # - repo: https://github.com/ljnsn/cz-conventional-gitmoji
+  #     rev: 0.2.4
+  #     hooks:
+  #       - id: conventional-gitmoji
+```

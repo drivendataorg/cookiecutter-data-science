@@ -73,6 +73,10 @@
 		"python.testing.pytestArgs": [
 			"tests"
 		],
+		"[python]": {
+			"editor.formatOnSave": true,
+			"editor.defaultFormatter": "charliermarsh.ruff"
+		},
 	},
 	"tasks": {
 		"version": "2.0.0",

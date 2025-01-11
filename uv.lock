@@ -539,12 +539,11 @@ wheels = [
 
 [[package]]
 name = "gatlens-opinionated-template"
-version = "0.0.7"
+version = "0.0.8"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
     { name = "cookiecutter" },
-    { name = "ipykernel" },
 ]
 
 [package.dev-dependencies]
@@ -556,6 +555,7 @@ dev = [
     { name = "commitizen" },
     { name = "cz-conventional-gitmoji" },
     { name = "flake8" },
+    { name = "ipykernel" },
     { name = "isort" },
     { name = "mdformat" },
     { name = "mdformat-frontmatter" },
@@ -573,6 +573,7 @@ dev = [
     { name = "pytest" },
     { name = "pytest-icdiff" },
     { name = "pytest-sugar" },
+    { name = "pytest-timeout" },
     { name = "pytest-watcher" },
     { name = "ruff" },
     { name = "termynal" },
@@ -587,7 +588,6 @@ dev = [
 requires-dist = [
     { name = "click", specifier = ">=8.1.0" },
     { name = "cookiecutter", specifier = ">=2.6.0" },
-    { name = "ipykernel", specifier = ">=6.29.5" },
 ]
 
 [package.metadata.requires-dev]
@@ -599,6 +599,7 @@ dev = [
     { name = "commitizen", specifier = ">=4.1.0" },
     { name = "cz-conventional-gitmoji", specifier = ">=0.6.1" },
     { name = "flake8", specifier = ">=5.0.4" },
+    { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "isort", specifier = ">=5.13.2" },
     { name = "mdformat", specifier = ">=0.7.21" },
     { name = "mdformat-frontmatter", specifier = ">=2.0.8" },
@@ -616,6 +617,7 @@ dev = [
     { name = "pytest", specifier = ">=8.3.4" },
     { name = "pytest-icdiff", specifier = ">=0.9" },
     { name = "pytest-sugar", specifier = ">=1.0.0" },
+    { name = "pytest-timeout", specifier = ">=1.0.0" },
     { name = "pytest-watcher", specifier = ">=0.4.3" },
     { name = "ruff", specifier = ">=0.8.4" },
     { name = "termynal", specifier = ">=0.2.0" },
@@ -1519,6 +1521,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/f5/ac/5754f5edd6d508bc6493bc37d74b928f102a5fff82d9a80347e180998f08/pytest-sugar-1.0.0.tar.gz", hash = "sha256:6422e83258f5b0c04ce7c632176c7732cab5fdb909cb39cca5c9139f81276c0a", size = 14992 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/92/fb/889f1b69da2f13691de09a111c16c4766a433382d44aa0ecf221deded44a/pytest_sugar-1.0.0-py3-none-any.whl", hash = "sha256:70ebcd8fc5795dc457ff8b69d266a4e2e8a74ae0c3edc749381c64b5246c8dfd", size = 10171 },
+]
+
+[[package]]
+name = "pytest-timeout"
+version = "2.3.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pytest" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/93/0d/04719abc7a4bdb3a7a1f968f24b0f5253d698c9cc94975330e9d3145befb/pytest-timeout-2.3.1.tar.gz", hash = "sha256:12397729125c6ecbdaca01035b9e5239d4db97352320af155b3f5de1ba5165d9", size = 17697 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/03/27/14af9ef8321f5edc7527e47def2a21d8118c6f329a9342cc61387a0c0599/pytest_timeout-2.3.1-py3-none-any.whl", hash = "sha256:68188cb703edfc6a18fad98dc25a3c61e9f24d644b0b70f33af545219fc7813e", size = 14148 },
 ]
 
 [[package]]
