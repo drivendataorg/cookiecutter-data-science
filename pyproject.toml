@@ -184,7 +184,7 @@ gatlens-opinionated-template = { workspace = true }
 # ---------------------------------------------------------------------------- #
 
 [tool.commitizen]
-# name = "cz_conventional_commits"
+name = "cz_gitmoji" # github.com/liorocks/cz-gitmoji
 tag_format = "$version"
 version_scheme = "semver2"
 version_provider = "pep621"

@@ -206,6 +206,7 @@ repos:
       - id: commitizen
         name: "🌳 git · Validate commit message"
         stages: [commit-msg]
+        additional_dependencies: [cz-conventional-gitmoji]
 
   # ---------------------------------------------------------------------------- #
   #                             🧪 Fast Tests (Local)                            #
