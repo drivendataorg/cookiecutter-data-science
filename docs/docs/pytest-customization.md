@@ -1,6 +1,27 @@
 # Pytest Customization
 
-## max-timeout flag
+## 00 Extensions
+
+```toml
+[
+    "pytest-cases>=3.8.6",     # Parametrized testing
+    "pytest-cov>=6.0.0",       # Coverage reporting
+    "pytest-icdiff>=0.9",      # Improved diffs
+    "pytest-mock>=3.14.0",     # Mocking
+    "pytest-playwright>=0.6.2", # Browser testing
+    "pytest-profiling>=1.8.1", # Test profiling
+    "pytest-random-order>=1.1.1", # Randomized test order
+    "pytest-shutil>=1.8.1",    # File system testing
+    "pytest-split>=0.10.0",    # Parallel testing
+    "pytest-sugar>=1.0.0",     # Test progress visualization
+    "pytest-timeout>=2.3.1",   # Test timeouts
+    "pytest>=8.3.4",           # Testing framework
+]
+```
+
+<!-- TODO: Add explanation -->
+
+## 01 Custom Option: `--max-timeout=SECONDS`
 
 In Pytest, [it's common to make custom markers for slow and fast tests](https://docs.pytest.org/en/7.1.x/example/markers.html#registering-markers) and then filter for which ones you would like to run. I prefer a bit more granularity and to instead say "run tests that take less than $t$ seconds". To do this, I piggyback off of the [pytest-timeout](https://pypi.org/project/pytest-timeout/) package (which will need to be installed) to save some effort, making my own filter for tests with a timeout above a specified threshold.
 
