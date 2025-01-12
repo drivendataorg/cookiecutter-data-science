@@ -16,7 +16,7 @@ _prep: ## Clean up .DS_Store files
 	rm -f **/*/.DS_store
 
 _welcome: ## Print a Welcome screen
-	curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt
+	curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/master/welcome.txt
 
 ###     DEV COMMANDS
 
