@@ -1,3 +1,9 @@
+## 0.1.0 (2025-01-11)
+
+### chore
+
+- update pre-commit config to always run specified hooks
+
 ## 0.0.8 (2025-01-11)
 
 ### chore
