@@ -1,6 +1,6 @@
 {
-	// Currently non-operational. Helpful for future commitlint czg integration
 	"$schema": "https://raw.githubusercontent.com/conventional-changelog/commitlint/refs/heads/master/%40commitlint/config-validator/src/commitlint.schema.json",
+	"$comment": "Currently non-operational. Helpful for future commitlint czg integration",
 	"rules": {},
 	"prompt": {
 		"allOf": [
