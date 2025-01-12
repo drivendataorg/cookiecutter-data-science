@@ -194,6 +194,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         "Makefile",
         "README.md",
         "pyproject.toml",
+        "biome.json",
         ".env",
         ".gitignore",
         ".devcontainer/devcontainer.json",
