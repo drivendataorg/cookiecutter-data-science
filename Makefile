@@ -1,5 +1,5 @@
 ## Phony tells Makefile these aren't files to be rebuilt
-.PHONY: _prep create_environment requirements format lint docs-serve test \
+.PHONY: all clean _prep create_environment requirements format lint docs-serve test \
 	test-fastest test-debug-last test-continuous _clean_manual_test manual-test manual-test-debug \
 	print-welcome publish docs-publish publish-all help
 
@@ -16,11 +16,11 @@ _prep: ## Clean up .DS_Store files
 	rm -f **/*/.DS_store
 
 _welcome: ## Print a Welcome screen
-	curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt
+	curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/master/welcome.txt
 
 ###     DEV COMMANDS
 
-clean: _prep
+clean: _prep  ## Clean up python cache files
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
@@ -42,9 +42,12 @@ requirements: ## Install Python dependencies
 	pip install -r dev-requirements.txt
 
 ## Format the code using isort and black
+# format: ## Format code using isort and black
+# 	isort --profile black ccds hooks tests docs/scripts
+# 	black ccds hooks tests docs/scripts
+
 format: ## Format code using isort and black
-	isort --profile black ccds hooks tests docs/scripts
-	black ccds hooks tests docs/scripts
+	ruff format hooks docs/scripts
 
 # lint: ## Run linting checks with flake8, isort, and black
 # 	flake8 ccds hooks tests docs/scripts
@@ -126,12 +129,14 @@ pre-commit-update: ## Update, install, and test hooks w/ new config
 
 .DEFAULT_GOAL := help
 
-help:  ## Show this help message
+_gotem: ## Show gotem logo
 	@echo "\033[38;5;39m   ____  ___ _____              "
 	@echo "  / ___|/ _ \_   _|__ _ __ ___  "
 	@echo " | |  _| | | || |/ _ \ '_ \` _ \ "
 	@echo " | |_| | |_| || |  __/ | | | | |"
 	@echo "  \____|\___/ |_|\___|_| |_| |_|\033[0m"
+
+help: _gotem  ## Show this help message
 	@echo "\n(Make sure to activate virtual environment)\n"
 	@echo "\n\033[1m~ Available rules: ~\033[0m\n"
 	@grep -E '^[a-zA-Z][a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[38;5;222m%-30s\033[0m %s\n", $$1, $$2}'

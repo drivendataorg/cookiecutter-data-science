@@ -1,0 +1,21 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true,
+		"defaultBranch": "master"
+	},
+	"files": {
+		"ignoreUnknown": true
+	},
+	"linter": {
+		"enabled": true
+	},
+	"json": {
+		"parser": {
+			"allowComments": true,
+			"allowTrailingCommas": true
+		}
+	}
+}

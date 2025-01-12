@@ -1,3 +1,4 @@
+# type: ignore
 # ruff: noqa
 
 from pathlib import Path

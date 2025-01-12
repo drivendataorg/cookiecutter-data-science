@@ -78,10 +78,10 @@
 				"reveal": "silent",
 				"panel": "shared"
 			},
-			"runOptions": {
-				"runOn": "folderOpen",
-				"instanceLimit": 1
-			},
+			// "runOptions": {
+			// 	"runOn": "folderOpen",
+			// 	"instanceLimit": 1
+			// },
 			"isBackground": true,
 			"problemMatcher": []
 		},
@@ -148,10 +148,10 @@
 				"id": "debug-rerun",
 				"color": "terminal.ansiRed"
 			},
-			"runOptions": {
-				"runOn": "folderOpen",
-				"instanceLimit": 1
-			},
+			// "runOptions": {
+			// 	"runOn": "folderOpen",
+			// 	"instanceLimit": 1
+			// },
 			"presentation": {
 				"reveal": "always",
 				"panel": "shared"

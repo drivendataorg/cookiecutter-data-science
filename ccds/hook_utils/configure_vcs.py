@@ -1,4 +1,4 @@
-# mypy: ignore-errors
+# type: ignore
 # ruff: noqa
 import os
 import subprocess

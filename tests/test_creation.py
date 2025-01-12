@@ -13,7 +13,6 @@ BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
 
 
 # GATLEN'S ADDED BITS #
-CCDS_ORIGINAL_DIR = Path(".ccds-original")
 VSCODE_CONFIG_DIR = Path(".vscode")
 OUT_DIR = Path("out")
 
@@ -93,7 +92,6 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         config: Configuration dictionary
     """
     expected_dirs = {
-        str(CCDS_ORIGINAL_DIR),
         str(VSCODE_CONFIG_DIR),
         ".",
         ".devcontainer",
@@ -124,6 +122,10 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
     }
 
     ignored_dirs = set()
+
+    if config["environment_manager"] == "uv":
+        expected_dirs.add(".venv")
+        ignored_dirs.update({d.relative_to(root) for d in root.glob(".venv/**/*") if d.is_dir()})
 
     if config["include_code_scaffold"] != "No":
         expected_dirs.add(f"{config['module_name']}/_ai")
@@ -190,9 +192,9 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
     """
     expected_files = {
         "Makefile",
-        str(CCDS_ORIGINAL_DIR / "README.md"),
         "README.md",
         "pyproject.toml",
+        "biome.json",
         ".env",
         ".gitignore",
         ".devcontainer/devcontainer.json",
@@ -277,6 +279,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
 
     if config["environment_manager"] == "uv":
         expected_files.add("uv.lock")
+        ignored_files.update({f.relative_to(root) for f in root.glob(f".venv/**/*") if f.is_file()})
 
     if config["version_control"] in (
         "git (local)",
