@@ -186,8 +186,13 @@ gatlens-opinionated-template = { workspace = true }
 [tool.commitizen]
 # https://commitizen-tools.github.io/commitizen/config/
 name = "cz_gitmoji" # https://github.com/ljnsn/cz-conventional-gitmoji
-tag_format = "$version"
 version_scheme = "semver2"
 version_provider = "pep621"
 update_changelog_on_bump = true
-# TODO: Make this the default: czg ai -N=3 -M="gpt-4o"
+# TODO: Add commitlint + cz-git integration (seems difficult)
+# TODO: Add custom scopes (also seems a bit hard to customize)
+
+[[tool.commitizen.customize.questions]]
+type = "confirm"
+name = "show_message"
+message = "Do you want to add body message in commit?"

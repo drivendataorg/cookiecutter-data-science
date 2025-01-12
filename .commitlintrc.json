@@ -1,4 +1,5 @@
 {
+	// Currently non-operational. Helpful for future commitlint czg integration
 	"$schema": "https://raw.githubusercontent.com/conventional-changelog/commitlint/refs/heads/master/%40commitlint/config-validator/src/commitlint.schema.json",
 	"rules": {},
 	"prompt": {
@@ -78,9 +79,23 @@
 		"useEmoji": false,
 		"emojiAlign": "center",
 		"useAI": true,
-		"aiNumber": 1,
+		"aiNumber": 3,
 		"themeColorCode": "",
-		"scopes": [],
+		"scopes": [
+			"template",
+			"global",
+			"core",
+			"ui",
+			"api",
+			"auth",
+			"config",
+			"db",
+			"docs",
+			"security",
+			"tests",
+			"utils",
+			"deps"
+		],
 		"allowCustomScopes": true,
 		"allowEmptyScopes": true,
 		"customScopesAlign": "bottom",
