@@ -39,6 +39,7 @@ repos:
         name: "🐍 python · Format with Ruff"
       # STRICT
       # - id: ruff
+      #   name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
       #   args: [--fix]
 
   # STRICT
