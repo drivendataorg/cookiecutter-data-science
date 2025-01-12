@@ -539,7 +539,7 @@ wheels = [
 
 [[package]]
 name = "gatlens-opinionated-template"
-version = "0.0.8"
+version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
@@ -617,7 +617,7 @@ dev = [
     { name = "pytest", specifier = ">=8.3.4" },
     { name = "pytest-icdiff", specifier = ">=0.9" },
     { name = "pytest-sugar", specifier = ">=1.0.0" },
-    { name = "pytest-timeout", specifier = ">=1.0.0" },
+    { name = "pytest-timeout", specifier = ">=2.3.0" },
     { name = "pytest-watcher", specifier = ">=0.4.3" },
     { name = "ruff", specifier = ">=0.8.4" },
     { name = "termynal", specifier = ">=0.2.0" },

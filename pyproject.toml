@@ -29,7 +29,6 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-# Using 3.10 to ensure compatability
 requires-python = ">=3.10,<4"
 dependencies = [
     "click>=8.1.0",
@@ -80,6 +79,7 @@ dev = [
     "mdformat-gfm>=0.4.1",
     "mdformat-ruff>=0.1.3",
 ]
+# pyforest?
 
 # ---------------------------------------------------------------------------- #
 #                             ruff formatter/linter                            #

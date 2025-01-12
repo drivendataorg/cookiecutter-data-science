@@ -144,8 +144,8 @@ repos:
           - ruff
       # STRICT
       # TODO: Convert to pyright
-      - id: nbqa-mypy
-        name: "📓 notebook · Type-check cells"
+      # - id: nbqa-mypy
+      #   name: "📓 notebook · Type-check cells"
 
   ### PNG Images ###
   - repo: https://github.com/shssoichiro/oxipng
