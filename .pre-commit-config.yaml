@@ -223,6 +223,7 @@ repos:
         types: [python]
         args: ["--collect-only"]
         pass_filenames: false
+        always_run: true
       # STRICT
       - id: pytest-fast
         name: 🧪 test · Run fast tests
@@ -231,3 +232,4 @@ repos:
         types: [python]
         args: ["--max-timeout=3"]
         pass_filenames: false
+        always_run: true
