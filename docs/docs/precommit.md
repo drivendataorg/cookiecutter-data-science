@@ -880,3 +880,5 @@ I went a bit overboard with cherry picking my favorite formatters, linters, etc.
 I'm slightly concerned that these ensemble linters might be an additional annoying piece of software to learn and configure that sets off small teams from using them entirely. Additionally, this software may not support your favorite linters - some of which mentioned in this guide include Biomejs and mdformat. I'm sure the list of available tools is extendable although I'm unsure how much effort is needed to do so.
 
 <!-- TODO: Read this, https://kislyuk.github.io/argcomplete/ -->
+
+<!-- Perhaps Jupytext to render Jupyternotebooks to scripts? https://jupytext.readthedocs.io/en/latest/using-pre-commit.html# -->
