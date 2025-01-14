@@ -837,6 +837,7 @@ Here are some other hooks I haven't added but would consider adding!
 - [actionlint](https://github.com/rhysd/actionlint) - Lints github action files, may be a better checker than the currently selected one.
 - [uv pre-commits](https://github.com/astral-sh/uv-pre-commit) - A collection of pre-commits for [uv](https://docs.astral.sh/uv/) by Astral
 - [Vulture](https://github.com/jendrikseipp/vulture) or [Deadcode](https://github.com/albertas/deadcode) - Detect unused code in Python
+- [Hadolint](https://github.com/hadolint/hadolint/blob/master/.pre-commit-hooks.yaml) - Lint Dockerfiles
 - [sync-pre-commit-deps](https://github.com/mxr/sync-pre-commit-deps) - Sync pre-commit hook dependencies based on other installed hooks (to avoid installing multiple versions I assume).
 
 <details markdown="1">
