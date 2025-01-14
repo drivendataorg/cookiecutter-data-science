@@ -41,3 +41,10 @@ uv will set up your entire virtual environment for you in accordance with your s
 **Build Tools**
 
 - poetry - Also good ig
+
+## Distributing
+
+- PyPi is dirt easy with uv
+- Whalebrew, read more on `./containerization.md`
+- Homebrew, TODO
+  (nbdev?)

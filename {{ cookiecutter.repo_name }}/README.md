@@ -12,6 +12,14 @@
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 {% endif %}
 
+{%- if "github" in cookiecutter.version_control and cookiecutter.docs != "none" %}
+
+<!-- TODO: Make this update to user's GitHub. -->
+https://gatlenculp.github.io/{{ cookiecutter.repo_name }}
+
+{%- endif %}
+
+
 ## Project Organization
 {#
 <!-- (Skipping common file descriptions to be concise) -->

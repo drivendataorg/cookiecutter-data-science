@@ -9,7 +9,7 @@ ______________________________________________________________________
 
 ### Docker
 
-- `docker/` directory provides a sample Dockerfile and `docker-compose.yml` file.
+- `docker/` directory provides a sample Dockerfile (and `docker-compose.yml` file).
 
 ### Kubernetes (TODO)
 
@@ -25,6 +25,10 @@ ______________________________________________________________________
 
 - Already set up via `.devcontainer`
 - Heavy image meant for development
+
+### Whalebrew
+
+Users can install your docker image and run a command from within it as if it were local. This is paired with the Docker file in your project
 
 ______________________________________________________________________
 
