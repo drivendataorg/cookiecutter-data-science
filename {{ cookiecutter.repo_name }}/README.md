@@ -20,6 +20,7 @@ https://gatlenculp.github.io/{{ cookiecutter.repo_name }}
 {%- endif %}
 
 
+
 ## Project Organization
 {#
 <!-- (Skipping common file descriptions to be concise) -->
@@ -27,6 +28,7 @@ https://gatlenculp.github.io/{{ cookiecutter.repo_name }}
 <!-- https://github.com/mightbesimon/vscode-emoji-icons -->
 <!-- TODO: In Github Actions actually have a simple test or something -->
 <!-- TODO: update main.yml to use what I now have setup -->
+TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 #}
 
 ```
