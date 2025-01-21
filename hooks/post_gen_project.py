@@ -176,8 +176,23 @@ generate_personal_ssh_keys(
 )
 
 # TODO(GatlenCulp): Upload generated ssh key to github as deploy key
-# $ gh repo deploy-key add project-deploy.pub
+# gh repo deploy-key add project-deploy.pub
+# Optional: --allow-write, --title <string>
+
+
+# TODO(GatlenCulp): Test connection to github
+# ssh -T git@github.com -i project-deploy.key
 
 
 # TODO(GatlenCulp): Make sure to add these to the config.ssh file
+# Add GitHub as hostname
+# Host github.com
+#     HostName github.com
+#     User git
+#     IdentityFile ~/.ssh/github_deploy_key
+#     IdentitiesOnly yes
+
+# TODO(GatlenCulp): Test connection to github using config file
+# ssh GitHub -F config.ssh
+
 # {% endif %}

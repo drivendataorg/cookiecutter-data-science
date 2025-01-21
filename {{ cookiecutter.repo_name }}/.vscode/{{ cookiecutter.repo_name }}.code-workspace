@@ -30,6 +30,20 @@
 // },
 // ```
 // 
+// To add a remote server for SSH you can use:
+// ```json
+// {
+// 	"name": "{{ cookiecutter._project_emoji }} {{ cookiecutter.repo_name }} (remote)",
+// 	{#- TODO: Render path automatically -#}
+// 	"rootPath": "vscode-remote://ssh-remote+/workspace/{{ cookiecutter.repo_name }}/.vscode/{{ cookiecutter.repo_name }}.code-workspace",
+// 	"tags": [
+// 		"🪿 gotem",
+// 		"🌎 remote",
+// 	],
+// 	"enabled": true
+// },
+// ```
+// 
 {
 	"folders": [
 		{
