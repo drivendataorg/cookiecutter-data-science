@@ -224,7 +224,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         "docs/SECURITY.md",
         "tests/conftest.py",
         "tests/test_main.py",
-        "notebooks/0.01_gatlen_example.ipynb",
+        f"notebooks/0.01_{config['author_name']}_example.ipynb",
         "notebooks/README.md",
         "secrets/schema/example.env",
         "secrets/schema/ssh/example.config.ssh",
