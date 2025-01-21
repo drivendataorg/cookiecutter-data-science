@@ -15,8 +15,7 @@ RUN uv sync
 
 # {%- if "github" in cookiecutter.version_control %}
 
-# TODO: Make this update to user's GitHub.
 # Label associated repo
-LABEL org.opencontainers.image.source https://github.com/GatlenCulp/{{ cookiecutter.repo_name }}
+LABEL org.opencontainers.image.source https://github.com/{{ cookiecutter._github_username }}/{{ cookiecutter.repo_name }}
 
 # {%- endif %}
