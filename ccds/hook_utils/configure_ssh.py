@@ -36,7 +36,7 @@ def generate_personal_ssh_keys(
     # Note: Perhaps return the two generated files?
 
 
-def generate_ssh_config_file(directory: str | Path, key_name: str) -> bool:
+def generate_ssh_config_file(directory: str | Path) -> bool:
     """Generate the config.ssh file."""
     # TODO: Implement
     raise NotImplementedError

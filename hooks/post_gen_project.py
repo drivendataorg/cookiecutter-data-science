@@ -6,7 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from ccds.hook_utils.configure_ssh import generate_personal_ssh_keys
+from ccds.hook_utils.configure_ssh import generate_personal_ssh_keys, generate_ssh_config_file
 from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_repo
 
 # https://github.com/cookiecutter/cookiecutter/issues/824
@@ -145,11 +145,34 @@ subprocess.run(["pre-commit", "install"], check=False)  # noqa: S603, S607
 #                                   SSH Keys                                   #
 # ---------------------------------------------------------------------------- #
 
+# --------------------------------- Personal --------------------------------- #
 # {% if cookiecutter._generate_personal_ssh_keys == "y" %}
 # TODO(GatlenCulp): Implement generating personal ssh keys
+# ssh-keygen -t ed25519 -C "GatlenCulp" -f PROJ_ROOT/secrets/GatlenCulp
+# rename (GatlenCulp, GatlenCulp.pub) -> (GatlenCulp.key, GatlenCulp.pub)
+# or just do make sure it is done the normal way
 generate_personal_ssh_keys(
     SECRETS_DIR,
     "{{ cookiecutter.author_name }}",
     comment="{{ cookiecutter.author_name }}",
 )
+
+# TODO(GatlenCulp): Implement setting up ssh config file
+generate_ssh_config_file(SECRETS_DIR)
+# {% endif %}
+
+# ------------------------------ Deployment Keys ----------------------------- #
+# {% if cookiecutter._generate_and_upload_gh_deploy_keys == "y" %}
+# ssh-keygen -t ed25519 -C "my description" -N "" -f ~/.ssh/gh-test
+generate_personal_ssh_keys(
+    SECRETS_DIR,
+    "{{ cookiecutter.repo_name }}-deploy",
+    comment="{{ cookiecutter.repo_name }}-deploy",
+)
+
+# TODO(GatlenCulp): Upload generated ssh key to github as deploy key
+
+
+# TODO(GatlenCulp): Make sure to add these to the config.ssh file
+
 # {% endif %}
