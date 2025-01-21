@@ -30,7 +30,7 @@
 // },
 // ```
 // 
-// To add a remote server for SSH you can use:
+// To add a remote server for SSH you can use something like:
 // ```json
 // {
 // 	"name": "{{ cookiecutter._project_emoji }} {{ cookiecutter.repo_name }} (remote)",
