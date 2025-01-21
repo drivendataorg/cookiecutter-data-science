@@ -32,7 +32,6 @@
 		"git (github public)"
 	],
 	"_github_username": "GatlenCulp",
-	"_full_name": "{{ cookiecutter.author_name }}",
 	"_use_conventional_commits": "y",
 	"_readme_modern_header": "y",
 	"_readme_include_logo": "y",
