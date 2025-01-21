@@ -146,11 +146,12 @@ subprocess.run(["pre-commit", "install"], check=False)  # noqa: S603, S607
 # ---------------------------------------------------------------------------- #
 
 # --------------------------------- Personal --------------------------------- #
+
 # {% if cookiecutter._generate_personal_ssh_keys == "y" %}
 # TODO(GatlenCulp): Implement generating personal ssh keys
 # ssh-keygen -t ed25519 -C "GatlenCulp" -f PROJ_ROOT/secrets/GatlenCulp
 # rename (GatlenCulp, GatlenCulp.pub) -> (GatlenCulp.key, GatlenCulp.pub)
-# or just do make sure it is done the normal way
+# or just do make sure it is named with .key normally.
 generate_personal_ssh_keys(
     SECRETS_DIR,
     "{{ cookiecutter.author_name }}",
@@ -162,8 +163,12 @@ generate_ssh_config_file(SECRETS_DIR)
 # {% endif %}
 
 # ------------------------------ Deployment Keys ----------------------------- #
+
 # {% if cookiecutter._generate_and_upload_gh_deploy_keys == "y" %}
-# ssh-keygen -t ed25519 -C "my description" -N "" -f ~/.ssh/gh-test
+# ssh-keygen -t ed25519 -C "project-deploy" -f PROJ_ROOT/secrets/project-deploy
+# rename (project-deploy, project-deploy.pub)  # noqa: ERA001
+#   -> (project-deploy.key, project-deploy.pub)
+# or just do make sure it is named with .key normally.
 generate_personal_ssh_keys(
     SECRETS_DIR,
     "{{ cookiecutter.repo_name }}-deploy",
@@ -171,8 +176,8 @@ generate_personal_ssh_keys(
 )
 
 # TODO(GatlenCulp): Upload generated ssh key to github as deploy key
+# $ gh repo deploy-key add project-deploy.pub
 
 
 # TODO(GatlenCulp): Make sure to add these to the config.ssh file
-
 # {% endif %}
