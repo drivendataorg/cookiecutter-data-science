@@ -33,6 +33,8 @@
 	],
 	"_github_username": "GatlenCulp",
 	"_use_conventional_commits": "y",
+	"_generate_personal_ssh_keys": "n",
+	"_generate_and_upload_gh_deploy_keys": "n",
 	"_project_emoji": "🍪",
 	"_readme_modern_header": "y",
 	"_readme_include_logo": "y",
