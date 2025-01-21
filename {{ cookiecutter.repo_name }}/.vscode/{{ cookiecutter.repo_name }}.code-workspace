@@ -1,6 +1,7 @@
 /* -------------------------------------------------------------------------- */
 /*                      Personal Workspace Configuration                      */
 /* -------------------------------------------------------------------------- */
+// 
 // Use this workspace configuration file to override the default settings
 // shared among team members for your personal use. (extensions.json, launch.json, etc.)
 // 
@@ -8,16 +9,18 @@
 // and ~/.ssh)
 // 
 /* ------------------------- Note on Dev Containers ------------------------- */
+// 
 // The VSCode command:
 //     `Dev Containers: Reopen in container`
 // does not work w/ workspace files. Instead use
 //     `Dev Containers: Open folder in container`
 // 
 /* ----------------------------- Project Manager ---------------------------- */
+// 
 // If using alefragnani.project-manager, add the following to your `project.json` file:
 // ```json
 // {
-// 	"name": "🍪 {{ cookiecutter.repo_name }}",
+// 	"name": "{{ cookiecutter._project_emoji }} {{ cookiecutter.repo_name }}",
 // 	{#- TODO: Render path automatically -#}
 // 	"rootPath": "/Path/to/{{ cookiecutter.repo_name }}/.vscode/{{ cookiecutter.repo_name }}.code-workspace",
 // 	"tags": [
@@ -26,6 +29,7 @@
 // 	"enabled": true
 // },
 // ```
+// 
 {
 	"folders": [
 		{
