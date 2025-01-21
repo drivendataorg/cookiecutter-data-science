@@ -1,0 +1,8 @@
+---
+blank_issues_enabled: false
+{% if cookiecutter._readme_use_github_discussions == 'y' -%}
+contact_links:
+  - name: {{cookiecutter.project_name}} Community Support
+    url: https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/discussions
+    about: Please ask and answer questions here.
+{% endif %}

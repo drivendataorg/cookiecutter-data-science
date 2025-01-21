@@ -7,7 +7,7 @@ name = "ccds"
 
 [project]
 name = "gatlens-opinionated-template"
-version = "0.1.0"
+version = "0.2.0"
 description = "A modern, opinionated full-stack CookieCutter project template that prioritizes developer experience and cutting-edge tools."
 authors = [
   { name = "Gatlen Culp", email = "GatlenCulp@gmail.com" },
@@ -189,7 +189,7 @@ gatlens-opinionated-template = { workspace = true }
 [tool.commitizen]
 # TODO: Add commitlint + cz-git integration (seems difficult)
 # TODO: Add custom scopes (also seems a bit hard to customize)
-name = "cz_gitmoji" # https://github.com/ljnsn/cz-conventional-gitmoji
+# name = "cz_gitmoji" # https://github.com/ljnsn/cz-conventional-gitmoji
 version_scheme = "semver2"
 version_provider = "pep621"
 update_changelog_on_bump = true

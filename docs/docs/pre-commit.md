@@ -603,7 +603,7 @@ default_install_hook_types:
 repos:
   #
   # Documentation Here:
-  # https://gatlenculp.github.io/gatlens-opinionated-template/precommit/
+  # https://gatlenculp.github.io/gatlens-opinionated-template/pre-commit/
   #
   # ---------------------------------------------------------------------------- #
   #                              🔄 Pre-Commit Hooks                             #

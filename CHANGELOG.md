@@ -1,3 +1,16 @@
+## 0.2.0 (2025-01-20)
+
+### Feat
+
+- update Dockerfile to use dynamic GitHub username for label
+- add VSCode configs for extensions, debugging, and settings
+- enhance commitlint with scopes and commitizen customization
+
+### Refactor
+
+- remove unused author name variable and update file references
+- **tests**: Update issue template filenames and add new documentation files for CODE_OF_CONDUCT, CONTRIBUTING, and SECURITY
+
 ## 0.1.0 (2025-01-11)
 
 ### chore

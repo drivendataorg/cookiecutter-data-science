@@ -324,3 +324,5 @@ misc = [
 <!-- CCDS V2 appears not to like git lfs much, expensive. -->
 
 <!-- Maybe I should add an automatic folder icon creator? -->
+
+<!-- TODO: Cite https://github.com/dec0dOS/amazing-github-template/tree/main -->

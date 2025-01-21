@@ -21,7 +21,7 @@ theme:
 nav:
   - 🏠 Home: index.md # Project overview, quickstart guide, and complete directory structure walkthrough
   - 🛠️ Core Tools: core-tools.md # Comprehensive breakdown of all core tools (IDE, Docker, AWS, etc.) and Python dependencies with explanations
-  - 🪝 Pre-commit Hooks: precommit.md
+  - 🪝 Pre-commit Hooks: pre-commit.md
   - 🧪 Pytest Customization: pytest-customization.md
   - 📓 Jupyter Notebooks: jupyter-notebooks.md
   - 💻 VSCode & Cursor: vscode.md # Detailed guide to workspace configuration, debug profiles, recommended extensions, and AI integration
