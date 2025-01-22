@@ -646,11 +646,12 @@ wheels = [
 
 [[package]]
 name = "gatlens-opinionated-template"
-version = "0.1.0"
+version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
     { name = "cookiecutter" },
+    { name = "pymdown-extensions" },
 ]
 
 [package.dev-dependencies]
@@ -698,6 +699,7 @@ dev = [
 requires-dist = [
     { name = "click", specifier = ">=8.1.0" },
     { name = "cookiecutter", specifier = ">=2.6.0" },
+    { name = "pymdown-extensions", specifier = ">=10.13" },
 ]
 
 [package.metadata.requires-dev]

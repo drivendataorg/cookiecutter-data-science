@@ -6,7 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from ccds.hook_utils.configure_ssh import generate_personal_ssh_keys, generate_ssh_config_file
+from ccds.hook_utils.configure_ssh import generate_personal_ssh_keys
 from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_repo
 
 # https://github.com/cookiecutter/cookiecutter/issues/824
@@ -157,9 +157,6 @@ generate_personal_ssh_keys(
     "{{ cookiecutter.author_name }}",
     comment="{{ cookiecutter.author_name }}",
 )
-
-# TODO(GatlenCulp): Implement setting up ssh config file
-generate_ssh_config_file(SECRETS_DIR)
 # {% endif %}
 
 # ------------------------------ Deployment Keys ----------------------------- #
@@ -182,15 +179,6 @@ generate_personal_ssh_keys(
 
 # TODO(GatlenCulp): Test connection to github
 # ssh -T git@github.com -i project-deploy.key
-
-
-# TODO(GatlenCulp): Make sure to add these to the config.ssh file
-# Add GitHub as hostname
-# Host github.com
-#     HostName github.com
-#     User git
-#     IdentityFile ~/.ssh/github_deploy_key
-#     IdentitiesOnly yes
 
 # TODO(GatlenCulp): Test connection to github using config file
 # ssh GitHub -F config.ssh

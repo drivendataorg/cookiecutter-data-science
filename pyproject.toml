@@ -33,6 +33,7 @@ requires-python = ">=3.10,<4"
 dependencies = [
     "click>=8.1.0",
     "cookiecutter>=2.6.0",
+    "pymdown-extensions>=10.13",
 ]
 
 [project.scripts]
