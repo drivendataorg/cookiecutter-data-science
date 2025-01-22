@@ -1,3 +1,13 @@
+## 0.3.0 (2025-01-22)
+
+### Feat
+
+- enhance SSH config with conditional host entries
+- add SSH setup instructions and remote server config examples
+- clarify SSH key naming conventions and update comments
+- **cookiecutter-hooks**: Added skeleton code for future SSH implementation
+- add SSH key generation stubs, update config and post-gen script
+
 ## 0.2.0 (2025-01-20)
 
 ### Feat
