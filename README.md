@@ -10,10 +10,12 @@ You can choose which language to use when selecting interpreter. By using our te
 You will get:
  - Folder structure
  - Documentation
+ - SSH connectivity
  - Tools for reproducibility
  - (if selected) Dockerfile with PyTorch + Jupyter installed
  - (if selected) Dockerfile with Tensorflow + Jupyter installed
  - (if selected) Dockerfile with R + RStudio Server installed
+
 
 You will **NOT** get:
  - Messy projects
