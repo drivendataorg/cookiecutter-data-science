@@ -1,0 +1,6 @@
+@article{ {{ cookiecutter.author_name }}2025{{ cookiecutter.repo_name }},
+  title={ {{ cookiecutter.repo_name }} },
+  author={ {{ cookiecutter.author_name }} },
+  journal={},
+  year={2025}
+}
