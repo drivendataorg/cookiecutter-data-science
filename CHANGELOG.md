@@ -1,3 +1,11 @@
+## 0.4.1 (2025-01-29)
+
+### Fix
+
+- **docs**: Updated reference in jupyter-notebooks.md file to new pre-commit.md file
+- **github-actions**: Fixed pull_request_template.md being upper case now so that tests pass part 2
+- **github-actions**: Fixed pull_request_template.md being upper case now so that tests pass
+
 ## 0.4.0 (2025-01-29)
 
 ### Feat
