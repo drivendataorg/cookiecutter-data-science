@@ -32,4 +32,4 @@ Pretty sure nbdev does NOT do this.
 
 ### Notebook Quality Assurance & Linting
 
-See [pre-commit](./precommit.md) for more information
+See [pre-commit](./pre-commit.md) for more information
