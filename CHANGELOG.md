@@ -1,3 +1,9 @@
+## 0.4.0 (2025-01-29)
+
+### Feat
+
+- **citation**: Add template citation to template for research papers
+
 ## 0.3.0 (2025-01-22)
 
 ### Feat
