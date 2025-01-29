@@ -5,6 +5,15 @@ build-backend = "flit_core.buildapi"
 [tool.flit.module]
 name = "ccds"
 
+[tool.flit.sdist]
+exclude = [
+    "docs/*",
+    "tests/*",
+    ".cache/*",
+    ".github/*",
+    ".vscode/*"
+]
+
 [project]
 name = "gatlens-opinionated-template"
 version = "0.4.1"
