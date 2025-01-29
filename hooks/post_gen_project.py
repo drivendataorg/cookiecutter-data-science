@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 
+from ccds.hook_utils.configure_ssh import generate_personal_ssh_keys
 from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_repo
 
 # https://github.com/cookiecutter/cookiecutter/issues/824
@@ -13,9 +14,12 @@ from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_
 from ccds.hook_utils.custom_config import write_custom_config
 from ccds.hook_utils.dependencies import basic, packages, scaffold, write_dependencies
 
-#
-#  TEMPLATIZED VARIABLES FILLED IN BY COOKIECUTTER
-#
+PROJ_ROOT = Path.cwd()
+SECRETS_DIR = Path.cwd() / "secrets"
+
+# ---------------------------------------------------------------------------- #
+#                EMPLATIZED VARIABLES FILLED IN BY COOKIECUTTER                #
+# ---------------------------------------------------------------------------- #
 packages_to_install = copy(packages)
 
 # {% if cookiecutter.dataset_storage.s3 %}
@@ -52,9 +56,9 @@ for docs_template in docs_path.iterdir():
     if docs_template.is_dir() and docs_template.name != "docs":
         shutil.rmtree(docs_template)
 
-#
-#  POST-GENERATION FUNCTIONS
-#
+# ---------------------------------------------------------------------------- #
+#                           POST-GENERATION FUNCTIONS                          #
+# ---------------------------------------------------------------------------- #
 write_dependencies(
     "{{ cookiecutter.dependency_file }}",
     packages_to_install,
@@ -96,9 +100,10 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
 # {% elif cookiecutter.include_code_scaffold == "course" %}
 # {% endif %}
 
-#
-#  GATLEN'S UPLOAD TO GITHUB REPO CODE
-#
+
+# ---------------------------------------------------------------------------- #
+#                          Install Virtual Envrionment                         #
+# ---------------------------------------------------------------------------- #
 
 # Install the virtual environment (uv only for now)
 # {% if cookiecutter.environment_manager == "uv" %}
@@ -107,9 +112,9 @@ subprocess.run(["make", "create_environment"], check=False)  # noqa: S603, S607
 subprocess.run(["make", "requirements"], check=False)  # noqa: S603, S607
 # {% endif %}
 
-#
-#  VERSION CONTROL
-#
+# ---------------------------------------------------------------------------- #
+#                                Version Control                               #
+# ---------------------------------------------------------------------------- #
 
 # {% if cookiecutter.version_control == "git (local)" %}
 init_local_git_repo(directory=Path.cwd())
@@ -127,7 +132,55 @@ configure_github_repo(
 )
 # {% endif %}
 
+# ---------------------------------------------------------------------------- #
+#                              Install Pre-Commit                              #
+# ---------------------------------------------------------------------------- #
+
 # {% if cookiecutter.environment_manager == "uv" %}
 os.chdir(Path.cwd())
 subprocess.run(["pre-commit", "install"], check=False)  # noqa: S603, S607
+# {% endif %}
+
+# ---------------------------------------------------------------------------- #
+#                                   SSH Keys                                   #
+# ---------------------------------------------------------------------------- #
+
+# --------------------------------- Personal --------------------------------- #
+
+# {% if cookiecutter._generate_personal_ssh_keys == "y" %}
+# TODO(GatlenCulp): Implement generating personal ssh keys
+# ssh-keygen -t ed25519 -C "GatlenCulp" -f PROJ_ROOT/secrets/GatlenCulp
+# rename (GatlenCulp, GatlenCulp.pub) -> (GatlenCulp.key, GatlenCulp.pub)
+# or just do make sure it is named with .key normally.
+generate_personal_ssh_keys(
+    SECRETS_DIR,
+    "{{ cookiecutter.author_name }}",
+    comment="{{ cookiecutter.author_name }}",
+)
+# {% endif %}
+
+# ------------------------------ Deployment Keys ----------------------------- #
+
+# {% if cookiecutter._generate_and_upload_gh_deploy_keys == "y" %}
+# ssh-keygen -t ed25519 -C "project-deploy" -f PROJ_ROOT/secrets/project-deploy
+# rename (project-deploy, project-deploy.pub)  # noqa: ERA001
+#   -> (project-deploy.key, project-deploy.pub)
+# or just do make sure it is named with .key normally.
+generate_personal_ssh_keys(
+    SECRETS_DIR,
+    "{{ cookiecutter.repo_name }}-deploy",
+    comment="{{ cookiecutter.repo_name }}-deploy",
+)
+
+# TODO(GatlenCulp): Upload generated ssh key to github as deploy key
+# gh repo deploy-key add project-deploy.pub
+# Optional: --allow-write, --title <string>
+
+
+# TODO(GatlenCulp): Test connection to github
+# ssh -T git@github.com -i project-deploy.key
+
+# TODO(GatlenCulp): Test connection to github using config file
+# ssh GitHub -F config.ssh
+
 # {% endif %}

@@ -2,6 +2,8 @@ exclude: |
   (?x)^(
       .*\{\{.*\}\}.*|     # Exclude any files with cookiecutter variables
       docs/site/.*|       # Exclude mkdocs compiled files
+      docs/docs/jupyter-notebooks_files/.*|       # Exclude Jupyter Notebooks files
+      jupyter-experiments/.*|       # Exclude jupyter-experiments
       \.history/.*|       # Exclude history files
       .*cache.*/.*|       # Exclude cache directories
       .*venv.*/.*|        # Exclude virtual environment directories
@@ -144,8 +146,8 @@ repos:
           - ruff
       # STRICT
       # TODO: Convert to pyright
-      - id: nbqa-mypy
-        name: "📓 notebook · Type-check cells"
+      # - id: nbqa-mypy
+      #   name: "📓 notebook · Type-check cells"
 
   ### PNG Images ###
   - repo: https://github.com/shssoichiro/oxipng

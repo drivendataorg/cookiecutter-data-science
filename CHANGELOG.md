@@ -1,3 +1,32 @@
+## 0.4.0 (2025-01-29)
+
+### Feat
+
+- **citation**: Add template citation to template for research papers
+
+## 0.3.0 (2025-01-22)
+
+### Feat
+
+- enhance SSH config with conditional host entries
+- add SSH setup instructions and remote server config examples
+- clarify SSH key naming conventions and update comments
+- **cookiecutter-hooks**: Added skeleton code for future SSH implementation
+- add SSH key generation stubs, update config and post-gen script
+
+## 0.2.0 (2025-01-20)
+
+### Feat
+
+- update Dockerfile to use dynamic GitHub username for label
+- add VSCode configs for extensions, debugging, and settings
+- enhance commitlint with scopes and commitizen customization
+
+### Refactor
+
+- remove unused author name variable and update file references
+- **tests**: Update issue template filenames and add new documentation files for CODE_OF_CONDUCT, CONTRIBUTING, and SECURITY
+
 ## 0.1.0 (2025-01-11)
 
 ### chore

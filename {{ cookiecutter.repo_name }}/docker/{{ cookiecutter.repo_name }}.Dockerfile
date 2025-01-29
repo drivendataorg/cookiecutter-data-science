@@ -1,21 +1,21 @@
 # Install uv
-FROM python:3.12-slim
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm
 
 # Change the working directory to the `app` directory
 WORKDIR /app
 
 # Copy the lockfile and `pyproject.toml` into the image
-ADD uv.lock /app/uv.lock
-ADD pyproject.toml /app/pyproject.toml
-
-# Install dependencies
-RUN uv sync --frozen --no-install-project
+COPY pyproject.toml /app/pyproject.toml
 
 # Copy the project into the image
-ADD . /app
+COPY . /app
 
 # Sync the project
-RUN uv sync --frozen
+RUN uv sync
 
-CMD [ "python", "{{cookiecutter.project_slug}}/foo.py"]
+# {%- if "github" in cookiecutter.version_control %}
+
+# Label associated repo
+LABEL org.opencontainers.image.source https://github.com/{{ cookiecutter._github_username }}/{{ cookiecutter.repo_name }}
+
+# {%- endif %}

@@ -66,6 +66,7 @@ def configure_github_repo(
     directory: Union[str, Path],
     repo_name: str,
     visibility: Literal["private", "public"] = "private",
+    description: str = "",
 ) -> bool:
     """
     Configure a Git repository locally and optionally on GitHub with specified branch protections.
@@ -98,7 +99,10 @@ def configure_github_repo(
             # Initialize local repository
             if not init_local_git_repo(directory):
                 return False
-            _gh(f"repo create {repo_name} --{visibility} --source=. --remote=origin --push")
+            _gh(
+                f"repo create {repo_name} --{visibility} --source=. "
+                f"--remote=origin --push --description {description}"
+            )
         else:
             remote_url = _get_gh_remote_url(github_username, repo_name)
             raise RuntimeError(f"GitHub repo already exists at {remote_url}")
@@ -148,3 +152,10 @@ def _github_repo_exists(username: str, repo_name: str) -> bool:
         return True
     except subprocess.CalledProcessError:
         return False
+
+
+# ---------------------------------------------------------------------------- #
+#                            GitHub SSH Deploy Keys                            #
+# ---------------------------------------------------------------------------- #
+
+# TODO(GatlenCulp): Implement this

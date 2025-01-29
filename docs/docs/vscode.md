@@ -323,3 +323,7 @@ More info on the rules [here](https://medium.com/@ashinno43/what-are-cursor-rule
 
 To use this file you first need to enable it:
 1\.
+
+## 08 Custom Docs (Cursor Only)
+
+You can specify custom documentation for cursor to index so you can ask questions regarding the tools that you are using. Adding the docs manually is annoying, but I cannot find where the docs are stored or how to automatically upload them. For now, if you're interested, you can add all index all of the following docs for cursor:

@@ -5,13 +5,17 @@
 			"path": ".."
 		},
 		{
-			"name": "manual test",
-			"path": "../manual_test/project_name"
+			"name": "nbdev-test",
+			"path": "../../nbdev-test"
 		},
-		{
-			"name": "cookiecutter",
-			"path": "/Users/gat/.config/cookiecutter"
-		}
+		// {
+		// 	"name": "manual test",
+		// 	"path": "../manual_test/project_name"
+		// },
+		// {
+		// 	"name": "cookiecutter",
+		// 	"path": "/Users/gat/.config/cookiecutter"
+		// }
 	],
 	"settings": {
 		"workbench.colorCustomizations": {

@@ -465,7 +465,7 @@ Accompanying Improved Git Commit Interface
 
 Commitizen comes with a built-in and customizable CLI that will walk you through making one of these standard commits. If you're using GOTem, this is preinstalled and you can run `cz commit` instead of `git commit`.
 
-_As an alternative to commitizen, there is also [`czg`](https://cz-git.qbb.sh/) (`cz-git` improved) which has a great implementation of AI-generated commits. However, it's [extremely painful to configure outside of non-javascript projects](https://github.com/Zhengqbbb/cz-git/issues/213) whereas [commitizen is more mature in this area.](https://commitizen-tools.github.io/commitizen/customization/)_
+_As an alternative to commitizen, there is also [`czg`](https://cz-git.qbb.sh/) (`cz-git` improved) which has a great implementation of AI-generated commits. However, it's [extremely painful to configure outside of non-javascript projects](https://github.com/Zhengqbbb/cz-git/issues/213) whereas [commitizen is more mature in this area.](https://commitizen-tools.github.io/commitizen/customization/). It's also worth noting that Cursor has its own AI generated commits, try Cmd + Shift + P `Generate Commit Message`_
 
 ![czg interface](https://user-images.githubusercontent.com/40693636/175753060-cf4f5e48-100d-430a-93e9-31b17f42802f.gif)
 
@@ -603,7 +603,7 @@ default_install_hook_types:
 repos:
   #
   # Documentation Here:
-  # https://gatlenculp.github.io/gatlens-opinionated-template/precommit/
+  # https://gatlenculp.github.io/gatlens-opinionated-template/pre-commit/
   #
   # ---------------------------------------------------------------------------- #
   #                              🔄 Pre-Commit Hooks                             #
@@ -837,6 +837,7 @@ Here are some other hooks I haven't added but would consider adding!
 - [actionlint](https://github.com/rhysd/actionlint) - Lints github action files, may be a better checker than the currently selected one.
 - [uv pre-commits](https://github.com/astral-sh/uv-pre-commit) - A collection of pre-commits for [uv](https://docs.astral.sh/uv/) by Astral
 - [Vulture](https://github.com/jendrikseipp/vulture) or [Deadcode](https://github.com/albertas/deadcode) - Detect unused code in Python
+- [Hadolint](https://github.com/hadolint/hadolint/blob/master/.pre-commit-hooks.yaml) - Lint Dockerfiles
 - [sync-pre-commit-deps](https://github.com/mxr/sync-pre-commit-deps) - Sync pre-commit hook dependencies based on other installed hooks (to avoid installing multiple versions I assume).
 
 <details markdown="1">
@@ -880,3 +881,5 @@ I went a bit overboard with cherry picking my favorite formatters, linters, etc.
 I'm slightly concerned that these ensemble linters might be an additional annoying piece of software to learn and configure that sets off small teams from using them entirely. Additionally, this software may not support your favorite linters - some of which mentioned in this guide include Biomejs and mdformat. I'm sure the list of available tools is extendable although I'm unsure how much effort is needed to do so.
 
 <!-- TODO: Read this, https://kislyuk.github.io/argcomplete/ -->
+
+<!-- Perhaps Jupytext to render Jupyternotebooks to scripts? https://jupytext.readthedocs.io/en/latest/using-pre-commit.html# -->
