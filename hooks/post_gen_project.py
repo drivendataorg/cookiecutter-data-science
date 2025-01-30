@@ -123,12 +123,14 @@ configure_github_repo(
     directory=Path.cwd(),
     repo_name="{{ cookiecutter.repo_name }}",
     visibility="private",
+    description="{{ cookiecutter.description }}",
 )
 # {% elif cookiecutter.version_control == "git (github public)" %}
 configure_github_repo(
     directory=Path.cwd(),
     repo_name="{{ cookiecutter.repo_name }}",
     visibility="public",
+    description="{{ cookiecutter.description }}",
 )
 # {% endif %}
 
