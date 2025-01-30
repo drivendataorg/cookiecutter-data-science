@@ -100,8 +100,11 @@ def configure_github_repo(
             if not init_local_git_repo(directory):
                 return False
             _gh(
-                f"repo create {repo_name} --{visibility} --source=. "
-                f"--remote=origin --push --description {description}"
+                f"repo create {repo_name} "
+                f"--{visibility} "
+                f"--source=. "
+                f"--remote=origin "
+                f"--push " + (f"--description {description}" if description else "")
             )
         else:
             remote_url = _get_gh_remote_url(github_username, repo_name)
