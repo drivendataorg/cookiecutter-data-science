@@ -104,7 +104,7 @@ def configure_github_repo(
                 f"--{visibility} "
                 f"--source=. "
                 f"--remote=origin "
-                f"--push " + (f"--description {description}" if description else "")
+                f"--push " + (f"--description '{description}'" if description else "")
             )
         else:
             remote_url = _get_gh_remote_url(github_username, repo_name)
