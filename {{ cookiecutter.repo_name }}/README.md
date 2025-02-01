@@ -89,7 +89,7 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 ```
 
 
-{%- if cookiecutter._readme_modern_header == 'y' -%}
+{% if cookiecutter._readme_modern_header == 'y' -%}
 {%- if cookiecutter._readme_include_logo == 'y' -%}
 <h1 align="center">
   <a href="https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.repo_name}}">
