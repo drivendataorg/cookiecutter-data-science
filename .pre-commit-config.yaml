@@ -90,6 +90,11 @@ repos:
     hooks:
       - id: mdformat
         name: "📝 markdown · Format markdown"
+        # Mdformat messes up jinja tags
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|
+          )$
         additional_dependencies:
           - mdformat-gfm
           - mdformat-ruff

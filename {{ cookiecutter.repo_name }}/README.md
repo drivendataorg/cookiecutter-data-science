@@ -94,8 +94,8 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
     └── 🐍 plots.py                     <- Code to create visualizations
 ```
 
-{% if cookiecutter.\_readme_modern_header == 'y' -%}
-{%- if cookiecutter.\_readme_include_logo == 'y' -%}
+{% if cookiecutter._readme_modern_header == 'y' -%}
+{%- if cookiecutter._readme_include_logo == 'y' -%}
 
 <h1 align="center">
   <a href="https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.repo_name}}">
@@ -133,8 +133,8 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 > Provide short description for your project here.
 
 {%- endif %}
-{% if cookiecutter.\_readme_include_badges == 'y' -%}
-{%- if cookiecutter.\_readme_modern_header == 'y' %}
+{% if cookiecutter._readme_include_badges == 'y' -%}
+{%- if cookiecutter._readme_modern_header == 'y' %}
 
 <div align="center">
 {%- endif %}
@@ -145,7 +145,7 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 [![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter.repo_name%7D%7D/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
 [![code with love by {{cookiecutter.github_username}}](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-%7B%7Bcookiecutter._github_username%7D%7D-ff1414.svg?style=flat-square)](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D)
 
-{% if cookiecutter.\_readme_modern_header == 'y' -%}
+{% if cookiecutter._readme_modern_header == 'y' -%}
 
 </div>
 {%- endif %}
@@ -162,14 +162,14 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 - [Usage](#usage)
 - [Roadmap](#roadmap)
 - [Support](#support)
-  {%- if cookiecutter.\_readme_include_project_assistance == 'y' %}
+  {%- if cookiecutter._readme_include_project_assistance == 'y' %}
 - [Project assistance](#project-assistance)
   {%- endif %}
 - [Contributing](#contributing)
-  {%- if cookiecutter.\_readme_include_authors == 'y' %}
+  {%- if cookiecutter._readme_include_authors == 'y' %}
 - [Authors & contributors](#authors--contributors)
   {%- endif %}
-  {%- if cookiecutter.\_readme_include_security == 'y' %}
+  {%- if cookiecutter._readme_include_security == 'y' %}
 - [Security](#security)
   {%- endif %}
   {%- if cookiecutter.open_source_license != 'No license file' %}
@@ -186,7 +186,7 @@ ______________________________________________________________________
 
 ## About
 
-{% if cookiecutter.\_readme_table_in_about == 'y' %}
+{% if cookiecutter._readme_table_in_about == 'y' %}
 
 <table><tr><td>
 {% endif %}
@@ -197,7 +197,7 @@ ______________________________________________________________________
 > Why did you undertake it?
 > You don't have to answer all the questions -- just the ones relevant to your project.
 
-{% if cookiecutter.\_readme_include_screenshots == 'y' -%}
+{% if cookiecutter._readme_include_screenshots == 'y' -%}
 
 <details>
 <summary>Screenshots</summary>
@@ -261,7 +261,7 @@ Reach out to the maintainer at one of the following places:
   {%- endif %}
 - Contact options listed on [this GitHub profile](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D)
 
-{% if cookiecutter.\_readme_include_project_assistance == 'y' -%}
+{% if cookiecutter._readme_include_project_assistance == 'y' -%}
 
 ## Project assistance
 
@@ -282,7 +282,7 @@ First off, thanks for taking the time to contribute! Contributions are what make
 
 Please read [our contribution guidelines](docs/CONTRIBUTING.md), and thank you for being involved!
 
-{% if cookiecutter.\_readme_include_authors == 'y' -%}
+{% if cookiecutter._readme_include_authors == 'y' -%}
 
 ## Authors & contributors
 
@@ -290,7 +290,7 @@ The original setup of this repository is by [{{cookiecutter.full_name}}](https:/
 
 For a full list of all authors and contributors, see [the contributors page](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter.repo_name%7D%7D/contributors).
 {% endif %}
-{% if cookiecutter.\_readme_include_security == 'y' -%}
+{% if cookiecutter._readme_include_security == 'y' -%}
 
 ## Security
 
@@ -307,7 +307,7 @@ This project is licensed under the **{{cookiecutter.open_source_license}}**.
 
 See [LICENSE](LICENSE) for more information.
 {% endif %}
-{% if cookiecutter.\_readme_include_acknowledgements == 'y' -%}
+{% if cookiecutter._readme_include_acknowledgements == 'y' -%}
 
 ## Acknowledgements
 
