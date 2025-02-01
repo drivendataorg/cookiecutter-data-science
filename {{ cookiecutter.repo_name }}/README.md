@@ -16,7 +16,7 @@
 
 <!-- TODO: Make this update to user's GitHub. -->
 
-https://gatlenculp.github.io/{{ cookiecutter.repo_name }}
+https://gatlenculp.github.io/{{cookiecutter.repo_name}}
 
 {%- endif %}
 
@@ -54,7 +54,7 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 │   ├── 🚀 launch.json
 │   ├── ⚙️ settings.json
 │   ├── 📋 tasks.json
-│   └── ⚙️ '{{ cookiecutter.repo_name }}.code-workspace'
+│   └── ⚙️ '{{cookiecutter.repo_name}}.code-workspace'
 ├── 📁 data
 │   ├── 📁 external                      <- Data from third party sources
 │   ├── 📁 interim                       <- Intermediate data that has been transformed
@@ -83,7 +83,7 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 │           ├── ⚙️ example.config.ssh
 │           ├── 🔑 example.something.key
 │           └── 🔑 example.something.pub
-└── 🚰 '{{ cookiecutter.module_name }}'  <- Easily publishable source code
+└── 🚰 '{{cookiecutter.module_name}}'  <- Easily publishable source code
     ├── ⚙️ config.py                     <- Store useful variables and configuration (Preset)
     ├── 🐍 dataset.py                    <- Scripts to download or generate data
     ├── 🐍 features.py                   <- Code to create features for modeling
@@ -140,10 +140,10 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 {%- endif %}
 <br />
 
-[![Project license](https://img.shields.io/github/license/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter._repo_slug%7D%7D.svg?style=flat-square)](LICENSE)
+[![Project license](https://img.shields.io/github/license/{{cookiecutter._github_username}}/{{cookiecutter._repo_slug}}.svg?style=flat-square)](LICENSE)
 
-[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter.repo_name%7D%7D/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
-[![code with love by {{cookiecutter.github_username}}](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-%7B%7Bcookiecutter._github_username%7D%7D-ff1414.svg?style=flat-square)](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D)
+[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+[![code with love by {{cookiecutter.github_username}}](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-}}cookiecutter._github_username}}-ff1414.svg?style=flat-square)](https://github.com/{{cookiecutter._github_username}})
 
 {% if cookiecutter._readme_modern_header == 'y' -%}
 
@@ -240,11 +240,11 @@ ______________________________________________________________________
 
 ## Roadmap
 
-See the [open issues](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter.repo_name%7D%7D/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/issues) for a list of proposed features (and known issues).
 
-- [Top Feature Requests](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter.repo_name%7D%7D/issues?q=label%3Aenhancement+is%3Aopen+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
-- [Top Bugs](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter.repo_name%7D%7D/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
-- [Newest Bugs](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter.repo_name%7D%7D/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
+- [Top Feature Requests](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/issues?q=label%3Aenhancement+is%3Aopen+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
+- [Top Bugs](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
+- [Newest Bugs](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
 ## Support
 
@@ -255,11 +255,11 @@ Reach out to the maintainer at one of the following places:
 
 {% if cookiecutter.use_github_discussions == 'y' -%}
 
-- [GitHub Discussions](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter.repo_name%7D%7D/discussions)
+- [GitHub Discussions](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/discussions)
   {%- elif cookiecutter.use_github_discussions != 'y' -%}
-- [GitHub issues](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter.repo_name%7D%7D/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+)
+- [GitHub issues](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+)
   {%- endif %}
-- Contact options listed on [this GitHub profile](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D)
+- Contact options listed on [this GitHub profile](https://github.com/{{cookiecutter._github_username}})
 
 {% if cookiecutter._readme_include_project_assistance == 'y' -%}
 
@@ -267,7 +267,7 @@ Reach out to the maintainer at one of the following places:
 
 If you want to say **thank you** or/and support active development of {{cookiecutter.project_name}}:
 
-- Add a [GitHub Star](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter.repo_name%7D%7D) to the project.
+- Add a [GitHub Star](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}) to the project.
 - Tweet about the {{cookiecutter.project_name}}.
 - Write interesting articles about the project on [Dev.to](https://dev.to/), [Medium](https://medium.com/) or your personal blog.
 
@@ -286,9 +286,9 @@ Please read [our contribution guidelines](docs/CONTRIBUTING.md), and thank you f
 
 ## Authors & contributors
 
-The original setup of this repository is by [{{cookiecutter.full_name}}](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D).
+The original setup of this repository is by [{{cookiecutter.full_name}}](https://github.com/{{cookiecutter._github_username}}).
 
-For a full list of all authors and contributors, see [the contributors page](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter.repo_name%7D%7D/contributors).
+For a full list of all authors and contributors, see [the contributors page](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/contributors).
 {% endif %}
 {% if cookiecutter._readme_include_security == 'y' -%}
 

@@ -4,7 +4,7 @@
 
 If there are any vulnerabilities in **{{cookiecutter.project_name}}**, don't hesitate to _report them_.
 
-1. Use any of the [private contact addresses](https://github.com/%7B%7Bcookiecutter._github_username%7D%7D/%7B%7Bcookiecutter.repo_name%7D%7D#support).
+1. Use any of the [private contact addresses](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}#support).
 
 1. Describe the vulnerability.
 
