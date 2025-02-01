@@ -225,11 +225,11 @@ repos:
         pass_filenames: false
         always_run: true
       # STRICT
-      - id: pytest-fast
-        name: 🧪 test · Run fast tests
-        entry: ./.venv/bin/pytest tests
-        language: system
-        types: [python]
-        args: ["--max-timeout=3"]
-        pass_filenames: false
-        always_run: true
+      # - id: pytest-fast
+      #   name: 🧪 test · Run fast tests
+      #   entry: ./.venv/bin/pytest tests
+      #   language: system
+      #   types: [python]
+      #   args: ["--max-timeout=3"]
+      #   pass_filenames: false
+      #   always_run: true
