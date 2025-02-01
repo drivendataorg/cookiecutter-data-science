@@ -59,7 +59,7 @@ requirements: ## Install Python Dep
 	{% endif %}
 {% endif %}
 
-
+.PHONY: publish-all
 publish-all: format lint publish docs-publish ## Run format, lint, publish package and docs
 
 #################################################################################
@@ -139,19 +139,24 @@ sync_data_up: ## Upload Data to storage system
 # TEST COMMANDS                                                                 #
 #################################################################################
 
+.PHONY: test
 test: _prep ## Run all tests
 	pytest -vvv --durations=0
 
+.PHONY: test-fastest
 test-fastest: _prep ## Run tests with fail-fast option
 	pytest -vvv -FFF
 
 # Requires pytest-watcher (Continuous Testing for Fast Tests)
+.PHONY: test-continuous
 test-continuous: _prep ## Run tests in watch mode using pytest-watcher
 	ptw . --now --runner pytest --config-file pyproject.toml -vvv -FFF
 
+.PHONY: test-debug-last
 test-debug-last: ## Debug last failed test with pdb
 	pytest --lf --pdb
 
+.PHONY: _clean_manual_test
 _clean_manual_test:
 	rm -rf manual_test
 
@@ -172,11 +177,13 @@ data: requirements
 # PRE-COMMIT COMMANDS                                                           #
 #################################################################################
 
+.PHONY: pre-commit-test
 pre-commit-test: ## Test hooks
 	pre-commit run --all-files
 	git add .pre-commit-config.yaml
 	pre-commit run commitizen --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
 
+.PHONY: pre-commit-update
 pre-commit-update: ## Update, install, and test hooks w/ new config
 	pre-commit autoupdate
 	pre-commit install
@@ -189,6 +196,7 @@ pre-commit-update: ## Update, install, and test hooks w/ new config
 
 .DEFAULT_GOAL := help
 
+.PHONY: help
 help:  ## Show this help message
 	@echo "\033[38;5;39m   ____  ___ _____              "
 	@echo "  / ___|/ _ \_   _|__ _ __ ___  "
@@ -198,3 +206,6 @@ help:  ## Show this help message
 	@echo "\n\033[1m~ Available rules: ~\033[0m\n"
 	@echo "For VSCode/Cursor, try: ⇧ ⌘ P, Tasks: Run Task\n"
 	@grep -E '^[a-zA-Z][a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[38;5;222m%-30s\033[0m %s\n", $$1, $$2}'
+
+.PHONY: all
+all: help

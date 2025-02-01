@@ -9,12 +9,18 @@ description = {{ cookiecutter.description|tojson }}
 authors = [
   { name = {{ cookiecutter.author_name|tojson }} },
 ]
-{% if cookiecutter.open_source_license != 'No license file' %}license = { file = "LICENSE" }{% endif %}
+# {% if cookiecutter.open_source_license != 'No license file' %}
+license = { file = "LICENSE" }
+# {% endif %}
 readme = {file = "README.md", content-type = "text/markdown"}
 classifiers = [
     "Private :: Do Not Upload",
     "Programming Language :: Python :: 3",
-    {% if cookiecutter.open_source_license == 'MIT' %}"License :: OSI Approved :: MIT License"{% elif cookiecutter.open_source_license == 'BSD-3-Clause' %}"License :: OSI Approved :: BSD License"{% endif %}
+    # {% if cookiecutter.open_source_license == 'MIT' %}
+    "License :: OSI Approved :: MIT License",
+    # {% elif cookiecutter.open_source_license == 'BSD-3-Clause' %}
+    "License :: OSI Approved :: BSD License"
+    # {% endif %}
 ]
 requires-python = "~={{ cookiecutter.python_version_number }}"
 
@@ -143,12 +149,25 @@ web = [  # Web development and scraping
 [tool.uv]
 default-groups = [
     "dev", "dev-doc", "nb", # Typical
-    {% if cookiecutter.include_code_scaffold == "data" %}"data", "dev-nb", "cli", # Data Tools{% endif %}
-    {% if cookiecutter.include_code_scaffold == "paper" %}"data", "dev-nb", # Paper Tools{% endif %}
-    {% if cookiecutter.include_code_scaffold == "app" %}"dev-nb", "web", # App Tools{% endif %}
-    {% if cookiecutter.include_code_scaffold == "ml" %}"data", "dev-nb", "cli", "ai-train" # Machine Learning Tools{% endif %}
-    {% if cookiecutter.include_code_scaffold == "lib" %}"dev-nb", # Library Tools{% endif %}
-    {% if cookiecutter.include_code_scaffold == "course" %}"dev-nb", # Course Tools{% endif %}
+    ## Data Tools
+    # {% if cookiecutter.include_code_scaffold == "data" %}
+    "data", "dev-nb", "cli",
+    # {% endif %}
+    # {% if cookiecutter.include_code_scaffold == "paper" %}
+    "data", "dev-nb",  # Paper Tools
+    # {% endif %}
+    # {% if cookiecutter.include_code_scaffold == "app" %}
+    "dev-nb", "web",  # App Tools
+    # {% endif %}
+    # {% if cookiecutter.include_code_scaffold == "ml" %}
+    "data", "dev-nb", "cli", "ai-train",  # Machine Learning Tools
+    # {% endif %}
+    # {% if cookiecutter.include_code_scaffold == "lib" %}
+    "dev-nb",  # Library Tools
+    # {% endif %}
+    # {% if cookiecutter.include_code_scaffold == "course" %}
+    "dev-nb",  # Course Tools
+    # {% endif %}
 ]
 
 

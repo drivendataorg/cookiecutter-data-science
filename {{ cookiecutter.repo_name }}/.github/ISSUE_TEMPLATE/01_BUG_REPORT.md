@@ -1,9 +1,9 @@
 ---
 name: Bug Report
 about: Create a report to help {{cookiecutter.project_name}} to improve
-title: "bug: "
-labels: "bug"
-assignees: ""
+title: 'bug: '
+labels: bug
+assignees: ''
 ---
 
 # Bug Report
@@ -32,7 +32,7 @@ assignees: ""
 insert short code snippets here
 ```
 
-**System [please complete the following information]:**
+**System \[please complete the following information\]:**
 
 - OS: e.g. [Ubuntu 18.04]
 - Language Version: [e.g. Python 3.8]
