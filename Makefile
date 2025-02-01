@@ -1,7 +1,7 @@
 ## Phony tells Makefile these aren't files to be rebuilt
 .PHONY: all clean _prep create_environment requirements format lint docs-serve test \
 	test-fastest test-debug-last test-continuous _clean_manual_test manual-test manual-test-debug \
-	print-welcome publish docs-publish publish-all help
+	print-welcome publish docs-publish publish-all help activate
 
 ## GLOBALS
 
@@ -23,6 +23,9 @@ _welcome: ## Print a Welcome screen
 clean: _prep  ## Clean up python cache files
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
+
+activate: ## Activate environment
+	. ./.venv/bin/activate
 
 create_environment: ## Create a new conda environment with Python $(PYTHON_VERSION) (Not really used)
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
