@@ -1,3 +1,10 @@
+## 0.4.3 (2025-02-03)
+
+### Fix
+
+- **mkdocs**: Temporarily disabled termynal generation to get docs to render
+- update README for consistent cookiecutter placeholder syntax
+
 ## 0.4.1 (2025-01-29)
 
 ### Fix

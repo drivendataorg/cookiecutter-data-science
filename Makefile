@@ -1,7 +1,7 @@
 ## Phony tells Makefile these aren't files to be rebuilt
 .PHONY: all clean _prep create_environment requirements format lint docs-serve test \
 	test-fastest test-debug-last test-continuous _clean_manual_test manual-test manual-test-debug \
-	print-welcome publish docs-publish publish-all help activate
+	print-welcome publish docs-publish publish-all help activate bump
 
 ## GLOBALS
 
@@ -36,6 +36,9 @@ publish: ## Build and publish package
 	uv build && \
 	uv publish || \
 	echo "\nProject of current version may already exist. Have you tried increasing version number?"
+
+bump: ## Bump the version and update the changelog
+	SKIP=no-commit-to-branch cz bump --changelog
 
 # ## Install Python Dependencies (switched to uv)
 # requirements: ## Install Python dependencies using uv
