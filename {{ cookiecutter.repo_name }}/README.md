@@ -15,19 +15,25 @@
 {%- if "github" in cookiecutter.version_control and cookiecutter.docs != "none" %}
 
 <!-- TODO: Make this update to user's GitHub. -->
-https://gatlenculp.github.io/{{ cookiecutter.repo_name }}
+
+https://gatlenculp.github.io/{{cookiecutter.repo_name}}
 
 {%- endif %}
 
-
-
 ## Project Organization
+
 {#
+
 <!-- (Skipping common file descriptions to be concise) -->
+
 <!-- Created with eza --all --tree --icons --ignore-glob ".gitkeep" -->
+
 <!-- https://github.com/mightbesimon/vscode-emoji-icons -->
+
 <!-- TODO: In Github Actions actually have a simple test or something -->
+
 <!-- TODO: update main.yml to use what I now have setup -->
+
 TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 #}
 
@@ -48,7 +54,7 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 │   ├── 🚀 launch.json
 │   ├── ⚙️ settings.json
 │   ├── 📋 tasks.json
-│   └── ⚙️ '{{ cookiecutter.repo_name }}.code-workspace'
+│   └── ⚙️ '{{cookiecutter.repo_name}}.code-workspace'
 ├── 📁 data
 │   ├── 📁 external                      <- Data from third party sources
 │   ├── 📁 interim                       <- Intermediate data that has been transformed
@@ -77,7 +83,7 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 │           ├── ⚙️ example.config.ssh
 │           ├── 🔑 example.something.key
 │           └── 🔑 example.something.pub
-└── 🚰 '{{ cookiecutter.module_name }}'  <- Easily publishable source code
+└── 🚰 '{{cookiecutter.module_name}}'  <- Easily publishable source code
     ├── ⚙️ config.py                     <- Store useful variables and configuration (Preset)
     ├── 🐍 dataset.py                    <- Scripts to download or generate data
     ├── 🐍 features.py                   <- Code to create features for modeling
@@ -88,9 +94,9 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
     └── 🐍 plots.py                     <- Code to create visualizations
 ```
 
-
 {% if cookiecutter._readme_modern_header == 'y' -%}
 {%- if cookiecutter._readme_include_logo == 'y' -%}
+
 <h1 align="center">
   <a href="https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.repo_name}}">
     <!-- Please provide path to your logo here -->
@@ -123,12 +129,13 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 {%- else -%}
 # {{cookiecutter.project_name}}
 
-> **[?]** 
+> **[?]**
 > Provide short description for your project here.
 
 {%- endif %}
 {% if cookiecutter._readme_include_badges == 'y' -%}
 {%- if cookiecutter._readme_modern_header == 'y' %}
+
 <div align="center">
 {%- endif %}
 <br />
@@ -136,9 +143,10 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 [![Project license](https://img.shields.io/github/license/{{cookiecutter._github_username}}/{{cookiecutter._repo_slug}}.svg?style=flat-square)](LICENSE)
 
 [![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
-[![code with love by {{cookiecutter.github_username}}](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-{{cookiecutter._github_username}}-ff1414.svg?style=flat-square)](https://github.com/{{cookiecutter._github_username}})
+[![code with love by {{cookiecutter.github_username}}](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-}}cookiecutter._github_username}}-ff1414.svg?style=flat-square)](https://github.com/{{cookiecutter._github_username}})
 
 {% if cookiecutter._readme_modern_header == 'y' -%}
+
 </div>
 {%- endif %}
 {% endif %}
@@ -154,30 +162,32 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 - [Usage](#usage)
 - [Roadmap](#roadmap)
 - [Support](#support)
-{%- if cookiecutter._readme_include_project_assistance == 'y' %}
+  {%- if cookiecutter._readme_include_project_assistance == 'y' %}
 - [Project assistance](#project-assistance)
-{%- endif %}
+  {%- endif %}
 - [Contributing](#contributing)
-{%- if cookiecutter._readme_include_authors == 'y' %}
+  {%- if cookiecutter._readme_include_authors == 'y' %}
 - [Authors & contributors](#authors--contributors)
-{%- endif %}
-{%- if cookiecutter._readme_include_security == 'y' %}
+  {%- endif %}
+  {%- if cookiecutter._readme_include_security == 'y' %}
 - [Security](#security)
-{%- endif %}
-{%- if cookiecutter.open_source_license != 'No license file' %}
+  {%- endif %}
+  {%- if cookiecutter.open_source_license != 'No license file' %}
 - [License](#license)
-{%- endif %}
-{%- if cookiecutter.include_acknowledgements == 'y' %}
+  {%- endif %}
+  {%- if cookiecutter.include_acknowledgements == 'y' %}
 - [Acknowledgements](#acknowledgements)
-{%- endif %}
+  {%- endif %}
 
 </details>
 {%- endif %}
 
----
+______________________________________________________________________
 
 ## About
+
 {% if cookiecutter._readme_table_in_about == 'y' %}
+
 <table><tr><td>
 {% endif %}
 > **[?]**
@@ -188,6 +198,7 @@ TODO: Take inspo from [here](https://github.com/matiassingers/awesome-readme)
 > You don't have to answer all the questions -- just the ones relevant to your project.
 
 {% if cookiecutter._readme_include_screenshots == 'y' -%}
+
 <details>
 <summary>Screenshots</summary>
 <br>
@@ -243,13 +254,15 @@ See the [open issues](https://github.com/{{cookiecutter._github_username}}/{{coo
 Reach out to the maintainer at one of the following places:
 
 {% if cookiecutter.use_github_discussions == 'y' -%}
+
 - [GitHub Discussions](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/discussions)
-{%- elif cookiecutter.use_github_discussions != 'y' -%}
+  {%- elif cookiecutter.use_github_discussions != 'y' -%}
 - [GitHub issues](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+)
-{%- endif %}
+  {%- endif %}
 - Contact options listed on [this GitHub profile](https://github.com/{{cookiecutter._github_username}})
 
 {% if cookiecutter._readme_include_project_assistance == 'y' -%}
+
 ## Project assistance
 
 If you want to say **thank you** or/and support active development of {{cookiecutter.project_name}}:
@@ -260,6 +273,7 @@ If you want to say **thank you** or/and support active development of {{cookiecu
 
 Together, we can make {{cookiecutter.project_name}} **better**!
 {% endif %}
+
 ## Contributing
 
 {% if cookiecutter.open_source_license != 'No license file' -%}
@@ -269,6 +283,7 @@ First off, thanks for taking the time to contribute! Contributions are what make
 Please read [our contribution guidelines](docs/CONTRIBUTING.md), and thank you for being involved!
 
 {% if cookiecutter._readme_include_authors == 'y' -%}
+
 ## Authors & contributors
 
 The original setup of this repository is by [{{cookiecutter.full_name}}](https://github.com/{{cookiecutter._github_username}}).
@@ -276,6 +291,7 @@ The original setup of this repository is by [{{cookiecutter.full_name}}](https:/
 For a full list of all authors and contributors, see [the contributors page](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/contributors).
 {% endif %}
 {% if cookiecutter._readme_include_security == 'y' -%}
+
 ## Security
 
 {{cookiecutter.project_name}} follows good practices of security, but 100% security cannot be assured.
@@ -284,6 +300,7 @@ For a full list of all authors and contributors, see [the contributors page](htt
 _For more information and to report security issues, please refer to our [security documentation](docs/SECURITY.md)._
 {% endif %}
 {% if cookiecutter.open_source_license != 'No license file' -%}
+
 ## License
 
 This project is licensed under the **{{cookiecutter.open_source_license}}**.
@@ -291,9 +308,10 @@ This project is licensed under the **{{cookiecutter.open_source_license}}**.
 See [LICENSE](LICENSE) for more information.
 {% endif %}
 {% if cookiecutter._readme_include_acknowledgements == 'y' -%}
+
 ## Acknowledgements
 
 > **[?]**
 > If your work was funded by any organization or institution, acknowledge their support here.
 > In addition, if your work relies on other software libraries, or was inspired by looking at other work, it is appropriate to acknowledge this intellectual debt too.
-{% endif %}
+> {% endif %}

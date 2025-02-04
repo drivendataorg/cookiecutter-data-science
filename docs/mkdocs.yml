@@ -54,11 +54,11 @@ markdown_extensions:
   - md_in_html
 plugins:
   - include-markdown
-  - termynal:
-      title: bash
-      buttons: macos
-      prompt_literal_start:
-        - "$"
+  # - termynal:
+  #     title: bash
+  #     buttons: macos
+  #     prompt_literal_start:
+  #       - "$"
   - gen-files:
       scripts:
         - scripts/generate-termynal.py

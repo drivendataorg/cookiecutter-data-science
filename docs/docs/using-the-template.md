@@ -45,7 +45,9 @@ on its own.
 
 !!! note "Using Windows?"
 
-    If you are using Windows, you may need to install Make. See the ["Installing Make on Windows"](#installing-make-on-windows) section below.
+```
+If you are using Windows, you may need to install Make. See the ["Installing Make on Windows"](#installing-make-on-windows) section below.
+```
 
 ## Create a Python virtual environment
 
@@ -85,7 +87,9 @@ git checkout -b initial-exploration
 
 !!! note
 
-    The following assumes you're using a Jupyter notebook, but while the specific commands for another notebook tool may look a little bit different, the process guidance still applies.
+```
+The following assumes you're using a Jupyter notebook, but while the specific commands for another notebook tool may look a little bit different, the process guidance still applies.
+```
 
 Now you're ready to do some analysis! Make sure that your project-specific environment is activated (you can check with `which jupyter`) and run `jupyter notebook notebooks` to open a Jupyter notebook in the `notebooks/` folder. You can start by creating a new notebook and doing some exploratory data analysis. We often name notebooks with a scheme that looks like this:
 

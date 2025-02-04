@@ -4,6 +4,7 @@ When contributing to this repository, please first discuss the change you wish t
 {% if cookiecutter._readme_include_code_of_conduct == 'y' -%}
 Please note we have a [code of conduct](CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
 {% endif %}
+
 ## Development environment setup
 
 > **[?]**
@@ -18,7 +19,7 @@ To set up a development environment, please follow these steps:
    git clone https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}
    ```
 
-2. TODO
+1. TODO
 
 ## Issues and feature requests
 
@@ -38,9 +39,9 @@ Please try to create bug reports that are:
 1. Search our repository for open or closed
    [Pull Requests](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/pulls)
    that relate to your submission. You don't want to duplicate effort.
-2. Fork the project
-3. Create your feature branch (`git checkout -b feat/amazing_feature`)
-4. Commit your changes (`git commit -m 'feat: add amazing_feature'`) {% if cookiecutter._use_conventional_commits == 'y' -%}
+1. Fork the project
+1. Create your feature branch (`git checkout -b feat/amazing_feature`)
+1. Commit your changes (`git commit -m 'feat: add amazing_feature'`) {% if cookiecutter._use_conventional_commits == 'y' -%}
    {{cookiecutter.project_name}} uses [conventional commits](https://www.conventionalcommits.org), so please follow the specification in your commit messages.{% endif %}
-5. Push to the branch (`git push origin feat/amazing_feature`)
-6. [Open a Pull Request](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/compare?expand=1)
+1. Push to the branch (`git push origin feat/amazing_feature`)
+1. [Open a Pull Request](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/compare?expand=1)

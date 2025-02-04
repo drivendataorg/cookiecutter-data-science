@@ -1,6 +1,5 @@
 exclude: |
   (?x)^(
-      .*\{\{.*\}\}.*|     # Exclude any files with cookiecutter variables
       docs/site/.*|       # Exclude mkdocs compiled files
       docs/docs/jupyter-notebooks_files/.*|       # Exclude Jupyter Notebooks files
       jupyter-experiments/.*|       # Exclude jupyter-experiments
@@ -39,6 +38,10 @@ repos:
     hooks:
       - id: ruff-format
         name: "🐍 python · Format with Ruff"
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|     # Exclude any files with cookiecutter variable, this is an issue with ruff
+          )$
       # STRICT
       # - id: ruff
       #   name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
@@ -65,6 +68,11 @@ repos:
       - id: biome-check
         name: "🟨 javascript · Lint, format, and safe fixes with Biome"
         additional_dependencies: ["@biomejs/biome@1.9.4"]
+        # Exclude FastAPI directories for now
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|
+          )$
 
   ### Data & Config Validation ###
   - repo: https://github.com/python-jsonschema/check-jsonschema
@@ -82,6 +90,11 @@ repos:
     hooks:
       - id: mdformat
         name: "📝 markdown · Format markdown"
+        # Mdformat messes up jinja tags
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|
+          )$
         additional_dependencies:
           - mdformat-gfm
           - mdformat-ruff
@@ -117,6 +130,12 @@ repos:
     hooks:
       - id: checkmake
         name: "🐮 Makefile · Lint Makefile"
+        # No clear documentation on how to skip certain checks.
+        # Fixed as many as I could, but best option is to ignore the file.
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|
+          )$
 
   ### SQL ###
 
@@ -138,6 +157,11 @@ repos:
         name: "📓 notebook · Format markdown cells"
         args: ["--nbqa-md"]
         types: [jupyter]
+        # Reading pyproject.toml in the template throws errors
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|
+          )$
         additional_dependencies:
           - mdformat
           - mdformat-gfm
@@ -175,6 +199,11 @@ repos:
       # Filesystem Checks
       - id: check-executables-have-shebangs
         name: "📁 filesystem/⚙️ exec · Verify shebang presence"
+        # Exclude FastAPI directories for now
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|
+          )$
       - id: check-shebang-scripts-are-executable
         name: "📁 filesystem/⚙️ exec · Verify script permissions"
       - id: check-case-conflict
