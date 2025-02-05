@@ -191,6 +191,19 @@ repos:
         additional_dependencies:
           - prettier@3.4.2
 
+  # ----------------------------- ⚡️ uv Build Tools ---------------------------- #
+  # This helps ensure cross-compatibility with people who don't wish to use uv
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    # uv version.
+    rev: 0.5.27
+    hooks:
+      # STRICT -- This (kind of) enforces use of uv
+      - id: uv-sync
+      # Update the uv lockfile
+      - id: uv-lock
+      # Export to txt
+      - id: uv-export
+
   # ---------------------------- 📁 Filesystem Tools --------------------------- #
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
