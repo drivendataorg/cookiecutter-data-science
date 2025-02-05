@@ -31,7 +31,7 @@
 
 ## 0.2.0 (2025-01-20)
 
-### Feat
+### Feate
 
 - update Dockerfile to use dynamic GitHub username for label
 - add VSCode configs for extensions, debugging, and settings

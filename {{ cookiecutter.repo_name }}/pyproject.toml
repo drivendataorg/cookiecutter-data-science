@@ -149,24 +149,29 @@ web = [  # Web development and scraping
 [tool.uv]
 default-groups = [
     "dev", "dev-doc", "nb", # Typical
-    ## Data Tools
     # {% if cookiecutter.include_code_scaffold == "data" %}
-    "data", "dev-nb", "cli",
+    ## Data Engineering
+    # "data", "dev-nb", "cli",
     # {% endif %}
     # {% if cookiecutter.include_code_scaffold == "paper" %}
-    "data", "dev-nb",  # Paper Tools
+    ## Paper Writing
+    # "data", "dev-nb",
     # {% endif %}
     # {% if cookiecutter.include_code_scaffold == "app" %}
-    "dev-nb", "web",  # App Tools
+    ## App Development
+    # "dev-nb", "web",
     # {% endif %}
     # {% if cookiecutter.include_code_scaffold == "ml" %}
-    "data", "dev-nb", "cli", "ai-train",  # Machine Learning Tools
+    ## Machine Learning
+    # "data", "dev-nb", "cli", "ai-train",
     # {% endif %}
     # {% if cookiecutter.include_code_scaffold == "lib" %}
-    "dev-nb",  # Library Tools
+    ## Library Development
+    # "dev-nb",
     # {% endif %}
     # {% if cookiecutter.include_code_scaffold == "course" %}
-    "dev-nb",  # Course Tools
+    ## University Coursework
+    # "dev-nb",  # Course Tools
     # {% endif %}
 ]
 
