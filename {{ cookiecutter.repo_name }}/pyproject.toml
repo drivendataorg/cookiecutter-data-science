@@ -85,10 +85,12 @@ data = [  # Data processing and storage
 ]
 dev = [  # Development tools
     "better-exceptions>=0.3.3", # Improved error messages
+    "commitizen>=4.1.1",       # Standardized commit messages
     "cruft>=2.15.0",           # Project template management
     "faker>=33.1.0",           # Fake data generation
     "hypothesis>=6.122.3",     # Property-based testing
     "pip>=24.3.1",             # Package installer
+    "pre-commit>=4.1.0",       # Git pre-commit hooks
     "polyfactory>=2.18.1",     # Test data factory
     "pyinstrument>=5.0.0",     # Profiler
     # "pyprojectsort>=0.3.0",  # pyproject.toml sorter (TODO: Find replacement)
@@ -106,9 +108,11 @@ dev = [  # Development tools
     "pytest-timeout>=2.3.1",   # Test timeouts
     "pytest>=8.3.4",           # Testing framework
     "ruff>=0.8.3",             # Fast Python linter
-    "taplo>=0.9.3",            # TOML toolkit
+    # "taplo>=0.9.3",            # TOML toolkit (Requires Rust's Cargo)
     "tox>=4.23.2",             # Test automation
     "uv>=0.5.7",               # Fast pip replacement
+    "pre-commit>=4.1.0",       # Git pre-commit hooks
+    "commitizen>=4.1.1",       # Standardized commit messages
 ]
 dev-doc = [  # Documentation tools
     "mdformat>=0.7.19",        # Markdown formatter
@@ -148,7 +152,7 @@ web = [  # Web development and scraping
 # ai, web, gui
 [tool.uv]
 default-groups = [
-    "dev", "dev-doc", "nb", # Typical
+    # "dev", "dev-doc", "nb", # Typical
     # {% if cookiecutter.include_code_scaffold == "data" %}
     ## Data Engineering
     # "data", "dev-nb", "cli",
