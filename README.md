@@ -7,7 +7,7 @@
 <!-- TODO: https://github.com/pytest-dev/cookiecutter-pytest-plugin -->
 
 > [!WARNING]
-> Not yet ready for production!
+> Not yet ready for production and template may fail to work between versions.
 
 <div align="center">
   <a href="https://gatlenculp.github.io/gatlens-opinionated-template/">
@@ -168,3 +168,12 @@ Here are a few guiding principles of this template to determine whether or not y
 ## Contributing ❤️
 
 If you plan major changes, consider upstreaming them to [CookieCutter Data Science (CCDS)](https://github.com/drivendataorg/cookiecutter-data-science). For minor fixes or adjustments to GOTem, submit an issue or pull request here. See [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
+
+### Known Issues
+
+[Some users have experienced an issue with Git LFS being improperly configured](https://github.com/GatlenCulp/gatlens-opinionated-template/pull/11#issuecomment-2633076431). I'm currently working to get this resolved. It's reported that the following may fix the problem: 
+
+1. Clone the package manually `git clone <this-repo>`
+2. Set up git lfs, skipping smudge `git lfs install --skip-smudge` as suggested [here](https://stackoverflow.com/questions/41716509/fail-to-clone-repository-with-git-lfs)
+3. Install the package with `pip install .`
+
