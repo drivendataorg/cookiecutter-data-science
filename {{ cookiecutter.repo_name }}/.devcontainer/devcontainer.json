@@ -19,10 +19,21 @@
 	"image": "mcr.microsoft.com/devcontainers/python:1-{{ cookiecutter.python_version_number }}-bullseye",
 	"features": {
 		"ghcr.io/dhoeric/features/act:1": {},
+		// {%- if cookiecutter.environment_manager == 'uv' %}
 		"ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
+		// {%- endif %}
 	},
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "./.devcontainer/postCreateCommand.sh",
+	"remoteEnv": {
+		// {%- if cookiecutter.environment_manager == 'uv' %}
+		// "UV_FROZEN": "true",
+		"UV_PYTHON_PREFERENCE": "only-managed",
+		"UV_PROJECT_ENVIRONMENT": "${containerWorkspaceFolder}/.devcontainer/.venv",
+		"VIRTUAL_ENV": "${containerWorkspaceFolder}/.devcontainer/.venv",
+		// {%- endif %}
+		"PATH": "${containerWorkspaceFolder}/.devcontainer/.venv/bin:${env:PATH}"
+	},
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
