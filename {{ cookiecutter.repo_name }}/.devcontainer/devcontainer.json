@@ -1,9 +1,22 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
+/* Add the below to your projects.json file to add this project
+// '~/Library/Application Support/Cursor/User/globalStorage/alefragnani.project-manager/projects.json'
+{
+	"name": "🍪 {{ cookiecutter.repo_name }}",
+	"rootPath": "vscode-remote://container
+	+ SOME RANDOM STRING OF NUMBERS THAT I NEED TO FIGURE OUT
+	/workspaces/{{ cookiecutter.repo_name }}",
+	"tags": [
+		"🪿 gotem"
+	],
+	"enabled": true
+},
+*/
 {
 	"name": "{{ cookiecutter.repo_name }}",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/python:1-{{ cookiecutter.python_version_number }}-bullseye",
 	"features": {
 		"ghcr.io/dhoeric/features/act:1": {},
 		"ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
@@ -49,17 +62,6 @@
 				"aaron-bond.better-comments", // Comments w/ Styling
 				// Project Management & Navigation
 				"alefragnani.project-manager", // Manage VSCode Workspaces
-				/* Add the below to your projects.json file to add this project
-		'~/Library/Application Support/Cursor/User/globalStorage/alefragnani.project-manager/projects.json'
-		{
-			"name": "🍪 {{ cookiecutter.repo_name }}",
-			"rootPath": "/Path/to/your/project/{{ cookiecutter.repo_name }}/.vscode/{{ cookiecutter.repo_name }}.code-workspace",
-			"tags": [
-				"🪿 gotem"
-			],
-			"enabled": true
-		},
-		*/
 				"peterschmalfeldt.explorer-exclude", // Keep Explorer Clean by Hiding Files
 				"christian-kohler.path-intellisense", // Path Intellisense
 				"kisstkondoros.vscode-gutter-preview", // Image Preview
