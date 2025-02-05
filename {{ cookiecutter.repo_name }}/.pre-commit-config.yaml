@@ -165,6 +165,8 @@ repos:
         additional_dependencies:
           - prettier@3.4.2
 
+  # ----------------------------- ⚡️ uv Build Tools ---------------------------- #
+
   # ---------------------------- 📁 Filesystem Tools --------------------------- #
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
