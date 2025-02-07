@@ -37,7 +37,7 @@ def default_ccds_main(f):
         # Per #389, set this to the currently released version by default
         param_names = [p.name for p in f.params]
         checkout_index = param_names.index("checkout")
-        f.params[checkout_index].default = __version__
+        f.params[checkout_index].default = f"v{__version__}"
         return f(*args, **kwargs)
 
     return _main
