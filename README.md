@@ -84,7 +84,7 @@ The directory structure of your new project will look something like this (depen
 
 ## Using unreleased changes
 
-By default, `ccds` will use the version of the template that corresponds to the installed version (e.g., if you have installed version v2.0.1, you'll use the v2.0.1 version of the template by default). If there are any _unreleased_ changes to the template (or changes in a separate branch) that you want to incorporate, you can do so by checking out whatever branch you'd like to use (checkout `master` for the latest changes):
+By default, `ccds` will use the _project template_ version that corresponds to the _installed `ccds` package_ version (e.g., if you have installed `ccds` v2.0.1, you'll use the v2.0.1 version of the project template by default). To use a specific version of the project template, use the `-c/--checkout` flag to provide the branch (or tag or commit hash) of the version you'd like to use. For example to use the project template from the `master` branch:
 
 ```bash
 ccds -c master
