@@ -82,6 +82,14 @@ The directory structure of your new project will look something like this (depen
     └── plots.py                <- Code to create visualizations   
 ```
 
+## Using unreleased changes
+
+By default, `ccds` will use the _project template_ version that corresponds to the _installed `ccds` package_ version (e.g., if you have installed `ccds` v2.0.1, you'll use the v2.0.1 version of the project template by default). To use a specific version of the project template, use the `-c/--checkout` flag to provide the branch (or tag or commit hash) of the version you'd like to use. For example to use the project template from the `master` branch:
+
+```bash
+ccds -c master
+```
+
 ## Using v1
 
 If you want to use the old v1 project template, you need to have either the cookiecutter-data-science package or cookiecutter package installed. Then, use either command-line program with the `-c v1` option:
