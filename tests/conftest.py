@@ -113,7 +113,7 @@ def pytest_generate_tests(metafunc):
         metafunc.parametrize(
             "config",
             config_generator(metafunc.config.getoption("fast")),
-            ids=make_test_id
+            ids=make_test_id,
         )
 
 
