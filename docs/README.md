@@ -13,8 +13,4 @@ Use [mkdocs](https://www.mkdocs.org/) structure to update the documentation. Tes
 
     mkdocs serve
 
-Once the docs look good, publish to `gh-pages` branch with:
-
-    mkdocs gh-deploy --clean
-
-** Note **: Never edit the generated site by hand because using `gh-deploy` blows away the `gh-pages` branch and you'll lose your edits.
+The [hosted docs](https://cookiecutter-data-science.drivendata.org/) are deployed via [render](render.com) when the `master` branch is updated.
