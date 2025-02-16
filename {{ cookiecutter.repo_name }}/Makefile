@@ -35,13 +35,13 @@ clean:
 ## Lint using ruff (use `make format` to do formatting)
 .PHONY: lint
 lint:
-	ruff check {{ cookiecutter.module_name }}
+	ruff check
 
 ## Format source code with ruff
 .PHONY: format
 format:
-	ruff check --fix {{ cookiecutter.module_name }}
-	ruff format {{ cookiecutter.module_name }}
+	ruff check --fix
+	ruff format
 {% elif cookiecutter.linting_and_formatting == 'flake8+black+isort' %}
 ## Lint using flake8, black, and isort (use `make format` to do formatting)
 .PHONY: lint
