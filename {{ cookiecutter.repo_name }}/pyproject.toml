@@ -34,4 +34,8 @@ profile = "black"
 [tool.ruff]
 line-length = 99
 src = ["{{ cookiecutter.module_name }}"]
+include = ["pyproject.toml", "{{ cookiecutter.module_name }}/**/*.py"]
+
+[tool.ruff.lint]
+extend-select = ["I"]  # Add import sorting
 {% endif %}
