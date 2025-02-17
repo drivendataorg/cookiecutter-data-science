@@ -7,7 +7,7 @@ name = "ccds"
 
 [project]
 name = "cookiecutter-data-science"
-version = "2.0.0"
+version = "2.0.1"
 description = "A logical, reasonably standardized but flexible project structure for doing and sharing data science work."
 authors = [
   { name = "DrivenData", email = "info@drivendata.org" },
