@@ -1,10 +1,10 @@
 {
   "R": {
-    "Version": "4.2.1",
+    "Version": "4.4.1",
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://ftpmirror1.infania.net/mirror/CRAN"
+        "URL": "https://mirror.accum.se/mirror/CRAN/"
       }
     ]
   },
@@ -19,7 +19,7 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.8.3",
+      "Version": "1.0.14",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "32e79b908fda56ee57fe518a8d37b864",
@@ -135,7 +135,7 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.0.2",
+      "Version": "1.1.5",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "04884d9a75d778aca22c7154b8333ec9",

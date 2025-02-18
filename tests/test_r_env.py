@@ -56,7 +56,7 @@ class TestCookieSetup(object):
             lines = list(map(lambda x: x.strip(), fin.readlines()))
         dockerfile_text = Path(dockerfile_path).read_text()
 
-        assert lines[0] == "FROM registry.git.vgregion.se/aiplattform/images/r:0.6.0"
+        assert lines[0] == "FROM registry.git.vgregion.se/aiplattform/images/r:0.6.1"
         assert lines[-5] == 'RUN R -e \'renv::activate()\' && R -e \'renv::restore()\''
         assert lines[-3] == 'USER root'
         assert lines[-2] == 'EXPOSE 8787'
