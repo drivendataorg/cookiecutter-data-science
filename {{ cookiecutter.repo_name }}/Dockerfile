@@ -1,6 +1,6 @@
 {% if cookiecutter.image == 'Tensorflow' -%}FROM registry.git.vgregion.se/aiplattform/images/tensorflow:1.2.0
 {% elif cookiecutter.image == 'PyTorch' -%}FROM registry.git.vgregion.se/aiplattform/images/pytorch:1.3.1
-{% elif cookiecutter.image == 'R' -%}FROM registry.git.vgregion.se/aiplattform/images/r:0.6.0{%- endif %}
+{% elif cookiecutter.image == 'R' -%}FROM registry.git.vgregion.se/aiplattform/images/r:0.6.1{%- endif %}
 ENV GID=1000
 ENV UID=1000
 {% if cookiecutter.image == 'R' %}ENV EDITOR_FOCUS_DIR="/workspace"{% endif %}
