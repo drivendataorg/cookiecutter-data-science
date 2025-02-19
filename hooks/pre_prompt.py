@@ -1,9 +1,12 @@
 import warnings
 
-from ccds import __version__
+try:
+    from ccds import __version__
+except ImportError:
+    __version__ = None  # ccds is not installed
 
 if __name__ == "__main__":
-    if __version__ < "2.0.1":
+    if __version__ is not None and __version__ < "2.0.1":
         warnings.warn(
             "You're currently using a CCDS version that always applies the "
             "newest template. For more stable behavior, upgrade to "
