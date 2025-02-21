@@ -2,8 +2,10 @@ import warnings
 
 try:
     from ccds import __version__
-except ImportError:
+except ModuleNotFoundError:
     __version__ = None  # ccds is not installed
+except ImportError:
+    __version__ = "2.0.0"  # ccds is installed but version is 2.0.0
 
 if __name__ == "__main__":
     if __version__ is not None and __version__ < "2.0.1":
