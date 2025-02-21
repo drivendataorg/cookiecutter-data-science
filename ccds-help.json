@@ -141,6 +141,13 @@
                 } 
             },
             {
+                "choice": "uv",
+                "help": {
+                    "description": "An extremely fast Python package and project manager, written in Rust.",
+                    "more_information": "[Docs](https://docs.astral.sh/uv/)"
+                } 
+            },
+            {
                 "choice": "none",
                 "help": {
                     "description": "Do not add `create_environment` commands; env management left to the user.",
