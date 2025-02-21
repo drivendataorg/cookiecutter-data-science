@@ -1,3 +1,3 @@
-from ccds.version import __version__
+from importlib.metadata import version
 
-__version__
+__version__ = version("cookiecutter-data-science")

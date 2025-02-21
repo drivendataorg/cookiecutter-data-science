@@ -23,7 +23,7 @@ generate.generate_context = generate_context_wrapper
 from cookiecutter import cli
 from cookiecutter import main as api_main  # noqa: F401 referenced by tests
 
-from ccds.version import __version__
+from ccds import __version__
 
 
 def default_ccds_main(f):
