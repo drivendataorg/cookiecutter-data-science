@@ -100,6 +100,22 @@ ccds https://github.com/drivendataorg/cookiecutter-data-science -c v1
 cookiecutter https://github.com/drivendataorg/cookiecutter-data-science -c v1
 ```
 
+## Features
+
+- Support for multiple environment managers:
+  - virtualenv
+  - conda
+  - pipenv
+  - uv (modern Python package installer)
+  - or no environment manager
+
+- Support for multiple dependency management approaches:
+  - requirements.txt
+  - environment.yml (conda)
+  - pyproject.toml
+  - Pipfile (pipenv)
+  - requirements.in (pip-compile/uv)
+
 ## Contributing
 
 We welcome contributions! [See the docs for guidelines](https://cookiecutter-data-science.drivendata.org/contributing/).

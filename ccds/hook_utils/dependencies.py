@@ -26,11 +26,13 @@ scaffold = [
 def write_dependencies(
     dependencies, packages, pip_only_packages, repo_name, module_name, python_version
 ):
-    if dependencies == "requirements.txt":
+    if dependencies == "requirements.txt" or dependencies == "requirements.in":
         with open(dependencies, "w") as f:
             lines = sorted(packages)
 
-            lines += ["" "-e ."]
+            # Only add -e . to requirements.txt, not requirements.in
+            if dependencies == "requirements.txt":
+                lines += ["", "-e ."]
 
             f.write("\n".join(lines))
             f.write("\n")

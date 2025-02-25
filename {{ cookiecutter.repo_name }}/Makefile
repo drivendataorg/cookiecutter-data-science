@@ -14,7 +14,14 @@ PYTHON_INTERPRETER = python
 ## Install Python Dependencies
 .PHONY: requirements
 requirements:
-	{% if "requirements.txt" == cookiecutter.dependency_file -%}
+	{% if cookiecutter.environment_manager == 'uv' -%}
+	{% if cookiecutter.dependency_file == 'requirements.in' -%}
+	uv pip compile requirements.in -o requirements.txt
+	uv pip sync requirements.txt
+	{% elif cookiecutter.dependency_file == 'pyproject.toml' -%}
+	uv sync
+	{% endif -%}
+	{% elif "requirements.txt" == cookiecutter.dependency_file -%}
 	$(PYTHON_INTERPRETER) -m pip install -U pip
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 	{% elif "environment.yml" == cookiecutter.dependency_file -%}
@@ -75,19 +82,28 @@ sync_data_up:
 ## Set up python interpreter environment
 .PHONY: create_environment
 create_environment:
-	{% if cookiecutter.environment_manager == 'conda' -%}
+	{% if cookiecutter.environment_manager == 'uv' -%}
+	uv venv --python $(PYTHON_VERSION)
+	@echo ">>> New uv environment created. Activate with:\nsource .venv/bin/activate"
+	
+	{% elif cookiecutter.environment_manager == 'conda' -%}
 	{% if cookiecutter.dependency_file != 'environment.yml' %}
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) -y
 	{% else -%}
 	conda env create --name $(PROJECT_NAME) -f environment.yml
 	{% endif %}
 	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
+	
 	{% elif cookiecutter.environment_manager == 'virtualenv' -%}
 	@bash -c "if [ ! -z `which virtualenvwrapper.sh` ]; then source `which virtualenvwrapper.sh`; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); else mkvirtualenv.bat $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); fi"
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
+	
 	{% elif cookiecutter.environment_manager == 'pipenv' -%}
 	pipenv --python $(PYTHON_VERSION)
 	@echo ">>> New pipenv created. Activate with:\npipenv shell"
+	
+	{% elif cookiecutter.environment_manager == 'none' -%}
+	@echo ">>> No environment manager selected. Please create your own environment."
 	{% endif %}
 {% endif %}
 

@@ -15,12 +15,15 @@
         "virtualenv",
         "conda",
         "pipenv",
+        "uv",
         "none"
     ],
     "dependency_file": [
         "requirements.txt",
         "environment.yml",
-        "Pipfile"
+        "pyproject.toml",
+        "Pipfile",
+        "requirements.in"
     ],
     "pydata_packages": [
         "none",

@@ -42,7 +42,7 @@ def config_generator(fast=False):
 
     def _is_valid(config):
         config = dict(config)
-        #  Pipfile + pipenv only valid combo for either
+        # Pipfile + pipenv only valid combo for either
         if (config["environment_manager"] == "pipenv") ^ (
             config["dependency_file"] == "Pipfile"
         ):
@@ -50,6 +50,11 @@ def config_generator(fast=False):
         # conda is the only valid env manager for environment.yml
         if (config["dependency_file"] == "environment.yml") and (
             config["environment_manager"] != "conda"
+        ):
+            return False
+        # uv should only use requirements.in or pyproject.toml
+        if (config["environment_manager"] == "uv") and (
+            config["dependency_file"] not in ["requirements.in", "pyproject.toml"]
         ):
             return False
         return True
