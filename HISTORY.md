@@ -2,6 +2,8 @@
 
 ## UNRELEASED
 
+## v2.0.1 (2025-02-26)
+
 - Deprecates CI & support for Python 3.8, adds CI & support for Python 3.13 (Issue [#423](https://github.com/drivendataorg/cookiecutter-data-science/issues/423)
 - Fixes issue with scaffold code that import of config did not work. Adds testing of imports to test suite. (Issue [#370](https://github.com/drivendataorg/cookiecutter-data-science/issues/370))
 - Create automated release mechanism (Issue [#317](https://github.com/drivendataorg/cookiecutter-data-science/issues/317)) and pin template version to installed release (Issue [#389](https://github.com/drivendataorg/cookiecutter-data-science/issues/389))
