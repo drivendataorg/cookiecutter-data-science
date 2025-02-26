@@ -25,6 +25,9 @@
         "Pipfile",
         "requirements.in"
     ],
+    "__prompts__": {
+        "dependency_file": "Select dependency file (Note: some files are only compatible with specific environment managers - requirements.in/pyproject.toml with uv, environment.yml with conda, Pipfile with pipenv)"
+    },
     "pydata_packages": [
         "none",
         "basic"

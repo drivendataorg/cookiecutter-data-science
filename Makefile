@@ -71,10 +71,10 @@ docs-serve:
 ###     TESTS
 
 test: _prep
-	pytest -vvv --durations=0
+	pytest -vvv --durations=0 --log-cli-level=INFO
 
 test-fastest: _prep
-	pytest -vvv -FFF
+	pytest -vvv -FFF --log-cli-level=INFO
 
 test-debug-last:
 	pytest --lf --pdb

@@ -57,6 +57,11 @@ def config_generator(fast=False):
             config["dependency_file"] not in ["requirements.in", "pyproject.toml"]
         ):
             return False
+        # pyproject.toml and requirements.in should only be used with uv
+        if (config["dependency_file"] in ["pyproject.toml", "requirements.in"]) and (
+            config["environment_manager"] != "uv"
+        ):
+            return False
         return True
 
     # remove invalid configs

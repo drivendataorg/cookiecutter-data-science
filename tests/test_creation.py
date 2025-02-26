@@ -3,10 +3,21 @@ import os
 import sys
 from pathlib import Path
 from subprocess import PIPE, run
+import logging
 
 from conftest import bake_project
 
 BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
+
+# Add logging configuration at the top of the file
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler('test_configs.log')
+    ]
+)
 
 
 def _decode_print_stdout_stderr(result):
@@ -45,7 +56,9 @@ def test_baking_configs(config, fast):
     """For every generated config in the config_generator, run all
     of the tests.
     """
-    print("using config", json.dumps(config, indent=2))
+    # Replace print with structured logging
+    logging.info("Testing configuration:\n%s", json.dumps(config, indent=2))
+    
     with bake_project(config) as project_directory:
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
@@ -99,8 +112,6 @@ def verify_files(root, config):
     expected_files = [
         "Makefile",
         "README.md",
-        "pyproject.toml",
-        "setup.cfg",
         ".env",
         ".gitignore",
         "data/external/.gitkeep",
@@ -115,6 +126,13 @@ def verify_files(root, config):
         "models/.gitkeep",
         f"{config['module_name']}/__init__.py",
     ]
+
+    # Add dependency file based on configuration
+    if config["dependency_file"] in ["requirements.txt", "requirements.in", "Pipfile", "environment.yml"]:
+        expected_files.append(config["dependency_file"])
+    
+    # Always include pyproject.toml and setup.cfg
+    expected_files.extend(["pyproject.toml", "setup.cfg"])
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):
@@ -139,13 +157,21 @@ def verify_files(root, config):
             "docs/docs/getting-started.md",
         ]
 
-    expected_files.append(config["dependency_file"])
-
     expected_files = [Path(f) for f in expected_files]
-
     existing_files = [f.relative_to(root) for f in root.glob("**/*") if f.is_file()]
 
-    assert sorted(existing_files) == sorted(expected_files)
+    # Sort both lists for comparison
+    expected_files = sorted(expected_files)
+    existing_files = sorted(existing_files)
+
+    # If the assertion fails, print the differences for debugging
+    if expected_files != existing_files:
+        print("\nMissing files (in expected but not found):")
+        print([f for f in expected_files if f not in existing_files])
+        print("\nExtra files (found but not expected):")
+        print([f for f in existing_files if f not in expected_files])
+
+    assert expected_files == existing_files
 
     for f in existing_files:
         assert no_curlies(root / f)

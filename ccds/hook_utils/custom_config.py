@@ -49,3 +49,42 @@ def write_custom_config(user_input_config):
     copytree(local_path, ".")
 
     tmp.cleanup()
+
+
+def validate_dependency_file(config):
+    """Validate that the dependency file choice is compatible with the environment manager"""
+    env_manager = config["environment_manager"]
+    dep_file = config["dependency_file"]
+
+    # Validate pipenv + Pipfile combo
+    if (env_manager == "pipenv") != (dep_file == "Pipfile"):
+        raise ValueError(
+            "Pipenv must be used with Pipfile and vice versa. "
+            f"Got environment_manager={env_manager}, dependency_file={dep_file}"
+        )
+
+    # Validate conda + environment.yml
+    if dep_file == "environment.yml" and env_manager != "conda":
+        raise ValueError(
+            "environment.yml can only be used with conda. "
+            f"Got environment_manager={env_manager}"
+        )
+
+    # Validate uv dependency files
+    if env_manager == "uv" and dep_file not in ["requirements.in", "pyproject.toml"]:
+        raise ValueError(
+            "uv can only be used with requirements.in or pyproject.toml. "
+            f"Got dependency_file={dep_file}"
+        )
+
+    # Validate pyproject.toml and requirements.in with uv
+    if dep_file in ["pyproject.toml", "requirements.in"] and env_manager != "uv":
+        raise ValueError(
+            f"{dep_file} can only be used with uv. "
+            f"Got environment_manager={env_manager}"
+        )
+
+def validate_config(config):
+    """Run all config validations"""
+    validate_dependency_file(config)
+    # ... any other existing validations ...
