@@ -35,6 +35,7 @@ clean:
 ## Lint using ruff (use `make format` to do formatting)
 .PHONY: lint
 lint:
+	ruff format --check
 	ruff check
 
 ## Format source code with ruff
