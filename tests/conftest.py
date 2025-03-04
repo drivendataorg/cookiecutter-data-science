@@ -107,7 +107,7 @@ def fast(request):
 def pytest_generate_tests(metafunc):
     # setup config fixture to get all of the results from config_generator
     def make_test_id(config):
-        return f"{config['environment_manager']}-{config['dependency_file']}-{config['docs']}"
+        return f"{config['environment_manager']}-{config['dependency_file']}-{config['pydata_packages']}"
 
     if "config" in metafunc.fixturenames:
         metafunc.parametrize(
