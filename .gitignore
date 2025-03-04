@@ -8,16 +8,9 @@ manual_test/
 
 # other local dev info
 .vscode/
-.history/
 
 # Mac OS-specific storage files
 .DS_Store
-Icon?
-Icon
-Icon[\r]
-
-# ruff
-.ruff_cache/
 
 # vim
 *.swp
