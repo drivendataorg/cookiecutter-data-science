@@ -16,7 +16,6 @@ PYTHON_INTERPRETER = python
 requirements:
 	{% if "requirements.txt" == cookiecutter.dependency_file -%}
 	{% if "uv" == cookiecutter.environment_manager -%}
-	uv pip install pip
 	uv pip install -r requirements.txt
 	{% else -%}
 	$(PYTHON_INTERPRETER) -m pip install -U pip
