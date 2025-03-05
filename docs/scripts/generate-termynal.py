@@ -1,3 +1,4 @@
+import json
 import shutil
 from pathlib import Path
 
@@ -49,14 +50,16 @@ ccds_script = [
     ("author_name", "Dat A. Scientist"),
     ("description", "This is my analysis of the data."),
     ("python_version_number", "3.12"),
-    ("Choose from", "3"),
+    ("Choose from", "3"),  # dataset_storage
     ("bucket", "s3://my-aws-bucket"),
     ("aws_profile", ""),
-    ("Choose from", "2"),
-    ("Choose from", "1"),
-    ("Choose from", "2"),
-    ("Choose from", "2"),
-    ("Choose from", "1"),
+    ("Choose from", "2"),  # environment_manager
+    ("Choose from", "1"),  # dependency_file
+    ("Choose from", "2"),  # pydata_packages
+    ("Choose from", "1"),  # linting_and_formatting
+    ("Choose from", "2"),  # open_source_license
+    ("Choose from", "1"),  # docs
+    ("Choose from", "2"),  # include_code_scaffold
 ]
 
 
@@ -127,6 +130,11 @@ def render_termynal():
 
     html_lines.append("</div>")
     output = "\n".join(html_lines)
+
+    # Ensure that all options are contained in the output
+    options = json.load((CCDS_ROOT / "ccds.json").open("r")).keys()
+    for option in options:
+        assert option in output, f'Option "{option}" not found in termynal output.'
 
     # replace local directory in ccds call with URL so it can be used for documentation
     output = output.replace(
