@@ -37,5 +37,7 @@ else
 fi
 
 make requirements
+make lint
+make format
 
 run_tests $PROJECT_NAME $MODULE_NAME
