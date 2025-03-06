@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 
+from ccds.hook_utils.scaffold_cleaner import ScaffoldCleaner
 from ccds.hook_utils.configure_ssh import generate_personal_ssh_keys
 from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_repo
 
@@ -79,18 +80,23 @@ if "{{ cookiecutter.open_source_license }}" == "No license file":  # noqa: PLR01
 pyproject_text = Path("pyproject.toml").read_text()
 Path("pyproject.toml").write_text(pyproject_text.replace(r"\u0027", "'"))
 
+scaffold_cleaner = ScaffoldCleaner(PROJ_ROOT)
+
 # {% if cookiecutter.include_code_scaffold == "No" %}
-# remove everything except __init__.py so result is an empty package
-for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
-    if generated_path.is_dir():
-        shutil.rmtree(generated_path)
-    elif generated_path.name != "__init__.py":
-        generated_path.unlink()
-    elif generated_path.name == "__init__.py":
-        # remove any content in __init__.py since it won't be available
-        generated_path.write_text(
-            '"""{{ cookiecutter.module_name }}: {{ cookiecutter.project_short_description }}."""\n',
-        )
+# # remove everything except __init__.py so result is an empty package
+# for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
+#     if generated_path.is_dir():
+#         shutil.rmtree(generated_path)
+#     elif generated_path.name != "__init__.py":
+#         generated_path.unlink()
+#     elif generated_path.name == "__init__.py":
+#         # remove any content in __init__.py since it won't be available
+#         generated_path.write_text(
+#             '"""{{ cookiecutter.module_name }}: {{ cookiecutter.project_short_description }}."""\n',
+#         )
+
+scaffold_cleaner()
+
 # {# TODO(Gatlen Culp): Fix below #}
 # {% elif cookiecutter.include_code_scaffold == "data" %}
 # {% elif cookiecutter.include_code_scaffold == "paper" %}
