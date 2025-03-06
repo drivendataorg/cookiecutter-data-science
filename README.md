@@ -171,9 +171,8 @@ If you plan major changes, consider upstreaming them to [CookieCutter Data Scien
 
 ### Known Issues
 
-[Some users have experienced an issue with Git LFS being improperly configured](https://github.com/GatlenCulp/gatlens-opinionated-template/pull/11#issuecomment-2633076431). I'm currently working to get this resolved. It's reported that the following may fix the problem: 
+[Some users have experienced an issue with Git LFS being improperly configured](https://github.com/GatlenCulp/gatlens-opinionated-template/pull/11#issuecomment-2633076431). I'm currently working to get this resolved. It's reported that the following may fix the problem:
 
 1. Clone the package manually `git clone <this-repo>`
-2. Set up git lfs, skipping smudge `git lfs install --skip-smudge` as suggested [here](https://stackoverflow.com/questions/41716509/fail-to-clone-repository-with-git-lfs)
-3. Install the package with `pip install .`
-
+1. Set up git lfs, skipping smudge `git lfs install --skip-smudge` as suggested [here](https://stackoverflow.com/questions/41716509/fail-to-clone-repository-with-git-lfs)
+1. Install the package with `pip install .`

@@ -33,6 +33,10 @@ dependencies = [
     "python-dotenv>=1.0.0"   # Load .env into environment vars
 ]
 
+# FOR CLI APPS
+# [project.scripts]
+# cookiecutter.module_name = "{{ cookiecutter.module_name|tojson }}.cli.main:app"
+
 [dependency-groups]
 ai-apps = [  # AI application development packages
     "ell-ai>=0.0.15",        # AI toolkit
