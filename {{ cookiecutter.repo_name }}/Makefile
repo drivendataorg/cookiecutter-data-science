@@ -21,6 +21,12 @@ requirements:
 	$(PYTHON_INTERPRETER) -m pip install -U pip
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 	{% endif -%}
+	{% elif "pyproject.toml" == cookiecutter.dependency_file -%}
+	{% if "uv" == cookiecutter.environment_manager -%}
+	uv pip install -e .
+	{% else -%}
+	pip install -e .
+	{% endif -%}
 	{% elif "environment.yml" == cookiecutter.dependency_file -%}
 	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
 	{% elif "Pipfile" == cookiecutter.dependency_file -%}
