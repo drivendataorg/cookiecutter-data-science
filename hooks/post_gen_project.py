@@ -6,17 +6,18 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from ccds.hook_utils.scaffold_cleaner import ScaffoldCleaner
-from ccds.hook_utils.configure_ssh import generate_personal_ssh_keys
-from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_repo
-
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
+from ccds.hook_utils.configure_ssh import generate_personal_ssh_keys
+from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_repo
 from ccds.hook_utils.custom_config import write_custom_config
 from ccds.hook_utils.dependencies import basic, packages, scaffold, write_dependencies
+from ccds.hook_utils.scaffold_cleaner import ScaffoldCleaner
 
-PROJ_ROOT = Path.cwd()
-SECRETS_DIR = Path.cwd() / "secrets"
+PROJ_ROOT = Path.cwd().resolve()
+MODULE_NAME = "{{ cookiecutter.module_name }}"
+PROJECT_SHORT_DESCRIPTION = "{{ cookiecutter.project_short_description }}"
+SECRETS_DIR = PROJ_ROOT / "secrets"
 
 # ---------------------------------------------------------------------------- #
 #                EMPLATIZED VARIABLES FILLED IN BY COOKIECUTTER                #
@@ -80,7 +81,7 @@ if "{{ cookiecutter.open_source_license }}" == "No license file":  # noqa: PLR01
 pyproject_text = Path("pyproject.toml").read_text()
 Path("pyproject.toml").write_text(pyproject_text.replace(r"\u0027", "'"))
 
-scaffold_cleaner = ScaffoldCleaner(PROJ_ROOT)
+scaffold_cleaner = ScaffoldCleaner(PROJ_ROOT, MODULE_NAME, PROJECT_SHORT_DESCRIPTION)
 
 # {% if cookiecutter.include_code_scaffold == "No" %}
 # # remove everything except __init__.py so result is an empty package
@@ -94,7 +95,6 @@ scaffold_cleaner = ScaffoldCleaner(PROJ_ROOT)
 #         generated_path.write_text(
 #             '"""{{ cookiecutter.module_name }}: {{ cookiecutter.project_short_description }}."""\n',
 #         )
-
 scaffold_cleaner()
 
 # {# TODO(Gatlen Culp): Fix below #}
