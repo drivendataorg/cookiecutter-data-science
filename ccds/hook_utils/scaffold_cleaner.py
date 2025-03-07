@@ -36,14 +36,17 @@ class ScaffoldCleaner:
                 cleaning_ops.add(lambda: self._select_module_scaffolding("course"))
                 continue
             if option == "app":
+                cleaning_ops.add(lambda: self._remove_dir(self.root / "notebooks"))
                 continue
             if option == "ml":
                 cleaning_ops.add(lambda: self._select_module_scaffolding("ai"))
                 continue
             if option == "lib":
+                cleaning_ops.add(lambda: self._remove_dir(self.root / "out"))
                 continue
             if option == "course":
                 cleaning_ops.add(lambda: self._select_module_scaffolding("course"))
+                cleaning_ops.add(lambda: self._remove_file(self.root / "Taskfile.yml"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / ".devcontainer"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / ".github"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "data"))
