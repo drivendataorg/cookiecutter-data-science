@@ -30,16 +30,20 @@ class ScaffoldCleaner:
         cleaning_ops = {self._remove_experimental}
         for option in cleaning_options:
             if option == "data":
+                cleaning_ops.add(lambda: self._select_module_scaffolding("ai"))
                 continue
             if option == "paper":
+                cleaning_ops.add(lambda: self._select_module_scaffolding("course"))
                 continue
             if option == "app":
                 continue
             if option == "ml":
+                cleaning_ops.add(lambda: self._select_module_scaffolding("ai"))
                 continue
             if option == "lib":
                 continue
             if option == "course":
+                cleaning_ops.add(lambda: self._select_module_scaffolding("course"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / ".devcontainer"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / ".github"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "data"))
@@ -59,6 +63,16 @@ class ScaffoldCleaner:
         self._create_blank_module()
         self._remove_dir(self.root / ".devcontainer")
         self._remove_experimental()
+
+    def _select_module_scaffolding(
+        self,
+        scaffold: Literal["ai", "backend", "course", "frontend"],
+    ) -> None:
+        """Delete all config except for the config passed in."""
+        module_path = self.root / self.module_name
+        all_scaffolds = {"ai", "backend", "course", "frontend"}
+        for unselected_scaffold in all_scaffolds - {scaffold}:
+            self._remove_dir(module_path / f"_{unselected_scaffold}")
 
     def _create_blank_module(self) -> None:
         """Remove everything except __init__.py so result is an empty package."""
