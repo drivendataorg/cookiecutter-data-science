@@ -14,9 +14,11 @@ from ccds.hook_utils.custom_config import write_custom_config
 from ccds.hook_utils.dependencies import basic, packages, scaffold, write_dependencies
 from ccds.hook_utils.scaffold_cleaner import ScaffoldCleaner
 
-PROJ_ROOT = Path.cwd().resolve()
 MODULE_NAME = "{{ cookiecutter.module_name }}"
 PROJECT_SHORT_DESCRIPTION = "{{ cookiecutter.project_short_description }}"
+CODE_SCAFFOLD = "{{ cookiecutter.include_code_scaffold }}"
+
+PROJ_ROOT = Path.cwd().resolve()
 SECRETS_DIR = PROJ_ROOT / "secrets"
 
 # ---------------------------------------------------------------------------- #
@@ -83,28 +85,10 @@ Path("pyproject.toml").write_text(pyproject_text.replace(r"\u0027", "'"))
 
 scaffold_cleaner = ScaffoldCleaner(PROJ_ROOT, MODULE_NAME, PROJECT_SHORT_DESCRIPTION)
 
-# {% if cookiecutter.include_code_scaffold == "No" %}
-# # remove everything except __init__.py so result is an empty package
-# for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
-#     if generated_path.is_dir():
-#         shutil.rmtree(generated_path)
-#     elif generated_path.name != "__init__.py":
-#         generated_path.unlink()
-#     elif generated_path.name == "__init__.py":
-#         # remove any content in __init__.py since it won't be available
-#         generated_path.write_text(
-#             '"""{{ cookiecutter.module_name }}: {{ cookiecutter.project_short_description }}."""\n',
-#         )
-scaffold_cleaner()
-
-# {# TODO(Gatlen Culp): Fix below #}
-# {% elif cookiecutter.include_code_scaffold == "data" %}
-# {% elif cookiecutter.include_code_scaffold == "paper" %}
-# {% elif cookiecutter.include_code_scaffold == "app" %}
-# {% elif cookiecutter.include_code_scaffold == "ml" %}
-# {% elif cookiecutter.include_code_scaffold == "lib" %}
-# {% elif cookiecutter.include_code_scaffold == "course" %}
-# {% endif %}
+if CODE_SCAFFOLD == "No":
+    scaffold_cleaner()
+else:
+    scaffold_cleaner([CODE_SCAFFOLD])
 
 
 # ---------------------------------------------------------------------------- #
