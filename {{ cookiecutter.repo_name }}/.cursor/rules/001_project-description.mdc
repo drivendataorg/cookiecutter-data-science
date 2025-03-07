@@ -1,9 +1,14 @@
+---
+description: General project description
+globs: 
+alwaysApply: true
+---
 {# This is a dynamically generated cursorrules file. #}
 # Cursor Rules for {{ cookiecutter.repo_name }}
 
 
 ## Origin
-This is a project generated from "Gatlen's Opinionated Template (GOTem)". GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), one of the most popular, flexible, and well maintained Python templates out there. GOTem extends CCDS with carefully selected defaults, dependency stack, customizations, additional features (that I maybe should have spent time contributing to the original project), and contemporary best practices. Ready for not just data science but also general Python development, research projects, and academic work. Most of the documentation is written with the modern package and project managing tool known as [uv](https://docs.astral.sh/uv/)
+This is a project generated from "Gatlen's Opinionated Template (GOTem)". GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](mdc:root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/https:/cookiecutter-data-science.drivendata.org), one of the most popular, flexible, and well maintained Python templates out there. GOTem extends CCDS with carefully selected defaults, dependency stack, customizations, additional features (that I maybe should have spent time contributing to the original project), and contemporary best practices. Ready for not just data science but also general Python development, research projects, and academic work. Most of the documentation is written with the modern package and project managing tool known as [uv](mdc:root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/https:/docs.astral.sh/uv)
 
 
 The source code can be found at https://github.com/GatlenCulp/gatlens-opinionated-template.
@@ -239,7 +244,7 @@ The following is the `README.md` file for GOTem. Recommendations (to a reasonabl
 
 **_Cutting-edge, opinionated, and ambitious project builder for power users and researchers._**
 
-GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](https://cookiecutter-data-science.drivendata.org/), one of the most popular, flexible, and well maintained Python templates out there. GOTem extends CCDS with carefully selected defaults, dependency stack, customizations, additional features (that I maybe should have spent time contributing to the original project), and contemporary best practices. Ready for not just data science but also general Python development, research projects, and academic work.
+GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](mdc:root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/https:/cookiecutter-data-science.drivendata.org), one of the most popular, flexible, and well maintained Python templates out there. GOTem extends CCDS with carefully selected defaults, dependency stack, customizations, additional features (that I maybe should have spent time contributing to the original project), and contemporary best practices. Ready for not just data science but also general Python development, research projects, and academic work.
 
 ### Key Features
 
@@ -261,9 +266,9 @@ GOTem is forked from (and synced with) [CookieCutter Data Science (CCDS) V2](htt
 |                                                     **⚡ You’re a Perfection & Performance Seeker** <br> - You enjoy pushing Python’s boundaries in speed, design, and maintainability. <br> - You're always looking for the best solution, not just quick patches.                                                      |                    **🏛️ You Need Old-School Stability** <br> - You want a large, established user base and predictable release cycles. <br> - You get uneasy about lesser-known or younger libraries that might break your production environment.                     |
 |                                                           **🏃‍♂️ You’re a Quick-Start Enthusiast** <br> - You want a template that practically configures itself so you can jump in. <br> - You like having robust CI/CD, Git setup, and docs all done for you.                                                            |               **🚶‍♂️ You Prefer Slow, Manual Setups** <br> - You don’t mind spending time creating everything from scratch for each new project. <br> - Doing things the classic or “official” way is more comfortable than using “opinionated” shortcuts.               |
 
-If the right-hand column describes you better, [CookieCutter Data Science (CCDS)](https://cookiecutter-data-science.drivendata.org/) or another minimal template might be a better fit.
+If the right-hand column describes you better, [CookieCutter Data Science (CCDS)](mdc:root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/https:/cookiecutter-data-science.drivendata.org) or another minimal template might be a better fit.
 
-**[View the full documentation here](https://gatlenculp.github.io/gatlens-opinionated-template/) ➡️**
+**[View the full documentation here](mdc:root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/root/https:/gatlenculp.github.io/gatlens-opinionated-template) ➡️**
 
 ---
 
