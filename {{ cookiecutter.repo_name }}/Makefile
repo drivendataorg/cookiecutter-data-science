@@ -23,7 +23,7 @@ requirements:
 	{% endif -%}
 	{% elif "pyproject.toml" == cookiecutter.dependency_file -%}
 	{% if "uv" == cookiecutter.environment_manager -%}
-	uv pip install -e .
+	uv sync
 	{% else -%}
 	pip install -e .
 	{% endif -%}
