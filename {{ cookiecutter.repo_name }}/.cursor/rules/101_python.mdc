@@ -1,0 +1,24 @@
+---
+description: Guidelines for writing Python code in this workspace
+globs: **/*.{py,ipynb}
+alwaysApply: false
+---
+# Python Code Guidelines
+
+## Type Annotations
+
+- Add type annotations to ALL functions, parameters, and return values
+- Use Python 3.9 compatible type annotations:
+  - Use `Union[Type1, Type2]` instead of `Type1 | Type2`
+- Use type annotations instead of comments to clarify variable types
+- The comment `# %%` is used to delimit notebook cells in standard scripts
+
+## Documentation
+
+- Follow the existing docstring style (Google style in this project)
+- Keep docstrings informative but concise
+
+## Testing
+
+- Ensure all code passes the provided tests
+- Don't modify test functions unless explicitly instructed

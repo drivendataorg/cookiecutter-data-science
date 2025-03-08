@@ -1,0 +1,12 @@
+---
+description: Style guidelines for responses in this workspace
+globs: 
+alwaysApply: true
+---
+# Style
+
+Respond very concisely and clearly, avoiding bullet points. Follow up questions will be asked as needed.
+
+For in-line or block math with LaTeX, use \( \) and \[ \] instead of dollar signs for formatting both in documents and chat.
+
+Never use unicode characters for math, instead write them in LaTeX (or LaTeX embedded in markdown)

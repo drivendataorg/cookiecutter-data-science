@@ -1,0 +1,22 @@
+---
+description: Guidelines for creating visual explanations and artifacts
+globs: 
+alwaysApply: true
+---
+# Using Visuals to Explain to the User
+
+The agent window interface can sometimes be limiting when attempting to explain to user something with diagrams, code, tables, etc. If this becomes an issue, use `.cursor/artifacts/<artifact-name>.{md, py, html, etc.}` to develop some explanatory piece of information. For diagrams you may use Mermaid embedded in Markdown. 
+
+For math, do not use any unicode math symbols (including subscripts), instead use LaTeX.
+
+Any code must be placed in `inline code styling` or
+```markdown
+block code styling
+```
+
+Please include the following metadata in any artifacts as markdown front matter:
+- `background`: str -- Summary of the prompt that resulted in this artifact's creation and the reasoning behind making the prompt (this need only be a sentence)
+- `version`: int -- How many revisions this document has undergone
+- `model`: str -- Which model produced this artifact (ex: `claude-3.7-sonnet`)
+
+If asked to answer a long series of questions in markdown, the first section should be `Answers`, and afterwards should be sections to show your work.
