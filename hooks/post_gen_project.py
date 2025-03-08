@@ -2,6 +2,8 @@ import shutil
 from copy import copy
 from pathlib import Path
 
+from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_repo
+
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
 from ccds.hook_utils.custom_config import write_custom_config
@@ -93,4 +95,20 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
     elif generated_path.name == "__init__.py":
         # remove any content in __init__.py since it won't be available
         generated_path.write_text("")
+# {% endif %}
+
+#
+#  VERSION CONTROL
+#
+
+# {% if cookiecutter.version_control == "git (local)" %}
+init_local_git_repo(directory=Path.cwd())
+# {% elif cookiecutter.version_control == "git (github private)" %}
+configure_github_repo(
+    directory=Path.cwd(), repo_name="{{ cookiecutter.repo_name }}", visibility="private"
+)
+# {% elif cookiecutter.version_control == "git (github public)" %}
+configure_github_repo(
+    directory=Path.cwd(), repo_name="{{ cookiecutter.repo_name }}", visibility="public"
+)
 # {% endif %}
