@@ -1,3 +1,5 @@
+import tomlkit
+
 packages = [
     "pip",
     "python-dotenv",
@@ -39,6 +41,15 @@ def write_dependencies(
 
             f.write("\n".join(lines))
             f.write("\n")
+
+    elif dependencies == "pyproject.toml":
+        with open(dependencies, "r") as f:
+            doc = tomlkit.parse(f.read())
+        doc["project"].add("dependencies", sorted(packages))
+        doc["project"]["dependencies"].multiline(True)
+
+        with open(dependencies, "w") as f:
+            f.write(tomlkit.dumps(doc))
 
     elif dependencies == "environment.yml":
         with open(dependencies, "w") as f:
