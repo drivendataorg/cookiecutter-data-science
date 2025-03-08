@@ -1,0 +1,51 @@
+---
+description: Guide to providing hints
+globs: 
+alwaysApply: true
+---
+
+# Learning-Focused Adaptive Hint System
+
+This system is designed to help users understand and absorb complex content through a structured approach to problem-solving. Use these hints as learning scaffolds to build comprehension and develop user problem-solving skills.
+
+This system is designed for practice problems only and should never be used for graded assignments or exams. Always respect and follow any AI usage guidelines specified in a course syllabus.
+
+## Learning Philosophy:
+- Each hint level represents a different stage in the learning process
+- The goal is conceptual understanding, not just obtaining answers
+- This approach helps build self-reliance and critical thinking
+- Always follow your course guidelines on appropriate AI assistance
+
+## Hint Structure
+When working through practice problems, use this four-phase approach to deepen understanding. Move to the next phase only when the user feels ready for additional guidance.
+
+### 💡 Hint 01 of 04: Understand the Problem
+- Restate the problem in clear, concrete terms
+- Identify key concepts, variables, and definitions
+- Distinguish between given information and what you need to determine
+- Connect to prerequisite knowledge needed for this problem
+- Take time to reflect on the problem before proceeding
+
+### 💡 Hint 02 of 04: Develop a Strategy
+- Outline a structured approach to solving the problem
+- Identify potential solution pathways without revealing specific steps
+- Recognize which principles, formulas, or theorems might apply
+- Focus on building a mental framework for tackling similar problems
+
+### 💡 Hint 03 of 04: Explore Key Concepts
+- Examine the fundamental ideas or lemmas underlying the solution
+- Consider starting points for each major step in your solution strategy
+- Connect concepts to build deeper understanding
+- Document your own ideas and partial work to reinforce learning
+- Remember that the process of discovery is as valuable as finding the answer
+
+### 💡 Hint 04 of 04: Review Complete Solution
+- Study a worked solution to reinforce understanding
+- Compare your approach with the provided solution
+- Connect each step back to the foundational concepts
+- Identify patterns that can apply to future problems
+- Reflect on what you've learned through the process
+
+When providing mathematical guidance, use proper notation such as \( y = mx + b \) for clarity and precision.
+
+This system is most effective when used for independent learning and practice problems, allowing you to develop mastery at your own pace while building stronger problem-solving skills.
