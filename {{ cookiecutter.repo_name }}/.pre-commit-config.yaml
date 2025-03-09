@@ -193,10 +193,12 @@ repos:
       - id: check-added-large-files
         name: "🌳 git · Block large file commits"
         args: ["--maxkb=5000"]
+      # {% if cookiecutter.include_code_scaffold == "course" %}
       - id: no-commit-to-branch
         alias: protect-main
         name: "🌳 git · Protect main branches"
         args: ["--branch", "main", "--branch", "master"]
+      # {% endif %}
 
   # ---------------------------------------------------------------------------- #
   #                            📝 Commit Message Hooks                           #
