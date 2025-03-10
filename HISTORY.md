@@ -5,7 +5,7 @@
 ## v2.1.0 (2025-03-10)
 
 - Added support for ruff as default linting + formatting, updating gitignore to latest GitHub default (Discussion [#374](https://github.com/drivendataorg/cookiecutter-data-science/discussions/374) and Issue [#388](https://github.com/drivendataorg/cookiecutter-data-science/issues/388))
-- Added support for uv pip (Discussion [#403](https://github.com/drivendataorg/cookiecutter-data-science/discussions/403))
+- Added support for `uv pip` as an environment manager option (Discussion [#403](https://github.com/drivendataorg/cookiecutter-data-science/discussions/403))
 - Added names to pytest ids (PR [#409](https://github.com/drivendataorg/cookiecutter-data-science/pull/409))
 - Added badges to README (Issue [#368](https://github.com/drivendataorg/cookiecutter-data-science/issue/434))
 
