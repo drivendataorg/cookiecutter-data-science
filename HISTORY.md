@@ -12,8 +12,6 @@
 - Fixed obsolete `[tool.ruff.lint.isort]` configuration key names that used underscores instead of hyphens. (Issue [#388](https://github.com/drivendataorg/cookiecutter-data-science/issues/388))
 - Changed import sorting in generated code scaffold to match the generated isort configuration. 
 - Added support for `uv pip` as an environment manager option (Discussion [#403](https://github.com/drivendataorg/cookiecutter-data-science/discussions/403))
-- Added names to pytest ids (PR [#409](https://github.com/drivendataorg/cookiecutter-data-science/pull/409))
-- Added badges to README (Issue [#368](https://github.com/drivendataorg/cookiecutter-data-science/issue/434))
 
 ## v2.0.1 (2025-02-26)
 
