@@ -56,7 +56,7 @@ def test_baking_configs(config, fast):
 
 def verify_folders(root, config):
     """Tests that expected folders and only expected folders exist."""
-    expected_dirs = [
+    expected_dirs = {
         ".",
         "data",
         "data/external",
@@ -70,32 +70,54 @@ def verify_folders(root, config):
         "reports",
         "reports/figures",
         config["module_name"],
-    ]
+    }
+    ignored_dirs = set()
 
     if config["include_code_scaffold"] == "Yes":
-        expected_dirs += [
-            f"{config['module_name']}/modeling",
-        ]
+        expected_dirs.add(f"{config['module_name']}/modeling")
 
     if config["docs"] == "mkdocs":
-        expected_dirs += ["docs/docs"]
+        expected_dirs.add("docs/docs")
 
-    expected_dirs = [
-        #  (root / d).resolve().relative_to(root) for d in expected_dirs
-        Path(d)
-        for d in expected_dirs
-    ]
+    if config["version_control"] in (
+        "git (local)",
+        "git (github public)",
+        "git (github private)",
+    ):
+        # Expected after `git init`
+        expected_dirs.update(
+            {
+                ".git",
+                ".git/hooks",
+                ".git/info",
+                ".git/objects",
+                ".git/refs",
+            }
+        )
+        # Expected after initial git commit
+        expected_dirs.update({".git/logs", ".git/logs/refs"})
+        git_patterns = [".git/objects/**/*", ".git/refs/**/*", ".git/logs/refs/**/*"]
+        ignored_dirs.update(
+            {
+                d.relative_to(root)
+                for pattern in git_patterns
+                for d in root.glob(pattern)
+                if d.is_dir()
+            }
+        )
 
-    existing_dirs = [
+    expected_dirs = {Path(d) for d in expected_dirs}
+
+    existing_dirs = {
         d.resolve().relative_to(root) for d in root.glob("**") if d.is_dir()
-    ]
+    }
 
-    assert sorted(existing_dirs) == sorted(expected_dirs)
+    assert sorted(existing_dirs - ignored_dirs) == sorted(expected_dirs)
 
 
 def verify_files(root, config):
     """Test that expected files and only expected files exist."""
-    expected_files = [
+    expected_files = {
         "Makefile",
         "README.md",
         "pyproject.toml",
@@ -112,44 +134,103 @@ def verify_files(root, config):
         "reports/figures/.gitkeep",
         "models/.gitkeep",
         f"{config['module_name']}/__init__.py",
-    ]
+    }
+
+    ignored_files = set()
 
     # conditional files
     if not config["open_source_license"].startswith("No license"):
-        expected_files.append("LICENSE")
+        expected_files.add("LICENSE")
 
     if config["linting_and_formatting"] == "flake8+black+isort":
         expected_files.append("setup.cfg")
 
     if config["include_code_scaffold"] == "Yes":
-        expected_files += [
-            f"{config['module_name']}/config.py",
-            f"{config['module_name']}/dataset.py",
-            f"{config['module_name']}/features.py",
-            f"{config['module_name']}/modeling/__init__.py",
-            f"{config['module_name']}/modeling/train.py",
-            f"{config['module_name']}/modeling/predict.py",
-            f"{config['module_name']}/plots.py",
-        ]
+        expected_files.update(
+            {
+                f"{config['module_name']}/config.py",
+                f"{config['module_name']}/dataset.py",
+                f"{config['module_name']}/features.py",
+                f"{config['module_name']}/modeling/__init__.py",
+                f"{config['module_name']}/modeling/train.py",
+                f"{config['module_name']}/modeling/predict.py",
+                f"{config['module_name']}/plots.py",
+            }
+        )
 
     if config["docs"] == "mkdocs":
-        expected_files += [
-            "docs/mkdocs.yml",
-            "docs/README.md",
-            "docs/docs/index.md",
-            "docs/docs/getting-started.md",
-        ]
+        expected_files.update(
+            {
+                "docs/mkdocs.yml",
+                "docs/README.md",
+                "docs/docs/index.md",
+                "docs/docs/getting-started.md",
+            }
+        )
 
-    expected_files.append(config["dependency_file"])
+    expected_files.add(config["dependency_file"])
 
-    expected_files = [Path(f) for f in expected_files]
+    if config["version_control"] in (
+        "git (local)",
+        "git (github public)",
+        "git (github private)",
+    ):
+        # Expected after `git init`
+        expected_files.update(
+            {
+                ".git/config",
+                ".git/description",
+                ".git/HEAD",
+                ".git/hooks/applypatch-msg.sample",
+                ".git/hooks/commit-msg.sample",
+                ".git/hooks/fsmonitor-watchman.sample",
+                ".git/hooks/post-update.sample",
+                ".git/hooks/pre-applypatch.sample",
+                ".git/hooks/pre-commit.sample",
+                ".git/hooks/pre-merge-commit.sample",
+                ".git/hooks/pre-push.sample",
+                ".git/hooks/pre-rebase.sample",
+                ".git/hooks/pre-receive.sample",
+                ".git/hooks/prepare-commit-msg.sample",
+                ".git/hooks/push-to-checkout.sample",
+                ".git/hooks/sendemail-validate.sample",
+                ".git/hooks/update.sample",
+                ".git/info/exclude",
+            }
+        )
+        # Expected after initial git commit
+        expected_files.update(
+            {
+                ".git/COMMIT_EDITMSG",
+                ".git/index",
+                ".git/logs/HEAD",
+            }
+        )
+        git_patterns = [".git/objects/**/*", ".git/refs/**/*", ".git/logs/refs/**/*"]
+        ignored_files.update(
+            {
+                f.relative_to(root)
+                for pattern in git_patterns
+                for f in root.glob(pattern)
+                if f.is_file()
+            }
+        )
 
-    existing_files = [f.relative_to(root) for f in root.glob("**/*") if f.is_file()]
+    expected_files = {Path(f) for f in expected_files}
 
-    assert sorted(existing_files) == sorted(expected_files)
+    existing_files = {f.relative_to(root) for f in root.glob("**/*") if f.is_file()}
 
-    for f in existing_files:
-        assert no_curlies(root / f)
+    checked_files = existing_files - ignored_files
+
+    assert sorted(checked_files) == sorted(expected_files)
+
+    # Ignore files where curlies may exist but aren't unrendered jinja tags
+    ignore_curly_files = {
+        Path(".git/hooks/fsmonitor-watchman.sample"),
+        Path(".git/index"),
+    }
+
+    assert all(no_curlies(root / f) for f in checked_files - ignore_curly_files)
 
 
 def verify_makefile_commands(root, config):

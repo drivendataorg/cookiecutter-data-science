@@ -307,5 +307,42 @@
                 } 
             }
         ]
+    },
+    {
+        "field": "version_control",
+        "help": {
+            "description": "What kind of version control system (vcs) and repository host to use.",
+            "more_information": ""
+        },
+        "choices": [
+            {
+                "choice": "none",
+                "help": {
+                    "description": "No version control.",
+                    "more_information": ""
+                } 
+            },
+            {
+                "choice": "git (local)",
+                "help": {
+                    "description": "Initialize project as a local git repository.",
+                    "more_information": "[Git CLI](https://git-scm.com/downloads) Required"
+                } 
+            },
+            {
+                "choice": "git (github private)",
+                "help": {
+                    "description": "Initialize project and upload to GitHub as a **private** repo.",
+                    "more_information": "[Git CLI](https://git-scm.com/downloads) + [GitHub CLI](https://cli.github.com/) & [Auth](https://cli.github.com/manual/gh_auth_login) Required"
+                } 
+            },
+            {
+                "choice": "git (github public)",
+                "help": {
+                    "description": "Initialize project and upload to GitHub as a **public** repo.",
+                    "more_information": "[Git CLI](https://git-scm.com/downloads) + [GitHub CLI](https://cli.github.com/) & [Auth](https://cli.github.com/manual/gh_auth_login) Required"
+                } 
+            }
+        ]
     }
 ]

@@ -42,3 +42,7 @@ ccds = "ccds.__main__:main"
 "Source Code" = "https://github.com/drivendataorg/cookiecutter-data-science/"
 "Bug Tracker" = "https://github.com/drivendataorg/cookiecutter-data-science/issues"
 "DrivenData" = "https://drivendata.co"
+
+[tool.pytest.ini_options]
+testpaths = "./tests"
+addopts = "-vv --color=yes"
