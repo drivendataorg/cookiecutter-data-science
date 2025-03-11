@@ -2,8 +2,8 @@
 
 _A logical, reasonably standardized but flexible project structure for doing and sharing data science work._
 
-![PyPI - Version](https://img.shields.io/pypi/v/cookiecutter-data-science)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/cookiecutter-data-science)
+[![PyPI - Version](https://img.shields.io/pypi/v/cookiecutter-data-science)](https://pypi.org/project/cookiecutter-data-science/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/cookiecutter-data-science)](https://pypi.org/project/cookiecutter-data-science/)
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
 </a>
