@@ -16,7 +16,7 @@ Some **do**s and **don't**s that follow from treating data analysis as a DAG:
 
 * ✅ **Do** write code that moves the raw data through a pipeline to your final analysis.
 * ✅ **Do** serialize or cache the intermediate outputs of long-running steps.
-* ✅ **Do** make it possible (and ideally, documented and automated) for anyone to reproduce your final data products with only the code in `{{ cookiecutter.module_name }}` and the data in `data/raw/` (and `data/external/`).
+* ✅ **Do** make it possible (and ideally, documented and automated) for anyone to reproduce your final data products with only the code in `src` and the data in `data/raw/` (and `data/external/`).
 
 * ⛔ **Don't** _ever_ edit your raw data, especially not manually, and _especially_ not in Excel. This includes changing file formats or fixing errors that might break a tool that's trying to read your data file.
 * ⛔ **Don't** overwrite your raw data with a newly processed or cleaned version.
@@ -51,7 +51,7 @@ When we use notebooks in our work, we often subdivide the `notebooks/` folder to
 
 ### Refactor the good parts into source code 
 
-Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at `{{ cookiecutter.module_name }}/data/make_dataset.py` and load data from `data/interim/`. If it's useful utility code, refactor it to `{{ cookiecutter.module_name }}`. Classic signs that you are ready to move from a notebook to source code include duplicating old notebooks to start new ones, copy/pasting functions between notebooks, and creating object-oriented classes within notebooks.
+Don't write code to do the same task in multiple notebooks. If it's a data preprocessing task, put it in the pipeline at `src/data/make_dataset.py` and load data from `data/interim/`. If it's useful utility code, refactor it to `src`. Classic signs that you are ready to move from a notebook to source code include duplicating old notebooks to start new ones, copy/pasting functions between notebooks, and creating object-oriented classes within notebooks.
 
 We make it easy to refactor notebook code because the ccds template makes your project a Python package by default and installs it locally in the requirements file of your chosen environment manager. This enables you to import your project's source code and use it in notebooks with a cell like the following:
 
@@ -60,10 +60,10 @@ We make it easy to refactor notebook code because the ccds template makes your p
 %load_ext autoreload
 
 # OPTIONAL: always reload modules so that as you change code
-# in {{ cookiecutter.module_name }}, it gets loaded
+# in src, it gets loaded
 %autoreload 2
 
-from {{ cookiecutter.module_name }}.data import make_dataset
+from src.data import make_dataset
 ```
 
 ## Keep your modeling organized
@@ -105,10 +105,10 @@ OTHER_VARIABLE=something
 
 ### Use a package to load these variables automatically.
 
-If you look at the stub script in `{{ cookiecutter.module_name }}/data/make_dataset.py`, it uses a package called [python-dotenv](https://github.com/theskumar/python-dotenv) to load up all the entries in this file as environment variables so they are accessible with `os.environ.get`. Here's an example snippet adapted from the `python-dotenv` documentation:
+If you look at the stub script in `src/data/make_dataset.py`, it uses a package called [python-dotenv](https://github.com/theskumar/python-dotenv) to load up all the entries in this file as environment variables so they are accessible with `os.environ.get`. Here's an example snippet adapted from the `python-dotenv` documentation:
 
 ```python
-# {{ cookiecutter.module_name }}/data/dotenv_example.py
+# src/data/dotenv_example.py
 import os
 from dotenv import load_dotenv, find_dotenv
 

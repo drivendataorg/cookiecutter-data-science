@@ -106,7 +106,7 @@ Now that you have your notebook going, start your analysis!
 
 ## Refactoring code into shared modules
 
-As your project goes on, you'll want to refactor your code in a way that makes it easy to share between notebooks and scripts. We recommend creating a module in the `{{ cookiecutter.module_name }}` folder that contains the code you use in your project. This is a good way to make sure that you can use the same code in multiple places without having to copy and paste it.
+As your project goes on, you'll want to refactor your code in a way that makes it easy to share between notebooks and scripts. We recommend creating a module in the `src` folder that contains the code you use in your project. This is a good way to make sure that you can use the same code in multiple places without having to copy and paste it.
 
 Because the default structure is a Python package and is installed by default, you can do the following to make that code available to you within a Jupyter notebook.
 

@@ -51,15 +51,15 @@ format:
 ## Lint using flake8, black, and isort (use `make format` to do formatting)
 .PHONY: lint
 lint:
-	flake8 {{ cookiecutter.module_name }}
-	isort --check --diff {{ cookiecutter.module_name }}
-	black --check {{ cookiecutter.module_name }}
+	flake8 src
+	isort --check --diff src
+	black --check src
 
 ## Format source code with black
 .PHONY: format
 format:
-	isort {{ cookiecutter.module_name }}
-	black {{ cookiecutter.module_name }}
+	isort src
+	black src
 {% endif %}
 
 {% if not cookiecutter.dataset_storage.none %}
@@ -124,7 +124,7 @@ create_environment:
 ## Make dataset
 .PHONY: data
 data: requirements
-	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/dataset.py
+	$(PYTHON_INTERPRETER) src/dataset.py
 {% endif %}
 
 #################################################################################

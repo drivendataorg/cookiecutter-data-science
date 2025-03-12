@@ -68,7 +68,7 @@ write_dependencies(
     packages_to_install,
     pip_only_packages,
     repo_name="{{ cookiecutter.repo_name }}",
-    module_name="{{ cookiecutter.module_name }}",
+    module_name="src",
     python_version="{{ cookiecutter.python_version_number }}",
 )
 
@@ -85,7 +85,7 @@ Path("pyproject.toml").write_text(pyproject_text.replace(r"\u0027", "'"))
 
 # {% if cookiecutter.include_code_scaffold == "No" %}
 # remove everything except __init__.py so result is an empty package
-for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
+for generated_path in Path("src").iterdir():
     if generated_path.is_dir():
         shutil.rmtree(generated_path)
     elif generated_path.name != "__init__.py":

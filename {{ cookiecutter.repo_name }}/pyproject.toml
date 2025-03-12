@@ -3,7 +3,7 @@ requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = {{ cookiecutter.module_name|tojson }}
+name = {{ cookiecutter.project_name|tojson }}
 version = "0.0.1"
 description = {{ cookiecutter.description|tojson }}
 authors = [
@@ -29,19 +29,35 @@ exclude = '''
 
 [tool.isort]
 profile = "black"
-known_first_party = ["{{ cookiecutter.module_name }}"]
+known_first_party = ["src"]
 force_sort_within_sections = true
 {% endif %}
 {% if cookiecutter.linting_and_formatting == 'ruff' %}
+
 [tool.ruff]
-line-length = 99
-src = ["{{ cookiecutter.module_name }}"]
-include = ["pyproject.toml", "{{ cookiecutter.module_name }}/**/*.py"]
+line-length = 120
+src = ["src"]
+include = ["pyproject.toml", "src/**/*.py"]
+fix = true
 
 [tool.ruff.lint]
 extend-select = ["I"]  # Add import sorting
 
 [tool.ruff.lint.isort]
-known-first-party = ["{{ cookiecutter.module_name }}"]
+known-first-party = ["src"]
 force-sort-within-sections = true
 {% endif %}
+
+[tool.uv]
+package = true
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pre-commit",
+    "deptry",
+    "pytest-cov",
+    %if ccds.linting_and_formatting == "ruff"%
+    "tox-uv",
+    {% endif %}
+]

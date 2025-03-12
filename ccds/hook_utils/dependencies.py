@@ -28,14 +28,12 @@ scaffold = [
 ]
 
 
-def write_dependencies(
-    dependencies, packages, pip_only_packages, repo_name, module_name, python_version
-):
+def write_dependencies(dependencies, packages, pip_only_packages, repo_name, module_name, python_version):
     if dependencies == "requirements.txt":
         with open(dependencies, "w") as f:
             lines = sorted(packages)
 
-            lines += ["" "-e ."]
+            lines += ["-e ."]
 
             f.write("\n".join(lines))
             f.write("\n")
