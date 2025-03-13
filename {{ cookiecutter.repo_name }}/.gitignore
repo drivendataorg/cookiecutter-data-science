@@ -1,15 +1,16 @@
-# generated docs items
-docs/site/
-docs/docs/_partials/termynal.md
-docs/docs/_partials/*/*.html
+#################################################################################
+# PROJECT-SPECIFIC IGNORES                                                       #
+#################################################################################
 
-# test cache
+# Test cache
 manual_test/
-.history
 
-# other local dev info
-.history/
-# .vscode/
+# Logs
+**/logs/
+
+#################################################################################
+# OPERATING SYSTEM IGNORES                                                      #
+#################################################################################
 
 # Mac OS-specific storage files
 .DS_Store
@@ -17,29 +18,65 @@ Icon?
 Icon
 Icon[\r]
 
-# ruff
-.ruff_cache/
+# Windows specific files
+Thumbs.db
 
-# vim
-*.swp
-*.swo
+# Backup files
+**/*.bak
+**/*.sav
+**/*.backup
+**/*~[0-9]*
 
-## https://github.com/github/gitignore/blob/4488915eec0b3a45b5c63ead28f286819c0917de/Python.gitignore
+#################################################################################
+# EDITOR IGNORES                                                                #
+#################################################################################
+
+# Vim
+**/*.swp
+**/*.swo
+
+# VSCode
+**/.vscode/
+.history/
+
+# PyCharm/JetBrains
+#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+**/.idea/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Sublime Text
+**/*.sublime-*
+
+# EditorConfig
+**/.editorconfig
+
+# Prettier
+**/.prettierrc
+
+#################################################################################
+# PYTHON CORE IGNORES                                                           #
+#################################################################################
 
 # Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
 
 # C extensions
 *.so
 
 # Distribution / packaging
 .Python
-build/
+**/build/
 develop-eggs/
-dist/
-downloads/
+**/dist/
+**/downloads/
 eggs/
 .eggs/
 lib/
@@ -47,9 +84,9 @@ lib64/
 parts/
 sdist/
 var/
-wheels/
+**/wheels/
 share/python-wheels/
-*.egg-info/
+**/*.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
@@ -65,69 +102,82 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports
-htmlcov/
+**/htmlcov/
 .tox/
 .nox/
-.coverage
-.coverage.*
+**/.coverage
+**/.coverage.*
 .cache
 nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
+**/coverage.xml
+**/*.cover
 .hypothesis/
-.pytest_cache/
-.ruff_cache/
+**/.pytest_cache/
 cover/
+
+# Code quality tools
+**/.ruff_cache/
+**/.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+**/.ruby-lsp/
+
+# Python version management
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# **/.python-version
 
 # Translations
 *.mo
 *.pot
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+#################################################################################
+# ENVIRONMENT & DEPENDENCY MANAGEMENT                                           #
+#################################################################################
 
-# Flask stuff:
-instance/
-.webassets-cache
+# Environment
+**/.env
+**/.venv
+env/
+venv/
+**/venv/
+ENV/
+env.bak/
+venv.bak/
 
-# Scrapy stuff:
-.scrapy
-
-# PyBuilder
-.pybuilder/
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
-
-# pipenv
+# {% if cookiecutter.environment_manager == 'conda' %}
+# Conda
+.conda/
+# {% elif cookiecutter.environment_manager == 'pipenv' %}
+# Pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
 #   However, in case of collaboration, if having platform-specific dependencies or dependencies
 #   having no cross-platform support, pipenv may install dependencies that don't work, or not
 #   install all needed dependencies.
 #Pipfile.lock
+# {% endif %}
 
-# poetry
+# Secrets
+secrets/
+!secrets/schema
+
+# {% if cookiecutter.dependency_file == 'requirements.txt' %}
+# pip
+# {% elif cookiecutter.dependency_file == 'environment.yml' %}
+# conda
+# {% elif cookiecutter.dependency_file == 'Pipfile' %}
+# pipenv
+# {% endif %}
+
+# Poetry
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
 #   commonly ignored for libraries.
 #   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
 #poetry.lock
 
-# pdm
+# PDM
 #   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
 #pdm.lock
 #   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
@@ -135,54 +185,138 @@ ipython_config.py
 #   https://pdm.fming.dev/#use-with-ide
 .pdm.toml
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+# PEP 582
 __pypackages__/
 
-# Celery stuff
+#################################################################################
+# PYTHON FRAMEWORKS & LIBRARIES                                                 #
+#################################################################################
+
+# Django
+**/*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask
+instance/
+.webassets-cache
+
+# Scrapy
+.scrapy
+
+# Jupyter
+**/.ipynb_checkpoints
+profile_default/
+ipython_config.py
+
+# Celery
 celerybeat-schedule
 celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments and Secrets
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-secrets/
-!secrets/schema
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
 
 # Pyre type checker
 .pyre/
 
-# pytype static type analyzer
-.pytype/
+# Rope project settings
+.ropeproject
 
 # Cython debug symbols
 cython_debug/
 
-# PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+# SageMath
+*.sage.py
+
+# Redis
+**/dump.rdb
+
+#################################################################################
+# DOCUMENTATION                                                                 #
+#################################################################################
+
+# {% if cookiecutter.docs == 'mkdocs' %}
+# MkDocs
+docs/site/
+docs/docs/_partials/termynal.md
+docs/docs/_partials/*/*.html
+/site
+**/site/
+**/docs/_build/
+# {% endif %}
+
+#################################################################################
+# DOMAIN-SPECIFIC IGNORES                                                       #
+#################################################################################
+
+# {% if cookiecutter.include_code_scaffold == 'data' %}
+#--------------------------------------------------------------------------------
+# DATA SCIENCE
+#--------------------------------------------------------------------------------
+
+# Raw data files
+data/raw/*
+!data/raw/.gitkeep
+
+# Processed data files
+data/processed/*
+!data/processed/.gitkeep
+
+# Interim data files
+data/interim/*
+!data/interim/.gitkeep
+
+# External data files
+data/external/*
+!data/external/.gitkeep
+# {% endif %}
+
+# {% if cookiecutter.include_code_scaffold == 'ml' %}
+#--------------------------------------------------------------------------------
+# MACHINE LEARNING
+#--------------------------------------------------------------------------------
+
+# Model files
+models/*
+!models/.gitkeep
+
+# Tensorboard logs
+logs/
+runs/
+# {% endif %}
+
+# {% if cookiecutter.include_code_scaffold == 'app' %}
+#--------------------------------------------------------------------------------
+# WEB DEVELOPMENT
+#--------------------------------------------------------------------------------
+
+# Node modules
+node_modules/
+
+# Build files
+build/
+dist/
+*.bundle.js
+
+# Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+# {% endif %}
+
+#--------------------------------------------------------------------------------
+# LATEX & DOCUMENT PREPARATION
+#--------------------------------------------------------------------------------
+
+# LaTeX build files
+**/*.aux
+**/*.bbl
+**/*.bcf
+**/*.blg
+**/*.fdb_latexmk
+**/*.fls
+**/*.lof
+**/*.lot
+**/*.out
+**/*.synctex.gz*
+**/*.toc
+**/_minted*
