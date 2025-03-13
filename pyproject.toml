@@ -42,6 +42,7 @@ requires-python = ">=3.10,<4"
 dependencies = [
     "click>=8.1.0",
     "cookiecutter>=2.6.0",
+    "loguru>=0.7.3",
     "pymdown-extensions>=10.13",
 ]
 
@@ -184,6 +185,11 @@ addopts = """
 
 testpaths = ["./tests"]
 log_file = "./logs/pytest.log"
+markers = [
+    "basic: mark a test as a basic instantiation test",
+    "detailed: mark a test as a detailed verification test",
+    "timeout: mark a test with a timeout value in seconds"
+]
 
 # ---------------------------------------------------------------------------- #
 #                                      uv                                      #

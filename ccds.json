@@ -36,6 +36,7 @@
 	"_generate_personal_ssh_keys": "n",
 	"_generate_and_upload_gh_deploy_keys": "n",
 	"_project_emoji": "🍪",
+	"_qa_level": "strict",
 	"_readme_modern_header": "y",
 	"_readme_include_logo": "y",
 	"_readme_include_screenshots": "y",

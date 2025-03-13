@@ -1,3 +1,5 @@
+# Documentation Here:
+# https://gatlenculp.github.io/gatlens-opinionated-template/precommit/
 exclude: |
   (?x)^(
       .*\{\{.*\}\}.*|     # Exclude any files with cookiecutter variables
@@ -13,10 +15,6 @@ default_install_hook_types:
   - pre-commit
   - commit-msg
 repos:
-  #
-  # Documentation Here:
-  # https://gatlenculp.github.io/gatlens-opinionated-template/precommit/
-  #
   # ---------------------------------------------------------------------------- #
   #                              🔄 Pre-Commit Hooks                             #
   # ---------------------------------------------------------------------------- #
@@ -37,17 +35,29 @@ repos:
     hooks:
       - id: ruff-format
         name: "🐍 python · Format with Ruff"
-      # STRICT
+      # {% if cookiecutter._qa_level == "strict" %}
+      - id: ruff
+        name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
+        args: [--fix]
+      # {% else %}
       # - id: ruff
       #   name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
       #   args: [--fix]
+      # {% endif %}
 
-  # STRICT
+  # {% if cookiecutter._qa_level == "strict" %}
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.391
+    hooks:
+      - id: pyright
+        name: "🐍 python · Check types"
+  # {% else %}
   # - repo: https://github.com/RobertCraigie/pyright-python
   #   rev: v1.1.391
   #   hooks:
   #     - id: pyright
   #       name: "🐍 python · Check types"
+  # {% endif %}
 
   - repo: https://github.com/abravalheri/validate-pyproject
     rev: v0.23
@@ -86,28 +96,47 @@ repos:
           - mdformat-frontmatter
           - ruff
 
-  # STRICT
+  # {% if cookiecutter._qa_level == "strict" %}
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: v0.12.0
+    hooks:
+      - id: markdownlint
+        name: "📝 markdown · Lint markdown"
+  # {% else %}
   # - repo: https://github.com/markdownlint/markdownlint
   #   rev: v0.12.0
   #   hooks:
   #     - id: markdownlint
   #       name: "📝 markdown · Lint markdown"
+  # {% endif %}
 
   ### Shell ###
 
-  # STRICT
+  # {% if cookiecutter._qa_level == "strict" %}
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        name: "🐚 shell · Lint shell scripts"
+
+  - repo: https://github.com/openstack/bashate
+    rev: 2.1.1
+    hooks:
+      - id: bashate
+        name: "🐚 shell · Check shell script code style"
+  # {% else %}
   # - repo: https://github.com/shellcheck-py/shellcheck-py
   #   rev: v0.10.0.1
   #   hooks:
   #     - id: shellcheck
   #       name: "🐚 shell · Lint shell scripts"
 
-  # STRICT
   # - repo: https://github.com/openstack/bashate
   #   rev: 2.1.1
   #   hooks:
   #     - id: bashate
   #       name: "🐚 shell · Check shell script code style"
+  # {% endif %}
 
   ### Makefile ###
   - repo: https://github.com/mrtazz/checkmake.git
@@ -117,15 +146,18 @@ repos:
         name: "🐮 Makefile · Lint Makefile"
 
   ### SQL ###
-
   - repo: https://github.com/sqlfluff/sqlfluff
     rev: 3.3.0
     hooks:
       - id: sqlfluff-fix
         name: "📊 SQL · Attempts to fix rule violations."
-      # STRICT
-      # - id: sqlfluff-lint
-      #   name: "📊 SQL · Lint SQL code files"
+      # {% if cookiecutter._qa_level == "strict" %}
+      - id: sqlfluff-lint
+        name: "📊 SQL · Lint SQL code files"
+    # {% else %}
+    # - id: sqlfluff-lint
+    #   name: "📊 SQL · Lint SQL code files"
+    # {% endif %}
 
   ### Notebooks ###
   - repo: https://github.com/nbQA-dev/nbQA
@@ -142,10 +174,14 @@ repos:
           - mdformat-ruff
           - mdformat-frontmatter
           - ruff
-      # STRICT
-      # TODO: Convert to pyright
-      # - id: nbqa-mypy
-      #   name: "📓 notebook · Type-check cells"
+      # {# TODO: Convert to pyright #}
+      # {% if cookiecutter._qa_level == "strict" %}
+      - id: nbqa-mypy
+        name: "📓 notebook · Type-check cells"
+    # {% else %}
+    # - id: nbqa-mypy
+    #   name: "📓 notebook · Type-check cells"
+    # {% endif %}
 
   ### PNG Images ###
   - repo: https://github.com/shssoichiro/oxipng
@@ -165,7 +201,20 @@ repos:
         additional_dependencies:
           - prettier@3.4.2
 
+  # {% if cookiecutter.environment_manager == "uv" %}
   # ----------------------------- ⚡️ uv Build Tools ---------------------------- #
+  # This helps ensure cross-compatibility with people who don't wish to use uv
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    # uv version.
+    rev: 0.5.27
+    hooks:
+      # STRICT -- This (kind of) enforces use of uv
+      - id: uv-sync
+      # Update the uv lockfile
+      - id: uv-lock
+      # Export to txt
+      - id: uv-export
+  # {% endif %}
 
   # ---------------------------- 📁 Filesystem Tools --------------------------- #
 
@@ -193,7 +242,7 @@ repos:
       - id: check-added-large-files
         name: "🌳 git · Block large file commits"
         args: ["--maxkb=5000"]
-      # {% if cookiecutter.include_code_scaffold == "course" %}
+      # {% if cookiecutter.include_code_scaffold != "course" %}
       - id: no-commit-to-branch
         alias: protect-main
         name: "🌳 git · Protect main branches"
@@ -229,7 +278,16 @@ repos:
         args: ["--collect-only"]
         pass_filenames: false
         always_run: true
-      # STRICT
+      # {% if cookiecutter._qa_level == "strict" %}
+      - id: pytest-fast
+        name: 🧪 test · Run fast tests
+        entry: ./.venv/bin/pytest tests
+        language: system
+        types: [python]
+        args: ["--max-timeout=3"]
+        pass_filenames: false
+        always_run: true
+      # {% else %}
       # - id: pytest-fast
       #   name: 🧪 test · Run fast tests
       #   entry: ./.venv/bin/pytest tests
@@ -238,3 +296,4 @@ repos:
       #   args: ["--max-timeout=3"]
       #   pass_filenames: false
       #   always_run: true
+      # {% endif %}

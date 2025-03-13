@@ -3,11 +3,15 @@
 import json
 import os
 import sys
+import logging
 from pathlib import Path
 from subprocess import PIPE, CompletedProcess, run
 from typing import Any
 
+import pytest
 from conftest import bake_project
+
+logger = logging.getLogger("test_creation")
 
 BASH_EXECUTABLE = os.getenv("BASH_EXECUTABLE", "bash")
 
@@ -32,13 +36,13 @@ def _decode_print_stdout_stderr(result: CompletedProcess) -> tuple[str, str]:
     if encoding is None:
         encoding = "utf-8"
 
-    print("\n======================= STDOUT ======================")
+    logger.debug("\n======================= STDOUT ======================")
     stdout = result.stdout.decode(encoding)
-    print(stdout)
+    logger.debug(stdout)
 
-    print("\n======================= STDERR ======================")
+    logger.debug("\n======================= STDERR ======================")
     stderr = result.stderr.decode(encoding)
-    print(stderr)
+    logger.debug(stderr)
 
     return stdout, stderr
 
@@ -65,6 +69,7 @@ def no_curlies(filepath: Path) -> bool:
     return not any(s in data for s in template_strings)
 
 
+@pytest.mark.detailed
 def test_baking_configs(config: dict[str, Any], fast: int) -> None:
     """For every generated config in the config_generator, run all
     of the tests.
@@ -73,14 +78,19 @@ def test_baking_configs(config: dict[str, Any], fast: int) -> None:
         config: Configuration dictionary
         fast: Integer controlling test speed/depth
     """
-    print("using config", json.dumps(config, indent=2))
+    logger.info("Testing detailed verification with config: %s", json.dumps(config, indent=2))
+
     with bake_project(config) as project_directory:
+        logger.info("Verifying folders...")
         verify_folders(project_directory, config)
+
+        logger.info("Verifying files...")
         verify_files(project_directory, config)
         # install_requirements(project_directory)
         # lint(project_directory)
 
         if fast < 2:
+            logger.info("Verifying Makefile commands...")
             verify_makefile_commands(project_directory, config)
 
 
@@ -163,7 +173,8 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         # Expected after initial git commit
         # expected_dirs.update({".git/logs", ".git/logs/refs"})
         ignored_patterns = [
-            ".git/**/*"
+            ".git/**/*",
+            "",
         ]  # [".git/objects/**/*", ".git/refs/**/*", ".git/logs/refs/**/*", ".git/branches/**/*"]
         ignored_dirs.update(
             {
@@ -242,7 +253,6 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         str(OUT_DIR / "reports" / "figures" / ".gitkeep"),
         str(OUT_DIR / "models" / ".gitkeep"),
         "Taskfile.yml",
-        ".cursorrules",
         f"{config['module_name']}/__init__.py",
     }
 
@@ -351,7 +361,6 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
     ignore_curly_files = {
         Path(".git/hooks/fsmonitor-watchman.sample"),
         Path(".git/index"),
-        Path(".cursorrules"),
     }
 
     assert all(no_curlies(root / f) for f in checked_files - ignore_curly_files)

@@ -4,10 +4,10 @@ from collections.abc import Callable
 from pathlib import Path
 import shutil
 from typing import Literal
+from loguru import logger
 
 CleaningOption = Literal["data", "paper", "app", "ml", "lib", "course"]
 CleaningOperation = Callable[[Path], None]
-# cleaning_map: dict[CleaningOption, list[CleaningOperation]] = {"course": [_clean_devcontainer]}
 
 
 class ScaffoldCleaner:
@@ -96,6 +96,9 @@ class ScaffoldCleaner:
 
     def _remove_file(self, path: Path) -> None:
         """Remove file at specified path."""
+        if not path.exists():
+            logger.warning(f"Path does not exist: {path}")
+            return
         path.unlink()
 
     def _remove_dir(self, dir_path: Path) -> None:

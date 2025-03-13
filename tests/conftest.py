@@ -8,10 +8,94 @@ from pathlib import Path
 import shutil
 import sys
 import tempfile
+import logging
+import re
 
 import pytest
+import colorama
+from colorama import Fore, Back, Style
+
+# Initialize colorama
+colorama.init(autoreset=True)
+
+
+class ColoredFormatter(logging.Formatter):
+    """Custom formatter with colored output."""
+
+    # Define color patterns for different parts of the log message
+    COLORS = {
+        "DEBUG": Fore.CYAN,
+        "INFO": Fore.GREEN,
+        "WARNING": Fore.YELLOW,
+        "ERROR": Fore.RED,
+        "CRITICAL": Fore.RED + Style.BRIGHT,
+    }
+
+    # Pattern to match context (e.g., "cookiecutter.hooks:hooks.py")
+    CONTEXT_PATTERN = re.compile(r"([a-zA-Z0-9_\.]+):([a-zA-Z0-9_\.]+)")
+
+    def format(self, record):
+        """Format the log record with colors."""
+        # Get the original formatted message
+        log_message = super().format(record)
+
+        # Color the level name
+        levelname_color = self.COLORS.get(record.levelname, "")
+        log_message = log_message.replace(
+            record.levelname, f"{levelname_color}{record.levelname}{Style.RESET_ALL}"
+        )
+
+        # Color the context (module:file)
+        def color_context(match):
+            module, file = match.groups()
+            return f"{Fore.MAGENTA}{module}{Style.RESET_ALL}:{Fore.BLUE}{file}{Style.RESET_ALL}"
+
+        log_message = self.CONTEXT_PATTERN.sub(color_context, log_message)
+
+        return log_message
+
+
+# Simple logging setup for tests
+@pytest.fixture(scope="session", autouse=True)
+def setup_logging():
+    """Configure basic logging for tests with colored output."""
+    # Create a colored formatter
+    formatter = ColoredFormatter(
+        "%(asctime)s - %(levelname)s - %(name)s:%(filename)s:%(lineno)d - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+
+    # Configure the root logger
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.INFO)
+
+    # Remove any existing handlers
+    for handler in root_logger.handlers[:]:
+        root_logger.removeHandler(handler)
+
+    # Create a console handler with the colored formatter
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    root_logger.addHandler(console_handler)
+
+    # Also set up a file handler for the log file
+    log_dir = Path("logs")
+    log_dir.mkdir(exist_ok=True)
+    file_handler = logging.FileHandler("logs/pytest.log")
+    file_handler.setFormatter(
+        logging.Formatter(
+            "%(asctime)s - %(levelname)s - %(name)s:%(filename)s:%(lineno)d - %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S",
+        )
+    )
+    root_logger.addHandler(file_handler)
+
+    # Log that we've set up logging
+    root_logger.info("Logging configured with colored output")
+
 
 from ccds.__main__ import api_main
+
 
 CCDS_ROOT = Path(__file__).parents[1].resolve()
 
@@ -27,13 +111,15 @@ default_args: dict[str, str] = {
 
 
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
-    """Filter test items based on their timeout marker value.
+    """Filter test items based on their timeout marker value and test type.
 
     This pytest hook modifies the test collection by removing tests whose timeout
     value exceeds the maximum specified timeout, as well as tests without any
     timeout marker. The maximum timeout can be set using the --max-timeout command
     line option. If --max-timeout is not provided, all tests will run regardless
     of their timeout value.
+
+    Additionally, it filters tests based on the --test-type option.
 
     Args:
         config: The pytest configuration object containing test session information
@@ -45,17 +131,29 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
         it will be deselected.
     """
     max_timeout = config.getoption("--max-timeout")
-    if max_timeout is None:
-        return
+    test_type = config.getoption("--test-type")
 
     all_items = set(items)
-    deselected_tests = {
-        item
-        for item in items
-        if not item.get_closest_marker("timeout")  # Remove tests without timeout marker
-        or item.get_closest_marker("timeout").args[0]
-        > max_timeout  # Remove tests exceeding max_timeout
-    }
+    deselected_tests = set()
+
+    # Filter by timeout
+    if max_timeout is not None:
+        deselected_tests.update(
+            {
+                item
+                for item in items
+                if not item.get_closest_marker("timeout")  # Remove tests without timeout marker
+                or item.get_closest_marker("timeout").args[0]
+                > max_timeout  # Remove tests exceeding max_timeout
+            }
+        )
+
+    # Filter by test type
+    if test_type == "basic":
+        deselected_tests.update({item for item in items if not item.get_closest_marker("basic")})
+    elif test_type == "detailed":
+        deselected_tests.update({item for item in items if not item.get_closest_marker("detailed")})
+    # If test_type is "all" or None, don't filter by test type
 
     if deselected_tests:
         config.hook.pytest_deselected(items=list(deselected_tests))
@@ -65,9 +163,10 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
 def pytest_addoption(parser: pytest.Parser) -> None:
     """Add custom command line options to pytest.
 
-    This function registers two custom command line options:
+    This function registers custom command line options:
     - --max-timeout: Set maximum allowed timeout for tests (default: None, run all tests)
     - --fast (-F): Control test execution speed by skipping certain validations
+    - --test-type: Select which type of tests to run (basic, detailed, or all)
 
     Args:
         parser: The pytest command line parser to which options will be added
@@ -81,6 +180,15 @@ def pytest_addoption(parser: pytest.Parser) -> None:
 
         Run tests in fast mode:
         pytest --fast or pytest -F
+
+        Run only basic instantiation tests:
+        pytest --test-type=basic
+
+        Run only detailed verification tests:
+        pytest --test-type=detailed
+
+        Run all tests:
+        pytest --test-type=all
     """
     parser.addoption(
         "--max-timeout",
@@ -95,6 +203,13 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         action="count",
         default=0,
         help="Speed up tests by skipping configs and/or Makefile validation",
+    )
+    parser.addoption(
+        "--test-type",
+        action="store",
+        default="all",
+        choices=["basic", "detailed", "all"],
+        help="Select which type of tests to run: basic instantiation, detailed verification, or all",
     )
 
 
