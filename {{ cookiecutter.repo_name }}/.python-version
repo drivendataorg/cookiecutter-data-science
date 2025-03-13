@@ -1,0 +1,1 @@
+{{ cookiecutter.python_version_number }}
