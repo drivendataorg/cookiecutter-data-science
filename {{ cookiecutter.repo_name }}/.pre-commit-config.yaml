@@ -208,12 +208,17 @@ repos:
     # uv version.
     rev: 0.5.27
     hooks:
-      # STRICT -- This (kind of) enforces use of uv
+      # {% if cookiecutter._qa_level == "strict" %}
       - id: uv-sync
-      # Update the uv lockfile
+        name: "⚡️ uv · Sync dependencies with uv"
+      # {% else %}
+      # - id: uv-sync
+      #   name: "⚡️ uv · Sync dependencies with uv"
+      # {% endif %}
       - id: uv-lock
-      # Export to txt
+        name: "⚡️ uv · Update dependency lockfile"
       - id: uv-export
+        name: "⚡️ uv · Export dependencies to requirements.txt"
   # {% endif %}
 
   # ---------------------------- 📁 Filesystem Tools --------------------------- #
