@@ -4,6 +4,7 @@ from collections.abc import Callable
 from pathlib import Path
 import shutil
 from typing import Literal
+
 from loguru import logger
 
 CleaningOption = Literal["data", "paper", "app", "ml", "lib", "course"]
@@ -76,6 +77,28 @@ class ScaffoldCleaner:
         all_scaffolds = {"ai", "backend", "course", "frontend"}
         for unselected_scaffold in all_scaffolds - {scaffold}:
             self._remove_dir(module_path / f"_{unselected_scaffold}")
+
+        # Extract the remaining directory into the module directory
+        selected_scaffold_path = module_path / f"_{scaffold}"
+        if selected_scaffold_path.exists() and selected_scaffold_path.is_dir():
+            # Copy all contents from the selected scaffold to the module directory
+            for item in selected_scaffold_path.iterdir():
+                target_path = module_path / item.name
+                logger.debug(f"Moving {item} to {target_path}")
+                if item.is_dir():
+                    if target_path.exists():
+                        shutil.rmtree(target_path)
+                    shutil.copytree(item, target_path)
+                else:
+                    if target_path.exists():
+                        target_path.unlink()
+                    shutil.copy2(item, target_path)
+
+            # Remove the scaffold directory after extraction
+            shutil.rmtree(selected_scaffold_path)
+            logger.info(
+                f"Extracted contents from _{scaffold} scaffold into {self.module_name} directory"
+            )
 
     def _create_blank_module(self) -> None:
         """Remove everything except __init__.py so result is an empty package."""
