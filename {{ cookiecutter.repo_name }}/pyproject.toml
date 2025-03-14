@@ -241,6 +241,8 @@ ignore = [
     "D107",  # Same as above
     "D205",  # Allow multi-line summary
     "D415",  # Less strict docstrings
+    "COM812", # Allow single-line string concat (Conflicts with ISC001)
+    "ISC001", # Allow single-line string concat (Conflicts with COM812)
     "TD002", # Allow user-less TODOs
     "TD003", # Allow issue-less TODOs
     "UP007", # Allow non-use of pipe for types

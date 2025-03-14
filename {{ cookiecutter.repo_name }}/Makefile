@@ -104,7 +104,7 @@ lint: ## Lint using ruff (use `make format` to do formatting)
 	ruff check --config pyproject.toml $(MODULE_NAME)
 
 format: ## Format source code
-	ruff --config pyproject.toml $(MODULE_NAME)
+	ruff format --config pyproject.toml $(MODULE_NAME)
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━ Documentation ━━━━━━━━━━━━━━━━━━━━━━━━━ #
 
