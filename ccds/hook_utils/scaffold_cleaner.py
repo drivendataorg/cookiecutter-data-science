@@ -1,8 +1,8 @@
 """Removes unnecessary files and simplifies scaffold based on options given."""
 
+import shutil
 from collections.abc import Callable
 from pathlib import Path
-import shutil
 from typing import Literal
 
 from loguru import logger
@@ -11,7 +11,7 @@ CleaningOption = Literal["data", "paper", "app", "ml", "lib", "course"]
 ScaffoldOptions = Literal["data", "backend", "course", "frontend"]
 CleaningOperation = Callable[[Path], None]
 
-ALL_SCAFFOLDS = {"data", "backend", "course", "frontend"}
+ALL_SCAFFOLDS = {"data", "backend", "course", "frontend", "cli"}
 
 
 class ScaffoldCleaner:
@@ -34,11 +34,11 @@ class ScaffoldCleaner:
         cleaning_ops = {self._remove_experimental}
         for option in cleaning_options:
             if option == "data":
-                cleaning_ops.add(lambda: self._select_module_scaffolding("data"))
+                cleaning_ops.add(lambda: self._select_module_scaffolding({"data", "cli"}))
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue
             if option == "ml":
-                cleaning_ops.add(lambda: self._select_module_scaffolding("data"))
+                cleaning_ops.add(lambda: self._select_module_scaffolding({"data", "cli"}))
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue
             if option == "lib":
@@ -47,7 +47,9 @@ class ScaffoldCleaner:
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue
             if option == "app":
-                cleaning_ops.add(lambda: self._select_module_scaffolding({"backend", "frontend"}))
+                cleaning_ops.add(
+                    lambda: self._select_module_scaffolding({"backend", "frontend", "cli"}),
+                )
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "notebooks"))
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue

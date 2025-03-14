@@ -47,6 +47,7 @@ _print-logo: ## Prints the GOTem logo
 .PHONY: clean _clean-mac _clean-latex _clean-python
 
 clean: _clean-mac _clean-latex _clean-python ## Delete all compiled Python files and LaTeX build artifacts
+	find . -type d -name ".cache" -delete
 
 _clean-mac: ## Clean macOS-related files
 	find . -type f -name "*.DS_store" -delete

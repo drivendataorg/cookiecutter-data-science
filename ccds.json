@@ -51,7 +51,6 @@
 	"_readme_table_in_about": "y",
 	"_copy_without_render": [
 		"*{{ cookiecutter.module_name }}/_backend/**",
-		"*{{ cookiecutter.module_name }}/_frontend/**",
-		"*{{ cookiecutter.module_name }}/_cli/**"
+		"*{{ cookiecutter.module_name }}/_frontend/**"
 	]
 }

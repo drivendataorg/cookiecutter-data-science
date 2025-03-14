@@ -59,7 +59,9 @@ dependencies = [
     "pydantic>=2.10.3",      # Data validation
     "rich>=13.9.4",          # Rich terminal output
     "numpy>=1.26.4",         # Numerical computing
-    "python-dotenv>=1.0.0"   # Load .env into environment vars
+    "python-dotenv>=1.0.0",  # Load .env into environment vars
+    "typer>=0.15.1",         # CLI builder"
+    "tqdm>=4.67.1",          # {# TODO: Replace within the data modules #}
 ]
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Scripts ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
@@ -68,9 +70,9 @@ dependencies = [
 [project.scripts]
 {{ cookiecutter.module_name }} = "{{ cookiecutter.module_name }}.cli.main:app"
 # {% if cookiecutter.include_code_scaffold in ("ml", "data") %}
-data = "{{ cookiecutter.module_name }}.dataset:app"
-feat = "{{ cookiecutter.module_name }}.features:app"
-plot = "{{ cookiecutter.module_name }}.dataset:app"
+data = "{{ cookiecutter.module_name }}.data.dataset:app"
+feat = "{{ cookiecutter.module_name }}.data.features:app"
+plot = "{{ cookiecutter.module_name }}.data.dataset:app"
 # {% endif %}
 # {% endif %}
 
@@ -225,6 +227,7 @@ default-groups = [
 [tool.ruff]
 cache-dir = ".cache/ruff"
 line-length = 100
+format = { quote-style = "double", indent-style = "space" }
 
 [tool.ruff.lint]
 select = ["ALL"]
@@ -248,7 +251,6 @@ mccabe.max-complexity = 10
 pycodestyle.max-doc-length = 99
 pydocstyle.convention = "google"
 isort = { known-first-party = ["{{ cookiecutter.module_name }}"], force-sort-within-sections = true }
-format = { quote-style = "double", indent-style = "space" }
 
 [tool.ruff.lint.per-file-ignores]
 "**/__init__.py" = [

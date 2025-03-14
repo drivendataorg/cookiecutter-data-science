@@ -1,9 +1,7 @@
 """Main CLI interface for a {{ cookiecutter.module_name }}."""
 
-from pathlib import Path
-
-import typer
 from loguru import logger
+import typer
 
 app = typer.Typer()
 
