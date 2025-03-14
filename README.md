@@ -11,7 +11,7 @@
 
 <div align="center">
   <a href="https://gatlenculp.github.io/gatlens-opinionated-template/">
-    <img src="./docs/docs/gotem.png" alt="GOTem Logo" style="max-width: 250px;"/>
+    <img src="https://github.com/GatlenCulp/gatlens-opinionated-template/raw/master/docs/docs/gotem.png" alt="GOTem Logo" style="max-width: 250px;"/>
   </a>
   <br/>
   <b>Gatlen's Opinionated Template</b>
