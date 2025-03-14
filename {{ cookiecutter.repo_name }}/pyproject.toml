@@ -21,19 +21,13 @@ name = {{ cookiecutter.module_name|tojson }}
 version = "0.0.1"
 description = {{ cookiecutter.description|tojson }}
 authors = [
-    {
-        name = {{ cookiecutter.author_name|tojson }},
-        email = {{ cookiecutter._author_email|tojson }},
-    },
+    { name = {{ cookiecutter.author_name|tojson }}, email = {{ cookiecutter._author_email|tojson }} },
 ]
 # {% if cookiecutter.open_source_license != 'No license file' %}
 license = { file = "LICENSE" }
 # {% endif %}
 
-readme = {
-    file = "README.md",
-    content-type = "text/markdown",
-}
+readme = { file = "README.md", content-type = "text/markdown" }
 
 classifiers = [
     "Private :: Do Not Upload",
@@ -45,34 +39,33 @@ classifiers = [
     # {% endif %}
 ]
 
+# {% if cookiecutter._github_username and "github" in cookiecutter.version_control %}
+[project.urls]
 # PyPI project links
-urls = {
-    # {% if cookiecutter._github_username and "github" in cookiecutter.version_control %}
-    Repository = "https://github.com/{{ cookiecutter._github_username }}/{{ cookiecutter.repo_name }}",
-    # {% if cookiecutter.docs == "mkdocs" %}
-    Homepage = "https://{{ cookiecutter._github_username }}.github.io/{{ cookiecutter.repo_name }}/",
-    Documentation = "https://{{ cookiecutter._github_username }}.github.io/{{ cookiecutter.repo_name }}/",
-    # {% endif %}
-    # {% endif %}
-}
+Repository = "https://github.com/{{ cookiecutter._github_username }}/{{ cookiecutter.repo_name }}"
+# {% if cookiecutter.docs == "mkdocs" %}
+Homepage = "https://{{ cookiecutter._github_username }}.github.io/{{ cookiecutter.repo_name }}/"
+Documentation = "https://{{ cookiecutter._github_username }}.github.io/{{ cookiecutter.repo_name }}/"
+# {% endif %}
+# {% endif %}
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Scripts ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
 
 # {% if cookiecutter.include_code_scaffold != "No" %}
-scripts = {
-    "{{ cookiecutter.module_name }}" = "{{ cookiecutter.module_name|tojson }}.cli.main:app"
-    # {% if cookiecutter.include_code_scaffold in ("ml", "data") %}
-    data = "{{ cookiecutter.module_name }}.dataset:app",
-    feat = "{{ cookiecutter.module_name }}.features:app",
-    plot = "{{ cookiecutter.module_name }}.dataset:app"
-    # {% endif %}
-}
+[project.scripts]
+{{ cookiecutter.module_name }} = "{{ cookiecutter.module_name }}.cli.main:app",
+# {% if cookiecutter.include_code_scaffold in ("ml", "data") %}
+data = "{{ cookiecutter.module_name }}.dataset:app",
+feat = "{{ cookiecutter.module_name }}.features:app",
+plot = "{{ cookiecutter.module_name }}.dataset:app"
+# {% endif %}
 # {% endif %}
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━ Dependencies ━━━━━━━━━━━━━━━━━━━━━━━━━━ #
-requires-python = "~={{ cookiecutter.python_version_number }}"
 
-dependencies = [
+project.requires-python = "~={{ cookiecutter.python_version_number }}"
+
+project.dependencies = [
     "loguru>=0.7.3",         # Better logging
     "plotly>=5.24.1",        # Interactive plotting
     "pydantic>=2.10.3",      # Data validation
@@ -252,14 +245,8 @@ ignore = [
 mccabe.max-complexity = 10
 pycodestyle.max-doc-length = 99
 pydocstyle.convention = "google"
-isort = {
-    known-first-party = ["{{ cookiecutter.module_name }}"],
-    force-sort-within-sections = true,
-}
-format = {
-    quote-style = "double",
-    indent-style = "space",
-}
+isort = { known-first-party = ["{{ cookiecutter.module_name }}"], force-sort-within-sections = true }
+format = { quote-style = "double", indent-style = "space" }
 
 [tool.ruff.lint.per-file-ignores]
 "**/__init__.py" = [
