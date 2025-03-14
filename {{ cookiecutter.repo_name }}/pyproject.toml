@@ -53,7 +53,7 @@ Documentation = "https://{{ cookiecutter._github_username }}.github.io/{{ cookie
 
 # {% if cookiecutter.include_code_scaffold != "No" %}
 [project.scripts]
-{{ cookiecutter.module_name }} = {{ cookiecutter.module_name }}.cli.main:app
+{{ cookiecutter.module_name }} = "{{ cookiecutter.module_name }}.cli.main:app"
 # {% if cookiecutter.include_code_scaffold in ("ml", "data") %}
 data = "{{ cookiecutter.module_name }}.dataset:app"
 feat = "{{ cookiecutter.module_name }}.features:app"
