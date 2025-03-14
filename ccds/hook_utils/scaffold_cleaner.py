@@ -154,6 +154,7 @@ class ScaffoldCleaner:
     def _remove_experimental(self) -> None:
         """Removes experimental files and features."""
         self._remove_file(self.root / "Taskfile.yml")
+        self._remove_nix()
 
     def _remove_file(self, path: Path) -> None:
         """Remove file at specified path."""
@@ -168,3 +169,8 @@ class ScaffoldCleaner:
             err_msg = f"{dir_path} is fake news"
             raise Exception(err_msg)
         shutil.rmtree(dir_path)
+
+    def _remove_nix(self) -> None:
+        """Removes the nix flake install files."""
+        self._remove_file(self.root / "default.nix")
+        self._remove_file(self.root / "flake.nix")
