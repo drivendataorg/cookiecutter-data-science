@@ -4,7 +4,7 @@
  | |_| | |_| || |  __/ | | | | |
   \____|\___/ |_|\___|_| |_| |_|
 
-~ Gatlen's Opinionated Template v1.0.0 ~
+~ Gatlen's Opinionated Template v0.5.0 ~
 
 A cutting-edge, opinionated, and ambitious project builder 
 for power users and researchers.

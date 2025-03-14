@@ -39,16 +39,6 @@ classifiers = [
     # {% endif %}
 ]
 
-# {% if cookiecutter._github_username and "github" in cookiecutter.version_control %}
-[project.urls]
-# PyPI project links
-Repository = "https://github.com/{{ cookiecutter._github_username }}/{{ cookiecutter.repo_name }}"
-# {% if cookiecutter.docs == "mkdocs" %}
-Homepage = "https://{{ cookiecutter._github_username }}.github.io/{{ cookiecutter.repo_name }}/"
-Documentation = "https://{{ cookiecutter._github_username }}.github.io/{{ cookiecutter.repo_name }}/"
-# {% endif %}
-# {% endif %}
-
 # ━━━━━━━━━━━━━━━━━━━━━━ Primary Dependencies ━━━━━━━━━━━━━━━━━━━━━━ #
 
 requires-python = "~={{ cookiecutter.python_version_number }}"
@@ -63,6 +53,18 @@ dependencies = [
     "typer>=0.15.1",         # CLI builder"
     "tqdm>=4.67.1",          # {# TODO: Replace within the data modules #}
 ]
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ URLs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
+# {% if cookiecutter._github_username and "github" in cookiecutter.version_control %}
+[project.urls]
+# PyPI project links
+Repository = "https://github.com/{{ cookiecutter._github_username }}/{{ cookiecutter.repo_name }}"
+# {% if cookiecutter.docs == "mkdocs" %}
+Homepage = "https://{{ cookiecutter._github_username }}.github.io/{{ cookiecutter.repo_name }}/"
+Documentation = "https://{{ cookiecutter._github_username }}.github.io/{{ cookiecutter.repo_name }}/"
+# {% endif %}
+# {% endif %}
+
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Scripts ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
 
@@ -79,11 +81,15 @@ plot = "{{ cookiecutter.module_name }}.data.dataset:app"
 # ━━━━━━━━━━━━━━━━━━━━━━━ Extra Dependencies ━━━━━━━━━━━━━━━━━━━━━━━ #
 
 [dependency-groups]
+# {% if cookiecutter.include_code_scaffold in ("ml", "data") %}
 ai-apps = [  # AI application development packages
     "ell-ai>=0.0.15",        # AI toolkit
     "langchain>=0.3.12",     # LLM application framework
     # "megaparse>=0.0.45",   # Advanced text parsing (TODO: Requires Python 3.10+)
 ]
+# {% endif %}
+
+# {% if cookiecutter.include_code_scaffold == "ml" %}
 ai-train = [  # Machine learning and model training packages
     "datasets>=3.1.0",         # Dataset handling
     "einops>=0.8.0",           # Tensor operations
@@ -100,21 +106,36 @@ ai-train = [  # Machine learning and model training packages
     "umap-learn>=0.5.7",       # Dimensionality reduction
     "wandb>=0.19.1",           # Experiment tracking
 ]
+# {% endif %}
+
+# {% if cookiecutter.include_code_scaffold in ("app", "ml") %}
 async = [  # Asynchronous programming
     "uvloop>=0.21.0",          # Fast event loop implementation
 ]
+# {% endif %}
+
+# {% if cookiecutter.include_code_scaffold in ("cli", "ml", "data") %}
 cli = [  # Command-line interface tools
     "typer>=0.15.1",           # CLI builder
 ]
+# {% endif %}
+
+# {% if cookiecutter.include_code_scaffold in ("app", "ml") %}
 cloud = [  # Cloud infrastructure tools
     # "ansible>=11.1.0",       # Infrastructure automation (TODO: Doesn't work for Python 3.10)
     "boto3>=1.35.81",          # AWS SDK
 ]
+# {% endif %}
+
+# {% if cookiecutter.include_code_scaffold in ("lib", "course") %}
 config = [  # Configuration management
     "cookiecutter>=2.6.0",     # Project templating
     "gin-config>=0.5.0",       # Config management
     "jinja2>=3.1.4",           # Template engine
 ]
+# {% endif %}
+
+# {% if cookiecutter.include_code_scaffold in ("data", "ml", "paper") %}
 data = [  # Data processing and storage
     "dagster>=1.9.5",          # Data orchestration
     "duckdb>=1.1.3",           # Embedded analytics database
@@ -128,6 +149,8 @@ data = [  # Data processing and storage
     "sqlmodel>=0.0.22",        # SQL ORM
     "tomli>=2.0.1",            # TOML parsing
 ]
+# {% endif %}
+
 dev = [  # Development tools
     "better-exceptions>=0.3.3", # Improved error messages
     "commitizen>=4.1.1",       # Standardized commit messages
@@ -157,25 +180,37 @@ dev = [  # Development tools
     "tox>=4.23.2",             # Test automation
     "uv>=0.5.7",               # Fast pip replacement
 ]
+
+# {% if cookiecutter.docs == "mkdocs" %}
 dev-doc = [  # Documentation tools
     "mdformat>=0.7.19",        # Markdown formatter
     "mkdocs>=1.6.1",           # Documentation generator
     "mkdocs-material>=9.5.48", # Documentation theme
 ]
+# {% endif %}
+
+# {% if cookiecutter.include_code_scaffold in ("data", "ml", "paper") %}
 dev-nb = [  # Notebook development tools
     "jupyter-book>=1.0.3",     # Notebook publishing
     "nbformat>=5.10.4",        # Notebook file format
     "nbqa>=1.9.1",             # Notebook linting
     "testbook>=0.4.2",         # Notebook testing
 ]
+# {% endif %}
+
+# {% if cookiecutter.include_code_scaffold in ("app") %}
 gui = [  # Graphical interface tools
     "streamlit>=1.41.1",       # Web app framework
 ]
+# {% endif %}
+
 misc = [  # Miscellaneous utilities
     "boltons>=24.1.0",         # Python utilities
     "cachetools>=5.5.0",       # Caching utilities
     "wrapt>=1.17.0",           # Decorator utilities
 ]
+
+# {% if cookiecutter.include_code_scaffold in ("data", "ml", "paper", "course") %}
 nb = [  # Jupyter notebook tools
     "chime>=0.7.0",            # Sound notifications
     "ipykernel>=6.29.5",       # Jupyter kernel
@@ -183,6 +218,9 @@ nb = [  # Jupyter notebook tools
     "ipywidgets>=8.1.5",       # Jupyter widgets
     "jupyterlab>=4.3.3",       # Notebook IDE
 ]
+# {% endif %}
+
+# {% if cookiecutter.include_code_scaffold in ("app") %}
 web = [  # Web development and scraping
     "beautifulsoup4>=4.12.3",  # HTML parsing
     "fastapi>=0.115.6",        # Web framework
@@ -192,33 +230,38 @@ web = [  # Web development and scraping
     "uvicorn>=0.33.0",         # ASGI server
     # "zrok>=0.4.42",          # Tunnel service (TODO: Requires 3.10+)
 ]
+# {% endif %}
 
 [tool.uv]
 default-groups = [
-    # "dev", "dev-doc", "nb",
-
+    # "dev", 
+    # {% if cookiecutter.docs == "mkdocs" %}
+    # "dev-doc", 
+    # {% endif %}
+    # "misc",
+    
     # {%- if cookiecutter.include_code_scaffold == "data" %}
-    # "data", "dev-nb", "cli",
+    # "data", "dev-nb", "cli", "nb",
     # {% endif %}
 
     # {%- if cookiecutter.include_code_scaffold == "paper" %}
-    # "data", "dev-nb",
+    # "data", "dev-nb", "nb",
     # {% endif %}
 
     # {%- if cookiecutter.include_code_scaffold == "app" %}
-    # "dev-nb", "web",
+    # "dev-nb", "web", "gui", "async", "cloud",
     # {% endif %}
 
     # {%- if cookiecutter.include_code_scaffold == "ml" %}
-    # "data", "dev-nb", "cli", "ai-train",
+    # "data", "dev-nb", "cli", "ai-train", "ai-apps", "async", "cloud", "nb",
     # {% endif %}
 
     # {%- if cookiecutter.include_code_scaffold == "lib" %}
-    # "dev-nb",
+    # "dev-nb", "config",
     # {% endif %}
 
     # {%- if cookiecutter.include_code_scaffold == "course" %}
-    # "dev-nb",
+    # "dev-nb", "config", "nb",
     # {% endif %}
 ]
 
