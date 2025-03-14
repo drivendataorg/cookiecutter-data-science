@@ -13,7 +13,7 @@
 		// ####################
 		{
 			"label": "[Makefile] Build Lint ✅",
-			"detail": "Run linting checks with flake8, isort, and black",
+			"detail": "Run linting checks with ruff",
 			"type": "shell",
 			"command": "make lint",
 			"group": {
@@ -30,7 +30,7 @@
 		},
 		{
 			"label": "[Makefile] Build Format 📏",
-			"detail": "Format code using isort and black",
+			"detail": "Format code using ruff",
 			"type": "shell",
 			"command": "make format",
 			"group": "build",
@@ -43,6 +43,7 @@
 				"panel": "shared"
 			}
 		},
+		// {% if cookiecutter.environment_manager != 'none' %}
 		{
 			"label": "[Makefile] Build + Publish All 📦 (⇧ ⌘ B)",
 			"detail": "Run format, lint, publish package and docs",
@@ -61,9 +62,45 @@
 				"panel": "shared"
 			}
 		},
+		// {% endif %}
+		// {% if cookiecutter.environment_manager != 'none' %}
+		{
+			"label": "[Makefile] Create Environment 🌱",
+			"detail": "Set up python interpreter environment",
+			"type": "shell",
+			"command": "make create_environment",
+			"group": "build",
+			"icon": {
+				"id": "terminal",
+				"color": "terminal.ansiBlue"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		// {% endif %}
+		// {% if cookiecutter.dependency_file != 'none' or cookiecutter.environment_manager == 'uv' %}
+		{
+			"label": "[Makefile] Install Requirements 📦",
+			"detail": "Install Python Dependencies",
+			"type": "shell",
+			"command": "make requirements",
+			"group": "build",
+			"icon": {
+				"id": "package",
+				"color": "terminal.ansiBlue"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		// {% endif %}
 		// ############
 		// ### DOCS ###
 		// ############
+		// {% if cookiecutter.docs == "mkdocs" %}
 		{
 			"label": "[Makefile] Docs Serve 📄",
 			"detail": "Serve documentation locally on port 8000",
@@ -102,6 +139,7 @@
 			"isBackground": false,
 			"problemMatcher": []
 		},
+		// {% endif %}
 		// #############
 		// ### TESTS ###
 		// #############
@@ -172,6 +210,87 @@
 				"panel": "shared"
 			}
 		},
+		// {% if cookiecutter.include_code_scaffold in ("data", "ml") %}
+		{
+			"label": "[Makefile] Generate Dataset 📊",
+			"detail": "Make Dataset",
+			"type": "shell",
+			"command": "make data",
+			"group": "build",
+			"icon": {
+				"id": "database",
+				"color": "terminal.ansiBlue"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		// {% endif %}
+		// {% if not cookiecutter.dataset_storage.none %}
+		{
+			"label": "[Makefile] Sync Data Down ⬇️",
+			"detail": "Download Data from storage system",
+			"type": "shell",
+			"command": "make sync_data_down",
+			"group": "build",
+			"icon": {
+				"id": "cloud-download",
+				"color": "terminal.ansiBlue"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "[Makefile] Sync Data Up ⬆️",
+			"detail": "Upload Data to storage system",
+			"type": "shell",
+			"command": "make sync_data_up",
+			"group": "build",
+			"icon": {
+				"id": "cloud-upload",
+				"color": "terminal.ansiBlue"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		// {% endif %}
+		// {% if cookiecutter.version_control != 'none' %}
+		{
+			"label": "[Makefile] Pre-Commit Test 🧪",
+			"detail": "Test pre-commit hooks",
+			"type": "shell",
+			"command": "make pre-commit-test",
+			"group": "test",
+			"icon": {
+				"id": "check-all",
+				"color": "terminal.ansiRed"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "[Makefile] Pre-Commit Update 🔄",
+			"detail": "Update, install, and test hooks w/ new config",
+			"type": "shell",
+			"command": "make pre-commit-update",
+			"group": "build",
+			"icon": {
+				"id": "refresh",
+				"color": "terminal.ansiBlue"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		// {% endif %}
 		// ##############
 		// ### VSCode ###
 		// ##############
@@ -192,6 +311,22 @@
 			"presentation": {
 				"reveal": "always",
 				"panel": "dedicated"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "[Makefile] Clean All 🧹",
+			"detail": "Delete all compiled Python files and LaTeX build artifacts",
+			"type": "shell",
+			"command": "make clean",
+			"group": "none",
+			"icon": {
+				"id": "trash",
+				"color": "terminal.ansiYellow"
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
 			},
 			"problemMatcher": []
 		}

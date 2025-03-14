@@ -1,7 +1,7 @@
 {
 	// See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
 	"recommendations": [
-		// Python Development
+		/* ━━━━━━━━━━━━━━━━━━━━━━ PYTHON DEVELOPMENT ━━━━━━━━━━━━━━━━━━━━━━ */
 		"ms-python.python", // Python Environments, Language, and More
 		"ms-python.vscode-pylance", // Python Language Server w/ Typing
 		"ms-python.debugpy", // VSCode Python Debugger
@@ -10,38 +10,44 @@
 		"rodolphebarbanneau.python-docstring-highlighter", // Highlight Python docstring syntax
 		"kevinrose.vsc-python-indent", // Correct indents for python
 
-		// Data Science & Notebooks
+		/* ━━━━━━━━━━━━━━━━━━━ DATA SCIENCE & NOTEBOOKS ━━━━━━━━━━━━━━━━━━━ */
+		// {% if cookiecutter.include_code_scaffold in ("data", "ml", "paper") %}
 		"ms-toolsai.jupyter", // Jupyter Notebooks in VSCode
 		"ms-toolsai.jupyter-renderers", // Jupyter Cell Output Renderer
 		"mechatroner.rainbow-csv", // Color-coded CSV Columns
-		"sbsnippets.pytorch-snippets", // Snippits for PyTorch
+		// {% if cookiecutter.include_code_scaffold == "ml" %}
+		"sbsnippets.pytorch-snippets", // Snippets for PyTorch
+		// {% endif %}
+		// {% endif %}
 
-		// Shell & Command Line
+		/* ━━━━━━━━━━━━━━━━━━━━━ SHELL & COMMAND LINE ━━━━━━━━━━━━━━━━━━━━━ */
 		"mads-hartmann.bash-ide-vscode", // .*sh script language support
 		"timonwong.shellcheck", // .*sh script linting
 		"foxundermoon.shell-format", // .*sh script formatting
 
-		// Remote Development
+		/* ━━━━━━━━━━━━━━━━━━━━━ REMOTE DEVELOPMENT ━━━━━━━━━━━━━━━━━━━━━━━ */
 		"ms-vscode-remote.remote-containers", // Remote Connect to Docker
 		"ms-vscode-remote.remote-ssh", // Remote Connect via SSH
 		"ms-vscode-remote.remote-ssh-edit", // SSH Config File Editing
 		"exiasr.hadolint", // Dockerfile linter
 
-		// Document Formats & Preview
+		/* ━━━━━━━━━━━━━━━━━━ DOCUMENT FORMATS & PREVIEW ━━━━━━━━━━━━━━━━━━ */
 		"mathematic.vscode-pdf", // PDF Preview
 		"vitaliymaz.vscode-svg-previewer", // SVG Preview
-		"ctcuff.font-preview", // Font PReview
-		"james-yu.latex-workshop", // LaTeX File Renderer for Documents
+		"ctcuff.font-preview", // Font Preview
 		"shd101wyy.markdown-preview-enhanced", // Improved Markdown Preview
+		// {% if cookiecutter.include_code_scaffold == "paper" %}
+		"james-yu.latex-workshop", // LaTeX File Renderer for Documents
+		// {% endif %}
 
-		// Code Formatting & Style
+		/* ━━━━━━━━━━━━━━━━━━━ CODE FORMATTING & STYLE ━━━━━━━━━━━━━━━━━━━ */
 		"esbenp.prettier-vscode", // Prettier general formatting tool
 		"mrmlnc.vscode-attrs-sorter", // HTML Attribute Sorter
 		"richie5um2.vscode-sort-json", // JSON Sorter
 		"2gua.rainbow-brackets", // Multi-colored brackets for readability
 		"aaron-bond.better-comments", // Comments w/ Styling
 
-		// Project Management & Navigation
+		/* ━━━━━━━━━━━━━━━━ PROJECT MANAGEMENT & NAVIGATION ━━━━━━━━━━━━━━━ */
 		"alefragnani.project-manager", // Manage VSCode Workspaces
 		/* Add the below to your projects.json file to add this project
 		'~/Library/Application Support/Cursor/User/globalStorage/alefragnani.project-manager/projects.json'
@@ -58,37 +64,52 @@
 		"christian-kohler.path-intellisense", // Path Intellisense
 		"kisstkondoros.vscode-gutter-preview", // Image Preview
 
-		// Git & Version Control
+		/* ━━━━━━━━━━━━━━━━━━━━ GIT & VERSION CONTROL ━━━━━━━━━━━━━━━━━━━━ */
+		// {% if cookiecutter.version_control != "none" %}
 		"eamodio.gitlens", // View git diffs, edits, branches and more
+		// {% endif %}
 
-		// TODO: Add cookiecutter template types, include if web only
-		// API Development
+		/* ━━━━━━━━━━━━━━━━━━━━━━ API DEVELOPMENT ━━━━━━━━━━━━━━━━━━━━━━━━ */
+		// {% if cookiecutter.include_code_scaffold in ("app", "ml") %}
 		"humao.rest-client", // Easily make HTTP queries for API testing
+		// {% endif %}
 
-		// Build Tools
+		/* ━━━━━━━━━━━━━━━━━━━━━━━ BUILD TOOLS ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 		"ms-vscode.makefile-tools", // Tools for Makefiles
 		"task.vscode-task", // Tools for Taskfiles
 
-		// Configuration Files
+		/* ━━━━━━━━━━━━━━━━━━━━ CONFIGURATION FILES ━━━━━━━━━━━━━━━━━━━━━━ */
 		"tamasfe.even-better-toml", // .toml language support
 		"dotenv.dotenv-vscode", // .env language support
 		"redhat.vscode-yaml", // .yaml language support
 		"redhat.vscode-xml", // .xml language support
 
-		// Output & Debugging
+		/* ━━━━━━━━━━━━━━━━━━━━━ WEB DEVELOPMENT ━━━━━━━━━━━━━━━━━━━━━━━━━ */
+		// {% if cookiecutter.include_code_scaffold == "app" %}
+		"dbaeumer.vscode-eslint", // JavaScript/TypeScript linting
+		"Vue.volar", // Vue.js support
+		"bradlc.vscode-tailwindcss", // Tailwind CSS IntelliSense
+		"svelte.svelte-vscode", // Svelte support
+		"Angular.ng-template", // Angular support
+		// {% endif %}
+
+		/* ━━━━━━━━━━━━━━━━━━━━ OUTPUT & DEBUGGING ━━━━━━━━━━━━━━━━━━━━━━━ */
 		"ibm.output-colorizer", // Automatically color-code VSCode Output logs
-		"usernamehw.errorlens",
-		"spmeesseman.vscode-taskexplorer",
-		"ms-azuretools.vscode-docker" // Highlight errors in-line
+		"usernamehw.errorlens", // Highlight errors in-line
+		"spmeesseman.vscode-taskexplorer", // Task explorer
+		// {% if cookiecutter.include_code_scaffold in ("app", "ml", "data") %}
+		"ms-azuretools.vscode-docker" // Docker support
+		// {% endif %}
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
 	"unwantedRecommendations": [
-		// Superceded by ruff
+		/* ━━━━━━━━━━━━━━━━━━━━━━ SUPERSEDED TOOLS ━━━━━━━━━━━━━━━━━━━━━━━ */
+		// Superseded by ruff
 		"ms-python.black-formatter",
 		"ms-python.isort",
 		"ms-python.pylint",
 
-		// Superceded by Pylance
+		// Superseded by Pylance
 		"ms-pyright.pyright"
 	]
 }

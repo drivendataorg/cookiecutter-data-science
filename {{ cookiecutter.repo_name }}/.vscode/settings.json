@@ -1,76 +1,125 @@
 {
 	// SSH Configuration
+	// {% if cookiecutter._generate_personal_ssh_keys == "y" or cookiecutter._generate_and_upload_gh_deploy_keys == "y" %}
 	"remote.SSH.configFile": "${workspaceFolder}/secrets/ssh/config.ssh",
+	// {% endif %}
 
 	// File Type Associations
 	"files.associations": {
-		"*.ssh": "ssh_config",
 		"*.env*": "dotenv",
-		"*.cursorrules": "markdown"
+		"*.cursorrules": "markdown",
+		// {% if cookiecutter._generate_personal_ssh_keys == "y" or cookiecutter._generate_and_upload_gh_deploy_keys == "y" %}
+		"*.ssh": "ssh_config",
+		// {% endif %}
 	},
 
 	// Excluded Files Won't Show in Sidebar
 	"files.exclude": {
-		// Version Control
-		"**/.git": false,
-		"**/.gitattributes": false,
-		"**/.github": false,
-		"**/.gitignore": false,
-		"**/.hg": false,
-		"**/.svn": false,
-		"**/CVS": false,
-		// System Files
-		"**/.DS_Store": false,
-		"**/Thumbs.db": false,
-		"**/*.bak": false,
-		"**/*.sav": false,
-		"**/*.backup": false,
-		"**/.*.swp": false,
-		"**/*~[0-9]*": false,
-		// Development Environment
-		"**/__pycache__": false,
-		"**/*.py[cod]": false,
-		"**/*$py.class": false,
-		"**/.editorconfig": false,
-		"**/.env": false,
-		"**/.idea": false,
-		"**/.ipynb_checkpoints": false,
-		"**/.mypy_cache": false,
-		"**/.prettierrc": false,
-		"**/.pytest_cache": false,
-		"**/.python-version": false,
-		"**/.ruff_cache": false,
-		"**/.ruby-lsp": false,
-		"**/.venv": false,
-		"**/.vscode": false,
-		"**/*.sublime-*": false,
-		"**/venv": false,
-		// Build and Distribution
-		"**/build": false,
-		"**/dist": false,
-		"**/*.egg-info": false,
-		"**/wheels": false,
-		"**/downloads": false,
-		// Project Files
-		"**/logs": false,
-		"**/scripts": false,
-		"**/tests": false,
-		"CHANGELOG.md": false,
-		"LICENSE.md": false,
-		"MANIFEST": false,
-		"requirements.txt": false,
-		// Documentation
-		"**/docs/_build": false,
-		"**/site": false,
-		// Testing and Coverage
-		"**/.coverage": false,
-		"**/.coverage.*": false,
-		"**/htmlcov": false,
-		"**/coverage.xml": false,
-		"**/*.cover": false,
-		// Databases
-		"**/dump.rdb": false,
-		// LaTeX
+		/* ━━━━━━━━━━━━━━━━━━ PROJECT-SPECIFIC IGNORES ━━━━━━━━━━━━━━━━━━ */
+		"**/manual_test": true,
+		"LICENSE*": true,
+
+		/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ VCS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+		".git": true,
+		".github": true,
+		".gitattributes": true,
+
+		/* ━━━━━━━━━━━━━━━━━━ OPERATING SYSTEM IGNORES ━━━━━━━━━━━━━━━━━━ */
+		"**/.DS_Store": true,
+		"**/Icon?": true,
+		"**/Thumbs.db": true,
+		"**/*.bak": true,
+		"**/*.sav": true,
+		"**/*.backup": true,
+		"**/*~[0-9]*": true,
+
+		/* ━━━━━━━━━━━━━━━━━━━━━━━ EDITOR IGNORES ━━━━━━━━━━━━━━━━━━━━━━━ */
+		/* ───────────────────────────── Vim ──────────────────────────── */
+		"**/.*.swp": true,
+		"**/.*.swo": true,
+		/* ─────────────────────────── VSCode ─────────────────────────── */
+        "**/.vscode": false,
+		"**/.history": true,
+		/* ─────────────────────────── Cursor ─────────────────────────── */
+		"**/.cursor": false,
+		/* ─────────────────────────── PyCharm ────────────────────────── */
+        "**/.idea": false,
+		/* ─────────────────────────── Spyder ─────────────────────────── */
+		"**/.spyderproject": true,
+		"**/.spyproject": true,
+		/* ─────────────────────────── Sublime ────────────────────────── */
+		"**/*.sublime-*": true,
+
+		/* ━━━━━━━━━━━━━━━━━━━━━ PYTHON CORE IGNORES ━━━━━━━━━━━━━━━━━━━━ */
+		".python-version": true,
+		"**/__pycache__": true,
+		"**/*.py[cod]": true,
+		"**/*$py.class": true,
+		"**/*.so": true,
+		"**/.Python": true,
+		"**/develop-eggs": true,
+		"**/.eggs": true,
+		"**/*.egg-info": true,
+		"**/.installed.cfg": true,
+		"**/*.egg": true,
+		"**/*.manifest": true,
+		"**/*.spec": true,
+		"**/pip-log.txt": true,
+		"**/pip-delete-this-directory.txt": true,
+		"**/htmlcov": true,
+		"**/.tox": true,
+		"**/.nox": true,
+		"**/.coverage": true,
+		"**/.coverage.*": true,
+		"**/.cache": true,
+		"**/nosetests.xml": true,
+		"**/coverage.xml": true,
+		"**/*.cover": true,
+		"**/.hypothesis": true,
+		"**/.pytest_cache": true,
+		"**/cover": true,
+		"**/.ruff_cache": true,
+		"**/.mypy_cache": true,
+		"**/.dmypy.json": true,
+		"**/dmypy.json": true,
+		"**/.pytype": true,
+		"**/.ruby-lsp": true,
+		"**/*.mo": true,
+		"**/*.pot": true,
+
+		/* ━━━━━━━━━━━━━ ENVIRONMENT & DEPENDENCY MANAGEMENT ━━━━━━━━━━━━ */
+		"**/env": true,
+		"**/ENV": true,
+		"**/env.bak": true,
+		"**/venv.bak": true,
+		"**/__pypackages__": true,
+		"**/venv": true,
+		"**/.venv": true,
+		// {% if cookiecutter.environment_manager == "conda" %}
+		"**/.conda": true,
+		// {% elif cookiecutter.environment_manager == "pipenv" %}
+		// Pipenv files are typically included in version control
+		// {% elif cookiecutter.environment_manager == "uv" %}
+		"requirements.txt": true,
+		"uv.lock": true,
+		// {% endif %}
+
+		/* ━━━━━━━━━━━━━━━━ PYTHON FRAMEWORKS & LIBRARIES ━━━━━━━━━━━━━━━ */
+		// {% if cookiecutter.include_code_scaffold in ("data", "ml", "paper") %}
+		"**/.ipynb_checkpoints": true,
+		"**/profile_default": true,
+		"**/ipython_config.py": true,
+		// {% endif %}
+		"**/celerybeat-schedule": true,
+		"**/celerybeat.pid": true,
+		"**/.pyre": true,
+		"**/.ropeproject": true,
+		"**/cython_debug": true,
+		"**/*.sage.py": true,
+		"**/dump.rdb": true,
+
+		// {% if cookiecutter.include_code_scaffold in ("paper", "course") %}
+		/* ━━━━━━━━━━━━━━━━ LATEX & DOCUMENT PREPARATION ━━━━━━━━━━━━━━━━ */
 		"**/*.aux": true,
 		"**/*.bbl": true,
 		"**/*.bcf": true,
@@ -78,19 +127,31 @@
 		"**/*.fdb_latexmk": true,
 		"**/*.fls": true,
 		"**/*.lof": true,
-		"**/*.log": false,
 		"**/*.lot": true,
 		"**/*.out": true,
 		"**/*.synctex.gz*": true,
 		"**/*.toc": true,
-		"**/_minted*": true
+		"**/_minted*": true,
+		// {% endif %}
 	},
 	"explorerExclude.backup": {},
-	// Python Settings
+	
+	/* ━━━━━━━━━━━━━━━━━━━━━━ PYTHON SETTINGS ━━━━━━━━━━━━━━━━━━━━━━━ */
+	// {% if cookiecutter.environment_manager == "uv" %}
 	"python.defaultInterpreterPath": ".venv/bin/python",
+	// {% elif cookiecutter.environment_manager == "virtualenv" %}
+	"python.defaultInterpreterPath": ".venv/bin/python",
+	// {% elif cookiecutter.environment_manager == "pipenv" %}
+	"python.defaultInterpreterPath": ".venv/bin/python",
+	// {% elif cookiecutter.environment_manager == "conda" %}
+	"python.defaultInterpreterPath": "~/miniconda3/envs/{{ cookiecutter.repo_name }}/bin/python",
+	// {% else %}
+	"python.defaultInterpreterPath": "python",
+	// {% endif %}
 	"python.testing.pytestEnabled": true,
 	"python.testing.pytestArgs": ["tests"],
-	// Editor Theme Customization
+	
+	/* ━━━━━━━━━━━━━━━━━━ EDITOR THEME CUSTOMIZATION ━━━━━━━━━━━━━━━━━━ */
 	"workbench.colorCustomizations": {
 		"editor.lineHighlightBackground": "#1073cf2d",
 		"editor.lineHighlightBorder": "#9fced11f"

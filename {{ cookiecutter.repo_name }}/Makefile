@@ -34,7 +34,7 @@ help: _print-logo  ## Show this help message
 	@grep -E '^[a-zA-Z][a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[38;5;222m%-30s\033[0m %s\n", $$1, $$2}'
 
 _welcome: ## Print a Welcome screen
-	curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/vscode-customization/welcome.txt
+	curl -s https://raw.githubusercontent.com/GatlenCulp/gatlens-opinionated-template/main/welcome.txt
 
 _print-logo: ## Prints the GOTem logo
 	@echo "\033[38;5;39m   ____  ___ _____"

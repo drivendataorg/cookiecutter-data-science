@@ -69,6 +69,7 @@ class ScaffoldCleaner:
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "notebooks"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "out"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "secrets"))
+                cleaning_ops.add(lambda: self._remove_dir(self.root / "tests"))
                 # Files
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 cleaning_ops.add(lambda: self._remove_file(self.root / "Taskfile.yml"))
