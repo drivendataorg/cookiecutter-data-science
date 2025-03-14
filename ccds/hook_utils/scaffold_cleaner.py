@@ -7,6 +7,7 @@ from typing import Literal
 
 from loguru import logger
 
+SecretManagers = Literal["none", "dot_env", "secrets_dir"]
 CleaningOption = Literal["data", "paper", "app", "ml", "lib", "course"]
 ScaffoldOptions = Literal["data", "backend", "course", "frontend"]
 CleaningOperation = Callable[[Path], None]
@@ -35,14 +36,17 @@ class ScaffoldCleaner:
         for option in cleaning_options:
             if option == "data":
                 cleaning_ops.add(lambda: self._select_module_scaffolding({"data", "cli"}))
+                cleaning_ops.add(lambda: self._select_secrets_manager("secrets_dir"))
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue
             if option == "ml":
                 cleaning_ops.add(lambda: self._select_module_scaffolding({"data", "cli"}))
+                cleaning_ops.add(lambda: self._select_secrets_manager("secrets_dir"))
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue
             if option == "lib":
                 cleaning_ops.add(lambda: self._select_module_scaffolding("data"))
+                cleaning_ops.add(lambda: self._select_secrets_manager("dot_env"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "out"))
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue
@@ -50,15 +54,18 @@ class ScaffoldCleaner:
                 cleaning_ops.add(
                     lambda: self._select_module_scaffolding({"backend", "frontend", "cli"}),
                 )
+                cleaning_ops.add(lambda: self._select_secrets_manager("dot_env"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "notebooks"))
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue
             if option == "paper":
                 cleaning_ops.add(lambda: self._select_module_scaffolding("course"))
+                cleaning_ops.add(lambda: self._select_secrets_manager("dot_env"))
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue
             if option == "course":
                 cleaning_ops.add(lambda: self._select_module_scaffolding("course"))
+                cleaning_ops.add(lambda: self._select_secrets_manager("dot_env"))
                 # Dirs
                 cleaning_ops.add(lambda: self._remove_dir(self.root / ".devcontainer"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / ".github"))
@@ -68,7 +75,6 @@ class ScaffoldCleaner:
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "logs"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "notebooks"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "out"))
-                cleaning_ops.add(lambda: self._remove_dir(self.root / "secrets"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "tests"))
                 # Files
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
@@ -175,3 +181,16 @@ class ScaffoldCleaner:
         """Removes the nix flake install files."""
         self._remove_file(self.root / "default.nix")
         self._remove_file(self.root / "flake.nix")
+
+    def _select_secrets_manager(self, secrets_manager: SecretManagers) -> None:
+        """Removes the secrets directory, transferring example.env to project root."""
+        if secrets_manager == "none":
+            self._remove_dir(self.root / "secrets")
+            return
+        if secrets_manager == "dot_env":
+            example_env_path = self.root / "secrets" / "schema" / "example.env"
+            shutil.copy2(example_env_path, self.root / "example.env")
+            self._remove_dir(self.root / "secrets")
+            return
+        if secrets_manager == "secrets_dir":
+            return

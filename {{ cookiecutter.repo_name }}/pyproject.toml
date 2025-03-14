@@ -222,10 +222,55 @@ default-groups = [
     # {% endif %}
 ]
 
+# {%- if cookiecutter.include_code_scaffold == "ml" %}
+# ━━━━━━━━━━━━━━━━━━━━━ PyTorch Index & Sources ━━━━━━━━━━━━━━━━━━━━ #
+# https://docs.astral.sh/uv/guides/integration/pytorch/
+
+## PyTorch Indexes 
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu118"
+url = "https://download.pytorch.org/whl/cu118"
+explicit = true
+
+## PyTorch Sources
+[[tool.uv.sources.torch]]
+index = "pytorch-cpu"
+marker = "platform_system == 'Darwin'"
+
+[[tool.uv.sources.torch]]
+index = "pytorch-cu118"
+marker = "platform_system != 'Darwin'"
+
+## TorchVision Sources
+[[tool.uv.sources.torchvision]]
+index = "pytorch-cpu"
+marker = "platform_system == 'Darwin'"
+
+[[tool.uv.sources.torchvision]]
+index = "pytorch-cu118"
+marker = "platform_system != 'Darwin'"
+# {% endif %}
+
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Ruff ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
 
 [tool.ruff]
 cache-dir = ".cache/ruff"
+# {% if cookiecutter.python_version_number == "3.9" %}
+target-version = "py39"
+# {% elif cookiecutter.python_version_number == "3.10" %}
+target-version = "py310"
+# {% elif cookiecutter.python_version_number == "3.11" %}
+target-version = "py311"
+# {% elif cookiecutter.python_version_number == "3.12" %}
+target-version = "py312"
+# {% elif cookiecutter.python_version_number == "3.13" %}
+target-version = "py313"
+# {% endif %}
 line-length = 100
 format = { quote-style = "double", indent-style = "space" }
 
