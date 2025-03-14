@@ -1,10 +1,10 @@
 """File to be run after template initialization by cookiecutter."""  # noqa: INP001
 
-from copy import copy
 import os
-from pathlib import Path
 import shutil
 import subprocess
+from copy import copy
+from pathlib import Path
 
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
