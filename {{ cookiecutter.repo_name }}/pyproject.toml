@@ -49,6 +49,19 @@ Documentation = "https://{{ cookiecutter._github_username }}.github.io/{{ cookie
 # {% endif %}
 # {% endif %}
 
+# ━━━━━━━━━━━━━━━━━━━━━━ Primary Dependencies ━━━━━━━━━━━━━━━━━━━━━━ #
+
+requires-python = "~={{ cookiecutter.python_version_number }}"
+
+dependencies = [
+    "loguru>=0.7.3",         # Better logging
+    "plotly>=5.24.1",        # Interactive plotting
+    "pydantic>=2.10.3",      # Data validation
+    "rich>=13.9.4",          # Rich terminal output
+    "numpy>=1.26.4",         # Numerical computing
+    "python-dotenv>=1.0.0"   # Load .env into environment vars
+]
+
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Scripts ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
 
 # {% if cookiecutter.include_code_scaffold != "No" %}
@@ -61,18 +74,7 @@ plot = "{{ cookiecutter.module_name }}.dataset:app"
 # {% endif %}
 # {% endif %}
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━ Dependencies ━━━━━━━━━━━━━━━━━━━━━━━━━━ #
-
-project.requires-python = "~={{ cookiecutter.python_version_number }}"
-
-project.dependencies = [
-    "loguru>=0.7.3",         # Better logging
-    "plotly>=5.24.1",        # Interactive plotting
-    "pydantic>=2.10.3",      # Data validation
-    "rich>=13.9.4",          # Rich terminal output
-    "numpy>=1.26.4",         # Numerical computing
-    "python-dotenv>=1.0.0"   # Load .env into environment vars
-]
+# ━━━━━━━━━━━━━━━━━━━━━━━ Extra Dependencies ━━━━━━━━━━━━━━━━━━━━━━━ #
 
 [dependency-groups]
 ai-apps = [  # AI application development packages
