@@ -1,3 +1,9 @@
+## 0.5.0 (2025-03-14)
+
+### Fix
+
+- Update readme to use github reference for pypi
+
 ## 0.4.5 (2025-03-14)
 
 ### Fix
