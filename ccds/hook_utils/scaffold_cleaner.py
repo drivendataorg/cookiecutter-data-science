@@ -8,7 +8,10 @@ from typing import Literal
 from loguru import logger
 
 CleaningOption = Literal["data", "paper", "app", "ml", "lib", "course"]
+ScaffoldOptions = Literal["data", "backend", "course", "frontend"]
 CleaningOperation = Callable[[Path], None]
+
+ALL_SCAFFOLDS = {"data", "backend", "course", "frontend"}
 
 
 class ScaffoldCleaner:
@@ -31,23 +34,30 @@ class ScaffoldCleaner:
         cleaning_ops = {self._remove_experimental}
         for option in cleaning_options:
             if option == "data":
-                cleaning_ops.add(lambda: self._select_module_scaffolding("ai"))
+                cleaning_ops.add(lambda: self._select_module_scaffolding("data"))
+                cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
+                continue
+            if option == "ml":
+                cleaning_ops.add(lambda: self._select_module_scaffolding("data"))
+                cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
+                continue
+            if option == "lib":
+                cleaning_ops.add(lambda: self._select_module_scaffolding("data"))
+                cleaning_ops.add(lambda: self._remove_dir(self.root / "out"))
+                cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
+                continue
+            if option == "app":
+                cleaning_ops.add(lambda: self._select_module_scaffolding({"backend", "frontend"}))
+                cleaning_ops.add(lambda: self._remove_dir(self.root / "notebooks"))
+                cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue
             if option == "paper":
                 cleaning_ops.add(lambda: self._select_module_scaffolding("course"))
-                continue
-            if option == "app":
-                cleaning_ops.add(lambda: self._remove_dir(self.root / "notebooks"))
-                continue
-            if option == "ml":
-                cleaning_ops.add(lambda: self._select_module_scaffolding("ai"))
-                continue
-            if option == "lib":
-                cleaning_ops.add(lambda: self._remove_dir(self.root / "out"))
+                cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue
             if option == "course":
                 cleaning_ops.add(lambda: self._select_module_scaffolding("course"))
-                cleaning_ops.add(lambda: self._remove_file(self.root / "Taskfile.yml"))
+                # Dirs
                 cleaning_ops.add(lambda: self._remove_dir(self.root / ".devcontainer"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / ".github"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "data"))
@@ -56,6 +66,11 @@ class ScaffoldCleaner:
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "logs"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "notebooks"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "out"))
+                cleaning_ops.add(lambda: self._remove_dir(self.root / "secrets"))
+                # Files
+                cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
+                cleaning_ops.add(lambda: self._remove_file(self.root / "Taskfile.yml"))
+                cleaning_ops.add(lambda: self._remove_file(self.root / "LICENSE"))
                 continue
 
         ## Execute cleaning operations
@@ -68,22 +83,45 @@ class ScaffoldCleaner:
         self._remove_dir(self.root / ".devcontainer")
         self._remove_experimental()
 
-    def _select_module_scaffolding(
-        self,
-        scaffold: Literal["ai", "backend", "course", "frontend"],
-    ) -> None:
+    def _select_module_scaffolding(self, scaffold: ScaffoldOptions | set[ScaffoldOptions]) -> None:
         """Delete all config except for the config passed in."""
+        selected_scaffolds = scaffold if isinstance(scaffold, set) else {scaffold}
         module_path = self.root / self.module_name
-        all_scaffolds = {"ai", "backend", "course", "frontend"}
-        for unselected_scaffold in all_scaffolds - {scaffold}:
+        for unselected_scaffold in ALL_SCAFFOLDS - selected_scaffolds:
             self._remove_dir(module_path / f"_{unselected_scaffold}")
 
         # Extract the remaining directory into the module directory
-        selected_scaffold_path = module_path / f"_{scaffold}"
-        if selected_scaffold_path.exists() and selected_scaffold_path.is_dir():
+        if isinstance(scaffold, str):
+            selected_scaffold_path = module_path / f"_{scaffold}"
+            self._extract_dir(selected_scaffold_path)
+            return
+
+        # If scaffold was a set, rename the scaffold directories to not have the underscore
+        for selected_scaffold in selected_scaffolds:
+            scaffold_path = module_path / f"_{selected_scaffold}"
+            if scaffold_path.exists() and scaffold_path.is_dir():
+                target_path = module_path / selected_scaffold
+                self._rename(scaffold_path, target_path)
+
+    def _rename(self, src_path: Path, target_path: Path) -> None:
+        """Renames a given path to that at the target path."""
+        logger.debug(f"Renaming {src_path} to {target_path}")
+        # If target already exists, remove it first
+        if target_path.exists():
+            if target_path.is_dir():
+                shutil.rmtree(target_path)
+            else:
+                target_path.unlink()
+        # Rename the directory
+        src_path.rename(target_path)
+        logger.info(f"Renamed {src_path} to {target_path}")
+
+    def _extract_dir(self, path: Path) -> None:
+        """Extracts the given path to the parent file and deletes the original directory."""
+        if path.exists() and path.is_dir():
             # Copy all contents from the selected scaffold to the module directory
-            for item in selected_scaffold_path.iterdir():
-                target_path = module_path / item.name
+            for item in path.iterdir():
+                target_path = path.parent / item.name
                 logger.debug(f"Moving {item} to {target_path}")
                 if item.is_dir():
                     if target_path.exists():
@@ -95,10 +133,8 @@ class ScaffoldCleaner:
                     shutil.copy2(item, target_path)
 
             # Remove the scaffold directory after extraction
-            shutil.rmtree(selected_scaffold_path)
-            logger.info(
-                f"Extracted contents from _{scaffold} scaffold into {self.module_name} directory"
-            )
+            shutil.rmtree(path)
+            logger.info(f"Extracted contents from _{path} scaffold into {target_path} directory")
 
     def _create_blank_module(self) -> None:
         """Remove everything except __init__.py so result is an empty package."""

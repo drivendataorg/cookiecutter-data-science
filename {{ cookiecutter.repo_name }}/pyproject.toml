@@ -33,9 +33,18 @@ dependencies = [
     "python-dotenv>=1.0.0"   # Load .env into environment vars
 ]
 
-# FOR CLI APPS
-# [project.scripts]
-# cookiecutter.module_name = "{{ cookiecutter.module_name|tojson }}.cli.main:app"
+
+# {# FOR CLI APPS #}
+# {% if cookiecutter.include_code_scaffold != "No" %}
+[project.scripts]
+{{ cookiecutter.module_name }} = "{{ cookiecutter.module_name|tojson }}.cli.main:app"
+# {% if cookiecutter.include_code_scaffold in ("ml", "data") %}
+data = "{{ cookiecutter.module_name|tojson }}.dataset:app"
+feat = "{{ cookiecutter.module_name|tojson }}.features:app"
+plot = "{{ cookiecutter.module_name|tojson }}.dataset:app"
+# {% endif %}
+
+# {% endif %}
 
 [dependency-groups]
 ai-apps = [  # AI application development packages

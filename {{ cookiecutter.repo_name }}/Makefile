@@ -1,4 +1,3 @@
-{# Usage included for devs not familiar with Makefiles #}
 # Basic Usage:
 #   make <rule>             : Run a specific rule (e.g., make test)
 #   make VAR=value <rule>   : Run rule with environment variable (e.g., make DOCS_PORT=8080 docs-serve)
@@ -18,7 +17,7 @@ DOCS_PORT ?= 8000
 
 # Write your custom rules here
 
-{%- if cookiecutter.include_code_scaffold != 'No' %}
+{% if cookiecutter.include_code_scaffold in ("data", "ml") %}
 .PHONY: data
 data: requirements ## Make Dataset
 	$(PYTHON_INTERPRETER) $(MODULE_NAME)/dataset.py
