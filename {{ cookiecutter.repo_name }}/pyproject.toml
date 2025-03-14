@@ -1,18 +1,40 @@
+# Documentation References:
+# - TOML syntax:  https://toml.io/en/v1.0.0
+# - Build system: https://peps.python.org/pep-0621/
+# - Ruff:         https://docs.astral.sh/ruff/settings/
+# - Pytest:       https://docs.pytest.org/en/stable/reference/reference.html#configuration-options
+# - Pyright:      https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+# {%- if cookiecutter.environment_manager == 'uv' %}
+# - UV:           https://docs.astral.sh/uv/configuration/files/
+# {% endif %}
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━ Build System ━━━━━━━━━━━━━━━━━━━━━━━━━━ #
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Project ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
 
 [project]
 name = {{ cookiecutter.module_name|tojson }}
 version = "0.0.1"
 description = {{ cookiecutter.description|tojson }}
 authors = [
-  { name = {{ cookiecutter.author_name|tojson }} },
+    {
+        name = {{ cookiecutter.author_name|tojson }},
+        email = {{ cookiecutter._author_email|tojson }},
+    },
 ]
 # {% if cookiecutter.open_source_license != 'No license file' %}
 license = { file = "LICENSE" }
 # {% endif %}
-readme = {file = "README.md", content-type = "text/markdown"}
+
+readme = {
+    file = "README.md",
+    content-type = "text/markdown",
+}
+
 classifiers = [
     "Private :: Do Not Upload",
     "Programming Language :: Python :: 3",
@@ -22,6 +44,32 @@ classifiers = [
     "License :: OSI Approved :: BSD License"
     # {% endif %}
 ]
+
+# PyPI project links
+urls = {
+    # {% if cookiecutter._github_username and "github" in cookiecutter.version_control %}
+    Repository = "https://github.com/{{ cookiecutter._github_username }}/{{ cookiecutter.repo_name }}",
+    # {% if cookiecutter.docs == "mkdocs" %}
+    Homepage = "https://{{ cookiecutter._github_username }}.github.io/{{ cookiecutter.repo_name }}/",
+    Documentation = "https://{{ cookiecutter._github_username }}.github.io/{{ cookiecutter.repo_name }}/",
+    # {% endif %}
+    # {% endif %}
+}
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Scripts ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
+
+# {% if cookiecutter.include_code_scaffold != "No" %}
+scripts = {
+    "{{ cookiecutter.module_name }}" = "{{ cookiecutter.module_name|tojson }}.cli.main:app"
+    # {% if cookiecutter.include_code_scaffold in ("ml", "data") %}
+    data = "{{ cookiecutter.module_name }}.dataset:app",
+    feat = "{{ cookiecutter.module_name }}.features:app",
+    plot = "{{ cookiecutter.module_name }}.dataset:app"
+    # {% endif %}
+}
+# {% endif %}
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━ Dependencies ━━━━━━━━━━━━━━━━━━━━━━━━━━ #
 requires-python = "~={{ cookiecutter.python_version_number }}"
 
 dependencies = [
@@ -33,29 +81,17 @@ dependencies = [
     "python-dotenv>=1.0.0"   # Load .env into environment vars
 ]
 
-
-# {# FOR CLI APPS #}
-# {% if cookiecutter.include_code_scaffold != "No" %}
-[project.scripts]
-{{ cookiecutter.module_name }} = "{{ cookiecutter.module_name|tojson }}.cli.main:app"
-# {% if cookiecutter.include_code_scaffold in ("ml", "data") %}
-data = "{{ cookiecutter.module_name|tojson }}.dataset:app"
-feat = "{{ cookiecutter.module_name|tojson }}.features:app"
-plot = "{{ cookiecutter.module_name|tojson }}.dataset:app"
-# {% endif %}
-
-# {% endif %}
-
 [dependency-groups]
 ai-apps = [  # AI application development packages
     "ell-ai>=0.0.15",        # AI toolkit
     "langchain>=0.3.12",     # LLM application framework
-    # "megaparse>=0.0.45",     # Advanced text parsing (TODO: Requires Python 3.10+)
+    # "megaparse>=0.0.45",   # Advanced text parsing (TODO: Requires Python 3.10+)
 ]
 ai-train = [  # Machine learning and model training packages
     "datasets>=3.1.0",         # Dataset handling
     "einops>=0.8.0",           # Tensor operations
     "jaxtyping>=0.2.36",       # Type hints for JAX
+    "nnsight>=0.3.7",          # ML Interp and Manipulation
     "onnx>=1.17.0",            # ML model interoperability
     "pytorch-lightning>=2.4.0", # PyTorch training framework
     "ray[tune]>=2.40.0",       # Distributed computing
@@ -66,7 +102,6 @@ ai-train = [  # Machine learning and model training packages
     "transformers>=4.47.0",    # Transformer models
     "umap-learn>=0.5.7",       # Dimensionality reduction
     "wandb>=0.19.1",           # Experiment tracking
-    "nnsight>=0.3.7",          # ML Interp and Manipulation
 ]
 async = [  # Asynchronous programming
     "uvloop>=0.21.0",          # Fast event loop implementation
@@ -75,7 +110,7 @@ cli = [  # Command-line interface tools
     "typer>=0.15.1",           # CLI builder
 ]
 cloud = [  # Cloud infrastructure tools
-    # "ansible>=11.1.0",       # Infrastructure automation (# TODO: Doesn't work for Python 3.10)
+    # "ansible>=11.1.0",       # Infrastructure automation (TODO: Doesn't work for Python 3.10)
     "boto3>=1.35.81",          # AWS SDK
 ]
 config = [  # Configuration management
@@ -86,12 +121,12 @@ config = [  # Configuration management
 data = [  # Data processing and storage
     "dagster>=1.9.5",          # Data orchestration
     "duckdb>=1.1.3",           # Embedded analytics database
-    # "lancedb>=0.17.0",         # Vector database (TODO: Figure out install error)
+    # "lancedb>=0.17.0",       # Vector database (TODO: Figure out install error)
     "networkx>=3.4.2",         # Graph operations
     "orjson>=3.10.12",         # Fast JSON parsing
+    "pandera>=0.22.1",         # Typing dataframes
     "pillow>=10.4.0",          # Image processing
     "polars>=1.17.0",          # Fast dataframes
-    "pandera>=0.22.1",         # Typing dataframs
     # "pygwalker>=0.4.9.13",   # Data visualization (TODO: Figure out install error)
     "sqlmodel>=0.0.22",        # SQL ORM
     "tomli>=2.0.1",            # TOML parsing
@@ -103,11 +138,12 @@ dev = [  # Development tools
     "faker>=33.1.0",           # Fake data generation
     "hypothesis>=6.122.3",     # Property-based testing
     "pip>=24.3.1",             # Package installer
-    "pre-commit>=4.1.0",       # Git pre-commit hooks
     "polyfactory>=2.18.1",     # Test data factory
+    "pre-commit>=4.1.0",       # Git pre-commit hooks
     "pyinstrument>=5.0.0",     # Profiler
     # "pyprojectsort>=0.3.0",  # pyproject.toml sorter (TODO: Find replacement)
     "pyright>=1.1.390",        # Static type checker
+    "pytest>=8.3.4",           # Testing framework
     "pytest-cases>=3.8.6",     # Parametrized testing
     "pytest-cov>=6.0.0",       # Coverage reporting
     "pytest-icdiff>=0.9",      # Improved diffs
@@ -119,18 +155,15 @@ dev = [  # Development tools
     "pytest-split>=0.10.0",    # Parallel testing
     "pytest-sugar>=1.0.0",     # Test progress visualization
     "pytest-timeout>=2.3.1",   # Test timeouts
-    "pytest>=8.3.4",           # Testing framework
     "ruff>=0.8.3",             # Fast Python linter
-    # "taplo>=0.9.3",            # TOML toolkit (Requires Rust's Cargo)
+    # "taplo>=0.9.3",          # TOML toolkit (Requires Rust's Cargo)
     "tox>=4.23.2",             # Test automation
     "uv>=0.5.7",               # Fast pip replacement
-    "pre-commit>=4.1.0",       # Git pre-commit hooks
-    "commitizen>=4.1.1",       # Standardized commit messages
 ]
 dev-doc = [  # Documentation tools
     "mdformat>=0.7.19",        # Markdown formatter
-    "mkdocs-material>=9.5.48", # Documentation theme
     "mkdocs>=1.6.1",           # Documentation generator
+    "mkdocs-material>=9.5.48", # Documentation theme
 ]
 dev-nb = [  # Notebook development tools
     "jupyter-book>=1.0.3",     # Notebook publishing
@@ -160,89 +193,123 @@ web = [  # Web development and scraping
     "requests>=2.32.3",        # HTTP client
     "scrapy>=2.12.0",          # Web scraping
     "uvicorn>=0.33.0",         # ASGI server
-    # "zrok>=0.4.42",          # Tunnel service (# TODO: Requires 3.10+)
+    # "zrok>=0.4.42",          # Tunnel service (TODO: Requires 3.10+)
 ]
-# ai, web, gui
+
 [tool.uv]
 default-groups = [
-    # "dev", "dev-doc", "nb", # Typical
-    # {% if cookiecutter.include_code_scaffold == "data" %}
-    ## Data Engineering
+    # "dev", "dev-doc", "nb",
+
+    # {%- if cookiecutter.include_code_scaffold == "data" %}
     # "data", "dev-nb", "cli",
     # {% endif %}
-    # {% if cookiecutter.include_code_scaffold == "paper" %}
-    ## Paper Writing
+
+    # {%- if cookiecutter.include_code_scaffold == "paper" %}
     # "data", "dev-nb",
     # {% endif %}
-    # {% if cookiecutter.include_code_scaffold == "app" %}
-    ## App Development
+
+    # {%- if cookiecutter.include_code_scaffold == "app" %}
     # "dev-nb", "web",
     # {% endif %}
-    # {% if cookiecutter.include_code_scaffold == "ml" %}
-    ## Machine Learning
+
+    # {%- if cookiecutter.include_code_scaffold == "ml" %}
     # "data", "dev-nb", "cli", "ai-train",
     # {% endif %}
-    # {% if cookiecutter.include_code_scaffold == "lib" %}
-    ## Library Development
+
+    # {%- if cookiecutter.include_code_scaffold == "lib" %}
     # "dev-nb",
     # {% endif %}
-    # {% if cookiecutter.include_code_scaffold == "course" %}
-    ## University Coursework
-    # "dev-nb",  # Course Tools
+
+    # {%- if cookiecutter.include_code_scaffold == "course" %}
+    # "dev-nb",
     # {% endif %}
 ]
 
-
-# [project.urls]
-# Homepage = "https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/"
-# Repository = "https://github.com/{{cookiecutter.author_github_handle}}/{{cookiecutter.project_name}}"
-# Documentation = "https://{{cookiecutter.author_github_handle}}.github.io/{{cookiecutter.project_name}}/"
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Ruff ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
 
 [tool.ruff]
 cache-dir = ".cache/ruff"
 line-length = 100
 
 [tool.ruff.lint]
-# TODO: Different groups of linting styles depending on code use.
 select = ["ALL"]
-ignore = [] # Add ignores as needed
+ignore = [
+    "S101",  # Allow assert
+    "E731",  # Allow lambdas
+    "EM101", # Allow strings in exceptions
+    "T201",  # Allow print
+    "D103",  # Allow public functions w/o docstrings
+    "D105",  # Allow undocumented magic methods
+    "D107",  # Same as above
+    "D205",  # Allow multi-line summary
+    "D415",  # Less strict docstrings
+    "TD002", # Allow user-less TODOs
+    "TD003", # Allow issue-less TODOs
+    "UP007", # Allow non-use of pipe for types
+    "UP035", # Same as above
+]
 
-
-[tool.ruff.lint.isort]
-known-first-party = ["{{ cookiecutter.module_name }}"]
-force-sort-within-sections = true
+mccabe.max-complexity = 10
+pycodestyle.max-doc-length = 99
+pydocstyle.convention = "google"
+isort = {
+    known-first-party = ["{{ cookiecutter.module_name }}"],
+    force-sort-within-sections = true,
+}
+format = {
+    quote-style = "double",
+    indent-style = "space",
+}
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401"] # Allow unused imports in __init__.py
+"**/__init__.py" = [
+    "F401",  # Allow unused imports in __init__.py
+]
 
-[tool.ruff.lint.mccabe]
-max-complexity = 10
+"**/*.ipynb" = [
+    "S101",  # Allow assert
+    "E731",  # Allow lambdas
+    "EM101", # Allow strings in exceptions
+    "T201",  # Allow print
+    "D103",  # Allow public functions w/o docstrings
+    "D105",  # Allow undocumented magic methods
+    "D107",  # Same as above
+    "D205",  # Allow multi-line summary
+    "D415",  # Less strict docstrings
+    "TD002", # Allow user-less TODOs
+    "TD003", # Allow issue-less TODOs
+    "UP007", # Allow non-use of pipe for types
+    "UP035", # Same as above
+]
 
-[tool.ruff.lint.pycodestyle]
-max-doc-length = 99
+"tests/**/*.py" = [
+    "S101",   # Allow assert
+    "ARG001", # Allow unused function args for fixtures
+    "FBT001", # Allow booleans as function params
+    "PLR2004", # Allow magic values in comparisons
+    "S311",   # Allow pseudo-random generators
+    "ANN001", # Allow for non-typed functions
+    "ANN201", # Allow for non-typed functions
+    "RET503", # Allow for implicit ignores
+]
 
-[tool.ruff.lint.pydocstyle]
-convention = "google"
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Pytest ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
 
 [tool.pytest.ini_options]
+testpaths = ["tests"]
+log_file = "./logs/pytest.log"
 addopts = """
 --tb=long
 --code-highlight=yes
 """
 
-testpaths = ["tests"]
-log_file = "./logs/pytest.log"
-
-
-[tool.pydoclint]
-style = "google"
-arg-type-hints-in-docstring = false
-check-return-types = true
-exclude = '\.venv'
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Pyright ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
 
 [tool.pyright]
-include = ["."]
+include = [ "{{ cookiecutter.module_name }}" ]
+exclude = [
+    "**/__pycache__",
+    # {%- if cookiecutter.environment_manager == 'uv' %}
+    ".venv",
+    # {% endif %}
+]

@@ -31,6 +31,7 @@
 		"git (github private)",
 		"git (github public)"
 	],
+	"_author_email": "GatlenCulp@gmail.com",
 	"_github_username": "GatlenCulp",
 	"_use_conventional_commits": "y",
 	"_generate_personal_ssh_keys": "n",
