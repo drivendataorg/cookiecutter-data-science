@@ -162,6 +162,7 @@ class ScaffoldCleaner:
         """Removes experimental files and features."""
         self._remove_file(self.root / "Taskfile.yml")
         self._remove_nix()
+        self._remove_file(self.root / "install.sh")
 
     def _remove_file(self, path: Path) -> None:
         """Remove file at specified path."""
