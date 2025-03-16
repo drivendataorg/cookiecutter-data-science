@@ -33,6 +33,7 @@
 	],
 	"_author_email": "GatlenCulp@gmail.com",
 	"_github_username": "GatlenCulp",
+	"_custom_domain": "gatlen.me",
 	"_use_conventional_commits": "y",
 	"_generate_personal_ssh_keys": "n",
 	"_generate_and_upload_gh_deploy_keys": "n",
