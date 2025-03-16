@@ -165,6 +165,7 @@ class ScaffoldCleaner:
         self._remove_file(self.root / "install.sh")
         self._remove_dir(self.root / "homebrew")
         self._remove_file(self.root / "CNAME")
+        self._remove_file(self.root / ".direnv")
 
     def _remove_file(self, path: Path) -> None:
         """Remove file at specified path."""

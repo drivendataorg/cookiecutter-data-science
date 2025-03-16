@@ -5,7 +5,10 @@ import typer
 
 app = typer.Typer()
 
-
+# {#
+# TODO: Update to have a simple version command that gnabs the version
+# from the pyproject.toml file.
+#}
 @app.command()
 def hello(name: str = "World") -> None:
     """Say hello to someone.
