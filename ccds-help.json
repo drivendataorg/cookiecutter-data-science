@@ -53,7 +53,7 @@
                 "help": {
                     "description": "No cloud storage configured; Makefile commands to sync data removed.",
                     "more_information": ""
-                }
+                } 
             },
             {
                 "choice": "azure",
@@ -66,10 +66,10 @@
                         "field": "container",
                         "help": {
                             "description": "Name of the container on blob storage.",
-                            "more_information": "[Docs](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-containers-portal)"
+                            "more_information": "[Docs](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-containers-portal)" 
                         }
                     }
-                ]
+                ] 
             },
             {
                 "choice": "s3",
@@ -82,7 +82,7 @@
                         "field": "bucket",
                         "help": {
                             "description": "The name of the bucket to store data in; can also be a longer S3 path.",
-                            "more_information": "[Docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html#BasicsBucket)"
+                            "more_information": "[Docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html#BasicsBucket)" 
                         }
                     },
                     {
@@ -92,7 +92,7 @@
                             "more_information": "[Docs](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)"
                         }
                     }
-                ]
+                ] 
             },
             {
                 "choice": "gcs",
@@ -108,7 +108,7 @@
                             "more_information": "[Docs](https://cloud.google.com/storage/docs/buckets)"
                         }
                     }
-                ]
+                ] 
             }
         ]
     },
@@ -124,35 +124,35 @@
                 "help": {
                     "description": "Simple wrapper on venv with more features.",
                     "more_information": "[Docs](https://virtualenv.pypa.io/en/latest/)"
-                }
+                } 
             },
             {
                 "choice": "conda",
                 "help": {
                     "description": "Data science environments supporting non-Python dependencies as well.",
                     "more_information": "[Docs](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)"
-                }
+                } 
             },
             {
                 "choice": "pipenv",
                 "help": {
                     "description": "Manages dependencies and virual environments.",
                     "more_information": "[Docs](https://pipenv.pypa.io/en/latest/)"
-                }
+                } 
             },
             {
                 "choice": "uv",
                 "help": {
                     "description": "An extremely fast Python package and project manager, written in Rust.",
                     "more_information": "[Docs](https://docs.astral.sh/uv/)"
-                }
+                } 
             },
             {
                 "choice": "none",
                 "help": {
                     "description": "Do not add `create_environment` commands; env management left to the user.",
                     "more_information": ""
-                }
+                } 
             }
         ]
     },
@@ -182,14 +182,14 @@
                 "help": {
                     "description": "Format used by `conda`.",
                     "more_information": "[Docs](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#sharing-an-environment)"
-                }
+                } 
             },
             {
                 "choice": "Pipfile",
                 "help": {
                     "description": "Format used by Pipenv",
                     "more_information": "[Docs](https://pipenv.pypa.io/en/latest/pipfile.html)"
-                }
+                } 
             }
         ]
     },
@@ -205,14 +205,14 @@
                 "help": {
                     "description": "No extra packages.",
                     "more_information": ""
-                }
+                } 
             },
             {
                 "choice": "basic",
                 "help": {
                     "description": "Basic common data science packages.",
                     "more_information": ""
-                }
+                } 
             }
         ]
     },
@@ -228,14 +228,14 @@
                 "help": {
                     "description": "Use ruff for linting and formatting.",
                     "more_information": ""
-                }
+                } 
             },
             {
                 "choice": "flake8+black+isort",
                 "help": {
                     "description": "Use flake8 for linting and black+isort for formatting.",
                     "more_information": ""
-                }
+                } 
             }
         ]
     },
@@ -251,21 +251,21 @@
                 "help": {
                     "description": "No license file will be included.",
                     "more_information": ""
-                }
+                } 
             },
             {
                 "choice": "MIT",
                 "help": {
                     "description": "MIT License",
                     "more_information": "[License](https://opensource.org/license/mit)"
-                }
+                } 
             },
             {
                 "choice": "BSD-3-Clause",
                 "help": {
                     "description": "3-Clause BSD License",
                     "more_information": "[License](https://opensource.org/license/bsd-3-clause)"
-                }
+                } 
             }
         ]
     },
@@ -281,14 +281,14 @@
                 "help": {
                     "description": "No `docs` folder.",
                     "more_information": ""
-                }
+                } 
             },
             {
                 "choice": "mkdocs",
                 "help": {
                     "description": "Include `docs` folder and `mkdocs` tools.",
                     "more_information": "[Docs](https://www.mkdocs.org/)"
-                }
+                } 
             }
         ]
     },
@@ -304,14 +304,14 @@
                 "help": {
                     "description": "Includes common data submodules.",
                     "more_information": ""
-                }
+                } 
             },
             {
                 "choice": "No",
                 "help": {
                     "description": "Empty Python module to start with.",
                     "more_information": ""
-                }
+                } 
             }
         ]
     }
