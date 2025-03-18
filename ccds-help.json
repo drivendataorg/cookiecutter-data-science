@@ -166,9 +166,16 @@
             {
                 "choice": "requirements.txt",
                 "help": {
-                    "description": "Most general, least feature-rich format for use with `pip`.",
-                    "more_information": "[pip docs](https://pip.pypa.io/en/stable/reference/requirements-file-format/)"
-                } 
+                    "description": "Classic format for a list of packages to be installed by `pip`.",
+                    "more_information": "[Docs](https://pip.pypa.io/en/stable/reference/requirements-file-format/)"
+                }
+            },
+            {
+                "choice": "pyproject.toml",
+                "help": {
+                    "description": "Modern configuration file for Python projects.",
+                    "more_information": "[Docs](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)"
+                }
             },
             {
                 "choice": "environment.yml",

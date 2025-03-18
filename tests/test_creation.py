@@ -146,7 +146,7 @@ def verify_files(root, config):
 
     existing_files = [f.relative_to(root) for f in root.glob("**/*") if f.is_file()]
 
-    assert sorted(existing_files) == sorted(expected_files)
+    assert sorted(existing_files) == sorted(set(expected_files))
 
     for f in existing_files:
         assert no_curlies(root / f)
