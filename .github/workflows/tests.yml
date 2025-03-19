@@ -4,12 +4,12 @@ name: tests
 on:
   push:
     branches: [master]
-    paths-ignore: 
+    paths-ignore:
       - "docs/**"
       - "README.md"
   pull_request:
     branches: [master]
-    paths-ignore: 
+    paths-ignore:
       - "docs/**"
       - "README.md"
   schedule:
@@ -24,19 +24,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.11"
-          cache: "pip"
-          cache-dependency-path: |
+          python-version: "3.13"
+          enable-cache: true
+          cache-dependency-glob: |
             pyproject.toml
             dev-requirements.txt
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          make requirements
+          uv pip install -r dev-requirements.txt
 
       - name: Lint
         run: |
@@ -57,17 +55,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v5
         with:
-          python-version: ${{ matrix.python-version }}
-          allow-prereleases: true
-          cache: "pip"
-          cache-dependency-path: |
+          python-version: "3.13"
+          enable-cache: true
+          cache-dependency-glob: |
             pyproject.toml
             dev-requirements.txt
 
-      - name: Set up Miniconda  
+      - name: Make Python ${{ matrix.python-version }} available
+        run:
+          uv python install ${{ matrix.python-version }}
+
+      - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
           auto-activate-base: true
@@ -96,8 +96,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          make requirements
+          uv pip install -r dev-requirements.txt
 
       - name: Check dependencies
         run: |
@@ -113,6 +112,8 @@ jobs:
           conda --version
           which pipenv
           pipenv --version
+          which uv
+          uv --version
           which virtualenv
           virtualenv --version
 
