@@ -178,6 +178,9 @@ def verify_makefile_commands(root, config):
             f"Environment manager '{config['environment_manager']}' not found in test harnesses."
         )
 
+    env = os.environ.copy()
+    env["EXPECTED_PYTHON_VERSION"] = config["python_version_number"]
+
     result = run(
         [
             BASH_EXECUTABLE,
@@ -187,6 +190,7 @@ def verify_makefile_commands(root, config):
         ],
         stderr=PIPE,
         stdout=PIPE,
+        env=env,
     )
 
     stdout_output, stderr_output = _decode_print_stdout_stderr(result)
