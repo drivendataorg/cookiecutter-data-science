@@ -12,6 +12,7 @@ from ccds.hook_utils.dependencies import (
     ruff,
     scaffold,
     write_dependencies,
+    write_python_version
 )
 
 #
@@ -71,6 +72,8 @@ write_dependencies(
     module_name="{{ cookiecutter.module_name }}",
     python_version="{{ cookiecutter.python_version_number }}",
 )
+
+write_python_version("{{ cookiecutter.python_version_number }}")
 
 write_custom_config("{{ cookiecutter.custom_config }}")
 
