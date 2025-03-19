@@ -31,7 +31,7 @@ def config_generator(fast=False):
     test_target_python_version = os.environ.get("TEST_TARGET_PYTHON_VERSION", "3.13")
 
     configs = product(
-        [test_target_python_version],
+        [("python_version_number", test_target_python_version)],
         [
             ("environment_manager", opt)
             for opt in cookiecutter_json["environment_manager"]
