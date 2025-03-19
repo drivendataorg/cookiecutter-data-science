@@ -1,7 +1,6 @@
 import json
 import os
 import shutil
-import sys
 import tempfile
 from contextlib import contextmanager
 from itertools import cycle, product
