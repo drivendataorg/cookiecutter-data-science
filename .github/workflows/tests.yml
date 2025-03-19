@@ -51,21 +51,23 @@ jobs:
     defaults:
       run:
         shell: bash
+    env:
+      TEST_TARGET_PYTHON_VERSION: 3.13
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.13"
+          python-version: ${{ matrix.python-version }})
           enable-cache: true
           cache-dependency-glob: |
             pyproject.toml
             dev-requirements.txt
 
-      - name: Make Python ${{ matrix.python-version }} available
+      - name: Make Python ${{ env.TEST_TARGET_PYTHON_VERSION }} available
         run:
-          uv python install ${{ matrix.python-version }}
+          uv python install $TEST_TARGET_PYTHON_VERSION
 
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v3
@@ -108,6 +110,8 @@ jobs:
           fi
           which make
           make --version
+          which python
+          python --version
           which conda
           conda --version
           which pipenv

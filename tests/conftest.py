@@ -1,4 +1,5 @@
 import json
+import os
 import shutil
 import sys
 import tempfile
@@ -25,13 +26,13 @@ default_args = {
 def config_generator(fast=False):
     cookiecutter_json = json.load((CCDS_ROOT / "ccds.json").open("r"))
 
-    # python versions for the created environment; match the root
-    # python version since Pipenv needs to be able to find an executable
-    running_py_version = f"{sys.version_info.major}.{sys.version_info.minor}"
-    py_version = [("python_version_number", v) for v in [running_py_version]]
+    # python version for the environment of the created project
+    # we fix this to specific version, and the test matrix ensures things work
+    # whether or not it matches the current python version running ccds
+    test_target_python_version = os.environ.get("TEST_TARGET_PYTHON_VERSION", "3.13")
 
     configs = product(
-        py_version,
+        [test_target_python_version],
         [
             ("environment_manager", opt)
             for opt in cookiecutter_json["environment_manager"]
