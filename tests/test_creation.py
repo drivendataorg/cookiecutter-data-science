@@ -180,6 +180,7 @@ def verify_makefile_commands(root, config):
 
     env = os.environ.copy()
     env["EXPECTED_PYTHON_VERSION"] = config["python_version_number"]
+    env["PIPENV_IGNORE_VIRTUALENVS"] = "1"  # pipenv should create its own virtualenv
 
     result = run(
         [
