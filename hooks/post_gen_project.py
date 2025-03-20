@@ -12,7 +12,7 @@ from ccds.hook_utils.dependencies import (
     ruff,
     scaffold,
     write_dependencies,
-    write_python_version
+    write_python_version,
 )
 
 #
