@@ -217,6 +217,36 @@
         ]
     },
     {
+        "field": "testing_framework",
+        "help": {
+            "description": "Framework used for testing your code.",
+            "more_information": ""
+        },
+        "choices": [
+            {
+                "choice": "none",
+                "help": {
+                    "description": "No testing framework.",
+                    "more_information": ""
+                }
+            },
+            {
+                "choice": "pytest",
+                "help": {
+                    "description": "Use the pytest framework for testing.",
+                    "more_information": "[Docs](https://docs.pytest.org/en/latest/)"
+                }
+            },
+            {
+                "choice": "unittest",
+                "help": {
+                    "description": "Use Python's built-in testing framework.",
+                    "more_information": "[Docs](https://docs.python.org/3/library/unittest.html)"
+                }
+            }
+        ]
+    },
+    {
         "field": "linting_and_formatting",
         "help": {
             "description": "How to handle linting and formatting on your code.",
