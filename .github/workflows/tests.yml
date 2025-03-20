@@ -67,7 +67,8 @@ jobs:
 
       - name: Make Python ${{ env.TEST_TARGET_PYTHON_VERSION }} available
         run:
-          uv python install $TEST_TARGET_PYTHON_VERSION
+          # --preview flag adds installed Python into PATH
+          uv python install $TEST_TARGET_PYTHON_VERSION --preview
 
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v3
@@ -102,6 +103,7 @@ jobs:
 
       - name: Check dependencies
         run: |
+          echo $PATH
           if [[ -z "${BASH_EXECUTABLE}" ]]; then
             bash --version
           else
