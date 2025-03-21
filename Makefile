@@ -54,7 +54,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -f .coverage
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
-	
+
 dist: clean ## builds source and wheel package
 	python -m build
 	ls -l dist
@@ -71,7 +71,7 @@ docs-serve:
 ###     TESTS
 
 test: _prep
-	pytest -vvv --durations=0
+	pytest -vvv --durations=0 tests
 
 test-fastest: _prep
 	pytest -vvv -FFF

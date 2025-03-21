@@ -44,6 +44,27 @@ pip_only_packages = [
     "python-dotenv",
 ]
 
+# Select testing framework
+tests_path = Path("tests")
+
+# {% if cookiecutter.testing_framework == "pytest" %}
+packages_to_install += ["pytest"]
+# {% endif %}
+
+# {% if cookiecutter.testing_framework == "none" %}
+shutil.rmtree(tests_path)
+
+# {% else %}
+tests_subpath = tests_path / "{{ cookiecutter.testing_framework }}"
+for obj in tests_subpath.iterdir():
+    shutil.move(str(obj), str(tests_path))
+
+# Remove all remaining tests templates
+for tests_template in tests_path.iterdir():
+    if tests_template.is_dir() and not tests_template.name == "tests":
+        shutil.rmtree(tests_template)
+# {% endif %}
+
 # Use the selected documentation package specified in the config,
 # or none if none selected
 docs_path = Path("docs")

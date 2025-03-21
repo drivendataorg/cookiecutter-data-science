@@ -31,7 +31,7 @@ requirements:
 	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
 	{% elif "Pipfile" == cookiecutter.dependency_file -%}
 	pipenv install
-	{% endif %}
+{% endif %}
 {% endif %}
 
 
@@ -67,6 +67,17 @@ format:
 	isort {{ cookiecutter.module_name }}
 	black {{ cookiecutter.module_name }}
 {% endif %}
+
+{% if cookiecutter.testing_framework != 'none' %}
+## Run tests
+.PHONY: test
+test:
+{%- if cookiecutter.testing_framework == 'unittest' %}
+	python -m unittest discover -s tests
+{%- elif cookiecutter.testing_framework == 'pytest' %}
+	python -m pytest tests
+{%- endif -%}
+{%- endif -%}
 
 {% if not cookiecutter.dataset_storage.none %}
 ## Download Data from storage system
@@ -118,7 +129,7 @@ create_environment:
 	@echo ">>> New uv virtual environment created. Activate with:"
 	@echo ">>> Windows: .\\\\.venv\\\\Scripts\\\\activate"
 	@echo ">>> Unix/macOS: source ./.venv/bin/activate"
-	{% endif %}
+{% endif %}
 {% endif %}
 
 
