@@ -9,6 +9,15 @@ function run_tests () {
         exit 99
     fi
 
+    # test Python version in created venv should be match configured version
+    CREATED_PYTHON_VERSION=$(python -c "import platform; print(platform.python_version())")
+    if [[ $(vspect parse $CREATED_PYTHON_VERSION "{major_minor_version}") == $EXPECTED_PYTHON_VERSION ]]; then
+        echo "Python version $CREATED_PYTHON_VERSION matches expected $EXPECTED_PYTHON_VERSION"
+    else
+        echo "Python version $CREATED_PYTHON_VERSION does not match $EXPECTED_PYTHON_VERSION"
+        exit 99
+    fi
+
     # test importable
     python -c "import $2"
 
