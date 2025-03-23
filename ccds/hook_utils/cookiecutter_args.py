@@ -75,7 +75,7 @@ class GCSStorage(BaseModel):
 
 
 # Main cookiecutter arguments model
-class CookiecutterArgs(BaseModel):
+class GotemArgs(BaseModel):
     """Pydantic model representing all cookiecutter arguments."""
 
     # Basic project information
@@ -165,21 +165,76 @@ class CookiecutterArgs(BaseModel):
     qa_level: str = Field(default="basic")
     
     # README options
-    readme_modern_header: Literal["y", "n"] = Field(default="y")
-    readme_include_logo: Literal["y", "n"] = Field(default="y")
-    readme_include_screenshots: Literal["y", "n"] = Field(default="y")
-    readme_use_github_discussions: Literal["y", "n"] = Field(default="n")
-    readme_include_badges: Literal["y", "n"] = Field(default="y")
-    readme_include_toc: Literal["y", "n"] = Field(default="n")
-    readme_include_project_assistance: Literal["y", "n"] = Field(default="y")
-    readme_include_authors: Literal["y", "n"] = Field(default="y")
-    readme_include_security: Literal["y", "n"] = Field(default="y")
-    readme_include_acknowledgements: Literal["y", "n"] = Field(default="y")
-    readme_table_in_about: Literal["y", "n"] = Field(default="y")
+    readme_modern_header: Literal["y", "n"] = Field(
+        default="y",
+        description="Whether to include a license file and which one to use.",
+        json_schema_extra={"alias": "_readme_modern_header"},
+        serialization_alias="_readme_modern_header"
+    )
+    readme_include_logo: Literal["y", "n"] = Field(
+        default="y",
+        description="Whether to include a logo in the README.",
+        json_schema_extra={"alias": "_readme_include_logo"},
+        serialization_alias="_readme_include_logo"
+    )
+    readme_include_screenshots: Literal["y", "n"] = Field(
+        default="y",
+        description="Whether to include screenshots in the README.",
+        json_schema_extra={"alias": "_readme_include_screenshots"},
+        serialization_alias="_readme_include_screenshots"
+    )
+    readme_use_github_discussions: Literal["y", "n"] = Field(
+        default="n",
+        description="Whether to use GitHub Discussions for the project.",
+        json_schema_extra={"alias": "_readme_use_github_discussions"},
+        serialization_alias="_readme_use_github_discussions"
+    )
+    readme_include_badges: Literal["y", "n"] = Field(
+        default="y",
+        description="Whether to include badges in the README.",
+        json_schema_extra={"alias": "_readme_include_badges"},
+        serialization_alias="_readme_include_badges"
+    )
+    readme_include_toc: Literal["y", "n"] = Field(
+        default="n",
+        description="Whether to include a table of contents in the README.",
+        json_schema_extra={"alias": "_readme_include_toc"},
+        serialization_alias="_readme_include_toc"
+    )
+    readme_include_project_assistance: Literal["y", "n"] = Field(
+        default="y",
+        description="Whether to include project assistance information in the README.",
+        json_schema_extra={"alias": "_readme_include_project_assistance"},
+        serialization_alias="_readme_include_project_assistance"
+    )
+    readme_include_authors: Literal["y", "n"] = Field(
+        default="y",
+        description="Whether to include author information in the README.",
+        json_schema_extra={"alias": "_readme_include_authors"},
+        serialization_alias="_readme_include_authors"
+    )
+    readme_include_security: Literal["y", "n"] = Field(
+        default="y",
+        description="Whether to include security information in the README.",
+        json_schema_extra={"alias": "_readme_include_security"},
+        serialization_alias="_readme_include_security"
+    )
+    readme_include_acknowledgements: Literal["y", "n"] = Field(
+        default="y",
+        description="Whether to include acknowledgements in the README.",
+        json_schema_extra={"alias": "_readme_include_acknowledgements"},
+        serialization_alias="_readme_include_acknowledgements"
+    )
+    readme_table_in_about: Literal["y", "n"] = Field(
+        default="y",
+        description="Whether to include a table in the about section of the README.",
+        json_schema_extra={"alias": "_readme_table_in_about"},
+        serialization_alias="_readme_table_in_about"
+    )
     
     # Templating options
     copy_without_render: List[str] = Field(default_factory=list)
 
 if __name__ == "__main__":
-    cookiecutter_args = CookiecutterArgs()
+    cookiecutter_args = GotemArgs()
     logger.info(str(cookiecutter_args))

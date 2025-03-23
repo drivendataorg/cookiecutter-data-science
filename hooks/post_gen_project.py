@@ -1,5 +1,6 @@
 """File to be run after template initialization by cookiecutter."""  # noqa: INP001
 
+import json
 import os
 import shutil
 import subprocess
@@ -12,39 +13,43 @@ from loguru import logger
 #   our workaround is to include these utility functions in the CCDS package
 from ccds.hook_utils.configure_ssh import generate_personal_ssh_keys
 from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_repo
-from ccds.hook_utils.cookiecutter_args import CookiecutterArgs
+from ccds.hook_utils.cookiecutter_args import GotemArgs
 from ccds.hook_utils.custom_config import write_custom_config
 from ccds.hook_utils.dependencies import basic, packages, scaffold, write_dependencies
 from ccds.hook_utils.scaffold_cleaner import ScaffoldCleaner
 
-MODULE_NAME = "{{ cookiecutter.module_name }}"
-PROJECT_SHORT_DESCRIPTION = "{{ cookiecutter.project_short_description }}"
-CODE_SCAFFOLD = "{{ cookiecutter.include_code_scaffold }}"
+cookiecutter_json = """{{ cookiecutter | tojson }}"""
+
+gotem_args = GotemArgs.model_validate_json(cookiecutter_json)
+# Also create a dictionary version for easy access
+cookiecutter_dict = json.loads(gotem_args.model_dump_json(by_alias=True))
+logger.info(cookiecutter_dict)
+
+# Set up constants from cookiecutter args
+MODULE_NAME = gotem_args.module_name
+# For project description, try to get "project_short_description" from the JSON dict
+# since it may not be in our model but is needed by scaffold_cleaner
+PROJECT_SHORT_DESCRIPTION = cookiecutter_dict.get(
+    "project_short_description", gotem_args.description,
+)
+CODE_SCAFFOLD = gotem_args.include_code_scaffold
 
 PROJ_ROOT = Path.cwd().resolve()
 SECRETS_DIR = PROJ_ROOT / "secrets"
-
-cookiecutter_json = """{{ cookiecutter | tojson }}"""
-
-cookiecutter_args = CookiecutterArgs.model_validate_json(cookiecutter_json)
-logger.info(cookiecutter_args)
 
 # ---------------------------------------------------------------------------- #
 #                EMPLATIZED VARIABLES FILLED IN BY COOKIECUTTER                #
 # ---------------------------------------------------------------------------- #
 packages_to_install = copy(packages)
 
-# {% if cookiecutter.dataset_storage.s3 %}
-packages_to_install += ["awscli"]
-# {% endif %} #
+if "s3" in gotem_args.dataset_storage:
+    packages_to_install += ["awscli"]
 
-# {% if cookiecutter.include_code_scaffold != "No" %}
-packages_to_install += scaffold
-# {% endif %}
+if gotem_args.include_code_scaffold != "No":
+    packages_to_install += scaffold
 
-# {% if cookiecutter.pydata_packages == "basic" %}
-packages_to_install += basic
-# {% endif %}
+if gotem_args.pydata_packages == "basic":
+    packages_to_install += basic
 
 # track packages that are not available through conda
 pip_only_packages = [
@@ -55,13 +60,12 @@ pip_only_packages = [
 # Use the selected documentation package specified in the config,
 # or none if none selected
 docs_path = Path("docs")
-# {% if cookiecutter.docs != "none" %}
-packages_to_install += ["{{ cookiecutter.docs }}"]
-pip_only_packages += ["{{ cookiecutter.docs }}"]
-docs_subpath = docs_path / "{{ cookiecutter.docs }}"
-for obj in docs_subpath.iterdir():
-    shutil.move(str(obj), str(docs_path))
-# {% endif %}
+if gotem_args.docs != "none":
+    packages_to_install += [gotem_args.docs]
+    pip_only_packages += [gotem_args.docs]
+    docs_subpath = docs_path / gotem_args.docs
+    for obj in docs_subpath.iterdir():
+        shutil.move(str(obj), str(docs_path))
 
 # Remove all remaining docs templates
 for docs_template in docs_path.iterdir():
@@ -72,18 +76,18 @@ for docs_template in docs_path.iterdir():
 #                           POST-GENERATION FUNCTIONS                          #
 # ---------------------------------------------------------------------------- #
 write_dependencies(
-    "{{ cookiecutter.dependency_file }}",
+    gotem_args.dependency_file,
     packages_to_install,
     pip_only_packages,
-    repo_name="{{ cookiecutter.repo_name }}",
-    module_name="{{ cookiecutter.module_name }}",
-    python_version="{{ cookiecutter.python_version_number }}",
+    repo_name=gotem_args.repo_name,
+    module_name=MODULE_NAME,
+    python_version=gotem_args.python_version_number,
 )
 
-write_custom_config("{{ cookiecutter.custom_config }}")
+write_custom_config(cookiecutter_dict.get("custom_config", ""))
 
 # Remove LICENSE if "No license file"
-if "{{ cookiecutter.open_source_license }}" == "No license file":  # noqa: PLR0133
+if gotem_args.open_source_license == "No license file":
     Path("LICENSE").unlink()
 
 # Make single quotes prettier
@@ -104,42 +108,39 @@ else:
 # ---------------------------------------------------------------------------- #
 
 # Install the virtual environment (uv only for now)
-# {% if cookiecutter.environment_manager == "uv" %}
-os.chdir(Path.cwd())
-subprocess.run(["make", "create_environment"], check=False)  # noqa: S603, S607
-subprocess.run(["make", "requirements"], check=False)  # noqa: S603, S607
-# {% endif %}
+if gotem_args.environment_manager == "uv":
+    os.chdir(Path.cwd())
+    subprocess.run(["make", "create_environment"], check=False)  # noqa: S603, S607
+    subprocess.run(["make", "requirements"], check=False)  # noqa: S603, S607
 
 # ---------------------------------------------------------------------------- #
 #                                Version Control                               #
 # ---------------------------------------------------------------------------- #
 
-# {% if cookiecutter.version_control == "git (local)" %}
-init_local_git_repo(directory=Path.cwd())
-# {% elif cookiecutter.version_control == "git (github private)" %}
-configure_github_repo(
-    directory=Path.cwd(),
-    repo_name="{{ cookiecutter.repo_name }}",
-    visibility="private",
-    description="{{ cookiecutter.description }}",
-)
-# {% elif cookiecutter.version_control == "git (github public)" %}
-configure_github_repo(
-    directory=Path.cwd(),
-    repo_name="{{ cookiecutter.repo_name }}",
-    visibility="public",
-    description="{{ cookiecutter.description }}",
-)
-# {% endif %}
+if gotem_args.version_control == "git (local)":
+    init_local_git_repo(directory=Path.cwd())
+elif gotem_args.version_control == "git (github private)":
+    configure_github_repo(
+        directory=Path.cwd(),
+        repo_name=gotem_args.repo_name,
+        visibility="private",
+        description=gotem_args.description,
+    )
+elif gotem_args.version_control == "git (github public)":
+    configure_github_repo(
+        directory=Path.cwd(),
+        repo_name=gotem_args.repo_name,
+        visibility="public",
+        description=gotem_args.description,
+    )
 
 # ---------------------------------------------------------------------------- #
 #                              Install Pre-Commit                              #
 # ---------------------------------------------------------------------------- #
 
-# {% if cookiecutter.environment_manager == "uv" %}
-os.chdir(Path.cwd())
-subprocess.run(["pre-commit", "install"], check=False)  # noqa: S603, S607
-# {% endif %}
+if gotem_args.environment_manager == "uv":
+    os.chdir(Path.cwd())
+    subprocess.run(["pre-commit", "install"], check=False)  # noqa: S603, S607
 
 # ---------------------------------------------------------------------------- #
 #                                   SSH Keys                                   #
@@ -147,40 +148,28 @@ subprocess.run(["pre-commit", "install"], check=False)  # noqa: S603, S607
 
 # --------------------------------- Personal --------------------------------- #
 
-# {% if cookiecutter._generate_personal_ssh_keys == "y" %}
-# TODO(GatlenCulp): Implement generating personal ssh keys
-# ssh-keygen -t ed25519 -C "GatlenCulp" -f PROJ_ROOT/secrets/GatlenCulp
-# rename (GatlenCulp, GatlenCulp.pub) -> (GatlenCulp.key, GatlenCulp.pub)
-# or just do make sure it is named with .key normally.
-generate_personal_ssh_keys(
-    SECRETS_DIR,
-    "{{ cookiecutter.author_name }}",
-    comment="{{ cookiecutter.author_name }}",
-)
-# {% endif %}
+if gotem_args.generate_personal_ssh_keys == "y":
+    generate_personal_ssh_keys(
+        SECRETS_DIR,
+        gotem_args.author_name,
+        comment=gotem_args.author_name,
+    )
 
 # ------------------------------ Deployment Keys ----------------------------- #
 
-# {% if cookiecutter._generate_and_upload_gh_deploy_keys == "y" %}
-# ssh-keygen -t ed25519 -C "project-deploy" -f PROJ_ROOT/secrets/project-deploy
-# rename (project-deploy, project-deploy.pub)  # noqa: ERA001
-#   -> (project-deploy.key, project-deploy.pub)
-# or just do make sure it is named with .key normally.
-generate_personal_ssh_keys(
-    SECRETS_DIR,
-    "{{ cookiecutter.repo_name }}-deploy",
-    comment="{{ cookiecutter.repo_name }}-deploy",
-)
+if gotem_args.generate_and_upload_gh_deploy_keys == "y":
+    generate_personal_ssh_keys(
+        SECRETS_DIR,
+        f"{gotem_args.repo_name}-deploy",
+        comment=f"{gotem_args.repo_name}-deploy",
+    )
 
-# TODO(GatlenCulp): Upload generated ssh key to github as deploy key
-# gh repo deploy-key add project-deploy.pub
-# Optional: --allow-write, --title <string>
+    # TODO(GatlenCulp): Upload generated ssh key to github as deploy key
+    # gh repo deploy-key add project-deploy.pub
+    # Optional: --allow-write, --title <string>
 
+    # TODO(GatlenCulp): Test connection to github
+    # ssh -T git@github.com -i project-deploy.key
 
-# TODO(GatlenCulp): Test connection to github
-# ssh -T git@github.com -i project-deploy.key
-
-# TODO(GatlenCulp): Test connection to github using config file
-# ssh GitHub -F config.ssh
-
-# {% endif %}
+    # TODO(GatlenCulp): Test connection to github using config file
+    # ssh GitHub -F config.ssh
