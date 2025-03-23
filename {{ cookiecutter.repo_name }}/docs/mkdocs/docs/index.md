@@ -1,4 +1,4 @@
-# {{ cookiecutter.project_name }} documentation!
+# {{ cookiecutter.project_name }} documentation
 
 {% if cookiecutter.project_description is not none %}
 

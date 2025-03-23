@@ -8,10 +8,10 @@ Roadmap available [here](https://roadmap.sh/r/gatlens-opinionated-template)
 
 ### Inspirations
 
-https://andreasbm.github.io/web-skills/
+<https://andreasbm.github.io/web-skills/>
 
-https://github.com/romenrg/evergreen-skills-developers
+<https://github.com/romenrg/evergreen-skills-developers>
 
-https://roadmap.sh/devops
+<https://roadmap.sh/devops>
 
-https://roadmap.sh/
+<https://roadmap.sh/>

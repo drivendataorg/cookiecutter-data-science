@@ -4,6 +4,7 @@
 {% if cookiecutter.environment_manager == "uv" %}
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 {% endif %}
+
 <!-- [![tests](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/actions/workflows/tests.yml/badge.svg)](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/actions/workflows/tests.yml) -->
 <!-- ![GitHub stars](https://img.shields.io/github/stars/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}?style=social) -->
 
@@ -11,6 +12,7 @@
 > This project was created using [Gatlen's Opinionated Template (GOTem)](https://github.com/GatlenCulp/gatlens-opinionated-template), a cutting-edge project template for power users and researchers.
 
 {% if cookiecutter._readme_include_logo == 'y' -%}
+
 <div align="center">
   <a href="https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.repo_name}}">
     <!-- Please provide path to your logo here -->
@@ -30,6 +32,7 @@
 {%- endif %}
 
 ---
+
 ## 00 Table of Contents
 
 - [{{cookiecutter.project_name}}](#{{cookiecutter.project_name | lower | replace(" ", "-")}})
@@ -44,16 +47,19 @@
   - [06 License](#06-license)
 
 ---
+
 ## 01 About
 
 > **[?]**
 > Provide detailed information about your project here.
+>
 > - What problem does it solve?
 > - What makes it unique?
 > - What are its key features?
 > - Who is it for?
 
 {% if cookiecutter._readme_include_screenshots == 'y' -%}
+
 <details>
 <summary>📸 Screenshots</summary>
 <br>
@@ -61,20 +67,22 @@
 > **[?]**
 > Please provide your screenshots here.
 
-|                               Home Page                               |                               Login Page                               |
-| :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+|                                    Home Page                                    |                                    Login Page                                    |
+| :-----------------------------------------------------------------------------: | :------------------------------------------------------------------------------: |
 | <img src="https://picsum.photos/id/237/200/300" title="Home Page" width="100%"> | <img src="https://picsum.photos/id/237/200/300" title="Login Page" width="100%"> |
 
 </details>
 {%- endif %}
 
 ---
+
 ## 02 Getting Started
 
 ### 02.01 Prerequisites
 
 > **[?]**
 > List all dependencies and requirements needed before installing the project:
+>
 > ```bash
 > # Example
 > python >= 3.8
@@ -85,36 +93,40 @@
 
 > **[?]**
 > Provide step-by-step installation instructions:
-> 
+>
 > **01. Clone the repository**
+>
 > ```bash
 > git clone https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}.git
 > cd {{cookiecutter.repo_name}}
 > ```
-> 
+>
 > **02. Install dependencies**
+>
 > ```bash
 > pip install -e .
 > ```
 
 ---
+
 ## 03 Usage
 
 > **[?]**
 > Provide basic usage examples with code snippets:
-> 
+>
 > ```python
 > from {{cookiecutter.module_name}} import example
-> 
+>
 > # Initialize
 > example.start()
-> 
+>
 > # Run a basic operation
 > result = example.process("data")
 > print(result)
 > ```
 
 ---
+
 ## 04 Project Structure
 
 This project follows the structure of [Gatlen's Opinionated Template (GOTem)](https://github.com/GatlenCulp/gatlens-opinionated-template):
@@ -137,6 +149,7 @@ This project follows the structure of [Gatlen's Opinionated Template (GOTem)](ht
 For a more detailed explanation of the project structure, see the [CONTRIBUTING.md](docs/CONTRIBUTING.md) file.
 
 ---
+
 ## 05 Contributing
 
 We welcome contributions to this project! Please see our [contribution guidelines](docs/CONTRIBUTING.md) for detailed information on how to:
@@ -147,11 +160,13 @@ We welcome contributions to this project! Please see our [contribution guideline
 - Get support
 
 ---
+
 ## 06 License
 
 {% if cookiecutter.open_source_license != 'No license file' %}
 This project is licensed under the {{cookiecutter.open_source_license}} - see the [LICENSE](LICENSE) file for details.
 {% else %}
+
 > **[?]**
 > Specify the license under which your project is available.
-{% endif %}
+> {% endif %}

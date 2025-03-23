@@ -18,7 +18,12 @@ ALL_SCAFFOLDS = {"data", "backend", "course", "frontend", "cli"}
 class ScaffoldCleaner:
     """Removes unnecessary files and simplifies scaffold based on options given."""
 
-    def __init__(self, root: Path, module_name: str, project_short_description: str = "") -> None:
+    def __init__(
+        self,
+        root: Path,
+        module_name: str,
+        project_short_description: str = "",
+    ) -> None:
         """Returns new scaffolding cleaner with a set root."""
         self.root = root
         self.module_name = module_name
@@ -35,12 +40,16 @@ class ScaffoldCleaner:
         cleaning_ops = {self._remove_experimental}
         for option in cleaning_options:
             if option == "data":
-                cleaning_ops.add(lambda: self._select_module_scaffolding({"data", "cli"}))
+                cleaning_ops.add(
+                    lambda: self._select_module_scaffolding({"data", "cli"}),
+                )
                 cleaning_ops.add(lambda: self._select_secrets_manager("secrets_dir"))
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue
             if option == "ml":
-                cleaning_ops.add(lambda: self._select_module_scaffolding({"data", "cli"}))
+                cleaning_ops.add(
+                    lambda: self._select_module_scaffolding({"data", "cli"}),
+                )
                 cleaning_ops.add(lambda: self._select_secrets_manager("secrets_dir"))
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
                 continue
@@ -52,7 +61,9 @@ class ScaffoldCleaner:
                 continue
             if option == "app":
                 cleaning_ops.add(
-                    lambda: self._select_module_scaffolding({"backend", "frontend", "cli"}),
+                    lambda: self._select_module_scaffolding(
+                        {"backend", "frontend", "cli"},
+                    ),
                 )
                 cleaning_ops.add(lambda: self._select_secrets_manager("dot_env"))
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "notebooks"))
@@ -92,7 +103,10 @@ class ScaffoldCleaner:
         self._remove_dir(self.root / ".devcontainer")
         self._remove_experimental()
 
-    def _select_module_scaffolding(self, scaffold: ScaffoldOptions | set[ScaffoldOptions]) -> None:
+    def _select_module_scaffolding(
+        self,
+        scaffold: ScaffoldOptions | set[ScaffoldOptions],
+    ) -> None:
         """Delete all config except for the config passed in."""
         selected_scaffolds = scaffold if isinstance(scaffold, set) else {scaffold}
         module_path = self.root / self.module_name
@@ -143,7 +157,9 @@ class ScaffoldCleaner:
 
             # Remove the scaffold directory after extraction
             shutil.rmtree(path)
-            logger.info(f"Extracted contents from _{path} scaffold into {target_path} directory")
+            logger.info(
+                f"Extracted contents from _{path} scaffold into {target_path} directory",
+            )
 
     def _create_blank_module(self) -> None:
         """Remove everything except __init__.py so result is an empty package."""

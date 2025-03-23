@@ -4,18 +4,18 @@
 set -e
 
 # Check if {{ cookiecutter.project_name }} is already installed
-if command -v {{ cookiecutter.module_name }} &> /dev/null; then
-    echo "
+if command -v {{ cookiecutter.module_name }} &>/dev/null; then
+	echo "
 ✅ {{ cookiecutter.project_name }} is already installed!
 Current version: $({{ cookiecutter.module_name }} --version 2>/dev/null || echo "unknown")
 
 Would you like to reinstall or update {{ cookiecutter.project_name }}?
 "
-    read -p "Reinstall/update {{ cookiecutter.project_name }}? (y/N) " reinstall
-    if [[ ! "$reinstall" =~ ^[Yy]$ ]]; then
-        echo "Installation cancelled. {{ cookiecutter.project_name }} is already installed."
-        exit 0
-    fi
+	read -p "Reinstall/update {{ cookiecutter.project_name }}? (y/N) " reinstall
+	if [[ ! $reinstall =~ ^[Yy]$ ]]; then
+		echo "Installation cancelled. {{ cookiecutter.project_name }} is already installed."
+		exit 0
+	fi
 fi
 
 echo "
@@ -52,19 +52,19 @@ Note: This may require sudo privileges for some installations.
 
 # Ask for confirmation
 read -p "Would you like to proceed with the installation? (y/N) " proceed
-if [[ ! "$proceed" =~ ^[Yy]$ ]]; then
-    echo "Installation cancelled."
-    exit 0
+if [[ ! $proceed =~ ^[Yy]$ ]]; then
+	echo "Installation cancelled."
+	exit 0
 fi
 
 echo "📦 Installing {{ cookiecutter.project_name }}..."
 
 {% if cookiecutter.environment_manager == 'uv' %}
 # Check if uv is installed, install if not
-if ! command -v uv &> /dev/null; then
-    echo "📦 Installing uv package manager..."
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-    source $HOME/.local/bin/env
+if ! command -v uv &>/dev/null; then
+	echo "📦 Installing uv package manager..."
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+	source $HOME/.local/bin/env
 fi
 
 # Install {{ cookiecutter.project_name }} using uv tool
@@ -72,9 +72,9 @@ echo "📚 Installing {{ cookiecutter.project_name }}..."
 uv pip install {{ cookiecutter.module_name }}
 {% elif cookiecutter.environment_manager == 'virtualenv' %}
 # Check if virtualenv is installed, install if not
-if ! command -v virtualenv &> /dev/null; then
-    echo "📦 Installing virtualenv..."
-    pip install virtualenv
+if ! command -v virtualenv &>/dev/null; then
+	echo "📦 Installing virtualenv..."
+	pip install virtualenv
 fi
 
 # Create and activate virtual environment
@@ -87,9 +87,9 @@ echo "📚 Installing {{ cookiecutter.project_name }}..."
 pip install {{ cookiecutter.module_name }}
 {% elif cookiecutter.environment_manager == 'conda' %}
 # Check if conda is installed
-if ! command -v conda &> /dev/null; then
-    echo "❌ Conda is not installed. Please install Conda first."
-    exit 1
+if ! command -v conda &>/dev/null; then
+	echo "❌ Conda is not installed. Please install Conda first."
+	exit 1
 fi
 
 # Create and activate conda environment
@@ -102,9 +102,9 @@ echo "📚 Installing {{ cookiecutter.project_name }}..."
 conda install {{ cookiecutter.module_name }} -y
 {% elif cookiecutter.environment_manager == 'pipenv' %}
 # Check if pipenv is installed, install if not
-if ! command -v pipenv &> /dev/null; then
-    echo "📦 Installing pipenv..."
-    pip install pipenv
+if ! command -v pipenv &>/dev/null; then
+	echo "📦 Installing pipenv..."
+	pip install pipenv
 fi
 
 # Install {{ cookiecutter.project_name }}
@@ -118,36 +118,36 @@ pip install {{ cookiecutter.module_name }}
 
 {% if 'paper' in cookiecutter.include_code_scaffold %}
 # Check if pdflatex is installed
-if ! command -v pdflatex &> /dev/null; then
-    echo "⚠️ LaTeX (pdflatex) is not installed."
-    
-    # Check if running on macOS
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        if ! command -v brew &> /dev/null; then
-            echo "🍺 Homebrew not found. Installing Homebrew..."
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-            
-            # Add Homebrew to PATH based on chip architecture
-            if [[ $(uname -m) == "arm64" ]]; then
-                echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-                eval "$(/opt/homebrew/bin/brew shellenv)"
-            else
-                echo 'eval "$(/usr/local/bin/brew shellenv)"' >> ~/.zprofile
-                eval "$(/usr/local/bin/brew shellenv)"
-            fi
-        fi
-        
-        echo "🍺 Installing MacTeX using Homebrew..."
-        brew install --cask mactex
-    # Check if running on Linux with apt-get
-    elif command -v apt-get &> /dev/null; then
-        echo "📦 Installing LaTeX using apt-get..."
-        sudo apt-get update
-        sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-latex-extra
-    else
-        echo "❌ Please install LaTeX (pdflatex) manually for your operating system."
-        exit 1
-    fi
+if ! command -v pdflatex &>/dev/null; then
+	echo "⚠️ LaTeX (pdflatex) is not installed."
+
+	# Check if running on macOS
+	if [[ $OSTYPE == "darwin"* ]]; then
+		if ! command -v brew &>/dev/null; then
+			echo "🍺 Homebrew not found. Installing Homebrew..."
+			/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+			# Add Homebrew to PATH based on chip architecture
+			if [[ $(uname -m) == "arm64" ]]; then
+				echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>~/.zprofile
+				eval "$(/opt/homebrew/bin/brew shellenv)"
+			else
+				echo 'eval "$(/usr/local/bin/brew shellenv)"' >>~/.zprofile
+				eval "$(/usr/local/bin/brew shellenv)"
+			fi
+		fi
+
+		echo "🍺 Installing MacTeX using Homebrew..."
+		brew install --cask mactex
+	# Check if running on Linux with apt-get
+	elif command -v apt-get &>/dev/null; then
+		echo "📦 Installing LaTeX using apt-get..."
+		sudo apt-get update
+		sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-latex-extra
+	else
+		echo "❌ Please install LaTeX (pdflatex) manually for your operating system."
+		exit 1
+	fi
 fi
 {% endif %}
 
@@ -158,12 +158,12 @@ echo "✅ Verifying installation..."
 # Ask user about project setup
 read -p "Would you like to set up a {{ cookiecutter.project_name }} project now? (y/N) " setup_project
 
-if [[ "$setup_project" =~ ^[Yy]$ ]]; then
-    echo "📁 Setting up project..."
-    mkdir -p ~/{{ cookiecutter.project_name }}_projects
-    cd ~/{{ cookiecutter.project_name }}_projects
-    {{ cookiecutter.module_name }} init
-    open .
+if [[ $setup_project =~ ^[Yy]$ ]]; then
+	echo "📁 Setting up project..."
+	mkdir -p ~/{{ cookiecutter.project_name }}_projects
+	cd ~/{{ cookiecutter.project_name }}_projects
+	{{ cookiecutter.module_name }} init
+	open .
 fi
 
 echo "

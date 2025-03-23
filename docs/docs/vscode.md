@@ -49,8 +49,8 @@ Here you can configure any additional folders you'd like to add to your workspac
     },
     // Option #02
     // {
-    // 	"name": "package",
-    // 	"path": "../{{ cookiecutter.module_name }}/"
+    //  "name": "package",
+    //  "path": "../{{ cookiecutter.module_name }}/"
     // }
   ],
   ...
@@ -66,7 +66,7 @@ This is where your team can share specific vscode settings for consitency. For e
   ...
   "settings": {
     "remote.SSH.configFile": "${workspaceFolder}/secrets/ssh/config.ssh",
-    
+
     // Excluded Files Won't Show in Sidebar
     "files.exclude": {
       // Option #02

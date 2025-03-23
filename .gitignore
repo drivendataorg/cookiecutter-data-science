@@ -187,3 +187,4 @@ cython_debug/
 
 # Misc Large Files
 *.cleanshot
+megalinter-reports/

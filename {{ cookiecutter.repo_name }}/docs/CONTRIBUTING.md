@@ -14,6 +14,7 @@ Please note we have a [code of conduct](CODE_OF_CONDUCT.md), please follow it in
 {% endif %}
 
 ---
+
 ## 00 Table of Contents
 
 - [Contributing to {{cookiecutter.project_name}}](#contributing-to-{{cookiecutter.project_name | lower | replace(" ", "-")}})
@@ -32,12 +33,14 @@ Please note we have a [code of conduct](CODE_OF_CONDUCT.md), please follow it in
   - [10 License](#10-license)
 
 ---
+
 ## 01 Development Environment Setup
 
 ### 01.01 Prerequisites
 
 > **[?]**
 > List all dependencies and requirements needed before setting up the development environment:
+>
 > ```bash
 > # Example
 > python >= 3.8
@@ -50,6 +53,7 @@ Please note we have a [code of conduct](CODE_OF_CONDUCT.md), please follow it in
 To set up a development environment, please follow these steps:
 
 **01. Clone the repository**
+
 ```bash
 git clone https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}
 cd {{cookiecutter.repo_name}}
@@ -57,31 +61,40 @@ cd {{cookiecutter.repo_name}}
 
 **02. Set up a virtual environment**
 {% if cookiecutter.environment_manager == "uv" %}
+
 ```bash
 # Using UV (recommended)
 uv venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
+
 {% else %}
+
 ```bash
 # Using venv
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
+
 {% endif %}
 
 **03. Install development dependencies**
 {% if cookiecutter.environment_manager == "uv" %}
+
 ```bash
 uv pip install -e ".[dev]"
 ```
+
 {% else %}
+
 ```bash
 pip install -e ".[dev]"
 ```
+
 {% endif %}
 
 **04. Set up pre-commit hooks**
+
 ```bash
 pre-commit install
 ```
@@ -90,6 +103,7 @@ pre-commit install
 > Add any additional setup steps specific to your project.
 
 ---
+
 ## 02 Project Organization
 
 <details>
@@ -105,8 +119,8 @@ pre-commit install
 │   │   └── 📁 setup-python-env       <- Automated python setup w/ uv
 │   ├── 💡 ISSUE_TEMPLATE             <- Templates for Raising Issues on GH
 │   ├── 💡 pull_request_template.md   <- Template for making GitHub PR
-│   └── ⚡️ workflows                  
-│       ├── 🚀 main.yml               <- Automated cross-platform testing w/ uv, precommit, deptry, 
+│   └── ⚡️ workflows
+│       ├── 🚀 main.yml               <- Automated cross-platform testing w/ uv, precommit, deptry,
 │       └── 🚀 on-release-main.yml    <- Automated mkdocs updates
 ├── 💻 .vscode                        <- Preconfigured extensions, debug profiles, workspaces, and tasks for VSCode/Cursor powerusers
 │   ├── 🚀 launch.json
@@ -151,14 +165,16 @@ pre-commit install
     │   └── 🐍 train.py                 <- Code to train models
     └── 🐍 plots.py                     <- Code to create visualizations
 ```
+
 </details>
 
 ---
+
 ## 03 Built With
 
 > **[?]**
 > List the key technologies, frameworks, and libraries used in this project:
-> 
+>
 > - Python 3.8+
 > - FastAPI for web services
 > - Polars for data processing
@@ -167,6 +183,7 @@ pre-commit install
 > - etc.
 
 ---
+
 ## 04 Issues and Feature Requests
 
 You've found a bug in the source code, a mistake in the documentation, or maybe you'd like a new feature? You can help us by [submitting an issue on GitHub](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/issues). Before you create an issue, make sure to search the issue archive -- your issue may have already been addressed!
@@ -181,6 +198,7 @@ Please try to create bug reports that are:
 **Even better: Submit a pull request with a fix or new feature!**
 
 ---
+
 ## 05 How to Submit a Pull Request
 
 1. Search our repository for open or closed [Pull Requests](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/pulls) that relate to your submission. You don't want to duplicate effort.
@@ -192,6 +210,7 @@ Please try to create bug reports that are:
 6. [Open a Pull Request](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/compare?expand=1)
 
 ---
+
 ## 06 Roadmap
 
 See the [open issues](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/issues) for a list of proposed features (and known issues).
@@ -201,6 +220,7 @@ See the [open issues](https://github.com/{{cookiecutter._github_username}}/{{coo
 - [Newest Bugs](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
 ---
+
 ## 07 Support
 
 > **[?]**
@@ -209,14 +229,15 @@ See the [open issues](https://github.com/{{cookiecutter._github_username}}/{{coo
 Reach out to the maintainer at one of the following places:
 
 {% if cookiecutter._readme_use_github_discussions == 'y' -%}
+
 - [GitHub Discussions](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/discussions)
-{%- elif cookiecutter._readme_use_github_discussions != 'y' -%}
+  {%- elif cookiecutter._readme_use_github_discussions != 'y' -%}
 - [GitHub issues](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+)
-{%- endif %}
+  {%- endif %}
 - Contact options listed on [this GitHub profile](https://github.com/{{cookiecutter._github_username}})
 
-{% if cookiecutter._readme_include_project_assistance == 'y' -%}
----
+## {% if cookiecutter._readme_include_project_assistance == 'y' -%}
+
 ## 08 Project Assistance
 
 If you want to say **thank you** or/and support active development of {{cookiecutter.project_name}}:
@@ -228,8 +249,8 @@ If you want to say **thank you** or/and support active development of {{cookiecu
 Together, we can make {{cookiecutter.project_name}} **better**!
 {% endif %}
 
-{% if cookiecutter._readme_include_authors == 'y' -%}
----
+## {% if cookiecutter._readme_include_authors == 'y' -%}
+
 ## 09 Authors & Contributors
 
 The original setup of this repository is by [{{cookiecutter.full_name}}](https://github.com/{{cookiecutter._github_username}}).
@@ -237,8 +258,8 @@ The original setup of this repository is by [{{cookiecutter.full_name}}](https:/
 For a full list of all authors and contributors, see [the contributors page](https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.repo_name}}/contributors).
 {% endif %}
 
-{% if cookiecutter.open_source_license != 'No license file' -%}
----
+## {% if cookiecutter.open_source_license != 'No license file' -%}
+
 ## 10 License
 
 This project is licensed under the **{{cookiecutter.open_source_license}}**.
