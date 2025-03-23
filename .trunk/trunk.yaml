@@ -62,9 +62,10 @@ actions:
     - git-lfs
     - trunk-announce
     - trunk-check-pre-push
-    - trunk-fmt-pre-commit
     - commitizen
     - trunk-upgrade-available
+  enabled:
+    - trunk-fmt-pre-commit
 tools:
   enabled:
     - commitizen@4.3.1
