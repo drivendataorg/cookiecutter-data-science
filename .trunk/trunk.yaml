@@ -25,6 +25,7 @@ lint:
     - markdownlint
     - prettier
   enabled:
+    - pre-commit-hooks@5.0.0
     - shellcheck@0.10.0
     - pre-commit-hooks@5.0.0
     - markdown-link-check@3.13.7
@@ -49,13 +50,13 @@ lint:
   ignore:
     - linters: [ALL]
       paths:
-        - docs/site/.*
-        - docs/docs/jupyter-notebooks_files/.*
-        - jupyter-experiments/.*
-        - \.history/.*
-        - .*cache.*/.*
-        - .*venv.*/.*
-        - .*\{\{.*\}\}.*
+        - docs/site/**
+        - docs/docs/jupyter-notebooks_files/**
+        - jupyter-experiments/**
+        - .history/**
+        - "**/cache*/**"
+        - "**/venv*/**"
+        - "**/*{{*}}*/**"
 actions:
   disabled:
     - commitlint

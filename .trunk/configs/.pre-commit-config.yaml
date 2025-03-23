@@ -28,7 +28,7 @@ repos:
     rev: v8.22.1
     hooks:
       - id: gitleaks
-        name: "🔒 security · Detect hardcoded secrets"
+        name: 🔒 security · Detect hardcoded secrets
 
   # --------------------------- 🔍 Code Quality Tools -------------------------- #
 
@@ -37,7 +37,7 @@ repos:
     rev: v0.9.1
     hooks:
       - id: ruff-format
-        name: "🐍 python · Format with Ruff"
+        name: 🐍 python · Format with Ruff
         exclude: |
           (?x)^(
             .*\{\{.*\}\}.*|     # Exclude any files with cookiecutter variable, this is an issue with ruff
@@ -58,15 +58,15 @@ repos:
     rev: v0.23
     hooks:
       - id: validate-pyproject
-        name: "🐍 python · Validate pyproject.toml"
+        name: 🐍 python · Validate pyproject.toml
         additional_dependencies: ["validate-pyproject-schema-store[all]"]
 
   ### Javascript & Web Tools ###
   - repo: https://github.com/biomejs/pre-commit
-    rev: "v0.6.1"
+    rev: v0.6.1
     hooks:
       - id: biome-check
-        name: "🟨 javascript · Lint, format, and safe fixes with Biome"
+        name: 🟨 javascript · Lint, format, and safe fixes with Biome
         additional_dependencies: ["@biomejs/biome@1.9.4"]
         # Exclude FastAPI directories for now
         exclude: |
@@ -79,17 +79,17 @@ repos:
     rev: 0.31.0
     hooks:
       - id: check-github-workflows
-        name: "🐙 github-actions · Validate gh workflow files"
-        args: ["--verbose"]
+        name: 🐙 github-actions · Validate gh workflow files
+        args: [--verbose]
       - id: check-taskfile
-        name: "✅ taskfile · Validate Task configuration"
+        name: ✅ taskfile · Validate Task configuration
 
   ### Markdown ###
   - repo: https://github.com/hukkin/mdformat
     rev: 0.7.21
     hooks:
       - id: mdformat
-        name: "📝 markdown · Format markdown"
+        name: 📝 markdown · Format markdown
         # Mdformat messes up jinja tags
         exclude: |
           (?x)^(
@@ -129,7 +129,7 @@ repos:
     rev: 0.2.2
     hooks:
       - id: checkmake
-        name: "🐮 Makefile · Lint Makefile"
+        name: 🐮 Makefile · Lint Makefile
         # No clear documentation on how to skip certain checks.
         # Fixed as many as I could, but best option is to ignore the file.
         exclude: |
@@ -143,7 +143,7 @@ repos:
     rev: 3.3.0
     hooks:
       - id: sqlfluff-fix
-        name: "📊 SQL · Attempts to fix rule violations."
+        name: 📊 SQL · Attempts to fix rule violations.
       # STRICT
       # - id: sqlfluff-lint
       #   name: "📊 SQL · Lint SQL code files"
@@ -154,8 +154,8 @@ repos:
     hooks:
       - id: nbqa
         entry: nbqa mdformat
-        name: "📓 notebook · Format markdown cells"
-        args: ["--nbqa-md"]
+        name: 📓 notebook · Format markdown cells
+        args: [--nbqa-md]
         types: [jupyter]
         # Reading pyproject.toml in the template throws errors
         exclude: |
@@ -178,15 +178,15 @@ repos:
     rev: v9.1.3
     hooks:
       - id: oxipng
-        name: "🖼️ images · Optimize PNG files"
-        args: ["-o", "4", "--strip", "safe", "--alpha"]
+        name: 🖼️ images · Optimize PNG files
+        args: [-o, "4", --strip, safe, --alpha]
 
   ### Additional File Types ###
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
-        name: "✨ misc-files · Format misc web files"
+        name: ✨ misc-files · Format misc web files
         types_or: [yaml, html, scss]
         additional_dependencies:
           - prettier@3.4.2
@@ -199,13 +199,13 @@ repos:
     hooks:
       # STRICT -- This (kind of) enforces use of uv
       - id: uv-sync
-        name: "⚡️ uv · Sync dependencies with uv"
+        name: ⚡️ uv · Sync dependencies with uv
       # Update the uv lockfile
       - id: uv-lock
-        name: "⚡️ uv · Update dependency lockfile"
+        name: ⚡️ uv · Update dependency lockfile
       # Export to txt
       - id: uv-export
-        name: "⚡️ uv · Export dependencies to requirements.txt"
+        name: ⚡️ uv · Export dependencies to requirements.txt
 
   # ---------------------------- 📁 Filesystem Tools --------------------------- #
 
@@ -214,34 +214,34 @@ repos:
     hooks:
       # Filesystem Checks
       - id: check-executables-have-shebangs
-        name: "📁 filesystem/⚙️ exec · Verify shebang presence"
+        name: 📁 filesystem/⚙️ exec · Verify shebang presence
         # Exclude FastAPI directories for now
         exclude: |
           (?x)^(
             .*\{\{.*\}\}.*|
           )$
       - id: check-shebang-scripts-are-executable
-        name: "📁 filesystem/⚙️ exec · Verify script permissions"
+        name: 📁 filesystem/⚙️ exec · Verify script permissions
       - id: check-case-conflict
-        name: "📁 filesystem/📝 names · Check case sensitivity"
+        name: 📁 filesystem/📝 names · Check case sensitivity
       - id: check-illegal-windows-names
-        name: "📁 filesystem/📝 names · Validate Windows filenames"
+        name: 📁 filesystem/📝 names · Validate Windows filenames
       - id: check-symlinks
-        name: "📁 filesystem/🔗 symlink · Check symlink validity"
+        name: 📁 filesystem/🔗 symlink · Check symlink validity
       - id: destroyed-symlinks
-        name: "📁 filesystem/🔗 symlink · Detect broken symlinks"
+        name: 📁 filesystem/🔗 symlink · Detect broken symlinks
       # ------------------------------- 🌳 Git Tools ------------------------------- #
       - id: check-merge-conflict
-        name: "🌳 git · Detect conflict markers"
+        name: 🌳 git · Detect conflict markers
       - id: forbid-new-submodules
-        name: "🌳 git · Prevent submodule creation"
+        name: 🌳 git · Prevent submodule creation
       - id: check-added-large-files
-        name: "🌳 git · Block large file commits"
-        args: ["--maxkb=5000"]
+        name: 🌳 git · Block large file commits
+        args: [--maxkb=5000]
       - id: no-commit-to-branch
         alias: protect-main
-        name: "🌳 git · Protect main branches"
-        args: ["--branch", "main", "--branch", "master"]
+        name: 🌳 git · Protect main branches
+        args: [--branch, main, --branch, master]
 
   # ---------------------------------------------------------------------------- #
   #                            📝 Commit Message Hooks                           #
@@ -254,7 +254,7 @@ repos:
     rev: v4.1.0
     hooks:
       - id: commitizen
-        name: "🌳 git · Validate commit message"
+        name: 🌳 git · Validate commit message
         stages: [commit-msg]
         additional_dependencies: [cz-conventional-gitmoji]
 
@@ -269,7 +269,7 @@ repos:
         entry: ./.venv/bin/pytest tests
         language: system
         types: [python]
-        args: ["--collect-only"]
+        args: [--collect-only]
         pass_filenames: false
         always_run: true
       # STRICT
@@ -278,6 +278,6 @@ repos:
         entry: ./.venv/bin/pytest tests
         language: system
         types: [python]
-        args: ["--max-timeout=3"]
+        args: [--max-timeout=3]
         pass_filenames: false
         always_run: true
