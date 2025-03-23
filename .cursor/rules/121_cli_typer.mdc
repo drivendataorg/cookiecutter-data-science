@@ -1,0 +1,109 @@
+---
+description: Guidelines for writing Python code in this workspace
+globs: *.py,*ipynb,*cli*
+alwaysApply: false
+---
+
+# Python CLI
+
+## Typer vs Others
+
+Always use Typer, not Argparse or Click - modern approach with helpful features.
+
+## Using the CLI
+
+Add CLI entry points to `pyproject.toml` as project scripts:
+
+```toml
+[project.scripts]
+command-name = "module_name.cli.main:app"
+```
+
+Call as `command-name [ARGS]` instead of `python3 cli.py`
+
+## Separate Logic
+
+Separate core functionality from CLI interface for reusability. Store in `core` or `logic` folders to enable:
+
+- Code reuse across multiple commands
+- Config-driven execution
+- Better testability
+
+## Options & Arguments
+
+Define with `Annotated` from `typing`:
+
+```python
+ComposeFileOption = Annotated[
+    Optional[Path],
+    typer.Option(
+        "--compose",
+        help="The gatpack compose file to use for templating operations.",
+        show_default="./*gatpack.json",
+        exists=True,
+        file_okay=True,
+        dir_okay=False,
+        writable=True,
+    ),
+]
+```
+
+Define options at module top level or import from dedicated options module - not within function definitions.
+
+### Option/Argument Settings
+
+Include `default: Any` (or `default_factory: Callable[[], Any]`) and `help: str` values. Useful settings:
+
+- `prompt: bool`: Request missing values from user
+- `confirmation_prompt: bool`: Require value re-entry for confirmation
+- `hide_input: bool`: For passwords/sensitive input
+- `envvar: str | list[str]`: Use environment variables as defaults
+
+## Printing & Displays
+
+Use Rich for console output. Loguru for logging (secondary to user communication).
+
+## Help Panels
+
+Use rich markdown formatting:
+
+```python
+app = typer.Typer(rich_markup_mode="markdown")
+
+
+@app.command()
+def create(
+    username: Annotated[str, typer.Argument(help="The username to be **created**")],
+):
+    """
+    **Create** a new *shinny* user. :sparkles:
+
+    * Create a [red]username[/red] :fire:
+    * Show that the username is created
+    ---
+    Learn more at the [Typer docs website](mdc:https:/typer.tiangolo.com)
+    """
+    print(f"Creating user: {username}")
+```
+
+Group help panel items with `rich_help_panel: str` on commands, options, or arguments.
+
+## Misc
+
+- App config: `app_dir = typer.get_app_dir(APP_NAME: str)`
+- Open files/URLs: `typer.launch(thing: Path | str)`
+- Auto-generate docs: `python -m typer some_script.py utils docs`
+- Each command should be its own file
+- Testing: `typer.CliRunner()`
+
+```python
+from typer.testing import CliRunner
+
+runner = CliRunner()
+
+
+def test_app():
+    result = runner.invoke(app, ["Camila", "--city", "Berlin"])
+    assert result.exit_code == 0
+    assert "Hello Camila" in result.stdout
+```

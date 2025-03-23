@@ -1,0 +1,15 @@
+---
+description: 
+globs: flake.nix,default.nix,pyproject.toml,*.rb,docker/**/*,install.sh
+alwaysApply: false
+---
+# Packaging Options
+
+This projects uses a few packaging options:
+- Nix Flakes (`flake.nix` and `default.nix`)
+- Install Script (`install.sh`)
+- Homebrew Formula (`Formula.rb`)
+- PyPi (`pyproject.toml`)
+- Container Images (`docker/`)
+
+These should be properly maintianed as the project experiences updates.

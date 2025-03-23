@@ -1,0 +1,75 @@
+---
+description: 
+globs: *.toml
+alwaysApply: false
+---
+# TOML
+
+## Why TOML?
+
+TOML is a modern and minimal sytnax configuration language. Whenever possible, configuration files should use this language above JSON or YAML.
+
+## Using TOML
+
+The full spec is defined [here](mdc:https:/toml.io/en/v1.0.0), but it's easiest to understand TOML by seeing how it maps to JSON structures. Unlike JSON or YAML, there are multiple ways to write the same file:
+
+### Basic Mapping: JSON to TOML
+
+```json
+{
+  "title": "TOML Example",
+  "database": {
+    "server": "192.168.1.1",
+    "ports": [8001, 8002, 8003],
+    "connection_max": 5000
+  },
+  "servers": [
+    {"name": "alpha", "role": "frontend"},
+    {"name": "beta", "role": "backend"}
+  ]
+}
+```
+
+```toml
+# TOML equivalent
+title = "TOML Example"
+
+# Tables are like JSON objects
+[database]
+server = "192.168.1.1"
+ports = [8001, 8002, 8003]
+connection_max = 5000
+
+# Arrays of tables for nested arrays of objects
+[[servers]]
+name = "alpha"
+role = "frontend"
+
+[[servers]]
+name = "beta"
+role = "backend"
+```
+
+Alternatively:
+
+```toml
+# Alternative TOML for the same JSON structure - less recommended but valid
+title = "TOML Example"
+
+# Using dotted keys instead of table headers
+database.server = "192.168.1.1" 
+database.ports = [8001, 8002, 8003]
+database.connection_max = 5000
+
+# Using inline tables in array instead of [[servers]]
+servers = [
+  {name = "alpha", role = "frontend"},
+  {name = "beta", role = "backend"}
+]
+```
+
+Notes:
+
+- Keys cannot be defined more than once.
+- Quotations can be added freely to keys or values, but unless there are reserved characters (spaces, dots, etc.) in them, they are not necessary
+- Once you insert a table header (ex: `[database]`, everything beneath it will be under that table until you add a new header)

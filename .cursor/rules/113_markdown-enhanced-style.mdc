@@ -1,0 +1,136 @@
+---
+description: 
+globs: *.md
+alwaysApply: false
+---
+{% raw %}
+# Markdown Preview Enhanced Features with Examples
+
+Markdown Preview enhanced is a vscode extension for working on Markdown Files and has a few extra features. Read about them here
+
+https://shd101wyy.github.io/crossnote/
+
+0. Code Highlighting and Numbering
+   ```python {.line-numbers .highlight="2-3"}
+   x = "Hello"
+   y = "World"
+   print(x, y)
+   ```
+
+1. Admonitions:
+   ```markdown
+   !!! note
+       This is an important note.
+
+   !!! warning
+       Be careful with this section.
+   ```
+
+2. File Imports:
+   ```markdown
+   @import "python_best_practices.md"
+   @import "document.pdf" {page_no=1}
+   @import "code_sample.py" {line_begin=10 line_end=20}
+   ```
+
+3. Code Execution:
+   ```python {cmd=true}
+   import matplotlib.pyplot as plt
+   plt.plot([1, 2, 3, 4])
+   plt.title("Simple Plot")
+   plt.show()
+   ```
+
+4. Plotly Integration:
+   ```javascript {cmd=true element="<div id='plotly-graph'></div>"}
+   var GRAPH = document.getElementById('plotly-graph')
+   Plotly.newPlot(GRAPH, [{
+     x: [1, 2, 3, 4],
+     y: [10, 15, 13, 17],
+     type: 'scatter'
+   }])
+   ```
+
+5. Slide Creation:
+   ```markdown
+   ---
+   presentation:
+     theme: serif
+   ---
+
+   # Slide 1
+   Content for slide 1
+
+   ---
+
+   # Slide 2
+   Content for slide 2
+   ```
+
+6. LaTeX Rendering:
+   ```latex {cmd=true}
+   \documentclass{article}
+    \begin{document}
+      \title{Sample Document}
+      \maketitle
+      Hello, world!
+   \end{document}
+   ```
+
+7. Front Matter:
+   ```markdown
+   ---
+   title: "My Document"
+   author: "John Doe"
+   date: "2024-03-15"
+    output:
+      custom_document:
+          path: /Exports/test.pdf
+          toc: true
+    pdf_document:
+      toc: true
+      toc_depth: 2
+    export_on_save:
+        pandoc: true
+   ---
+   ```
+
+8. Custom Configuration:
+   ```javascript
+   // In config.js (global or workspace)
+   ({
+     katexConfig: {
+       macros: {
+         "\\RR": "\\mathbb{R}"
+       }
+     },
+     mermaidConfig: {
+       theme: 'forest'
+     }
+   })
+   ```
+
+9. Custom Styling:
+   ```less
+   /* In my-style.less */
+   .markdown-preview {
+     h1 {
+       color: #4a4a4a;
+       border-bottom: 2px solid #4a4a4a;
+     }
+   }
+
+   /* In markdown file */
+   @import "my-style.less"
+   ```
+
+10. Math Macros:
+    ```markdown
+    $\newcommand{\vec}[1]{\mathbf{#1}}$
+    
+    Now we can use our new macro:
+    $\vec{v} = (x, y, z)$
+    ```
+
+These examples demonstrate the diverse capabilities of the Markdown Preview Enhanced extension, showcasing its power in creating rich, interactive documents with advanced formatting, code execution, and mathematical typesetting.
+{% endraw %}

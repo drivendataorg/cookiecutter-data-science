@@ -1,0 +1,68 @@
+---
+description: Standards for creating Mermaid diagrams in markdown
+globs: *.md
+alwaysApply: false
+---
+
+# Mermaid Diagrams
+
+## 01 Basic Syntax
+
+Use triple backticks with mermaid tag:
+
+```mermaid
+graph TD
+    A[Start] --> B[End]
+```
+
+## 02 Style Guidelines
+
+- Use `classDef` for consistent styling
+- Use `<br />` for line breaks (not `\n`)
+- Include emojis on both edges and nodes when appropriate
+- Use descriptive node labels
+
+## 03 Relationship Diagrams
+
+For complex relationships, use direction and line styles:
+
+```mermaid
+graph TD
+    A[Main Concept] --> B[Subconcept 1]
+    A --> C[Subconcept 2]
+    
+    B --> D[Example 1]
+    C -.-> |"relates to"| D
+    
+    classDef main fill:none,stroke:#0275d8,stroke-width:2px;
+    classDef sub fill:none,stroke:#5cb85c,stroke-width:1px;
+    
+    class A main;
+    class B,C,D sub;
+```
+
+## 04 Including Legends
+
+Add legends using subgraphs:
+
+```mermaid
+graph LR
+    subgraph Legend
+        L1["Solid line (→)"] --> L2["Direct relationship"]
+        L3["Dashed line (-.->)"] -.-> L4["Indirect relationship"]
+        
+        style L1 fill:none,stroke:#333,stroke-width:1px
+        style L3 fill:none,stroke:#333,stroke-width:1px
+    end
+    
+    style Legend fill:none,stroke:#333,stroke-width:1px
+```
+
+## 05 Common Diagram Types
+
+- `graph TD` - Top-down flowchart
+- `graph LR` - Left-right flowchart
+- `sequenceDiagram` - Sequence diagrams
+- `classDiagram` - Class relationships
+- `stateDiagram-v2` - State transitions
+- `gantt` - Project timelines

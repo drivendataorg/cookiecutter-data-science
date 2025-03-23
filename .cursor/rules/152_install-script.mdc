@@ -1,0 +1,48 @@
+---
+description: Guidelines for creating and maintaining installation scripts
+globs: install.sh, scripts/install.sh
+alwaysApply: false
+---
+
+# Install Script
+
+This project maintains an install script `install.sh` written generally in a POSIX-compatible language and installable using a curl command quickly.
+
+This script should generally manage installing the project and its dependencies onto any machine on any platform. This is a very lofty goal. To do this, a variety of other installation methods that this project supports should be looked at. If they are found on the system, then they install using that method (ex: Nix, Brew, UV, PipX, etc.). If those don't exist, then the script opts for the minimally invasive method of installing, but not before asking to do this installation first since it might affect the user's system.
+
+The default method to use for this project is to install `uv` using their installation script, then installing the project as a `uv` tool.
+
+## Best Practices
+
+- Use POSIX-compatible shell syntax (`#!/bin/sh` not `#!/bin/bash`)
+- Support non-interactive usage via `-y` flag and pipe detection
+- Include clear error handling with `set -e` and descriptive messages
+- Detect and adapt to different environments (macOS, Linux, Docker)
+- Check for existing installations before proceeding
+- Provide user-friendly prompts and explanations for each step
+- Display a summary of planned actions before installation begins
+- Verify installation success with version checks
+- Include fallback instructions if installation path issues occur
+- Add clear documentation within the script
+- Support silent mode with optional verbose flag
+- Implement privilege escalation only when necessary
+
+## Script Structure
+
+1. Environment setup and flag parsing
+1. Platform detection
+1. Dependency checking
+1. User confirmation
+1. Installation steps with progress feedback
+1. Path and environment updates
+1. Verification steps
+1. Usage instructions
+
+## Security Considerations
+
+- Verify downloaded files with checksums
+- Avoid piping curl directly to shell when possible
+- Don't hardcode credentials or tokens
+- Use temporary directories with proper permissions
+- Clean up temporary files after installation
+- Minimize usage of sudo/root privileges

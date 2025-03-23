@@ -1,0 +1,14 @@
+---
+description: Information about the project template and tooling
+globs: pyproject.toml
+alwaysApply: false
+---
+# Project Tooling
+
+This is a project generated from "Gatlen's Opinionated Template (GOTem)". GOTem is forked from (and synced with), CCDSone of the most popular, flexible, and well maintained Python templates out there. 
+
+GOTem extends CCDS with carefully selected defaults, dependency stack, customizations, additional features, and contemporary best practices. Ready for not just data science but also general Python development, research projects, and academic work. Most of the documentation is written with the modern package and project managing tool known as uv
+
+The source code can be found at https://github.com/GatlenCulp/gatlens-opinionated-template.
+
+If there are any questions relating to the structure, refer to the documentation, available at `https://gatlenculp.github.io/gatlens-opinionated-template/{page_name}` without the `.md`. 

@@ -1,0 +1,144 @@
+---
+description: Best practices for maintaining Homebrew formulas in this project
+globs: /homebrew/Formula/*.rb
+alwaysApply: false
+---
+
+# Homebrew Formula Maintenance
+
+This project manages Homebrew formulas in the `homebrew/Formula/` directory. These formulas allow for consistent and reproducible environment setup across development machines.
+
+## 01 Formula Structure
+
+### 01.01 General Structure
+
+Each formula should follow this structure:
+
+```ruby
+class FormulaName < Formula
+  desc "Concise description of what this formula provides"
+  homepage "https://project-homepage.com"
+  url "https://download-url/version-x.y.z.tar.gz"
+  sha256 "checksum-hash-value"
+  license "MIT" # Or appropriate license
+
+  depends_on "dependency1"
+  depends_on "dependency2" => :recommended
+  depends_on "dependency3" => :optional
+
+  def install
+    # Installation instructions
+    system "./configure", "--prefix=#{prefix}"
+    system "make", "install"
+  end
+
+  test do
+    # Test that verifies installation worked correctly
+    system "#{bin}/command", "--version"
+  end
+end
+```
+
+### 01.02 Python Project Structure
+
+For Python projects, use this template which includes virtualenv support:
+
+```ruby
+require "English"
+class ProjectName < Formula
+  include Language::Python::Virtualenv
+  desc "Project description"
+  homepage "https://github.com/username/repo_name"
+  
+  # Stable release
+  url "https://github.com/username/repo_name.git",
+    using:    :git,
+    tag:      "v0.1.0",
+    revision: "HEAD"
+  license "License Type"
+  
+  # Development release
+  head "https://github.com/username/repo_name.git",
+    branch: "main"
+
+  # Automatically check for new versions
+  livecheck do
+    url :stable
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
+  end
+
+  depends_on "python@3.x" => :build
+
+  # Define python dependencies to be installed into the virtualenv
+  resource "package-name" do
+    url "https://files.pythonhosted.org/packages/..."
+    sha256 "checksum-hash-value"
+  end
+
+  def install
+    # Install documentation
+    doc.install "README.md"
+    doc.install "LICENSE" if File.exist?("LICENSE")
+    
+    # Install dependencies and the CLI in a virtualenv
+    venv = virtualenv_create(libexec/"venv", "python3.x")
+    venv.pip_install resources
+    venv.pip_install_and_link buildpath
+    
+    # Create bin script
+    bin.install libexec/"venv/bin/module_name"
+  end
+
+  def caveats
+    <<~EOS
+      🚀 Project Name has been installed.
+
+      For more information, visit:
+        https://github.com/username/repo_name
+    EOS
+  end
+
+  test do
+    # Check if the command-line tool is installed and runs without error
+    system bin/"module_name", "--version"
+    # Check if the documentation files are installed
+    assert_predicate doc/"README.md", :exist?
+  end
+end
+```
+
+## 02 Update Workflow
+
+1. Update formula when:
+
+   - Project dependencies change
+   - New version is released
+   - Security vulnerabilities are discovered
+
+1. To update:
+
+   - Update version number in URL
+   - Update SHA256 checksum (obtain with `shasum -a 256 file.tgz`)
+   - Modify dependencies as needed
+   - Test installation with `brew install --build-from-source ./Formula/name.rb`
+
+### 02.01 Python Project Updates
+
+For Python projects, use the following command to update resources:
+
+```bash
+brew update-python-resources Formula/project_name.rb
+```
+
+This will automatically update all Python dependencies to their latest versions and update the SHA256 checksums.
+
+## 03 Best Practices
+
+- Maintain consistent versioning with project
+- Document all changes in formula commit messages
+- Test formula locally before committing
+- Use Ruby style conventions from `brew style`
+- Keep formulas minimal and focused on essential dependencies
+- Prefer stable releases over development versions
+- For Python projects, use the `virtualenv_create` method for creating isolated environments
+- Use livecheck blocks to automatically check for new versions

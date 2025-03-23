@@ -1,0 +1,59 @@
+---
+description: Guidelines for LaTeX usage and best practices
+globs: *.tex
+alwaysApply: false
+---
+
+# LaTeX Rules
+
+## Bibliography
+
+- Use BibLaTeX with Biber (`\parencite{citation_name}` for inline citations)
+- Zotero for reference management
+
+## Document Structure
+
+- Label all equations and sections for easy cross-referencing
+- Use `tabulararray` for complex tables; `booktabs` for simple ones
+- Use `tikz` for diagrams (Quiver for editing)
+
+## Environment
+
+- LaTeX Workshop with SyncTeX support
+
+## QA Tools
+
+- `texfmt`: Modern LaTeX formatter
+- `chktex`: LaTeX linter
+- `texlab`: LaTeX LSP for IDEs
+- **Fix all linting issues after making any changes to LaTeX files**
+- Run `chktex` to verify changes don't introduce errors
+
+## Useful Packages
+
+- `csquotes`: For proper quotation marks
+- `showlabels`: Display reference labels
+- `darkmode`: For dark-themed documents
+
+## Platforms this is Used on
+
+This is being used on LaTeX Workshop which has SyncTeX and other features.
+
+## Best Practices
+
+- Provide labels to every equation and every section so that way they can be easily referenced across the document.
+- Never use
+
+## Tables
+
+- `tabulararray` or `booktabs` -- Use tabulararray for complicated and expressive tables and booktabs for simpler tables.
+
+## Diagrams
+
+Use `tikz` for diagrams and import any needed packages. Quiver is a modern tool that should be used for editing these diagrams as well.
+
+## Misc
+
+- `csquotes` -- To avoid the weird similar quotations that appear and so you doin't need to write \`\` and ''
+- `Showlabels` -- Use to show the labels of equations, figures, and sections so they can be more easily references
+- `darkmode` -- For turning documnets into darkmode. This is a personal preference

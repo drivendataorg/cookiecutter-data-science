@@ -1,0 +1,38 @@
+---
+description: .mdc files describe specific rules for how certain files, file types, and directories are to be understood and used
+globs: .cursor/rules/*.mdc,.cursor/rules/*.md
+alwaysApply: false
+---
+
+`.mdc` File Structure & Best Practices:
+
+- 001-099: Core/workspace rules
+- 100-299: Pattern-Based Style Guides
+- 300-499: Agent Modes
+- 500-699: Domain-Specific
+
+Front Matter Attributes:
+
+1. `description : str` (top)
+
+   - Brief purpose summary
+   - Appears in AI context
+
+1. `globs : list[glob]` (top)
+
+   - Comma-separated list
+   - Example: `/dir1/**/*,/dir2/**/*,/dir3/**/*`
+   - Use standard glob syntax
+
+1. `alwaysApply : bool`
+
+   - Whether to apply this rule to every query
+
+1. Body Text (this section)
+
+   - Keep under 25 lines
+   - Use concise/shorthand
+   - Tag files with @
+   - Focus on key directives
+
+Best Practice: The assistant may propose changes to `.mdc` files for the user to copy into the UI. The assistant should not attempt direct file edits to `.mdc` files. `.md` files are working files for `.mdc` rules and may be directly edited.

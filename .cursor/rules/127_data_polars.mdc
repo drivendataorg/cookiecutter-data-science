@@ -1,0 +1,68 @@
+---
+description: Guidelines for data manipulation with Polars and related libraries
+globs: *.py,*.ipynb
+alwaysApply: false
+---
+
+# Data Manipulation with Polars
+
+Polars is recommended for dataframe operations as it offers:
+
+- Faster performance than pandas
+- Cleaner syntax
+- Lazy evaluation
+- Multiple data backends (SQL, CSV, etc.)
+
+## Typing with Pandera
+
+Pandera combines pydantic with dataframes for validation:
+
+```python
+import pandas as pd
+import pandera as pa
+
+# Data to validate
+df = pd.DataFrame(
+    {
+        "column1": [1, 4, 0, 10, 9],
+        "column2": [-1.3, -1.4, -2.9, -10.1, -20.4],
+        "column3": ["value_1", "value_2", "value_3", "value_2", "value_1"],
+    }
+)
+
+# Schema definition
+schema = pa.DataFrameSchema(
+    {
+        "column1": pa.Column(int, checks=pa.Check.le(10)),
+        "column2": pa.Column(float, checks=pa.Check.lt(-1.2)),
+        "column3": pa.Column(
+            str,
+            checks=[
+                pa.Check.str_startswith("value_"),
+                pa.Check(lambda s: s.str.split("_", expand=True).shape[1] == 2),
+            ],
+        ),
+    }
+)
+
+validated_df = schema(df)
+print(validated_df)
+```
+
+## Recommended Data Packages
+
+```toml
+data = [
+    "dagster>=1.9.5",         # Data orchestration
+    "duckdb>=1.1.3",          # Fast analytical database
+    "lancedb>=0.17.0",        # Vector database
+    "networkx>=3.4.2",        # Graph analysis
+    "numpy>=1.26.4",          # Numerical computing
+    "orjson>=3.10.12",        # Fast JSON operations
+    "pillow>=10.4.0",         # Image processing
+    "polars>=1.17.0",         # Fast DataFrames
+    "pygwalker>=0.4.9.13",    # Interactive visualization
+    "sqlmodel>=0.0.22",       # SQL ORM
+    "tomli>=2.0.1",           # TOML parsing
+]
+```

@@ -161,7 +161,7 @@ class GotemArgs(BaseModel):
     generate_personal_ssh_keys: Literal["y", "n"] = Field(default="n")
     generate_and_upload_gh_deploy_keys: Literal["y", "n"] = Field(default="n")
     project_emoji: str = Field(default="🍪")
-    qa_tool: str = Field(default="trunk")
+    qa_tool: Literal["trunk", "pre-commit", None] = Field(default="trunk")
     qa_level: str = Field(default="basic")
     
     # README options

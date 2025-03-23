@@ -1,0 +1,84 @@
+---
+description: Guidelines for writing Python code in this workspace
+globs: *test*.py,test/*
+alwaysApply: false
+---
+
+# Testing Python with Pytest
+
+## Best Practices
+
+### Parameterize Tests
+
+Use for testing multiple input variations:
+
+```python
+@pytest.mark.parametrize("a, b, expected", [(2, 3, 5), (-10, 5, -5), (0, 0, 0), (100, -50, 50)])
+def test_add_numbers(a, b, expected):
+    assert add_numbers(a, b) == expected
+```
+
+### Single Assert per Test
+
+Collect all differences before failing to provide complete debugging info. Prefer one comprehensive assertion per test for better error reporting.
+
+### Use Fixtures
+
+Define reusable test dependencies:
+
+```python
+@pytest.fixture
+def sample_data():
+    return {"user": "test_user", "id": 123}
+
+
+def test_user_exists(sample_data):
+    assert sample_data["user"] == "test_user"
+```
+
+### Additional Tips
+
+- Test behavior, not implementation details
+- Avoid testing code expected to break
+- Name tests descriptively: `test_[function]_[scenario]_[expected]`
+- Use `pytest.raises` for exception testing
+- Mock external dependencies with `monkeypatch` or `pytest-mock`
+- Use `faker` for getting fake data
+- Use `caplog` fixture to test log messages
+- Employ markers to categorize tests: `@pytest.mark.slow`
+- Use `conftest.py` for shared fixtures
+
+## Test Types
+
+### Unit Tests
+
+- Test individual functions/methods in isolation
+- Mock all dependencies
+- Fast execution
+- Location: `tests/`
+
+### E2E Tests
+
+- Test complete workflows from user perspective
+- Use real or realistic staging environment
+- Slow execution
+- Start projects with a basic E2E test that verifies the system runs without errors
+- Location: `tests/e2e/`
+
+## Running Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run specific test file
+pytest tests/test_module.py
+
+# Run with coverage
+pytest --cov=my_package
+
+# Filter by markers
+pytest -m "not slow"
+```
+
+Note: Ensure all code passes provided tests. Do not modify test functions unless explicitly instructed.

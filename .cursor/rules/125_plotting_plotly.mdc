@@ -1,0 +1,90 @@
+---
+description: Best practices for data visualization with Plotly
+globs: *.py,*.ipynb
+alwaysApply: false
+---
+
+# Plotting with Plotly
+
+## Why Plotly
+
+Plotly creates interactive, publication-quality visualizations that can be saved in various formats (HTML, PNG, SVG, PDF) and easily shared. It offers superior interactivity compared to Matplotlib.
+
+## Best Practices
+
+### Separate Data from Visualization
+
+Define and manipulate data in DataFrames before plotting:
+
+```python
+# Good practice
+df = prepare_data()  # Data logic separate from visualization
+fig = px.scatter(df, x="x", y="y", color="category")
+
+# Avoid this
+fig = px.scatter(x=data_x, y=data_y)  # Raw data directly in plot call
+```
+
+### Use Plotly Express for Simple Plots
+
+```python
+import plotly.express as px
+
+# Single-line plots with sensible defaults
+fig = px.scatter(df, x="x", y="y", color="category", hover_data=["additional_info"])
+```
+
+### Use Graph Objects for Complex Customization
+
+```python
+import plotly.graph_objects as go
+
+# More control but more verbose
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=df.x, y=df.y, mode="markers"))
+fig.update_layout(title="Custom Plot")
+```
+
+### Common Styling Patterns
+
+```python
+# Consistent theme application
+fig.update_layout(
+    {
+        "template": "plotly_white",  # or "plotly_dark", "ggplot2", etc.
+        "font": {"family": "Arial", "size": 12},
+        "margin": {"l": 40, "r": 40, "t": 50, "b": 40},
+        "title": {"text": "Plot Title", "font": {"size": 24}},
+        "legend": {"orientation": "h", "y": -0.2},
+    }
+)
+```
+
+### Interactive Features
+
+```python
+# Add dropdown selectors, sliders, or buttons
+fig.update_layout(
+    {
+        "updatemenus": [
+            {
+                "buttons": [
+                    {"method": "update", "label": "Linear", "args": [{"visible": [True, False]}]},
+                    {"method": "update", "label": "Log", "args": [{"visible": [False, True]}]},
+                ]
+            }
+        ]
+    }
+)
+```
+
+### Save and Display
+
+```python
+# Save in multiple formats
+fig.write_html("plot.html")
+fig.write_image("plot.png", scale=2)  # Higher resolution
+
+# In Jupyter: automatic display or explicit control
+fig.show()
+```

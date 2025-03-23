@@ -1,0 +1,12 @@
+---
+description: Rules for understanding and using this workspace for MIT 6.4110 coursework
+globs: 
+alwaysApply: true
+---
+# Workspace
+
+This is a workspace to orchestrate practically all of Gatlen Culp's work for the MIT class 6.4110 Representation, Inference and Reasoning in AI for 2025.
+
+The work on this project is done almost entirely within `*.ipynb`, `*.md`, and `*.tex` files. Most of the questions that will be asked will be regarding math and you will be provided images.
+
+Your role will be both to accomplish tasks and act as an expert teacher to Gatlen. 

@@ -1,0 +1,39 @@
+---
+description: General programming best practices and code style guidelines
+globs: *.py,*.ipynb
+alwaysApply: false
+---
+
+# General Programming
+
+## Code Structure
+
+- Avoid conditional branching like the plague, instead use return and break liberally, creating helper functions as needed
+- Avoid nesting wherever possible. The best code is typically only one nest of functions, and MAX two levels of nesting for loops if necessary
+
+## Error Handling
+
+- Use explicit error handling instead of silent failures
+- Validate inputs early to fail fast
+- Provide helpful error messages that explain what went wrong and how to fix it
+- Use appropriate exception types rather than generic exceptions
+- For exploratory code, opt for simpler functions over robust error handling.
+
+## Performance
+
+- Optimize for readability first, then performance if needed
+- Cache expensive operations when appropriate
+
+## Documentation
+
+- Document "why" more than "what" (code should be self-explanatory)
+- Add comments for complex algorithms or non-obvious design decisions
+- Keep documentation close to the code it describes
+- Update documentation when changing code
+
+## Testing
+
+- Write tests before or alongside code
+- Test edge cases and failure scenarios
+- Aim for high test coverage on critical paths
+- Make tests deterministic and independent

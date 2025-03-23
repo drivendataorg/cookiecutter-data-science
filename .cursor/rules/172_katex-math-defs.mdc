@@ -1,0 +1,66 @@
+---
+description: Guidelines for LaTeX usage and best practices
+globs: *.tex,*.md
+alwaysApply: false
+---
+
+# Guidelines for Writing Math Definitions
+\( \newcommand{\defin}{\mathrel{:}\in} \)
+
+## Structure
+- Use column-aligned hierarchical definitions with names
+- Align symbols/variables vertically for easy reference
+- Utilize LaTeX align environment for precise alignment
+
+## Notation
+- Prefer interval notation over inequalities where appropriate
+- Always state the bounds of variables and sets
+- Define `\defin` with `\( \newcommand{\defin}{\mathrel{:}\in} \)` for "defined in" at the top of a file
+
+## LaTeX Commands
+- Use \(\defeq\) for definitions instead of \(=\)
+- Use \(\defin\) for defining an element of a set instead of \(\in\)
+- Employ `\phantom{}` for proper alignment in complex equations
+- Use semantic commands `\Reals` instead of `\mathbb{R}`
+
+## Organization
+- Start with the main definition
+- Follow with detailed explanations of each component
+- Include domain and codomain information for functions
+- Define all symbols and notations used
+- Specify the type of each variable or set
+- Include quantifiers (\(\forall\), \(\exists\)) when necessary
+
+## Example Format
+
+\[
+\begin{aligned}
+G &\colonequals (V, E, w, h) &&
+    G \colonequals \text{fin. undir. } \textbf{G}\text{raph} &&
+    \mathbb{G} = \set{\text{all } G} \\
+  &\phantom{=(V, E, w,} h\phantom{)} &&
+    h \colonequals \text{node features} &&
+    h_v \defin \mathbb{R}^m \land h_v \defin [-C, C] &&
+    \forall v \defin V \\
+  &\phantom{=(V, E,} w\phantom{, h)} &&
+    w \colonequals \text{edge }\textbf{w}\text{eights} &&
+    w_e \defin \mathbb{R} \land w_e \defin [-C, C] &&
+    \forall e \defin E \\
+  &\phantom{=(V,} E\phantom{, w, h)} &&
+    E \colonequals \textbf{E}\text{dge set} &&
+    E \subset V \times V \\
+  &\phantom{=(}V\phantom{, E, w, h)} &&
+    V \colonequals \textbf{V}\text{ertex set}\\
+  &\phantom{=(V, E, w, h)} &&
+    \phantom{w \colonequals \text{edge }\textbf{w}\text{eights}}&&
+    \phantom{w_e \defin \mathbb{R} \land w_e \defin [-}C \defin (0, \infty)\\
+\end{aligned}
+\]
+
+## Function Notation
+- Define function mappings as \(f : x \mapsto y\) instead of \(f(x) := y\)
+
+## Additional Considerations
+- Break complex definitions into multiple aligned equations
+- Use descriptive variable names when possible
+- Include relevant constraints or conditions

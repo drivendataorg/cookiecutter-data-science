@@ -1,0 +1,24 @@
+---
+description: Guidelines for using Data Version Control (DVC) in this project
+globs:
+alwaysApply: false
+---
+
+# Data Version Control (DVC)
+
+For managing data, make sure to use Data Version Control (DVC). Do not use Git LFS, that system is rittled with errors
+
+## Core DVC Commands
+
+- `dvc init` - Initialize DVC in project
+- `dvc add <file/dir>` - Track data file/directory
+- `dvc push` - Push data to remote storage
+- `dvc pull` - Get latest data from remote
+- `dvc repro` - Reproduce pipeline/experiments
+
+## Conventions
+
+- Store data in `data/` directory
+- Define pipelines in `dvc.yaml`
+- Keep ML metrics in `metrics.json`
+- Document data sources in `data/README.md`

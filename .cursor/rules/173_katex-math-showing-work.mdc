@@ -1,0 +1,125 @@
+---
+description: Guidelines for LaTeX usage and best practices
+globs: *.tex,*.md
+alwaysApply: false
+---
+{% raw %}
+
+# Guidelines for Solving Math Problems
+\( \newcommand{\defin}{\mathrel{:}\in} \)
+
+## Markdown and KaTeX 
+- Use `\[ \]` for block math expressions
+- Use `\( \)` for inline math expressions
+
+## Equation Formatting
+- Use `alignat` environment for multi-line equations
+- Number each step in manipulations
+- Align equations over the equality/inequality symbol
+
+Example:
+\[
+\begin{alignat}{2}
+    y - 2 &= 2 \cdot \frac{\partial u}{\partial v} &&+ 5 \\
+          &= 2 \cdot x                            &&+ 5 \tag{Given} \\
+          &= 12                                   &&+ 5 \tag{x is 6} \\
+    y - 2 &= 17                                        \tag{addition} \\
+    y     &= 19
+\end{alignat}
+\]
+
+## Macros
+- Define macros to improve readability
+- Use `\newcommand\macroname[numargs]{definition}`
+
+Example:
+\[
+\newcommand\blue[1]{\textcolor{blue}{#1}}
+\newcommand\x{\blue{x}}
+\newcommand\y{\textbf{y}}
+\newcommand\dd[2]{\frac{\partial #1}{\partial #2}}
+\y = 2 \cdot \dd{u}{v} + 7 = 2 \cdot \x + 7
+\]
+
+## Solution Structure
+- Begin with problem restatement
+- Number steps for complex proofs
+- Provide brief explanations for each step
+- Clearly state conclusion
+
+## Proof Example
+**Prove that the sum of two even integers is even.**
+
+*Proof:*
+
+1. Let \(a\) and \(b\) be even integers.
+2. By definition, \(a = 2m\) and \(b = 2n\), where \(m\) and \(n\) are integers.
+3. Consider the sum \(a + b\):
+
+   \[
+   \begin{alignat}{2}
+   a + b &= 2m + 2n \\
+         &= 2(m + n) \tag{1}
+   \end{alignat}
+   \]
+
+4. Since \(m + n\) is an integer, \((1) \implies\) \(2(m + n)\) is even by definition.
+5. Therefore, the sum of two even integers is even. \(\qed\)
+
+## Additional Guidelines
+- Use color and styling through macros
+- Address edge cases and constraints
+- Mention alternative approaches when applicable
+- Use `\boxed{}` to emphasize final answers
+
+## Complex Example
+\[
+\newcommand{\E}{\mathbb{E}}
+\]
+
+1) Weak domination condition:
+   For \(T\) to weakly dominate \(B\), we must have:
+   \[
+   \begin{alignat}{2}
+   u_1(T, L) &\geq u_1(B, L) \tag{1} \\
+   u_1(T, R) &\geq u_1(B, R) \tag{2}
+   \end{alignat}
+   \]
+   With at least one of these inequalities being strict.
+
+2) Best response condition:
+   Let \(p \in (0,1)\) be the probability that player 2 plays \(L\). For \(B\) to be a best response:
+   \[
+   \begin{alignat}{2}
+   \E[u_1(B, s_2)] &\geq \E[u_1(T, s_2)] \\
+   p \cdot u_1(B, L) + (1-p) \cdot u_1(B, R) 
+   &\geq p \cdot u_1(T, L) + (1-p) \cdot u_1(T, R) \tag{3}
+   \end{alignat}
+   \]
+
+3) From (1) and (2), we derive:
+   \[
+   \begin{alignat}{2}
+   p \cdot u_1(T, L) &\geq p \cdot u_1(B, L) \tag{4} \\
+   (1-p) \cdot u_1(T, R) &\geq (1-p) \cdot u_1(B, R) \tag{5}
+   \end{alignat}
+   \]
+
+4) Adding (4) and (5):
+   \[
+   \begin{alignat}{2}
+   p \cdot u_1(T, L) + (1-p) \cdot u_1(T, R) 
+   &\geq p \cdot u_1(B, L) + (1-p) \cdot u_1(B, R) \tag{6}
+   \end{alignat}
+   \]
+
+5) This contradicts (3). Since at least one inequality in (1) or (2) is strict and \(p \in (0,1)\), inequality (6) must be strict:
+   \[
+   \begin{alignat}{2}
+   p \cdot u_1(T, L) + (1-p) \cdot u_1(T, R) 
+   &> p \cdot u_1(B, L) + (1-p) \cdot u_1(B, R) \tag{7}
+   \end{alignat}
+   \]
+
+Therefore, it's impossible for \(T\) to weakly dominate \(B\) while simultaneously having \(B\) as a best response to a belief with positive probability on each of player 2's strategies.
+{% endraw %}
