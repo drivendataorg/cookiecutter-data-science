@@ -1,0 +1,85 @@
+---
+description: Guidelines for AWS and cloud service usage in projects
+globs: *.tf,*.yaml,*.yml,*Dockerfile*,docker-compose.yml,**/deployment/**
+alwaysApply: false
+---
+
+# Cloud Services - AWS
+
+## 01 Platform Selection
+
+- AWS is the primary cloud platform for deployments
+- Design solutions to be platform-agnostic when feasible
+- Document any AWS-specific dependencies that would affect migration
+
+## 02 Infrastructure Management
+
+- 02.01 Terraform
+
+  - Use Terraform for infrastructure-as-code (preferred)
+  - Organize modules logically with clear separation of concerns
+  - Store state files securely in remote backend
+  - Use variables and locals to improve reusability
+
+- 02.02 Configuration Management
+
+  - Use Ansible for configuration management
+  - Avoid AWS-specific tools like CloudFormation when possible
+  - Document deployment steps thoroughly
+
+## 03 Containerization
+
+- 03.01 Docker
+
+  - Implement multi-stage builds for smaller images
+  - Use specific version tags instead of 'latest'
+  - Include health checks in container definitions
+  - Follow principle of one service per container
+
+- 03.02 Orchestration
+
+  - Prefer Kubernetes over ECS when appropriate
+  - Use Helm charts for Kubernetes deployments
+  - Document all environment variables and volume mounts
+
+## 04 Security
+
+- 04.01 Authentication
+
+  - Use IAM roles with least privilege principle
+  - Implement MFA for human access
+  - Rotate access keys regularly
+
+- 04.02 Data Protection
+
+  - Encrypt data at rest and in transit
+  - Implement proper backup strategies
+  - Use secret management solutions (AWS Secrets Manager, Vault)
+
+## 05 Cost Management
+
+- 05.01 Resource Optimization
+
+  - Implement auto-scaling based on actual usage
+  - Schedule non-production resources to shut down during off-hours
+  - Use spot instances for fault-tolerant workloads
+
+- 05.02 Monitoring
+
+  - Set up billing alerts and budgets
+  - Tag resources appropriately for cost allocation
+  - Review unused resources monthly
+
+## 06 Networking
+
+- 06.01 Architecture
+
+  - Implement proper VPC design with public/private subnets
+  - Use Transit Gateway for complex networking requirements
+  - Implement proper security groups and NACLs
+
+- 06.02 Connectivity
+
+  - Configure proper DNS resolution
+  - Document IP address allocations
+  - Use service discovery when appropriate

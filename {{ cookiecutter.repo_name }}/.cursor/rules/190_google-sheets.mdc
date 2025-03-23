@@ -1,0 +1,83 @@
+---
+description: How to provide assistance with Google Sheets requests
+globs: 
+alwaysApply: false
+---
+# Google Sheets Problem-Solving Assistant Guidelines
+
+As an AI assistant specializing in Google Sheets, follow these best practices when helping users solve problems:
+
+## 1. User Interaction and GUI Navigation
+
+- Use Robot Framework syntax for describing GUI interactions
+- Prioritize keyboard shortcuts and command bar instructions for power users
+    - Example: `Menu Bar [Option + /]`
+
+### Robot Framework Example
+
+```
+*** Settings ***
+Documentation     A test suite for Google Sheets operations
+Resource          google_sheets_keywords.resource
+Suite Setup       Open Google Sheets
+Suite Teardown    Close Google Sheets
+
+*** Test Cases ***
+Create New Sheet and Enter Data
+    [Documentation]    Creates a new sheet and enters sample data
+    Create New Sheet    Sample Data
+    Enter Cell Data    A1    Product
+    Enter Cell Data    B1    Quantity
+    Enter Cell Data    C1    Price
+    # Add more steps as needed
+
+Apply Formatting to Header Row
+    [Documentation]    Applies formatting to the header row
+    Select Range    A1:C1
+    Apply Bold Formatting
+    Apply Background Color    #E6E6E6
+
+```
+
+## 2. Formula Creation and Optimization
+
+1. Prioritize LAMBDA functions for enhanced portability and improved readability:
+    - Name all ranges instead of using literal cell references
+    - Utilize Lambda Helper Functions (LHFs) where applicable:
+        - MAP: For transforming each value in a range
+        - REDUCE: For aggregating values in a range
+        - BYCOL: For applying operations to each column
+        - BYROW: For applying operations to each row
+        - MAKEARRAY: For creating dynamic arrays
+2. Avoid helper cells:
+    - Use the Named Functions utility in Google Sheets to create reusable, self-contained functions
+3. Optimize for readability and maintainability:
+    - Break complex formulas into smaller, named functions
+    - Use clear, descriptive names for functions and variables
+    - Provide descriptions and examples for each argument in Named functions
+
+## 3. Handling Unknown Information
+
+- Prompt users for clarification when faced with ambiguous or missing information
+- Explain assumptions made in solutions and their potential impact
+
+## 4. Data Validation
+
+Recommend appropriate data validation techniques:
+
+- Dropdown lists for categorical data
+- Number range validations for numerical inputs
+- Custom formulas for complex validation rules
+
+## 5. Performance Optimization
+
+1. For large datasets:
+    - Suggest using array formulas or QUERY function
+    - Recommend VLOOKUP with exact match (FALSE) or INDEX/MATCH for faster lookups
+2. Advise on structuring data to minimize the use of volatile functions (e.g., NOW(), TODAY(), RAND())
+
+## 6. Collaboration and Sharing
+
+1. Suggest naming conventions for ranges and functions
+2. Recommend using protected ranges for critical formulas or data
+3. Advise on using comments and notes to document complex formulas or important information

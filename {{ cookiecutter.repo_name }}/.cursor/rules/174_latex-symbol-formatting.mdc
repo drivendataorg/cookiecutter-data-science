@@ -1,0 +1,140 @@
+---
+description: Guidelines for LaTeX usage and best practices
+globs: *.tex,*.md
+alwaysApply: false
+---
+# Math Symbol Formatting
+
+## Types
+- **Scalars** \(\mathbf{x}\): a-z lowercase, italicized
+  - **Constants** \(\alpha\): Greek letters (typically \(\alpha, \beta, \gamma\))
+- **Vectors** \(\mathbf{v}\): bolded lowercase (typically \(\mathbf{u},\mathbf{v},\mathbf{w}\))
+  - **Unit Vectors** \(\hat{\mathbf{v}}\): Bolded lowercase with hat
+- **Matrices/Tensors** \(\mathbf{A}\): Bolded uppercase
+  - **Identity Matrix** \(\mathbf{I}\)
+- **Sets** \(\mathcal{A}\): Define using \(\set{x | x < 5}\), represent with capital calligraphic letters
+  - **Number Sets** \(\Reals\): Capitalized and blackboard bold (use \(\Reals\) not \(\R\))
+  - **Tuples** \(\newcommand{\tuple}[1]{\overset{\rightharpoonup}{\mathcal{#1}}}\tuple{A}\): Sets with arrow to indicate order
+- **Functions** \(f(x)\): a-z lowercase, italicized with parenthesis (typically \(f(x), g(x), h(x)\))
+
+## Definitions
+- Defining variable: \(x \defeq 8\)
+- Domains/Codomains: \(f : \mathcal X \to \mathcal Y\)
+
+## Code as Math
+- Functions: \(\mathtt{convolution\_layer(x)}\) (snakecase with parentheses)
+- Variables: \(\mathtt{convolution\_layer}\) (snakecase)
+- Classes: \(\mathtt{ConvolutionLayer}\) (UpperCamelCase)
+
+## Grids and Lists
+- Matrices/Tensors: Use square brackets
+
+\[
+\begin{bmatrix}
+   a & b \\
+   c & d
+\end{bmatrix}
+\]
+
+- Determinants: Use vertical bars
+
+\[
+\begin{vmatrix}
+   a & b \\
+   c & d
+\end{vmatrix}
+\]
+
+- Cases: Use curly brackets on both sides
+
+\[
+x =
+\begin{Bmatrix}
+   a &\text{if } b \\
+   c &\text{if } d
+\end{Bmatrix}
+\]
+
+## Indexing
+- Matrices/Tensors: \(\mathbf{A}_{ijk}\) (subscript variables \(i,j,k\))
+  - With numbers: \(\mathbf{A}_{4,5,8}\) (use commas)
+- Derivatives: \(f^\prime, f^{\prime\prime}\)
+- Averages: \(\bar{x}, \bar{y}, \bar{z}\)
+
+## Variations
+- Approximations: \(\hat{\theta}\) (hat)
+- Optimal values: \(\theta^*\) (star)
+
+## Derivatives
+\[
+\newcommand{\odv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\pdv}[2]{\frac{\partial #1}{\partial #2}}
+\odv{y}{x}, \pdv{f}{x}
+\]
+
+## Probability
+- Probability: \(\Pr[ x | y ]\) (Pr with square brackets)
+- Expected Value: \(\mathbb{E}[ x | y ]\) (blackboard E)
+- Variance: \(\mathrm{Var}[x]\) (using `\mathrm`)
+- Distribution: \(p \in [0,1]\) (lowercase, typically \(p\) or \(q\))
+
+## Operators
+- Multiplication: \(\cdot\) or no space (not \(*\))
+- Math operators: \(\sin, \min, \det\), etc.
+
+## Annotations
+- Use equation tags for all equations
+- Use `\tag` to show reasoning between steps
+
+\[
+\begin{alignat}{2}
+    \tag{Given by Definition}
+    y &= 2 \cdot x &&+ 5\\
+    \tag{Additive Property}
+    y + 3 &= 2 \cdot x &&+ 5 + 3\\
+\end{alignat}
+\]
+
+## Color Usage
+Four colors only:
+
+1. **Black** (Default)
+   - Operators, numbers, most variables
+   - Constants (e, \( \pi \)) and function names (sin, cos, log)
+
+2. **Red** (Changes and Emphasis)
+   - Changes in equations between steps
+   - Substitutions, cancellations, transformations
+
+3. **Blue** (Target Variable)
+   - Variable we're solving for
+
+4. **Green** (Flexible)
+   - Additional emphasis or distinction
+   - Auxiliary variables or parameters
+
+## Color Example
+\[
+   \newcommand{\x}{\textcolor{blue}{x}}
+   \newcommand{\red}[1]{\textcolor{red}{#1}}
+\]
+
+\[
+a\x^2 + b\x + c = 0
+\]
+
+\[
+\x = \frac{-b \pm \sqrt{\red{b^2 - 4ac}}}{2a}
+\]
+
+\[
+\x = \frac{-5 \pm \sqrt{\red{5^2 - 4(1)(6)}}}{2(1)}
+\]
+
+\[
+\x = \frac{-5 \pm \sqrt{\red{25 - 24}}}{2} = \frac{-5 \pm \red{1}}{2}
+\]
+
+\[
+\x_1 = \frac{-5 + 1}{2} = \red{-2} \quad \text{and} \quad \x_2 = \frac{-5 - 1}{2} = \red{-3}
+\]

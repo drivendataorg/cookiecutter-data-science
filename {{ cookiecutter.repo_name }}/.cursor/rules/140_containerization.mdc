@@ -1,0 +1,40 @@
+---
+description: Guidelines for container usage and configuration in the project
+globs: *Dockerfile*, docker-compose.yml,docker-compose.yaml,*docker*
+alwaysApply: false
+---
+
+# Containers
+
+For containerization, it's important to always have a docker container configuration that is capable of running the application.
+
+If the application depends on multiple parts including a server, a user, a database, etc. Their setup should also be containerized.
+
+The main configuration logic for docker containers should happen outside of the docker container so that it can work on the machines of others.
+
+## Best Practices
+
+- Use multi-stage builds to minimize image size
+- Pin exact versions for base images (e.g., `python:3.11.5-slim`)
+- Keep images lightweight by removing unnecessary files
+- Use non-root user for running applications
+- Include proper health checks
+
+## Linting
+
+- Use hadolint for Dockerfile validation
+- All Dockerfiles must pass hadolint checks before merging
+- Run with `hadolint Dockerfile`
+- Configure rules in `.hadolint.yaml`
+
+## Project Structure
+
+- Place all Dockerfiles in `docker/` directory
+- Use `docker-compose.yml` for multi-container setups
+- Document container requirements in `docker/README.md`
+
+## Development Workflow
+
+- Use bind mounts for code during development
+- Include dev/prod configuration options
+- Ensure consistent environments with `pyproject.toml`

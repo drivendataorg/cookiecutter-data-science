@@ -1,0 +1,30 @@
+---
+description: Guidelines for using Dev Containers for consistent development environments
+globs: .devcontainer/**
+alwaysApply: false
+---
+
+# Dev Containers
+
+Devcontainers are a way of making sure anyone is able to work on and install the project. It's a good way of keeping track of dependencies and making it so that dev environments are standard and everyone has access to the same tools without interfering with their local machine.
+
+The dev container should always build.
+
+## Configuration
+
+- Store configs in `.devcontainer/` directory
+- Include `devcontainer.json` with VS Code extensions
+- Define custom `postCreateCommand` for setup
+- Use forwarded ports for services
+
+## Features
+
+- Install only dev-specific tools (linters, formatters, debuggers)
+- Configure pre-commit hooks in container
+- Mount local SSH keys via `ssh-agent`
+- Share volumes for caching dependencies
+
+## Workflow
+
+- Document container usage in project `CONTRIBUTING.md`
+- Ensure IDE settings are consistent for all team members

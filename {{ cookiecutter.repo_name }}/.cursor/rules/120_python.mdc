@@ -1,0 +1,52 @@
+---
+description: Core Python coding standards for the project
+globs: *.py,*ipynb
+alwaysApply: false
+---
+
+# Python Guidelines
+
+## Code Style
+
+- Google-style docstrings
+- `# %%` to delimit notebook cells in scripts
+- `pathlib` over `os` for file operations
+
+## Typing
+
+- Python 3.9 syntax: `Union[Type1, Type2]` not `Type1 | Type2`; `Optional[Type]` not `Type | None`
+- Type annotations for all functions, parameters, and return values
+- Add type annotations when initializing empty iterables/variables as None
+- Avoid `Any` when possible; create `typevar`s if needed
+- Consider semantic type aliases (e.g., `Html = str`)
+
+## Organization
+
+- Central `config.py` for settings, constants, env vars, and logging config
+- Secrets in `.env` or `secrets/` directory
+- Modules with clear, specific purposes
+- Public functions at top (ideally one per module)
+- Private helpers prefixed with underscore (`_helper_function`)
+- No helper imports between modules
+- Helper functions should use 1-2 line docstrings for readability
+
+## Pydantic
+
+- Prefer pydantic models over dataclasses, typed dicts, namedtuples, and dictionaries
+- Use for reading/writing data (e.g., JSON files)
+- Use classes only for complex objects with operations/mutation methods
+
+## Loguru & Rich
+
+- `loguru` over Python's `logging`
+- No print statements; use logging statements
+- For user-facing output, use `rich` and log those messages
+- Use emojis in logs for faster visual recognition
+
+## Simplifying Code
+
+- Single clear comprehensions (dict/generator/set/list) over iterative building
+- Reduce nesting with `itertools` and `functools` (Ex: `itertools.product` eliminates two+ for loops)
+- Avoid recursion; use while loops with queues (a la BFS/DFS)
+- Use generators where appropriate and efficient
+- Use sets where their operations make code clearer

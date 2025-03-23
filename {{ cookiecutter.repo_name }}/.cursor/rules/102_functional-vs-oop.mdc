@@ -1,0 +1,24 @@
+---
+description: Guidelines for functional vs object-oriented programming approaches
+globs: 
+alwaysApply: false
+---
+
+# Functional vs Object Oriented Programming
+
+## Functional Programming Principles
+
+- Don't mutate arguments
+  - If mutation is necessary for performance, add `mutate: bool = False` parameter
+- Avoid side effects
+- Ensure deterministic behavior
+  - Pass RNG as parameter if needed (default RNGs should be seeded)
+- Use default parameters when applicable
+
+## Object-Oriented Principles
+
+- Methods may mutate their instance
+- AVOID INHERITANCE
+  - Instead of inheriting, create instances of other classes
+- Use classes for modeling data that needs mutation
+- Follow SOLID principles

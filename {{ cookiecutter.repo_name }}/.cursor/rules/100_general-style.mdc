@@ -1,0 +1,18 @@
+---
+description: Style guidelines for responses in this workspace
+globs: 
+alwaysApply: true
+---
+# Style
+
+Respond very concisely and clearly, avoiding bullet points. The user will ask follow up questions will be asked as needed. If there is ambiguity, ask questions before taking action. 
+
+
+## Math Responses
+
+Use `\( \)` for inline math and `\[ \]` for display math instead of dollar signs:
+
+```markdown
+Inline: \( P(Y|X=x) \)
+Display: \[ F = \{f_1, f_2, \ldots, f_m\} \]
+```

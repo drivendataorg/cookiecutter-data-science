@@ -1,0 +1,49 @@
+---
+description: Markdown formatting standards
+globs: *.md
+alwaysApply: false
+---
+
+# Markdown Styling
+
+## 01 Code
+Use backticks for `inline code` or triple backticks for blocks:
+```markdown
+code block
+```
+
+## 02 Citations
+Use footnotes for references:
+```markdown
+Text with reference[^1].
+[^1]: Source URL or description.
+```
+
+## 03 Alerts
+```markdown
+> [!NOTE|TIP|IMPORTANT|WARNING|CAUTION]
+> Alert content here.
+```
+
+## 04 Dropdowns
+Use for optional verbose content:
+```markdown
+<details>
+<summary><b>ℹ️ Alternative Names for Variable Elimination</b></summary>
+<br />
+
+- Bucket elimination
+- Sum-product algorithm (in specific contexts)
+- Non-serial dynamic programming
+- Adaptive consistency
+- Directional resolution
+
+<br />
+</details>
+```
+
+## 05 Related Rules
+- katex-math
+- mermaid-diagrams
+- markdown-enhanced-style
+- heading-indices

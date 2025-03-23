@@ -1,0 +1,61 @@
+---
+description: Guidelines for implementing and testing GitHub Actions workflows
+globs: .github/**/*.yml,.github/**/*.yaml
+alwaysApply: false
+---
+
+# CI/CD Github Actions
+
+For any CI/CD tasks, please implement them into `.github/workflows` directory for GitHub Actions.
+
+## 01 Workflow Structure
+
+- Name workflows descriptively: `name: Python Tests`
+- Use appropriate triggers:
+  ```yaml
+  on:
+    push:
+      branches: [main]
+    pull_request:
+      branches: [main]
+  ```
+- Organize jobs logically with clear names
+- Use consistent job dependencies with `needs:`
+
+## 02 Best Practices
+
+- Use GitHub-hosted runners when possible: `runs-on: ubuntu-latest`
+- Pin action versions with full SHA for security: `actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab`
+- Leverage organization secrets for sensitive data
+- Set appropriate timeouts: `timeout-minutes: 10`
+- Use GitHub Cache for dependencies:
+  ```yaml
+  - uses: actions/cache@v3
+    with:
+      path: ~/.cache/pip
+      key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+  ```
+
+## 03 Testing Locally with Act CLI
+
+Act CLI allows testing GitHub Actions workflows locally:
+
+```bash
+# Run all workflows
+act
+
+# Run specific workflow
+act -W .github/workflows/python-tests.yml
+
+# Run specific job
+act -j test -W .github/workflows/python-tests.yml
+
+# Run with specific event
+act pull_request -W .github/workflows/python-tests.yml
+```
+
+Common Act CLI flags:
+
+- `-P ubuntu-latest=catthehacker/ubuntu:act-latest` - Use specific platform image
+- `--secret-file .secrets` - Provide secrets from file
+- `-v` - Verbose output

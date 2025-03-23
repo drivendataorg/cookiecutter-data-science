@@ -1,0 +1,137 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+## Mathematical Notation for Representing Game Theory (Experimental)
+
+### 01 Normal Form Representation
+
+NOTE: The first subscript will ALWAYS be the player associated.
+
+**Extensive Form**
+$\mathcal H$: Set of all nodes (Aka: Set of histories)
+$\mathcal Z$: Set of all terminal nodes
+$\mathcal H \backslash \mathcal Z$: Set of all decision nodes
+- $h \in \mathcal H \backslash \mathcal Z$: A particular decision node (note, $h$ is not in $\mathcal H$)
+  - $A(h)$: Set of all available actions/moves at decions node $h$. New node denoted as $(h,a)$ where $a \in A(h)$
+  - $i(h)$: Player who is to move at decision node $h$
+  - $\mathcal H^{(t)}$: All nodes at depth $t$. (Gatlen Def)
+  - $\mathcal H^{(t_1 : t_2)}$: All between moves depths $t_1$ and $t_2$. (Gatlen Def, idk if either of these really make sense.)
+- $\mathcal I \subseteq \mathcal H \backslash \mathcal Z$: An information set, ie: subset of decision nodes s.t. same player moves at each and same moves are available (Feel like they're missing something.) (Also future references to $\mathcal I$ will refer to ALL infosets, not just one.)
+  - $\mathcal I_i = \set{\mathcal I_i^{(1)}, \cdots, \mathcal I_i^{(\ell)}}$: Every information set (a.k.a. history) available to player $i$ for $\ell$ info sets.
+    - TODO: This is so weird, why are info sets a set of decision nodes ($h$) but $h_i$ is a set of info sets? I'll just rename $h_i$ to $\mathcal I_i$ (Changed $h_i$ to current.)
+  - We will also call the number of infosets available to player $i$, $|\mathcal I_i| = \ell_i$ or just $\ell$
+
+$\tilde u = (\tilde u_1, \cdots, \tilde u_n)$: All payoff functions 
+- $\tilde u_i(z)$: Payoff to player $i$ as a function of the outcome. (This is deterministic vNM utility.)
+- $\tilde u : \mathcal Z \to \Reals^n$
+
+**Strategic/Normal Form Notation**
+$N = \set{1, \cdots, n}$: Players
+
+$\mathcal S = \mathcal S_1 \times \cdots \times \mathcal S_n$: Set of all possible strategy profiles.
+- $\mathcal S_i = \set{s_i^1, \cdots, s_i^m}$: strategy space/set of player $i$ where they have $m$ strategies
+  - $s_i = \Bigl( A_i(\mathcal I_i^{(j)}) | j \in \set{1, \cdots, \ell}\Bigr)$: a (pure) strategy of player $i$. $s_i^{(j)}$ is the action they take at their $j$th of $\ell$ info sets. $|s_i| = \# \text{ of info sets}$.
+- $s = (s_1, \cdots, s_n)$: strategy profile of the $n$ players (the "outcome" of the game)
+- $s_{-i} = (s_1, \cdots, s_{i-1}, s_{i+1}, \cdots, s_n)$: The strategy profile of the other $n-1$ players not $i$.
+
+$u = (u_1, \cdots, u_n)$: All payoff functions 
+- $u_i(s_i, s_{-i})$: Payoff to player $i$ as a function of the strategy profile of $n$ players.
+- $u : \mathcal S \to \Reals^n$
+
+$z(s) \in Z$: The outcome of strategy profile $s$ (deterministic if no nature)
+$\mathcal G = (N, \mathcal S, \mathcal u)$
+
+
+**Gatlen's Notes**
+
+$A_i(\mathcal{I}_i^{(j)})$: My fancy way of denoting available actions available for player $i$ at their $j$th infoset. $\mathcal I$ im using to mean all info sets.
+
+**Simplifying Game Theory with Linear Algebra**
+
+You can use the tensor product to represent a combination of strategies.
+
+$$
+\mathbf{S}
+= \mathbf S_1 \otimes \mathbf S_2
+=\
+\begin{bmatrix} T \\ M \\ B \end{bmatrix}
+\otimes
+\begin{bmatrix} L & C & R \end{bmatrix}
+\\=
+\begin{bmatrix} 
+   TL & TC & TR \\
+   ML & MC & MR \\
+   BL & BC & BR
+\end{bmatrix}
+$$
+
+This can also be mapped element-wise to payoffs using $u(\mathbf S)$
+
+The expected payoffs for a mixed strat can also be calculated like below where
+
+$$
+\newcommand\E{\mathbb{E}}
+\newcommand\Sone{\mathbf{S_1}}
+\newcommand\Stwo{\mathbf{S_2}}
+\sigma_1 = (\mathbf S_1, \mathbf p_1) \\
+= (
+   \begin{bmatrix} T \\ M \\ B \end{bmatrix}, 
+   \begin{bmatrix} p^T \\ p^M \\ 1 - p^T - p^M \end{bmatrix})
+\\
+\E[u(\Stwo, \sigma_1)] = u(\Stwo \otimes \Sone) \cdot \mathbf p_1
+$$
+
+**Mixed Strategies**
+
+$\Delta \mathcal S$: Set of all possible (Gatlen Defined) (Slice along a single player, you get $\Delta \mathcal S_i$, slice along a single set of mixed strategies and you get a profile.)
+- $\Delta \mathcal S_i$: Set of possible mixed strategies for player $i$ (set of all probability distributions over their pure strats)
+  - $\sigma_i = (p_i^{(1)}, p_i^{(2)}, \cdots, p_i^{(m)})$: Mixed strategy for player $i$ is a distribution over $m$ pure strategies that they have available. (Can itself be a pure strat.)
+- $\sigma = (\sigma_1, \cdots, \sigma_n)$: Mixed strategy profile of $n$ players.
+  - $\sigma_{-i} = (\sigma_1, \cdots, \sigma_{i-1}, \sigma_{i+1}, \cdots, \sigma_{n})$
+
+$\beta_{-i} (s_{-i}): \mathcal S_i \to [0, 1]$: Belief that player $i$ has about the probability distribution of pure strategies all other players have. It itself is representing a possible probability distribution.
+- $u_i(s_i, \beta_{-i}) := \sum_{s_{-i} \in \mathcal S_{-i}} u_i(s_i, s_{-i}) \cdot \beta_{-i} (s_{-i})$
+
+$s_i \in \mathcal{BR_i(\blue{s_{-i}})} = \text{ is a best response to } \blue{s_{-i}} :$ IFF you can't improve on the response:
+$$
+u_i(\red{s_i}, \blue{s_{-i}}) \geq u_i(\red{s_i^\prime}, \blue{s_{-i}}) \quad (\forall s_{-i}^\prime \in \mathcal S_{-i})
+$$
+
+$s_i \in \mathcal{BR_i(\blue{\beta_{-i}})} = \text{ is a best response to } \blue{\beta_{-i}} :$ IFF you can't improve given that the belief is true:
+$$
+u_i(\red{s_i}, \blue{\beta_{-i}}) \geq u_i(\red{s_i^\prime}, \blue{\beta_{-i}}) \quad (\forall s_{-i}^\prime \in \mathcal S_{-i})
+$$
+
+**Domination**
+
+Gatlen's notation, taken from Decision Theory includes the `\succ` and `\prec`
+
+$s_i^* \succ s_{i} \text{ where } (s_i, s_i^* \in \mathcal S_i) := s_i^* \text{ strictly dominates } s_i$: IFF
+$$
+u_i(\red{s_i^*}, s_{-i}) > u_i(\red{s_i}, s_{-i}) \quad (\forall s_{-i} \in \mathcal S_{-i})
+$$
+
+$s_i^* \succeq s_{i} \text{ where } (s_i, s_i^* \in \mathcal S_i) := s_i^* \text{ weakly dominates } s_i$: IFF it is not worse for any other oppositional strat and it is at least better for one strat. Ie:
+$$
+\begin{align}
+    u_i(\red{s_i^*}, s_{-i}) &\green{\geq} u_i(\red{s_i}, s_{-i}) \\
+    \text{AND } \exists s_i : u_i(\red{s_i^*}, s_{-i}) &\green{>} u_i(\red{s_i}, s_{-i})
+    \quad (\forall s_{-i} \in \mathcal S_{-i})
+\end{align}
+$$
+ 
+$\prec, \preceq$ are defined similarly.
+
+
+
+TODO: Define rationalizabiliy - I'm pretty sure only strictly dominated.
+
+TODO: Define dominant strategy equilibrium - I'm pretty sure if weakly dominated
+
+**Nash Equilibrium**
+
+$s^*$ is $\mathcal{NE}$ or "Nash Equilibrium" $\colonequals$ for each $i$, $u_i(s_i^*, s_{-i}^*) \geq u_i (s_i, s_{-i}^*) \forall s_i \in S_i$, ie: $s_i^*$ is a best response to the belief $\beta_{-i}$ that $s_{-i}^*$
+
+$\sigma^*$ is $\mathcal{MNE}$ or "Mixed Nash Equilibrium" $\colonequals \forall i, \sigma_i, u_i (\sigma_i^*, \sigma_{-i}^*) \geq u_i (\sigma_i, \sigma_{-i}^*)$, ie: $s_i^*$ is a $\mathcal{BR}(\sigma_{-i}^*)$. Do this by

@@ -1,0 +1,35 @@
+---
+description: 
+globs: .cursor/notes/*.md
+alwaysApply: false
+---
+# (Cursor Rule 102) Agent Note Taking
+
+Agentic AI note taking is an experimental technique for the user to learn content. Instead of reading sequentially through a textbook or notes, the user will iteratively interact with an AI agent to build their understanding, and in the process, building a document explaining the topic and their thought process. The AI is acting as a sort of teacher.
+
+Notes are to be considered living documents that will likely be interacted with and updated again and again over time as a user learns more. The user may also share this document with others who are trying to learn about the topic. The entire `.cursor/notes` directory may be considered wholistically, with interwoven notes constituting a kind of "Notebook" where there might be a link to another page.
+
+## User interactions
+
+In the chat, answer clearly and concisely. Answers/information should be put into the document itself and the chat should primarily be used for asking clarifying questions, providing some further directions for discussion, etc.
+
+
+## Markdown Styling
+
+### General Style
+In addition to [201_markdown-style.mdc](mdc:.cursor/rules/201_markdown-style.mdc)
+
+Think about the formatting of this document similar to an interactive blog post. The styling should be quite expressive while keeping the syntax minimal.
+
+
+### Front matter metadata
+
+Please include:
+- `title`: str -- Brief title of the note. Does not need to match the file name
+- `summary`: str -- Brief summary of the note of 1-3 sentences. Not meant to be a detailed summary, more like a brief that the user can read and determine whether or not they want to continue.
+- `background`: str -- Summary of the prompt that resulted in this note's creation and the reasoning behind making the prompt (this need only be a sentence)
+- `version`: int -- How many revisions this document has undergone
+- `model`: str -- Which model produced this note (ex: `claude-3.7-sonnet`)
+
+
+

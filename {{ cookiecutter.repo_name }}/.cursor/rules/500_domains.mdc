@@ -1,0 +1,10 @@
+---
+description: Use of cursor rules 500-699
+globs: 
+alwaysApply: false
+---
+# Domains
+
+Domains are specific to the domain being worked in (Ex: ML, Game Theory, Statistics, etc.) and not specific to the tools being used (Ex: PyTorch, NashPy, etc.)
+
+They may be used, for example, to specify the specific notation and rules to use when working on math within that domain.

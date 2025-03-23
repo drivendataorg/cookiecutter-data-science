@@ -1,0 +1,101 @@
+---
+description: Guidelines for writing Python code in this workspace
+globs: *.py,*.ipynb
+alwaysApply: false
+---
+
+# ML with Python
+
+## Core Packages
+
+```toml
+ai-train = [
+    "datasets>=3.1.0",           # Efficient dataset handling and processing
+    "einops>=0.8.0",            # Clear tensor manipulation operations
+    "jaxtyping>=0.2.36",        # Type hints for tensor operations
+    "onnx>=1.17.0",             # Model format for cross-platform compatibility
+    "pytorch-lightning>=2.4.0",  # PyTorch training framework with less boilerplate
+    "ray[tune]>=2.40.0",        # Distributed computing and hyperparameter tuning
+    "safetensors>=0.4.5",       # Secure tensor serialization
+    "scikit-learn>=1.6.0",      # Traditional ML algorithms and utilities
+    "shap>=0.46.0",             # Model interpretability and explanations
+    "torch>=2.5.1",             # Deep learning framework
+    "transformers>=4.47.0",     # State-of-the-art transformer models
+    "umap-learn>=0.5.7",        # Dimensionality reduction
+    "wandb>=0.19.1",            # Experiment tracking and visualization
+    "nnsight>=0.3.7",           # Neural network interpretation tools
+]
+```
+
+## Package Selection Guide
+
+- **PyTorch-Lightning**: Use over raw PyTorch to reduce boilerplate
+- **EinOps**: For cleaner tensor operations (replaces complex reshapes/transposes)
+- **Safetensors**: For secure model + data saving/loading
+- **Transformers/Datasets**: For HuggingFace model and dataset access
+- **UMAP**: For dimensionality reduction and visualization
+- **Weights & Biases**: For experiment tracking and visualization
+- **ONNX**: For final model export and cross-platform deployment
+- **Ray[Tune]**: For hyperparameter optimization
+- **Scikit-Learn**: For traditional ML algorithms and preprocessing
+- **JaxTyping**: For typing tensor operations
+
+## EinOps Examples
+
+Compare traditional PyTorch with EinOps:
+
+**Traditional PyTorch:**
+
+```python
+class Self_Attn_Old(nn.Module):
+    def __init__(self, in_dim, activation):
+        super(Self_Attn_Old, self).__init__()
+        self.chanel_in = in_dim
+        self.activation = activation
+        self.query_conv = nn.Conv2d(in_dim, in_dim // 8, kernel_size=1)
+        self.key_conv = nn.Conv2d(in_dim, in_dim // 8, kernel_size=1)
+        self.value_conv = nn.Conv2d(in_dim, in_dim, kernel_size=1)
+        self.gamma = nn.Parameter(torch.zeros(1))
+        self.softmax = nn.Softmax(dim=-1)
+
+    def forward(self, x):
+        m_batchsize, C, width, height = x.size()
+        proj_query = self.query_conv(x).view(m_batchsize, -1, width * height).permute(0, 2, 1)
+        proj_key = self.key_conv(x).view(m_batchsize, -1, width * height)
+        energy = torch.bmm(proj_query, proj_key)
+        attention = self.softmax(energy)
+        proj_value = self.value_conv(x).view(m_batchsize, -1, width * height)
+        out = torch.bmm(proj_value, attention.permute(0, 2, 1))
+        out = out.view(m_batchsize, C, width, height)
+        out = self.gamma * out + x
+        return out, attention
+```
+
+**With EinOps:**
+
+```python
+class Self_Attn_New(nn.Module):
+    def __init__(self, in_dim):
+        super().__init__()
+        self.query_conv = nn.Conv2d(in_dim, in_dim // 8, kernel_size=1)
+        self.key_conv = nn.Conv2d(in_dim, in_dim // 8, kernel_size=1)
+        self.value_conv = nn.Conv2d(in_dim, in_dim, kernel_size=1)
+        self.gamma = nn.Parameter(torch.zeros([1]))
+
+    def forward(self, x):
+        proj_query = rearrange(self.query_conv(x), "b c h w -> b (h w) c")
+        proj_key = rearrange(self.key_conv(x), "b c h w -> b c (h w)")
+        proj_value = rearrange(self.value_conv(x), "b c h w -> b c (h w)")
+        energy = torch.bmm(proj_query, proj_key)
+        attention = F.softmax(energy, dim=2)
+        out = torch.bmm(attention, proj_value)
+        out = x + self.gamma * rearrange(out, "b c (h w) -> b c h w", **parse_shape(x, "b c h w"))
+        return out, attention
+```
+
+## EinOps Operations
+
+- `rearrange`: Reshape, transpose, permute without changing elements
+- `reduce`: Combine reordering with reductions (mean, sum, max)
+- `repeat`: Handle repeating and tiling operations
+- **Key Benefit**: Clear semantic meaning using named axes

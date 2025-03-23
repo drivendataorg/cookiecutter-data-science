@@ -1,0 +1,26 @@
+---
+description: Numbering convention for document headings
+globs: *.md,*.tex,*.ipynb
+alwaysApply: false
+---
+
+# Heading Indices
+
+Use numbered sections following this pattern:
+
+```markdown
+- Main Topic
+  - 01 First Section
+  - 02 Second Section
+    - 02.00 General Content
+    - 02.01 First Subsection
+    - 02.02 Second Subsection
+    - 02.03 Third Subsection
+      - 02.03.a First Detail
+      - 02.03.b Second Detail
+```
+
+Rules:
+1. Only leaf headers should contain content
+2. For parent section content, use a ".00" subsection (e.g., "02.00 General Content")
+3. Maximum heading depth: 3 levels

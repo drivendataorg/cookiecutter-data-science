@@ -1,0 +1,54 @@
+---
+description: Guidelines for using Git and GitHub in this project
+globs: *.git*
+alwaysApply: true
+---
+
+# Version Control
+
+This project uses **Git** for version control with repositories hosted on **GitHub**.
+
+## Git Best Practices
+
+- Use `git mv <src> <dst>` for renaming or moving files to preserve history
+- Commit frequently with logical, self-contained changes
+- Don't commit generated files, credentials, or large binary files
+- Use `.gitignore` to exclude unnecessary files (build artifacts, cache files, etc.)
+
+## Conventional Commits
+
+Use the [Conventional Commits](mdc:https:/www.conventionalcommits.org) specification for commit messages:
+
+```
+type(optional-scope): description
+
+optional body
+```
+
+Types include:
+
+- **feat**: New feature
+- **fix**: Bug fix
+- **docs**: Documentation only changes
+- **style**: Changes that don't affect code meaning
+- **refactor**: Code change that neither fixes a bug nor adds a feature
+- **test**: Adding missing tests
+- **chore**: Changes to build process or auxiliary tools
+
+## Git Flow Model
+
+This project follows the Git Flow branching model:
+
+- **main**: Production-ready code only
+- **develop**: Integration branch for features
+- **feat/**: New functionality (branch from and merge to develop)
+- **release/**: Preparing for a release (branch from develop, merge to main and develop)
+- **hotfix/**: Urgent production fixes (branch from main, merge to main and develop)
+
+## Workflow
+
+1. Create feature branch: `git checkout -b feature/new-feature develop`
+1. Make changes and commit regularly using `cz`
+1. Push to remote: `git push -u origin feature/new-feature`
+1. Open pull request to develop branch
+1. After code review and testing, merge to develop

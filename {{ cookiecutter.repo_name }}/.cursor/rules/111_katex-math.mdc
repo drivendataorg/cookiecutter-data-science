@@ -1,0 +1,74 @@
+---
+description: KaTeX math formatting standards
+globs: *.md
+alwaysApply: true
+---
+
+# Math Formatting
+
+## 00 KaTeX
+
+KaTeX is a subset of LaTeX commonly used in web apps and markdown files, similar to MathJax.
+
+## 01 Delimiters
+
+Use `\( \)` for inline math and `\[ \]` for display math instead of dollar signs:
+
+```markdown
+Inline: \( P(Y|X=x) \)
+Display: \[ F = \{f_1, f_2, \ldots, f_m\} \]
+```
+
+- Alternate parentheses and brackets for nested groupings
+- Use proper sizing with `\Big` and `\Bigg` for complex expressions
+
+\[
+\Biggl(
+    \Bigl[ x-(4y) \Bigr] +
+    \Bigl[ y \cdot (400 \cdot [x z f(x)]) \Bigr]
+\Biggr)
+\]
+
+## 02 Common Mistakes
+
+- Never use unicode math symbols or subscripts
+- Always use KaTeX for mathematical expressions
+- Ensure proper spacing around inline math
+- Use proper KaTeX commands (`\ldots` instead of `...`)
+- Include appropriate braces for multi-character subscripts: ( x\_{ij} ) not ( x_ij )
+
+## 03 Probability Notation
+
+Use proper probability notation:
+
+```markdown
+- Probability: \( P(X=x) \)
+- Joint probability: \( P(X=x, Y=y) \)
+- Conditional probability: \( P(Y=y \mid X=x) \)
+- Random variables: \( X, Y, Z \) (upright capitals)
+- Values: \( x, y, z \) (lowercase italics)
+```
+
+## 04 Common Operators
+
+```markdown
+- Set notation: \( \{x_1, x_2, \ldots, x_n\} \)
+- Expectations: \( \mathbb{E}[X] \) or \( \mathbb{E}_{x \sim p(x)}[f(x)] \)
+- Summations: \( \sum_{i=1}^n x_i \)
+- Products: \( \prod_{i=1}^n x_i \)
+- Integrals: \( \int f(x) dx \) or \( \int_a^b f(x) dx \)
+```
+
+## 05 Examples
+
+Incorrect:
+
+```markdown
+P(Y|X=x) or F = {f₁, f₂, ..., fₘ}
+```
+
+Correct:
+
+```markdown
+\( P(Y \mid X=x) \) or \[ F = \{f_1, f_2, \ldots, f_m\} \]
+```

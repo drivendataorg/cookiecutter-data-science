@@ -1,0 +1,8 @@
+---
+description: Guidelines for storing important information in memory files
+globs: 
+alwaysApply: true
+---
+# Agent Memory
+
+If the user provides important information about their preferences, the tools that they are using, or anything else that might be helpful to remember, please detail this inside a `.cursor/mem/<memory-name>.md` file. 

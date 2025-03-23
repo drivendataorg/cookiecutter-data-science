@@ -1,0 +1,27 @@
+---
+description: Guidelines for LaTeX usage and best practices
+globs: *.tex
+alwaysApply: false
+---
+
+# LaTeX Math
+
+## Math
+
+- Use semantic commands (`\Set{a,b,c}` instead of `\{a,b,c\}`)
+- Prefer `\( \)` and `\[ \]` over dollar signs
+- Use delimiting sets instead of `\left`, `\right`, or `\big`
+- Key packages:
+  - `delimset`: For properly sized delimiter pairs
+  - `physics`: For vectors and derivatives
+  - `mathtools`: For math tools (includes `amsmath`)
+  - `amssymb`: For math symbols
+
+## Delimiter Pairs
+
+- Use `delimset` package for mathematical delimiters
+- Define custom delimiter pairs: `\DeclareMathDelimiterSet{\name}[narg]{definition}`
+- Standard pairs: `\brk` (brackets), `\abs` (absolute value), `\norm` (norm)
+- Adjust size with flags: `^1` (big), `^2` (Big), `^3` (bigg), `*` (auto-size)
+- Examples:
+  - Basic usage: `\brk{x}`, `\brk^2{x}`, `\brk[s]{x}` (square brackets)

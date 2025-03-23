@@ -1,0 +1,41 @@
+---
+description: Guidelines for developing and maintaining Nix flakes in the project
+globs: flake.nix, default.nix, *.nix
+alwaysApply: false
+---
+
+# Nix Flakes
+
+Nix flakes are a way of easily encorporating a project into something installable into a nix environment. For maximum compatibility, these nix flakes should be mantained in a `flake.nix` file and a `default.nix` file.
+
+## Key Components
+
+- `default.nix`: Defines the package build instructions
+- `flake.nix`: Declares dependencies and outputs
+- `shell.nix`: Optional development environment
+
+## Best Practices
+
+- Keep inputs minimal and pinned to specific versions
+- Use flake-utils for cross-platform compatibility
+- Group dependencies by logical categories
+- Separate build inputs from runtime dependencies
+- Include devShells for development environments
+- Add CI checks as flake outputs
+- Document package and inputs in the description
+- Prefer `buildPythonApplication` for executable packages
+
+## Common Operations
+
+- `nix build`: Build the default package
+- `nix run`: Run the default application
+- `nix develop`: Enter development environment
+- `nix flake update`: Update all flake inputs
+- `nix flake check`: Verify flake integrity
+
+## Structure Conventions
+
+- Place all Nix files in root directory
+- Use camelCase for attribute names
+- Follow nixpkgs conventions for dependencies
+- Include LICENSE reference in meta

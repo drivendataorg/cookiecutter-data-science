@@ -1,0 +1,15 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+## Drawing Extensive Form Trees
+
+For Mermaid Diagrams:
+1. Label the infosets. Draw dotted lines between nodes of the same infoset
+2. Label the players and color them using some unique coloring scheme.
+3. Generate the tree root on the left and branch it out to the right.
+4. Players use a closed circle as the node and chance/nature uses an open circle.
+5. Edges should be labeled with the action taken
+6. Terminal nodes should be marked with their payoffs.

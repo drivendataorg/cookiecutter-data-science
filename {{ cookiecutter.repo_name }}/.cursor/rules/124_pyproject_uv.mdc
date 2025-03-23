@@ -1,0 +1,33 @@
+---
+description: Project and dependency management with pyproject and uv
+globs: *.py,*.ipynb,pyproject.toml
+alwaysApply: false
+---
+
+# Pyproject and UV
+
+## Pyproject.toml
+
+Modern configuration file for Python projects that replaces setuptools, requirements.txt, etc. Uses minimal syntax for defining:
+
+- `project`: Project metadata (author, version, etc.) that appears on PyPI
+- `tools`: Configuration tables for tools (`tool.<tool-name>`) including ruff, pyright, pytest
+
+Always use pyproject.toml instead of separate configuration files for tools.
+
+## UV Package Manager
+
+Fast alternative to poetry and pip. Commands:
+
+- Add permanent dependency: `uv add <package-name>` (updates pyproject.toml)
+- Test package: `uv pip install <package-name>`
+- Update after pyproject changes: `uv sync`
+- Verify build: `uv build`
+- Install global tools: `uv tool install <package-name>`
+
+Never use `pip install` in this project.
+
+## Virtual Environments
+
+- Create venv: `uv venv`
+- Activate: `source .venv/bin/activate`

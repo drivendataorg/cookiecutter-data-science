@@ -1,0 +1,61 @@
+---
+description: 
+globs: *.py,*.ipynb
+alwaysApply: false
+---
+# Python Quality Assurance Tools
+
+Essential QA tools for maintaining high-quality Python code in this workspace.
+
+## 01 Standard Commands
+
+Run these after editing Python files:
+
+```bash
+# Format and lint
+ruff format path/to/file.py
+ruff check path/to/file.py --fix
+
+# Type check
+pyright path/to/file.py
+```
+
+For Jupyter notebooks:
+
+```bash
+# Python code cells
+nbqa ruff format path/to/notebook.ipynb
+nbqa ruff check path/to/notebook.ipynb --fix
+nbqa pyright path/to/notebook.ipynb
+
+# Markdown cells
+nbqa mdformat path/to/notebook.ipynb --nbqa-md
+```
+
+Always fix remaining errors before proceeding and re-run to verify.
+
+## 02 Core Tools
+
+### 02.01 Ruff
+
+[Ruff](mdc:https:/docs.astral.sh/ruff) provides formatting, linting, import sorting, security scanning, code modernization, and docstring validation.
+
+### 02.02 Pyright
+
+[Pyright](mdc:https:/microsoft.github.io/pyright) handles type checking, inference, and error reporting.
+
+## 03 Additional Tools
+
+### 03.01 Jupyter Notebooks
+
+- **nbQA**: Applies Python QA tools to notebook cells
+- **mdformat**: Formats markdown cells
+
+### 03.02 Configuration
+
+- **validate-pyproject**: Validates pyproject.toml
+- **check-jsonschema**: Validates configuration files
+
+### 03.03 Testing
+
+- **pytest**: Runs Python tests
