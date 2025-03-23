@@ -37,7 +37,7 @@
 	"_use_conventional_commits": "y",
 	"_generate_personal_ssh_keys": "n",
 	"_generate_and_upload_gh_deploy_keys": "n",
-	"_project_emoji": "🍪",
+	"_project_emoji": "",
 	"_qa_tool": "trunk",
 	"_qa_level": "basic",
 	"_readme_modern_header": "y",

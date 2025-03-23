@@ -11,6 +11,7 @@ SecretManagers = Literal["none", "dot_env", "secrets_dir"]
 CleaningOption = Literal["data", "paper", "app", "ml", "lib", "course"]
 ScaffoldOptions = Literal["data", "backend", "course", "frontend"]
 CleaningOperation = Callable[[Path], None]
+QATools = Literal["trunk", "pre-commit", None]
 
 ALL_SCAFFOLDS = {"data", "backend", "course", "frontend", "cli"}
 
@@ -23,6 +24,7 @@ class ScaffoldCleaner:
         root: Path,
         module_name: str,
         project_short_description: str = "",
+        qa_tool: QATools = "trunk",
     ) -> None:
         """Returns new scaffolding cleaner with a set root."""
         self.root = root

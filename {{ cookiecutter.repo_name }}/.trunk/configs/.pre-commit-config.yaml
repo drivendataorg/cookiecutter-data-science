@@ -1,0 +1,283 @@
+exclude: |
+  (?x)^(
+      docs/site/.*|       # Exclude mkdocs compiled files
+      docs/docs/jupyter-notebooks_files/.*|       # Exclude Jupyter Notebooks files
+      jupyter-experiments/.*|       # Exclude jupyter-experiments
+      \.history/.*|       # Exclude history files
+      .*cache.*/.*|       # Exclude cache directories
+      .*venv.*/.*|        # Exclude virtual environment directories
+  )$
+fail_fast: true
+default_language_version:
+  python: python3.12
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+repos:
+  #
+  # Documentation Here:
+  # https://gatlenculp.github.io/gatlens-opinionated-template/precommit/
+  #
+  # ---------------------------------------------------------------------------- #
+  #                              🔄 Pre-Commit Hooks                             #
+  # ---------------------------------------------------------------------------- #
+
+  # ----------------------------- 🔒 Security Tools ---------------------------- #
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.22.1
+    hooks:
+      - id: gitleaks
+        name: 🔒 security · Detect hardcoded secrets
+
+  # --------------------------- 🔍 Code Quality Tools -------------------------- #
+
+  ### Python Tools ###
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.1
+    hooks:
+      - id: ruff-format
+        name: 🐍 python · Format with Ruff
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|     # Exclude any files with cookiecutter variable, this is an issue with ruff
+          )$
+      # STRICT
+      # - id: ruff
+      #   name: "🐍 python · Lint and perform safe auto-fixes with Ruff"
+      #   args: [--fix]
+
+  # STRICT
+  # - repo: https://github.com/RobertCraigie/pyright-python
+  #   rev: v1.1.391
+  #   hooks:
+  #     - id: pyright
+  #       name: "🐍 python · Check types"
+
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.23
+    hooks:
+      - id: validate-pyproject
+        name: 🐍 python · Validate pyproject.toml
+        additional_dependencies: ["validate-pyproject-schema-store[all]"]
+
+  ### Javascript & Web Tools ###
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v0.6.1
+    hooks:
+      - id: biome-check
+        name: 🟨 javascript · Lint, format, and safe fixes with Biome
+        additional_dependencies: ["@biomejs/biome@1.9.4"]
+        # Exclude FastAPI directories for now
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|
+          )$
+
+  ### Data & Config Validation ###
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.31.0
+    hooks:
+      - id: check-github-workflows
+        name: 🐙 github-actions · Validate gh workflow files
+        args: [--verbose]
+      - id: check-taskfile
+        name: ✅ taskfile · Validate Task configuration
+
+  ### Markdown ###
+  - repo: https://github.com/hukkin/mdformat
+    rev: 0.7.21
+    hooks:
+      - id: mdformat
+        name: 📝 markdown · Format markdown
+        # Mdformat messes up jinja tags
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|
+          )$
+        additional_dependencies:
+          - mdformat-gfm
+          - mdformat-ruff
+          - mdformat-frontmatter
+          - ruff
+
+  # STRICT
+  # - repo: https://github.com/markdownlint/markdownlint
+  #   rev: v0.12.0
+  #   hooks:
+  #     - id: markdownlint
+  #       name: "📝 markdown · Lint markdown"
+
+  ### Shell ###
+
+  # STRICT
+  # - repo: https://github.com/shellcheck-py/shellcheck-py
+  #   rev: v0.10.0.1
+  #   hooks:
+  #     - id: shellcheck
+  #       name: "🐚 shell · Lint shell scripts"
+
+  # STRICT
+  # - repo: https://github.com/openstack/bashate
+  #   rev: 2.1.1
+  #   hooks:
+  #     - id: bashate
+  #       name: "🐚 shell · Check shell script code style"
+
+  ### Makefile ###
+  - repo: https://github.com/mrtazz/checkmake.git
+    rev: 0.2.2
+    hooks:
+      - id: checkmake
+        name: 🐮 Makefile · Lint Makefile
+        # No clear documentation on how to skip certain checks.
+        # Fixed as many as I could, but best option is to ignore the file.
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|
+          )$
+
+  ### SQL ###
+
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 3.3.0
+    hooks:
+      - id: sqlfluff-fix
+        name: 📊 SQL · Attempts to fix rule violations.
+      # STRICT
+      # - id: sqlfluff-lint
+      #   name: "📊 SQL · Lint SQL code files"
+
+  ### Notebooks ###
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.9.1
+    hooks:
+      - id: nbqa
+        entry: nbqa mdformat
+        name: 📓 notebook · Format markdown cells
+        args: [--nbqa-md]
+        types: [jupyter]
+        # Reading pyproject.toml in the template throws errors
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|
+          )$
+        additional_dependencies:
+          - mdformat
+          - mdformat-gfm
+          - mdformat-ruff
+          - mdformat-frontmatter
+          - ruff
+      # STRICT
+      # TODO: Convert to pyright
+      # - id: nbqa-mypy
+      #   name: "📓 notebook · Type-check cells"
+
+  ### PNG Images ###
+  - repo: https://github.com/shssoichiro/oxipng
+    rev: v9.1.3
+    hooks:
+      - id: oxipng
+        name: 🖼️ images · Optimize PNG files
+        args: [-o, "4", --strip, safe, --alpha]
+
+  ### Additional File Types ###
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        name: ✨ misc-files · Format misc web files
+        types_or: [yaml, html, scss]
+        additional_dependencies:
+          - prettier@3.4.2
+
+  # ----------------------------- ⚡️ uv Build Tools ---------------------------- #
+  # This helps ensure cross-compatibility with people who don't wish to use uv
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    # uv version.
+    rev: 0.5.27
+    hooks:
+      # STRICT -- This (kind of) enforces use of uv
+      - id: uv-sync
+        name: ⚡️ uv · Sync dependencies with uv
+      # Update the uv lockfile
+      - id: uv-lock
+        name: ⚡️ uv · Update dependency lockfile
+      # Export to txt
+      - id: uv-export
+        name: ⚡️ uv · Export dependencies to requirements.txt
+
+  # ---------------------------- 📁 Filesystem Tools --------------------------- #
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # Filesystem Checks
+      - id: check-executables-have-shebangs
+        name: 📁 filesystem/⚙️ exec · Verify shebang presence
+        # Exclude FastAPI directories for now
+        exclude: |
+          (?x)^(
+            .*\{\{.*\}\}.*|
+          )$
+      - id: check-shebang-scripts-are-executable
+        name: 📁 filesystem/⚙️ exec · Verify script permissions
+      - id: check-case-conflict
+        name: 📁 filesystem/📝 names · Check case sensitivity
+      - id: check-illegal-windows-names
+        name: 📁 filesystem/📝 names · Validate Windows filenames
+      - id: check-symlinks
+        name: 📁 filesystem/🔗 symlink · Check symlink validity
+      - id: destroyed-symlinks
+        name: 📁 filesystem/🔗 symlink · Detect broken symlinks
+      # ------------------------------- 🌳 Git Tools ------------------------------- #
+      - id: check-merge-conflict
+        name: 🌳 git · Detect conflict markers
+      - id: forbid-new-submodules
+        name: 🌳 git · Prevent submodule creation
+      - id: check-added-large-files
+        name: 🌳 git · Block large file commits
+        args: [--maxkb=5000]
+      - id: no-commit-to-branch
+        alias: protect-main
+        name: 🌳 git · Protect main branches
+        args: [--branch, main, --branch, master]
+
+  # ---------------------------------------------------------------------------- #
+  #                            📝 Commit Message Hooks                           #
+  # ---------------------------------------------------------------------------- #
+  #
+  # --------------------------- ✍️ Git Commit Quality -------------------------- #
+
+  ### Commit Message Standards ###
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.1.0
+    hooks:
+      - id: commitizen
+        name: 🌳 git · Validate commit message
+        stages: [commit-msg]
+        additional_dependencies: [cz-conventional-gitmoji]
+
+  # ---------------------------------------------------------------------------- #
+  #                             🧪 Fast Tests (Local)                            #
+  # ---------------------------------------------------------------------------- #
+
+  - repo: local
+    hooks:
+      - id: pytest-collect
+        name: 🧪 test · Validate test formatting
+        entry: ./.venv/bin/pytest tests
+        language: system
+        types: [python]
+        args: [--collect-only]
+        pass_filenames: false
+        always_run: true
+      # STRICT
+      - id: pytest-fast
+        name: 🧪 test · Run fast tests
+        entry: ./.venv/bin/pytest tests
+        language: system
+        types: [python]
+        args: [--max-timeout=3]
+        pass_filenames: false
+        always_run: true

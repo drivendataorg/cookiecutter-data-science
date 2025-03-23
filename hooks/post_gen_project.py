@@ -6,10 +6,13 @@ import subprocess
 from copy import copy
 from pathlib import Path
 
+from loguru import logger
+
 # https://github.com/cookiecutter/cookiecutter/issues/824
 #   our workaround is to include these utility functions in the CCDS package
 from ccds.hook_utils.configure_ssh import generate_personal_ssh_keys
 from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_repo
+from ccds.hook_utils.cookiecutter_args import CookiecutterArgs
 from ccds.hook_utils.custom_config import write_custom_config
 from ccds.hook_utils.dependencies import basic, packages, scaffold, write_dependencies
 from ccds.hook_utils.scaffold_cleaner import ScaffoldCleaner
@@ -20,6 +23,11 @@ CODE_SCAFFOLD = "{{ cookiecutter.include_code_scaffold }}"
 
 PROJ_ROOT = Path.cwd().resolve()
 SECRETS_DIR = PROJ_ROOT / "secrets"
+
+cookiecutter_json = """{{ cookiecutter | tojson }}"""
+
+cookiecutter_args = CookiecutterArgs.model_validate_json(cookiecutter_json)
+logger.info(cookiecutter_args)
 
 # ---------------------------------------------------------------------------- #
 #                EMPLATIZED VARIABLES FILLED IN BY COOKIECUTTER                #
