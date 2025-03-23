@@ -19,26 +19,52 @@ runtimes:
 # This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
 lint:
   disabled:
+    - bandit
+    - isort
+    - black
     - markdownlint
+    - prettier
   enabled:
+    - shellcheck@0.10.0
+    - pre-commit-hooks@5.0.0
+    - markdown-link-check@3.13.7
+    - sqlfluff@3.3.1
+    - ruff-nbqa@0.11.1
     - actionlint@1.7.7
-    - bandit@1.8.3
     - biome@1.9.4
-    - black@25.1.0
     - checkov@3.2.390
     - dotenv-linter@3.3.0
     - git-diff-check
     - hadolint@2.12.1-beta
-    - isort@6.0.1
     - nixpkgs-fmt@1.3.0
     - osv-scanner@2.0.0
     - oxipng@9.1.4
-    - prettier@3.5.3
     - pyright@1.1.397
     - ruff@0.11.1
-    - shellcheck@0.10.0
     - shfmt@3.6.0
     - svgo@3.3.2
     - taplo@0.9.3
     - trufflehog@3.88.18
     - yamllint@1.36.2
+  ignore:
+    - linters: [ALL]
+      paths:
+        - docs/site/.*
+        - docs/docs/jupyter-notebooks_files/.*
+        - jupyter-experiments/.*
+        - \.history/.*
+        - .*cache.*/.*
+        - .*venv.*/.*
+        - .*\{\{.*\}\}.*
+actions:
+  disabled:
+    - commitlint
+    - git-lfs
+    - trunk-announce
+    - trunk-check-pre-push
+    - trunk-fmt-pre-commit
+    - commitizen
+    - trunk-upgrade-available
+tools:
+  enabled:
+    - commitizen@4.3.1

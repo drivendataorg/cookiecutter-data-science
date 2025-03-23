@@ -7,7 +7,13 @@
 		"defaultBranch": "master"
 	},
 	"files": {
-		"ignoreUnknown": true
+		"ignoreUnknown": true,
+		"include": ["**/*.js", "**/*.json", "**/*.yaml", "**/*.yml"]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"indentWidth": 2
 	},
 	"linter": {
 		"enabled": true
@@ -16,6 +22,13 @@
 		"parser": {
 			"allowComments": true,
 			"allowTrailingCommas": true
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double",
+			"trailingCommas": "all",
+			"semicolons": "always"
 		}
 	}
 }
