@@ -1,0 +1,189 @@
+---
+description: 
+globs: *.py,*.ipynb
+alwaysApply: false
+---
+# Pydantic Model Best Practices
+
+## 01 Core Principles
+
+### 01.00 Field Design
+- ALWAYS provide a default value unless the field is truly required (use `...` for required fields)
+- ALWAYS include a description for self-documenting schemas
+- ALWAYS constrain fields as much as possible to catch errors early
+- ALWAYS use the most specific type possible (e.g., `PositiveInt` over `int`)
+- ALWAYS prefer built-in Pydantic types over custom validation
+- NEVER start field names with underscore (e.g., NO `_github_username: str`)
+- NEVER override existing model methods unless specifically intended
+- PREFER fields over methods for data representation
+- Use `repr=False` for fields that shouldn't appear in string representation
+
+### 01.01 Built-in Types
+```python
+from pydantic import (
+    BaseModel, Field, EmailStr, SecretStr, HttpUrl,
+    PostgresDsn, RedisDsn, AnyUrl, IPvAnyAddress,
+    PositiveInt, NegativeFloat, conint, confloat,
+    PositiveFloat, NonNegativeInt, NonPositiveFloat
+)
+from datetime import datetime, date, time, timedelta
+from decimal import Decimal
+from uuid import UUID
+from typing import List, Dict, Set, Tuple, Union, Literal
+
+class Example(BaseModel):
+    # Use built-in types instead of custom validation
+    email: EmailStr = Field(..., description="User email")  # Instead of regex
+    password: SecretStr = Field(..., description="User password", repr=False)  # Hide in repr
+    website: HttpUrl = Field(description="Website URL")  # Instead of URL regex
+    db_url: PostgresDsn = Field(description="Database URL")  # Instead of URL parsing
+    ip_address: IPvAnyAddress = Field(description="IP address")  # Instead of regex
+    
+    # Numeric constraints using specialized types
+    age: PositiveInt = Field(description="User age")  # Instead of gt=0
+    rating: confloat(ge=0, le=5) = Field(description="User rating")  # Constrained float
+    price: Decimal = Field(max_digits=10, decimal_places=2, description="Product price")
+    
+    # Time handling
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    date_only: date = Field(default_factory=date.today)
+    duration: timedelta = Field(default=timedelta(days=1))
+
+    model_config = ConfigDict(
+        str_strip_whitespace=True,
+        validate_assignment=True
+    )
+```
+
+### 01.02 Extra Types
+```python
+from pydantic_extra_types.color import Color
+from pydantic_extra_types.country import Country
+from pydantic_extra_types.phone_numbers import PhoneNumber
+from pydantic_extra_types.coordinate import Coordinate
+from pydantic_extra_types.mac_address import MacAddress
+
+class AdvancedExample(BaseModel):
+    color: Color = Field(description="Color in any format")
+    country: Country = Field(description="ISO country code")
+    phone: PhoneNumber = Field(description="Phone number with validation")
+    location: Coordinate = Field(description="Geographical coordinate")
+    device_mac: MacAddress = Field(description="Device MAC address")
+```
+
+## 02 Configuration and Aliases
+
+### 02.00 Field Aliases
+```python
+class AliasExample(BaseModel):
+    # Simple alias for different JSON key
+    user_id: int = Field(
+        alias="userId",  # JSON/external name
+        description="User ID"
+    )
+    
+    # Validation alias for input processing
+    email_address: str = Field(
+        validation_alias="emailAddress",  # Input name
+        serialization_alias="email",  # Output name
+        description="Email address"
+    )
+    
+    # Complex validation alias
+    nested_field: str = Field(
+        validation_alias=["data", "nested", "field"],  # Nested path
+        description="Nested field access"
+    )
+
+    model_config = ConfigDict(
+        # Global alias generator (e.g., camelCase conversion)
+        alias_generator=lambda string: "".join(
+            word.capitalize() if i else word
+            for i, word in enumerate(string.split("_"))
+        )
+    )
+```
+
+## 03 Serialization
+
+### 03.00 Basic Serialization
+```python
+class SerializationExample(BaseModel):
+    name: str
+    age: int
+    metadata: Dict[str, str]
+
+    # DON'T: Create custom serialization methods
+    def to_json(self) -> str:
+        return json.dumps(self.dict())  # Wrong
+
+    # DO: Use built-in methods
+    data = model.model_dump()  # Python dict
+    json_data = model.model_dump_json()  # JSON string
+    
+    # With options
+    filtered = model.model_dump(
+        include={'name', 'age'},
+        exclude_none=True,
+        mode='json'
+    )
+```
+
+### 03.01 Custom Serialization
+```python
+from datetime import datetime, timedelta, timezone
+from typing import Any
+from pydantic import field_serializer, model_serializer
+
+class CustomSerializationExample(BaseModel):
+    dt: datetime
+    diff: timedelta
+    
+    model_config = ConfigDict(
+        ser_json_timedelta='iso8601'  # Configure timedelta serialization
+    )
+
+    # Field-level serialization
+    @field_serializer('dt')
+    def serialize_dt(self, dt: datetime, _info):
+        return dt.timestamp()
+
+    # Model-level serialization
+    @model_serializer
+    def serialize_model(self) -> dict[str, Any]:
+        return {
+            'dt': self.dt.isoformat(),
+            'diff': str(self.diff)
+        }
+```
+
+## 04 Anti-Patterns
+
+### 04.00 Field Design
+```python
+# DON'T: Use custom regex when built-in type exists
+class BadExample(BaseModel):
+    email: str = Field(pattern=r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+    url: str = Field(pattern=r'^https?://.+')
+    
+# DO: Use built-in types
+class GoodExample(BaseModel):
+    email: EmailStr
+    url: HttpUrl
+```
+
+### 04.01 Model Design
+- DON'T use inheritance for model variations; use composition
+- DON'T create deeply nested models (>3 levels)
+- DON'T use dynamic field names
+- DON'T mix business logic with validation logic
+- DON'T create methods when fields can represent the data
+- DON'T override built-in methods unless absolutely necessary
+- DON'T use `Any` type unless absolutely necessary
+
+### 04.02 Performance
+- DON'T use validators for simple type coercion
+- DON'T validate the same data multiple times
+- DON'T store large binary data in models
+- DON'T use dynamic model creation unless necessary
+- DON'T use `model_dump()` in tight loops

@@ -1,0 +1,118 @@
+---
+description: 
+globs: *config*.py,*model*.py,models/**/*.py,classes/**/*.py
+alwaysApply: false
+---
+# Pydantic Settings Best Practices
+
+## 01 Configuration Loading
+
+### 01.00 Basic Setup
+```python
+from pydantic import BaseModel, SecretStr
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+class DatabaseSettings(BaseModel):
+    user: str
+    password: SecretStr
+    host: str = "localhost"
+    port: int = 5432
+    db: str
+
+class AppSettings(BaseSettings):
+    """Application settings with multi-source configuration support."""
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        toml_file="config.toml",  # Also supports yaml_file, json_file
+        env_nested_delimiter="__"  # Access nested fields: DATABASE__HOST
+    )
+
+    host: str = "localhost"
+    port: int = 8000
+    database: DatabaseSettings
+
+# Usage
+settings = AppSettings()  # Loads from env vars, files, and defaults
+```
+
+### 01.01 Configuration Files
+```toml
+# config.toml
+host = "example.com"
+port = 8000
+
+[database]
+user = "admin"
+password = "secret"
+db = "myapp"
+```
+
+```yaml
+# config.yaml
+host: example.com
+port: 8000
+database:
+  user: admin
+  password: secret
+  db: myapp
+```
+
+## 02 Best Practices
+
+### 02.00 Security
+- Use `SecretStr` for sensitive values
+- Store secrets in environment variables
+- Never commit secrets to version control
+- Use `.env` for development secrets
+
+### 02.01 Structure
+- Keep configuration hierarchical but shallow
+- Group related settings in nested models
+- Provide descriptive field documentation
+- Set sensible defaults for optional values
+
+### 02.02 Environment Variables
+- Use uppercase with underscores
+- Use double underscores for nesting
+- Examples:
+  ```bash
+  export APP_HOST=example.com
+  export APP_DATABASE__PASSWORD=secret
+  export APP_DATABASE__PORT=5432
+  ```
+
+## 03 Loading Priority
+
+### 03.00 Default Order (Highest to Lowest)
+1. Environment variables
+2. Configuration files (TOML/YAML/JSON)
+3. .env file
+4. Default values
+
+### 03.01 Custom Loading Order
+```python
+from typing import Tuple, Type
+from pydantic_settings import (
+    BaseSettings,
+    PydanticBaseSettingsSource,
+    TomlConfigSettingsSource
+)
+
+class CustomSettings(BaseSettings):
+    @classmethod
+    def settings_customise_sources(
+        cls,
+        settings_cls: Type[BaseSettings],
+        init_settings: PydanticBaseSettingsSource,
+        env_settings: PydanticBaseSettingsSource,
+        dotenv_settings: PydanticBaseSettingsSource,
+        file_secret_settings: PydanticBaseSettingsSource,
+    ) -> Tuple[PydanticBaseSettingsSource, ...]:
+        return (
+            init_settings,          # Constructor arguments
+            env_settings,           # Environment variables
+            TomlConfigSettingsSource(settings_cls),  # TOML config
+            dotenv_settings,        # .env file
+            file_secret_settings,   # Secrets directory
+        )
+``` 
