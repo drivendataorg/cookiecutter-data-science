@@ -3,6 +3,7 @@ description: Guidelines for LaTeX usage and best practices
 globs: *.tex,*.md
 alwaysApply: false
 ---
+{% raw %}
 # Math Symbol Formatting
 
 ## Types
@@ -138,3 +139,4 @@ a\x^2 + b\x + c = 0
 \[
 \x_1 = \frac{-5 + 1}{2} = \red{-2} \quad \text{and} \quad \x_2 = \frac{-5 - 1}{2} = \red{-3}
 \]
+{% endraw %}

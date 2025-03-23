@@ -3,7 +3,7 @@ description: Guidelines for implementing and testing GitHub Actions workflows
 globs: .github/**/*.yml,.github/**/*.yaml
 alwaysApply: false
 ---
-
+{% raw %}
 # CI/CD Github Actions
 
 For any CI/CD tasks, please implement them into `.github/workflows` directory for GitHub Actions.
@@ -59,3 +59,5 @@ Common Act CLI flags:
 - `-P ubuntu-latest=catthehacker/ubuntu:act-latest` - Use specific platform image
 - `--secret-file .secrets` - Provide secrets from file
 - `-v` - Verbose output
+
+{% endraw %}

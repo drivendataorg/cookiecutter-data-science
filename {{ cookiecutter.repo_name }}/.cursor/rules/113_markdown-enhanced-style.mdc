@@ -3,7 +3,7 @@ description:
 globs: *.md
 alwaysApply: false
 ---
-
+{% raw %}
 # Markdown Preview Enhanced Features with Examples
 
 Markdown Preview enhanced is a vscode extension for working on Markdown Files and has a few extra features. Read about them here
@@ -133,3 +133,4 @@ https://shd101wyy.github.io/crossnote/
     ```
 
 These examples demonstrate the diverse capabilities of the Markdown Preview Enhanced extension, showcasing its power in creating rich, interactive documents with advanced formatting, code execution, and mathematical typesetting.
+{% endraw %}

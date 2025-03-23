@@ -38,6 +38,7 @@
 	"_generate_personal_ssh_keys": "n",
 	"_generate_and_upload_gh_deploy_keys": "n",
 	"_project_emoji": "🍪",
+	"_qa_tool": "trunk",
 	"_qa_level": "basic",
 	"_readme_modern_header": "y",
 	"_readme_include_logo": "y",
@@ -51,7 +52,8 @@
 	"_readme_include_acknowledgements": "y",
 	"_readme_table_in_about": "y",
 	"_copy_without_render": [
-		"*{{ cookiecutter.module_name }}/_backend/**",
-		"*{{ cookiecutter.module_name }}/_frontend/**"
+		"*{{ cookiecutter.module_name }}/.cursor/rules/**/*",
+		"*{{ cookiecutter.module_name }}/_backend/**/*",
+		"*{{ cookiecutter.module_name }}/_frontend/**/*"
 	]
 }

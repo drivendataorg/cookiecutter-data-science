@@ -3,6 +3,8 @@ description: Guidelines for LaTeX usage and best practices
 globs: *.tex,*.md
 alwaysApply: false
 ---
+{% raw %}
+
 # Guidelines for Solving Math Problems
 \( \newcommand{\defin}{\mathrel{:}\in} \)
 
@@ -120,3 +122,4 @@ Example:
    \]
 
 Therefore, it's impossible for \(T\) to weakly dominate \(B\) while simultaneously having \(B\) as a best response to a belief with positive probability on each of player 2's strategies.
+{% endraw %}
