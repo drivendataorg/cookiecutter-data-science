@@ -4,12 +4,12 @@ name: tests
 on:
   push:
     branches: [master]
-    paths-ignore:
+    paths-ignore: 
       - "docs/**"
       - "README.md"
   pull_request:
     branches: [master]
-    paths-ignore:
+    paths-ignore: 
       - "docs/**"
       - "README.md"
   schedule:
@@ -24,17 +24,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: astral-sh/setup-uv@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
-          enable-cache: true
-          cache-dependency-glob: |
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: |
             pyproject.toml
             dev-requirements.txt
 
       - name: Install dependencies
         run: |
-          uv pip install -r dev-requirements.txt
+          python -m pip install --upgrade pip
+          make requirements
 
       - name: Lint
         run: |
@@ -51,26 +53,21 @@ jobs:
     defaults:
       run:
         shell: bash
-    env:
-      TEST_TARGET_PYTHON_VERSION: 3.13
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: astral-sh/setup-uv@v5
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          enable-cache: true
-          cache-dependency-glob: |
+          allow-prereleases: true
+          cache: "pip"
+          cache-dependency-path: |
             pyproject.toml
             dev-requirements.txt
 
-      - name: Make Python ${{ env.TEST_TARGET_PYTHON_VERSION }} available
-        run:
-          # --preview flag adds installed Python into PATH
-          uv python install $TEST_TARGET_PYTHON_VERSION --preview
-
-      - name: Set up Miniconda
+      - name: Set up Miniconda  
         uses: conda-incubator/setup-miniconda@v3
         with:
           auto-activate-base: true
@@ -99,11 +96,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          uv pip install -r dev-requirements.txt
+          python -m pip install --upgrade pip
+          make requirements
 
       - name: Check dependencies
         run: |
-          echo $PATH
           if [[ -z "${BASH_EXECUTABLE}" ]]; then
             bash --version
           else
@@ -112,14 +109,10 @@ jobs:
           fi
           which make
           make --version
-          which python
-          python --version
           which conda
           conda --version
           which pipenv
           pipenv --version
-          which uv
-          uv --version
           which virtualenv
           virtualenv --version
 
