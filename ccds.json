@@ -28,6 +28,11 @@
         "none",
         "basic"
     ],
+    "testing_framework": [
+        "none",
+        "pytest",
+        "unittest"
+    ],
     "linting_and_formatting": [
         "ruff",
         "flake8+black+isort"
