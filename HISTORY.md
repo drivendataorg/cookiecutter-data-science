@@ -1,6 +1,10 @@
 # cookiecutter-data-science Changelog
 
-## UNRELEASED
+## v2.2.0 (2025-03-23)
+
+- Added `pyproject.toml` as a dependencies file format option. (PR [#436](https://github.com/drivendataorg/cookiecutter-data-science/pull/436))
+- Added choice to include scaffolding for tests, with pytest and unittest as options. (PR [#447](https://github.com/drivendataorg/cookiecutter-data-science/pull/447))
+- Fixed `requires-python` in `pyproject.toml` to correctly reflect the selected Python version. (PR [#446](https://github.com/drivendataorg/cookiecutter-data-science/pull/446))
 
 ## v2.1.0 (2025-03-10)
 
