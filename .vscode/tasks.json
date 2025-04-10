@@ -305,7 +305,7 @@
 				"color": "terminal.ansiYellow"
 			},
 			"runOptions": {
-				"runOn": "folderOpen",
+				// "runOn": "folderOpen",
 				"instanceLimit": 1
 			},
 			"presentation": {
