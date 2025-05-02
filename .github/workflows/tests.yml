@@ -5,12 +5,10 @@ on:
   push:
     branches: [master]
     paths-ignore: 
-      - "docs/**"
       - "README.md"
   pull_request:
     branches: [master]
     paths-ignore: 
-      - "docs/**"
       - "README.md"
   schedule:
     # Run every Sunday
@@ -41,6 +39,10 @@ jobs:
       - name: Lint
         run: |
           make lint
+
+      - name: Build documentation
+        run: |
+          make docs
 
   tests:
     name: Tests (${{ matrix.os }}, Python ${{ matrix.python-version }})
