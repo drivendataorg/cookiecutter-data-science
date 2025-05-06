@@ -28,9 +28,9 @@ requirements:
 	pip install -e .
 	{% endif -%}
 	{% elif "environment.yml" == cookiecutter.dependency_file -%}
-	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
+	conda env update --name $(PROJECTq_NAME) --file environment.yml --prune
 	{% elif "Pipfile" == cookiecutter.dependency_file -%}
-	pipenv install
+	pipenv install --pre --clear
 {% endif %}
 {% endif %}
 
