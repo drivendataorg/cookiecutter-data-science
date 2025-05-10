@@ -1,0 +1,98 @@
+{
+    "name": "ML dev tools",
+    "id": "py-dev",
+    "version": "0.1.0",
+    "description": "Python based environment",
+    "installsAfter": [
+      "ghcr.io/devcontainers/features/aws-cli",
+      "ghcr.io/va-h/devcontainers-features/uv:1"
+    ],
+    "options": {
+      "bashrc_path": {
+        "default": "/root/.bashrc",
+        "description": "Path to the bash initialisation script to inject hooks into",
+        "type": "string"
+      }
+    },
+    "capAdd": [
+      "SYS_PTRACE"
+    ],
+    "securityOpt": [
+      "seccomp=unconfined"
+    ],
+    "mounts": [
+      {
+        "source": "history-${devcontainerId}",
+        "target": "/commandhistory",
+        "type": "volume"
+      }
+    ],
+    "customizations": {
+      "vscode": {
+        "settings": {
+          "autoDocstring.docstringFormat": "numpy-notypes",
+          "aws.telemetry": false,
+          "editor.codeActionsOnSave": {
+            "source.formatAll": true,
+            "source.fixAll": "always",
+            "source.organizeImports": "always"
+          },
+          "editor.formatOnSave": true,
+          "editor.rulers": [
+            88
+          ],
+          "files.exclude": {
+            "**/*.pyc": {
+              "when": "$(basename).py"
+            },
+            "**/__pycache__": true,
+            "**/.coverage": true,
+            "**/.ipynb_checkpoints": true,
+            "**/.mypy_cache": true,
+            "**/.pytest_cache": true,
+            "**/.ruff_cache": true,
+            "**/.venv": true
+          },
+          "notebook.codeActionsOnSave": {
+            "source.formatAll": true,
+            "source.fixAll": true,
+            "source.organizeImports": true
+          },
+          "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+          "python.languageServer": "Pylance",
+          "python.poetryPath": "/usr/local/py-utils/bin/poetry",
+          "python.testing.unittestEnabled": false,
+          "python.testing.pytestEnabled": true,
+          "python.testing.pytestArgs": [
+            "."
+          ],
+          "python.venvFolders": [
+            "${workspaceFolder}/.venv"
+          ],
+          "remote.extensionKind": {
+            "ms-toolsai.jupyter": [
+              "workspace"
+            ]
+          },
+          "workbench.colorCustomizations": {
+            "editorRuler.foreground": "#ff4081"
+          }
+        },
+        "extensions": [
+          "076923.python-image-preview",
+          "charliermarsh.ruff",
+          "gruntfuggly.todo-tree",
+          "markis.code-coverage",
+          "ms-python.mypy-type-checker",
+          "ms-python.python",
+          "ms-python.vscode-pylance",
+          "ms-toolsai.jupyter-keymap",
+          "ms-toolsai.jupyter",
+          "ms-vscode.makefile-tools",
+          "njpwerner.autodocstring",
+          "tamasfe.even-better-toml",
+          "yzhang.markdown-all-in-one"
+        ]
+      }
+    }
+  }

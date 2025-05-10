@@ -1,0 +1,23 @@
+{
+    "name": "{{ cookiecutter.module_name}}",
+    "image": "mcr.microsoft.com/devcontainers/python:{{ cookiecutter.python_version_number }}",
+    "hostRequirements": {
+      "gpu": "optional"
+    },
+    "features": {
+      "./py-dev": {},
+      "ghcr.io/va-h/devcontainers-features/uv:1": {},
+      "ghcr.io/devcontainers/features/node": {},
+      "ghcr.io/devcontainers/features/aws-cli": {}
+    },
+    "runArgs": [
+      "--ipc=host",
+      "--privileged"
+    ],
+    "postCreateCommand": "make create_environment && make requirements",
+    "mounts": [
+      "source=${localEnv:HOME}/.aws/config,target=/root/.aws/config,type=bind,consistency=cached,ro=1",
+      "source=${localEnv:HOME}/.aws/sso,target=/root/.aws/sso,type=bind,consistency=cached"
+    ],
+    "remoteUser": "root"
+  }
