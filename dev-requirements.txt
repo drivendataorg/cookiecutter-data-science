@@ -11,7 +11,7 @@ mkdocs-material
 mkdocs-gen-files
 mkdocs-include-markdown-plugin
 pexpect
-pipenv
+pipenv<2025
 pytest
 termynal
 twine
