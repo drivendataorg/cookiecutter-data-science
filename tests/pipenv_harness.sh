@@ -37,7 +37,7 @@ for python in pythons:
     print(f'Found Python {python.version}: {python.path} (arch: {python.architecture})')
 "
 
-cho "--- Which python resolves to ---"
+echo "--- Which python resolves to ---"
 which python
 python --version
 python -c "import platform; print(f'Architecture: {platform.architecture()}')"
