@@ -29,7 +29,6 @@ echo "=== DEBUGGING PYTHON DISCOVERY ==="
 
 # 1. Install pythonfinder and list all Python versions with paths
 echo "--- Installing pythonfinder and listing versions ---"
-pip install pythonfinder
 python -c "
 import pythonfinder
 finder = pythonfinder.Finder()
