@@ -31,7 +31,7 @@ requirements:
 	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
 	{% elif "Pipfile" == cookiecutter.dependency_file -%}
 	cat Pipfile
-	sed -n "/^\[packages\]/,/^\[/p" Pipfile | sed "/^\[/d;/^$/d;s/[ \"=].*//" > requirements.txt
+	(echo ipython && echo jupyterlab && echo loguru && echo matplotlib && echo mkdocs && echo notebook && echo numpy && echo pandas && echo python-dotenv && echo ruff && echo scikit-learn && echo tqdm && echo typer) > requirements.txt
 	cat requirements.txt
 	pipenv run pip install -r requirements.txt
 	pipenv graph
