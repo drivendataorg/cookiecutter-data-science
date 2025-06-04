@@ -30,12 +30,7 @@ requirements:
 	{% elif "environment.yml" == cookiecutter.dependency_file -%}
 	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
 	{% elif "Pipfile" == cookiecutter.dependency_file -%}
-	cat Pipfile
-	(echo ipython && echo jupyterlab && echo loguru && echo matplotlib && echo mkdocs && echo notebook && echo numpy && echo pandas && echo python-dotenv && echo ruff && echo scikit-learn && echo tqdm && echo typer) > requirements.txt
-	cat requirements.txt
-	pipenv run pip install -r requirements.txt
-	pipenv graph
-	pipenv install
+	python -m pipenv install
 {% endif %}
 {% endif %}
 
