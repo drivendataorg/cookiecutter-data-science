@@ -31,11 +31,6 @@ requirements:
 	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
 	{% elif "Pipfile" == cookiecutter.dependency_file -%}
 	cat Pipfile
-	pipenv requirements > requirements.txt
-	cat requirements.txt
-	pipenv run pip install -r requirements.txt
-	pipenv graph
-	pipenv lock --clear --verbose
 	pipenv install
 {% endif %}
 {% endif %}
