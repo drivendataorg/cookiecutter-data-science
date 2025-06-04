@@ -23,8 +23,8 @@ cd $1
 make
 echo "Pipenv Python environment variable is set to: $PIPENV_PYTHON"
 echo "$PATH"
-# make create_environment
-pipenv --python C:/hostedtoolcache/windows/Python/3.11.9/x64/python.exe
+make create_environment
+# pipenv --python C:/hostedtoolcache/windows/Python/3.11.9/x64/python.exe
 
 
 # can happen outside of environment since pipenv knows based on Pipfile

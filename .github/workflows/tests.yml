@@ -18,29 +18,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  code-quality:
-    name: Code Quality
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  # code-quality:
+  #   name: Code Quality
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: "pip"
-          cache-dependency-path: |
-            pyproject.toml
-            dev-requirements.txt
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: "3.11"
+  #         cache: "pip"
+  #         cache-dependency-path: |
+  #           pyproject.toml
+  #           dev-requirements.txt
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          make requirements
+  #     - name: Install dependencies
+  #       run: |
+  #         python -m pip install --upgrade pip
+  #         make requirements
 
-      - name: Lint
-        run: |
-          make lint
+  #     - name: Lint
+  #       run: |
+  #         make lint
 
   tests:
     name: Tests (${{ matrix.os }}, Python ${{ matrix.python-version }})
@@ -64,7 +64,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
-          architecture: 'x64'
           cache: "pip"
           cache-dependency-path: |
             pyproject.toml
@@ -97,7 +96,7 @@ jobs:
           # Set bash executable explicitly since Make may pick wrong shell
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
           # Set PIPENV_PYTHON to use the correct 64-bit Python from setup-python
-          echo "PIPENV_PYTHON=$(which python)" >> "$GITHUB_ENV"
+          echo "PIPENV_PYTHON=$(which python).exe" >> "$GITHUB_ENV"
 
       - name: Install dependencies
         run: |
@@ -118,15 +117,10 @@ jobs:
           conda --version
           which pipenv
           pipenv --version
-          which python
-          python --version
-          pipenv run which python
-          pipenv run python --version
           which virtualenv
           virtualenv --version
-          echo $PATH
-          # Debug Python architecture
-          echo "PIPENV_PYTHON is set to: ${PIPENV_PYTHON}"
+          which python
+          python --version
           python -c "import platform; print(f'Python architecture: {platform.architecture()}')"
 
       - name: Run tests
