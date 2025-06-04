@@ -117,7 +117,7 @@ def write_dependencies(
             lines = ["[packages]"]
             lines += [f'{p} = "*"' for p in sorted(packages)]
 
-            lines += [f'{module_name} = {{editable = true, path = "."}}']
+            lines += [f'"{module_name}" ={{editable = true, path = "."}}']
 
             lines += ["", "[requires]", f'python_version = "{python_version}"']
 
