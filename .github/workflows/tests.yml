@@ -124,6 +124,9 @@ jobs:
           which virtualenv
           virtualenv --version
           echo $PATH
+          # Debug Python architecture
+          echo "PIPENV_PYTHON is set to: ${PIPENV_PYTHON}"
+          python -c "import platform; print(f'Python architecture: {platform.architecture()}')"
 
       - name: Run tests
         run: |

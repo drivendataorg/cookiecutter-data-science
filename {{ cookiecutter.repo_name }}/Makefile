@@ -123,6 +123,10 @@ create_environment:
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
 	{% elif cookiecutter.environment_manager == 'pipenv' -%}
 	pipenv --python $(PYTHON_VERSION)
+	# Debug Python architecture
+	echo "PIPENV_PYTHON is set to: ${PIPENV_PYTHON}"
+	python -c "import platform; print(f'Python architecture: {platform.architecture()}')"
+	pipenv run python -c "import platform; print(f'Python architecture: {platform.architecture()}')"
 	@echo ">>> New pipenv created. Activate with:\npipenv shell"
 	{% elif cookiecutter.environment_manager == 'uv' -%}
 	uv venv --python $(PYTHON_VERSION)
