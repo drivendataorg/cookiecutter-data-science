@@ -29,8 +29,7 @@ if [[ "$RUNNER_OS" == "Windows" ]]; then
 	pipenv --python $(shell where python).exe
 else
     make create_environment
-    echo "Running on non-Windows OS"
-    
+fi
 # can happen outside of environment since pipenv knows based on Pipfile
 make requirements
 
