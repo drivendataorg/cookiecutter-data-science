@@ -123,7 +123,7 @@ jobs:
           pipenv run python --version
           which virtualenv
           virtualenv --version
-          run: echo $PATH
+          echo $PATH
 
       - name: Run tests
         run: |
