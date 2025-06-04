@@ -21,6 +21,7 @@ source $CCDS_ROOT/test_functions.sh
 # navigate to the generated project and run make commands 
 cd $1
 make
+echo "Pipenv Python environment variable is set to: $PIPENV_PYTHON"
 make create_environment
 
 # can happen outside of environment since pipenv knows based on Pipfile

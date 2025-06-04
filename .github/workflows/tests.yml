@@ -44,7 +44,7 @@ jobs:
 
   tests:
     name: Tests (${{ matrix.os }}, Python ${{ matrix.python-version }})
-    needs: code-quality
+    # needs: code-quality
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -64,6 +64,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
+          architecture: 'x64'
           cache: "pip"
           cache-dependency-path: |
             pyproject.toml
