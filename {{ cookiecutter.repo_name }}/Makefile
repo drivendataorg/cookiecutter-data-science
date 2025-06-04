@@ -122,11 +122,7 @@ create_environment:
 	@bash -c "if [ ! -z `which virtualenvwrapper.sh` ]; then source `which virtualenvwrapper.sh`; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); else mkvirtualenv.bat $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); fi"
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
 	{% elif cookiecutter.environment_manager == 'pipenv' -%}
-	pipenv --python $(PYTHON_VERSION)
-	# Debug Python architecture
-	echo "PIPENV_PYTHON is set to: ${PIPENV_PYTHON}"
-	python -c "import platform; print(f'Python architecture: {platform.architecture()}')"
-	pipenv run python -c "import platform; print(f'Python architecture: {platform.architecture()}')"
+	pipenv --python python
 	@echo ">>> New pipenv created. Activate with:\npipenv shell"
 	{% elif cookiecutter.environment_manager == 'uv' -%}
 	uv venv --python $(PYTHON_VERSION)
