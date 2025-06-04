@@ -22,6 +22,7 @@ source $CCDS_ROOT/test_functions.sh
 cd $1
 make
 echo "Pipenv Python environment variable is set to: $PIPENV_PYTHON"
+echo "$PATH"
 make create_environment
 
 # can happen outside of environment since pipenv knows based on Pipfile
