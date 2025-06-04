@@ -25,12 +25,12 @@ make
 # GitHub-hosted Windows runners using setup-python have 32-bit versions of Python
 # installed (see #452). We can test the make command on non-Windows systems,
 # but on Windows we should ensure we use the system python
-ifeq ($(OS),Windows_NT)
+if [[ "$RUNNER_OS" == "Windows" ]]; then
 	pipenv --python $(shell where python).exe
 else
     make create_environment
-endif
-
+    echo "Running on non-Windows OS"
+    
 # can happen outside of environment since pipenv knows based on Pipfile
 make requirements
 
