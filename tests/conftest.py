@@ -41,7 +41,6 @@ def config_generator(fast=False):
         [("environment_manager", "pipenv")],
         [("dependency_file", "Pipfile")],
         [("pydata_packages", "basic")],
-
     )
 
     def _is_valid(config):
