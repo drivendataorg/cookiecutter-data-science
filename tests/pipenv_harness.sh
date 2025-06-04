@@ -21,32 +21,15 @@ source $CCDS_ROOT/test_functions.sh
 # navigate to the generated project and run make commands 
 cd $1
 make
-echo "Pipenv Python environment variable is set to: $PIPENV_PYTHON"
-echo "$PATH"
 
-# Debug pythonfinder and Python discovery
-echo "=== DEBUGGING PYTHON DISCOVERY ==="
-
-# 1. Install pythonfinder and list all Python versions with paths
-echo "--- Installing pythonfinder and listing versions ---"
-python -c "
-import pythonfinder
-finder = pythonfinder.Finder()
-pythons = finder.find_all_python_versions()
-for python in pythons:
-    print(f'Found Python {python.version}: {python.path} (arch: {python.architecture})')
-"
-
-echo "--- Which python resolves to ---"
-which python
-python --version
-python -c "import platform; print(f'Architecture: {platform.architecture()}')"
-
-echo "=== END DEBUGGING ==="
-echo ""
-
-make create_environment
-
+# GitHub-hosted Windows runners using setup-python have 32-bit versions of Python
+# installed (see #452). We can test the make command on non-Windows systems,
+# but on Windows we should ensure we use the system python
+ifeq ($(OS),Windows_NT)
+	pipenv --python $(shell where python).exe
+else
+    make create_environment
+endif
 
 # can happen outside of environment since pipenv knows based on Pipfile
 make requirements
