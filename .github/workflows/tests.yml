@@ -59,14 +59,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v6
-        with:
-          version: "latest"
-          enable-cache: true
-
       - name: Set up Python ${{ matrix.python-version }}
-        run: uv python install ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
+          cache: "pip"
+          cache-dependency-path: |
+            pyproject.toml
+            dev-requirements.txt
 
       - name: Set up Miniconda  
         uses: conda-incubator/setup-miniconda@v3
@@ -99,8 +100,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          uv pip install --upgrade pip
-          uv run make requirements
+          python -m pip install --upgrade pip
+          make requirements
 
       - name: Check dependencies
         run: |
