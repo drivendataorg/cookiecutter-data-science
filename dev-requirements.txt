@@ -13,7 +13,6 @@ mkdocs-include-markdown-plugin
 pexpect
 pipenv
 pytest
-pythonfinder
 termynal
 twine
 uv

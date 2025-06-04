@@ -30,6 +30,7 @@ if [[ "$RUNNER_OS" == "Windows" ]]; then
 else
     make create_environment
 fi
+
 # can happen outside of environment since pipenv knows based on Pipfile
 make requirements
 

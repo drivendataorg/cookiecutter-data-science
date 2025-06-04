@@ -32,15 +32,12 @@ def config_generator(fast=False):
 
     configs = product(
         py_version,
-        # [
-        #     ("environment_manager", opt)
-        #     for opt in cookiecutter_json["environment_manager"]
-        # ],
-        # [("dependency_file", opt) for opt in cookiecutter_json["dependency_file"]],
-        # [("pydata_packages", opt) for opt in cookiecutter_json["pydata_packages"]],
-        [("environment_manager", "pipenv")],
-        [("dependency_file", "Pipfile")],
-        [("pydata_packages", "basic")],
+        [
+            ("environment_manager", opt)
+            for opt in cookiecutter_json["environment_manager"]
+        ],
+        [("dependency_file", opt) for opt in cookiecutter_json["dependency_file"]],
+        [("pydata_packages", opt) for opt in cookiecutter_json["pydata_packages"]],
     )
 
     def _is_valid(config):
