@@ -122,7 +122,7 @@ create_environment:
 	@bash -c "if [ ! -z `which virtualenvwrapper.sh` ]; then source `which virtualenvwrapper.sh`; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); else mkvirtualenv.bat $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); fi"
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
 	{% elif cookiecutter.environment_manager == 'pipenv' -%}
-	pipenv --python python
+	pipenv install
 	@echo ">>> New pipenv created. Activate with:\npipenv shell"
 	{% elif cookiecutter.environment_manager == 'uv' -%}
 	uv venv --python $(PYTHON_VERSION)
