@@ -95,6 +95,8 @@ jobs:
           echo "${CONDA}\Scripts" >> $GITHUB_PATH
           # Set bash executable explicitly since Make may pick wrong shell
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
+          # Set PIPENV_PYTHON to use the correct 64-bit Python from setup-python
+          echo "PIPENV_PYTHON=$(which python)" >> "$GITHUB_ENV"
 
       - name: Install dependencies
         run: |
@@ -115,6 +117,10 @@ jobs:
           conda --version
           which pipenv
           pipenv --version
+          which python
+          python --version
+          pipenv run which python
+          pipenv run python --version
           which virtualenv
           virtualenv --version
 
