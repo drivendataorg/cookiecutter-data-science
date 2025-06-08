@@ -115,6 +115,9 @@ jobs:
           pipenv --version
           which virtualenv
           virtualenv --version
+          which python
+          python --version
+          python -c "import platform; print(f'Python architecture: {platform.architecture()}')"
 
       - name: Run tests
         run: |
