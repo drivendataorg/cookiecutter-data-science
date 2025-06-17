@@ -56,6 +56,7 @@ ccds_script = [
     ("Choose from", "2"),  # environment_manager
     ("Choose from", "1"),  # dependency_file
     ("Choose from", "2"),  # pydata_packages
+    ("Choose from", "3"),  # testing_framework
     ("Choose from", "1"),  # linting_and_formatting
     ("Choose from", "2"),  # open_source_license
     ("Choose from", "1"),  # docs
