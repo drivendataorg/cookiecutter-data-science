@@ -58,6 +58,8 @@ def verify_folders(root, config):
     """Tests that expected folders and only expected folders exist."""
     expected_dirs = [
         ".",
+        ".devcontainer",
+        ".devcontainer/py-dev",
         "data",
         "data/external",
         "data/interim",
