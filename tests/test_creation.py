@@ -58,6 +58,8 @@ def verify_folders(root, config):
     """Tests that expected folders and only expected folders exist."""
     expected_dirs = [
         ".",
+        ".devcontainer",
+        ".devcontainer/py-dev",
         "data",
         "data/external",
         "data/interim",
@@ -96,6 +98,9 @@ def verify_folders(root, config):
 def verify_files(root, config):
     """Test that expected files and only expected files exist."""
     expected_files = [
+        ".devcontainer/devcontainer.json",
+        ".devcontainer/py-dev/devcontainer-feature.json",
+        ".devcontainer/py-dev/install.sh",
         "Makefile",
         "README.md",
         "pyproject.toml",
