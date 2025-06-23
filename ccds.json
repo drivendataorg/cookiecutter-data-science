@@ -41,6 +41,7 @@
 	"_qa_tool": "trunk",
 	"_qa_level": "basic",
 	"_task_manager": "taskfile",
+	"_typesetting_tool": "typst",
 	"_readme_modern_header": "y",
 	"_readme_include_logo": "y",
 	"_readme_include_screenshots": "y",

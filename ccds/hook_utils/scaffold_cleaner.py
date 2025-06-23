@@ -9,6 +9,7 @@ from loguru import logger
 
 SecretManagers = Literal["none", "dot_env", "secrets_dir"]
 TaskManagers = Literal["none", "taskfile", "makefile"]
+TypeSettingTools = Literal["latex", "typst"]
 CleaningOption = Literal["data", "paper", "app", "ml", "lib", "course"]
 ScaffoldOptions = Literal["data", "backend", "course", "frontend"]
 CleaningOperation = Callable[[Path], None]
@@ -219,7 +220,7 @@ class ScaffoldCleaner:
             return
 
     def _select_task_manager(self, task_manager: TaskManagers) -> None:
-        """Removes the secrets directory, transferring example.env to project root."""
+        """Deletes all non-applicable TaskManagers"""
         if task_manager == "none":
             self._remove_file(self.root / "Makefile")
             self._remove_file(self.root / "Taskfile.yml")
@@ -232,4 +233,16 @@ class ScaffoldCleaner:
             self._remove_file(self.root / "Taskfile.yml")
             return
         err_msg = f"Task Manager is not valid: {task_manager}"
+        raise ValueError(err_msg)
+
+    def _select_typesetting_tool(self, typesetting_tool: TypeSettingTools) -> None:
+        """Sets typsetting tool to either LaTeX or Typst."""
+        # TODO(GatlenCulp): Finish this
+        if typesetting_tool == "latex":
+            logger.info("Typesetting tool selection not yet implemented.")
+            return
+        if typesetting_tool == "typst":
+            logger.info("Typesetting tool selection not yet implemented.")
+            return
+        err_msg = f"Typesetting Tool is not valid: {typesetting_tool}"
         raise ValueError(err_msg)
