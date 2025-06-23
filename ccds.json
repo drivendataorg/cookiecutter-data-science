@@ -40,6 +40,7 @@
 	"_project_emoji": "",
 	"_qa_tool": "trunk",
 	"_qa_level": "basic",
+	"_task_manager": "taskfile",
 	"_readme_modern_header": "y",
 	"_readme_include_logo": "y",
 	"_readme_include_screenshots": "y",

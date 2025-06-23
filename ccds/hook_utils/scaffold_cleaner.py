@@ -8,6 +8,7 @@ from typing import Literal
 from loguru import logger
 
 SecretManagers = Literal["none", "dot_env", "secrets_dir"]
+TaskManagers = Literal["none", "taskfile", "makefile"]
 CleaningOption = Literal["data", "paper", "app", "ml", "lib", "course"]
 ScaffoldOptions = Literal["data", "backend", "course", "frontend"]
 CleaningOperation = Callable[[Path], None]
@@ -39,7 +40,7 @@ class ScaffoldCleaner:
             self._remove_all_scaffolding()
             return
 
-        cleaning_ops = {self._remove_experimental}
+        cleaning_ops = {self._remove_experimental, lambda: self._select_task_manager("taskfile")}
         for option in cleaning_options:
             if option == "data":
                 cleaning_ops.add(
@@ -91,7 +92,6 @@ class ScaffoldCleaner:
                 cleaning_ops.add(lambda: self._remove_dir(self.root / "tests"))
                 # Files
                 cleaning_ops.add(lambda: self._remove_file(self.root / "biome.json"))
-                cleaning_ops.add(lambda: self._remove_file(self.root / "Taskfile.yml"))
                 cleaning_ops.add(lambda: self._remove_file(self.root / "LICENSE"))
                 continue
 
@@ -181,9 +181,9 @@ class ScaffoldCleaner:
         self._remove_dir(self.root / ".obsidian")
         self._remove_dir(self.root / "homebrew")
         self._remove_file(self.root / ".direnv")
+        self._remove_file(self.root / ".envrc")
         self._remove_file(self.root / "CNAME")
         self._remove_file(self.root / "install.sh")
-        self._remove_file(self.root / "Taskfile.yml")
         self._remove_nix()
 
     def _remove_file(self, path: Path) -> None:
@@ -197,7 +197,7 @@ class ScaffoldCleaner:
         """Removes specified high-level directory and subfiles."""
         if not (dir_path.exists() and dir_path.is_dir()):
             err_msg = f"{dir_path} is fake news"
-            raise Exception(err_msg)
+            raise ValueError(err_msg)
         shutil.rmtree(dir_path)
 
     def _remove_nix(self) -> None:
@@ -217,3 +217,19 @@ class ScaffoldCleaner:
             return
         if secrets_manager == "secrets_dir":
             return
+
+    def _select_task_manager(self, task_manager: TaskManagers) -> None:
+        """Removes the secrets directory, transferring example.env to project root."""
+        if task_manager == "none":
+            self._remove_file(self.root / "Makefile")
+            self._remove_file(self.root / "Taskfile.yml")
+            return
+        if task_manager == "taskfile":
+            logger.error("Reached Makefile remove!")
+            self._remove_file(self.root / "Makefile")
+            return
+        if task_manager == "makefile":
+            self._remove_file(self.root / "Taskfile.yml")
+            return
+        err_msg = f"Task Manager is not valid: {task_manager}"
+        raise ValueError(err_msg)

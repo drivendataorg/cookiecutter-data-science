@@ -326,3 +326,8 @@ misc = [
 <!-- Maybe I should add an automatic folder icon creator? -->
 
 <!-- TODO: Cite https://github.com/dec0dOS/amazing-github-template/tree/main -->
+
+## 08 Misc
+- Exploring Nix and Mise-en-place
+- Considering just using make files instead of Taskfiles.
+- Considering Trunk over Mega-Linter or Pre-commits for cross-language linting/formatting.

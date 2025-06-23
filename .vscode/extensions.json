@@ -98,7 +98,8 @@
 		"usernamehw.errorlens", // Highlight errors in-line
 		"spmeesseman.vscode-taskexplorer", // Task explorer
 		// {% if cookiecutter.include_code_scaffold in ("app", "ml", "data") %}
-		"ms-azuretools.vscode-docker" // Docker support
+		"ms-azuretools.vscode-docker",
+		"trunk.io" // Docker support
 		// {% endif %}
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
