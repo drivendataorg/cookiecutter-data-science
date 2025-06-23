@@ -40,7 +40,7 @@ class ScaffoldCleaner:
             self._remove_all_scaffolding()
             return
 
-        cleaning_ops = {self._remove_experimental, lambda: self._select_task_manager("taskfile")}
+        cleaning_ops = {self._remove_experimental, lambda: self._select_task_manager("makefile")}
         for option in cleaning_options:
             if option == "data":
                 cleaning_ops.add(

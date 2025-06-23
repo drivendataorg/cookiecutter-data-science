@@ -39,3 +39,8 @@ brew install --cask miniconda
 ## Possible Future Features
 
 - [ ] Use `{{ cookiecutter.project_emoji }}` to create an automatic folder icon `{{ cookiecuttter.module_name }}.icns`. I personally find this very useful for organizing my projects
+
+## TODO
+- [ ] Perhaps add mise-en-place as a task/package manager
+- [ ] Add typst to options for LaTeX
+- [ ] 
