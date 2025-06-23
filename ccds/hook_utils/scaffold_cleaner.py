@@ -41,7 +41,11 @@ class ScaffoldCleaner:
             self._remove_all_scaffolding()
             return
 
-        cleaning_ops = {self._remove_experimental, lambda: self._select_task_manager("makefile")}
+        cleaning_ops = {
+            self._remove_experimental,
+            lambda: self._select_task_manager("makefile"),
+            lambda: self._select_qa_tool("trunk"),
+        }
         for option in cleaning_options:
             if option == "data":
                 cleaning_ops.add(
@@ -245,4 +249,19 @@ class ScaffoldCleaner:
             logger.info("Typesetting tool selection not yet implemented.")
             return
         err_msg = f"Typesetting Tool is not valid: {typesetting_tool}"
+        raise ValueError(err_msg)
+
+    def _select_qa_tool(self, qa_tool: QATools) -> None:
+        """Sets the QA tool to pre-commit or Trunk (a superlinter)."""
+        if qa_tool == "trunk":
+            self._remove_file(self.root / ".pre-commit-config.yaml")
+            return
+        if qa_tool == "pre-commit":
+            self._remove_dir(self.root / ".trunk")
+            return
+        if qa_tool is None:
+            self._remove_file(self.root / ".pre-commit-config.yaml")
+            self._remove_dir(self.root / ".trunk")
+            return
+        err_msg = f"QA Tool is not valid: {qa_tool}"
         raise ValueError(err_msg)

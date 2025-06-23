@@ -30,7 +30,8 @@ MODULE_NAME = gotem_args.module_name
 # For project description, try to get "project_short_description" from the JSON dict
 # since it may not be in our model but is needed by scaffold_cleaner
 PROJECT_SHORT_DESCRIPTION = cookiecutter_dict.get(
-    "project_short_description", gotem_args.description,
+    "project_short_description",
+    gotem_args.description,
 )
 CODE_SCAFFOLD = gotem_args.include_code_scaffold
 
@@ -138,9 +139,9 @@ elif gotem_args.version_control == "git (github public)":
 #                              Install Pre-Commit                              #
 # ---------------------------------------------------------------------------- #
 
-if gotem_args.environment_manager == "uv":
-    os.chdir(Path.cwd())
-    subprocess.run(["pre-commit", "install"], check=False)  # noqa: S603, S607
+# if gotem_args.environment_manager == "uv":
+#     os.chdir(Path.cwd())
+#     subprocess.run(["pre-commit", "install"], check=False)  # noqa: S603, S607
 
 # ---------------------------------------------------------------------------- #
 #                                   SSH Keys                                   #
