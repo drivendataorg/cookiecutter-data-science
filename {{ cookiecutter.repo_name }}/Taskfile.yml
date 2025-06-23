@@ -8,6 +8,10 @@ vars:
   DOCS_PORT: "8000"
 
 tasks:
+  default:
+    cmds:
+      - task: help
+
   ###############################################################################
   # Dependencies & Environment
   ###############################################################################
@@ -75,10 +79,26 @@ tasks:
   # Utilities
   ###############################################################################
 
-  prep:
-    desc: Clean up .DS_Store files
+  help:
+    desc: Show this help message
+    silent: true
     cmds:
-      - rm -f **/*/.DS_store
+      - task: logo
+      - |
+        echo -e "\n\033[1m~ Available rules: ~\033[0m\n"
+        echo -e "For VSCode/Cursor, try: ⇧ ⌘ P, Tasks: Run Task\n"
+        task --list
+
+  logo:
+    desc: Prints the GOTem logo
+    silent: true
+    cmds:
+      - |
+        echo -e "\033[38;5;39m   ____  ___ _____"
+        echo -e "  / ___|/ _ \_   _|__ _ __ ___"
+        echo -e " | |  _| | | || |/ _ \ '_ \` _ \\"
+        echo -e " | |_| | |_| || |  __/ | | | | |"
+        echo -e "  \____|\___/ |_|\___|_| |_| |_|\033[0m"
 
   welcome:
     desc: Print a Welcome screen
@@ -90,7 +110,35 @@ tasks:
   ###############################################################################
 
   clean:
-    desc: Delete all compiled Python files
+    desc: Delete all compiled Python files and LaTeX build artifacts
+    deps: [_clean-mac, _clean-latex, _clean-python]
+    cmds:
+      - find . -type d -name ".cache" -delete
+
+  _clean-mac:
+    internal: true
+    cmds:
+      - find . -type f -name "*.DS_store" -delete
+
+  _clean-latex:
+    internal: true
+    cmds:
+      - find . -type f -name "*.aux" -delete
+      - find . -type f -name "*.bbl" -delete
+      - find . -type f -name "*.bcf" -delete
+      - find . -type f -name "*.blg" -delete
+      - find . -type f -name "*.fdb_latexmk" -delete
+      - find . -type f -name "*.fls" -delete
+      - find . -type f -name "*.lof" -delete
+      - find . -type f -name "*.log" -delete
+      - find . -type f -name "*.lot" -delete
+      - find . -type f -name "*.out" -delete
+      - find . -type f -name "*.synctex.gz*" -delete
+      - find . -type f -name "*.toc" -delete
+      - find . -type d -name "_minted*" -delete
+
+  _clean-python:
+    internal: true
     cmds:
       - find . -type f -name "*.py[co]" -delete
       - find . -type d -name "__pycache__" -delete
@@ -134,19 +182,16 @@ tasks:
 
   test:
     desc: Run all tests
-    deps: [prep]
     cmds:
       - pytest -vvv --durations=0
 
   test-fastest:
     desc: Run tests with fail-fast option
-    deps: [prep]
     cmds:
       - pytest -vvv -FFF
 
   test-continuous:
     desc: Run tests in watch mode using pytest-watcher
-    deps: [prep]
     cmds:
       - ptw . --now --runner pytest --config-file pyproject.toml -vvv -FFF
 
@@ -154,6 +199,18 @@ tasks:
     desc: Debug last failed test with pdb
     cmds:
       - pytest --lf --pdb
+
+  manual-test:
+    desc: Run manual tests
+    cmds:
+      - task: clean-manual-test
+      - mkdir -p manual_test
+      - echo "<manual-test not yet implemented>"
+
+  clean-manual-test:
+    desc: Clean manual test artifacts
+    cmds:
+      - rm -rf manual_test
 
   ###############################################################################
   # Data Sync
@@ -197,10 +254,21 @@ tasks:
       # {%- endraw %}
   # {%- endif %}
 
-  default:
-    desc: List all available tasks
+  ###############################################################################
+  # Packaging & Publishing
+  ###############################################################################
+  publish:
+    desc: "Publish package to PyPI"
     cmds:
-      - task --list
+      - echo "Publishing not yet implemented"
+
+  publish-all:
+    desc: "Run format, lint, publish package and docs"
+    deps:
+      - format
+      - lint
+      - publish
+      - docs-publish
 
   # {% if cookiecutter.use_github == 'Yes' %}
   ###############################################################################
