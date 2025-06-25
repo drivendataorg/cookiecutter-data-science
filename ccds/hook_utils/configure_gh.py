@@ -52,7 +52,7 @@ def configure_github_repo(
 
         # Initialize repository if needed
         if not (directory / ".git").is_dir():
-            _run_git_command("init")
+            _run_git_command("init -b main")
 
         # Add and commit changes if needed
         if _run_git_command("status --porcelain", capture_output=True).stdout:
