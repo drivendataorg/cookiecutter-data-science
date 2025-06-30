@@ -102,6 +102,10 @@ write_custom_config("{{ cookiecutter.custom_config }}")
 if "{{ cookiecutter.open_source_license }}" == "No license file":
     Path("LICENSE").unlink()
 
+# Remove ruff.toml if not using ruff
+if "{{ cookiecutter.linting_and_formatting }}" != "ruff":
+    Path("ruff.toml").unlink()
+
 # Make single quotes prettier
 # Jinja tojson escapes single-quotes with \u0027 since it's meant for HTML/JS
 pyproject_text = Path("pyproject.toml").read_text()
