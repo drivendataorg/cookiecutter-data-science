@@ -22,7 +22,7 @@ create_environment:
 
 ## Install Python Dependencies
 requirements:
-	$(PYTHON_INTERPRETER) -m pip install -r dev-requirements.txt
+	$(PYTHON_INTERPRETER) -m pip install -U -r dev-requirements.txt
 
 ## Format the code using isort and black
 format:

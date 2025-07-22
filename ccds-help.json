@@ -148,6 +148,13 @@
                 } 
             },
             {
+                "choice": "pixi",
+                "help": {
+                    "description": "A fast package manager built on top of the conda ecosystem with lock files for reproducible environments. Supports both pixi.toml and pyproject.toml. Requires pixi to be installed as a system binary (see docs for installation instructions).",
+                    "more_information": "[Docs](https://pixi.sh/)"
+                } 
+            },
+            {
                 "choice": "none",
                 "help": {
                     "description": "Do not add `create_environment` commands; env management left to the user.",
@@ -173,7 +180,7 @@
             {
                 "choice": "pyproject.toml",
                 "help": {
-                    "description": "Modern configuration file for Python projects.",
+                    "description": "Modern configuration file for Python projects. Also supported by pixi when using tool.pixi sections.",
                     "more_information": "[Docs](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)"
                 }
             },
@@ -189,6 +196,13 @@
                 "help": {
                     "description": "Format used by Pipenv",
                     "more_information": "[Docs](https://pipenv.pypa.io/en/latest/pipfile.html)"
+                } 
+            },
+            {
+                "choice": "pixi.toml",
+                "help": {
+                    "description": "Configuration file used by pixi for managing dependencies and environments.",
+                    "more_information": "[Docs](https://pixi.sh/latest/reference/pixi_manifest/)"
                 } 
             }
         ]
