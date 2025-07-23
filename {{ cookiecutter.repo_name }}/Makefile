@@ -144,7 +144,8 @@ create_environment:
 	@echo ">>> Activate with:\npixi shell"
 	{% elif cookiecutter.environment_manager == 'poetry' -%}
 	poetry env use $(PYTHON_VERSION)
-	@echo ">>> Poetry environment created. Activate with:\neval $(poetry env activate)"
+	@echo ">>> Poetry environment created. Activate with: "
+	@echo '$$(poetry env activate)'
 	@echo ">>> Or run commands with:\npoetry run <command>"
 {% endif %}
 {% endif %}
