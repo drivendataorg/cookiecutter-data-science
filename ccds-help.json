@@ -155,6 +155,13 @@
                 } 
             },
             {
+                "choice": "poetry",
+                "help": {
+                    "description": "A dependency management and packaging tool for Python with lock files for reproducible environments. Uses pyproject.toml for configuration. Requires poetry to be installed as a system binary.",
+                    "more_information": "[Docs](https://python-poetry.org/docs/)"
+                } 
+            },
+            {
                 "choice": "none",
                 "help": {
                     "description": "Do not add `create_environment` commands; env management left to the user.",

@@ -62,6 +62,11 @@ def config_generator(fast=False):
             config["dependency_file"] not in ["pixi.toml", "pyproject.toml"]
         ):
             return False
+        # poetry only supports pyproject.toml
+        if (config["environment_manager"] == "poetry") and (
+            config["dependency_file"] != "pyproject.toml"
+        ):
+            return False
         return True
 
     # remove invalid configs
