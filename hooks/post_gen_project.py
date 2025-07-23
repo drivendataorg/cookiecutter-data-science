@@ -92,6 +92,8 @@ write_dependencies(
     repo_name="{{ cookiecutter.repo_name }}",
     module_name="{{ cookiecutter.module_name }}",
     python_version="{{ cookiecutter.python_version_number }}",
+    environment_manager="{{ cookiecutter.environment_manager }}",
+    description="{{ cookiecutter.description }}",
 )
 
 write_python_version("{{ cookiecutter.python_version_number }}")

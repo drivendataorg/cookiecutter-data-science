@@ -24,6 +24,8 @@ requirements:
 	{% elif "pyproject.toml" == cookiecutter.dependency_file -%}
 	{% if "uv" == cookiecutter.environment_manager -%}
 	uv sync
+	{% elif "pixi" == cookiecutter.environment_manager -%}
+	pixi install
 	{% else -%}
 	pip install -e .
 	{% endif -%}
@@ -31,6 +33,8 @@ requirements:
 	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
 	{% elif "Pipfile" == cookiecutter.dependency_file -%}
 	pipenv install
+	{% elif "pixi.toml" == cookiecutter.dependency_file -%}
+	pixi install
 {% endif %}
 {% endif %}
 
@@ -129,6 +133,13 @@ create_environment:
 	@echo ">>> New uv virtual environment created. Activate with:"
 	@echo ">>> Windows: .\\\\.venv\\\\Scripts\\\\activate"
 	@echo ">>> Unix/macOS: source ./.venv/bin/activate"
+	{% elif cookiecutter.environment_manager == 'pixi' -%}
+	{% if cookiecutter.dependency_file == 'pixi.toml' %}
+	@echo ">>> Pixi environment will be created when running 'make requirements'"
+	{% else %}
+	@echo ">>> Pixi environment configured in pyproject.toml. Run 'make requirements' to install dependencies."
+	{% endif %}
+	@echo ">>> Activate with:\npixi shell"
 {% endif %}
 {% endif %}
 

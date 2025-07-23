@@ -16,13 +16,15 @@
         "conda",
         "pipenv",
         "uv",
+        "pixi",
         "none"
     ],
     "dependency_file": [
         "requirements.txt",
         "pyproject.toml",
         "environment.yml",
-        "Pipfile"
+        "Pipfile",
+        "pixi.toml"
     ],
     "pydata_packages": [
         "none",

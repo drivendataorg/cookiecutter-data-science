@@ -52,6 +52,16 @@ def config_generator(fast=False):
             config["environment_manager"] != "conda"
         ):
             return False
+        # pixi is the only valid env manager for pixi.toml
+        if (config["dependency_file"] == "pixi.toml") and (
+            config["environment_manager"] != "pixi"
+        ):
+            return False
+        # pixi supports both pixi.toml and pyproject.toml
+        if (config["environment_manager"] == "pixi") and (
+            config["dependency_file"] not in ["pixi.toml", "pyproject.toml"]
+        ):
+            return False
         return True
 
     # remove invalid configs
