@@ -178,6 +178,13 @@ def write_dependencies(
             doc["project"].add("dependencies", sorted(packages))
             doc["project"]["dependencies"].multiline(True)
 
+            # poetry uses standard project dependencies, but we should use its build system
+            if environment_manager == "poetry":
+                # Update build system to use poetry-core
+                doc["build-system"] = tomlkit.table()
+                doc["build-system"]["requires"] = ["poetry-core>=2.0.0,<3.0.0"]
+                doc["build-system"]["build-backend"] = "poetry.core.masonry.api"
+
         with open(dependencies, "w") as f:
             f.write(tomlkit.dumps(doc))
 
