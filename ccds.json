@@ -17,6 +17,7 @@
         "pipenv",
         "uv",
         "pixi",
+        "poetry",
         "none"
     ],
     "dependency_file": [

@@ -12,6 +12,7 @@ mkdocs-gen-files
 mkdocs-include-markdown-plugin
 pexpect
 pipenv
+poetry
 pytest
 termynal
 twine

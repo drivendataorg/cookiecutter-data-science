@@ -26,6 +26,8 @@ requirements:
 	uv sync
 	{% elif "pixi" == cookiecutter.environment_manager -%}
 	pixi install
+	{% elif "poetry" == cookiecutter.environment_manager -%}
+	poetry install
 	{% else -%}
 	pip install -e .
 	{% endif -%}
@@ -140,6 +142,11 @@ create_environment:
 	@echo ">>> Pixi environment configured in pyproject.toml. Run 'make requirements' to install dependencies."
 	{% endif %}
 	@echo ">>> Activate with:\npixi shell"
+	{% elif cookiecutter.environment_manager == 'poetry' -%}
+	poetry env use $(PYTHON_VERSION)
+	@echo ">>> Poetry environment created. Activate with: "
+	@echo '$$(poetry env activate)'
+	@echo ">>> Or run commands with:\npoetry run <command>"
 {% endif %}
 {% endif %}
 

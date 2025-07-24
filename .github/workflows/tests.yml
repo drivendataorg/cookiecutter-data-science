@@ -81,6 +81,11 @@ jobs:
           cache: false
           run-install: false
   
+      - name: Set up Poetry
+        uses: abatilo/actions-poetry@v3
+        with:
+          poetry-version: latest
+
       - name: Cache conda packages
         uses: actions/cache@v4
         env:
@@ -125,6 +130,8 @@ jobs:
           virtualenv --version
           which pixi
           pixi --version
+          which poetry
+          poetry --version
           which python
           python --version
           python -c "import platform; print(f'Python architecture: {platform.architecture()}')"
