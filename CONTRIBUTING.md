@@ -50,3 +50,6 @@ brew install --cask miniconda
     # Except for this .gitignore file
     !.gitignore
     ```
+- [ ] Compare devenv vs envrc vs mise-en-place vs a straight up flake for better package management
+- [ ] Pull the latest changes from CookieCutter Data Science
+- [ ] Allow selection between Typst and LaTeX
