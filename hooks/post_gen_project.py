@@ -63,7 +63,7 @@ if gotem_args.pydata_packages == "basic":
 # {% if cookiecutter.linting_and_formatting == "ruff" %}
 packages_to_install += ruff
 # Remove setup.cfg
-Path("setup.cfg").unlink()
+# Path("setup.cfg").unlink() This isn't here?
 # {% elif cookiecutter.linting_and_formatting == "flake8+black+isort" %}
 packages_to_install += flake8_black_isort
 # {% endif %}
