@@ -103,12 +103,19 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
     expected_dirs = {
         str(VSCODE_CONFIG_DIR),
         ".",
+        ".cursor",
+        ".cursor/artifacts",
+        ".cursor/mem",
+        ".cursor/notes",
+        ".cursor/rules",
         ".devcontainer",
         ".github",
         ".github/actions",
         ".github/actions/setup-python-env",
         ".github/ISSUE_TEMPLATE",
         ".github/workflows",
+        ".trunk",
+        ".trunk/configs",
         "data",
         "data/external",
         "data/interim",
@@ -136,20 +143,42 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         expected_dirs.add(".venv")
         ignored_dirs.update({d.relative_to(root) for d in root.glob(".venv/**/*") if d.is_dir()})
 
-    if config["include_code_scaffold"] != "No":
-        expected_dirs.add(f"{config['module_name']}/_ai")
-        expected_dirs.add(f"{config['module_name']}/_ai/modeling")
-        expected_dirs.add(f"{config['module_name']}/_frontend")
-        expected_dirs.add(f"{config['module_name']}/_backend")
-        expected_dirs.add(f"{config['module_name']}/_course")
-        ignored_dirs.update(
-            {
-                d.relative_to(root)
-                for subdir in ["_frontend", "_backend", "_course"]
-                for d in root.glob(f"{config['module_name']}/{subdir}/**/*")
-                if d.is_dir()
+                # Define scaffold directories that should be verified
+        scaffold_dirs = set()
+        if config["include_code_scaffold"] == "Yes":
+            scaffold_dirs = {
+                "_ai",
+                "_ai/modeling",
+                "_frontend",
+                "_frontend/src",
+                "_frontend/public",
+                "_backend",
+                "_backend/app",
+                "_backend/scripts",
+                "_course",
+                "_course/demo",
+                "_course/ps01",
+                "_cli",
             }
-        )
+
+            # Add expected scaffold directories
+            for d in scaffold_dirs:
+                expected_dirs.add(f"{config['module_name']}/{d}")
+
+            # First ignore all subdirectories
+            ignored_dirs.update(
+                {
+                    d.relative_to(root)
+                    for d in root.glob(f"{config['module_name']}/**/*")
+                    if d.is_dir()
+                }
+            )
+
+            # Then remove from ignored_dirs the ones we want to verify
+            for d in scaffold_dirs:
+                path = Path(f"{config['module_name']}/{d}")
+                if path in ignored_dirs:
+                    ignored_dirs.remove(path)
 
     if config["docs"] == "mkdocs":
         expected_dirs.add("docs/docs")
@@ -173,7 +202,6 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         # expected_dirs.update({".git/logs", ".git/logs/refs"})
         ignored_patterns = [
             ".git/**/*",
-            "",
         ]  # [".git/objects/**/*", ".git/refs/**/*", ".git/logs/refs/**/*", ".git/branches/**/*"]
         ignored_dirs.update(
             {
@@ -262,7 +290,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         expected_files.add("LICENSE")
 
     if config["include_code_scaffold"] == "Yes":
-        expected_files += [
+        expected_files.update([
             f"{config['module_name']}/config.py",
             f"{config['module_name']}/dataset.py",
             f"{config['module_name']}/features.py",
@@ -270,7 +298,7 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
             f"{config['module_name']}/modeling/train.py",
             f"{config['module_name']}/modeling/predict.py",
             f"{config['module_name']}/plots.py",
-        ]
+        ])
 
     if config["docs"] == "mkdocs":
         expected_files.update(
@@ -281,8 +309,6 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
                 "docs/docs/getting-started.md",
             }
         )
-
-    expected_files.add(config["dependency_file"])
 
     if config["dependency_file"] != "none":
         expected_files.add(config["dependency_file"])
@@ -368,7 +394,7 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
         config: Configuration dictionary
 
     Returns:
-        True if verification succeeds
+        True if verification succeeds, False if environment manager is 'none'
 
     Raises:
         ValueError: If environment manager not found in test harnesses
@@ -382,7 +408,7 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
     elif config["environment_manager"] == "pipenv":
         harness_path = test_path / "pipenv_harness.sh"
     elif config["environment_manager"] == "none":
-        return True
+        return False
     else:
         raise ValueError(
             f"Environment manager '{config['environment_manager']}' not found in test harnesses.",
@@ -408,6 +434,7 @@ def verify_makefile_commands(root: Path, config: dict[str, Any]) -> bool:
     assert "Delete all compiled Python files" in stdout_output
 
     assert result.returncode == 0
+    return True
 
 
 def lint(root):

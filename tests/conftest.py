@@ -259,18 +259,18 @@ def config_generator(fast: int | bool = False) -> Generator[dict[str, str], None
         ):
             return False
         # pixi is the only valid env manager for pixi.toml
-        if (config["dependency_file"] == "pixi.toml") and (
-            config["environment_manager"] != "pixi"
+        if (config_dict["dependency_file"] == "pixi.toml") and (
+            config_dict["environment_manager"] != "pixi"
         ):
             return False
         # pixi supports both pixi.toml and pyproject.toml
-        if (config["environment_manager"] == "pixi") and (
-            config["dependency_file"] not in ["pixi.toml", "pyproject.toml"]
+        if (config_dict["environment_manager"] == "pixi") and (
+            config_dict["dependency_file"] not in ["pixi.toml", "pyproject.toml"]
         ):
             return False
         # poetry only supports pyproject.toml
-        if (config["environment_manager"] == "poetry") and (
-            config["dependency_file"] != "pyproject.toml"
+        if (config_dict["environment_manager"] == "poetry") and (
+            config_dict["dependency_file"] != "pyproject.toml"
         ):
             return False
         return True
@@ -337,11 +337,15 @@ def pytest_generate_tests(metafunc: pytest.Metafunc) -> None:  # type: ignore[mi
                 "conda": "con",
                 "pipenv": "penv",
                 "uv": "uv",
+                "pixi": "pixi",
+                "poetry": "poet",
             },
             "dependency_file": {
                 "requirements.txt": "req.txt",
                 "environment.yml": "env.yml",
                 "Pipfile": "pfile",
+                "pyproject.toml": "pyproj",
+                "pixi.toml": "pixi",
             },
             "docs": {"mkdocs": "mkdocs", "none": "no-doc"},
             "version_control": {
