@@ -35,7 +35,7 @@ You'll be asked a series of questions to set up the repository on GitHub. Once y
 make RECIPE_NAME
 ```
 
-where `RECIPE_NAME` is the same of a recipe like `requirements` or `sync_data_up`. Projects created by CCDS include a `Makefile` with several recipes we've predefined. You'll see them referenced in the sections below. To see a list of all available commands, just call
+where `RECIPE_NAME` is the name of a recipe like `requirements` or `sync_data_up`. Projects created by CCDS include a `Makefile` with several recipes we've predefined. You'll see them referenced in the sections below. To see a list of all available commands, just call
 
 ```bash
 make
@@ -97,12 +97,12 @@ Now you're ready to do some analysis! Make sure that your project-specific envir
 0.01-pjb-data-source-1.ipynb
 ```
 
-- `0.01` - Helps leep work in chronological order. The structure is `PHASE.NOTEBOOK`. `NOTEBOOK` is just the Nth notebook in that phase to be created. For phases of the project, we generally use a scheme like the following, but you are welcome to design your own conventions:
-  - `0` - Data exploration - often just for exploratory work
-  - `1` - Data cleaning and feature creation - often writes data to `data/processed` or `data/interim`
-  - `2` - Visualizations - often writes publication-ready viz to `reports`
-  - `3` - Modeling - training machine learning models
-  - `4` - Publication - Notebooks that get turned directly into reports
+ - `0.01` - Helps keep work in chronological order. The structure is `PHASE.NOTEBOOK`. `NOTEBOOK` is just the Nth notebook in that phase to be created. For phases of the project, we generally use a scheme like the following, but you are welcome to design your own conventions:
+    - `0` - Data exploration - often just for exploratory work
+    - `1` - Data cleaning and feature creation - often writes data to `data/processed` or `data/interim`
+    - `2` - Visualizations - often writes publication-ready viz to `reports`
+    - `3` - Modeling - training machine learning models
+    - `4` - Publication - Notebooks that get turned directly into reports
 - `pjb` - Your initials; this is helpful for knowing who created the notebook and prevents collisions from people working in the same notebook.
 - `data-source-1` - A description of what the notebook covers
 

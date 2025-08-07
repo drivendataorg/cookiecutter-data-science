@@ -20,6 +20,7 @@ pytest-watcher
 ruff
 termynal
 twine
+uv
 virtualenvwrapper; sys_platform != 'win32'
 virtualenvwrapper-win; sys_platform == 'win32'
 uv

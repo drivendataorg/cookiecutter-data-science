@@ -258,25 +258,60 @@ def config_generator(fast: int | bool = False) -> Generator[dict[str, str], None
             config_dict["environment_manager"] != "conda"
         ):
             return False
+        # pixi is the only valid env manager for pixi.toml
+        if (config["dependency_file"] == "pixi.toml") and (
+            config["environment_manager"] != "pixi"
+        ):
+            return False
+        # pixi supports both pixi.toml and pyproject.toml
+        if (config["environment_manager"] == "pixi") and (
+            config["dependency_file"] not in ["pixi.toml", "pyproject.toml"]
+        ):
+            return False
+        # poetry only supports pyproject.toml
+        if (config["environment_manager"] == "poetry") and (
+            config["dependency_file"] != "pyproject.toml"
+        ):
+            return False
         return True
 
     # remove invalid configs
     filtered_configs = [c for c in filtered_configs if _is_valid(c)]
 
+    # ensure linting and formatting options are run on code scaffold
+    # otherwise, linting "passes" because one linter never runs on any code during tests
+    code_format_cycler = cycle(
+        product(
+            [
+                ("include_code_scaffold", opt)
+                for opt in cookiecutter_json["include_code_scaffold"]
+            ],
+            [
+                ("linting_and_formatting", opt)
+                for opt in cookiecutter_json["linting_and_formatting"]
+            ],
+        )
+    )
+
+    # cycle over values for multi-select fields that should be inter-operable
+    # and that we don't need to handle with combinatorics
     cycle_fields: list[str] = [
         "dataset_storage",
         "open_source_license",
-        "include_code_scaffold",
         "docs",
     ]
-    cyclers = {k: cycle(cookiecutter_json[k]) for k in cycle_fields}
+    multi_select_cyclers = {k: cycle(cookiecutter_json[k]) for k in cycle_fields}
 
     for ind, c in enumerate(filtered_configs):
         config = dict(c)
         config.update(default_args)
-        # Alternate including the code scaffold
-        for field, cycler in cyclers.items():
+
+        code_format_settings = dict(next(code_format_cycler))
+        config.update(code_format_settings)
+
+        for field, cycler in multi_select_cyclers.items():
             config[field] = next(cycler)
+
         config["repo_name"] += f"-{ind}"
         yield config
 

@@ -31,29 +31,13 @@ make create_environment
 
 # Check if running on Windows and use appropriate activate path
 if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* ]]; then
-    VENV_PATH=".venv/Scripts/activate"
+    source ".venv/Scripts/activate"
 else
-    VENV_PATH=".venv/bin/activate"
+    source ".venv/bin/activate"
 fi
 
 make requirements
+make lint
+make format
 
-# Verify venv exists before attempting to activate
-if [ ! -f "$VENV_PATH" ]; then
-    echo "Virtual environment activation script not found at $VENV_PATH"
-    exit 1
-fi
-
-# Activate the virtual environment
-source "$VENV_PATH"
-
-# Test python executable path
-python -c "import sys; assert \"$PROJECT_NAME\" in sys.executable"
-
-# Test module importability
-python -c "import $MODULE_NAME"
-
-# Test config importability if scaffolded
-if [ -f "$MODULE_NAME/config.py" ]; then
-    python -c "from $MODULE_NAME import config"
-fi
+run_tests $PROJECT_NAME $MODULE_NAME

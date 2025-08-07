@@ -135,6 +135,11 @@ ipython_config.py
 #   https://pdm.fming.dev/#use-with-ide
 .pdm.toml
 
+# pixi
+#   pixi.lock should be committed to version control for reproducibility
+#   .pixi/ contains the environments and should not be committed
+.pixi/
+
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
 

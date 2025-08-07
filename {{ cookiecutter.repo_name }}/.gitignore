@@ -35,27 +35,7 @@ Thumbs.db
 **/*.swp
 **/*.swo
 
-# VSCode
-**/.vscode/
-.history/
-
-# PyCharm/JetBrains
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-**/.idea/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Sublime Text
-**/*.sublime-*
-
-#################################################################################
-# PYTHON CORE IGNORES                                                           #
-#################################################################################
+## https://github.com/github/gitignore/blob/4488915eec0b3a45b5c63ead28f286819c0917de/Python.gitignore
 
 # Byte-compiled / optimized / DLL files
 **/__pycache__/
@@ -150,21 +130,8 @@ venv.bak/
 #   having no cross-platform support, pipenv may install dependencies that don't work, or not
 #   install all needed dependencies.
 #Pipfile.lock
-# {% endif %}
 
-# Secrets
-secrets/
-!secrets/schema
-
-# {% if cookiecutter.dependency_file == 'requirements.txt' %}
-# pip
-# {% elif cookiecutter.dependency_file == 'environment.yml' %}
-# conda
-# {% elif cookiecutter.dependency_file == 'Pipfile' %}
-# pipenv
-# {% endif %}
-
-# Poetry
+# poetry
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
 #   commonly ignored for libraries.
@@ -176,8 +143,15 @@ secrets/
 #pdm.lock
 #   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
 #   in version control.
-#   https://pdm.fming.dev/#use-with-ide
+#   https://pdm.fming.dev/latest/usage/project/#working-with-version-control
 .pdm.toml
+.pdm-python
+.pdm-build/
+
+# pixi
+#   pixi.lock should be committed to version control for reproducibility
+#   .pixi/ contains the environments and should not be committed
+.pixi/
 
 # PEP 582
 __pypackages__/
@@ -314,3 +288,9 @@ dist/
 **/*.synctex.gz*
 **/*.toc
 **/_minted*
+
+# Ruff stuff:
+.ruff_cache/
+
+# PyPI configuration file
+.pypirc

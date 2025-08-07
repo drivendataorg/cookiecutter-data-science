@@ -39,8 +39,6 @@ classifiers = [
   # {% endif %}
 ]
 
-# ━━━━━━━━━━━━━━━━━━━━━━ Primary Dependencies ━━━━━━━━━━━━━━━━━━━━━━ #
-
 requires-python = "~={{ cookiecutter.python_version_number }}"
 
 dependencies = [
@@ -300,8 +298,9 @@ marker = "platform_system != 'Darwin'"
 # {% endif %}
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Ruff ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
-
+# {% if cookiecutter.linting_and_formatting == 'ruff' %}
 [tool.ruff]
+
 cache-dir = ".cache/ruff"
 # {% if cookiecutter.python_version_number == "3.9" %}
 target-version = "py39"
@@ -314,10 +313,13 @@ target-version = "py312"
 # {% elif cookiecutter.python_version_number == "3.13" %}
 target-version = "py313"
 # {% endif %}
-line-length = 100
+line-length = 99
 format = { quote-style = "double", indent-style = "space" }
 
 [tool.ruff.lint]
+src = ["{{ cookiecutter.module_name }}"]
+
+include = ["pyproject.toml", "{{ cookiecutter.module_name }}/**/*.py"]
 select = ["ALL"]
 ignore = [
   "S101",   # Allow assert
@@ -340,9 +342,10 @@ ignore = [
 mccabe.max-complexity = 10
 pycodestyle.max-doc-length = 99
 pydocstyle.convention = "google"
-isort = { known-first-party = [
-  "{{ cookiecutter.module_name }}",
-], force-sort-within-sections = true }
+
+[tool.ruff.lint.isort]
+known-first-party = ["{{ cookiecutter.module_name }}"]
+force-sort-within-sections = true
 
 [tool.ruff.lint.per-file-ignores]
 "**/__init__.py" = [
@@ -375,6 +378,7 @@ isort = { known-first-party = [
   "ANN201",  # Allow for non-typed functions
   "RET503",  # Allow for implicit ignores
 ]
+# {% endif %}
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Pytest ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #
 
@@ -396,3 +400,19 @@ exclude = [
   ".venv",
   # {% endif %}
 ]
+# {% if cookiecutter.linting_and_formatting == 'flake8+black+isort' %}
+[tool.black]
+line-length = 99
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+)/
+'''
+
+[tool.isort]
+profile = "black"
+known_first_party = ["{{ cookiecutter.module_name }}"]
+force_sort_within_sections = true
+# {% endif %}

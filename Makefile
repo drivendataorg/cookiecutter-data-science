@@ -20,7 +20,7 @@ _welcome: ## Print a Welcome screen
 
 ###     DEV COMMANDS
 
-clean: _prep  ## Clean up python cache files
+clean: _prep clean-build clean-test  ## Clean up python cache files and artifacts
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
@@ -40,12 +40,8 @@ publish: ## Build and publish package
 bump: ## Bump the version and update the changelog
 	SKIP=no-commit-to-branch cz bump --changelog
 
-# ## Install Python Dependencies (switched to uv)
-# requirements: ## Install Python dependencies using uv
-# 	uv pip install -r dev-requirements.txt
-
 requirements: ## Install Python dependencies
-	pip install -r dev-requirements.txt
+	$(PYTHON_INTERPRETER) -m pip install -U -r dev-requirements.txt
 
 ## Format the code using isort and black
 # format: ## Format code using isort and black
@@ -55,15 +51,31 @@ requirements: ## Install Python dependencies
 format: ## Format code using isort and black
 	ruff format hooks docs/scripts
 
-# lint: ## Run linting checks with flake8, isort, and black
-# 	flake8 ccds hooks tests docs/scripts
-# 	isort --check --profile black ccds hooks tests docs/scripts
-# 	black --check ccds hooks tests docs/scripts
-
 lint: ## Run linting checks with ruff
 	ruff check hooks docs/scripts --config ./pyproject.toml --fix 
 
-# pyright .
+clean-build: ## remove build artifacts
+	rm -fr build/
+	rm -fr dist/
+	rm -fr .eggs/
+	find . -name '*.egg-info' -exec rm -fr {} +
+	find . -name '*.egg' -exec rm -f {} +
+
+clean-pyc: ## remove Python file artifacts
+	find . -name '*.pyc' -exec rm -f {} +
+	find . -name '*.pyo' -exec rm -f {} +
+	find . -name '*~' -exec rm -f {} +
+	find . -name '__pycache__' -exec rm -fr {} +
+
+clean-test: ## remove test and coverage artifacts
+	rm -fr .tox/
+	rm -f .coverage
+	rm -fr htmlcov/
+	rm -fr .pytest_cache
+
+dist: clean ## builds source and wheel package
+	python -m build
+	ls -l dist
 
 ###     DOCS
 

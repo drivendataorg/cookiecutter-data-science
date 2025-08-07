@@ -15,7 +15,15 @@ from ccds.hook_utils.configure_ssh import generate_personal_ssh_keys
 from ccds.hook_utils.configure_vcs import configure_github_repo, init_local_git_repo
 from ccds.hook_utils.cookiecutter_args import GotemArgs
 from ccds.hook_utils.custom_config import write_custom_config
-from ccds.hook_utils.dependencies import basic, packages, scaffold, write_dependencies
+from ccds.hook_utils.dependencies import (
+    basic,
+    flake8_black_isort,
+    packages,
+    ruff,
+    scaffold,
+    write_dependencies,
+    write_python_version,
+)
 from ccds.hook_utils.scaffold_cleaner import ScaffoldCleaner
 
 cookiecutter_json = """{{ cookiecutter | tojson }}"""
@@ -52,11 +60,39 @@ if gotem_args.include_code_scaffold != "No":
 if gotem_args.pydata_packages == "basic":
     packages_to_install += basic
 
+# {% if cookiecutter.linting_and_formatting == "ruff" %}
+packages_to_install += ruff
+# Remove setup.cfg
+Path("setup.cfg").unlink()
+# {% elif cookiecutter.linting_and_formatting == "flake8+black+isort" %}
+packages_to_install += flake8_black_isort
+# {% endif %}
 # track packages that are not available through conda
 pip_only_packages = [
     "awscli",
     "python-dotenv",
 ]
+
+# Select testing framework
+tests_path = Path("tests")
+
+# {% if cookiecutter.testing_framework == "pytest" %}
+packages_to_install += ["pytest"]
+# {% endif %}
+
+# {% if cookiecutter.testing_framework == "none" %}
+shutil.rmtree(tests_path)
+
+# {% else %}
+tests_subpath = tests_path / "{{ cookiecutter.testing_framework }}"
+for obj in tests_subpath.iterdir():
+    shutil.move(str(obj), str(tests_path))
+
+# Remove all remaining tests templates
+for tests_template in tests_path.iterdir():
+    if tests_template.is_dir() and not tests_template.name == "tests":
+        shutil.rmtree(tests_template)
+# {% endif %}
 
 # Use the selected documentation package specified in the config,
 # or none if none selected
@@ -83,7 +119,11 @@ write_dependencies(
     repo_name=gotem_args.repo_name,
     module_name=MODULE_NAME,
     python_version=gotem_args.python_version_number,
+    environment_manager=gotem_args.environment_manager,
+    description=gotem_args.description,
 )
+
+write_python_version(gotem_args.python_version_number)
 
 write_custom_config(cookiecutter_dict.get("custom_config", ""))
 
@@ -141,7 +181,7 @@ elif gotem_args.version_control == "git (github public)":
 
 # if gotem_args.environment_manager == "uv":
 #     os.chdir(Path.cwd())
-#     subprocess.run(["pre-commit", "install"], check=False)  # noqa: S603, S607
+#     subprocess.run(["pre-commit", "install"], check=False)
 
 # ---------------------------------------------------------------------------- #
 #                                   SSH Keys                                   #
