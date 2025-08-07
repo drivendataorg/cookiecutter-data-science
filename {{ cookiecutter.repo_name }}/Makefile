@@ -284,6 +284,21 @@ create_environment:
 {% endif %}
 
 
+{%- if cookiecutter.version_control != 'none' %}
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━ Pre-Commits ━━━━━━━━━━━━━━━━━━━━━━━━━━ #
+.PHONY: pre-commit-test pre-commit-update
+
+pre-commit-test: ## Test hooks
+	pre-commit run --all-files
+	git add .pre-commit-config.yaml
+	pre-commit run commitizen --hook-stage commit-msg --commit-msg-filename ".git/COMMIT_EDITMSG"
+
+pre-commit-update: ## Update, install, and test hooks w/ new config
+	pre-commit autoupdate
+	pre-commit install
+	$(MAKE) pre-commit-test
+{%- endif %}
+
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
