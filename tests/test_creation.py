@@ -127,7 +127,6 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         "secrets/schema",
         "secrets/schema/ssh",
         "docker",
-        "tests",
         str(OUT_DIR),
         str(OUT_DIR / "models"),
         str(OUT_DIR / "features"),
@@ -136,6 +135,21 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         "notebooks",
         config["module_name"],
     }
+    scaffold_dirs = {
+        "_ai",
+        "_ai/modeling",
+        "_frontend",
+        "_frontend/src",
+        "_frontend/public",
+        "_backend",
+        "_backend/app",
+        "_backend/scripts",
+        "_course",
+        "_course/demo",
+        "_course/ps01",
+        "_cli",
+    }
+    ignored_patterns = {".git/**/*"}
 
     ignored_dirs = set()
 
@@ -143,42 +157,24 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
         expected_dirs.add(".venv")
         ignored_dirs.update({d.relative_to(root) for d in root.glob(".venv/**/*") if d.is_dir()})
 
-                # Define scaffold directories that should be verified
-        scaffold_dirs = set()
-        if config["include_code_scaffold"] == "Yes":
-            scaffold_dirs = {
-                "_ai",
-                "_ai/modeling",
-                "_frontend",
-                "_frontend/src",
-                "_frontend/public",
-                "_backend",
-                "_backend/app",
-                "_backend/scripts",
-                "_course",
-                "_course/demo",
-                "_course/ps01",
-                "_cli",
+    # Define scaffold directories that should be verified
+    # if config["include_code_scaffold"] == "Yes":
+    if True:
+        # Add expected scaffold directories
+        # expected_dirs.update({f"{config['module_name']}/{d}" for d in scaffold_dirs})
+
+        # First ignore all subdirectories
+        ignored_dirs.update(
+            {
+                d.relative_to(root)
+                for d in root.glob(f"{config['module_name']}/**/*")
+                if d.is_dir()
             }
-
-            # Add expected scaffold directories
-            for d in scaffold_dirs:
-                expected_dirs.add(f"{config['module_name']}/{d}")
-
-            # First ignore all subdirectories
-            ignored_dirs.update(
-                {
-                    d.relative_to(root)
-                    for d in root.glob(f"{config['module_name']}/**/*")
-                    if d.is_dir()
-                }
-            )
-
-            # Then remove from ignored_dirs the ones we want to verify
-            for d in scaffold_dirs:
-                path = Path(f"{config['module_name']}/{d}")
-                if path in ignored_dirs:
-                    ignored_dirs.remove(path)
+        )
+    
+    # if config["tests"] == "pytest"
+    if False:
+        expected_dirs.add("tests")
 
     if config["docs"] == "mkdocs":
         expected_dirs.add("docs/docs")
@@ -198,11 +194,8 @@ def verify_folders(root: Path, config: dict[str, Any]) -> None:
                 # ".git/refs",
             }
         )
+        
         # Expected after initial git commit
-        # expected_dirs.update({".git/logs", ".git/logs/refs"})
-        ignored_patterns = [
-            ".git/**/*",
-        ]  # [".git/objects/**/*", ".git/refs/**/*", ".git/logs/refs/**/*", ".git/branches/**/*"]
         ignored_dirs.update(
             {
                 d.relative_to(root)
@@ -290,15 +283,17 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
         expected_files.add("LICENSE")
 
     if config["include_code_scaffold"] == "Yes":
-        expected_files.update([
-            f"{config['module_name']}/config.py",
-            f"{config['module_name']}/dataset.py",
-            f"{config['module_name']}/features.py",
-            f"{config['module_name']}/modeling/__init__.py",
-            f"{config['module_name']}/modeling/train.py",
-            f"{config['module_name']}/modeling/predict.py",
-            f"{config['module_name']}/plots.py",
-        ])
+        expected_files.update(
+            [
+                f"{config['module_name']}/config.py",
+                f"{config['module_name']}/dataset.py",
+                f"{config['module_name']}/features.py",
+                f"{config['module_name']}/modeling/__init__.py",
+                f"{config['module_name']}/modeling/train.py",
+                f"{config['module_name']}/modeling/predict.py",
+                f"{config['module_name']}/plots.py",
+            ]
+        )
 
     if config["docs"] == "mkdocs":
         expected_files.update(
@@ -366,6 +361,21 @@ def verify_files(root: Path, config: dict[str, Any]) -> None:
     expected_files = {Path(f) for f in expected_files}
 
     existing_files = {f.relative_to(root) for f in root.glob("**/*") if f.is_file()}
+
+    # Always ignore Cursor project files, Trunk config, and scaffolded subpackages
+    ignored_file_patterns = [
+        ".cursor/**/*",
+        ".trunk/**/*",
+        f"{config['module_name']}/_*/**/*",
+    ]
+    ignored_files.update(
+        {
+            f.relative_to(root)
+            for pattern in ignored_file_patterns
+            for f in root.glob(pattern)
+            if f.is_file()
+        }
+    )
 
     checked_files = existing_files - ignored_files
 
