@@ -1,8 +1,43 @@
-## 0.5.0 (2025-03-14)
+## 0.5.1 (2025-09-03)
 
 ### Fix
 
+- Fix documentation generation from json. Update version.
+
+## 0.5.0 (2025-08-08)
+
+### Feat
+
+- fix tests
+- got template to work with updates
+- update pre-commit
+- skeleton code for choosing between trunk and pre-commit
+- added skeleton code for typst
+- Added typst support for template
+- had gemini try matching the Makefile features
+- Added skeleton code for selecting the task manager
+- add template.env
+- Update cursor integration readmes
+- Create obsidian pre-configuration as an experimental feature
+- Playing with devenv
+- add pydantic cursor rules
+- add initial cursor rules and artifacts for project structure and guidelines
+- experimenting with megalinter and trunk.io
+- final updates to cursor rules. most are experimental and probably should not be used
+- Added skeleton code for a direnv setup
+- Add skeleton code for an experimental CNAME file
+- Add skeleton code for an experiment homebrew configuration
+- Add skeleton code for an experiment install.sh configuration
+- Make dependency-groups also appear conitionally, not just the default ones
+
+### Fix
+
+- Progress towards working tests
 - Update readme to use github reference for pypi
+
+### Refactor
+
+- Remove old unused files
 
 ## 0.4.5 (2025-03-14)
 
@@ -16,98 +51,86 @@
 
 - add tag_format to commitizen config
 
-## 0.4.3 (2025-02-03)
+## 0.4.3 (2025-03-14)
+
+### Feat
+
+- **scaffold_cleaner**: add secrets manager selection functionality and update cleaning operations
+- Add experimental nix flake configuration
+- correct the cli implementation so it works out of the box
+- Create CLI scaffolding and rename AI scaffolding to data
+- Scaffold cleaner extracts selected module files. Template Makefile refactor
+- **template**: Pin python version number for each project (typically helpful for testing the lowest version number
+- Add new dynamic quality assurance templating tag to control pre-commit. Also update tests to use better logging I believe
+- Add 007_educational-hinting system
+- Add cursor rules to template to improve agent responses and functionality. Includes artifacts, memory, style, etc.
+- remove more unneeded files based on scaffolding type
+- remove even more code scaffolding depending on the project type
+- apply new .cursor/rules setup to template
+- make course cleaning operations
+- Broken skeleton code for scaffold cleaning
+- add frozen requirements.txt and fix template files
 
 ### Fix
 
+- update Makefile to use 'ruff format' for code formatting, add new ignore rules in pyproject.toml, and create __init__.py for data module
+- **pyproject,template**: correct pyproject syntax errors part 4
+- **pyproject,template**: correct pyproject syntax errors part 3
+- **pyproject,template**: correct pyproject syntax errors part 2
+- **pyproject,template**: correct pyproject syntax errors
+- fix removing all scaffolding
 - **mkdocs**: Temporarily disabled termynal generation to get docs to render
 - update README for consistent cookiecutter placeholder syntax
 
-## 0.4.1 (2025-01-29)
+### Refactor
 
-### Fix
+- Update devcontainer.json to be better organized
+- Remove history and flake linter
+- **vscode**: reorganize extension recommendations and update task details to use 'ruff' for linting and formatting
+- **pyproject,template**: Reorganize pyproject.toml settings, improve Ruff configuration, more.
+- **.gitignore**: Refactor template gitignore
+- **pyproject.toml**: Add commitizen and pre-commit to the dev requirements. Disable typical packages for less bloat.
+- **pyproject.toml**: Label default dependency group packs and disable them to avoid unnecessary bloat
+- **pyproject.toml**: Label default dependency group packs and disable them to avoid unnecessary bloat
 
-- **docs**: Updated reference in jupyter-notebooks.md file to new pre-commit.md file
-- **github-actions**: Fixed pull_request_template.md being upper case now so that tests pass part 2
-- **github-actions**: Fixed pull_request_template.md being upper case now so that tests pass
-
-## 0.4.0 (2025-01-29)
+## 0.4.1 (2025-01-31)
 
 ### Feat
 
+- **cookiecutter**: Add automatic description to the github upload
 - **citation**: Add template citation to template for research papers
-
-## 0.3.0 (2025-01-22)
-
-### Feat
-
 - enhance SSH config with conditional host entries
 - add SSH setup instructions and remote server config examples
 - clarify SSH key naming conventions and update comments
 - **cookiecutter-hooks**: Added skeleton code for future SSH implementation
 - add SSH key generation stubs, update config and post-gen script
-
-## 0.2.0 (2025-01-20)
-
-### Feate
-
 - update Dockerfile to use dynamic GitHub username for label
 - add VSCode configs for extensions, debugging, and settings
 - enhance commitlint with scopes and commitizen customization
 
+### Fix
+
+- exclude mdformat for Jinja tags and fix README placeholders
+- remove unused GNN image from problem set directory
+- fix inconsistent Jinja2 syntax in README.md template
+- fix description handling by adding quotes in GitHub repo config
+- **vcs**: Made github only provide --description flag if there is a description
+- Deleted favicon file that was not needed and for some reason missing in git lfs. Would be smart to clone from repo as a test in the future.
+- Hopefully updated missing git lfs files to work
+- **docs**: Updated reference in jupyter-notebooks.md file to new pre-commit.md file
+- **github-actions**: Fixed pull_request_template.md being upper case now so that tests pass part 2
+- **github-actions**: Fixed pull_request_template.md being upper case now so that tests pass
+
 ### Refactor
 
+- **template**: Updated pre-commit config to selectively ignore certain tests on files isntead of completely ignoring template. Deleted corrupted png files.
+- **pyproject.toml**: Updated build to not include unnecessary directories
 - remove unused author name variable and update file references
 - **tests**: Update issue template filenames and add new documentation files for CODE_OF_CONDUCT, CONTRIBUTING, and SECURITY
 
-## 0.1.0 (2025-01-11)
-
-### chore
-
-- update pre-commit config to always run specified hooks
-
 ## 0.0.8 (2025-01-11)
 
-### chore
-
-- **global**: merge origin/main onto git-support-origin, untested
-- updated pre-commit config to not have invalid commitizen argument
-
-### ci
-
-- remove outdated pre-commit article and update configuration comments
-- **pre-commit**: add SQL code checking and Makefile refactor
-- **pre-commit**: add shell code style checking support to pre-commit and documentation
-- **pre-commit**: Add and test shellcheck for pre-commit. Disabled until shell files can meat the standard.
-- **pre-commit**: Add and test markdownlint to pre-commit-config.yaml and docs. Disabled until Markdown can be passing.
-- **pre-commit**: Added syncing pre-commit dependencies
-- add new tasks for documentation and testing in Taskfile.yml
-- **pyproject.toml**: Added dynamic selection of default uv installation groups depending on project scaffold type
-
-### docs
-
-- add comprehensive guide on pre-commit hooks for developers
-- refactor pre-commit hooks for clarity and consistency improvements
-- **pytest-customization**: Add a pytest customization document that is hidden
-- enable strict hooks and update pre-commit documentation
-- update pre-commit hooks and add QA settings documentation
-- enhance pre-commit docs with setup, security, and new hooks info
-- **template-README**: Added some badges to the README
-- **pre-commit**: Add additional hooks to consider
-- **pre-commit**: Added note regarding ensemble linters/formatters and hesitations on my current approach
-- **pre-commit**: Added shell check to chosen pre-commit docs
-- **pre-commit**: Updated pre-commit docs to reflect new pyright hook
-- set Python version to 3.12 and update documentation details
-- update pre-commit configuration and enhance documentation clarity
-- add pre-commit configuration and final result documentation
-- fix mkdocs rendering of markdown inside of summary tags
-- enhance precommit documentation with improved section titles
-- update pre-commit configurations and improve documentation clarity
-- **precommit.md**: Improve formatting and make more concise
-- update pyproject.toml with commitizen, add more pre-commit hooks, progress on precommit.md
-- add more hooks to the pre-commit documentation
-
-### feat
+### Feat
 
 - update pyproject.toml with comment
 - comment out strict hooks, add local tests, and auto-format Python
@@ -123,9 +146,8 @@
 - update pre-commit hook names for improved clarity and format
 - refactor pre-commit config for clearer section headings
 - upgrade essentials before requirement
-- upgrade essentials before requirement
 
-### fix
+### Fix
 
 - update welcome screen URL to use the master branch
 - **pre-commit-and-tests**: remove references to non-existing .ccds-original dir in tests and switched biome to check (format + safe fixes) instead of just checking
@@ -136,7 +158,7 @@
 - **pre-commit**: remove commitizen-branch since it is too demanding to have to go back and amend
 - use makefile global variable for python interpreter in help command (#392)
 
-### refactor
+### Refactor
 
 - Removed .ccds-original as it is probably not needed anymore
 - refactor GitHub repo configuration for improved readability and update version to 0.0.6
@@ -144,21 +166,4 @@
 - refactor pre-commit config to enhance hook naming and clarity
 - Added ability to check commitizen commit messages and moved to front
 - extend the `make clean` command
-- extend the `make clean` command
 - restrict linting to `src` directory
-- restrict linting to `src` directory
-
-### style
-
-- enhance pre-commit config with emoji for better readability
-- add gitleaks hook and enhance pre-commit configuration clarity
-
-### test
-
-- add CommitLint configuration for enhanced commit message validation
-- Proper accounting for uv in the tests and readded to the options which it had somehow been removed from
-- exclude Windows from CI; clarify pre-commit test description
-
-### 🎨🏗️ Style & Architecture
-
-- **pyproject.toml**: update cz to use cz_gitmoji >>> ⏰ 1m
