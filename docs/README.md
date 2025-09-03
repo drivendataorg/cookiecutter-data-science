@@ -2,25 +2,25 @@
 
 Install development requirements:
 
-```
+```bash
 pip install -r dev-requirements.txt
 ```
 
 Change directories into the docs folder:
 
-```
+```bash
 cd docs
 ```
 
 Use [mkdocs](https://www.mkdocs.org/) structure to update the documentation. Test locally with:
 
-```
+```bash
 uv run mkdocs serve
 ```
 
 Once the docs look good, publish to `gh-pages` branch with:
 
-```
+```bash
 uv run mkdocs gh-deploy --clean
 ```
 

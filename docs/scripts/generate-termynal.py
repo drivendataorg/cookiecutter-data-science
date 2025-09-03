@@ -63,13 +63,14 @@ ccds_script = [
     ("Choose from", "2"),  # open_source_license
     ("Choose from", "1"),  # docs
     ("Choose from", "2"),  # include_code_scaffold
+    ("Choose from", "1"),  # version_control
 ]
 
 
 def run_scripts():
     try:
         output = []
-        output += execute_command_and_get_output(f"ccds {CCDS_ROOT}", ccds_script)
+        output += execute_command_and_get_output(f"gotem {CCDS_ROOT}", ccds_script)
         return output
 
     finally:
@@ -137,8 +138,10 @@ def render_termynal():
     html_lines.append("</div>")
     output = "\n".join(html_lines)
 
-    # Ensure that all options are contained in the output
+    # Ensure that all user-facing options are contained in the output
     options = json.load((CCDS_ROOT / "ccds.json").open("r")).keys()
+    # Ignore meta/hidden keys that begin with underscore
+    options = [option for option in options if not option.startswith("_")]
     for option in options:
         assert option in output, f'Option "{option}" not found in termynal output.'
 
