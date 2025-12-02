@@ -214,3 +214,52 @@ def verify_makefile_commands(root, config):
         assert "reformatted" not in stderr_output
 
     assert result.returncode == 0
+
+
+def test_git_initialization(config, fast):
+    """Test that git repository is initialized when requested."""
+    # Test with git initialization enabled
+    config_with_git = {**config, "initialize_git": "Yes"}
+
+    with bake_project(config_with_git) as project_directory:
+        git_dir = project_directory / ".git"
+
+        # Check that .git directory exists
+        assert git_dir.exists(), "Git repository should be initialized"
+        assert git_dir.is_dir(), ".git should be a directory"
+
+        # Check that there is an initial commit
+        result = run(
+            ["git", "log", "--oneline"],
+            cwd=str(project_directory),
+            capture_output=True,
+            text=True,
+        )
+
+        assert result.returncode == 0, "Git log should succeed"
+        assert "Initial commit" in result.stdout, "Should have initial commit"
+
+        # Check that all expected files are tracked
+        result = run(
+            ["git", "ls-files"],
+            cwd=str(project_directory),
+            capture_output=True,
+            text=True,
+        )
+
+        tracked_files = result.stdout.strip().split("\n")
+        assert len(tracked_files) > 0, "Should have tracked files"
+        assert ".gitignore" in tracked_files, ".gitignore should be tracked"
+        assert "README.md" in tracked_files, "README.md should be tracked"
+
+
+def test_no_git_initialization(config, fast):
+    """Test that git repository is not initialized when not requested."""
+    # Test with git initialization disabled
+    config_no_git = {**config, "initialize_git": "No"}
+
+    with bake_project(config_no_git) as project_directory:
+        git_dir = project_directory / ".git"
+
+        # Check that .git directory does not exist
+        assert not git_dir.exists(), "Git repository should not be initialized"
