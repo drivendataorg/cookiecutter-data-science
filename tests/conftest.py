@@ -93,6 +93,7 @@ def config_generator(fast=False):
         "dataset_storage",
         "open_source_license",
         "docs",
+        "initialize_git",
     ]
     multi_select_cyclers = {k: cycle(cookiecutter_json[k]) for k in cycle_fields}
 

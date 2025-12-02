@@ -1,4 +1,6 @@
 import shutil
+import subprocess
+import sys
 from copy import copy
 from pathlib import Path
 
@@ -119,4 +121,52 @@ for generated_path in Path("{{ cookiecutter.module_name }}").iterdir():
     elif generated_path.name == "__init__.py":
         # remove any content in __init__.py since it won't be available
         generated_path.write_text("")
+# {% endif %}
+
+# Initialize git repository if requested
+# {% if cookiecutter.initialize_git == "Yes" %}
+try:
+    # Check if git is available
+    git_check = subprocess.run(
+        ["git", "--version"],
+        capture_output=True,
+        text=True,
+    )
+
+    if git_check.returncode == 0:
+        # Initialize git repository
+        subprocess.run(["git", "init"], check=True)
+
+        # Configure line ending handling (recommended for cross-platform compatibility)
+        subprocess.run(["git", "config", "core.autocrlf", "input"], check=False)
+
+        # Add all files
+        subprocess.run(["git", "add", "."], check=True)
+
+        # Create initial commit
+        commit_message = "Initial commit from cookiecutter-data-science template"
+        subprocess.run(
+            ["git", "commit", "-m", commit_message],
+            check=True,
+        )
+
+        print("\n Git repository initialized with initial commit")
+    else:
+        print(
+            "\n Git not found. Skipping repository initialization.\n"
+            "  Install git and run: git init && git add . && git commit -m 'Initial commit'",
+            file=sys.stderr,
+        )
+except subprocess.CalledProcessError as e:
+    print(
+        f"\n Git initialization failed: {e}\n"
+        f"  You can manually initialize with: git init && git add . && git commit -m 'Initial commit'",
+        file=sys.stderr,
+    )
+except FileNotFoundError:
+    print(
+        "\nGit not found. Skipping repository initialization.\n"
+        "  Install git and run: git init && git add . && git commit -m 'Initial commit'",
+        file=sys.stderr,
+    )
 # {% endif %}

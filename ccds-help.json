@@ -355,14 +355,37 @@
                 "help": {
                     "description": "Includes common data submodules.",
                     "more_information": ""
-                } 
+                }
             },
             {
                 "choice": "No",
                 "help": {
                     "description": "Empty Python module to start with.",
                     "more_information": ""
-                } 
+                }
+            }
+        ]
+    },
+    {
+        "field": "initialize_git",
+        "help": {
+            "description": "Initialize a git repository for version control with an initial commit.",
+            "more_information": "[About Git](https://git-scm.com/)"
+        },
+        "choices": [
+            {
+                "choice": "Yes",
+                "help": {
+                    "description": "Initialize git repository with .gitignore and initial commit.",
+                    "more_information": "Runs 'git init', adds all files, and creates an initial commit."
+                }
+            },
+            {
+                "choice": "No",
+                "help": {
+                    "description": "No version control initialization; you can set it up manually later.",
+                    "more_information": ""
+                }
             }
         ]
     }

@@ -4,18 +4,17 @@ You've [created](index.md#starting-a-new-project) your project. You've [read the
 
 Here's a quick guide of the kinds of things we do once our project is ready to go. We'll walk through this example using git and GitHub for version control and jupyter notebooks for exploration, but you can use whatever tools you like.
 
-## Set up version control
+## Version Control
 
-Often, we start by initializing a `git` repository to track the code we write in version control and collaborate with teammates. At the command line, you can do this with the following commands which do the following: turn the folder into a git repository, add all of the files and folders created by CCDS into source control (except for what is in the `.gitignore` file), and then make a commit to the repository.
+By default, CCDS initializes your project as a git repository with an initial commit. If you chose not to initialize git during setup, or want to reinitialize, you can do this manually at the command line:
 
 ```bash
-# From inside your newly created project directory
 git init
 git add .
-git commit -m "CCDS defaults"
+git commit -m "Initial commit"
 ```
 
-We usually commit the entire default CCDS structure so it is easy to track the changes we make to the structure in version history.
+Whether git was initialized automatically or manually, you now have version control set up for your project. We usually commit the entire default CCDS structure so it is easy to track the changes we make to the structure in version history.
 
 Now that the default layout is committed, you should push it to a shared repository. You can do this through the interface of whatever source control platform you use. This may be GitHub, GitLab, Bitbucket, or something else.
 
