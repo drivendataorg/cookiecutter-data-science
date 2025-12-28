@@ -4,7 +4,11 @@
 
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_VERSION = {{ cookiecutter.python_version_number }}
+{% if cookiecutter.environment_manager == 'uv' %}
+PYTHON_INTERPRETER = uv run python
+{% else %}
 PYTHON_INTERPRETER = python
+{% endif %}
 
 #################################################################################
 # COMMANDS                                                                      #
