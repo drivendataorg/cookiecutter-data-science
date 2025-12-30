@@ -107,6 +107,13 @@ jobs:
           # Set bash executable explicitly since Make may pick wrong shell
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
 
+          # Fix conda prune issues on Windows
+          echo "CONDA_SOLVER=classic" >> "$GITHUB_ENV"
+          echo "CONDA_PKGS_DIRS=${CONDA}/pkgs" >> "$GITHUB_ENV"
+          
+          # Fix ruff config discovery for pixi
+          echo "RUFF_CONFIG=pyproject.toml" >> "$GITHUB_ENV"
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
