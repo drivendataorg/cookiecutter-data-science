@@ -51,11 +51,15 @@ if [ -d ".pixi" ]; then
     echo "Removing Ruff config files under .pixi to avoid discovery"
     find .pixi \( -name ".ruff.toml" -o -name "ruff.toml" \) -print -delete
 fi
-pixi run python - <<'PY'
+RUFF_PATH="$(pixi run python - <<'PY'
 import shutil
-print(f"ruff which: {shutil.which('ruff')}")
+print(shutil.which("ruff") or "")
 PY
-pixi run ruff --version
+)"
+echo "ruff which: ${RUFF_PATH:-None}"
+if [ -n "$RUFF_PATH" ]; then
+    pixi run ruff --version
+fi
 
 pixi run make lint
 pixi run make format
