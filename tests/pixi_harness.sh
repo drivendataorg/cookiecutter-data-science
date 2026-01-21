@@ -22,9 +22,6 @@ function finish {
     if [ -f "pixi.lock" ]; then
         rm -f pixi.lock
     fi
-    if [ -f ".ruff-empty.toml" ]; then
-        rm -f .ruff-empty.toml
-    fi
 }
 trap finish EXIT
 
@@ -49,13 +46,16 @@ if [ -f "$MODULE_NAME/config.py" ]; then
     pixi run python -c "from $MODULE_NAME import config"
 fi
 
-# Run linting/formatting through make, but force Ruff to ignore any .ruff.toml it discovers.
-if [ -f "pyproject.toml" ]; then
-    export RUFF_CONFIG="pyproject.toml"
-else
-    : > .ruff-empty.toml
-    export RUFF_CONFIG=".ruff-empty.toml"
+# Run linting/formatting through make, but remove any .pixi ruff configs that Ruff may discover.
+if [ -d ".pixi" ]; then
+    echo "Removing Ruff config files under .pixi to avoid discovery"
+    find .pixi \( -name ".ruff.toml" -o -name "ruff.toml" \) -print -delete
 fi
+pixi run python - <<'PY'
+import shutil
+print(f"ruff which: {shutil.which('ruff')}")
+PY
+pixi run ruff --version
 
 pixi run make lint
 pixi run make format
