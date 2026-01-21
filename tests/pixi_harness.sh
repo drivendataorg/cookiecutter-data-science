@@ -22,6 +22,9 @@ function finish {
     if [ -f "pixi.lock" ]; then
         rm -f pixi.lock
     fi
+    if [ -f ".ruff-empty.toml" ]; then
+        rm -f .ruff-empty.toml
+    fi
 }
 trap finish EXIT
 
@@ -46,29 +49,16 @@ if [ -f "$MODULE_NAME/config.py" ]; then
     pixi run python -c "from $MODULE_NAME import config"
 fi
 
-# Run linting and formatting through pixi without picking up .pixi/.ruff.toml configs.
-# If pyproject.toml exists, force it; otherwise run isolated with no config discovery.
-RUFF_FLAGS=()
+# Run linting/formatting through make, but force Ruff to ignore any .ruff.toml it discovers.
 if [ -f "pyproject.toml" ]; then
-    RUFF_FLAGS+=(--config pyproject.toml)
+    export RUFF_CONFIG="pyproject.toml"
 else
-    RUFF_FLAGS+=(--isolated)
+    : > .ruff-empty.toml
+    export RUFF_CONFIG=".ruff-empty.toml"
 fi
 
-RUFF_TARGETS=()
-if [ -f "pyproject.toml" ]; then
-    if [ -d "$MODULE_NAME" ]; then
-        RUFF_TARGETS+=("$MODULE_NAME")
-    fi
-    RUFF_TARGETS+=("pyproject.toml")
-elif [ -d "$MODULE_NAME" ]; then
-    RUFF_TARGETS+=("$MODULE_NAME")
-else
-    RUFF_TARGETS+=(".")
-fi
-
-pixi run ruff format --check "${RUFF_FLAGS[@]}" "${RUFF_TARGETS[@]}"
-pixi run ruff check "${RUFF_FLAGS[@]}" "${RUFF_TARGETS[@]}"
+pixi run make lint
+pixi run make format
 
 # Custom pixi test function to avoid issues with test_functions.sh
 # Check that python is available in pixi environment
