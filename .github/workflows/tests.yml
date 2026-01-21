@@ -107,9 +107,6 @@ jobs:
           # Set bash executable explicitly since Make may pick wrong shell
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
           
-          # Fix ruff config discovery for pixi
-          echo "RUFF_CONFIG=pyproject.toml" >> "$GITHUB_ENV"
-
           # Add small delay for conda operations on Windows
           echo "CONDA_INSTALL_DELAY=2" >> "$GITHUB_ENV"
 
