@@ -106,6 +106,8 @@ jobs:
           echo "${CONDA}\Scripts" >> $GITHUB_PATH
           # Set bash executable explicitly since Make may pick wrong shell
           echo "BASH_EXECUTABLE=$(which bash)" >> "$GITHUB_ENV"
+          # Add small delay for conda operations on Windows
+          echo "CONDA_INSTALL_DELAY=2" >> "$GITHUB_ENV"
 
       - name: Install dependencies
         run: |

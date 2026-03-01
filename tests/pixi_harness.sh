@@ -46,7 +46,21 @@ if [ -f "$MODULE_NAME/config.py" ]; then
     pixi run python -c "from $MODULE_NAME import config"
 fi
 
-# Run linting and formatting through pixi
+# Run linting/formatting through make, but remove any .pixi ruff configs that Ruff may discover.
+if [ -d ".pixi" ]; then
+    echo "Removing Ruff config files under .pixi to avoid discovery"
+    find .pixi \( -name ".ruff.toml" -o -name "ruff.toml" \) -print -delete
+fi
+RUFF_PATH="$(pixi run python - <<'PY'
+import shutil
+print(shutil.which("ruff") or "")
+PY
+)"
+echo "ruff which: ${RUFF_PATH:-None}"
+if [ -n "$RUFF_PATH" ]; then
+    pixi run ruff --version
+fi
+
 pixi run make lint
 pixi run make format
 

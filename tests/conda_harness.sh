@@ -32,6 +32,10 @@ fi
 
 make
 make create_environment
+# Add delay on Windows to let conda settle
+if [[ -n "${CONDA_INSTALL_DELAY}" && "${CONDA_INSTALL_DELAY}" =~ ^[0-9]+$ ]]; then
+    sleep "${CONDA_INSTALL_DELAY}"
+fi
 conda activate $PROJECT_NAME
 make requirements
 make lint
