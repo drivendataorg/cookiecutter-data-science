@@ -9,26 +9,26 @@ This project was generated from the [Cookiecutter Data Science](https://cookiecu
 
 ```
 ├── data/
-│   ├── raw/          ← Original, immutable data. NEVER modify.
-│   ├── external/     ← Third-party data sources.
-│   ├── interim/      ← Intermediate transformed data.
-│   └── processed/    ← Final, canonical datasets.
-├── models/           ← Trained models, predictions, summaries.
-├── notebooks/        ← Jupyter notebooks for exploration.
-├── references/       ← Data dictionaries, manuals, documentation.
+│   ├── raw/          <- Original, immutable data. NEVER modify.
+│   ├── external/     <- Third-party data sources.
+│   ├── interim/      <- Intermediate transformed data.
+│   └── processed/    <- Final, canonical datasets.
+├── models/           <- Trained models, predictions, summaries.
+├── notebooks/        <- Jupyter notebooks for exploration.
+├── references/       <- Data dictionaries, manuals, documentation.
 ├── reports/
-│   └── figures/      ← Generated analysis outputs.
-├── {{ cookiecutter.module_name }}/  ← Source code for this project.
+│   └── figures/      <- Generated analysis outputs.
+├── {{ cookiecutter.module_name }}/  <- Source code for this project.
 {%- if cookiecutter.include_code_scaffold == 'Yes' %}
-│   ├── config.py     ← Project configuration and path definitions.
-│   ├── dataset.py    ← Data loading and generation.
-│   ├── features.py   ← Feature engineering code.
-│   ├── plots.py      ← Visualization code.
+│   ├── config.py     <- Project configuration and path definitions.
+│   ├── dataset.py    <- Data loading and generation.
+│   ├── features.py   <- Feature engineering code.
+│   ├── plots.py      <- Visualization code.
 │   └── modeling/
-│       ├── train.py  ← Model training.
-│       └── predict.py← Model inference.
+│       ├── train.py  <- Model training.
+│       └── predict.py<- Model inference.
 {%- endif %}
-└── tests/            ← Test suite.
+└── tests/            <- Test suite.
 ```
 
 ## Core Principles
