@@ -35,7 +35,7 @@ This project was generated from the [Cookiecutter Data Science](https://cookiecu
 
 Reproducibility is the most critical component of any data science project. The following principles should be followed to ensure that the project is reproducible and maintainable.
 
-### Data analysis is a DAG
+### Data analysis is a directed acyclic graph
 
 Treat the data pipeline as a directed acyclic graph. Each step takes inputs and produces outputs with no circular dependencies. Anyone must be able to reproduce final outputs from code and raw data alone.
 
@@ -49,7 +49,7 @@ Intermediate outputs should be cached in `interim/`. Final products go to `proce
 
 ### Data is not in source control
 
-The `data/` and `models/` directories are gitignored. Do not commit data files, trained models, or `.env` files to git.{% if not cookiecutter.dataset_storage.none %} Use `make sync_data_down` / `make sync_data_up` to sync data with cloud storage. Prefer using `cloudpathlib` to interact with cloud storage in a consistent way.{% endif %}
+The `data/` and `models/` directories are gitignored. Do not commit data files, trained models, or `.env` files to git.{% if not cookiecutter.dataset_storage.none %} Use `make sync_data_down` / `make sync_data_up` to sync data with cloud storage. Prefer using `cloudpathlib` in code to interact with cloud storage in a consistent way.{% endif %}
 
 ### Use Make as the task runner
 
