@@ -97,17 +97,6 @@ def verify_agents_md(root, config):
         assert "flake8, black, and isort" in agents_md
         assert "Uses ruff" not in agents_md
 
-    # Testing framework
-    if config["testing_framework"] == "pytest":
-        assert "Uses pytest" in agents_md
-        assert "Uses unittest" not in agents_md
-    elif config["testing_framework"] == "unittest":
-        assert "Uses unittest" in agents_md
-        assert "Uses pytest" not in agents_md
-    elif config["testing_framework"] == "none":
-        assert "Uses pytest" not in agents_md
-        assert "Uses unittest" not in agents_md
-
 
 def test_baking_configs(config, fast):
     """For every generated config in the config_generator, run all
@@ -201,9 +190,6 @@ def verify_files(root, config):
             f"{config['module_name']}/modeling/predict.py",
             f"{config['module_name']}/plots.py",
         ]
-
-    if config["testing_framework"] != "none":
-        expected_files += ["tests/test_data.py"]
 
     if config["docs"] == "mkdocs":
         expected_files += [
