@@ -2,6 +2,7 @@ from collections import OrderedDict
 from pathlib import Path
 
 from cookiecutter.environment import StrictEnvironment
+from cookiecutter.exceptions import CookiecutterException
 from cookiecutter.exceptions import UndefinedVariableInTemplate
 from cookiecutter.generate import generate_context
 from cookiecutter.prompt import (
@@ -11,6 +12,15 @@ from cookiecutter.prompt import (
     render_variable,
 )
 from jinja2.exceptions import UndefinedError
+
+
+def _fail_if_repo_dir_exists(repo_name):
+    project_dir = Path.cwd() / repo_name
+    if project_dir.exists():
+        raise CookiecutterException(
+            f"Project directory '{project_dir}' already exists. "
+            "Please choose a different value for 'repo_name'."
+        )
 
 
 def _prompt_choice_and_subitems(cookiecutter_dict, env, key, options, no_input):
@@ -91,6 +101,8 @@ def prompt_for_config(context, no_input=False):
                     val = read_user_variable(key, val)
 
                 cookiecutter_dict[key] = val
+                if key == "repo_name":
+                    _fail_if_repo_dir_exists(val)
         except UndefinedError as err:
             msg = "Unable to render variable '{}'".format(key)
             raise UndefinedVariableInTemplate(msg, err, context)
