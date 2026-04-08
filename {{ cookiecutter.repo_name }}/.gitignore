@@ -1,8 +1,6 @@
 # Data
 /data/**
-# Allow the folder
 !/data/**/
-# whitelist
 !/data/**/.gitkeep
 
 # Mac OS-specific storage files
