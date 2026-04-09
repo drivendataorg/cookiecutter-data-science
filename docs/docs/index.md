@@ -93,6 +93,7 @@ The directory structure of your new project will look something like this (depen
 ├── LICENSE            <- Open-source license if one is chosen
 ├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
 ├── README.md          <- The top-level README for developers using this project.
+├── AGENTS.md          <- The top-level AGENTS file for AI coing agents.
 ├── data
 │   ├── external       <- Data from third party sources.
 │   ├── interim        <- Intermediate data that has been transformed.
