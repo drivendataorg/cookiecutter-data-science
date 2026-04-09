@@ -52,9 +52,9 @@ The `data/` and `models/` directories are gitignored. Do not commit data files, 
 
 Run tasks through `make`. Available recipes:
 
-* `make` — List all available commands.
-* `make requirements` — Install/update dependencies.
-* `make data` — Run the data processing pipeline.{% if cookiecutter.linting_and_formatting != 'none' %}
+* `make` — List all available commands
+* `make requirements` — Install/update dependencies
+* `make data` — Run the data processing pipeline (assumes data is present in `data/raw/`){% if cookiecutter.linting_and_formatting != 'none' %}
 * `make lint` — Check code style.
 * `make format` — Auto-format code.{% endif %}{% if cookiecutter.testing_framework != 'none' %}
 * `make test` — Run the test suite.{% endif %}{% if not cookiecutter.dataset_storage.none %}
@@ -67,7 +67,7 @@ Add project-specific recipes to the `Makefile` for commands that are run frequen
 
 ### Notebooks are for exploration; source code is for repetition
 
-Use `notebooks/` for exploratory analysis. When code is reused across notebooks, refactor it into the `{{ cookiecutter.module_name }}/` package. The project is installed as a local package, so you can import with:
+Use `notebooks/` for exploratory analysis notebooks. When code is reused across notebooks, refactor it into the `{{ cookiecutter.module_name }}/` package. The project is installed as a local package, so you can import with:
 
 ```python
 from {{ cookiecutter.module_name }}.dataset import main
@@ -77,7 +77,7 @@ Notebook naming convention: `<step>.<order>-<identifier>-<description>.ipynb` (e
 
 ### Secrets
 
-**NEVER** read `.env` or any secrets files directly.. Code should load secrets with `python-dotenv`. Use `{{ cookiecutter.module_name }}/config.py` for project paths and configuration. Never hardcode credentials, print secrets in logs, or add them to source control.
+**NEVER** read `.env` or any secrets files directly. Code should load secrets with `python-dotenv`. Use `{{ cookiecutter.module_name }}/config.py` for project paths and configuration. Never hardcode credentials, print secrets in logs, or add them to source control.
 
 ## Development Workflow
 
@@ -117,4 +117,12 @@ Notebook naming convention: `<step>.<order>-<identifier>-<description>.ipynb` (e
 * **Testing:** Uses unittest. Run `make test`.
 {%- endif %}
 
-Formatting, linting, and testing should be run before committing work or at the end of each session.
+Linting and testing should succeed before committing work or at the end of each session. Run `make format` to format code if linting fails.
+
+## Avoid
+
+* Do not delete, edit, or overwrite files in `data/raw/`
+* Do not commit data files, models, or `.env` to version control
+* Do not install packages without updating the dependency file
+* Do not run Python code or install packages outside of the project environment. {% if cookiecutter.environment_manager == 'conda' %}Use `conda run -n {{ cookiecutter.repo_name }}` to prefix commands, or activate with `conda activate {{ cookiecutter.repo_name }}` first.{% elif cookiecutter.environment_manager == 'uv' %}Use `uv run` to prefix commands, or activate with `source .venv/bin/activate` first.{% elif cookiecutter.environment_manager == 'pipenv' %}Use `pipenv run` to prefix commands, or activate with `pipenv shell` first.{% elif cookiecutter.environment_manager == 'pixi' %}Use `pixi run` to prefix commands, or activate with `pixi shell` first.{% elif cookiecutter.environment_manager == 'poetry' %}Use `poetry run` to prefix commands.{% elif cookiecutter.environment_manager == 'virtualenv' %}Activate with `workon {{ cookiecutter.repo_name }}` first.{%
+  endif %}
