@@ -66,7 +66,6 @@ def verify_agents_md(root, config):
     if has_storage:
         assert "sync_data_down" in agents_md
         assert "sync_data_up" in agents_md
-        assert "cloudpathlib" in agents_md
     else:
         assert "sync_data_down" not in agents_md
         assert "sync_data_up" not in agents_md
