@@ -5,6 +5,23 @@
 
 This project was generated from the [Cookiecutter Data Science](https://cookiecutter-data-science.drivendata.org/) template. Follow the conventions below when working in this codebase.
 
+## Key Commands
+
+Run tasks through `make`. Key recipes:
+
+* `make` — List all available commands
+* `make requirements` — Install/update dependencies
+* `make data` — Run the data processing pipeline (assumes data is present in `data/raw/`){% if cookiecutter.linting_and_formatting != 'none' %}
+* `make lint` — Check code style
+* `make format` — Auto-format code{% endif %}{% if cookiecutter.testing_framework != 'none' %}
+* `make test` — Run the test suite{% endif %}{% if not cookiecutter.dataset_storage.none %}
+* `make sync_data_down` — Pull data from cloud storage
+* `make sync_data_up` — Push data to cloud storage{% endif %}
+* `make create_environment` — Set up the Python environment
+* `make clean` — Remove compiled Python files
+
+Add project-specific recipes to the `Makefile` for commands that are run frequently or require multiple steps.
+
 ## Project Directory Structure
 
 * {{ cookiecutter.repo_name }}/
@@ -50,20 +67,7 @@ The `data/` and `models/` directories are gitignored. Do not commit data files, 
 
 ### Use Make as the task runner
 
-Run tasks through `make`. Available recipes:
-
-* `make` — List all available commands
-* `make requirements` — Install/update dependencies
-* `make data` — Run the data processing pipeline (assumes data is present in `data/raw/`){% if cookiecutter.linting_and_formatting != 'none' %}
-* `make lint` — Check code style.
-* `make format` — Auto-format code.{% endif %}{% if cookiecutter.testing_framework != 'none' %}
-* `make test` — Run the test suite.{% endif %}{% if not cookiecutter.dataset_storage.none %}
-* `make sync_data_down` — Pull data from cloud storage.
-* `make sync_data_up` — Push data to cloud storage.{% endif %}
-* `make create_environment` — Set up the Python environment.
-* `make clean` — Remove compiled Python files.
-
-Add project-specific recipes to the `Makefile` for commands that are run frequently or require multiple steps. For example, you might add `make train_model` to run the full training pipeline.
+Run all tasks through `make` — see the Key Commands section above for the full list of available recipes.
 
 ### Notebooks are for exploration; source code is for repetition
 
@@ -119,10 +123,31 @@ Notebook naming convention: `<step>.<order>-<identifier>-<description>.ipynb` (e
 
 Linting and testing should succeed before committing work or at the end of each session. Run `make format` to format code if linting fails.
 
-## Avoid
+## Version Control
 
-* Do not delete, edit, or overwrite files in `data/raw/`
-* Do not commit data files, models, or `.env` to version control
-* Do not install packages without updating the dependency file
-* Do not run Python code or install packages outside of the project environment. {% if cookiecutter.environment_manager == 'conda' %}Use `conda run -n {{ cookiecutter.repo_name }}` to prefix commands, or activate with `conda activate {{ cookiecutter.repo_name }}` first.{% elif cookiecutter.environment_manager == 'uv' %}Use `uv run` to prefix commands, or activate with `source .venv/bin/activate` first.{% elif cookiecutter.environment_manager == 'pipenv' %}Use `pipenv run` to prefix commands, or activate with `pipenv shell` first.{% elif cookiecutter.environment_manager == 'pixi' %}Use `pixi run` to prefix commands, or activate with `pixi shell` first.{% elif cookiecutter.environment_manager == 'poetry' %}Use `poetry run` to prefix commands.{% elif cookiecutter.environment_manager == 'virtualenv' %}Activate with `workon {{ cookiecutter.repo_name }}` first.{%
-  endif %}
+* Do not push to a remote repository without asking first.
+* Write concise commit messages that describe the change and why it was made.{% if cookiecutter.linting_and_formatting != 'none' %}
+* Run `make lint` and `make format` before committing changes.{% endif %}{% if cookiecutter.testing_framework != 'none' %}
+* Run `make test` before committing changes. Fix any failures — do not skip or disable tests.{% endif %}
+
+## Boundaries
+
+### Always do
+
+* Run all Python code within the project environment. {% if cookiecutter.environment_manager == 'conda' %}Use `conda run -n {{ cookiecutter.repo_name }}` to prefix commands, or activate with `conda activate {{ cookiecutter.repo_name }}` first.{% elif cookiecutter.environment_manager == 'uv' %}Use `uv run` to prefix commands, or activate with `source .venv/bin/activate` first.{% elif cookiecutter.environment_manager == 'pipenv' %}Use `pipenv run` to prefix commands, or activate with `pipenv shell` first.{% elif cookiecutter.environment_manager == 'pixi' %}Use `pixi run` to prefix commands, or activate with `pixi shell` first.{% elif cookiecutter.environment_manager == 'poetry' %}Use `poetry run` to prefix commands.{% elif cookiecutter.environment_manager == 'virtualenv' %}Activate with `workon {{ cookiecutter.repo_name }}` first.{% endif %}
+* Update the dependency file when installing new packages
+* Refactor reusable notebook code into the `{{ cookiecutter.module_name }}/` package
+
+### Ask first
+
+* Before deleting or overwriting files in `data/processed/`
+* Before adding new dependencies to the project
+* Before modifying the `Makefile`
+* Before creating new notebooks
+
+### Never do
+
+* Delete, edit, or overwrite files in `data/raw/`
+* Commit data files, trained models, or `.env` to version control
+* Hardcode credentials or print secrets in logs
+* Skip or disable lint rules or tests to get around failures
