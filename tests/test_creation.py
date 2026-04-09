@@ -41,6 +41,62 @@ def no_curlies(filepath):
     return not any(template_strings_in_file)
 
 
+def verify_agents_md(root, config):
+    """Test that AGENTS.md is correctly rendered for the given config."""
+    agents_md = (root / "AGENTS.md").read_text()
+
+    # Project name and module name are always rendered
+    assert config["project_name"] in agents_md
+    assert config["module_name"] in agents_md
+
+    # No unrendered Jinja2 template strings
+    assert no_curlies(root / "AGENTS.md")
+
+    # Code scaffold section conditionally included in project structure
+    if config["include_code_scaffold"] == "Yes":
+        assert "dataset.py" in agents_md
+        assert "features.py" in agents_md
+        assert "modeling/" in agents_md
+    else:
+        assert "dataset.py" not in agents_md
+        assert "features.py" not in agents_md
+
+    # Dataset storage conditionals
+    has_storage = "none" not in config["dataset_storage"]
+    if has_storage:
+        assert "sync_data_down" in agents_md
+        assert "sync_data_up" in agents_md
+    else:
+        assert "sync_data_down" not in agents_md
+        assert "sync_data_up" not in agents_md
+
+    # Environment manager
+    env_manager = config["environment_manager"]
+    if env_manager == "conda":
+        assert "conda activate" in agents_md
+    elif env_manager == "virtualenv":
+        assert "workon" in agents_md
+    elif env_manager == "pipenv":
+        assert "pipenv shell" in agents_md
+    elif env_manager == "uv":
+        assert "source .venv/bin/activate" in agents_md
+    elif env_manager == "pixi":
+        assert "pixi shell" in agents_md
+    elif env_manager == "poetry":
+        assert "poetry env activate" in agents_md
+
+    # Dependency file
+    assert f"`{config['dependency_file']}`" in agents_md
+
+    # Linting and formatting
+    if config["linting_and_formatting"] == "ruff":
+        assert "Uses ruff" in agents_md
+        assert "flake8" not in agents_md
+    elif config["linting_and_formatting"] == "flake8+black+isort":
+        assert "flake8, black, and isort" in agents_md
+        assert "Uses ruff" not in agents_md
+
+
 def test_baking_configs(config, fast):
     """For every generated config in the config_generator, run all
     of the tests.
@@ -49,6 +105,7 @@ def test_baking_configs(config, fast):
     with bake_project(config) as project_directory:
         verify_folders(project_directory, config)
         verify_files(project_directory, config)
+        verify_agents_md(project_directory, config)
 
         if fast < 2:
             verify_makefile_commands(project_directory, config)
@@ -96,6 +153,7 @@ def verify_folders(root, config):
 def verify_files(root, config):
     """Test that expected files and only expected files exist."""
     expected_files = [
+        "AGENTS.md",
         "Makefile",
         "README.md",
         "pyproject.toml",
