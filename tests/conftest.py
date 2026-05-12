@@ -22,7 +22,7 @@ default_args = {
 }
 
 
-def config_generator(fast=False):
+def config_generator(fast: Any = False) -> None:
     cookiecutter_json = json.load((CCDS_ROOT / "ccds.json").open("r"))
 
     # python versions for the created environment; match the root
@@ -40,7 +40,7 @@ def config_generator(fast=False):
         [("pydata_packages", opt) for opt in cookiecutter_json["pydata_packages"]],
     )
 
-    def _is_valid(config):
+    def _is_valid(config: Any) -> None:
         config = dict(config)
         #  Pipfile + pipenv only valid combo for either
         if (config["environment_manager"] == "pipenv") ^ (
@@ -114,7 +114,7 @@ def config_generator(fast=False):
             break
 
 
-def pytest_addoption(parser):
+def pytest_addoption(parser: Any) -> None:
     """Pass -F/--fast multiple times to speed up tests
 
     default - execute makefile commands, all configs
@@ -133,13 +133,13 @@ def pytest_addoption(parser):
 
 
 @pytest.fixture
-def fast(request):
+def fast(request: Any) -> None:
     return request.config.getoption("--fast")
 
 
-def pytest_generate_tests(metafunc):
+def pytest_generate_tests(metafunc: Any) -> None:
     # setup config fixture to get all of the results from config_generator
-    def make_test_id(config):
+    def make_test_id(config: Any) -> None:
         return f"{config['environment_manager']}-{config['dependency_file']}-{config['pydata_packages']}"
 
     if "config" in metafunc.fixturenames:
@@ -151,7 +151,7 @@ def pytest_generate_tests(metafunc):
 
 
 @contextmanager
-def bake_project(config):
+def bake_project(config: Any) -> None:
     temp = Path(tempfile.mkdtemp(suffix="data-project")).resolve()
 
     api_main.cookiecutter(
