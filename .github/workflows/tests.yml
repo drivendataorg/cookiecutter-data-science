@@ -59,6 +59,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Poetry 2.3+ requires Python >=3.10 to install/run the CLI. Install a
+      # dedicated interpreter for Poetry before the matrix Python so the matrix
+      # version remains the default `python` on PATH for tests.
+      - name: Set up Python for Poetry CLI
+        id: poetry-python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
@@ -82,9 +91,10 @@ jobs:
           run-install: false
   
       - name: Set up Poetry
-        uses: abatilo/actions-poetry@v3
-        with:
-          poetry-version: latest
+        run: |
+          python -m pip install --upgrade pipx
+          pipx install --python "${{ steps.poetry-python.outputs.python-path }}" poetry
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Cache conda packages
         uses: actions/cache@v4
