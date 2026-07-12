@@ -46,7 +46,13 @@ if [ -f "$MODULE_NAME/config.py" ]; then
     pixi run python -c "from $MODULE_NAME import config"
 fi
 
-# Run linting and formatting through pixi
+# Run linting and formatting through pixi.
+# On Windows, conda/pixi Python installs can ship nested .ruff.toml files under
+# .pixi that break config discovery (extends a missing parent). Remove them.
+if [ -d ".pixi" ]; then
+    echo "Removing Ruff config files under .pixi to avoid discovery"
+    find .pixi \( -name ".ruff.toml" -o -name "ruff.toml" \) -print -delete
+fi
 pixi run make lint
 pixi run make format
 
