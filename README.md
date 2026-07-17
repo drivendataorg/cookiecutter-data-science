@@ -45,10 +45,10 @@ The directory structure of your new project will look something like this (depen
 ├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
 ├── README.md          <- The top-level README for developers using this project.
 ├── data
-│   ├── external       <- Data from third party sources.
+│   ├── external       <- Supporting data from third-party sources that complements the primary dataset.
 │   ├── interim        <- Intermediate data that has been transformed.
 │   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
+│   └── raw            <- The original, immutable primary data used in the project.
 │
 ├── docs               <- A default mkdocs project; see www.mkdocs.org for details
 │
