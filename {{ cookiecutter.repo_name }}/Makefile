@@ -74,6 +74,13 @@ format:
 	black {{ cookiecutter.module_name }}
 {% endif %}
 
+{% if cookiecutter.notebook_export == "nbautoexport"}
+.PHONY: nbautoexport
+nbautoexport:
+	nbautoexport install
+	nbautoexport configure notebooks
+{% endif %}
+
 {% if cookiecutter.testing_framework != 'none' %}
 ## Run tests
 .PHONY: test
