@@ -291,6 +291,28 @@
         ]
     },
     {
+        "field": "notebook_export",
+        "help": {
+            "description": "Jupyter notebook export package automatically added to your requirements file."
+        },
+        "choices": [
+            {
+                "choice": "none",
+                "help": {
+                    "description": "No notebook export package.",
+                    "more_information": ""
+                }
+            },
+            {
+                "choice": "nbautoexport",
+                "help": {
+                    "description": "Add and configure nbautoexport.",
+                    "more_information": "[Docs](https://github.com/drivendataorg/nbautoexport)"
+                }
+            }
+        ]
+    },
+    {
         "field": "open_source_license",
         "help": {
             "description": "Whether to include a license file and which one to use.",
