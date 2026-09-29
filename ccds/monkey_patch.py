@@ -7,6 +7,7 @@ from cookiecutter.generate import generate_context
 from cookiecutter.prompt import (
     prompt_choice_for_config,
     read_user_choice,
+    read_user_dict,
     read_user_variable,
     render_variable,
 )
@@ -103,9 +104,7 @@ def prompt_for_config(context, no_input=False):
                 val = render_variable(env, raw, cookiecutter_dict)
 
                 if not no_input:
-                    val = read_user_dict(  # noqa: F821 referencable in patched context
-                        key, val
-                    )
+                    val = read_user_dict(key, val)
 
                 cookiecutter_dict[key] = val
         except UndefinedError as err:
