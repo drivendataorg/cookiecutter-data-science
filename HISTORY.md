@@ -3,6 +3,7 @@
 ## Next Release
 
 - Dropped CI & support for Python 3.9 (EOL).
+- Added CI & support for Python 3.14.
 - Fixed Windows CI failures when using pixi + ruff by excluding `.pixi` from Ruff discovery.
 
 ## v2.3.0 (2025-07-23)
