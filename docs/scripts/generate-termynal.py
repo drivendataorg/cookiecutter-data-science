@@ -1,46 +1,53 @@
 import json
-import shutil
+import os
+import re
+import subprocess
+import sys
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
-import pexpect
 from ansi2html import Ansi2HTMLConverter
 
 CCDS_ROOT = Path(__file__).parents[2].resolve()
 
 
-def execute_command_and_get_output(command, input_script):
-    input_script = iter(input_script)
-    child = pexpect.spawn(command, encoding="utf-8")
+def execute_command_and_get_output(command, input_script, cwd, timeout=60):
+    """Run the scripted CLI dialogue without requiring a pseudo-terminal.
 
-    interaction_history = [f"$ {command}\n"]
+    Rich's prompts accept piped stdin on Windows, macOS and Linux. Pipes do not
+    echo input, so restore each answer after its prompt for the animation.
+    """
+    input_script = list(input_script)
+    result = subprocess.run(
+        command,
+        input="".join(answer + "\n" for _, answer in input_script),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        cwd=cwd,
+        env={**os.environ, "PYTHONIOENCODING": "utf-8", "NO_COLOR": "1"},
+        encoding="utf-8",
+        timeout=timeout,
+        check=False,
+    )
+    if result.returncode:
+        raise RuntimeError(
+            f"CCDS exited with status {result.returncode}:\n{result.stdout}"
+        )
 
-    prompt, user_input = next(input_script)
-
-    try:
-        while True:
-            index = child.expect([prompt, pexpect.EOF, pexpect.TIMEOUT])
-
-            if index == 0:
-                output = child.before + child.after
-                interaction_history += [line.strip() for line in output.splitlines()]
-
-                child.sendline(user_input)
-
-                try:
-                    prompt, user_input = next(input_script)
-                except StopIteration:
-                    pass
-
-            elif index == 1:  # The subprocess has exited.
-                output = child.before
-                interaction_history += [line.strip() for line in output.splitlines()]
-                break
-            elif index == 2:  # Timeout waiting for new data.
-                print("\nTimeout waiting for subprocess response.")
-                continue
-
-    finally:
-        return interaction_history
+    transcript = []
+    remaining = result.stdout
+    for prompt, answer in input_script:
+        match = re.search(re.escape(prompt) + r"[^\r\n]*?: ", remaining)
+        if match is None:
+            raise RuntimeError(
+                f"Expected CCDS prompt {prompt!r} not found:\n{remaining}"
+            )
+        transcript.append(remaining[: match.end()] + answer + "\n")
+        remaining = remaining[match.end() :]
+    transcript.append(remaining)
+    return [f"$ ccds {CCDS_ROOT}"] + [
+        line.strip() for line in "".join(transcript).splitlines()
+    ]
 
 
 ccds_script = [
@@ -65,15 +72,13 @@ ccds_script = [
 
 
 def run_scripts():
-    try:
-        output = []
-        output += execute_command_and_get_output(f"ccds {CCDS_ROOT}", ccds_script)
-        return output
-
-    finally:
-        # always cleanup
-        if Path("my_analysis").exists():
-            shutil.rmtree("my_analysis")
+    # Never generate into (or delete a project from) the developer's directory.
+    with TemporaryDirectory(prefix="ccds-docs-") as directory:
+        return execute_command_and_get_output(
+            [sys.executable, "-u", "-m", "ccds", str(CCDS_ROOT)],
+            ccds_script,
+            directory,
+        )
 
 
 def render_termynal():
@@ -82,7 +87,7 @@ def render_termynal():
 
     # watch for inputs and format them differently
     script = iter(ccds_script)
-    _, user_input = next(script)
+    expected_prompt, user_input = next(script)
 
     conv = Ansi2HTMLConverter(inline=True)
     html_lines = [
@@ -99,19 +104,22 @@ def render_termynal():
             )
 
         # style inline cookiecutter user inputs
-        elif ":" in result and user_input in result:
+        elif expected_prompt is not None and re.fullmatch(
+            r".*" + re.escape(expected_prompt) + r".*?:\s*" + re.escape(user_input),
+            result,
+        ):
             # treat all the options that were output as a single block
-            if len(result_collector) > 1:
-                prev_results = conv.convert(
-                    "\n".join(result_collector[:-1]), full=False
-                )
+            if result_collector:
+                prev_results = conv.convert("\n".join(result_collector), full=False)
                 html_lines.append(f"<span data-ty>{prev_results}</span>")
 
             # split the line up into the prompt text with options, the default, and the user input
-            prompt, user_input = result.strip().split(":", 1)
-            prompt = conv.convert(prompt, full=False)
-            prompt = f'<span data-ty class="inline-input">{result_collector[-1].strip()} {prompt}:</span>'
-            user_input = conv.convert(user_input.strip(), full=False)
+            # Remove the known answer rather than splitting on colons, which
+            # can occur in defaults and answers (e.g. s3://my-aws-bucket).
+            prompt = result[: -len(user_input)] if user_input else result
+            prompt = conv.convert(prompt.rstrip(), full=False)
+            prompt = f'<span data-ty class="inline-input">{prompt}</span>'
+            user_input = conv.convert(user_input, full=False)
 
             # treat the cookiecutter prompt as a shell prompt
             out_line = f"{prompt}"
@@ -121,14 +129,20 @@ def render_termynal():
             result_collector = []
 
             try:
-                _, user_input = next(script)
+                expected_prompt, user_input = next(script)
             except StopIteration:
-                user_input = "STOP ITER"  # never true so we just capture the remaining rows after the script
+                expected_prompt = None
 
         # collect all the other lines for a single output
         else:
             result_collector.append(result)
 
+    if expected_prompt is not None:
+        raise RuntimeError(f"Expected input for {expected_prompt!r} was not rendered.")
+
+    if result_collector:
+        remaining = conv.convert("\n".join(result_collector), full=False)
+        html_lines.append(f"<span data-ty>{remaining}</span>")
     html_lines.append("</div>")
     output = "\n".join(html_lines)
 
@@ -148,8 +162,9 @@ def render_termynal():
 if __name__ == "__main__":
     print(render_termynal())
 
-# mkdocs build entry point
-else:
+# mkdocs-gen-files executes scripts with runpy.run_path. Normal imports should
+# not launch a build, so that the capture and rendering functions can be tested.
+elif __name__ == "<run_path>":
     import mkdocs_gen_files
 
     with mkdocs_gen_files.open("index.md", "r") as f:
