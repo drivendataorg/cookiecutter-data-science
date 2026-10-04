@@ -155,6 +155,10 @@ Now you'll be able to [create a Pull Request in GitHub](https://docs.github.com/
 
 There's no magic in the `Makefile`. We often add project-specific commands or update the existing ones over the course of a project. For example, we've added scripts to generate reports with pandoc, build and serve documentation, publish static sites from assets, package code for distribution, and more.
 
+## Changing the `AGENTS.md` file
+
+There's no magic in the `AGENTS.md` file either (apart from the ✨magic✨ of AI). This is a place to put instructions for AI coding agents that you might use in your project. We often add project-specific instructions for how to use agents effectively with the codebase and data in our project. Best practices for instructing agents in a project are evolving rapidly, so we recommend updating this file as you learn what works best for your project.
+
 ## Installing Make on Windows
 
 Unfortunately, GNU Make is not typically pre-installed on Windows. Here are a few different options for getting Make:
