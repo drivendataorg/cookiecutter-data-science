@@ -32,6 +32,10 @@ packages_to_install += scaffold
 packages_to_install += basic
 # {% endif %}
 
+# {% if cookiecutter.notebook_export == "nbautoexport" %}
+packages_to_install += ["nbautoexport"]
+# {% endif %}
+
 # {% if cookiecutter.linting_and_formatting == "ruff" %}
 packages_to_install += ruff
 # Remove setup.cfg

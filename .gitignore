@@ -3,6 +3,9 @@ docs/site/
 docs/docs/_partials/termynal.md
 docs/docs/_partials/*/*.html
 
+# Agent docs
+CLAUDE.md
+
 # test cache
 manual_test/
 
