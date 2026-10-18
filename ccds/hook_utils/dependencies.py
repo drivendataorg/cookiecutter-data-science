@@ -65,11 +65,11 @@ def resolve_python_version_specifier(python_version):
 
 
 def write_python_version(python_version):
-    with open("pyproject.toml", "r") as f:
+    with open("pyproject.toml", "r", encoding="utf-8") as f:
         doc = tomlkit.parse(f.read())
 
     doc["project"]["requires-python"] = resolve_python_version_specifier(python_version)
-    with open("pyproject.toml", "w") as f:
+    with open("pyproject.toml", "w", encoding="utf-8") as f:
         f.write(tomlkit.dumps(doc))
 
 
@@ -138,7 +138,7 @@ def write_dependencies(
             f.write("\n")
 
     elif dependencies == "pyproject.toml":
-        with open(dependencies, "r") as f:
+        with open(dependencies, "r", encoding="utf-8") as f:
             doc = tomlkit.parse(f.read())
 
         # If using pixi, add pixi-specific configuration
@@ -185,7 +185,7 @@ def write_dependencies(
                 doc["build-system"]["requires"] = ["poetry-core>=2.0.0,<3.0.0"]
                 doc["build-system"]["build-backend"] = "poetry.core.masonry.api"
 
-        with open(dependencies, "w") as f:
+        with open(dependencies, "w", encoding="utf-8") as f:
             f.write(tomlkit.dumps(doc))
 
     elif dependencies == "environment.yml":

@@ -106,8 +106,10 @@ if "{{ cookiecutter.open_source_license }}" == "No license file":
 
 # Make single quotes prettier
 # Jinja tojson escapes single-quotes with \u0027 since it's meant for HTML/JS
-pyproject_text = Path("pyproject.toml").read_text()
-Path("pyproject.toml").write_text(pyproject_text.replace(r"\u0027", "'"))
+pyproject_text = Path("pyproject.toml").read_text(encoding="utf-8")
+Path("pyproject.toml").write_text(
+    pyproject_text.replace(r"\u0027", "'"), encoding="utf-8"
+)
 
 # {% if cookiecutter.include_code_scaffold == "No" %}
 # remove everything except __init__.py so result is an empty package
