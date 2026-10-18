@@ -3,6 +3,9 @@ import jinja2
 
 jinja2.StrictUndefined = jinja2.Undefined
 
+# TOML strings cannot contain JSON's surrogate-pair escapes for non-BMP text.
+jinja2.defaults.DEFAULT_POLICIES["json.dumps_kwargs"]["ensure_ascii"] = False
+
 
 # Monkey-patch cookiecutter to allow sub-items
 from cookiecutter import prompt
