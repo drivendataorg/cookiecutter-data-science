@@ -13,7 +13,7 @@ authors = [
 readme = "README.md"
 classifiers = [
     "Programming Language :: Python :: 3",
-    {% if cookiecutter.open_source_license == 'MIT' %}"License :: OSI Approved :: MIT License"{% elif cookiecutter.open_source_license == 'BSD-3-Clause' %}"License :: OSI Approved :: BSD License"{% endif %}
+    {% if cookiecutter.open_source_license == 'MIT' %}"License :: OSI Approved :: MIT License"{% elif cookiecutter.open_source_license == 'BSD-3-Clause' %}"License :: OSI Approved :: BSD License"{% elif cookiecutter.open_source_license == 'EUROPEAN UNION PUBLIC LICENCE v. 1.2' %}"License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)"{% endif %}
 ]
 {% if cookiecutter.linting_and_formatting == 'flake8+black+isort' %}
 [tool.black]
