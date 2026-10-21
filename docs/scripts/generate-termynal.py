@@ -58,7 +58,7 @@ ccds_script = [
     ("Choose from", "2"),  # pydata_packages
     ("Choose from", "3"),  # testing_framework
     ("Choose from", "1"),  # linting_and_formatting
-    ("Choose from", "2"),  # open_source_license
+    ("Choose from", "3"),  # open_source_license
     ("Choose from", "1"),  # docs
     ("Choose from", "2"),  # include_code_scaffold
 ]

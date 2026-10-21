@@ -317,6 +317,13 @@
                     "description": "3-Clause BSD License",
                     "more_information": "[License](https://opensource.org/license/bsd-3-clause)"
                 } 
+            },
+            {
+                "choice": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
+                "help": {
+                    "description": "European Union Public Licence (EUPL) version 1.2",
+                    "more_information": "[License](https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12)"
+                }
             }
         ]
     },
