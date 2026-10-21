@@ -16,7 +16,7 @@ _A logical, flexible, and reasonably standardized project structure for doing an
 
 ## Quickstart
 
-Cookiecutter Data Science v2 requires Python 3.9+. Since this is a cross-project utility application, we recommend installing it with [pipx](https://pypa.github.io/pipx/). Installation command options:
+Cookiecutter Data Science v2 requires Python 3.10+. Since this is a cross-project utility application, we recommend installing it with [pipx](https://pypa.github.io/pipx/). Installation command options:
 
 === "With pipx (recommended)"
 

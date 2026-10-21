@@ -1,5 +1,15 @@
 # cookiecutter-data-science Changelog
 
+## Next Release
+
+- Dropped CI & support for Python 3.9 (EOL).
+- Fixed Windows CI failures when using pixi + ruff by excluding `.pixi` from Ruff discovery.
+
+## v2.3.0 (2025-07-23)
+
+ - Added `pixi` as a new environment manager option (supports `pyproject.toml` and `pixi.toml`). (PR [#459](https://github.com/drivendataorg/cookiecutter-data-science/pull/459), Issue [#406](https://github.com/drivendataorg/cookiecutter-data-science/issues/406))
+ - Added `poetry` as a new environment manager option (supports `pyproject.toml`). (PR [#460](https://github.com/drivendataorg/cookiecutter-data-science/pull/460), Issue [#374](https://github.com/drivendataorg/cookiecutter-data-science/issues/374))
+
 ## v2.2.0 (2025-03-23)
 
 - Added `pyproject.toml` as a dependencies file format option. (PR [#436](https://github.com/drivendataorg/cookiecutter-data-science/pull/436))

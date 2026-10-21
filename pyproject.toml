@@ -7,7 +7,7 @@ name = "ccds"
 
 [project]
 name = "cookiecutter-data-science"
-version = "2.2.0"
+version = "2.3.0"
 description = "A logical, reasonably standardized but flexible project structure for doing and sharing data science work."
 authors = [
   { name = "DrivenData", email = "info@drivendata.org" },
@@ -20,7 +20,6 @@ classifiers = [
   "Intended Audience :: Science/Research",
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -28,7 +27,7 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
   "click",
   "cookiecutter",

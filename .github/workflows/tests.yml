@@ -5,12 +5,10 @@ on:
   push:
     branches: [master]
     paths-ignore: 
-      - "docs/**"
       - "README.md"
   pull_request:
     branches: [master]
     paths-ignore: 
-      - "docs/**"
       - "README.md"
   schedule:
     # Run every Sunday
@@ -42,6 +40,10 @@ jobs:
         run: |
           make lint
 
+      - name: Build documentation
+        run: |
+          make docs
+
   tests:
     name: Tests (${{ matrix.os }}, Python ${{ matrix.python-version }})
     needs: code-quality
@@ -49,7 +51,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [3.9, "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
     defaults:
       run:
         shell: bash
@@ -72,6 +74,17 @@ jobs:
         with:
           auto-activate-base: true
           activate-environment: ""
+
+      - name: Set up Pixi
+        uses: prefix-dev/setup-pixi@v0.8.12
+        with:
+          cache: false
+          run-install: false
+  
+      - name: Set up Poetry
+        uses: abatilo/actions-poetry@v3
+        with:
+          poetry-version: latest
 
       - name: Cache conda packages
         uses: actions/cache@v4
@@ -115,6 +128,13 @@ jobs:
           pipenv --version
           which virtualenv
           virtualenv --version
+          which pixi
+          pixi --version
+          which poetry
+          poetry --version
+          which python
+          python --version
+          python -c "import platform; print(f'Python architecture: {platform.architecture()}')"
 
       - name: Run tests
         run: |
